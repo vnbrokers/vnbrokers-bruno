@@ -1,0 +1,26 @@
+info:
+  name: Bảng giá – giá thời gian thực của mã
+  type: http
+  seq: 2
+  tags:
+    - Market_Data
+
+http:
+  method: GET
+  url: "{{baseUrl}}/dnse-price-service/api/market-prices/:symbol"
+  params:
+    - name: symbol
+      value: VIC
+      type: path
+      description: Mã chứng khoán
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |
+  Lấy dữ liệu giá hiện tại (realtime) của một mã chứng khoán.
+  Bao gồm giá khớp gần nhất, giá mua/bán tốt nhất (bid/ask), khối lượng, v.v.

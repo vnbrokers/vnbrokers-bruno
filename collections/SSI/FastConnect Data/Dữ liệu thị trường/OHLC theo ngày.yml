@@ -1,0 +1,36 @@
+info:
+  name: OHLC theo ngày
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{fcDataBaseUrl}}/api/v2/Market/DailyOhlc"
+  params:
+    - name: symbol
+      value: "{{symbol}}"
+      type: query
+      disabled: true
+    - name: fromDate
+      value: "{{fromDate}}"
+      type: query
+    - name: toDate
+      value: "{{toDate}}"
+      type: query
+    - name: pageIndex
+      value: "{{pageIndex}}"
+      type: query
+    - name: pageSize
+      value: "{{pageSize}}"
+      type: query
+    - name: ascending
+      value: "{{ascending}}"
+      type: query
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

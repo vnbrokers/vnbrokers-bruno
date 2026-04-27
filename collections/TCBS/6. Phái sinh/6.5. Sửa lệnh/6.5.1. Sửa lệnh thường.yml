@@ -1,0 +1,26 @@
+info:
+  name: 6.5.1. Sửa lệnh thường
+  type: http
+  seq: 1
+  tags:
+  - edit_order_derivative
+http:
+  method: POST
+  url: "{{baseUrl}}/khronos/v1/order/change"
+  body:
+    type: json
+    data: |-
+      {
+        "accountId": "105C031402",
+        "subAccountId": "105C031402A",
+        "orderNo": "17",
+        "refId": "000123.H.HH2104062",
+        "nvol": "300",
+        "nprice": "56000.5"
+      }
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

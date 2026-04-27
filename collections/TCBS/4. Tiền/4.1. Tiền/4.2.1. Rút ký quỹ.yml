@@ -1,0 +1,24 @@
+info:
+  name: 4.2.1. Rút ký quỹ
+  type: http
+  seq: 2
+  tags:
+  - money
+http:
+  method: POST
+  url: "{{baseUrl}}/khronos/v1/cash/withdraw/update"
+  body:
+    type: json
+    data: |-
+      {
+        "accountId": "105C000113",
+        "subAccountId": "105C000113A",
+        "amount": 1500000,
+        "paymentContent": "RUT TIEN KY QUY"
+      }
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

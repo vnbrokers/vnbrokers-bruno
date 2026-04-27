@@ -1,0 +1,15 @@
+info:
+  name: 5.7.9. Lấy thông tin lịch sử giá khớp, cung cầu (realtime)
+  type: http
+  seq: 9
+  tags:
+  - market_information_stock_normal
+http:
+  method: GET
+  url: "{{baseUrl}}/ws/ouranos/v1/stream"
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

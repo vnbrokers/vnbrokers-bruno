@@ -1,0 +1,73 @@
+info:
+  name: Dữ liệu OHLC (nến)
+  type: http
+  seq: 3
+  tags:
+    - Market_Data
+
+http:
+  method: GET
+  url: "{{baseUrl}}/dnse-price-service/api/ohlc"
+  params:
+    - name: symbol
+      value: VIC
+      type: query
+      description: Mã chứng khoán
+    - name: resolution
+      value: "1"
+      type: query
+      description: Khung thời gian (phút hoặc D=ngày, W=tuần, M=tháng)
+    - name: resolution
+      value: "5"
+      type: query
+      description: Khung thời gian (phút hoặc D=ngày, W=tuần, M=tháng)
+      disabled: true
+    - name: resolution
+      value: "15"
+      type: query
+      description: Khung thời gian (phút hoặc D=ngày, W=tuần, M=tháng)
+      disabled: true
+    - name: resolution
+      value: "30"
+      type: query
+      description: Khung thời gian (phút hoặc D=ngày, W=tuần, M=tháng)
+      disabled: true
+    - name: resolution
+      value: "60"
+      type: query
+      description: Khung thời gian (phút hoặc D=ngày, W=tuần, M=tháng)
+      disabled: true
+    - name: resolution
+      value: D
+      type: query
+      description: Khung thời gian (phút hoặc D=ngày, W=tuần, M=tháng)
+      disabled: true
+    - name: resolution
+      value: W
+      type: query
+      description: Khung thời gian (phút hoặc D=ngày, W=tuần, M=tháng)
+      disabled: true
+    - name: resolution
+      value: M
+      type: query
+      description: Khung thời gian (phút hoặc D=ngày, W=tuần, M=tháng)
+      disabled: true
+    - name: from
+      value: "1700000000"
+      type: query
+      description: Thời điểm bắt đầu (Unix timestamp, giây)
+    - name: to
+      value: "1710000000"
+      type: query
+      description: Thời điểm kết thúc (Unix timestamp, giây)
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |
+  Lấy dữ liệu giá lịch sử theo dạng nến (OHLC: Open/High/Low/Close).
+  Hỗ trợ nhiều khung thời gian: 1 phút, 5 phút, 15 phút, 30 phút, 1 giờ, 1 ngày.

@@ -1,0 +1,30 @@
+info:
+  name: 6.1.1. Tổng quan tiền, ký quỹ của phái sinh
+  type: http
+  seq: 1
+  tags:
+  - total_cash_derivative
+http:
+  method: GET
+  url: "{{baseUrl}}/khronos/v1/account/status"
+  params:
+  - name: accountId
+    value: 105C031402
+    type: query
+    description: số tài khoản lưu kí
+  - name: subAccountId
+    value: 105C031402A
+    type: query
+    description: Tiểu khoản phái sinh
+  - name: getType
+    value: '1'
+    type: query
+    description: |
+      - `0`: Lấy toàn bộ
+      - `1`: Chỉ lấy tiền
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

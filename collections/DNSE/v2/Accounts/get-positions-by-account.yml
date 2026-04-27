@@ -1,0 +1,149 @@
+info:
+  name: Vị thế nắm giữ
+  type: http
+  seq: 8
+
+http:
+  method: GET
+  url: "{{baseUrl}}/accounts/:accountNo/positions?marketType=DERIVATIVE&pageSize=20"
+  headers:
+    - name: X-API-Key
+      value: "{{apiKey}}"
+      disabled: true
+    - name: X-Aux-Date
+      value: ""
+      disabled: true
+    - name: X-Signature
+      value: ""
+      disabled: true
+  params:
+    - name: marketType
+      value: DERIVATIVE
+      type: query
+    - name: pageSize
+      value: "20"
+      type: query
+    - name: accountNo
+      value: "{{accountNo}}"
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công – trả về danh sách vị thế nắm giữ
+    request:
+      url: "{{baseUrl}}/accounts/{{accountNo}}/positions"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+      params:
+        - name: marketType
+          value: DERIVATIVE
+          type: query
+        - name: pageSize
+          value: "20"
+          type: query
+        - name: accountNo
+          value: ""
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "positions": [],
+            "pageIndex": 0,
+            "pageSize": 0,
+            "pageNumber": 0,
+            "total": 0
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{baseUrl}}/accounts/{{accountNo}}/positions"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+      params:
+        - name: marketType
+          value: ""
+          type: query
+        - name: pageSize
+          value: ""
+          type: query
+        - name: accountNo
+          value: ""
+          type: path
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/accounts/{{accountNo}}/positions"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+      params:
+        - name: marketType
+          value: ""
+          type: query
+        - name: pageSize
+          value: ""
+          type: query
+        - name: accountNo
+          value: ""
+          type: path
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: |
+  API trả về danh sách vị thế nắm giữ theo tiểu khoản.
+
+  Query Parameters:
+    - marketType (string, required): Loại thị trường (STOCK / DERIVATIVE)
+    - pageSize (string, required): Số lượng bản ghi trên 1 trang
+
+  Path Parameters:
+    - accountNo (string): Số tiểu khoản
+
+  Response bao gồm:
+    - Danh sách vị thế: trạng thái, khối lượng, giá vốn, giá thị trường, giá hòa vốn
+    - Thông tin phân trang: pageIndex, pageSize, pageNumber, total

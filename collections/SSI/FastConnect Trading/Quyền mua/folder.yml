@@ -1,0 +1,7 @@
+info:
+  name: Quyền mua
+  type: folder
+  seq: 6
+
+request:
+  auth: inherit

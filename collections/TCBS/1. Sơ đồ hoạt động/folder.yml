@@ -1,0 +1,6 @@
+info:
+  name: 1. Sơ đồ hoạt động
+  type: folder
+  seq: 1
+request:
+  auth: inherit

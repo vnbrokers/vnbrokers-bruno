@@ -1,0 +1,116 @@
+info:
+  name: Chi tiết lệnh
+  type: http
+  seq: 3
+  tags:
+    - Trading
+
+http:
+  method: GET
+  url: "{{baseUrl}}/dnse-order-service/v2/orders/:orderId"
+  params:
+    - name: orderId
+      value: ""
+      type: path
+      description: Mã lệnh (order ID)
+    - name: subAccount
+      value: ""
+      type: query
+    - name: assetType
+      value: stock
+      type: query
+      disabled: true
+    - name: assetType
+      value: derivative
+      type: query
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Chi tiết lệnh
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/orders/:orderId"
+      method: GET
+      params:
+        - name: orderId
+          value: ""
+          type: path
+          description: Mã lệnh (order ID)
+        - name: subAccount
+          value: ""
+          type: query
+        - name: assetType
+          value: stock
+          type: query
+          disabled: true
+        - name: assetType
+          value: derivative
+          type: query
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "orderId": "",
+            "symbol": "",
+            "side": "buy",
+            "orderType": "LO",
+            "quantity": 0,
+            "price": 0,
+            "matchedQuantity": 0,
+            "matchedPrice": 0,
+            "status": "pending",
+            "assetType": "stock",
+            "createdAt": "",
+            "updatedAt": ""
+          }
+  - name: 404 Response
+    description: Không tìm thấy tài nguyên
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/orders/:orderId"
+      method: GET
+      params:
+        - name: orderId
+          value: ""
+          type: path
+          description: Mã lệnh (order ID)
+        - name: subAccount
+          value: ""
+          type: query
+        - name: assetType
+          value: stock
+          type: query
+          disabled: true
+        - name: assetType
+          value: derivative
+          type: query
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": 0,
+            "message": "",
+            "details": ""
+          }
+
+docs: Lấy thông tin chi tiết của một lệnh theo mã lệnh.

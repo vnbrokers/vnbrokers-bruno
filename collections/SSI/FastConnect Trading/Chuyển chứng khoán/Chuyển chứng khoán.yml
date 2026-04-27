@@ -1,0 +1,25 @@
+info:
+  name: Chuyển chứng khoán
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v2/stock/transfer"
+  body:
+    type: json
+    data: |-
+      {
+        "senderAccount": "{{senderAccount}}",
+        "receiverAccount": "{{receiverAccount}}",
+        "instrumentID": "{{instrumentID}}",
+        "quantity": {{quantity}},
+        "code": "{{code}}"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

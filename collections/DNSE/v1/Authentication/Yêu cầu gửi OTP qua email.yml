@@ -1,0 +1,60 @@
+info:
+  name: Yêu cầu gửi OTP qua email
+  type: http
+  seq: 2
+  tags:
+    - Authentication
+
+http:
+  method: GET
+  url: "{{baseUrl}}/auth-service/api/email-otp"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OTP đã được gửi qua email
+    request:
+      url: "{{baseUrl}}/auth-service/api/email-otp"
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "success": true,
+            "message": "Thao tác thành công"
+          }
+  - name: 401 Response
+    description: Chưa xác thực hoặc token không hợp lệ
+    request:
+      url: "{{baseUrl}}/auth-service/api/email-otp"
+      method: POST
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": 401,
+            "message": "Unauthorized"
+          }
+
+docs: |
+  Yêu cầu hệ thống gửi mã OTP đến email đã đăng ký.
+  Mã OTP có hiệu lực trong **2 phút**.
+  Dùng mã này để tạo Trading Token.

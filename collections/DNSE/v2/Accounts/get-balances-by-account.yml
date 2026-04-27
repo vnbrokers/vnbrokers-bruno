@@ -1,0 +1,157 @@
+info:
+  name: Lấy số dư tài khoản theo số tiểu khoản
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{baseUrl}}/accounts/:accountNo/balances"
+  params:
+    - name: accountNo
+      value: "{{accountNo}}"
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công - trả về số dư tài khoản
+    request:
+      url: "{{baseUrl}}/accounts/{{accountNo}}/balances"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: ""
+        - name: X-Aux-Date
+          value: ""
+        - name: X-Signature
+          value: ""
+        - name: X-API-Key
+          value: "{{apiKey}}"
+      params:
+        - name: accountNo
+          value: ""
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "stock": {
+              "totalCash": 0,
+              "availableCash": 0,
+              "depositInterest": 0,
+              "totalDebt": 0,
+              "depositFeeAmount": 0,
+              "withdrawableCash": 0,
+              "cashDividendReceiving": 0
+            },
+            "derivative": {
+              "pendingDepositWithdraw": 0,
+              "remainSecure": 0,
+              "usedSecure": 0,
+              "pendingSecure": 0,
+              "holdTaxAndFee": 0,
+              "totalLoanDebt": 0
+            }
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{baseUrl}}/accounts/{{accountNo}}/balances"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: ""
+        - name: X-Aux-Date
+          value: ""
+        - name: X-Signature
+          value: ""
+        - name: X-API-Key
+          value: "{{apiKey}}"
+      params:
+        - name: accountNo
+          value: ""
+          type: path
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/accounts/{{accountNo}}/balances"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: ""
+        - name: X-Aux-Date
+          value: ""
+        - name: X-Signature
+          value: ""
+        - name: X-API-Key
+          value: "{{apiKey}}"
+      params:
+        - name: accountNo
+          value: ""
+          type: path
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: |-
+  Trả về số dư tài khoản bao gồm tiền mặt, tiền có thể rút, nợ, lãi, cổ tức chờ về và thông tin cọc phái sinh.
+
+  ```json
+  {
+    "stock": {
+      "totalCash": 3720308,
+      "availableCash": 3720022,
+      "depositInterest": 286,
+      "totalDebt": 592355,
+      "depositFeeAmount": 405,
+      "withdrawableCash": 3719617,
+      "cashDividendReceiving": 0
+    },
+    "derivative": {
+      "pendingDepositWithdraw": 826996062,
+      "remainSecure": 122363429600,
+      "usedSecure": 102098277,
+      "pendingSecure": 826996062,
+      "holdTaxAndFee": 0,
+      "totalLoanDebt": 0
+    }
+  }
+
+  ```

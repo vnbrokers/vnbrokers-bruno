@@ -1,0 +1,6 @@
+info:
+  name: 5.6. Tài sản cổ phiếu
+  type: folder
+  seq: 6
+request:
+  auth: inherit

@@ -1,0 +1,15 @@
+info:
+  name: Hạn mức gọi API
+  type: http
+  seq: 11
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v2/Trading/rateLimit"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

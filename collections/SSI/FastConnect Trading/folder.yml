@@ -1,0 +1,10 @@
+info:
+  name: FastConnect Trading
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit
+  variables:
+    - name: baseUrl
+      value: https://fc-tradeapi.ssi.com.vn

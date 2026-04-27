@@ -1,0 +1,7 @@
+info:
+  name: Dữ liệu thị trường
+  type: folder
+  seq: 2
+
+request:
+  auth: inherit

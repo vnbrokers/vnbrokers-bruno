@@ -1,0 +1,6 @@
+info:
+  name: 5.1. Đặt lệnh
+  type: folder
+  seq: 1
+request:
+  auth: inherit

@@ -1,0 +1,30 @@
+info:
+  name: 6.4.1. Đặt lệnh thường
+  type: http
+  seq: 1
+  tags:
+  - order_derivative
+http:
+  method: POST
+  url: "{{baseUrl}}/khronos/v1/order/place"
+  body:
+    type: json
+    data: |-
+      {
+        "accountId": "105C031402",
+        "subAccountId": "105C031402A",
+        "side": "B",
+        "symbol": "{{symbol}}",
+        "price": "1198.7",
+        "volume": "10",
+        "advance": "",
+        "refId": "H.OWsC4418qYN59HXcvGtD3z",
+        "orderType": "0",
+        "pin": "H"
+      }
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,185 @@
+info:
+  name: Sổ lệnh (danh sách lệnh trong ngày)
+  type: http
+  seq: 2
+  tags:
+    - Trading
+
+http:
+  method: GET
+  url: "{{baseUrl}}/dnse-order-service/v2/orders"
+  params:
+    - name: subAccount
+      value: ""
+      type: query
+      description: Mã tiểu khoản
+    - name: assetType
+      value: stock
+      type: query
+      disabled: true
+    - name: assetType
+      value: derivative
+      type: query
+      disabled: true
+    - name: status
+      value: all
+      type: query
+      description: Lọc theo trạng thái lệnh
+      disabled: true
+    - name: status
+      value: pending
+      type: query
+      description: Lọc theo trạng thái lệnh
+      disabled: true
+    - name: status
+      value: matched
+      type: query
+      description: Lọc theo trạng thái lệnh
+      disabled: true
+    - name: status
+      value: cancelled
+      type: query
+      description: Lọc theo trạng thái lệnh
+      disabled: true
+    - name: status
+      value: rejected
+      type: query
+      description: Lọc theo trạng thái lệnh
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Danh sách lệnh
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/orders"
+      method: GET
+      params:
+        - name: subAccount
+          value: ""
+          type: query
+          description: Mã tiểu khoản
+        - name: assetType
+          value: stock
+          type: query
+          disabled: true
+        - name: assetType
+          value: derivative
+          type: query
+          disabled: true
+        - name: status
+          value: all
+          type: query
+          description: Lọc theo trạng thái lệnh
+          disabled: true
+        - name: status
+          value: pending
+          type: query
+          description: Lọc theo trạng thái lệnh
+          disabled: true
+        - name: status
+          value: matched
+          type: query
+          description: Lọc theo trạng thái lệnh
+          disabled: true
+        - name: status
+          value: cancelled
+          type: query
+          description: Lọc theo trạng thái lệnh
+          disabled: true
+        - name: status
+          value: rejected
+          type: query
+          description: Lọc theo trạng thái lệnh
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "orderId": "",
+              "symbol": "",
+              "side": "buy",
+              "orderType": "LO",
+              "quantity": 0,
+              "price": 0,
+              "matchedQuantity": 0,
+              "matchedPrice": 0,
+              "status": "pending",
+              "assetType": "stock",
+              "createdAt": "",
+              "updatedAt": ""
+            }
+          ]
+  - name: 401 Response
+    description: Chưa xác thực hoặc token không hợp lệ
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/orders"
+      method: GET
+      params:
+        - name: subAccount
+          value: ""
+          type: query
+          description: Mã tiểu khoản
+        - name: assetType
+          value: stock
+          type: query
+          disabled: true
+        - name: assetType
+          value: derivative
+          type: query
+          disabled: true
+        - name: status
+          value: all
+          type: query
+          description: Lọc theo trạng thái lệnh
+          disabled: true
+        - name: status
+          value: pending
+          type: query
+          description: Lọc theo trạng thái lệnh
+          disabled: true
+        - name: status
+          value: matched
+          type: query
+          description: Lọc theo trạng thái lệnh
+          disabled: true
+        - name: status
+          value: cancelled
+          type: query
+          description: Lọc theo trạng thái lệnh
+          disabled: true
+        - name: status
+          value: rejected
+          type: query
+          description: Lọc theo trạng thái lệnh
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": 401,
+            "message": "Unauthorized"
+          }
+
+docs: |
+  Lấy danh sách các lệnh đã đặt của một tiểu khoản trong ngày giao dịch.
+  Áp dụng cho cả giao dịch cơ sở và phái sinh.

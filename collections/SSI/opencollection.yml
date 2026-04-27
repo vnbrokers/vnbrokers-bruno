@@ -1,0 +1,18 @@
+opencollection: 1.0.0
+
+info:
+  name: SSI FastConnect Trading
+
+request:
+  headers:
+    - name: Content-Type
+      value: application/json
+  auth:
+    type: bearer
+    token: "{{accessToken}}"
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git

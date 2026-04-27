@@ -1,0 +1,27 @@
+info:
+  name: Hủy lệnh điều kiện
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v2/fco/cancelorder"
+  headers:
+    - name: User-Agent
+      value: "{{userAgent}}"
+  body:
+    type: json
+    data: |-
+      {
+        "fcoId": "{{fcoId}}",
+        "code": "{{code}}",
+        "userAgent": "{{userAgent}}",
+        "deviceId": "{{deviceId}}"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

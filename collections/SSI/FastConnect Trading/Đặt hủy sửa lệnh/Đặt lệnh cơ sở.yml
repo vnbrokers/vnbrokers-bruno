@@ -1,0 +1,40 @@
+info:
+  name: Đặt lệnh cơ sở
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v2/Trading/NewOrder"
+  body:
+    type: json
+    data: |-
+      {
+        "account": "{{account}}",
+        "instrumentID": "{{instrumentID}}",
+        "marketID": "{{marketID}}",
+        "buySell": "{{buySell}}",
+        "orderType": "{{orderType}}",
+        "price": {{price}},
+        "quantity": {{quantity}},
+        "requestID": "{{requestID}}",
+        "code": "{{code}}"
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: marketID
+      value: VN
+    - name: buySell
+      value: B
+    - name: orderType
+      value: LO
+    - name: requestID
+      value: "{{uuid}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,37 @@
+info:
+  name: 5.6.4. Tra cứu nợ
+  type: http
+  seq: 4
+  tags:
+    - get_asset_stock_normal
+
+http:
+  method: GET
+  url: "{{baseUrl}}/erebos/v2/digital/margin-info?acctno={{accountNo}}&fromdate=2026-01-01&todate=2026-04-25&page=1&size=25"
+  params:
+    - name: acctno
+      value: "{{accountNo}}"
+      type: query
+    - name: fromdate
+      value: 2026-01-01
+      type: query
+    - name: todate
+      value: 2026-04-25
+      type: query
+    - name: page
+      value: "1"
+      type: query
+    - name: size
+      value: "25"
+      type: query
+    - name: custodycd
+      value: "{{custodyCode}}"
+      type: query
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,73 @@
+info:
+  name: Số dư tài khoản (tiểu khoản)
+  type: http
+  seq: 1
+  tags:
+    - Balance
+
+http:
+  method: GET
+  url: "{{baseUrl}}/order-service/account-balances/{{subAccount}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thông tin số dư
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/account/balance"
+      method: GET
+      params:
+        - name: subAccount
+          value: 064C123456
+          type: query
+          description: Mã tiểu khoản (ví dụ "064C123456")
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "subAccount": "",
+            "cash": 0,
+            "purchasingPower": 0,
+            "withdrawableAmount": 0,
+            "portfolioValue": 0,
+            "totalAsset": 0,
+            "debt": 0,
+            "marginRatio": 0
+          }
+  - name: 401 Response
+    description: Chưa xác thực hoặc token không hợp lệ
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/account/balance"
+      method: GET
+      params:
+        - name: subAccount
+          value: 064C123456
+          type: query
+          description: Mã tiểu khoản (ví dụ "064C123456")
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": 401,
+            "message": "Unauthorized"
+          }
+
+docs: Lấy thông tin số dư tiền mặt và chứng khoán của một tiểu khoản.

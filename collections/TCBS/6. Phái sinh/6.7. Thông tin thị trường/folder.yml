@@ -1,0 +1,6 @@
+info:
+  name: 6.7. Thông tin thị trường
+  type: folder
+  seq: 7
+request:
+  auth: inherit

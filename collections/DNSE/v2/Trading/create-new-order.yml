@@ -1,0 +1,208 @@
+info:
+  name: Đặt lệnh
+  type: http
+  seq: 19
+
+http:
+  method: POST
+  url: "{{baseUrl}}/accounts/orders?marketType=DERIVATIVE"
+  headers:
+    - name: Content-Type
+      value: application/json
+      disabled: true
+    - name: X-API-Key
+      value: "{{apiKey}}"
+      disabled: true
+    - name: X-Signature
+      value: ""
+      disabled: true
+    - name: X-Aux-Date
+      value: ""
+      disabled: true
+    - name: trading-token
+      value: "{{tradingToken}}"
+  params:
+    - name: marketType
+      value: DERIVATIVE
+      type: query
+    - name: orderCategory
+      value: NORMAL
+      type: query
+      disabled: true
+  body:
+    type: json
+    data: |2-
+          {
+            "accountNo": "{{accountNo}}",
+            "loanPackageId": {{loanPackageId}},
+            "orderType": "{{orderType}}",
+            "price": {{price}},
+            "quantity":{{quantity}},
+            "side": "{{side}}",
+            "symbol": "{{symbol}}"
+          }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: accountNo
+      value: "1"
+      disabled: true
+    - name: loanPackageId
+      value: "1775"
+    - name: orderType
+      value: LO
+    - name: price
+      value: "2052.7"
+    - name: quantity
+      value: "1"
+    - name: symbol
+      value: 41I1G5000
+    - name: side
+      value: NS
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công – trả về thông tin lệnh vừa đặt
+    request:
+      url: "{{baseUrl}}/accounts/orders"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: trading-token
+          value: "{{tradingToken}}"
+      params:
+        - name: marketType
+          value: DERIVATIVE
+          type: query
+        - name: orderCategory
+          value: NORMAL
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": 0,
+            "symbol": "",
+            "side": "",
+            "orderType": "",
+            "orderStatus": "",
+            "price": 0,
+            "averagePrice": 0,
+            "quantity": 0,
+            "fillQuantity": 0,
+            "canceledQuantity": 0,
+            "leaveQuantity": 0,
+            "accountNo": "",
+            "marketType": "",
+            "orderCategory": "",
+            "transDate": "",
+            "createdDate": "",
+            "modifiedDate": ""
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{baseUrl}}/accounts/orders"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: trading-token
+          value: "{{tradingToken}}"
+      params:
+        - name: marketType
+          value: ""
+          type: query
+        - name: orderCategory
+          value: ""
+          type: query
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/accounts/orders"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: trading-token
+          value: "{{tradingToken}}"
+      params:
+        - name: marketType
+          value: DERIVATIVE
+          type: query
+        - name: orderCategory
+          value: NORMAL
+          type: query
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: |
+  API đặt lệnh giao dịch.
+
+  Query Parameters:
+    - marketType (string, required): Loại thị trường (STOCK / DERIVATIVE)
+    - orderCategory (string, required): Phân loại lệnh (NORMAL mặc định)
+
+  Header Parameters:
+    - X-API-Key (string, required)
+    - X-Signature (string, required)
+    - X-Aux-Date (string, required)
+    - trading-token (string, required): Token đặt lệnh
+
+  Body Parameters:
+    - accountNo (string): Số tiểu khoản
+    - loanPackageId (number): ID gói vay
+    - orderType (string): LO, MOK, MAK, MTL, ATO, ATC, PLO
+    - price (number): Giá đặt
+    - quantity (number): Khối lượng đặt
+    - side (string): NB (Mua), NS (Bán)
+    - symbol (string): Mã chứng khoán
+
+  Response:
+    - Thông tin lệnh vừa đặt: trạng thái, giá, khối lượng, thời gian tạo

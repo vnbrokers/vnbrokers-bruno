@@ -1,0 +1,7 @@
+info:
+  name: Token và xác thực 2FA
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

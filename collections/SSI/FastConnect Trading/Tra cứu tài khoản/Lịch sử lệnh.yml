@@ -1,0 +1,32 @@
+info:
+  name: Lịch sử lệnh
+  type: http
+  seq: 10
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v2/Trading/orderHistory"
+  params:
+    - name: account
+      value: "{{account}}"
+      type: query
+    - name: startDate
+      value: "{{startDate}}"
+      type: query
+    - name: endDate
+      value: "{{endDate}}"
+      type: query
+  auth: inherit
+
+runtime:
+  variables:
+    - name: startDate
+      value: 01/01/2026
+    - name: endDate
+      value: 31/01/2026
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

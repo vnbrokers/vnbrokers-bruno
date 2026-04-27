@@ -1,0 +1,25 @@
+info:
+  name: 6.6.1. Huỷ lệnh thường
+  type: http
+  seq: 1
+  tags:
+  - cancel_order_derivative
+http:
+  method: POST
+  url: "{{baseUrl}}/khronos/v1/order/cancel"
+  body:
+    type: json
+    data: |-
+      {
+        "accountId": "105C031402",
+        "orderNo": "1",
+        "cmd": "Web.cancelOrder",
+        "pin": "",
+        "refId": ""
+      }
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

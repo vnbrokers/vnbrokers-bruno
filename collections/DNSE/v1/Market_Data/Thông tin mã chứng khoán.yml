@@ -1,0 +1,26 @@
+info:
+  name: Thông tin mã chứng khoán
+  type: http
+  seq: 1
+  tags:
+    - Market_Data
+
+http:
+  method: GET
+  url: "{{baseUrl}}/dnse-price-service/api/securities/:symbol"
+  params:
+    - name: symbol
+      value: VIC
+      type: path
+      description: Mã chứng khoán (ví dụ "VIC", "VN30F2505")
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |
+  Lấy thông tin chi tiết của một mã chứng khoán hoặc hợp đồng phái sinh.
+  Bao gồm: tên công ty, sàn niêm yết, giá tham chiếu, biên độ, v.v.

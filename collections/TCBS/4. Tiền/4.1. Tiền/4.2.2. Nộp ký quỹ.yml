@@ -1,0 +1,26 @@
+info:
+  name: 4.2.2. Nộp ký quỹ
+  type: http
+  seq: 3
+  tags:
+    - money
+
+http:
+  method: POST
+  url: "{{baseUrl}}/khronos/v1/cash/deposit/update"
+  body:
+    type: json
+    data: |-
+      {
+        "accountId": "105C000113",
+        "subAccountId": "105C000113A",
+        "amount": 1500000,
+        "paymentContent": "NAP TIEN KY QUY"
+      } 
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

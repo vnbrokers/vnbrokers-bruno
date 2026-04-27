@@ -1,0 +1,11 @@
+# Secrets
+.env*
+**/environments/*
+!**/environments/*.Example.yml
+
+# Dependencies
+node_modules
+
+# OS files
+.DS_Store
+Thumbs.db

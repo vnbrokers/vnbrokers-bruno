@@ -1,0 +1,7 @@
+info:
+  name: Tiền và ký quỹ
+  type: folder
+  seq: 4
+
+request:
+  auth: inherit

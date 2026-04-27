@@ -1,0 +1,28 @@
+info:
+  name: 2.1.1. Trao đổi API Key để lấy JWT Token
+  type: http
+  seq: 1
+  tags:
+    - authen
+
+http:
+  method: POST
+  url: "{{baseUrl}}/gaia/v1/oauth2/openapi/token"
+  body:
+    type: json
+    data: |-
+      {
+        "otp": "{{otp}}",
+        "apiKey": "{{apiKey}}"
+      }
+
+runtime:
+  scripts:
+    - type: after-response
+      code: bru.setEnvVar("accessToken", res.getBody().token)
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

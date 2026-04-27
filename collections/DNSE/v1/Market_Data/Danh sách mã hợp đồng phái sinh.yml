@@ -1,0 +1,19 @@
+info:
+  name: Danh sách mã hợp đồng phái sinh
+  type: http
+  seq: 6
+  tags:
+    - Market_Data
+
+http:
+  method: GET
+  url: "{{baseUrl}}/dnse-price-service/api/derivatives"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: Lấy danh sách tất cả các hợp đồng tương lai đang được niêm yết.

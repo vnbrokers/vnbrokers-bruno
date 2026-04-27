@@ -1,0 +1,20 @@
+info:
+  name: 5.4.3. Lấy thông tin khớp lệnh
+  type: http
+  seq: 3
+  tags:
+  - get_order_stock_normal
+http:
+  method: GET
+  url: "{{baseUrl}}/aion/v1/accounts/:accountNo/matching-details"
+  params:
+  - name: accountNo
+    value: "{{accountNo}}"
+    type: path
+    description: Số tiểu khoản
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

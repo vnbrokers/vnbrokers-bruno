@@ -1,0 +1,187 @@
+info:
+  name: Lịch sử OHLC
+  type: http
+  seq: 3
+
+http:
+  method: GET
+  url: "{{baseUrl}}/price/ohlc?symbol=ACB&type=STOCK&resolution=15&from=1773657310&to=1773830110"
+  headers:
+    - name: X-API-Key
+      value: "{{apiKey}}"
+      disabled: true
+    - name: X-Aux-Date
+      value: ""
+      disabled: true
+    - name: X-Signature
+      value: ""
+      disabled: true
+  params:
+    - name: symbol
+      value: ACB
+      type: query
+    - name: type
+      value: STOCK
+      type: query
+    - name: resolution
+      value: "15"
+      type: query
+    - name: from
+      value: "1773657310"
+      type: query
+    - name: to
+      value: "1773830110"
+      type: query
+  auth: inherit
+
+runtime:
+  scripts:
+
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công – trả về dữ liệu OHLC theo khoảng thời gian
+    request:
+      url: "{{baseUrl}}/price/ohlc"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+      params:
+        - name: symbol
+          value: ACB
+          type: query
+        - name: type
+          value: STOCK
+          type: query
+        - name: resolution
+          value: "15"
+          type: query
+        - name: from
+          value: "1773657310"
+          type: query
+        - name: to
+          value: "1773830110"
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "t": [],
+            "o": [],
+            "h": [],
+            "l": [],
+            "c": [],
+            "v": [],
+            "nextTime": 0
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{baseUrl}}/price/ohlc"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+      params:
+        - name: symbol
+          value: ""
+          type: query
+        - name: type
+          value: ""
+          type: query
+        - name: resolution
+          value: ""
+          type: query
+        - name: from
+          value: ""
+          type: query
+        - name: to
+          value: ""
+          type: query
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/price/ohlc"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+      params:
+        - name: symbol
+          value: ""
+          type: query
+        - name: type
+          value: ""
+          type: query
+        - name: resolution
+          value: ""
+          type: query
+        - name: from
+          value: ""
+          type: query
+        - name: to
+          value: ""
+          type: query
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: |
+  API trả về dữ liệu lịch sử OHLC (Open – High – Low – Close) theo mã chứng khoán và khoảng thời gian.
+
+  Query Parameters:
+    - symbol (string, required): Mã chứng khoán
+    - type (string, required): Loại thị trường
+        STOCK: Cổ phiếu
+        DERIVATIVE: Phái sinh
+        INDEX: Chỉ số thị trường
+    - resolution (string, required): Khung thời gian nến (1,3,5,15,30,1h,1D,1W)
+    - from (string, required): Timestamp bắt đầu
+    - to (string, required): Timestamp kết thúc
+
+  Response bao gồm:
+    - t: Danh sách timestamp
+    - o: Giá mở cửa
+    - h: Giá cao nhất
+    - l: Giá thấp nhất
+    - c: Giá đóng cửa
+    - v: Khối lượng giao dịch
+    - nextTime: Timestamp của cây nến tiếp theo (0 nếu không còn)

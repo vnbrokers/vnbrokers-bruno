@@ -1,0 +1,15 @@
+info:
+  name: 6.7.2. Bảng giá phái sinh
+  type: http
+  seq: 2
+  tags:
+  - market_information_derivative
+http:
+  method: GET
+  url: "{{baseUrl}}/ws/thesis/v1/stream/derivative"
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

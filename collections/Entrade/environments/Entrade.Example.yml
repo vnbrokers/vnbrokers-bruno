@@ -1,0 +1,12 @@
+name: Entrade.Example
+variables:
+  - name: baseUrl
+    value: https://services.entrade.com.vn
+  - secret: true
+    name: username
+  - secret: true
+    name: password
+  - secret: true
+    name: investorId
+  - secret: true
+    name: token

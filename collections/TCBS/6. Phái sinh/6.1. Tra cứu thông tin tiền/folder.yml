@@ -1,0 +1,6 @@
+info:
+  name: 6.1. Tra cứu thông tin tiền
+  type: folder
+  seq: 1
+request:
+  auth: inherit

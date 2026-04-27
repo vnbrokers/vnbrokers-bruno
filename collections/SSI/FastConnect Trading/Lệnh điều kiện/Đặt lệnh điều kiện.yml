@@ -1,0 +1,40 @@
+info:
+  name: Đặt lệnh điều kiện
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v2/fco/neworder"
+  headers:
+    - name: User-Agent
+      value: "{{userAgent}}"
+  body:
+    type: json
+    data: |-
+      {
+        "account": "{{account}}",
+        "instrumentID": "{{instrumentID}}",
+        "side": "{{side}}",
+        "orderType": "{{orderType}}",
+        "price": {{price}},
+        "quantity": {{quantity}},
+        "type": "{{conditionalType}}",
+        "code": "{{code}}",
+        "userAgent": "{{userAgent}}",
+        "deviceId": "{{deviceId}}"
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: userAgent
+      value: fctrading application for customer {{account}}
+    - name: conditionalType
+      value: stop_limit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,14 @@
+name: DNSEv1.Example
+variables:
+  - name: baseUrl
+    value: https://api.dnse.com.vn
+  - secret: true
+    name: username
+  - secret: true
+    name: password
+  - secret: true
+    name: token
+  - secret: true
+    name: tradingToken
+  - secret: true
+    name: subAccount

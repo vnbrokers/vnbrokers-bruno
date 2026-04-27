@@ -1,0 +1,26 @@
+info:
+  name: Danh sách mã chứng khoán
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{fcDataBaseUrl}}/api/v2/Market/Securities"
+  params:
+    - name: market
+      value: "{{market}}"
+      type: query
+      disabled: true
+    - name: pageIndex
+      value: "{{pageIndex}}"
+      type: query
+    - name: pageSize
+      value: "{{pageSize}}"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

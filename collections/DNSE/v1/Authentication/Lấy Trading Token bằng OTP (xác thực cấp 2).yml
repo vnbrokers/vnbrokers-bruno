@@ -1,0 +1,190 @@
+info:
+  name: Lấy Trading Token bằng OTP (xác thực cấp 2)
+  type: http
+  seq: 3
+  tags:
+    - Authentication
+
+http:
+  method: POST
+  url: "{{baseUrl}}/order-service/trading-token"
+  body:
+    type: json
+    data: |-
+      {
+        "otp": "{{otp}}",
+        "email_otp": true
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: otp
+      value: "167849"
+  scripts:
+    - type: after-response
+      code: bru.setEnvVar("tradingToken", res.getBody().tradingToken)
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response (Dùng SmartOTP)
+    description: Trading Token được cấp thành công
+    request:
+      url: "{{baseUrl}}/auth-service/api/trading-token"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "otp": "123456",
+            "smart_otp": true
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "tradingToken": "",
+            "expiredAt": ""
+          }
+  - name: 200 Response (Dùng Email OTP)
+    description: Trading Token được cấp thành công
+    request:
+      url: "{{baseUrl}}/auth-service/api/trading-token"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "otp": "654321",
+            "smart_otp": false
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "tradingToken": "",
+            "expiredAt": ""
+          }
+  - name: 400 Response (Dùng SmartOTP)
+    description: Dữ liệu đầu vào không hợp lệ
+    request:
+      url: "{{baseUrl}}/auth-service/api/trading-token"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "otp": "123456",
+            "smart_otp": true
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": 0,
+            "message": "",
+            "details": ""
+          }
+  - name: 400 Response (Dùng Email OTP)
+    description: Dữ liệu đầu vào không hợp lệ
+    request:
+      url: "{{baseUrl}}/auth-service/api/trading-token"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "otp": "654321",
+            "smart_otp": false
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": 0,
+            "message": "",
+            "details": ""
+          }
+  - name: 401 Response (Dùng SmartOTP)
+    description: Chưa xác thực hoặc token không hợp lệ
+    request:
+      url: "{{baseUrl}}/auth-service/api/trading-token"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "otp": "123456",
+            "smart_otp": true
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": 401,
+            "message": "Unauthorized"
+          }
+  - name: 401 Response (Dùng Email OTP)
+    description: Chưa xác thực hoặc token không hợp lệ
+    request:
+      url: "{{baseUrl}}/auth-service/api/trading-token"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "otp": "654321",
+            "smart_otp": false
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": 401,
+            "message": "Unauthorized"
+          }
+
+docs: |
+  Tạo Trading Token bằng cách xác thực OTP (SmartOTP hoặc Email OTP).
+  Trading Token có hiệu lực **8 tiếng** và cần thiết cho các API giao dịch.

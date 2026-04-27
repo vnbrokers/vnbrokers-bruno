@@ -1,0 +1,20 @@
+info:
+  name: 5.5.1. Lấy sức mua
+  type: http
+  seq: 1
+  tags:
+  - purchasing_power_stock_normal
+http:
+  method: GET
+  url: "{{baseUrl}}/aion/v1/accounts/:accountNo/ppse"
+  params:
+  - name: accountNo
+    value: "{{accountNo}}"
+    type: path
+    description: Số tiểu khoản
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

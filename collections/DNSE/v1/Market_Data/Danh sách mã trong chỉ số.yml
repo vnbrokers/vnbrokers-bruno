@@ -1,0 +1,24 @@
+info:
+  name: Danh sách mã trong chỉ số
+  type: http
+  seq: 5
+  tags:
+    - Market_Data
+
+http:
+  method: GET
+  url: "{{baseUrl}}/dnse-price-service/api/index-components/:indexCode"
+  params:
+    - name: indexCode
+      value: VN30
+      type: path
+      description: Mã chỉ số (ví dụ "VN30", "VNINDEX")
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: Lấy danh sách các mã chứng khoán thuộc một chỉ số (ví dụ VN30).

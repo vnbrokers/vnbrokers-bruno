@@ -1,0 +1,109 @@
+info:
+  name: Danh sách gói vay
+  type: http
+  seq: 2
+  tags:
+    - Balance
+
+http:
+  method: GET
+  url: "{{baseUrl}}/dnse-order-service/v2/account/loan-packages"
+  params:
+    - name: subAccount
+      value: ""
+      type: query
+      description: Mã tiểu khoản
+    - name: assetType
+      value: stock
+      type: query
+      description: Loại tài sản (stock hoặc derivative)
+      disabled: true
+    - name: assetType
+      value: derivative
+      type: query
+      description: Loại tài sản (stock hoặc derivative)
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Danh sách gói vay
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/account/loan-packages"
+      method: GET
+      params:
+        - name: subAccount
+          value: ""
+          type: query
+          description: Mã tiểu khoản
+        - name: assetType
+          value: stock
+          type: query
+          description: Loại tài sản (stock hoặc derivative)
+          disabled: true
+        - name: assetType
+          value: derivative
+          type: query
+          description: Loại tài sản (stock hoặc derivative)
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "id": 0,
+              "name": "",
+              "marginRatio": 0,
+              "interestRate": 0,
+              "assetType": "stock"
+            }
+          ]
+  - name: 401 Response
+    description: Chưa xác thực hoặc token không hợp lệ
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/account/loan-packages"
+      method: GET
+      params:
+        - name: subAccount
+          value: ""
+          type: query
+          description: Mã tiểu khoản
+        - name: assetType
+          value: stock
+          type: query
+          description: Loại tài sản (stock hoặc derivative)
+          disabled: true
+        - name: assetType
+          value: derivative
+          type: query
+          description: Loại tài sản (stock hoặc derivative)
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": 401,
+            "message": "Unauthorized"
+          }
+
+docs: |
+  Lấy danh sách các gói vay (margin) áp dụng cho tiểu khoản.
+  `loan_package_id` từ endpoint này được dùng khi đặt lệnh ký quỹ.

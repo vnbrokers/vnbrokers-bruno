@@ -1,0 +1,51 @@
+info:
+  name: Prepare WS auth message
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/stream?encoding=json"
+  params:
+    - name: encoding
+      value: json
+      type: query
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |- # pragma: allowlist secret
+        if (bru.isSafeMode()) {
+          const cryptoJS = require("crypto-js");
+
+          const createAuthMessage=(apiKey, apiSecret) =>{
+            const timestamp = Math.floor(Date.now() / 1000); // seconds
+            const nonce = `${Date.now()}${Math.floor(Math.random() * 1000000)}`;
+            const message = `${apiKey}:${timestamp}:${nonce}`;
+            const signature = cryptoJS
+              .HmacSHA256(message, apiSecret)
+              .toString(cryptoJS.enc.Hex);
+
+            return {
+              action: "auth",
+              api_key: apiKey,
+              signature: signature,
+              timestamp: timestamp,
+              nonce: nonce,
+            };
+          }
+          const apiKey = bru.getEnvVar("apiKey");
+          const apiSecret = bru.getEnvVar("apiSecret");
+
+          const { signature, timestamp, nonce } = createAuthMessage(apiKey, apiSecret);
+          bru.setEnvVar("wsSignature", signature);
+          bru.setEnvVar("wsTimestamp", timestamp);
+          bru.setEnvVar("wsNonce", nonce);
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

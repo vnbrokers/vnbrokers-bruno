@@ -1,0 +1,139 @@
+info:
+  name: Sức mua / Sức bán tối đa
+  type: http
+  seq: 3
+  tags:
+    - Balance
+
+http:
+  method: GET
+  url: "{{baseUrl}}/dnse-order-service/v2/account/trade-capacities"
+  params:
+    - name: symbol
+      value: VIC
+      type: query
+      description: Mã chứng khoán (ví dụ "VIC" hoặc "VN30F2505")
+    - name: price
+      value: "41600"
+      type: query
+      description: Giá giao dịch (đơn vị đồng)
+    - name: subAccount
+      value: ""
+      type: query
+      description: Mã tiểu khoản
+    - name: assetType
+      value: stock
+      type: query
+      disabled: true
+    - name: assetType
+      value: derivative
+      type: query
+      disabled: true
+    - name: loanPackageId
+      value: ""
+      type: query
+      description: Mã gói vay (null nếu không dùng margin)
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Sức mua/bán tối đa
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/account/trade-capacities"
+      method: GET
+      params:
+        - name: symbol
+          value: VIC
+          type: query
+          description: Mã chứng khoán (ví dụ "VIC" hoặc "VN30F2505")
+        - name: price
+          value: "41600"
+          type: query
+          description: Giá giao dịch (đơn vị đồng)
+        - name: subAccount
+          value: ""
+          type: query
+          description: Mã tiểu khoản
+        - name: assetType
+          value: stock
+          type: query
+          disabled: true
+        - name: assetType
+          value: derivative
+          type: query
+          disabled: true
+        - name: loanPackageId
+          value: ""
+          type: query
+          description: Mã gói vay (null nếu không dùng margin)
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "symbol": "",
+            "maxBuyQuantity": 0,
+            "maxSellQuantity": 0,
+            "requiredMargin": 0
+          }
+  - name: 401 Response
+    description: Chưa xác thực hoặc token không hợp lệ
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/account/trade-capacities"
+      method: GET
+      params:
+        - name: symbol
+          value: VIC
+          type: query
+          description: Mã chứng khoán (ví dụ "VIC" hoặc "VN30F2505")
+        - name: price
+          value: "41600"
+          type: query
+          description: Giá giao dịch (đơn vị đồng)
+        - name: subAccount
+          value: ""
+          type: query
+          description: Mã tiểu khoản
+        - name: assetType
+          value: stock
+          type: query
+          disabled: true
+        - name: assetType
+          value: derivative
+          type: query
+          disabled: true
+        - name: loanPackageId
+          value: ""
+          type: query
+          description: Mã gói vay (null nếu không dùng margin)
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": 401,
+            "message": "Unauthorized"
+          }
+
+docs: |
+  Tính toán sức mua hoặc sức bán tối đa theo mã, giá và gói vay.
+  Áp dụng cho cả giao dịch cơ sở (stock) và phái sinh (derivative).

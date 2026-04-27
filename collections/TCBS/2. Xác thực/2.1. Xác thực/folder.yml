@@ -1,0 +1,6 @@
+info:
+  name: 2.1. Xác thực
+  type: folder
+  seq: 1
+request:
+  auth: inherit

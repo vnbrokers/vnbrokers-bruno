@@ -1,0 +1,38 @@
+info:
+  name: 5.6.3. Thông tin sao kê tiền
+  type: http
+  seq: 3
+  tags:
+    - get_asset_stock_normal
+
+http:
+  method: GET
+  url: "{{baseUrl}}/erebos/v2/digital/trans-hist-cashStatements?acctno={{accountNo}}&fromDate=2025-12-01&toDate=2026-01-15&pageSize=25&pageIndex=1"
+  params:
+    - name: acctno
+      value: "{{accountNo}}"
+      type: query
+    - name: fromDate
+      value: 2025-12-01
+      type: query
+    - name: toDate
+      value: 2026-01-15
+      type: query
+    - name: pageSize
+      value: "25"
+      type: query
+    - name: pageIndex
+      value: "1"
+      type: query
+    - name: transactionCode
+      value: "1153"
+      type: query
+      description: Loại giao dịch
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

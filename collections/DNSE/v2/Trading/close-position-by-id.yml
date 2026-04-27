@@ -1,0 +1,164 @@
+info:
+  name: Đóng vị thế
+  type: http
+  seq: 23
+
+http:
+  method: POST
+  url: "{{baseUrl}}/accounts/positions/:positionId/close?marketType=DERIVATIVE"
+  headers:
+    - name: Accept
+      value: application/json
+      disabled: true
+    - name: X-API-Key
+      value: "{{apiKey}}"
+      disabled: true
+    - name: X-Signature
+      value: ""
+      disabled: true
+    - name: X-Aux-Date
+      value: ""
+      disabled: true
+    - name: trading-token
+      value: "{{TRADING_TOKEN}}"
+  params:
+    - name: marketType
+      value: DERIVATIVE
+      type: query
+    - name: positionId
+      value: "{{positionId}}"
+      type: path
+  auth: inherit
+
+runtime:
+  variables:
+    - name: positionId
+      value: "123"
+  scripts:
+
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công – tạo lệnh đóng vị thế
+    request:
+      url: "{{baseUrl}}/accounts/positions/{{positionId}}/close"
+      method: POST
+      headers:
+        - name: Accept
+          value: application/json
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: trading-token
+          value: "{{tradingToken}}"
+      params:
+        - name: marketType
+          value: DERIVATIVE
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": 0,
+            "side": "",
+            "accountNo": "",
+            "symbol": "",
+            "price": 0,
+            "quantity": 0,
+            "orderType": "",
+            "fillQuantity": 0,
+            "leaveQuantity": 0,
+            "canceledQuantity": 0,
+            "loanPackageId": 0,
+            "createdDate": "",
+            "modifiedDate": ""
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{baseUrl}}/accounts/positions/{{positionId}}/close"
+      method: POST
+      headers:
+        - name: Accept
+          value: application/json
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: trading-token
+          value: "{{tradingToken}}"
+      params:
+        - name: marketType
+          value: ""
+          type: query
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/accounts/positions/{{positionId}}/close"
+      method: POST
+      headers:
+        - name: Accept
+          value: application/json
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: trading-token
+          value: "{{tradingToken}}"
+      params:
+        - name: marketType
+          value: DERIVATIVE
+          type: query
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: |
+  API đóng vị thế phái sinh.
+
+  Query Parameters:
+    - marketType (string, required): Chỉ hỗ trợ DERIVATIVE
+
+  Header Parameters:
+    - X-API-Key (string, required)
+    - X-Signature (string, required)
+    - X-Aux-Date (string, required)
+    - trading-token (string, required)
+
+  Path Parameters:
+    - positionId (string): ID vị thế cần đóng
+
+  Response:
+    - Trả về thông tin lệnh đóng vị thế vừa được tạo.

@@ -1,0 +1,15 @@
+info:
+  name: 5.4.4. Lấy thông tin khớp lệnh (realtime)
+  type: http
+  seq: 4
+  tags:
+  - get_order_stock_normal
+http:
+  method: GET
+  url: "{{baseUrl}}/ws/aither"
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

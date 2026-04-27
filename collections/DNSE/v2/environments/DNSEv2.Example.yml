@@ -1,0 +1,22 @@
+name: Development
+variables:
+  - secret: true
+    name: apiKey
+  - secret: true
+    name: apiSecret
+  - name: baseUrl
+    value: https://openapi.dnse.com.vn
+  - secret: true
+    name: X-Signature
+  - name: X-Aux-Date
+    value: Fri, 17 Apr 2026 13:45:29 +0000
+  - secret: true
+    name: wsSignature
+  - name: wsTimestamp
+    value: "1776563296"
+  - name: wsNonce
+    value: "17765632968732440"
+  - secret: true
+    name: accountNo
+  - secret: true
+    name: tradingToken

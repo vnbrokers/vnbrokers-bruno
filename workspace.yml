@@ -1,0 +1,22 @@
+opencollection: 1.0.0
+info:
+  name: "VNBrokers"
+  type: workspace
+
+collections:
+  - name: "DNSE v1"
+    path: "collections/DNSE/v1"
+  - name: "DNSE v2"
+    path: "collections/DNSE/v2"
+  - name: "Entrade"
+    path: "collections/Entrade"
+  - name: "SSI"
+    path: "collections/SSI"
+  - name: "TCBS"
+    path: "collections/TCBS"
+
+specs:
+  - name: "TCBS iFlash Open API"
+    path: "apispec/TCBS iFlash Open API.yaml"
+
+docs: "VNBrokers - A Collection of OpenAPIs from Vietnamese Securities Companies"

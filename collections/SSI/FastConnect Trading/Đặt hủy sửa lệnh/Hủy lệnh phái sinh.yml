@@ -1,0 +1,27 @@
+info:
+  name: Hủy lệnh phái sinh
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v2/Trading/derCancelOrder"
+  body:
+    type: json
+    data: |-
+      {
+        "account": "{{account}}",
+        "orderID": "{{orderID}}",
+        "marketID": "VNFE",
+        "instrumentID": "{{instrumentID}}",
+        "buySell": "{{buySell}}",
+        "requestID": "{{requestID}}",
+        "code": "{{code}}"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

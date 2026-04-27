@@ -1,0 +1,35 @@
+info:
+  name: 6.4.2. Đặt lệnh điều kiện
+  type: http
+  seq: 2
+  tags:
+  - order_derivative
+http:
+  method: POST
+  url: "{{baseUrl}}/khronos/v1/order/condition/place"
+  body:
+    type: json
+    data: |-
+      {
+        "accountId": "105C031402",
+        "subAccountId": "105C031402A",
+        "side": "B",
+        "symbol": "{{symbol}}",
+        "price": "117000",
+        "volume": "300",
+        "advance": "",
+        "refId": "",
+        "orderType": "SOL",
+        "pin": "",
+        "type": "",
+        "cmd": "",
+        "callbackPoint": "0.1",
+        "activationPrice": "1505.7",
+        "soPrice": "1505.7"
+      }
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

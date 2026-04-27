@@ -1,0 +1,6 @@
+info:
+  name: 3.1 Thông tin tài khoản
+  type: folder
+  seq: 1
+request:
+  auth: inherit

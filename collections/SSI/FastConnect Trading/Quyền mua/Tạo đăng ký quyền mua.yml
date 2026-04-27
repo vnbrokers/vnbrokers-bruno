@@ -1,0 +1,24 @@
+info:
+  name: Tạo đăng ký quyền mua
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v2/ors/create"
+  body:
+    type: json
+    data: |-
+      {
+        "account": "{{account}}",
+        "instrumentID": "{{instrumentID}}",
+        "quantity": {{quantity}},
+        "code": "{{code}}"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

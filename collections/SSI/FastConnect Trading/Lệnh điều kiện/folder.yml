@@ -1,0 +1,7 @@
+info:
+  name: Lệnh điều kiện
+  type: folder
+  seq: 7
+
+request:
+  auth: inherit

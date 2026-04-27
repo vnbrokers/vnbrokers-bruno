@@ -1,0 +1,58 @@
+info:
+  name: 6.3.1. Tra cứu sổ lệnh thường
+  type: http
+  seq: 1
+  tags:
+  - get_order_derivative
+http:
+  method: GET
+  url: "{{baseUrl}}/khronos/v1/order/in-day"
+  params:
+  - name: pageNo
+    value: '1'
+    type: query
+    description: Trang số
+  - name: pageSize
+    value: '20'
+    type: query
+    description: Số phần tử trong trang
+  - name: accountId
+    value: 105C031402
+    type: query
+    description: số tài khoản lưu kí
+  - name: symbol
+    value: "{{symbol}}"
+    type: query
+    description: |
+      filter theo mã hợp đồng và theo vị thế:
+      - `ALL,ALL`: Lọc ALL
+      - `VN30F2303,B`: Lọc theo mã
+      - `ALL,B`: Lọc theo L/S
+  - name: refId
+    value: H.7387641765855363489
+    type: query
+    description: Ref id của lệnh
+    disabled: true
+  - name: orderType
+    type: query
+    description: |
+      filter theo Loại lệnh:
+      - ``: Tất cả
+      - `3`: Arbitrage
+      - `4`: SL/TP
+      - `5`: ForceClose
+      - `6`: Thường
+  - name: status
+    value: '0'
+    type: query
+    description: |
+      filter theo trạng thái:
+      - `0`: Tất cả
+      - `1`: Chờ khớp
+      - `2`: Đã khớp
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

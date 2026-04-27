@@ -1,0 +1,37 @@
+info:
+  name: 6.2.1. Tài sản, vị thế đóng
+  type: http
+  seq: 1
+  tags:
+  - asset_derivative
+http:
+  method: GET
+  url: "{{baseUrl}}/khronos/v1/account/portfolio/position/close"
+  params:
+  - name: accountId
+    value: 105C031402
+    type: query
+    description: số tài khoản lưu kí
+  - name: subAccountId
+    value: 105C031402A
+    type: query
+    description: Tiểu khoản phái sinh
+  - name: symbol
+    value: "{{symbol}}"
+    type: query
+    description: Mã chứng khoán
+    disabled: true
+  - name: pageNo
+    value: '1'
+    type: query
+    description: Số trang
+  - name: pageSize
+    value: '20'
+    type: query
+    description: Số dòng
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

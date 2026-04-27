@@ -1,0 +1,36 @@
+info:
+  name: 5.7.8. Cung cầu theo tháng
+  type: http
+  seq: 8
+  tags:
+  - market_information_stock_normal
+http:
+  method: GET
+  url: "{{baseUrl}}/nyx/v1/intraday/:ticker/bsa-month"
+  params:
+  - name: ticker
+    value: TCB
+    type: path
+    description: Mã cổ phiếu
+  - name: timeWindow
+    type: query
+    description: |
+      Khung thời gian:
+      - 1M
+    disabled: true
+  - name: type
+    value: all
+    type: query
+    description: |
+      Loại nhà đầu tư:
+      - sheep (Nhà đầu tư cá nhân nhỏ lẻ)
+      - wolf (Nhà đầu tư tổ chức vừa)
+      - shark (Nhà đầu tư lớn/tổ chức lớn)
+      - all (Tất cả loại nhà đầu tư)
+    disabled: true
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

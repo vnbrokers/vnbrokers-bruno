@@ -1,0 +1,19 @@
+info:
+  name: Danh sách chỉ số thị trường
+  type: http
+  seq: 4
+  tags:
+    - Market_Data
+
+http:
+  method: GET
+  url: "{{baseUrl}}/dnse-price-service/api/indices"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: Lấy giá trị các chỉ số thị trường (VN-Index, HNX-Index, VN30, v.v.)

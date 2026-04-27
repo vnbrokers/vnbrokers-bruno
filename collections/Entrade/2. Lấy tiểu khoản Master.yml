@@ -1,0 +1,28 @@
+info:
+  name: 2. Lấy tiểu khoản Master
+  type: http
+  seq: 2
+  tags:
+    - Authentication
+
+http:
+  method: GET
+  url: "{{baseUrl}}/entrade-api/:investorId/investor_account"
+  params:
+    - name: investorId
+      value: "{{investorId}}"
+      type: path
+  body:
+    type: json
+    data: ""
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |
+  Đăng nhập bằng username/password để lấy JWT token.
+  JWT token dùng cho các API đọc thông tin (xác thực cấp 1).

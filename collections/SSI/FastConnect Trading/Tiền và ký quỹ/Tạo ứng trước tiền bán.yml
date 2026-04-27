@@ -1,0 +1,23 @@
+info:
+  name: Tạo ứng trước tiền bán
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v2/cash/createCashInAdvance"
+  body:
+    type: json
+    data: |-
+      {
+        "account": "{{account}}",
+        "ciaAmount": {{ciaAmount}},
+        "code": "{{code}}"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

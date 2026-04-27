@@ -1,0 +1,75 @@
+info:
+  name: Thông tin tài khoản (profile khách hàng)
+  type: http
+  seq: 1
+  tags:
+    - Account
+
+http:
+  method: GET
+  url: "{{baseUrl}}/user-service/api/me"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thông tin tài khoản
+    request:
+      url: "{{baseUrl}}/dnse-user-service/api/investors/me"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": "",
+            "investorId": "",
+            "name": "",
+            "custodyCode": "",
+            "email": "",
+            "mobile": "",
+            "status": "ACTIVE",
+            "gender": "MALE",
+            "birthday": "",
+            "address": "",
+            "identificationCode": "",
+            "identificationDate": "",
+            "identificationExpiredDate": "",
+            "identificationPlace": "",
+            "createdDate": "",
+            "modifiedDate": "",
+            "referralCode": "",
+            "registeredSmartOtp": false,
+            "isEmailVerified": false,
+            "userApproveType": "AUTO_APPROVED"
+          }
+  - name: 401 Response
+    description: Chưa xác thực hoặc token không hợp lệ
+    request:
+      url: "{{baseUrl}}/dnse-user-service/api/investors/me"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": 401,
+            "message": "Unauthorized"
+          }
+
+docs: Trả về thông tin cá nhân của khách hàng đang đăng nhập.

@@ -1,0 +1,157 @@
+info:
+  name: Chi tiết vị thế theo ID
+  type: http
+  seq: 9
+
+http:
+  method: GET
+  url: "{{baseUrl}}/accounts/positions/:positionId?marketType=STOCK"
+  headers:
+    - name: X-API-Key
+      value: "{{apiKey}}"
+      disabled: true
+    - name: X-Aux-Date
+      value: ""
+      disabled: true
+    - name: X-Signature
+      value: ""
+      disabled: true
+  params:
+    - name: marketType
+      value: STOCK
+      type: query
+    - name: positionId
+      value: "{{positionId}}"
+      type: path
+  auth: inherit
+
+runtime:
+  variables:
+    - name: positionId
+      value: "2183078"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công – trả về chi tiết vị thế theo ID
+    request:
+      url: "{{baseUrl}}/accounts/positions/{{positionId}}"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+      params:
+        - name: marketType
+          value: DERIVATIVE
+          type: query
+        - name: positionId
+          value: ""
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "data": {
+              "id": 0,
+              "symbol": "",
+              "marketType": "",
+              "accountNo": "",
+              "status": "",
+              "loanPackageId": 0,
+              "side": "",
+              "accumulateQuantity": 0,
+              "tradeQuantity": 0,
+              "closedQuantity": 0,
+              "openQuantity": 0,
+              "overNightQuantity": 0,
+              "costPrice": 0,
+              "averageCostPrice": 0,
+              "averageClosePrice": 0,
+              "marketPrice": 0,
+              "breakEvenPrice": 0,
+              "createdDate": "",
+              "modifiedDate": ""
+            }
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{baseUrl}}/accounts/positions/{{positionId}}"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+      params:
+        - name: marketType
+          value: ""
+          type: query
+        - name: positionId
+          value: ""
+          type: path
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/accounts/positions/{{positionId}}"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+      params:
+        - name: marketType
+          value: ""
+          type: query
+        - name: positionId
+          value: ""
+          type: path
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: |
+  API trả về chi tiết vị thế theo positionId.
+
+  Query Parameters:
+    - marketType (string, required): Loại thị trường (STOCK / DERIVATIVE)
+
+  Path Parameters:
+    - positionId (number): ID vị thế
+
+  Response bao gồm:
+    - Thông tin vị thế: trạng thái, khối lượng, giá vốn, giá thị trường, giá hòa vốn
+    - Thời điểm mở và cập nhật vị thế

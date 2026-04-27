@@ -1,0 +1,28 @@
+info:
+  name: Lịch sử trạng thái lệnh điều kiện
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v2/fco/statusHistory"
+  headers:
+    - name: User-Agent
+      value: "{{userAgent}}"
+  params:
+    - name: fcoId
+      value: "{{fcoId}}"
+      type: query
+    - name: pageIndex
+      value: "{{pageIndex}}"
+      type: query
+    - name: pageSize
+      value: "{{pageSize}}"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

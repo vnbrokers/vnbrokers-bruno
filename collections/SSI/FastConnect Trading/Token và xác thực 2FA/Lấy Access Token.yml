@@ -1,0 +1,34 @@
+info:
+  name: Lấy Access Token
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v2/Trading/AccessToken"
+  body:
+    type: json
+    data: |-
+      {
+        "consumerID": "{{consumerID}}",
+        "consumerSecret": "{{consumerSecret}}",
+        "twoFactorType": {{twoFactorType}},
+        "code": "{{code}}",
+        "isSave": false
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: baseUrl
+      value: https://fc-tradeapi.ssi.com.vn
+    - name: twoFactorType
+      value: "1"
+    - name: code
+      value: ""
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,6 @@
+info:
+  name: 6.5. Sửa lệnh
+  type: folder
+  seq: 5
+request:
+  auth: inherit

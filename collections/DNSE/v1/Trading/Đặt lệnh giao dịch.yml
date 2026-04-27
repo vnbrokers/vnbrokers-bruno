@@ -1,0 +1,295 @@
+info:
+  name: Đặt lệnh giao dịch
+  type: http
+  seq: 1
+  tags:
+    - Trading
+
+http:
+  method: POST
+  url: "{{baseUrl}}/dnse-order-service/v2/orders"
+  body:
+    type: json
+    data: |-
+      {
+        "account": "064C123456",
+        "symbol": "VIC",
+        "side": "buy",
+        "quantity": 100,
+        "price": 41600,
+        "order_type": "LO",
+        "loan_package_id": null,
+        "asset_type": "stock"
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 201 Response (Mua cổ phiếu cơ sở)
+    description: Lệnh đặt thành công
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/orders"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "account": "064C123456",
+            "symbol": "VIC",
+            "side": "buy",
+            "quantity": 100,
+            "price": 41600,
+            "order_type": "LO",
+            "loan_package_id": null,
+            "asset_type": "stock"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "orderId": "",
+            "status": "pending",
+            "message": ""
+          }
+  - name: 201 Response (Bán phái sinh (Short))
+    description: Lệnh đặt thành công
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/orders"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "account": "064C123456",
+            "symbol": "VN30F2505",
+            "side": "sell",
+            "quantity": 1,
+            "price": 1300,
+            "order_type": "LO",
+            "loan_package_id": 2403,
+            "asset_type": "derivative"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "orderId": "",
+            "status": "pending",
+            "message": ""
+          }
+  - name: 400 Response (Mua cổ phiếu cơ sở)
+    description: Dữ liệu đầu vào không hợp lệ
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/orders"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "account": "064C123456",
+            "symbol": "VIC",
+            "side": "buy",
+            "quantity": 100,
+            "price": 41600,
+            "order_type": "LO",
+            "loan_package_id": null,
+            "asset_type": "stock"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": 0,
+            "message": "",
+            "details": ""
+          }
+  - name: 400 Response (Bán phái sinh (Short))
+    description: Dữ liệu đầu vào không hợp lệ
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/orders"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "account": "064C123456",
+            "symbol": "VN30F2505",
+            "side": "sell",
+            "quantity": 1,
+            "price": 1300,
+            "order_type": "LO",
+            "loan_package_id": 2403,
+            "asset_type": "derivative"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": 0,
+            "message": "",
+            "details": ""
+          }
+  - name: 401 Response (Mua cổ phiếu cơ sở)
+    description: Chưa xác thực hoặc token không hợp lệ
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/orders"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "account": "064C123456",
+            "symbol": "VIC",
+            "side": "buy",
+            "quantity": 100,
+            "price": 41600,
+            "order_type": "LO",
+            "loan_package_id": null,
+            "asset_type": "stock"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": 401,
+            "message": "Unauthorized"
+          }
+  - name: 401 Response (Bán phái sinh (Short))
+    description: Chưa xác thực hoặc token không hợp lệ
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/orders"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "account": "064C123456",
+            "symbol": "VN30F2505",
+            "side": "sell",
+            "quantity": 1,
+            "price": 1300,
+            "order_type": "LO",
+            "loan_package_id": 2403,
+            "asset_type": "derivative"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": 401,
+            "message": "Unauthorized"
+          }
+  - name: 422 Response (Mua cổ phiếu cơ sở)
+    description: Không thể xử lý lệnh (số dư không đủ, quá giới hạn, v.v.)
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/orders"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "account": "064C123456",
+            "symbol": "VIC",
+            "side": "buy",
+            "quantity": 100,
+            "price": 41600,
+            "order_type": "LO",
+            "loan_package_id": null,
+            "asset_type": "stock"
+          }
+    response:
+      status: 422
+      statusText: Unprocessable Entity
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": 0,
+            "message": "",
+            "details": ""
+          }
+  - name: 422 Response (Bán phái sinh (Short))
+    description: Không thể xử lý lệnh (số dư không đủ, quá giới hạn, v.v.)
+    request:
+      url: "{{baseUrl}}/dnse-order-service/v2/orders"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "account": "064C123456",
+            "symbol": "VN30F2505",
+            "side": "sell",
+            "quantity": 1,
+            "price": 1300,
+            "order_type": "LO",
+            "loan_package_id": 2403,
+            "asset_type": "derivative"
+          }
+    response:
+      status: 422
+      statusText: Unprocessable Entity
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": 0,
+            "message": "",
+            "details": ""
+          }
+
+docs: |
+  Đặt lệnh mua hoặc bán chứng khoán cơ sở / phái sinh.
+
+  **Yêu cầu:** Trading Token (xác thực cấp 2).
+
+  Các loại lệnh hỗ trợ: `LO`, `ATO`, `ATC`, `MTL`, `MOK`, `MAK`.

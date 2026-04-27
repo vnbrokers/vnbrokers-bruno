@@ -1,0 +1,31 @@
+info:
+  name: 5.2.1. Sửa lệnh thường
+  type: http
+  seq: 1
+  tags:
+  - update_order_stock_normal
+http:
+  method: PUT
+  url: "{{baseUrl}}/akhlys/v1/accounts/:accountNo/orders/:orderId"
+  params:
+  - name: accountNo
+    value: "{{accountNo}}"
+    type: path
+    description: Số tiểu khoản
+  - name: orderId
+    value: "{{orderId}}"
+    type: path
+    description: orderId
+  body:
+    type: json
+    data: |-
+      {
+        "price": 10000,
+        "quantity": 100
+      }
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

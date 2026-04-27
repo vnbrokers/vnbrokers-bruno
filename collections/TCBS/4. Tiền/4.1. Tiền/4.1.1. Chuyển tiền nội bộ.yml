@@ -1,0 +1,24 @@
+info:
+  name: 4.1.1. Chuyển tiền nội bộ
+  type: http
+  seq: 1
+  tags:
+  - money
+http:
+  method: POST
+  url: "{{baseUrl}}/physis/v1/stock/transfer"
+  body:
+    type: json
+    data: |-
+      {
+        "sourceAccountNumber": "0001170730",
+        "destinationAccountNumber": "105C738764A",
+        "amount": "90000",
+        "description": "CHUYEN TIEN PHAI SINH"
+      }
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

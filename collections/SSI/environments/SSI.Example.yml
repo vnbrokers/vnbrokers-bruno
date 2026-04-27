@@ -1,0 +1,32 @@
+name: SSI.Example
+variables:
+  - name: fcDataBaseUrl
+    value: https://fc-data.ssi.com.vn
+  - secret: true
+    name: consumerID
+  - secret: true
+    name: consumerSecret
+  - secret: true
+    name: accessToken
+  - name: market
+    value: HOSE
+  - name: symbol
+    value: SSI
+  - name: exchange
+    value: HOSE
+  - name: indexCode
+    value: VN30
+  - name: indexId
+    value: VNINDEX
+  - name: fromDate
+    value: 01/01/2026
+  - name: toDate
+    value: 31/01/2026
+  - name: pageIndex
+    value: "1"
+  - name: pageSize
+    value: "10"
+  - name: ascending
+    value: "false"
+  - name: resollution
+    value: "1"

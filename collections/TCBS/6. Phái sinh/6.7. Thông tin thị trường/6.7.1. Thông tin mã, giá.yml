@@ -1,0 +1,15 @@
+info:
+  name: 6.7.1. Thông tin mã, giá
+  type: http
+  seq: 1
+  tags:
+  - market_information_derivative
+http:
+  method: GET
+  url: "{{baseUrl}}/tartarus/v1/derivatives"
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

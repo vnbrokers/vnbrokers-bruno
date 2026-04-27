@@ -1,0 +1,20 @@
+info:
+  name: 5.6.2. Lấy thông tin số dư tiền
+  type: http
+  seq: 2
+  tags:
+  - get_asset_stock_normal
+http:
+  method: GET
+  url: "{{baseUrl}}/aion/v1/accounts/:accountNo/cashInvestments"
+  params:
+  - name: accountNo
+    value: "{{accountNo}}"
+    type: path
+    description: Số tiểu khoản
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

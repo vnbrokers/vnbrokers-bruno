@@ -1,0 +1,191 @@
+info:
+  name: Sửa lệnh
+  type: http
+  seq: 20
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/accounts/:accountNo/orders/:orderId?marketType=STOCK&orderCategory=NORMAL"
+  headers:
+    - name: Content-Type
+      value: application/json
+      disabled: true
+    - name: X-API-Key
+      value: "{{apiKey}}"
+      disabled: true
+    - name: X-Signature
+      value: ""
+      disabled: true
+    - name: X-Aux-Date
+      value: ""
+      disabled: true
+    - name: trading-token
+      value: "{{TRADING_TOKEN}}"
+  params:
+    - name: marketType
+      value: STOCK
+      type: query
+    - name: orderCategory
+      value: NORMAL
+      type: query
+    - name: accountNo
+      value: "{{accountNo}}"
+      type: path
+    - name: orderId
+      value: "{{orderId}}"
+      type: path
+  auth: inherit
+
+runtime:
+  variables:
+    - name: orderId
+      value: "1"
+  scripts:
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công – trả về thông tin lệnh sau khi sửa
+    request:
+      url: "{{baseUrl}}/accounts/{{accountNo}}/orders/{{orderId}}"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: trading-token
+          value: "{{tradingToken}}"
+      params:
+        - name: marketType
+          value: DERIVATIVE
+          type: query
+        - name: orderCategory
+          value: NORMAL
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": 0,
+            "accountNo": "",
+            "side": "",
+            "loanPackageId": 0,
+            "symbol": "",
+            "orderType": "",
+            "orderCategory": "",
+            "price": 0,
+            "quantity": 0,
+            "fillQuantity": 0,
+            "canceledQuantity": 0,
+            "marketType": "",
+            "transDate": "",
+            "createdDate": "",
+            "modifiedDate": ""
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{baseUrl}}/accounts/{{accountNo}}/orders/{{orderId}}"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: trading-token
+          value: "{{tradingToken}}"
+      params:
+        - name: marketType
+          value: ""
+          type: query
+        - name: orderCategory
+          value: ""
+          type: query
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/accounts/{{accountNo}}/orders/{{orderId}}"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: trading-token
+          value: "{{tradingToken}}"
+      params:
+        - name: marketType
+          value: DERIVATIVE
+          type: query
+        - name: orderCategory
+          value: NORMAL
+          type: query
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: |
+  API sửa lệnh giao dịch.
+
+  Query Parameters:
+    - marketType (string, required): STOCK hoặc DERIVATIVE
+    - orderCategory (string, required): NORMAL (mặc định)
+
+  Header Parameters:
+    - X-API-Key (string, required)
+    - X-Signature (string, required)
+    - X-Aux-Date (string, required)
+    - trading-token (string, required): Token đặt lệnh
+
+  Path Parameters:
+    - accountNo (string): Số tiểu khoản
+    - orderId (number): ID lệnh cần sửa
+
+  Body Parameters:
+    - price (number): Giá mới (LO)
+    - quantity (number): Khối lượng mới
+
+  Ghi chú:
+    - Cơ sở: được sửa cả giá và khối lượng
+    - Phái sinh: chỉ được sửa 1 trong 2 (giá hoặc khối lượng)
+    - Khối lượng mới phải > khối lượng đã khớp (nếu có)
+
+  Response:
+    - Thông tin lệnh sau khi sửa

@@ -1,0 +1,50 @@
+info:
+  name: 7. Đặt lệnh
+  type: http
+  seq: 3
+  tags:
+    - Authentication
+
+http:
+  method: POST
+  url: "{{baseUrl}}/papertrade-entrade-api/derivative/orders"
+  params:
+    - name: _start
+      value: "1"
+      type: query
+      disabled: true
+    - name: _end
+      value: ""
+      type: query
+      disabled: true
+    - name: _sort
+      value: ""
+      type: query
+      disabled: true
+    - name: _order
+      value: ""
+      type: query
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+        "bankMarginPortfolioId": 34,
+        "investorId": {{investorId}},
+        "symbol": "VN30F2512",
+        "price": 1920.9,
+        "orderType": "LO",
+        "side": "NB",
+        "quantity": 1
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |
+  Đăng nhập bằng username/password để lấy JWT token.
+  JWT token dùng cho các API đọc thông tin (xác thực cấp 1).

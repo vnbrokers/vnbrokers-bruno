@@ -1,0 +1,24 @@
+info:
+  name: Nộp rút ký quỹ VSD
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v2/cash/vsdCashDW"
+  body:
+    type: json
+    data: |-
+      {
+        "account": "{{account}}",
+        "amount": {{amount}},
+        "type": "{{type}}",
+        "code": "{{code}}"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

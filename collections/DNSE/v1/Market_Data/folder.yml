@@ -1,0 +1,7 @@
+info:
+  name: Market_Data
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

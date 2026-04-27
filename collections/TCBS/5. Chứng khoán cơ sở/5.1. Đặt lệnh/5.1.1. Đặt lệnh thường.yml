@@ -1,0 +1,30 @@
+info:
+  name: 5.1.1. Đặt lệnh thường
+  type: http
+  seq: 1
+  tags:
+  - order_stock_normal
+http:
+  method: POST
+  url: "{{baseUrl}}/akhlys/v1/accounts/:accountNo/orders"
+  params:
+  - name: accountNo
+    value: "{{accountNo}}"
+    type: path
+    description: Số tiểu khoản
+  body:
+    type: json
+    data: |-
+      {
+        "execType": "NS",
+        "price": 10000,
+        "priceType": "LO",
+        "quantity": 100,
+        "symbol": "{{symbol}}"
+      }
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

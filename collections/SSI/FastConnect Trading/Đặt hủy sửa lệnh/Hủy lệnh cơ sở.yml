@@ -1,0 +1,27 @@
+info:
+  name: Hủy lệnh cơ sở
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v2/Trading/CancelOrder"
+  body:
+    type: json
+    data: |-
+      {
+        "account": "{{account}}",
+        "orderID": "{{orderID}}",
+        "marketID": "{{marketID}}",
+        "instrumentID": "{{instrumentID}}",
+        "buySell": "{{buySell}}",
+        "requestID": "{{requestID}}",
+        "code": "{{code}}"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,26 @@
+info:
+  name: 6.5.2. Sửa lệnh điều kiện
+  type: http
+  seq: 2
+  tags:
+  - edit_order_derivative
+http:
+  method: POST
+  url: "{{baseUrl}}/khronos/v2/order/condition/change"
+  body:
+    type: json
+    data: |-
+      {
+        "accountId": "105C031402",
+        "pkOrderNo": "901938",
+        "type": "",
+        "refId": "000123.H.HH2104062",
+        "soPrice": "1453.9",
+        "cmd": "Web.Order.ChangeCondition"
+      }
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

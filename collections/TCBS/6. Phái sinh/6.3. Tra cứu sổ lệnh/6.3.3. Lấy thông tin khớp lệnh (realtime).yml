@@ -1,0 +1,15 @@
+info:
+  name: 6.3.3. Lấy thông tin khớp lệnh (realtime)
+  type: http
+  seq: 3
+  tags:
+  - get_order_derivative
+http:
+  method: GET
+  url: "{{baseUrl}}/ws/nesoi"
+  auth: inherit
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

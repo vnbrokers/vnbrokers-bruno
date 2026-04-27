@@ -1,0 +1,29 @@
+info:
+  name: Sửa lệnh cơ sở
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v2/Trading/ModifyOrder"
+  body:
+    type: json
+    data: |-
+      {
+        "account": "{{account}}",
+        "orderID": "{{orderID}}",
+        "marketID": "{{marketID}}",
+        "instrumentID": "{{instrumentID}}",
+        "buySell": "{{buySell}}",
+        "price": {{price}},
+        "quantity": {{quantity}},
+        "requestID": "{{requestID}}",
+        "code": "{{code}}"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,27 @@
+info:
+  name: Lấy mã OTP
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v2/Trading/GetOTP"
+  body:
+    type: json
+    data: |-
+      {
+        "consumerID": "{{consumerID}}",
+        "consumerSecret": "{{consumerSecret}}"
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: baseUrl
+      value: https://fc-tradeapi.ssi.com.vn
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

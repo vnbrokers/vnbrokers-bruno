@@ -1,0 +1,26 @@
+info:
+  name: 3.1.1. Lấy thông tin tiểu khoản
+  type: http
+  seq: 1
+  tags:
+    - account
+
+http:
+  method: GET
+  url: "{{baseUrl}}/eros/v2/get-profile/by-username/:custodyCode?fields=basicInfo,personalInfo,bankSubAccounts"
+  params:
+    - name: fields
+      value: basicInfo,personalInfo,bankSubAccounts
+      type: query
+      description: Danh sách thông tin cần lấy
+    - name: custodyCode
+      value: "{{custodyCode}}"
+      type: path
+      description: Số tài khoản
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,6 @@
+info:
+  name: 6.3. Tra cứu sổ lệnh
+  type: folder
+  seq: 3
+request:
+  auth: inherit
