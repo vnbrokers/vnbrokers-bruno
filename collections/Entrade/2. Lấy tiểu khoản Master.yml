@@ -2,20 +2,26 @@ info:
   name: 2. Lấy tiểu khoản Master
   type: http
   seq: 2
-  tags:
-    - Authentication
 
 http:
   method: GET
-  url: "{{baseUrl}}/entrade-api/:investorId/investor_account"
-  params:
-    - name: investorId
-      value: "{{investorId}}"
-      type: path
-  body:
-    type: json
-    data: ""
+  url: "{{baseUrl}}/investors/{{investorId}}/investor_account"
+  headers:
+    - name: x-api-key
+      value: "{{apiKey}}"
+      disabled: true
+    - name: date
+      value: "{{X-Aux-Date}}"
+      disabled: true
   auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        bru.setEnvVar("investorAccountId", String(res.getBody().id))
+
+        console.log(res.body.availableCash)
 
 settings:
   encodeUrl: true
@@ -23,6 +29,104 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: |
-  Đăng nhập bằng username/password để lấy JWT token.
-  JWT token dùng cho các API đọc thông tin (xác thực cấp 1).
+examples:
+  - name: 200 Response
+    description: Thành công - trả về thông tin tiểu khoản master
+    request:
+      url: "{{baseUrl}}/investors/{{investorId}}/investor_account"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: X-Aux-Date
+          value: ""
+        - name: X-Signature
+          value: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": 1000000036,
+            "investorId": 1000000036,
+            "orderSecure": 0.0,
+            "derivativeOrderSecure": 0.0,
+            "dealSecure": 0.0,
+            "initDerivativeDealSecures": [],
+            "derivativeDealSecure": -38107851276.91032,
+            "tradingFeeSecure": 0.0,
+            "totalCash": 10437906825.0,
+            "sellingTaxSecure": 0.0,
+            "orderMoneyAdvanceFeeSecure": 0.0,
+            "receivable": 0.0,
+            "taxCredit": 1756499.95,
+            "initCash": 10437906825.0,
+            "holdOvernightSecure": 0.0,
+            "originalReferenceBonus": 0.0,
+            "referenceBonus": 0.0,
+            "netDerivativeOrderSecure": 0.0,
+            "cashOnHand": 0.0,
+            "remainDebt": 5349990.0,
+            "uncollectedCollateralFee": 0.0,
+            "holdCollateralFee": 0.0,
+            "createdDate": "2022-11-03T02:47:07.057Z",
+            "modifiedDate": "2025-11-27T13:01:02.548Z",
+            "status": "ACTIVE",
+            "type": "MASTER",
+            "lastActionAge": 3,
+            "availableCash": 10437906825.0,
+            "withdrawalCash": 10437906825.0,
+            "purchasingPower": 10437906825.0,
+            "depositionalCash": 0.0
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{baseUrl}}/investors/{{investorId}}/investor_account"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/investors/{{investorId}}/investor_account"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: Lấy thông tin tiểu khoản Master của khách hàng theo investorId.

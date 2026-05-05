@@ -1,0 +1,118 @@
+info:
+  name: 4.15. Đặt lệnh chốt lời
+  type: http
+  seq: 415
+
+http:
+  method: POST
+  url: "{{baseUrl}}/deal_risks"
+  body:
+    type: json
+    data: |-
+      {
+        "id": {{dealId}},
+        "takeProfitPrice": {{takeProfitPrice}}
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: dealId
+      value: "3359544"
+    - name: takeProfitPrice
+      value: "2022"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công – đặt lệnh chốt lời
+    request:
+      url: "{{baseUrl}}/deal_risks"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "id": 1000546,
+            "takeProfitPrice": 1950
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": 1000546,
+            "status": "ACTIVE",
+            "cutLossRate": 0.2,
+            "takeProfitRate": 0.0,
+            "investorId": "1000000036",
+            "investorAccountId": 1000000036,
+            "trailingEnabled": false,
+            "createdDate": "2022-11-10T03:12:40.462Z",
+            "modifiedDate": "2025-11-28T04:13:15.353Z",
+            "maxCutLossRate": 0.4
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{baseUrl}}/deal_risks"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "id": "",
+            "takeProfitPrice": ""
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/deal_risks"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "id": 1000546,
+            "takeProfitPrice": 1950
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: Đặt lệnh chốt lời cho deal.

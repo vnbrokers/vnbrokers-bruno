@@ -1,0 +1,153 @@
+info:
+  name: 4. Lấy danh sách gói vay
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{baseUrl}}/investors/{{investorId}}/derivative_margin_portfolios"
+  headers:
+    - name: x-api-key
+      value: "{{apiKey}}"
+      disabled: true
+    - name: Authorization
+      value: Bearer {{token}}
+    - name: date
+      value: "{{X-Aux-Date}}"
+      disabled: true
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        if (res.getBody().data && res.getBody().data.length > 0) {
+          bru.setEnvVar("loanPackageId", res.getBody().data[0].id)
+          
+          bru.setEnvVar("bankMarginPortfolioId", String(res.body.data[0].id))
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công - trả về danh sách gói vay
+    request:
+      url: "{{baseUrl}}/investors/{{investorId}}/derivative_margin_portfolios"
+      method: GET
+      headers:
+        - name: Authorization
+          value: Bearer {{token}}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "total": 1,
+            "data": [
+              {
+                "id": 123,
+                "bankId": 10001,
+                "bankAccountId": 1000005,
+                "name": "Gói kỹ quỹ 5%",
+                "interestRate": 4.11E-4,
+                "tradingFeeRate": 15750.0,
+                "overdueInterestRate": 0.0,
+                "loanTerm": 30,
+                "maxLoanPool": 1.0E10,
+                "coInvestTaxRate": 0.05,
+                "createdDate": "2025-08-15T07:18:32.574Z",
+                "modifiedDate": "2025-10-08T03:18:12.780Z",
+                "closedPositionFee": 4.11E-4,
+                "tradingTaxRate": 0.0,
+                "portfolio": [
+                  {
+                    "symbol": "VN30F1M",
+                    "initialRate": 0.05,
+                    "maintenanceRate": 0.03,
+                    "liquidateRate": 0.02,
+                    "overnightRate": 0.05,
+                    "dailyStockBorrowFee": 0.0,
+                    "withdrawalRate": 0.05,
+                    "additionalRate": 0.05,
+                    "companySecureRate": 0.2,
+                    "vsdSecureRate": 0.17,
+                    "bankSecureRate": 0.2
+                  },
+                  {
+                    "symbol": "VN30F2M",
+                    "initialRate": 0.05,
+                    "maintenanceRate": 0.03,
+                    "liquidateRate": 0.02,
+                    "overnightRate": 0.05,
+                    "dailyStockBorrowFee": 0.0,
+                    "withdrawalRate": 0.05,
+                    "additionalRate": 0.05,
+                    "companySecureRate": 0.2,
+                    "vsdSecureRate": 0.17,
+                    "bankSecureRate": 0.2
+                  }
+                ],
+                "assetManagementOvernightFee": 0.0,
+                "autoAdvanceRealizedProfit": true,
+                "displaySymbols": [
+                  "VN30F2512"
+                ]
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{baseUrl}}/investors/{{investorId}}/derivative_margin_portfolios"
+      method: GET
+      headers:
+        - name: Authorization
+          value: Bearer {{token}}
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/investors/{{investorId}}/derivative_margin_portfolios"
+      method: GET
+      headers:
+        - name: Authorization
+          value: Bearer {{token}}
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: Lấy danh sách gói vay theo investorId.

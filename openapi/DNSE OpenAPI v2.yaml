@@ -238,7 +238,7 @@ paths:
                 properties:
                   tradingToken:
                     type: string
-                    example: 9ab81e9c-8a81-45aa-8190-b69a1c179d52
+                    example: # 9ab81e9c-8a81-45aa-8190-b69a1c179d52
                     description: Token đặt lệnh
               example:
                 tradingToken: 9ab81e9c-8a81-45aa-8190-b69a1c179d52 #gitleaks:allow
@@ -5311,7 +5311,7 @@ paths:
                     description: Danh sách giao dịch
                   nextPageToken:
                     type: string
-                    example: NDYwMTQ1XzIwMjYtMDMtMTJUMDQ6MjU6MDUuNTZa
+                    example: # NDYwMTQ1XzIwMjYtMDMtMTJUMDQ6MjU6MDUuNTZa
                     description: Token dùng để lấy trang tiếp theo
               example:
                 trades:

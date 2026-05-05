@@ -1,0 +1,110 @@
+info:
+  name: 1. Đăng nhập
+  type: http
+  seq: 1
+
+
+
+
+
+http:
+  method: POST
+  url: "{{authBaseUrl}}/v2/auth"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "username": "{{username}}",
+        "password": "{{password}}"
+      }
+
+runtime:
+  scripts:
+    - type: after-response
+      code: bru.setEnvVar("token", res.getBody().token)
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Đăng nhập thành công
+    request:
+      url: "{{baseUrl}}/v2/auth"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "token": "eyJh..."
+          }
+  - name: 400 Response
+    description: Sai thông tin đăng nhập
+    request:
+      url: "{{baseUrl}}/v2/auth"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/v2/auth"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: API đăng nhập, trả về JWT token dùng cho tất cả các API khác (hiệu lực 8 giờ).

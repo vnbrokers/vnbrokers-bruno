@@ -1,0 +1,225 @@
+info:
+  name: 14. Đóng deal
+  type: http
+  seq: 15
+
+http:
+  method: POST
+  url: "{{baseUrl}}/derivative/deals/{{dealId}}/_close_deal"
+  headers:
+    - name: x-api-key
+      value: "{{apiKey}}"
+      disabled: true
+    - name: date
+      value: "{{X-Aux-Date}}"
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+        "orderType": "{{orderType}}",
+        "triggeredBy": "close-deal"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công - đóng deal thành công
+    request:
+      url: "{{baseUrl}}/derivative/deals/1000546/_close_deal"
+      method: POST
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: X-Aux-Date
+          value: ""
+        - name: X-Signature
+          value: ""
+      body:
+        type: json
+        data: |-
+          {
+            "orderType": "LO",
+            "triggeredBy": "close-deal"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "data": [
+              {
+                "id": 1000546,
+                "bankId": 10000,
+                "bankAccountId": 1000040,
+                "investorId": 1000000036,
+                "investorAccountId": 1000000036,
+                "bankMarginPortfolioId": 34,
+                "symbol": "VN30F2512",
+                "side": "NB",
+                "positionCostPrice": 1908.0,
+                "stockClosePrice": 1922.9,
+                "averageCostPrice": 1908.0,
+                "averageClosedPrice": 0.0,
+                "adjustedCostPrice": 1908.2815096,
+                "openQuantity": 1,
+                "closedQuantity": 0,
+                "initialQuantity": 1,
+                "type": "DERIVATIVE",
+                "currentMarginRate": 0.057332,
+                "cash": 0.0,
+                "cashSecure": 0.0,
+                "receivable": 0.0,
+                "loan": 4.5792E7,
+                "secure": 9540000.0,
+                "additionalSecure": 0.0,
+                "interest": 52202.88,
+                "totalDebt": 1.908E8,
+                "tradingFeeAmount": 10750.0,
+                "marginExcessAmount": 1398896.16,
+                "marginCallAmount": 0.0,
+                "sellingTaxAmount": 0.0,
+                "moneyAdvanceFeeAmount": 0.0,
+                "moneyAdvanceAmount": 0.0,
+                "stockBorrowFee": 0.0,
+                "positionRealizedProfit": 0.0,
+                "lastRealizedProfit": 0.0,
+                "positionUnrealizedProfit": 1490000.0,
+                "receivedQuantity": 0,
+                "positionType": 1,
+                "createdDate": "2025-11-25T10:21:34.146Z",
+                "modifiedDate": "2025-11-28T03:36:04.377Z",
+                "investorSettlementAmount": 0.0,
+                "bankSettlementAmount": 0.0,
+                "sourDebtPayment": 0.0,
+                "tradingTaxAmount": 0.0,
+                "closedPositionFeeAmount": 0.0,
+                "netProfit": 1398896.16,
+                "unrealizedTotalTaxAndFee": 28150.96,
+                "status": "ACTIVE",
+                "assetManagementOvernightFeeAmount": 0.0,
+                "unrealizedTradingTaxFactor": 0.0,
+                "accumulatedSecure": 9540000.0,
+                "breakEvenPrice": 1908.911038,
+                "collectedInterestAndFee": 0.0,
+                "releasedSecureAndProfit": 0.0,
+                "dailyReleasedSecureAndProfit": 0.0,
+                "dailyReleasedNetProfit": 0.0,
+                "totalInterestAndFeeWithoutClosingTax": 91103.84,
+                "orderIds": [
+                  1110900
+                ],
+                "totalInterestAndFee": 62952.88,
+                "coInvestTax": 0.0,
+                "fixedNetProfit": -62952.88,
+                "overdueInterestRate": 0.0,
+                "dailyStockBorrowFee": 0.0,
+                "companySecureRate": 0.24,
+                "closedPositionFee": 3.8E-4,
+                "moneyAdvanceRate": 0.0,
+                "assetManagementOvernightFee": 0.0,
+                "overnightRate": 0.05,
+                "sellingTaxRate": 0.0,
+                "bankSecureRate": 0.24,
+                "vsdSecureRate": 0.17,
+                "tradingTaxRate": 0.0,
+                "coInvestTaxRate": 0.05,
+                "settled": false,
+                "remainingTradeableQuantity": 1,
+                "marginStatus": "NORMAL",
+                "totalFee": 62952.88,
+                "netProfitRate": 0.146635,
+                "initialMarginRate": 0.05,
+                "interestRate": 3.8E-4,
+                "tradingFeeRate": 10750.0,
+                "marginRate": 0.95,
+                "maintenanceRate": 0.04,
+                "additionalRate": 0.05,
+                "liquidateMarginRate": 0.03,
+                "closed": false,
+                "state": "OPEN"
+              }
+            ],
+            "total": 1,
+            "start": 0,
+            "end": 1
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{baseUrl}}/derivative/deals//_close_deal"
+      method: POST
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: X-Aux-Date
+          value: ""
+        - name: X-Signature
+          value: ""
+      body:
+        type: json
+        data: |-
+          {
+            "orderType": "",
+            "triggeredBy": "close-deal"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/derivative/deals/1000546/_close_deal"
+      method: POST
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: X-Aux-Date
+          value: ""
+        - name: X-Signature
+          value: ""
+      body:
+        type: json
+        data: |-
+          {
+            "orderType": "LO",
+            "triggeredBy": "close-deal"
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: Đóng deal Phái Sinh theo dealId.

@@ -1,0 +1,102 @@
+info:
+  name: 4.11. Hủy tất cả lệnh điều kiện (Smart Order)
+  type: http
+  seq: 411
+
+http:
+  method: DELETE
+  url: "{{smartOrderBaseUrl}}/orders?investorAccountId={{investorAccountId}}&investorId={{investorId}}"
+  params:
+    - name: investorAccountId
+      value: "{{investorAccountId}}"
+      type: query
+    - name: investorId
+      value: "{{investorId}}"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công – hủy tất cả lệnh điều kiện
+    request:
+      url: "{{smartOrderBaseUrl}}/orders"
+      method: DELETE
+      params:
+        - name: investorAccountId
+          value: "1000000036"
+          type: query
+        - name: investorId
+          value: "1000000036"
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "status": "OK"
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{smartOrderBaseUrl}}/orders"
+      method: DELETE
+      params:
+        - name: investorAccountId
+          value: ""
+          type: query
+        - name: investorId
+          value: ""
+          type: query
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{smartOrderBaseUrl}}/orders"
+      method: DELETE
+      params:
+        - name: investorAccountId
+          value: "1000000036"
+          type: query
+        - name: investorId
+          value: "1000000036"
+          type: query
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: Hủy tất cả lệnh điều kiện theo investorAccountId và investorId.

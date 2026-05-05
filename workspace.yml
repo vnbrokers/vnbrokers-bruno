@@ -18,5 +18,7 @@ collections:
 specs:
   - name: "TCBS iFlash Open API"
     path: "apispec/TCBS iFlash Open API.yaml"
+  - name: "DNSE OpenAPI v2"
+    path: "openapi/DNSE OpenAPI v2.yaml"
 
 docs: "VNBrokers - A Collection of OpenAPIs from Vietnamese Securities Companies"

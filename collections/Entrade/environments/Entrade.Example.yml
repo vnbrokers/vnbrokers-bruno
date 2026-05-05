@@ -1,7 +1,9 @@
 name: Entrade.Example
 variables:
+  - name: productionBaseUrl
+    value: https://services.entrade.com.vn/entrade-api
   - name: baseUrl
-    value: https://services.entrade.com.vn
+    value: https://services-staging.entrade.com.vn/papertrade-entrade-api
   - secret: true
     name: username
   - secret: true
@@ -10,3 +12,11 @@ variables:
     name: investorId
   - secret: true
     name: token
+  - secret: true
+    name: investorId
+  - secret: true
+    name: investorAccountId
+  - secret: true
+    name: bankMarginPortfolioId
+  - name: smartOrderBaseUrl
+    value: https://services-staging.entrade.com.vn/papertrade-smart-order
