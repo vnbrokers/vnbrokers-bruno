@@ -1,6 +1,7 @@
 [tools]
 pre-commit = "4.6.0"
 gitleaks = "8.30.1"
+yamlfmt = "0.21.0"
 
 [tasks.pre-commit]
 run = "pre-commit run --all-files"
