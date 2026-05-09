@@ -6,16 +6,6 @@ info:
 http:
   method: GET
   url: "{{baseUrl}}/price/ohlc?symbol=ACB&type=STOCK&resolution=15&from=1773657310&to=1773830110"
-  headers:
-    - name: X-API-Key
-      value: "{{apiKey}}"
-      disabled: true
-    - name: X-Aux-Date
-      value: ""
-      disabled: true
-    - name: X-Signature
-      value: ""
-      disabled: true
   params:
     - name: symbol
       value: ACB

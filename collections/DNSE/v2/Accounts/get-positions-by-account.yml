@@ -6,16 +6,6 @@ info:
 http:
   method: GET
   url: "{{baseUrl}}/accounts/:accountNo/positions?marketType=DERIVATIVE&pageSize=20"
-  headers:
-    - name: X-API-Key
-      value: "{{apiKey}}"
-      disabled: true
-    - name: X-Aux-Date
-      value: ""
-      disabled: true
-    - name: X-Signature
-      value: ""
-      disabled: true
   params:
     - name: marketType
       value: DERIVATIVE

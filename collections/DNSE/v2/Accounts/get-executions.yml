@@ -6,16 +6,6 @@ info:
 http:
   method: GET
   url: "{{baseUrl}}/accounts/:accountNo/executions/:orderId?marketType=STOCK&orderCategory=NORMAL"
-  headers:
-    - name: X-API-Key
-      value: "{{apiKey}}"
-      disabled: true
-    - name: X-Aux-Date
-      value: ""
-      disabled: true
-    - name: X-Signature
-      value: ""
-      disabled: true
   params:
     - name: marketType
       value: STOCK

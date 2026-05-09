@@ -6,15 +6,6 @@ info:
 http:
   method: POST
   url: "{{baseUrl}}/registration/send-email-otp"
-  headers:
-    - name: X-API-Key
-      value: "{{apiKey}}"
-    - name: X-Aux-Date
-      value: ""
-      disabled: true
-    - name: X-Signature
-      value: ""
-      disabled: true
   auth: inherit
 
 runtime:

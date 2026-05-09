@@ -7,18 +7,6 @@ http:
   method: DELETE
   url: "{{baseUrl}}/accounts/:accountNo/orders/:orderId?marketType=DERIVATIVE&orderCategory=NORMAL"
   headers:
-    - name: Accept
-      value: application/json
-      disabled: true
-    - name: X-API-Key
-      value: "{{apiKey}}"
-      disabled: true
-    - name: X-Signature
-      value: ""
-      disabled: true
-    - name: X-Aux-Date
-      value: ""
-      disabled: true
     - name: trading-token
       value: "{{tradingToken}}"
   params:

@@ -6,16 +6,6 @@ info:
 http:
   method: GET
   url: "{{baseUrl}}/price/:symbol/secdef?boardId=G1"
-  headers:
-    - name: X-API-Key
-      value: "{{apiKey}}"
-      disabled: true
-    - name: X-Aux-Date
-      value: ""
-      disabled: true
-    - name: X-Signature
-      value: ""
-      disabled: true
   params:
     - name: boardId
       value: G1

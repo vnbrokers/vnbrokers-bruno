@@ -13,3 +13,6 @@ run = "gitleaks git -v -f SARIF"
 
 [tasks.check-leaks]
 depends = ["pre-commit", "gitleaks:dir"]
+
+[tasks.gen-githooks]
+run = "mise generate git-pre-commit --write --task=check-leaks"

@@ -6,19 +6,6 @@ info:
 http:
   method: GET
   url: "{{baseUrl}}/accounts/:accountNo/orders?marketType=DERIVATIVE&orderCategory=NORMAL"
-  headers:
-    - name: X-API-Key
-      value: ""
-      disabled: true
-    - name: X-Aux-Date
-      value: ""
-      disabled: true
-    - name: X-Signature
-      value: ""
-      disabled: true
-    - name: X-API-Key
-      value: "{{apiKey}}"
-      disabled: true
   params:
     - name: marketType
       value: DERIVATIVE

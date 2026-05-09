@@ -7,18 +7,6 @@ http:
   method: POST
   url: "{{baseUrl}}/accounts/positions/:positionId/close?marketType=DERIVATIVE"
   headers:
-    - name: Accept
-      value: application/json
-      disabled: true
-    - name: X-API-Key
-      value: "{{apiKey}}"
-      disabled: true
-    - name: X-Signature
-      value: ""
-      disabled: true
-    - name: X-Aux-Date
-      value: ""
-      disabled: true
     - name: trading-token
       value: "{{TRADING_TOKEN}}"
   params:

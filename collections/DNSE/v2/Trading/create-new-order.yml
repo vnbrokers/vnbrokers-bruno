@@ -7,18 +7,6 @@ http:
   method: POST
   url: "{{baseUrl}}/accounts/orders?marketType=DERIVATIVE"
   headers:
-    - name: Content-Type
-      value: application/json
-      disabled: true
-    - name: X-API-Key
-      value: "{{apiKey}}"
-      disabled: true
-    - name: X-Signature
-      value: ""
-      disabled: true
-    - name: X-Aux-Date
-      value: ""
-      disabled: true
     - name: trading-token
       value: "{{tradingToken}}"
   params:

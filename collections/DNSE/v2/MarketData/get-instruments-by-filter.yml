@@ -6,16 +6,6 @@ info:
 http:
   method: GET
   url: "{{baseUrl}}/instruments?symbol=ACB&marketId=STO&securityGroupId=ST&indexName=VN30&limit=10&page=1"
-  headers:
-    - name: X-API-Key
-      value: "{{apiKey}}"
-      disabled: true
-    - name: X-Aux-Date
-      value: ""
-      disabled: true
-    - name: X-Signature
-      value: ""
-      disabled: true
   params:
     - name: symbol
       value: ACB

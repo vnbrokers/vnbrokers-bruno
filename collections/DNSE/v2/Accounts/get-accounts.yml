@@ -6,19 +6,16 @@ info:
 http:
   method: GET
   url: "{{baseUrl}}/accounts"
-  headers:
-    - name: x-api-key
-      value: "{{apiKey}}"
-      disabled: true
-    - name: date
-      value: "{{X-Aux-Date}}"
-      disabled: true
   auth: inherit
 
 runtime:
   scripts:
     - type: after-response
-      code: bru.setEnvVar("accountNo", res.getBody().accounts[0].id)
+      code: bru.setEnvVar("accountNo", res.getBody()?.accounts?.[0]?.id || "")
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
 
 settings:
   encodeUrl: true
