@@ -30,6 +30,6 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: |
+docs: |-
   Đăng nhập bằng username/password để lấy JWT token.
   JWT token dùng cho các API đọc thông tin (xác thực cấp 1).

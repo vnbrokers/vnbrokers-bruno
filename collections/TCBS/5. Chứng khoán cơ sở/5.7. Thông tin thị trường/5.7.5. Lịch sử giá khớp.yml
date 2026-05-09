@@ -3,30 +3,30 @@ info:
   type: http
   seq: 5
   tags:
-  - market_information_stock_normal
+    - market_information_stock_normal
 http:
   method: GET
   url: "{{baseUrl}}/nyx/v1/intraday/:ticker/his/paging"
   params:
-  - name: ticker
-    value: TCB
-    type: path
-    description: Mã cổ phiếu
-  - name: page
-    value: '0'
-    type: query
-    description: Số trang
-    disabled: true
-  - name: size
-    value: '20'
-    type: query
-    description: Số dòng
-    disabled: true
-  - name: headIndex
-    value: "-1"
-    type: query
-    description: Chỉ số đầu để phân trang ngược
-    disabled: true
+    - name: ticker
+      value: TCB
+      type: path
+      description: Mã cổ phiếu
+    - name: page
+      value: '0'
+      type: query
+      description: Số trang
+      disabled: true
+    - name: size
+      value: '20'
+      type: query
+      description: Số dòng
+      disabled: true
+    - name: headIndex
+      value: "-1"
+      type: query
+      description: Chỉ số đầu để phân trang ngược
+      disabled: true
   auth: inherit
 settings:
   encodeUrl: true

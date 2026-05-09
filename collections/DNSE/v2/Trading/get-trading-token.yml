@@ -24,7 +24,7 @@ http:
       {
         "otpType": "{{otpType}}",
         "passcode": "{{passcode}}"
-        
+
       }
   auth: inherit
 
@@ -118,7 +118,7 @@ examples:
             "status": 0
           }
 
-docs: |
+docs: |-
   API xác thực mã OTP để lấy tradingToken phục vụ đặt lệnh.
 
   Body Parameters:

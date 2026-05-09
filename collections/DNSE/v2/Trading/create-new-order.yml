@@ -170,7 +170,7 @@ examples:
             "status": 0
           }
 
-docs: |
+docs: |-
   API đặt lệnh giao dịch.
 
   Query Parameters:

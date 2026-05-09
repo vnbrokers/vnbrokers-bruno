@@ -287,7 +287,7 @@ examples:
             "details": ""
           }
 
-docs: |
+docs: |-
   Đặt lệnh mua hoặc bán chứng khoán cơ sở / phái sinh.
 
   **Yêu cầu:** Trading Token (xác thực cấp 2).

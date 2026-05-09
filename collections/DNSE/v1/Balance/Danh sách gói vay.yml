@@ -104,6 +104,6 @@ examples:
             "message": "Unauthorized"
           }
 
-docs: |
+docs: |-
   Lấy danh sách các gói vay (margin) áp dụng cho tiểu khoản.
   `loan_package_id` từ endpoint này được dùng khi đặt lệnh ký quỹ.

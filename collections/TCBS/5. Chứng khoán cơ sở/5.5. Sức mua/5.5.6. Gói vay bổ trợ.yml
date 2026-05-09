@@ -3,15 +3,15 @@ info:
   type: http
   seq: 6
   tags:
-  - purchasing_power_stock_normal
+    - purchasing_power_stock_normal
 http:
   method: GET
   url: "{{baseUrl}}/campaign-management/v1/margin/subscription/:accountNo/addons/detail"
   params:
-  - name: accountNo
-    value: "{{accountNo}}"
-    type: path
-    description: Số tài khoản margin
+    - name: accountNo
+      value: "{{accountNo}}"
+      type: path
+      description: Số tài khoản margin
   auth: inherit
 settings:
   encodeUrl: true

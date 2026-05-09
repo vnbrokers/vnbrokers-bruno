@@ -124,7 +124,7 @@ examples:
             "status": 0
           }
 
-docs: |
+docs: |-
   API trả về danh sách vị thế nắm giữ theo tiểu khoản.
 
   Query Parameters:

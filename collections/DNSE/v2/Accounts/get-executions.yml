@@ -163,7 +163,7 @@ examples:
             "status": 0
           }
 
-docs: |
+docs: |-
   API trả về chi tiết trạng thái lệnh theo orderId và tiểu khoản.
 
   Query Parameters:

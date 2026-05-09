@@ -3,25 +3,25 @@ info:
   type: http
   seq: 7
   tags:
-  - market_information_stock_normal
+    - market_information_stock_normal
 http:
   method: GET
   url: "{{baseUrl}}/nyx/v1/intraday/:ticker/bsa"
   params:
-  - name: ticker
-    value: TCB
-    type: path
-    description: Mã cổ phiếu
-  - name: type
-    value: all
-    type: query
-    description: |
-      Loại nhà đầu tư:
-      - sheep (Nhà đầu tư cá nhân nhỏ lẻ)
-      - wolf (Nhà đầu tư tổ chức vừa)
-      - shark (Nhà đầu tư lớn/tổ chức lớn)
-      - all (Tất cả loại nhà đầu tư)
-    disabled: true
+    - name: ticker
+      value: TCB
+      type: path
+      description: Mã cổ phiếu
+    - name: type
+      value: all
+      type: query
+      description: |
+        Loại nhà đầu tư:
+        - sheep (Nhà đầu tư cá nhân nhỏ lẻ)
+        - wolf (Nhà đầu tư tổ chức vừa)
+        - shark (Nhà đầu tư lớn/tổ chức lớn)
+        - all (Tất cả loại nhà đầu tư)
+      disabled: true
   auth: inherit
 settings:
   encodeUrl: true

@@ -180,6 +180,6 @@ examples:
             "message": "Unauthorized"
           }
 
-docs: |
+docs: |-
   Lấy danh sách các lệnh đã đặt của một tiểu khoản trong ngày giao dịch.
   Áp dụng cho cả giao dịch cơ sở và phái sinh.

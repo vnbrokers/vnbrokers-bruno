@@ -3,7 +3,7 @@ info:
   type: http
   seq: 2
   tags:
-  - market_information_derivative
+    - market_information_derivative
 http:
   method: GET
   url: "{{baseUrl}}/ws/thesis/v1/stream/derivative"

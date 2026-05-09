@@ -1,18 +1,17 @@
 info:
-  name: 5.5.5. Tổng nợ gốc, Tổng nợ lãi, Rtt thực tế, Tỷ lệ ký quỹ ban đầu, Tỷ lệ
-    duy trì, Tỷ lệ cảnh báo
+  name: 5.5.5. Tổng nợ gốc, Tổng nợ lãi, Rtt thực tế, Tỷ lệ ký quỹ ban đầu, Tỷ lệ duy trì, Tỷ lệ cảnh báo
   type: http
   seq: 5
   tags:
-  - purchasing_power_stock_normal
+    - purchasing_power_stock_normal
 http:
   method: GET
   url: "{{baseUrl}}/hydros/v1/account/:accountNo/risk"
   params:
-  - name: accountNo
-    value: "{{accountNo}}"
-    type: path
-    description: Số tài khoản margin
+    - name: accountNo
+      value: "{{accountNo}}"
+      type: path
+      description: Số tài khoản margin
   auth: inherit
 settings:
   encodeUrl: true

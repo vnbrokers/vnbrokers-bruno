@@ -142,7 +142,7 @@ examples:
             "status": 0
           }
 
-docs: |
+docs: |-
   API trả về lịch sử lệnh theo khoảng thời gian.
 
   Query Parameters:

@@ -54,7 +54,7 @@ examples:
             "message": "Unauthorized"
           }
 
-docs: |
+docs: |-
   Yêu cầu hệ thống gửi mã OTP đến email đã đăng ký.
   Mã OTP có hiệu lực trong **2 phút**.
   Dùng mã này để tạo Trading Token.

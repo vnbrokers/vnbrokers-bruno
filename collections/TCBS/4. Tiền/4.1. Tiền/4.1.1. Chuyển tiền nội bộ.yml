@@ -3,7 +3,7 @@ info:
   type: http
   seq: 1
   tags:
-  - money
+    - money
 http:
   method: POST
   url: "{{baseUrl}}/physis/v1/stock/transfer"

@@ -3,26 +3,28 @@ info:
   type: http
   seq: 1
   tags:
-  - total_cash_derivative
+    - total_cash_derivative
+
 http:
   method: GET
-  url: "{{baseUrl}}/khronos/v1/account/status"
+  url: "{{baseUrl}}/khronos/v1/account/status?accountId=105C031402&subAccountId=105C031402A&getType=1"
   params:
-  - name: accountId
-    value: 105C031402
-    type: query
-    description: số tài khoản lưu kí
-  - name: subAccountId
-    value: 105C031402A
-    type: query
-    description: Tiểu khoản phái sinh
-  - name: getType
-    value: '1'
-    type: query
-    description: |
-      - `0`: Lấy toàn bộ
-      - `1`: Chỉ lấy tiền
+    - name: accountId
+      value: 105C031402
+      type: query
+      description: số tài khoản lưu kí
+    - name: subAccountId
+      value: 105C031402A
+      type: query
+      description: Tiểu khoản phái sinh
+    - name: getType
+      value: "1"
+      type: query
+      description: |
+        - `0`: Lấy toàn bộ
+        - `1`: Chỉ lấy tiền
   auth: inherit
+
 settings:
   encodeUrl: true
   timeout: 0

@@ -27,7 +27,6 @@ http:
 runtime:
   scripts:
 
-
 settings:
   encodeUrl: true
   timeout: 0
@@ -154,7 +153,7 @@ examples:
             "status": 0
           }
 
-docs: |
+docs: |-
   API trả về dữ liệu lịch sử OHLC (Open – High – Low – Close) theo mã chứng khoán và khoảng thời gian.
 
   Query Parameters:

@@ -16,7 +16,7 @@ http:
         "subAccountId": "105C000113A",
         "amount": 1500000,
         "paymentContent": "NAP TIEN KY QUY"
-      } 
+      }
   auth: inherit
 
 settings:

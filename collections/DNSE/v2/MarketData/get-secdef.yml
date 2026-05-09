@@ -122,7 +122,7 @@ examples:
             "status": 0
           }
 
-docs: |
+docs: |-
   API trả về thông tin giao dịch của mã chứng khoán.
 
   Query Parameters:

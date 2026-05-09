@@ -185,6 +185,6 @@ examples:
             "message": "Unauthorized"
           }
 
-docs: |
+docs: |-
   Tạo Trading Token bằng cách xác thực OTP (SmartOTP hoặc Email OTP).
   Trading Token có hiệu lực **8 tiếng** và cần thiết cho các API giao dịch.

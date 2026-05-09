@@ -3,19 +3,19 @@ info:
   type: http
   seq: 2
   tags:
-  - asset_derivative
+    - asset_derivative
 http:
   method: GET
   url: "{{baseUrl}}/khronos/v1/account/portfolio/status"
   params:
-  - name: accountId
-    value: 105C031402
-    type: query
-    description: số tài khoản lưu kí
-  - name: subAccountId
-    value: 105C031402A
-    type: query
-    description: Tiểu khoản phái sinh
+    - name: accountId
+      value: 105C031402
+      type: query
+      description: số tài khoản lưu kí
+    - name: subAccountId
+      value: 105C031402A
+      type: query
+      description: Tiểu khoản phái sinh
   auth: inherit
 settings:
   encodeUrl: true

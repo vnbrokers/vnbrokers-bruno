@@ -23,7 +23,7 @@ runtime:
       code: |-
         if (res.getBody().data && res.getBody().data.length > 0) {
           bru.setEnvVar("loanPackageId", res.getBody().data[0].id)
-          
+
           bru.setEnvVar("bankMarginPortfolioId", String(res.body.data[0].id))
         }
 

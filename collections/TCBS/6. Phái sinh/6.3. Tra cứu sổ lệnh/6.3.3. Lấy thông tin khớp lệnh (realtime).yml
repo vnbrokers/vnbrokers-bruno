@@ -3,7 +3,7 @@ info:
   type: http
   seq: 3
   tags:
-  - get_order_derivative
+    - get_order_derivative
 http:
   method: GET
   url: "{{baseUrl}}/ws/nesoi"

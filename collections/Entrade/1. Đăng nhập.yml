@@ -3,10 +3,6 @@ info:
   type: http
   seq: 1
 
-
-
-
-
 http:
   method: POST
   url: "{{authBaseUrl}}/v2/auth"

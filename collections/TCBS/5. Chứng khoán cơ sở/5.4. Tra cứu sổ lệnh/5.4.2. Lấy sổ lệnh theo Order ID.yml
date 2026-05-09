@@ -3,19 +3,19 @@ info:
   type: http
   seq: 2
   tags:
-  - get_order_stock_normal
+    - get_order_stock_normal
 http:
   method: GET
   url: "{{baseUrl}}/aion/v1/accounts/:accountNo/orders/:orderID"
   params:
-  - name: accountNo
-    value: "{{accountNo}}"
-    type: path
-    description: Số tiểu khoản
-  - name: orderID
-    value: "{{orderId}}"
-    type: path
-    description: Order ID
+    - name: accountNo
+      value: "{{accountNo}}"
+      type: path
+      description: Số tiểu khoản
+    - name: orderID
+      value: "{{orderId}}"
+      type: path
+      description: Order ID
   auth: inherit
 settings:
   encodeUrl: true

@@ -167,7 +167,6 @@ examples:
 docs: |-
   Trả về sức mua và sức bán tối đa theo tiểu khoản, dựa trên thị trường, mã chứng khoán, gói vay và giá đặt lệnh.
 
-
   marketType
   string
   required

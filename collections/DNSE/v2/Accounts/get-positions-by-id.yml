@@ -133,7 +133,7 @@ examples:
             "status": 0
           }
 
-docs: |
+docs: |-
   API trả về chi tiết vị thế theo positionId.
 
   Query Parameters:

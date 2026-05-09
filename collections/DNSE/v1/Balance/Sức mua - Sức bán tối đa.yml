@@ -134,6 +134,6 @@ examples:
             "message": "Unauthorized"
           }
 
-docs: |
+docs: |-
   Tính toán sức mua hoặc sức bán tối đa theo mã, giá và gói vay.
   Áp dụng cho cả giao dịch cơ sở (stock) và phái sinh (derivative).

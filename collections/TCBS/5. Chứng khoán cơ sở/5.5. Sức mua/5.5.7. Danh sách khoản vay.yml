@@ -3,15 +3,15 @@ info:
   type: http
   seq: 7
   tags:
-  - purchasing_power_stock_normal
+    - purchasing_power_stock_normal
 http:
   method: GET
   url: "{{baseUrl}}/khaos/v1/loan/:accountNo"
   params:
-  - name: accountNo
-    value: "{{accountNo}}"
-    type: path
-    description: Số tài khoản margin
+    - name: accountNo
+      value: "{{accountNo}}"
+      type: path
+      description: Số tài khoản margin
   auth: inherit
 settings:
   encodeUrl: true

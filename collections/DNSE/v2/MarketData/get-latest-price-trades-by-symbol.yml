@@ -113,7 +113,7 @@ examples:
             "status": 0
           }
 
-docs: |
+docs: |-
   API trả về dữ liệu khớp gần nhất của mã chứng khoán.
 
   Query Parameters:

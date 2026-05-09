@@ -3,15 +3,15 @@ info:
   type: http
   seq: 1
   tags:
-  - order_stock_normal
+    - order_stock_normal
 http:
   method: POST
   url: "{{baseUrl}}/akhlys/v1/accounts/:accountNo/orders"
   params:
-  - name: accountNo
-    value: "{{accountNo}}"
-    type: path
-    description: Số tiểu khoản
+    - name: accountNo
+      value: "{{accountNo}}"
+      type: path
+      description: Số tiểu khoản
   body:
     type: json
     data: |-

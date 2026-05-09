@@ -160,7 +160,7 @@ examples:
             "status": 0
           }
 
-docs: |
+docs: |-
   Trả về danh sách lệnh giao dịch theo tiểu khoản, bao gồm thông tin giá, khối lượng, trạng thái và loại lệnh.
 
   Query Parameters

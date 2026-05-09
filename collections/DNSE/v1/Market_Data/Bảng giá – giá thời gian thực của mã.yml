@@ -21,6 +21,6 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: |
+docs: |-
   Lấy dữ liệu giá hiện tại (realtime) của một mã chứng khoán.
   Bao gồm giá khớp gần nhất, giá mua/bán tốt nhất (bid/ask), khối lượng, v.v.

@@ -104,6 +104,6 @@ examples:
             "message": "Unauthorized"
           }
 
-docs: |
+docs: |-
   Lấy danh sách các vị thế (deal) đang mở của tiểu khoản.
   Áp dụng cho cả cổ phiếu cơ sở và phái sinh.

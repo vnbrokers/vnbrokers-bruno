@@ -21,6 +21,6 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: |
+docs: |-
   Lấy thông tin chi tiết của một mã chứng khoán hoặc hợp đồng phái sinh.
   Bao gồm: tên công ty, sàn niêm yết, giá tham chiếu, biên độ, v.v.

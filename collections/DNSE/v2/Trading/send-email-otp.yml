@@ -11,7 +11,6 @@ http:
 runtime:
   scripts:
 
-
 settings:
   encodeUrl: true
   timeout: 0
@@ -81,7 +80,7 @@ examples:
             "status": 0
           }
 
-docs: |
+docs: |-
   API gửi mã OTP đến email của người dùng để xác thực.
 
   Header Parameters:

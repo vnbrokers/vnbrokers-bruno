@@ -68,6 +68,6 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: |
+docs: |-
   Lấy dữ liệu giá lịch sử theo dạng nến (OHLC: Open/High/Low/Close).
   Hỗ trợ nhiều khung thời gian: 1 phút, 5 phút, 15 phút, 30 phút, 1 giờ, 1 ngày.

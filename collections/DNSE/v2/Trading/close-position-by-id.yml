@@ -24,7 +24,6 @@ runtime:
       value: "123"
   scripts:
 
-
 settings:
   encodeUrl: true
   timeout: 0
@@ -133,7 +132,7 @@ examples:
             "status": 0
           }
 
-docs: |
+docs: |-
   API đóng vị thế phái sinh.
 
   Query Parameters:

@@ -3,15 +3,15 @@ info:
   type: http
   seq: 1
   tags:
-  - purchasing_power_stock_normal
+    - purchasing_power_stock_normal
 http:
   method: GET
   url: "{{baseUrl}}/aion/v1/accounts/:accountNo/ppse"
   params:
-  - name: accountNo
-    value: "{{accountNo}}"
-    type: path
-    description: Số tiểu khoản
+    - name: accountNo
+      value: "{{accountNo}}"
+      type: path
+      description: Số tiểu khoản
   auth: inherit
 settings:
   encodeUrl: true

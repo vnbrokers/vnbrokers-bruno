@@ -3,16 +3,16 @@ info:
   type: http
   seq: 4
   tags:
-  - market_information_stock_normal
+    - market_information_stock_normal
 http:
   method: GET
   url: "{{baseUrl}}/tartarus/v1/putThroughSnaps"
   params:
-  - name: floor
-    value: '1'
-    type: query
-    description: "Rổ chứng khoán: \n- `1`: Hose\n- `2`: HNX\n- `3`: Upcom\n"
-    disabled: true
+    - name: floor
+      value: '1'
+      type: query
+      description: "Rổ chứng khoán: \n- `1`: Hose\n- `2`: HNX\n- `3`: Upcom\n"
+      disabled: true
   auth: inherit
 settings:
   encodeUrl: true

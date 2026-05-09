@@ -3,7 +3,7 @@ info:
   type: http
   seq: 2
   tags:
-  - edit_order_derivative
+    - edit_order_derivative
 http:
   method: POST
   url: "{{baseUrl}}/khronos/v2/order/condition/change"

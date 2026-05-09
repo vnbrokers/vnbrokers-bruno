@@ -151,7 +151,7 @@ examples:
             "status": 0
           }
 
-docs: |
+docs: |-
   API hủy lệnh giao dịch.
 
   Query Parameters:

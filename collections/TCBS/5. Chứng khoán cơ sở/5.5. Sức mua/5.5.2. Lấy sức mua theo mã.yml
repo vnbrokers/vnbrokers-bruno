@@ -3,19 +3,19 @@ info:
   type: http
   seq: 2
   tags:
-  - purchasing_power_stock_normal
+    - purchasing_power_stock_normal
 http:
   method: GET
   url: "{{baseUrl}}/aion/v1/accounts/:accountNo/ppse/:symbol"
   params:
-  - name: accountNo
-    value: "{{accountNo}}"
-    type: path
-    description: Số tiểu khoản
-  - name: symbol
-    value: "{{symbol}}"
-    type: path
-    description: Mã chứng khoán
+    - name: accountNo
+      value: "{{accountNo}}"
+      type: path
+      description: Số tiểu khoản
+    - name: symbol
+      value: "{{symbol}}"
+      type: path
+      description: Mã chứng khoán
   auth: inherit
 settings:
   encodeUrl: true

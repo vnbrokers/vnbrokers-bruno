@@ -149,7 +149,7 @@ examples:
             "status": 0
           }
 
-docs: |
+docs: |-
   API sửa lệnh giao dịch.
 
   Query Parameters:

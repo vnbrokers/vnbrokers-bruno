@@ -3,53 +3,53 @@ info:
   type: http
   seq: 2
   tags:
-  - get_order_derivative
+    - get_order_derivative
 http:
   method: GET
   url: "{{baseUrl}}/khronos/v1/order/condition/detail"
   params:
-  - name: pageNo
-    value: '1'
-    type: query
-    description: Trang số
-  - name: PageSize
-    value: '25'
-    type: query
-    description: Số phần tử trong trang
-  - name: accountId
-    value: 105C031402
-    type: query
-    description: số tài khoản lưu kí
-  - name: subAccountID
-    value: 105C031402A
-    type: query
-    description: Số tài khoản phái sinh
-  - name: orderStatus
-    value: '0'
-    type: query
-    description: |
-      filter theo trạng thái:
-      - `0`: Tất cả
-      - `1`: Chờ kích hoạt
-      - `2`: Đã kích hoạt
-      - `3`: Từ chối
-  - name: orderType
-    value: ALL,ALL
-    type: query
-    description: |
-      filter theo loại lệnh:
-      - ``: Tất cả
-      - `3`: Arbitrage
-      - `4`: SL/TP
-      - `5`: stopOrder
-  - name: Symbol
-    value: "{{symbol}}"
-    type: query
-    description: |
-      filter theo mã HĐTL và theo vị thế:
-      - `ALL,ALL`: Lọc ALL
-      - `VN30F2303,B`: Lọc theo mã
-      - `ALL,B`: Lọc theo L/S
+    - name: pageNo
+      value: '1'
+      type: query
+      description: Trang số
+    - name: PageSize
+      value: '25'
+      type: query
+      description: Số phần tử trong trang
+    - name: accountId
+      value: 105C031402
+      type: query
+      description: số tài khoản lưu kí
+    - name: subAccountID
+      value: 105C031402A
+      type: query
+      description: Số tài khoản phái sinh
+    - name: orderStatus
+      value: '0'
+      type: query
+      description: |
+        filter theo trạng thái:
+        - `0`: Tất cả
+        - `1`: Chờ kích hoạt
+        - `2`: Đã kích hoạt
+        - `3`: Từ chối
+    - name: orderType
+      value: ALL,ALL
+      type: query
+      description: |
+        filter theo loại lệnh:
+        - ``: Tất cả
+        - `3`: Arbitrage
+        - `4`: SL/TP
+        - `5`: stopOrder
+    - name: Symbol
+      value: "{{symbol}}"
+      type: query
+      description: |
+        filter theo mã HĐTL và theo vị thế:
+        - `ALL,ALL`: Lọc ALL
+        - `VN30F2303,B`: Lọc theo mã
+        - `ALL,B`: Lọc theo L/S
   auth: inherit
 settings:
   encodeUrl: true

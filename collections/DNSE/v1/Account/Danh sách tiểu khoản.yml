@@ -58,6 +58,6 @@ examples:
             "message": "Unauthorized"
           }
 
-docs: |
+docs: |-
   Lấy danh sách tất cả tiểu khoản (sub-account) thuộc tài khoản chính.
   Mỗi tài khoản DNSE có thể có nhiều tiểu khoản cho cơ sở và phái sinh.

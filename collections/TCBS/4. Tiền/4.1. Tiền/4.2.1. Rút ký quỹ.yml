@@ -3,7 +3,7 @@ info:
   type: http
   seq: 2
   tags:
-  - money
+    - money
 http:
   method: POST
   url: "{{baseUrl}}/khronos/v1/cash/withdraw/update"
