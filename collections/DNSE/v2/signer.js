@@ -35,7 +35,7 @@ const sign = (req) => {
 
     const buildSigningString = ({ method, path, date, nonce }) => {
       let signingString = `(request-target): ${method} ${path}\n`;
-      signingString += `date: ${date}`;
+      signingString += `x-aux-date: ${date}`;
 
       if (nonce) {
         signingString += `\nnonce: ${nonce}`;
@@ -77,11 +77,11 @@ const sign = (req) => {
     const signatureHeader = buildSignatureHeader({
       apiKey,
       algorithm: ALGORITHM,
-      headers: "(request-target) date",
+      headers: "(request-target) x-aux-date",
       signature,
       nonce,
     });
-    req.setHeader("Date", date);
+    req.setHeader("X-Aux-Date", date);
     req.setHeader("X-Signature", signatureHeader);
 
     bru.setEnvVar("X-Aux-Date", date)

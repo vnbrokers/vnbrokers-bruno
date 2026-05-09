@@ -20,7 +20,7 @@ request:
       value: "{{apiKey}}"
     - name: X-Signature
       value: "{{X-Signature}}"
-    - name: Date
+    - name: X-Aux-Date
       value: "{{X-Aux-Date}}"
     - name: Content-Type
       value: application/json
