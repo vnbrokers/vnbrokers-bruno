@@ -17,3 +17,33 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{baseUrl}}/api/v2/Trading/ppmmraccount"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Success",
+            "status": 200,
+            "data": [
+              {
+                "account": "0901358",
+                "totalAsset": 100000000,
+                "purchasingPower": 100000000,
+                "marginRatio": 50,
+                "maintenanceRatio": 40,
+                "warningRatio": 35
+              }
+            ]
+          }

@@ -17,3 +17,44 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{baseUrl}}/api/v2/Trading/cashAcctBal"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Success",
+            "status": 200,
+            "data": [
+              {
+                "account": "0901358",
+                "cashbal": 100000000,
+                "cashonhold": 0,
+                "secureamount": 0,
+                "withdrawable": 100000000,
+                "receivingcasht1": 0,
+                "receivingcasht2": 0,
+                "matchedbuyvolume": 0,
+                "matchedsellvolume": 0,
+                "unmatchedbuyvolume": 0,
+                "unmatchedsellvolume": 0,
+                "paidcasht1": 0,
+                "paidcasht2": 0,
+                "cia": 0,
+                "debt": 0,
+                "purchasingpower": 100000000,
+                "totalasset": 100000000
+              }
+            ]
+          }

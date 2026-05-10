@@ -23,3 +23,42 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{fcDataBaseUrl}}/api/v2/Market/IndexComponents"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "data": [
+              {
+                "IndexCode": "VN30",
+                "IndexName": "VN30",
+                "Exchange": "HOSE",
+                "TotalSymbolNo": "30",
+                "IndexComponent": [
+                  {
+                    "Isin": "ACB",
+                    "StockSymbol": "ACB"
+                  },
+                  {
+                    "Isin": "BCM",
+                    "StockSymbol": "BCM"
+                  }
+                ]
+              }
+            ],
+            "message": "Success",
+            "status": "Success",
+            "totalRecord": 1
+          }

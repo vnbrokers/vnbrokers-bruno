@@ -13,3 +13,35 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{baseUrl}}/api/v2/Trading/rateLimit"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Success",
+            "status": 200,
+            "data": [
+              {
+                "endpoint": "*",
+                "period": "s",
+                "limit": 10
+              },
+              {
+                "endpoint": "post:*",
+                "period": "m",
+                "limit": 60
+              }
+            ]
+          }

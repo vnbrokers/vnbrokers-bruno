@@ -22,3 +22,41 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{baseUrl}}/api/v2/cash/vsdCashDW"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "account": "0901358",
+            "amount": 1000000,
+            "type": "D",
+            "code": "123456789"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Success",
+            "status": 200,
+            "data": {
+              "account": "0901358",
+              "transactionID": "VSD001",
+              "amount": 1000000,
+              "type": "D"
+            }
+          }

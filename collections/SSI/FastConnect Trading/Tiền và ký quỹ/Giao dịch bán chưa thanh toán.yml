@@ -17,3 +17,32 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{baseUrl}}/api/v2/cash/unsettleSoldTransaction"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Success",
+            "status": 200,
+            "data": [
+              {
+                "account": "0901358",
+                "transactionID": "CIA001",
+                "amount": 10000000,
+                "settleDate": "12/08/2023",
+                "instrumentID": "SSI"
+              }
+            ]
+          }

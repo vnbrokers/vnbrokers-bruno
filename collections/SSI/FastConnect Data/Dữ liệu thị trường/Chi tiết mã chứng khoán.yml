@@ -28,3 +28,56 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{fcDataBaseUrl}}/api/v2/Market/SecuritiesDetails"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "data": [
+              {
+                "RType": "y",
+                "ReportDate": "19/01/2023",
+                "TotalNoSym": "1",
+                "RepeatedInfo": [
+                  {
+                    "Isin": null,
+                    "Symbol": "SSI",
+                    "SymbolName": "CTCP CHUNG KHOAN SSI",
+                    "SymbolEngName": "SSI Securities Corporation",
+                    "SecType": "S",
+                    "MarketId": "HOSE",
+                    "Exchange": "HOSE",
+                    "Issuer": null,
+                    "LotSize": "100",
+                    "IssueDate": "",
+                    "MaturityDate": "",
+                    "FirstTradingDate": "",
+                    "LastTradingDate": "",
+                    "ContractMultiplier": "0",
+                    "SettlMethod": "",
+                    "Underlying": null,
+                    "PutOrCall": null,
+                    "ExercisePrice": "0",
+                    "ExerciseStyle": "",
+                    "ExcerciseRatio": "0",
+                    "ListedShare": "1501130137"
+                  }
+                ]
+              }
+            ],
+            "message": "Success",
+            "status": "Success",
+            "totalRecord": 1
+          }

@@ -33,3 +33,45 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{fcDataBaseUrl}}/api/v2/Market/DailyIndex"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "data": [
+              {
+                "Indexcode": "VNINDEX",
+                "IndexValue": "1220.61",
+                "TradingDate": "10/08/2023",
+                "Time": null,
+                "Change": "0.57",
+                "RatioChange": "0.05",
+                "TotalTrade": "587266",
+                "Totalmatchvol": "851025500",
+                "Totalmatchval": "19053260000000",
+                "IndexName": "VNINDEX",
+                "Advances": "223",
+                "Nochanges": "83",
+                "Declines": "235",
+                "Ceiling": "13",
+                "Floor": "7",
+                "Market": "HOSE",
+                "Exchange": "HOSE"
+              }
+            ],
+            "message": "Success",
+            "status": "Success",
+            "totalRecord": 1
+          }

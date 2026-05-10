@@ -30,3 +30,44 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{baseUrl}}/api/v2/Trading/orderHistory"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Success",
+            "status": 200,
+            "data": {
+              "orderHistories": [
+                {
+                  "uniqueID": "10000001",
+                  "orderID": "12658867",
+                  "buySell": "B",
+                  "price": 1410,
+                  "quantity": 2,
+                  "filledQty": "2",
+                  "orderStatus": "FF",
+                  "marketID": "VNFE",
+                  "inputTime": "10:00:00",
+                  "modifiedTime": "10:01:00",
+                  "instrumentID": "VN30F2306",
+                  "orderType": "LO",
+                  "cancelQty": "0",
+                  "avgPrice": "1410",
+                  "rejectReason": ""
+                }
+              ]
+            }
+          }

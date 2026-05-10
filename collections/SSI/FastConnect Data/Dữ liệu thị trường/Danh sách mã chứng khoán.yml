@@ -24,3 +24,38 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{fcDataBaseUrl}}/api/v2/Market/Securities"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "data": [
+              {
+                "Market": "HOSE",
+                "Symbol": "AAA",
+                "StockName": "CTCP NHUA&MT XANH AN PHAT",
+                "StockEnName": "An Phat Bioplastics Joint Stock Company"
+              },
+              {
+                "Market": "HOSE",
+                "Symbol": "AAM",
+                "StockName": "CTCP THUY SAN MEKONG",
+                "StockEnName": "Mekong Fisheries Joint Stock Company"
+              }
+            ],
+            "message": "Success",
+            "status": "Success",
+            "totalRecord": 2
+          }

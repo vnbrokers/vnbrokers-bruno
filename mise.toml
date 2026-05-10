@@ -19,4 +19,4 @@ depends = ["pre-commit", "gitleaks:dir"]
 run = "mise generate git-pre-commit --write --task=check-leaks"
 
 [tasks.format]
-run = "yamlfmt ."
+run = "yamlfmt"

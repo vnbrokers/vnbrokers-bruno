@@ -38,3 +38,38 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{fcDataBaseUrl}}/api/v2/Market/IntradayOhlc"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "data": [
+              {
+                "Symbol": "SSI",
+                "Market": "HOSE",
+                "TradingDate": "10/08/2023",
+                "Time": "09:15:00",
+                "Open": "28600",
+                "High": "28850",
+                "Low": "28100",
+                "Close": "28100",
+                "Volume": "23382100",
+                "Value": "663258204999.9850"
+              }
+            ],
+            "message": "Success",
+            "status": "Success",
+            "totalRecord": 1
+          }

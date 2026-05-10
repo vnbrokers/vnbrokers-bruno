@@ -17,3 +17,33 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{baseUrl}}/api/v2/ors/dividend"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Success",
+            "status": 200,
+            "data": [
+              {
+                "account": "0901358",
+                "instrumentID": "SSI",
+                "availableQuantity": 100,
+                "rightRatio": "10:1",
+                "registerFromDate": "01/08/2023",
+                "registerToDate": "31/08/2023"
+              }
+            ]
+          }

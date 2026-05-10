@@ -17,3 +17,44 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{baseUrl}}/api/v2/Trading/derivPosition"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Success",
+            "status": 200,
+            "data": [
+              {
+                "account": "0901358",
+                "openPositions": [
+                  {
+                    "marketID": "VNFE",
+                    "instrumentID": "VN30F2306",
+                    "longQty": 1,
+                    "shortQty": 0,
+                    "net": 1,
+                    "bidAvgPrice": 1410,
+                    "askAvgPrice": 0,
+                    "tradePrice": 1410,
+                    "marketPrice": 1412,
+                    "floatingPL": 200000,
+                    "tradingPL": 0
+                  }
+                ],
+                "closePositions": []
+              }
+            ]
+          }

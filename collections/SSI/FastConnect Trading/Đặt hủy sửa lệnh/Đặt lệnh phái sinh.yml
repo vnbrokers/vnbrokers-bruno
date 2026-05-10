@@ -27,3 +27,52 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{baseUrl}}/api/v2/Trading/derNewOrder"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "account": "0901358",
+            "instrumentID": "SSI",
+            "marketID": "VNFE",
+            "buySell": "B",
+            "orderType": "LO",
+            "price": 28600,
+            "quantity": 100,
+            "requestID": "93235974",
+            "code": "123456789"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Success",
+            "status": 200,
+            "data": {
+              "requestID": "93235974",
+              "requestData": {
+                "instrumentID": "VN30F2306",
+                "marketID": "VNFE",
+                "buySell": "B",
+                "orderType": "LO",
+                "price": 1410,
+                "quantity": 2,
+                "account": "0901358"
+              }
+            }
+          }

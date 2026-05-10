@@ -17,3 +17,47 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{baseUrl}}/api/v2/Trading/stockPosition"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Success",
+            "status": 200,
+            "data": [
+              {
+                "totalMarketValue": 2860000,
+                "stockPositions": [
+                  {
+                    "marketID": "VN",
+                    "instrumentID": "SSI",
+                    "onHand": 100,
+                    "block": 0,
+                    "bonus": 0,
+                    "buyT0": 0,
+                    "buyT1": 0,
+                    "buyT2": 0,
+                    "sellT0": 0,
+                    "sellT1": 0,
+                    "sellT2": 0,
+                    "avgPrice": 28000,
+                    "mortgage": 0,
+                    "holdForTrade": 0,
+                    "marketPrice": 28600
+                  }
+                ]
+              }
+            ]
+          }

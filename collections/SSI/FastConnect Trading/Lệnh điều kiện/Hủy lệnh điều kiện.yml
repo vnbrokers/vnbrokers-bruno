@@ -25,3 +25,39 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{baseUrl}}/api/v2/fco/cancelorder"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "fcoId": "FCO001",
+            "code": "123456789",
+            "userAgent": "FCTrading",
+            "deviceId": "MAC Address"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "success",
+            "status": 200,
+            "data": {
+              "fcoId": "FCO001",
+              "processStatus": "cancelled"
+            }
+          }
