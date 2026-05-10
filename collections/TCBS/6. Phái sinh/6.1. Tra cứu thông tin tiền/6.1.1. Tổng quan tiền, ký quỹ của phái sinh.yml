@@ -30,3 +30,63 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK Loại bút toán 1: success, < 0: error Chi tiết lỗi
+    request:
+      url: "{{baseUrl}}/khronos/v1/account/status?accountId=105C031402&subAccountId=105C031402A&getType=1"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "cmd": "Web.Portfolio.AccountStatus",
+            "rc": "1",
+            "rs": "",
+            "oID": "",
+            "data": {
+              "cash": "600089123",
+              "stock": "0",
+              "collateral": "600089123",
+              "type": "CA_NHAN",
+              "net": "NO",
+              "tyle": "54.46",
+              "im": "322140000",
+              "vm": "-4200000",
+              "dm": "0",
+              "mr": "326819003",
+              "avaiCash": "0",
+              "avaiColla": "170341311",
+              "vmunpay": "0",
+              "info": "",
+              "color": "green",
+              "vm_eod": "0",
+              "others": "479003",
+              "tax": "",
+              "feeCTCK": "",
+              "feeHNX": "",
+              "cashWithdraw": "172989123",
+              "tienbosung": "0",
+              "cashavaiwithdraw": "0",
+              "assets": "595090120",
+              "nav": "595090120",
+              "cashOut": "0",
+              "unrelizeVM": "0",
+              "feePos": "0",
+              "feeMan": "320000",
+              "product": "NORMAL",
+              "status": "",
+              "debt": "",
+              "w1": "",
+              "w2": "",
+              "limit": "",
+              "package": ""
+            }
+          }

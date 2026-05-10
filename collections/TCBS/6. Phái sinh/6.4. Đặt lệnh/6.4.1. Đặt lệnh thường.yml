@@ -28,3 +28,67 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK Loại bút toán 1: success, < 0: error Chi tiết lỗi
+    request:
+      url: "{{baseUrl}}/khronos/v1/order/place"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "accountId": "105C031402",
+            "subAccountId": "105C031402A",
+            "side": "B",
+            "symbol": "VN30F2103",
+            "price": "1198.7",
+            "volume": "10",
+            "advance": "",
+            "refId": "H.OWsC4418qYN59HXcvGtD3z",
+            "orderType": "0",
+            "pin": "H"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "cmd": "Web.newOrder",
+            "rc": "1",
+            "rs": "",
+            "oID": "",
+            "data": [
+              {
+                "symbol": "VN30F2104",
+                "shareStatus": "",
+                "status": "P",
+                "msg_type": "1I",
+                "showPrice": "1198.7",
+                "orderTime": "15:52:48",
+                "type": "I",
+                "accountCode": "170929A",
+                "orderNo": "17",
+                "market": "",
+                "matchVolume": "0",
+                "side": "B",
+                "volume": "1",
+                "pk_orderNo": "7625320",
+                "channel": "I",
+                "refID": "17",
+                "group": "FU",
+                "accType": "C",
+                "quote": "G",
+                "autoType": ""
+              }
+            ]
+          }

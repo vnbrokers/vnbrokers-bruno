@@ -17,7 +17,7 @@ collections:
 
 specs:
   - name: "TCBS iFlash Open API"
-    path: "apispec/TCBS iFlash Open API.yaml"
+    path: "openapi/TCBS iFlash Open API.yaml"
   - name: "DNSE OpenAPI v2"
     path: "openapi/DNSE OpenAPI v2.yaml"
 

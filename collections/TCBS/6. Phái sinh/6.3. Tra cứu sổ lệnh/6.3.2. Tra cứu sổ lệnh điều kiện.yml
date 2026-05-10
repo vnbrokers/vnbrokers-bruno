@@ -56,3 +56,52 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK Loại bút toán 1: success, < 0: error Chi tiết lỗi
+    request:
+      url: "{{baseUrl}}/khronos/v1/order/condition/detail"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "cmd": "Web.Order.ConditionOrder",
+            "rc": "1",
+            "rs": "",
+            "oID": "",
+            "data": [
+              {
+                "orderNo": "1",
+                "groupOrder": "463502",
+                "pk_orderNo": "463504",
+                "accountCode": "000112A",
+                "side": "B",
+                "symbol": "VN30F2303",
+                "showPrice": "1190.5",
+                "volume": "2",
+                "condition": "",
+                "result": "0",
+                "active_time": "",
+                "send_time": "14:01:01",
+                "cancel_time": "",
+                "group": "FU",
+                "channel": "I",
+                "maxPrice": "",
+                "soPrice": "1190.5",
+                "orderType": "SL",
+                "from_time": "29/04/2021",
+                "exp_time": "29/04/2021",
+                "status": "0",
+                "details": "",
+                "notes": "SL/TP"
+              }
+            ]
+          }

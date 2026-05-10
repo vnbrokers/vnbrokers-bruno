@@ -17,3 +17,6 @@ depends = ["pre-commit", "gitleaks:dir"]
 
 [tasks.gen-githooks]
 run = "mise generate git-pre-commit --write --task=check-leaks"
+
+[tasks.format]
+run = "yamlfmt ."

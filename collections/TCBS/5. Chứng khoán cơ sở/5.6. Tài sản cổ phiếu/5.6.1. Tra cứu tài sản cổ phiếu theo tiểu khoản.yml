@@ -18,3 +18,53 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{baseUrl}}/aion/v1/accounts/:accountNo/se"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "",
+            "accountNo": "0001170730",
+            "custodyID": "105C354675",
+            "fullName": "Nguyen Van Nam",
+            "stock": [
+              {
+                "symbol": "FPT",
+                "secType": "001",
+                "secTypeName": "",
+                "availableTrading": "1000",
+                "mortgaged": 0,
+                "t0": 0,
+                "t1": 0,
+                "t2": 0,
+                "blocked": 0,
+                "securedQuantity": 0,
+                "sellRemain": 0,
+                "exercisedCA": 0,
+                "unexercisedCA": 0,
+                "stockDividend": 0,
+                "cashDividend": 0,
+                "waitForTrade": 0,
+                "waitForTransfer": 0,
+                "waitForWithdraw": 0,
+                "currentPrice": 44000,
+                "costPrice": 52906,
+                "sellExec": 0,
+                "onHold": 0,
+                "totalQtty": 0,
+                "settlement": 0
+              }
+            ]
+          }

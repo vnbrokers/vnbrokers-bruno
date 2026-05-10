@@ -23,3 +23,47 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK Loại bút toán 1: success, < 0: error Chi tiết lỗi
+    request:
+      url: "{{baseUrl}}/khronos/v1/order/cancel"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "accountId": "105C031402",
+            "orderNo": "1",
+            "cmd": "Web.cancelOrder",
+            "pin": "",
+            "refId": ""
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "cmd": "Web.changeOrder",
+            "rc": "1",
+            "rs": "",
+            "oID": "",
+            "data": [
+              {
+                "orderNo": 1,
+                "msg_type": "1C",
+                "status": "PW",
+                "pk_orderNo": 7625368,
+                "cancelTime": "16:20:15"
+              }
+            ]
+          }

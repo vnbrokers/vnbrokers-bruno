@@ -22,3 +22,64 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{baseUrl}}/aion/v1/accounts/:accountNo/orders/:orderID"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "List",
+            "pageSize": "10",
+            "pageIndex": "1",
+            "totalCount": 1,
+            "data": [
+              {
+                "object": "order",
+                "accountNo": "0001008918",
+                "orderID": "9202110200000060280",
+                "execType": "NB",
+                "orderQtty": "2500.0",
+                "execQtty": "0.0",
+                "codeID": "",
+                "symbol": "HPG",
+                "priceType": "LO",
+                "txtime": "14:15:34",
+                "txdate": "2021-08-19T00:00:00.000+07:00",
+                "expDate": "2021-08-19T00:00:00.000+07:00",
+                "timeType": "T",
+                "orStatus": "11",
+                "feeAcr": "0.0",
+                "limitPrice": "25000.0",
+                "cancelQtty": "0.0",
+                "remainQtty": "2500.0",
+                "via": "O",
+                "quotePrice": "25000.0",
+                "matchPrice": "0.0",
+                "tradePlace": "005",
+                "matchType": "P",
+                "isDisposal": "Y",
+                "isCancel": "Y",
+                "isAmend": "Y",
+                "userName": "6868",
+                "orsOrderID": "9202110200000060280",
+                "sectype": "001",
+                "isFOOrder": "Y",
+                "odTimeStamp": "2021-10-20 14:15:34.000000",
+                "matchAmount": 0,
+                "mmType": "",
+                "bRatio": 100.03,
+                "taxSellAmout": 0
+              }
+            ]
+          }

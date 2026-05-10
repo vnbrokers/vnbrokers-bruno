@@ -18,3 +18,35 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{baseUrl}}/aion/v1/accounts/:accountNo/ppse"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "accountNo": "0001170730",
+            "custodyID": "105C336398",
+            "symbol": "FPT",
+            "price": "120000",
+            "pp0": "50000000001",
+            "ppse": "50000000001",
+            "ppseref": "50000000001",
+            "maxBuyQuantity": "458600",
+            "realMaxBuyQuantity": "458678",
+            "minBuyQuantity": "375200",
+            "marginRatioLoan": "50",
+            "marginPriceLoan": "24000",
+            "rateBrkS": "0.03",
+            "rateBrkB": "0.03"
+          }

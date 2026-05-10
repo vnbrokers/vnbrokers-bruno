@@ -24,3 +24,49 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK Loại bút toán 1: success, < 0: error Chi tiết lỗi
+    request:
+      url: "{{baseUrl}}/khronos/v1/order/change"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "accountId": "105C031402",
+            "subAccountId": "105C031402A",
+            "orderNo": "17",
+            "refId": "000123.H.HH2104062",
+            "nvol": "300",
+            "nprice": "56000.5"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "cmd": "Web.changeOrder",
+            "rc": "1",
+            "rs": "",
+            "oID": "",
+            "data": [
+              {
+                "orderNo": 9,
+                "msg_type": "1P",
+                "status": "PC",
+                "showPrice": "1290.0",
+                "volume": "4",
+                "pk_orderNo": 20029858
+              }
+            ]
+          }

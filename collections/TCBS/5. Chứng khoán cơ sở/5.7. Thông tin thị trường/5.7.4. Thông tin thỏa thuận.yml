@@ -19,3 +19,55 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{baseUrl}}/tartarus/v1/putThroughSnaps"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "buyAdv": [
+              {
+                "symbol": "FPT",
+                "price": 1614.6,
+                "vol": 1403.4,
+                "time": "20231220-02:16:13.588",
+                "status": 1,
+                "color": 1,
+                "orderId": "DHT00000000000036",
+                "side": "B"
+              }
+            ],
+            "sellAdv": [
+              {
+                "symbol": "FPT",
+                "price": 1614.6,
+                "vol": 1403.4,
+                "time": "20231220-02:16:13.588",
+                "status": 1,
+                "color": 1,
+                "orderId": "DHT00000000000036",
+                "side": "B"
+              }
+            ],
+            "match": [
+              {
+                "symbol": "FPT",
+                "price": 1614.6,
+                "vol": 5000,
+                "val": 117275000,
+                "time": "20231220-02:16:13.588",
+                "accumulatedValue": 117275000
+              }
+            ]
+          }
