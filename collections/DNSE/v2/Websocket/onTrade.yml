@@ -1,0 +1,56 @@
+info:
+  name: onTrade
+  type: websocket
+  seq: 3
+
+websocket:
+  url: wss://ws-openapi.dnse.com.vn/v1/stream?encoding=json
+  message:
+    type: text
+    data: |-
+      {
+        "action": "subscribe",
+        "channels": [
+          {
+            "name": "tick.G1.json",
+            "symbols": [
+              "HPG"
+            ]
+          }
+        ]
+      }
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  {
+    "action": "subscribe",
+    "channels": [
+      {
+        "name": "tick.G1.json",
+        "symbols": [
+          "HPG"
+        ]
+      }
+    ]
+  }
+
+  {
+    "T": "t",
+    "boardId": "G1",
+    "grossTradeAmount": 108.75646,
+    "highestPrice": 27.5,
+    "isin": "VN000000HPG4",
+    "lowestPrice": 27.25,
+    "marketId": "STO",
+    "matchPrice": 27.3,
+    "matchQtty": 10,
+    "multicastReceiveTime": "2026-05-11T02:59:34.995840607Z",
+    "openPrice": 27.5,
+    "sendingTime": "2026-05-11T02:59:34.989Z",
+    "symbol": "HPG",
+    "totalVolumeTraded": "397320",
+    "tradingSessionId": "40"
+  }

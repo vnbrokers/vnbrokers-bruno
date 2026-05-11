@@ -1,0 +1,78 @@
+info:
+  name: onQuotes
+  type: websocket
+  seq: 5
+
+websocket:
+  url: wss://ws-openapi.dnse.com.vn/v1/stream?encoding=json
+  message:
+    type: text
+    data: |
+      {
+        "action": "subscribe",
+        "channels": [
+          {
+            "name": "top_price.G1.json",
+            "symbols": [
+              "HPG"
+            ]
+          }
+        ]
+      }
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  ```
+  {
+    "action": "subscribe",
+    "channels": [
+      {
+        "name": "top_price.G1.json",
+        "symbols": [
+          "HPG"
+        ]
+      }
+    ]
+  }
+
+  {
+    "T": "q",
+    "bid": [
+      {
+        "price": 27.25,
+        "qtty": 39440
+      },
+      {
+        "price": 27.2,
+        "qtty": 49510
+      },
+      {
+        "price": 27.15,
+        "qtty": 24630
+      }
+    ],
+    "boardId": "G1",
+    "isin": "VN000000HPG4",
+    "marketId": "STO",
+    "multicastReceiveTime": "2026-05-11T03:26:11.102485284Z",
+    "offer": [
+      {
+        "price": 27.3,
+        "qtty": 14230
+      },
+      {
+        "price": 27.35,
+        "qtty": 47820
+      },
+      {
+        "price": 27.4,
+        "qtty": 66970
+      }
+    ],
+    "sendingTime": "2026-05-11T03:26:11.100Z",
+    "symbol": "HPG"
+  }
+  ```

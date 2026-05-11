@@ -1,0 +1,118 @@
+info:
+  name: onMarketIndex
+  type: websocket
+  seq: 11
+
+websocket:
+  url: wss://ws-openapi.dnse.com.vn/v1/stream?encoding=json
+  message:
+    type: json
+    data: |-
+      {
+        "action": "subscribe",
+        "channels": [
+          {
+            "name": "market_index.VN30.json"
+          }
+        ]
+      }
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  ### Chỉ số thị trường (Market Index) {#market-index}
+
+  Cung cấp thông tin chỉ số thị trường bao gồm giá trị chỉ số, mức thay đổi, độ rộng thị trường (số mã tăng/giảm/đi ngang)
+  và thanh khoản. Dữ liệu được cập nhật liên tục trong phiên giao dịch.
+
+  #### Input
+
+  - **marketIndex**: Tên chỉ số thị trường
+
+    | Giá trị | Mô tả |
+                |--------|------|
+    | HNX30 | Chỉ số Top 30 cổ phiếu sàn HNX |
+    | VN30 | Chỉ số Top 30 cổ phiếu sàn HOSE |
+    | HNX | Chỉ số sàn HNX |
+    | VNXALLSHARE | Chỉ số các cổ phiếu chọn lọc sàn HOSE |
+    | UPCOM | Chỉ số sàn UPCOM |
+    | VNDIVIDEND | Chỉ số nhóm cổ phiếu có tỷ suất cổ tức tăng trưởng |
+    | VNINDEX | Chỉ số sàn HOSE |
+    | VN50GROWTH | Chỉ số nhóm 50 cổ phiếu tăng trưởng sàn HOSE |
+    | VN100 | Chỉ số Top 100 cổ phiếu sàn HOSE |
+    | VNMITECH | Chỉ số nhóm cổ phiếu công nghệ |
+
+  #### Payload
+
+  ```
+  {
+    "action": "subscribe",
+    "channels": [
+      {
+        "name": "market_index.VN30.json"
+      }
+    ]
+  }
+  ```
+
+  ```json lines
+  {
+    "T": "mi",
+    "indexName": "VNINDEX",
+    //string  // Tên chỉ số thị trường
+    "changedRatio": 0.41,
+    //float   // Tỷ lệ thay đổi (%)
+    "changedValue": 6.84,
+    //float   // Giá trị thay đổi so với tham chiếu
+    "fluctuationSteadinessIssueCount": 67,
+    //integer // Số lượng mã có giá không đổi
+    "fluctuationDownIssueCount": 158,
+    //integer // Số lượng mã có giá giảm
+    "fluctuationUpIssueCount": 144,
+    //integer // Số lượng mã có giá tăng
+    "fluctuationLowerLimitIssueCount": null,
+    //integer // Số lượng mã giảm sàn
+    "fluctuationUpperLimitIssueCount": 7,
+    //integer // Số lượng mã tăng trần
+    "fluctuationDownIssueVolume": 220246500,
+    //integer // Tổng khối lượng giao dịch các mã có giá giảm
+    "fluctuationUpIssueVolume": 446927155,
+    //integer // Tổng khối lượng giao dịch các mã có giá tăng 
+    "fluctuationSteadinessIssueVolume": 39390038,
+    //integer // Tổng khối lượng giao dịch các mã có giá không đổi
+    "currencyCode": "VND",
+    //string  // Đơn vị tiền tệ
+    "indexTypeCode": "001",
+    //string  // Mã loại chỉ số
+    "lowestValueIndexes": 1662.05,
+    //float   // Giá thấp nhất trong phiên
+    "highestValueIndexes": 1677.83,
+    //float   // Giá cao nhất trong phiên
+    "priorValueIndexes": 1662.54,
+    //float   // Giá trị tham chiếu
+    "valueIndexes": 1669.38,
+    //float   // Giá trị hiện tại của chỉ số
+    "contauctAccTrdVal": 15609.88011093,
+    //float   // Tổng giá trị giao dịch theo phương thức khớp lệnh
+    "contauctAccTrdVol": 606182599,
+    //integer // Tổng khối lượng giao dịch theo phương thức khớp lệnh
+    "blkTrdAccTrdVal": 3040.58723198,
+    //float   // Tổng giá trị giao dịch theo phương thức thỏa thuận
+    "blkTrdAccTrdVol": 100381155,
+    //integer // Tổng khối lượng giao dịch theo phương thức thỏa thuận
+    "grossTradeAmount": 18650.46734291,
+    //float   // Tổng giá trị giao dịch trong ngày
+    "totalVolumeTraded": 706563754,
+    //integer // Tổng khối lượng giao dịch trong ngày
+    "marketIndexClass": 1,
+    //integer // Phân loại chỉ số
+    "marketId": "STO",
+    //string  // Mã thị trường
+    "tradingSessionId": "40",
+    //string  // Mã phiên giao dịch hiện tại
+    "transactTime": "2026-03-31 07:05:05"
+    //string  // Thời điểm cập nhật
+  }
+  ```

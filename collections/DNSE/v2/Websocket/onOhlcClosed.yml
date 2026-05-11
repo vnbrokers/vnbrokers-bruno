@@ -1,0 +1,65 @@
+info:
+  name: onOhlcClosed
+  type: websocket
+  seq: 12
+
+websocket:
+  url: wss://ws-openapi.dnse.com.vn/v1/stream?encoding=json
+  message:
+    type: json
+    data: |-
+      {
+        "action": "subscribe",
+        "channels": [
+          {
+            "name": "ohlc_closed.1.json",
+            "symbols": [
+              "HPG"
+            ]
+          }
+        ]
+      }
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  ### OHLC đóng nến (OHLC Closed) {#ohlc-closed}
+
+  Cung cấp dữ liệu nến đã đóng theo từng khung thời gian (resolution). Dữ liệu chỉ gửi khi kết thúc mỗi khung thời gian và không thay đổi sau đó.
+
+  #### Input
+
+  - **symbol**: Mã hoặc danh sách mã chứng khoán hay chỉ số thị trường
+      - Lưu ý: Đối với phái sinh, truyền lên `symbolType` (VD: VN30F1M) thay vì `symbol` (VD: 41I1G4000).
+  - **resolution**: Khung thời gian của nến (VD: 1, 3, 5, 15, 30, 1H, 1D, 1W)
+
+  ```
+  {
+    "action": "subscribe",
+    "channels": [
+      {
+        "name": "ohlc_closed.1.json",
+        "symbols": [
+          "HPG"
+        ]
+      }
+    ]
+  }
+
+
+  {
+    "T": "bc",
+    "close": 27.25,
+    "high": 27.3,
+    "lastUpdated": 1778472986,
+    "low": 27.25,
+    "open": 27.25,
+    "resolution": "1",
+    "symbol": "HPG",
+    "time": 1778472960,
+    "type": "STOCK",
+    "volume": 2400
+  }
+  ```

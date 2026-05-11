@@ -1,0 +1,63 @@
+info:
+  name: onOhlc
+  type: websocket
+  seq: 7
+
+websocket:
+  url: wss://ws-openapi.dnse.com.vn/v1/stream?encoding=json
+  message:
+    type: json
+    data: |-
+      {
+        "action": "subscribe",
+        "channels": [
+          {
+            "name": "ohlc.1.json",
+            "symbols": [
+              "HPG"
+            ]
+          }
+        ]
+      }
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  OHLC cung cấp thông tin nến (open, high, low, close, volume) theo khung thời gian thực dưới dạng dữ liệu nến đang hình thành và được cập nhật liên tục theo các giao dịch phát sinh. Áp dụng cho Cổ phiếu (stock), Phái sinh (derivative) và Chỉ số thị trường (index) với nhiều khung thời gian (resolution).
+
+  Input
+  symbol: Mã hoặc danh sách mã chứng khoán hay chỉ số thị trường
+  Lưu ý: Đối với phái sinh, truyền lên symbolType (VD: VN30F1M) thay vì symbol (VD: 41I1G4000).
+  resolution: Khung thời gian của nến (VD: 1, 3, 5, 15, 30, 1H, 1D, 1W)
+  ```
+
+
+  {
+    "action": "subscribe",
+    "channels": [
+      {
+        "name": "ohlc.1.json",
+        "symbols": [
+          "HPG"
+        ]
+      }
+    ]
+  }
+
+
+  {
+    "T": "b",
+    "close": 27.25,
+    "high": 27.3,
+    "lastUpdated": 1778472986,
+    "low": 27.25,
+    "open": 27.25,
+    "resolution": "1",
+    "symbol": "HPG",
+    "time": 1778472960,
+    "type": "STOCK",
+    "volume": 2400
+  }
+  ```

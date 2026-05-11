@@ -1,0 +1,87 @@
+info:
+  name: onSecurityDefinition
+  type: websocket
+  seq: 9
+
+websocket:
+  url: wss://ws-openapi.dnse.com.vn/v1/stream?encoding=json
+  message:
+    type: json
+    data: |-
+      {
+        "action": "subscribe",
+        "channels": [
+          {
+            "name": "security_definition.G1.json",
+            "symbols": [
+              "HPG"
+            ]
+          }
+        ]
+      }
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  Thông tin giao dịch chứng khoán (Security Definition)
+  Cung cấp thông tin về giá trần sàn tham chiếu và trạng thái của mã chứng khoán trong ngày giao dịch. Dữ liệu được hệ thống gửi hai lần vào lúc hệ thống kết thúc chạy dữ liệu cuối ngày (khoảng 8 giờ tối) và vào đầu ngày giao dịch hôm sau (khoảng 8 giờ sáng).
+
+  Input
+  symbols: Mã hoặc danh sách mã chứng khoán. Nếu không truyền, hệ thống sẽ trả toàn bộ danh sách mã chứng khoán trên phạm vi thị trường.
+
+  boardId: Mã bảng giao dịch (VD: G1 – lô chẵn). Nếu không truyền, hệ thống sẽ lấy tất cả các bảng.
+
+  ```
+
+  {
+    "action": "subscribe",
+    "channels": [
+      {
+        "name": "security_definition.G1.json",
+        "symbols": [
+          "HPG"
+        ]
+      }
+    ]
+  }
+
+  Received message format:
+  {
+    "T": "sd",
+    "marketId": "DVX",
+    //string  // Mã thị trường niêm yết mã chứng khoán
+    "boardId": "G1",
+    //string  // Mã bảng giao dịch
+    "isin": "VN41I1G20009",
+    //string  // Mã định danh quốc tế
+    "symbol": "41I1G2000",
+    //string  // Mã chứng khoán
+    "productGrpId": "FIO",
+    //string  // Nhóm sản phẩm theo thị trường
+    "securityGroupId": "FU",
+    //string  // Nhóm chứng khoán
+    "basicPrice": 2066.6,
+    //float   // Giá tham chiếu ngày giao dịch
+    "ceilingPrice": 2211.2,
+    //float   // Giá trần ngày giao dịch
+    "floorPrice": 1922.0,
+    //float   // Giá sàn ngày giao dịch
+    "openInterestQuantity": 24473,
+    //integer // Khối lượng hợp đồng phái sinh mở qua đêm
+    "securityStatus": "NO_HALT",
+    //string  // Trạng thái giao dịch của mã chứng khoán
+    "symbolAdminStatusCode": "NRM",
+    //string  // Trạng thái quản lý hành chính mã chứng khoán
+    "symbolTradingMethodStatusCode": "NRM",
+    //string  // Trạng thái cơ chế giao dịch mã chứng khoán
+    "symbolTradingSanctionStatusCode": "NRM",
+    //string  // Tình trạng giao dịch của mã chứng khoán
+    "listingDate": 20260223,
+    //string  // Ngày niêm yết
+    "finalTradeDate": 20260416
+    //string  // Ngày giao dịch cuối cùng (đối với mã phái sinh, chứng quyền) 
+  }
+
+  ```

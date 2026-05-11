@@ -1,0 +1,71 @@
+info:
+  name: onForeign
+  type: websocket
+  seq: 8
+
+websocket:
+  url: wss://ws-openapi.dnse.com.vn/v1/stream?encoding=json
+  message:
+    type: text
+    data: |-
+      {
+        "action": "subscribe",
+        "channels": [
+          {
+            "name": "foreign.G1.json",
+            "symbols": [
+              "HPG"
+            ]
+          }
+        ]
+      }
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  OHLC cung cấp thông tin nến (open, high, low, close, volume) theo khung thời gian thực dưới dạng dữ liệu nến đang hình thành và được cập nhật liên tục theo các giao dịch phát sinh. Áp dụng cho Cổ phiếu (stock), Phái sinh (derivative) và Chỉ số thị trường (index) với nhiều khung thời gian (resolution).
+
+  Input
+  symbol: Mã hoặc danh sách mã chứng khoán hay chỉ số thị trường
+  Lưu ý: Đối với phái sinh, truyền lên symbolType (VD: VN30F1M) thay vì symbol (VD: 41I1G4000).
+  resolution: Khung thời gian của nến (VD: 1, 3, 5, 15, 30, 1H, 1D, 1W)
+
+  ```
+
+  {
+    "action": "subscribe",
+    "channels": [
+      {
+        "name": "forgeign.G1.json",
+        "symbols": [
+          "HPG"
+        ]
+      }
+    ]
+  }
+
+  Received message format:
+  {
+    "T": "f",
+    "boardId": "G1",
+    "buyTradedAmount": "7079155000",
+    "buyVolume": "259000",
+    "foreignInvestorTypeCode": "10",
+    "foreignerBuyPossibleQuantity": "2453576846",
+    "foreignerOrderLimitQuantity": "2381767907",
+    "marketId": "STO",
+    "multicastReceiveTime": "2026-05-11T04:21:11.064442884Z",
+    "sellTradedAmount": "52266730000",
+    "sellVolume": "1912200",
+    "symbol": "HPG",
+    "totalBuyTradedAmount": "7082286400",
+    "totalBuyVolume": "259113",
+    "totalSellTradedAmount": "52270123150",
+    "totalSellVolume": "1912323",
+    "tradingSessionId": "40",
+    "transactTime": "042100062"
+  }
+
+  ```
