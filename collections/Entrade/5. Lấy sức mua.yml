@@ -7,12 +7,6 @@ http:
   method: GET
   url: "{{baseUrl}}/derivative/investors/:investorId/ppse?bankMarginPortfolioId={{bankMarginPortfolioId}}&price=0&symbol=41I1G5000&side=NB"
   headers:
-    - name: x-api-key
-      value: "{{apiKey}}"
-      disabled: true
-    - name: date
-      value: "{{X-Aux-Date}}"
-      disabled: true
   params:
     - name: bankMarginPortfolioId
       value: "{{bankMarginPortfolioId}}"
@@ -48,13 +42,6 @@ examples:
     request:
       url: "{{baseUrl}}/derivative/investors/{{investorId}}/ppse"
       method: GET
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
       params:
         - name: bankMarginPortfolio
           value: "123"
@@ -94,13 +81,6 @@ examples:
     request:
       url: "{{baseUrl}}/derivative/investors/{{investorId}}/ppse"
       method: GET
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
       params:
         - name: bankMarginPortfolio
           value: ""
@@ -133,13 +113,6 @@ examples:
     request:
       url: "{{baseUrl}}/derivative/investors/{{investorId}}/ppse"
       method: GET
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
       params:
         - name: bankMarginPortfolio
           value: ""

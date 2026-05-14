@@ -7,12 +7,6 @@ http:
   method: GET
   url: "{{baseUrl}}/derivative/deals?investorAccountId={{investorAccountId}}&_start=0&_end=20"
   headers:
-    - name: x-api-key
-      value: "{{apiKey}}"
-      disabled: true
-    - name: date
-      value: "{{X-Aux-Date}}"
-      disabled: true
   params:
     - name: investorAccountId
       value: "{{investorAccountId}}"
@@ -45,13 +39,6 @@ examples:
     request:
       url: "{{baseUrl}}/derivative/deals"
       method: GET
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
       params:
         - name: investorAccountId
           value: "1000000036"
@@ -180,13 +167,6 @@ examples:
     request:
       url: "{{baseUrl}}/derivative/deals"
       method: GET
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
       params:
         - name: investorAccountId
           value: ""
@@ -222,13 +202,6 @@ examples:
     request:
       url: "{{baseUrl}}/derivative/deals"
       method: GET
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
       params:
         - name: investorAccountId
           value: ""

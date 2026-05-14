@@ -7,12 +7,6 @@ http:
   method: DELETE
   url: "{{baseUrl}}/derivative/orders/:orderId"
   headers:
-    - name: x-api-key
-      value: "{{apiKey}}"
-      disabled: true
-    - name: date
-      value: "{{X-Aux-Date}}"
-      disabled: true
   params:
     - name: orderId
       value: "6858488"
@@ -36,13 +30,6 @@ examples:
     request:
       url: "{{baseUrl}}/derivative/orders/1110909"
       method: DELETE
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
     response:
       status: 200
       statusText: OK
@@ -91,13 +78,6 @@ examples:
     request:
       url: "{{baseUrl}}/derivative/orders/"
       method: DELETE
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
     response:
       status: 400
       statusText: Bad Request

@@ -7,12 +7,6 @@ http:
   method: GET
   url: "{{baseUrl}}/risk_configs?investorAccountId={{investorAccountId}}"
   headers:
-    - name: x-api-key
-      value: "{{apiKey}}"
-      disabled: true
-    - name: date
-      value: "{{X-Aux-Date}}"
-      disabled: true
   params:
     - name: investorAccountId
       value: "{{investorAccountId}}"
@@ -31,13 +25,6 @@ examples:
     request:
       url: "{{baseUrl}}/risk_configs"
       method: GET
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
       params:
         - name: investorAccountId
           value: "1000000036"
@@ -72,13 +59,6 @@ examples:
     request:
       url: "{{baseUrl}}/risk_configs"
       method: GET
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
       params:
         - name: investorAccountId
           value: ""
@@ -102,13 +82,6 @@ examples:
     request:
       url: "{{baseUrl}}/risk_configs"
       method: GET
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
       params:
         - name: investorAccountId
           value: ""

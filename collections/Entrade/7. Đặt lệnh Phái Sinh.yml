@@ -7,12 +7,6 @@ http:
   method: POST
   url: "{{baseUrl}}/derivative/orders"
   headers:
-    - name: x-api-key
-      value: "{{apiKey}}"
-      disabled: true
-    - name: date
-      value: "{{X-Aux-Date}}"
-      disabled: true
   body:
     type: json
     data: |-
@@ -55,13 +49,6 @@ examples:
     request:
       url: "{{baseUrl}}/derivative/orders"
       method: POST
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
       body:
         type: json
         data: |-
@@ -120,13 +107,6 @@ examples:
     request:
       url: "{{baseUrl}}/derivative/orders"
       method: POST
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
       body:
         type: json
         data: |-
@@ -158,13 +138,6 @@ examples:
     request:
       url: "{{baseUrl}}/derivative/orders"
       method: POST
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
       body:
         type: json
         data: |-

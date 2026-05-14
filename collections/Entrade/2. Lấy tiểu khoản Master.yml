@@ -7,12 +7,6 @@ http:
   method: GET
   url: "{{baseUrl}}/investors/{{investorId}}/investor_account"
   headers:
-    - name: x-api-key
-      value: "{{apiKey}}"
-      disabled: true
-    - name: date
-      value: "{{X-Aux-Date}}"
-      disabled: true
   auth: inherit
 
 runtime:
@@ -35,13 +29,6 @@ examples:
     request:
       url: "{{baseUrl}}/investors/{{investorId}}/investor_account"
       method: GET
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
     response:
       status: 200
       statusText: OK

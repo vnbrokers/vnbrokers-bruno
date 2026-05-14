@@ -7,12 +7,6 @@ http:
   method: PATCH
   url: "{{baseUrl}}/risk_configs/{{investorAccountId}}"
   headers:
-    - name: x-api-key
-      value: "{{apiKey}}"
-      disabled: true
-    - name: date
-      value: "{{X-Aux-Date}}"
-      disabled: true
   body:
     type: json
     data: |-
@@ -52,13 +46,6 @@ examples:
     request:
       url: "{{baseUrl}}/risk_configs/1000000036"
       method: PATCH
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
       body:
         type: json
         data: |-
@@ -101,13 +88,6 @@ examples:
     request:
       url: "{{baseUrl}}/risk_configs/1000000036"
       method: PATCH
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
       body:
         type: json
         data: |-
@@ -138,13 +118,6 @@ examples:
     request:
       url: "{{baseUrl}}/risk_configs/1000000036"
       method: PATCH
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
       body:
         type: json
         data: |-

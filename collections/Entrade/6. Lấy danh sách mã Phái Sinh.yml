@@ -7,12 +7,6 @@ http:
   method: GET
   url: "{{baseUrl}}/derivatives"
   headers:
-    - name: x-api-key
-      value: "{{apiKey}}"
-      disabled: true
-    - name: date
-      value: "{{X-Aux-Date}}"
-      disabled: true
   auth: inherit
 
 settings:
@@ -27,13 +21,6 @@ examples:
     request:
       url: "{{baseUrl}}/derivatives"
       method: GET
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
     response:
       status: 200
       statusText: OK
@@ -97,13 +84,6 @@ examples:
     request:
       url: "{{baseUrl}}/derivatives"
       method: GET
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
     response:
       status: 400
       statusText: Bad Request
@@ -123,13 +103,6 @@ examples:
     request:
       url: "{{baseUrl}}/derivatives"
       method: GET
-      headers:
-        - name: X-API-Key
-          value: "{{apiKey}}"
-        - name: X-Aux-Date
-          value: ""
-        - name: X-Signature
-          value: ""
     response:
       status: 500
       statusText: Internal Server Error
