@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/ors/dividend"
+  url: "{{baseUrl}}/api/v2/ors/dividend?account={{account}}"
   params:
     - name: account
       value: "{{account}}"

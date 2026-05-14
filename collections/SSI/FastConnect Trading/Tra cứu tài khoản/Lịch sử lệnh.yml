@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/Trading/orderHistory"
+  url: "{{baseUrl}}/api/v2/Trading/orderHistory?account={{account}}&startDate={{startDate}}&endDate={{endDate}}"
   params:
     - name: account
       value: "{{account}}"
@@ -23,7 +23,7 @@ runtime:
     - name: startDate
       value: 01/01/2026
     - name: endDate
-      value: 31/01/2026
+      value: 06/01/2026
 
 settings:
   encodeUrl: true

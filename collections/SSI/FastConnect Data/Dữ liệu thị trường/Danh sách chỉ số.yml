@@ -5,12 +5,11 @@ info:
 
 http:
   method: GET
-  url: "{{fcDataBaseUrl}}/api/v2/Market/IndexList"
+  url: "{{fcDataBaseUrl}}/api/v2/Market/IndexList?exchange={{exchange}}&pageIndex={{pageIndex}}&pageSize={{pageSize}}"
   params:
     - name: exchange
       value: "{{exchange}}"
       type: query
-      disabled: true
     - name: pageIndex
       value: "{{pageIndex}}"
       type: query

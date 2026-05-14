@@ -5,10 +5,10 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/Trading/derivAcctBal"
+  url: "{{baseUrl}}/api/v2/Trading/derivAcctBal?account={{account_8}}"
   params:
     - name: account
-      value: "{{account}}"
+      value: "{{account_8}}"
       type: query
   auth: inherit
 

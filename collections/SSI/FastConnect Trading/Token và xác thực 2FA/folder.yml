@@ -5,3 +5,6 @@ info:
 
 request:
   auth: inherit
+  scripts:
+    - type: before-request
+      code: req.deleteHeader('Authorization')

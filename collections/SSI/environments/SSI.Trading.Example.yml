@@ -1,0 +1,13 @@
+name: SSI.Trading.Example
+variables:
+  - name: fcDataBaseUrl
+    value: https://fc-tradeapi.ssi.com.vn
+  - secret: true
+    name: consumerID
+  - secret: true
+    name: consumerSecret
+  - secret: true
+    name: accessToken
+  - secret: true
+    name: account
+

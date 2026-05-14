@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/Trading/auditOrderBook"
+  url: "{{baseUrl}}/api/v2/Trading/auditOrderBook?account={{account}}"
   params:
     - name: account
       value: "{{account}}"

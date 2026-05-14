@@ -5,12 +5,11 @@ info:
 
 http:
   method: GET
-  url: "{{fcDataBaseUrl}}/api/v2/Market/IntradayOhlc"
+  url: "{{fcDataBaseUrl}}/api/v2/Market/IntradayOhlc?symbol={{symbol}}&fromDate={{fromDate}}&toDate={{toDate}}&pageIndex={{pageIndex}}&pageSize={{pageSize}}"
   params:
     - name: symbol
       value: "{{symbol}}"
       type: query
-      disabled: true
     - name: fromDate
       value: "{{fromDate}}"
       type: query
@@ -32,6 +31,13 @@ http:
       type: query
       disabled: true
   auth: inherit
+
+runtime:
+  variables:
+    - name: fromDate
+      value: 14/05/2026
+    - name: toDate
+      value: 14/05/2026
 
 settings:
   encodeUrl: true

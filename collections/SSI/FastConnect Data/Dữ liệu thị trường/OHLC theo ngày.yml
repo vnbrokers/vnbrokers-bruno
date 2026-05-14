@@ -5,12 +5,11 @@ info:
 
 http:
   method: GET
-  url: "{{fcDataBaseUrl}}/api/v2/Market/DailyOhlc"
+  url: "{{fcDataBaseUrl}}/api/v2/Market/DailyOhlc?symbol={{symbol}}&fromDate={{fromDate}}&toDate={{toDate}}&pageIndex={{pageIndex}}&pageSize={{pageSize}}"
   params:
     - name: symbol
       value: "{{symbol}}"
       type: query
-      disabled: true
     - name: fromDate
       value: "{{fromDate}}"
       type: query

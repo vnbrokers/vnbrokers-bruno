@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/cash/transferHistories"
+  url: "{{baseUrl}}/api/v2/cash/transferHistories?account={{account}}&startDate={{startDate}}&endDate={{endDate}}"
   params:
     - name: account
       value: "{{account}}"

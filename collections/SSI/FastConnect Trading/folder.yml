@@ -4,6 +4,9 @@ info:
   seq: 1
 
 request:
+  headers:
+    - name: Authorization
+      value: Bearer {{accessToken}}
   auth: inherit
   variables:
     - name: baseUrl

@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/cash/estCashInAdvanceFee"
+  url: "{{baseUrl}}/api/v2/cash/estCashInAdvanceFee?account={{account}}&ciaAmount={{ciaAmount}}"
   params:
     - name: account
       value: "{{account}}"

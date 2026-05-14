@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/fco/orderbook"
+  url: "{{baseUrl}}/api/v2/fco/orderbook?fcoId={{fcoId}}&pageIndex={{pageIndex}}&pageSize={{pageSize}}"
   headers:
     - name: User-Agent
       value: "{{userAgent}}"

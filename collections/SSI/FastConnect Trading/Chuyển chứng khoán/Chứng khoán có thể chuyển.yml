@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/stock/transferable"
+  url: "{{baseUrl}}/api/v2/stock/transferable?account={{account}}"
   params:
     - name: account
       value: "{{account}}"

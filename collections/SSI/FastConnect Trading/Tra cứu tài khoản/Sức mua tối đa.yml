@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/Trading/maxBuyQty"
+  url: "{{baseUrl}}/api/v2/Trading/maxBuyQty?account={{account}}&instrumentID={{instrumentID}}&price={{price}}"
   params:
     - name: account
       value: "{{account}}"
@@ -17,6 +17,13 @@ http:
       value: "{{price}}"
       type: query
   auth: inherit
+
+runtime:
+  variables:
+    - name: instrumentID
+      value: SSI
+    - name: price
+      value: "20000"
 
 settings:
   encodeUrl: true

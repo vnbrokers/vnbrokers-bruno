@@ -5,12 +5,148 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/Trading/ppmmraccount"
+  url: |-
+    - name: market
+        value: HOSE
+      - name: symbol
+        value: SSI
+      - name: exchange
+        value: HOSE
+      - name: indexCode
+        value: VN30
+      - name: indexId
+        value: VNINDEX
+      - name: fromDate
+        value: 01/01/2026
+      - name: toDate
+        value: 31/01/2026
+      - name: pageIndex
+        value: "1"
+      - name: pageSize
+        value: "10"
+      - name: ascending
+        value: "false"
+      - name: resollution
+        value: "1"  - name: market
+        value: HOSE
+      - name: symbol
+        value: SSI
+      - name: exchange
+        value: HOSE
+      - name: indexCode
+        value: VN30
+      - name: indexId
+        value: VNINDEX
+      - name: fromDate
+        value: 01/01/2026
+      - name: toDate
+        value: 31/01/2026
+      - name: pageIndex
+        value: "1"
+      - name: pageSize
+        value: "10"
+      - name: ascending
+        value: "false"
+      - name: resollution
+        value: "1"- name: market
+        value: HOSE
+      - name: symbol
+        value: SSI
+      - name: exchange
+        value: HOSE
+      - name: indexCode
+        value: VN30
+      - name: indexId
+        value: VNINDEX
+      - name: fromDate
+        value: 01/01/2026
+      - name: toDate
+        value: 31/01/2026
+      - name: pageIndex
+        value: "1"
+      - name: pageSize
+        value: "10"
+      - name: ascending
+        value: "false"
+      - name: resollution
+        value: "1"  - name: market
+        value: HOSE
+      - name: symbol
+        value: SSI
+      - name: exchange
+        value: HOSE
+      - name: indexCode
+        value: VN30
+      - name: indexId
+        value: VNINDEX
+      - name: fromDate
+        value: 01/01/2026
+      - name: toDate
+        value: 31/01/2026
+      - name: pageIndex
+        value: "1"
+      - name: pageSize
+        value: "10"
+      - name: ascending
+        value: "false"
+      - name: resollution
+        value: "1"  - name: market
+        value: HOSE
+      - name: symbol
+        value: SSI
+      - name: exchange
+        value: HOSE
+      - name: indexCode
+        value: VN30
+      - name: indexId
+        value: VNINDEX
+      - name: fromDate
+        value: 01/01/2026
+      - name: toDate
+        value: 31/01/2026
+      - name: pageIndex
+        value: "1"
+      - name: pageSize
+        value: "10"
+      - name: ascending
+        value: "false"
+      - name: resollution
+        value: "1"  - name: market
+        value: HOSE
+      - name: symbol
+        value: SSI
+      - name: exchange
+        value: HOSE
+      - name: indexCode
+        value: VN30
+      - name: indexId
+        value: VNINDEX
+      - name: fromDate
+        value: 01/01/2026
+      - name: toDate
+        value: 31/01/2026
+      - name: pageIndex
+        value: "1"
+      - name: pageSize
+        value: "10"
+      - name: ascending
+        value: "false"
+      - name: resollution
+        value: "1"{{baseUrl}}/api/v2/Trading/ppmmraccount?account={{account}}
   params:
     - name: account
       value: "{{account}}"
       type: query
   auth: inherit
+
+runtime:
+  variables:
+    - name: account
+      value: {{account}}
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
 
 settings:
   encodeUrl: true

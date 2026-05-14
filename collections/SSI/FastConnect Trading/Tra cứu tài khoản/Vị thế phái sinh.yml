@@ -5,12 +5,17 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/Trading/derivPosition"
+  url: "{{baseUrl}}/api/v2/Trading/derivPosition?account={{account}}"
   params:
     - name: account
       value: "{{account}}"
       type: query
   auth: inherit
+
+runtime:
+  variables:
+    - name: account
+      value: ""
 
 settings:
   encodeUrl: true

@@ -5,12 +5,11 @@ info:
 
 http:
   method: GET
-  url: "{{fcDataBaseUrl}}/api/v2/Market/Securities"
+  url: "{{fcDataBaseUrl}}/api/v2/Market/Securities?market={{market}}&pageIndex={{pageIndex}}&pageSize={{pageSize}}"
   params:
     - name: market
       value: "{{market}}"
       type: query
-      disabled: true
     - name: pageIndex
       value: "{{pageIndex}}"
       type: query

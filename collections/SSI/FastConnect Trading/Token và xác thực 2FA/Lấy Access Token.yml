@@ -16,16 +16,16 @@ http:
         "code": "{{code}}",
         "isSave": false
       }
-  auth: inherit
 
 runtime:
   variables:
-    - name: baseUrl
-      value: https://fc-tradeapi.ssi.com.vn
     - name: twoFactorType
       value: "1"
     - name: code
       value: ""
+  scripts:
+    - type: after-response
+      code: bru.setEnvVar('accessToken', res.body.data.accessToken)
 
 settings:
   encodeUrl: true

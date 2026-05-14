@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/cash/unsettleSoldTransaction"
+  url: "{{baseUrl}}/api/v2/cash/unsettleSoldTransaction?account={{account}}"
   params:
     - name: account
       value: "{{account}}"

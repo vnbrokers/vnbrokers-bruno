@@ -13,7 +13,6 @@ http:
         "consumerID": "{{consumerID}}",
         "consumerSecret": "{{consumerSecret}}"
       }
-  auth: inherit
 
 runtime:
   variables:
