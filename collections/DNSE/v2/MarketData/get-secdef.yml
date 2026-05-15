@@ -30,6 +30,8 @@ examples:
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
       params:
         - name: boardId
           value: ""
@@ -71,6 +73,8 @@ examples:
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
       params:
         - name: boardId
           value: ""
@@ -100,6 +104,8 @@ examples:
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
       params:
         - name: boardId
           value: ""

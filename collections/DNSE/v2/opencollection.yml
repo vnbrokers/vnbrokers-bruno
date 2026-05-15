@@ -24,6 +24,8 @@ request:
       value: "{{X-Aux-Date}}"
     - name: Content-Type
       value: application/json
+    - name: Version
+      value: "2026-05-07"
   auth:
     type: apikey
     key: X-API-Key
@@ -36,6 +38,7 @@ request:
         sign(req)
     - type: after-response
       code: |-
+        // `after-response` script for curl/HTTP clients code generation
         const {sign} = require('./signer')
         sign(req)
 bundled: false

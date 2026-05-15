@@ -33,6 +33,8 @@ examples:
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
       params:
         - name: marketType
           value: DERIVATIVE
@@ -53,11 +55,32 @@ examples:
         type: json
         data: |-
           {
-            "positions": [],
+            "positions": [
+              {
+                "id": 177796763592657,
+                "marketType": "DERIVATIVE",
+                "symbol": "41I1G5000",
+                "accountNo": "0001179019",
+                "status": "OPEN",
+                "loanPackageId": 2278,
+                "side": "NB",
+                "accumulateQuantity": 259,
+                "tradeQuantity": 23,
+                "closedQuantity": 236,
+                "openQuantity": 23,
+                "overNightQuantity": 0,
+                "costPrice": 2036.78986,
+                "marketPrice": 1915.8,
+                "breakEvenPrice": 2037.28116,
+                "averageClosePrice": 2094.28941,
+                "createdDate": "2026-05-05T09:17:50.457893Z",
+                "modifiedDate": "2026-05-08T06:51:04.755263Z"
+              }
+            ],
             "pageIndex": 0,
-            "pageSize": 0,
-            "pageNumber": 0,
-            "total": 0
+            "pageSize": 20,
+            "pageNumber": 1,
+            "total": 3
           }
   - name: 400 Response
     description: Yêu cầu không hợp lệ
@@ -67,6 +90,8 @@ examples:
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
       params:
         - name: marketType
           value: ""
@@ -99,6 +124,8 @@ examples:
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
       params:
         - name: marketType
           value: ""

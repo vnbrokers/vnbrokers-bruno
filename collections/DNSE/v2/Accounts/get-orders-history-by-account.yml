@@ -40,6 +40,8 @@ examples:
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
       params:
         - name: marketType
           value: STOCK
@@ -79,6 +81,8 @@ examples:
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
       params:
         - name: marketType
           value: ""
@@ -114,6 +118,8 @@ examples:
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
       params:
         - name: marketType
           value: ""

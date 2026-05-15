@@ -39,6 +39,8 @@ examples:
           value: ""
         - name: X-API-Key
           value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
       params:
         - name: accountNo
           value: ""
@@ -110,6 +112,8 @@ examples:
           value: ""
         - name: X-API-Key
           value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
       params:
         - name: accountNo
           value: ""
@@ -148,6 +152,8 @@ examples:
           value: ""
         - name: X-API-Key
           value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
       params:
         - name: accountNo
           value: ""

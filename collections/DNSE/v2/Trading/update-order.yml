@@ -49,6 +49,8 @@ examples:
           value: "{{apiKey}}"
         - name: trading-token
           value: "{{tradingToken}}"
+        - name: version
+          value: "2026-05-07"
       params:
         - name: marketType
           value: DERIVATIVE
@@ -94,6 +96,8 @@ examples:
           value: "{{apiKey}}"
         - name: trading-token
           value: "{{tradingToken}}"
+        - name: version
+          value: "2026-05-07"
       params:
         - name: marketType
           value: ""
@@ -127,6 +131,8 @@ examples:
           value: "{{apiKey}}"
         - name: trading-token
           value: "{{tradingToken}}"
+        - name: version
+          value: "2026-05-07"
       params:
         - name: marketType
           value: DERIVATIVE

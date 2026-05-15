@@ -57,6 +57,8 @@ examples:
           value: application/json
         - name: X-API-Key
           value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
     response:
       status: 200
       statusText: OK
@@ -79,6 +81,8 @@ examples:
           value: application/json
         - name: X-API-Key
           value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
     response:
       status: 400
       statusText: Bad Request
@@ -103,6 +107,8 @@ examples:
           value: application/json
         - name: X-API-Key
           value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
     response:
       status: 500
       statusText: Internal Server Error
