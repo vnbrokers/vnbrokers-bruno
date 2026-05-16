@@ -1,0 +1,126 @@
+info:
+  name: Danh sách tiểu khoản quản lý
+  type: http
+  seq: 501
+
+http:
+  method: GET
+  url: "{{baseUrl}}/brokers/accounts/care-by"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công – trả về danh sách tiểu khoản quản lý
+    request:
+      url: https://openapi.dnse.com.vn/brokers/accounts/care-by
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: X-Aux-Date
+          value: "{{X-Aux-Date}}"
+        - name: X-Signature
+          value: "{{X-Signature}}"
+        - name: version
+          value: 2026-05-07
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "careBy": [
+              {
+                "accountNo": "0335000633",
+                "fullName": "Hoang Tu Mai",
+                "custodyCode": "064C1MAI20",
+                "underlyingNav": 21345678901,
+                "derivativeNav": 32789123456,
+                "totalNav": 54134802357,
+                "dealAccount": true,
+                "derivativeAccount": true,
+                "derivative": {
+                  "status": "ACTIVE"
+                },
+                "permissions": [
+                  {
+                    "product": "UNDERLYING_STOCK",
+                    "role": "ADVISOR"
+                  },
+                  {
+                    "product": "DERIVATIVES_STOCK",
+                    "role": "BROKER"
+                  }
+                ]
+              }
+            ],
+            "total": 1
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: https://openapi.dnse.com.vn/brokers/accounts/care-by
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: ""
+        - name: X-Aux-Date
+          value: ""
+        - name: X-Signature
+          value: ""
+        - name: version
+          value: ""
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: https://openapi.dnse.com.vn/brokers/accounts/care-by
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: X-Aux-Date
+          value: "{{X-Aux-Date}}"
+        - name: X-Signature
+          value: "{{X-Signature}}"
+        - name: version
+          value: 2026-05-07
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: Danh sách tiểu khoản quản lý của môi giới/SACO DNSE.
