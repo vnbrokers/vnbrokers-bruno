@@ -1,11 +1,17 @@
-name: Development
+name: DNSEv2
 variables:
+  - name: baseUrl
+    value: https://openapi.dnse.com.vn
+  - name: wsBaseUrl
+    value: wss://ws-openapi.dnse.com.vn
   - secret: true
     name: apiKey
   - secret: true
     name: apiSecret
-  - name: baseUrl
-    value: https://openapi.dnse.com.vn
+  - secret: true
+    name: tradingToken
+  - secret: true
+    name: accountNo
   - secret: true
     name: X-Signature
   - name: X-Aux-Date
@@ -16,7 +22,5 @@ variables:
     value: "1776563296"
   - name: wsNonce
     value: "17765632968732440"
-  - secret: true
-    name: accountNo
-  - secret: true
-    name: tradingToken
+
+

@@ -1,18 +1,18 @@
 info:
-  name: onQuotes
+  name: onExpectedPrice
   type: websocket
-  seq: 5
+  seq: 6
 
 websocket:
-  url: wss://ws-openapi.dnse.com.vn/v1/stream?encoding=json
+  url: "{{wsBaseUrl}}/v1/stream?encoding=json"
   message:
-    type: text
+    type: json
     data: |
       {
         "action": "subscribe",
         "channels": [
           {
-            "name": "top_price.G1.json",
+            "name": "expected_price.G1.json",
             "symbols": [
               "HPG"
             ]
@@ -30,13 +30,14 @@ docs: |-
     "action": "subscribe",
     "channels": [
       {
-        "name": "top_price.G1.json",
+        "name": "expected_price.G1.json",
         "symbols": [
           "HPG"
         ]
       }
     ]
   }
+
 
   {
     "T": "q",

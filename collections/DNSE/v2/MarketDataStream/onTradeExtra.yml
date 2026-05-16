@@ -4,7 +4,7 @@ info:
   seq: 4
 
 websocket:
-  url: wss://ws-openapi.dnse.com.vn/v1/stream?encoding=json
+  url: "{{wsBaseUrl}}/v1/stream?encoding=json"
   message:
     type: json
     data: |-
@@ -25,6 +25,7 @@ settings:
   keepAliveInterval: 0
 
 docs: |-
+  ```json
   {
     "action": "subscribe",
     "channels": [
@@ -36,7 +37,9 @@ docs: |-
       }
     ]
   }
+  ```
 
+  ```json
   {
     "T": "te",
     "avgPrice": 27.361,
@@ -56,3 +59,4 @@ docs: |-
     "totalVolumeTraded": "478110",
     "tradingSessionId": "40"
   }
+  ```

@@ -1,0 +1,66 @@
+info:
+  name: onPosition
+  type: websocket
+  seq: 2
+
+websocket:
+  url: "{{wsBaseUrl}}/v1/stream?encoding=json"
+  message:
+    type: json
+    data: |-
+      {
+        "action": "subscribe",
+        "channels": [
+          {
+            "name": "position.STOCK.json",
+            "symbols": []
+          }
+        ]
+      }
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+
+docs: |-
+  Dữ liệu vị trí thời gian thực (Position Event)
+  Cung cấp thông tin chi tiết về vị trí giao dịch trên tài khoản người dùng theo thời gian thực. Hệ thống sẽ đẩy dữ liệu ngay khi có sự thay đổi liên quan đến: vị trí mới, thay đổi trạng thái, hoặc thay đổi giá trị.
+
+  Input
+  market_type: Phân loại thị trường
+  STOCK: Lệnh giao dịch cơ sở
+  DERIVATIVE: Lệnh giao dịch phái sinh
+
+  ```
+  {
+    "action": "subscribe",
+    "channels": [
+      {
+        "name": "position.STOCK.json",
+        "symbols": []
+      }
+    ]
+  }
+
+  {
+    "id": 177796763592657,
+    "marketType": "DERIVATIVE",
+    "symbol": "41I1G5000",
+    "accountNo": "0001179019",
+    "status": "OPEN",
+    "loanPackageId": 2278,
+    "side": "NB",
+    "accumulateQuantity": 259,
+    "tradeQuantity": 23,
+    "closedQuantity": 236,
+    "openQuantity": 23,
+    "overNightQuantity": 0,
+    "costPrice": 2036.78986,
+    "marketPrice": 1915.8,
+    "breakEvenPrice": 2037.28116,
+    "averageClosePrice": 2094.28941,
+    "createdDate": "2026-05-05T09:17:50.457893Z",
+    "modifiedDate": "2026-05-08T06:51:04.755263Z"
+  }
+  ```

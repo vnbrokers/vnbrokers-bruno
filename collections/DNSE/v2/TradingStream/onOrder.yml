@@ -4,7 +4,7 @@ info:
   seq: 10
 
 websocket:
-  url: wss://ws-openapi.dnse.com.vn/v1/stream?encoding=json
+  url: "{{wsBaseUrl}}/v1/stream?encoding=json"
   message:
     type: json
     data: |-
@@ -12,10 +12,8 @@ websocket:
         "action": "subscribe",
         "channels": [
           {
-            "name": "order.json",
-            "symbols": [
-              "HPG"
-            ]
+            "name": "order.STOCK.json",
+            "symbols": []
           }
         ]
       }
@@ -38,10 +36,8 @@ docs: |-
     "action": "subscribe",
     "channels": [
       {
-        "name": "tick.G1.json",
-        "symbols": [
-          "HPG"
-        ]
+        "name": "order.STOCK.json",
+        "symbols": []
       }
     ]
   }
