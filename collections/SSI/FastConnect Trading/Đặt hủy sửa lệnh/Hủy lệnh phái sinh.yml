@@ -16,9 +16,25 @@ http:
         "instrumentID": "{{instrumentID}}",
         "buySell": "{{buySell}}",
         "requestID": "{{requestID}}",
-        "code": "{{code}}"
+        "code": null,
+        "deviceID": "{{deviceId}}"
       }
   auth: inherit
+
+runtime:
+  variables:
+    - name: account
+      value: "{{account_8}}"
+    - name: orderID
+      value: 
+    - name: marketID
+      value: VNFE
+    - name: instrumentID
+      value: 41I1G5000
+    - name: buySell
+      value: S
+    - name: code
+      value: ""
 
 settings:
   encodeUrl: true

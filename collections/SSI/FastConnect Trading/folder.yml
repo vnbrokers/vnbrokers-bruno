@@ -11,3 +11,18 @@ request:
   variables:
     - name: baseUrl
       value: https://fc-tradeapi.ssi.com.vn
+  scripts:
+    - type: before-request
+      code: |-
+        if (!bru.isSafeMode() && req.method === "POST") {
+          const {signWithRSA}=require("./signer")
+          const privateKey = bru.getEnvVar("privateKey");
+
+          const requestID = Math.floor(Math.random() * 100000000);
+          const message = JSON.stringify(bru.interpolate({...req.body,requestID }));
+          const signature = signWithRSA(privateKey, message);
+          
+          req.setHeader("X-Signature", signature)
+          bru.setEnvVar("X-Signature", signature)
+          bru.setEnvVar("requestID", requestID)
+        }

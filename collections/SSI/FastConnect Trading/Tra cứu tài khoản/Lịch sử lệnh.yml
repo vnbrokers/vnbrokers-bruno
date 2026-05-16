@@ -21,9 +21,11 @@ http:
 runtime:
   variables:
     - name: startDate
-      value: 01/01/2026
+      value: 10/05/2026
     - name: endDate
-      value: 06/01/2026
+      value: 15/05/2026
+    - name: account
+      value: "{{account_8}}"
 
 settings:
   encodeUrl: true

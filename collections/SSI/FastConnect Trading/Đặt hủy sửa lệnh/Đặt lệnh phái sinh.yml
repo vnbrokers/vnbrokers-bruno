@@ -12,15 +12,34 @@ http:
       {
         "account": "{{account}}",
         "instrumentID": "{{instrumentID}}",
-        "marketID": "VNFE",
+        "market": "VNFE",
         "buySell": "{{buySell}}",
         "orderType": "{{orderType}}",
         "price": {{price}},
         "quantity": {{quantity}},
         "requestID": "{{requestID}}",
-        "code": "{{code}}"
+        "channelID": "TA",
+      "deviceId": "{{deviceId}}"
+
       }
   auth: inherit
+
+runtime:
+  variables:
+    - name: account
+      value: "{{account_8}}"
+    - name: instrumentID
+      value: 41I1G5000
+    - name: buySell
+      value: S
+    - name: orderType
+      value: LO
+    - name: price
+      value: "2197.0"
+    - name: quantity
+      value: "1"
+    - name: requestID
+      value: "{{requestID}}"
 
 settings:
   encodeUrl: true

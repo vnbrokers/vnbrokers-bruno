@@ -31,7 +31,7 @@ runtime:
     - name: orderType
       value: LO
     - name: requestID
-      value: "{{uuid}}"
+      value: "{{requestID}}"
 
 settings:
   encodeUrl: true

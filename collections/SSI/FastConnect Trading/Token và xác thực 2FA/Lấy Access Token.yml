@@ -14,7 +14,7 @@ http:
         "consumerSecret": "{{consumerSecret}}",
         "twoFactorType": {{twoFactorType}},
         "code": "{{code}}",
-        "isSave": false
+        "isSave": {{isSave}}
       }
 
 runtime:
@@ -22,10 +22,12 @@ runtime:
     - name: twoFactorType
       value: "1"
     - name: code
-      value: ""
+      value: "123456"
+    - name: isSave
+      value: "true"
   scripts:
     - type: after-response
-      code: bru.setEnvVar('accessToken', res.body.data.accessToken)
+      code: res.status === 200 && bru.setEnvVar('accessToken', res.body.data.accessToken)
 
 settings:
   encodeUrl: true

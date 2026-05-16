@@ -12,6 +12,11 @@ http:
       type: query
   auth: inherit
 
+runtime:
+  variables:
+    - name: account
+      value: "{{account_8}}"
+
 settings:
   encodeUrl: true
   timeout: 0

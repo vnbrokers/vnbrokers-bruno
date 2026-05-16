@@ -7,7 +7,17 @@ variables:
   - secret: true
     name: consumerSecret
   - secret: true
+    name: privateKey
+  - secret: true
     name: accessToken
   - secret: true
+    name: X-Signature
+  - secret: true
+    name: requestID
+  - secret: true
     name: account
+  - secret: true
+    name: account_8
+  - secret: true
+    name: deviceId
 
