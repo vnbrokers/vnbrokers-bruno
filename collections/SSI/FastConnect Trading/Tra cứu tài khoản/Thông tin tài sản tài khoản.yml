@@ -5,134 +5,7 @@ info:
 
 http:
   method: GET
-  url: |-
-    - name: market
-        value: HOSE
-      - name: symbol
-        value: SSI
-      - name: exchange
-        value: HOSE
-      - name: indexCode
-        value: VN30
-      - name: indexId
-        value: VNINDEX
-      - name: fromDate
-        value: 01/01/2026
-      - name: toDate
-        value: 31/01/2026
-      - name: pageIndex
-        value: "1"
-      - name: pageSize
-        value: "10"
-      - name: ascending
-        value: "false"
-      - name: resollution
-        value: "1"  - name: market
-        value: HOSE
-      - name: symbol
-        value: SSI
-      - name: exchange
-        value: HOSE
-      - name: indexCode
-        value: VN30
-      - name: indexId
-        value: VNINDEX
-      - name: fromDate
-        value: 01/01/2026
-      - name: toDate
-        value: 31/01/2026
-      - name: pageIndex
-        value: "1"
-      - name: pageSize
-        value: "10"
-      - name: ascending
-        value: "false"
-      - name: resollution
-        value: "1"- name: market
-        value: HOSE
-      - name: symbol
-        value: SSI
-      - name: exchange
-        value: HOSE
-      - name: indexCode
-        value: VN30
-      - name: indexId
-        value: VNINDEX
-      - name: fromDate
-        value: 01/01/2026
-      - name: toDate
-        value: 31/01/2026
-      - name: pageIndex
-        value: "1"
-      - name: pageSize
-        value: "10"
-      - name: ascending
-        value: "false"
-      - name: resollution
-        value: "1"  - name: market
-        value: HOSE
-      - name: symbol
-        value: SSI
-      - name: exchange
-        value: HOSE
-      - name: indexCode
-        value: VN30
-      - name: indexId
-        value: VNINDEX
-      - name: fromDate
-        value: 01/01/2026
-      - name: toDate
-        value: 31/01/2026
-      - name: pageIndex
-        value: "1"
-      - name: pageSize
-        value: "10"
-      - name: ascending
-        value: "false"
-      - name: resollution
-        value: "1"  - name: market
-        value: HOSE
-      - name: symbol
-        value: SSI
-      - name: exchange
-        value: HOSE
-      - name: indexCode
-        value: VN30
-      - name: indexId
-        value: VNINDEX
-      - name: fromDate
-        value: 01/01/2026
-      - name: toDate
-        value: 31/01/2026
-      - name: pageIndex
-        value: "1"
-      - name: pageSize
-        value: "10"
-      - name: ascending
-        value: "false"
-      - name: resollution
-        value: "1"  - name: market
-        value: HOSE
-      - name: symbol
-        value: SSI
-      - name: exchange
-        value: HOSE
-      - name: indexCode
-        value: VN30
-      - name: indexId
-        value: VNINDEX
-      - name: fromDate
-        value: 01/01/2026
-      - name: toDate
-        value: 31/01/2026
-      - name: pageIndex
-        value: "1"
-      - name: pageSize
-        value: "10"
-      - name: ascending
-        value: "false"
-      - name: resollution
-        value: "1"{{baseUrl}}/api/v2/Trading/ppmmraccount?account={{account}}
+  url: "{{baseUrl}}/api/v2/Trading/ppmmraccount"
   params:
     - name: account
       value: "{{account}}"
@@ -142,11 +15,7 @@ http:
 runtime:
   variables:
     - name: account
-      value: {{account}}
-  assertions:
-    - expression: res.status
-      operator: eq
-      value: "200"
+      value: "{{account}}"
 
 settings:
   encodeUrl: true
@@ -154,12 +23,143 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET  ppmmrAccount
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/Trading/ppmmraccount
+  ```
+
+  Truy vấn thông tin tài sản của tài khoản
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản muốn truy vấn bao gồm Cơ sở và Phái sinh |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | data | list | List data |
+  | collateralAsset | number | Tài sản thế chấp |
+  | callLMW | number | Yêu cầu ký quỹ theo LMW |
+  | liability | number | Nghĩa vụ nợ phải trả |
+  | eeOrigin | number | Vốn gốc có thể sử dụng |
+  | forceLMV | number | Giá trị thị trường bị cưỡng chế |
+  | equity | number | Vốn chủ sở hữu (tổng tài sản trừ nợ phải trả) |
+  | ee | number | Vốn có thể sử dụng |
+  | callMargin | number | Lệnh báo ký quỹ |
+  | cashBalance | number | Số dư tiền mặt |
+  | purchasingPower | number | Sức mua |
+  | callForceSell | number | Lệnh bán cưỡng chế |
+  | lmv | number | Giá trị thị trường |
+  | marginCall | number | Yêu cầu bổ sung ký quỹ |
+  | withdrawal | number | Số tiền rút được |
+  | collateralA | number | Tài sản thế chấp |
+  | action | string | Trạng thái tài khoản/Hành động |
+  | marginRatio | number | Tỷ lệ ký quỹ |
+  | debt | number | Tổng dư nợ |
+  | accruedInterest | number | Lãi phải trả tích lũy |
+  | holdRight | number | Quyền nắm giữ |
+  | preLoan | number | Khoản vay trước |
+  | fees | number | Phí phải nộp |
+  | buyUnmatch | number | Lệnh mua chưa khớp |
+  | ap | number | Phải trả/Phải trả T+1 |
+  | apT1 | number | Phải trả/Phải trả T+1 |
+  | sellUnmatch | number | Lệnh bán chưa khớp |
+  | cia | number | Tiền ứng trước (Cash in Advance) |
+  | ar | number | Phải thu/Phải thu T+1 |
+  | arT1 | number | Phải thu/Phải thu T+1 |
+  | ppCredit | number | Sức mua tín dung |
+  | creditLimit | number | Hạn mức tín dụng |
+  | totalAssets | number | Tổng tài sản trong tài khoản |
+  | marginCallLMVSold | number | Giá trị thị trường đã bán do margin call |
+  | lmvNonMarginable | number | Giá trị thị trường cổ phiếu không ký quỹ được |
+  | eeCredit | number | Vốn có thể sử dụng tín dụng |
+  | totalEquity | number | Tổng vốn chủ sở hữu |
+  | eE90 | number | Vốn sử dụng được theo tỷ lệ ký quỹ 90%/80%/70%/60%/50% |
+  | eE80 | number | Vốn sử dụng được theo tỷ lệ ký quỹ 90%/80%/70%/60%/50% |
+  | eE70 | number | Vốn sử dụng được theo tỷ lệ ký quỹ 90%/80%/70%/60%/50% |
+  | eE60 | number | Vốn sử dụng được theo tỷ lệ ký quỹ 90%/80%/70%/60%/50% |
+  | eE50 | number | Vốn sử dụng được theo tỷ lệ ký quỹ 90%/80%/70%/60%/50% |
+  | dividend | number | Cổ tức |
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  {
+  account: "0901358",
+  }
+  api/v2/Trading/ppmmraccount?Account={{MarginAccount}}
+
+  Output:
+  {
+      "message": "Success",
+      "status": 200,
+      "data": {
+          "collateralAsset": 100000,
+          "callLMW": 0.35,
+          "liability": 0,
+          "eeOrigin": 100000,
+          "forceLMV": 0.25,
+          "equity": 100000,
+          "ee": 100000,
+          "callMargin": 0,
+          "cashBalance": 100000,
+          "purchasingPower": 200000,
+          "callForceSell": 0,
+          "lmv": 0,
+          "marginCall": 0,
+          "withdrawal": 100000,
+          "collateralA": 0,
+          "action": "Normal",
+          "marginRatio": 1.0,
+          "debt": 0,
+          "accruedInterest": 0,
+          "holdRight": 0,
+          "preLoan": 0,
+          "fees": 0,
+          "buyUnmatch": 0,
+          "ap": 0,
+          "apT1": 0,
+          "sellUnmatch": 0,
+          "cia": 0,
+          "ar": 0,
+          "arT1": 0,
+          "ppCredit": 200000,
+          "creditLimit": 0,
+          "totalAssets": 100000,
+          "marginCallLMVSold": 0,
+          "lmvNonMarginable": 0,
+          "eeCredit": 100000,
+          "totalEquity": 100000,
+          "eE90": 111111,
+          "eE80": 125000,
+          "eE70": 142857,
+          "eE60": 166666,
+          "eE50": 200000,
+          "dividend": 0
+      }
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/Trading/ppmmraccount"
       method: GET
+      params:
+        - name: account
+          value: "0901358"
+          type: query
     response:
       status: 200
       statusText: OK

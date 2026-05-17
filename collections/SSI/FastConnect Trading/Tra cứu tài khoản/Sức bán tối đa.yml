@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/Trading/maxSellQty?account={{account}}&instrumentID={{instrumentID}}&price={{price}}"
+  url: "{{baseUrl}}/api/v2/Trading/maxSellQty"
   params:
     - name: account
       value: "{{account}}"
@@ -31,12 +31,70 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET  maxSellQty
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/Trading/maxSellQty
+  ```
+
+  Truy vấn số lượng bán tối đa, sử dụng cho cả tài khoản cơ sở và phái sinh.
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản muốn truy vấn bao gồm Cơ sở và Phái sinh |
+  | instrumentID | string | Yes | Mã chứng khoán |
+  | price | number | Yes | Giá |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | data | list | List data |
+  | account | string | Số tài khoản |
+  | maxSellQty | number | Khối lượng bán tối đa |
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  {
+  account: "0041691",
+  intrumentID: “SSI”
+  }
+  Output:
+  {
+      "message": "Success",
+      "status": 200,
+      "data": {
+          "account": "0041691",
+          "maxSellQty": 2000
+      }
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/Trading/maxSellQty"
       method: GET
+      params:
+        - name: account
+          value: "0901358"
+          type: query
+        - name: instrumentID
+          value: "SSI"
+          type: query
+        - name: price
+          value: "25000"
+          type: query
     response:
       status: 200
       statusText: OK

@@ -18,12 +18,100 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET  stockPosition
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/Trading/stockPosition
+  ```
+
+  Truy vấn danh mục của tài khoản cơ sở.
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản cơ sở muốn truy vấn |
+
+  #### Output
+
+  | Tên trường | Kiểu dữ liệu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | data | list | List data |
+  | totalMarketValue | number | Tổng giá trị thị trường danh mục= sum(maketprice * onhand) |
+  | stockPositions | list | Danh mục đầu tư của tài khoản |
+  | marketID | string | Mã sàn |
+  | instrumentID | string | Mã chứng khoán |
+  | onHand | number | Tổng khối lượng đang nắm giữ, bao gồm cả chứng khoán bán chưa thanh toán T0, T1; không bao gồm chứng khoán mua chờ thanh toán T0, T1 và chứng khoán quyền. |
+  | block | number | Phong tỏa |
+  | bonus | number | Cổ phiếu quyền quyền |
+  | buyT0 | number | Mua khớp thanh toán ngày T0 |
+  | buyT1 | number | Mua khớp thanh toán ngày T1 |
+  | buyT2 | number | Mua khớp thanh toán ngày T2 |
+  | sellT0 | number | Bán khớp thanh toán ngày T0 |
+  | sellT1 | number | Bán khớp thanh toán ngày T1 |
+  | sellT2 | number | Bán khớp thanh toán ngày T2 |
+  | avgPrice | number | Giá vốn trung bình |
+  | mortgage | number | Chứng khoán cầm cố |
+  | holdForTrade | number | Chứng khoán hạn chế chuyển nhượng |
+  | marketPrice | number | Giá trị trường |
+  | exchangeID | string | Mã sàn giao dịch |
+  | sellingQty | string | Khối lượng bán |
+  | buyingQty | string | Khối lượng mua |
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  {
+  account: "0901351",
+  }
+  }
+  Output:
+  {
+    "message": "Success",
+    "status": 200,
+    "data": {
+      "account": "0001011",
+      "totalMarketValue": 0,
+      "stockPositions": [
+        {
+          "marketID": "VN",
+          "instrumentID": "AMC",
+          "onHand": 300,
+          "block": 0,
+          "bonus": 3819,
+          "buyT0": 0,
+          "buyT1": 0,
+          "buyT2": 0,
+          "sellT0": 0,
+          "sellT1": 0,
+          "sellT2": 0,
+          "avgPrice": 1529,
+          "mortgage": 0,
+          "sellableQty": 300,
+          "holdForTrade": 0,
+          "marketPrice": 0
+        }
+      ]
+    }
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/Trading/stockPosition"
       method: GET
+      params:
+        - name: account
+          value: "0901358"
+          type: query
     response:
       status: 200
       statusText: OK

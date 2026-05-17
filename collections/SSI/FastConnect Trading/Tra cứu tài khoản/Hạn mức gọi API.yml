@@ -14,6 +14,50 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET  rateLimit
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/Trading/rateLimit
+  ```
+
+  Truy vấn thông tin những API được set rateLimit
+
+  **Thông tin chi tiết**
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Mô tả msg call API |
+  | status | number | Trạng thái |
+  | data | list | Thông tin dữ liệu trả ra |
+  | endpoint | string | Thông tin set rateLimit bao gồm 1 trong các trường hợp sau: * -> Toàn bộ các API post:* -> Toàn bộ các API method POSTget:* -> Toàn bộ các API method GET*:*/api_name -> rateLimit riêng từng API |
+  | period | string | Thời gian giới hạn (s,m,h,d) |
+  | limit | number | Số lần giới hạn |
+
+  **Ví dụ**
+
+  ```json
+  Output:
+  {
+    "message": "Success",
+    "status": 200,
+    "data": [
+      {
+        "endpoint": "*",
+        "period": "1s",
+        "limit": 5
+      },
+      {
+        "endpoint": "*",
+        "period": "5s",
+        "limit": 30
+      }
+    ]
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success

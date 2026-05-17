@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/cash/transferHistories?account={{account}}&startDate={{startDate}}&endDate={{endDate}}"
+  url: "{{baseUrl}}/api/v2/cash/transferHistories"
   params:
     - name: account
       value: "{{account}}"
@@ -24,12 +24,92 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET  transferHistories
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/cash/transferHistories
+  ```
+
+  Tra cứu thông tin Lịch sử chuyển tiền nội bộ và Nộp/Rút kỹ quỹ
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản nguồn truy vấn |
+  | fromDate | string | Yes | Ngày bắt đầu tìm kiếmĐịnh dạng: dd/mm/yyyy |
+  | toDate | string | Yes | Ngày kết thúc tìm kiếmĐịnh dạng: dd/mm/yyyy |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Mô tả msg call API |
+  | status | number | Trạng thái |
+  | data | list | Thông tn dữ liệu trả ra |
+  | transferHistories | list | Danh sách lịch sử chuyển tiền và Nộp/Rút ký quỹ |
+  | transactionID | string | Mã chi nhánh ngân hàng |
+  | date | string | Ngày thực hiện giao dịch |
+  | account | string | Số tài khoản chuyển |
+  | beneficiaryAccount | string | Số tài khoản nhận |
+  | amount | number | Số tiền |
+  | bankName | string | Ngân hàng nhận |
+  | bankBranchName | string | Chi nhánh ngân hàng nhận |
+  | beneficiary | string | Tên người nhận |
+  | remark | string | Nội dung |
+  | type | string | Loại giao dịch (Nộp/ Rút) |
+  | status | string | Trạng thái chuyển |
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  account:8888881
+  fromDate: 10/01/2023
+  toDate: 10/08/2023
+  Output:
+  {
+    "message": "Success",
+    "status": 200,
+    "data": {
+      "transferHistories": [
+        {
+          "transactionID": "101660519",
+          "date": "07/03/2023 11:54:22",
+          "account": "8888881",
+          "beneficiaryAccount": "8888886",
+          "amount": 1000000,
+          "bankName": "TECHCOMBANK_NH KỸ THƯƠNG",
+          "bankBranchName": "CN THANG LONG",
+          "beneficiary": "TK tự doanh CK niêm yết (TK 8)",
+          "remark": "Huyen test chuyen tien sang 6",
+          "type": "W",
+          "status": "A"
+        }
+      ]
+    }
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/cash/transferHistories"
       method: GET
+      params:
+        - name: account
+          value: "0901358"
+          type: query
+        - name: startDate
+          value: "01/08/2023"
+          type: query
+        - name: endDate
+          value: "31/08/2023"
+          type: query
     response:
       status: 200
       statusText: OK

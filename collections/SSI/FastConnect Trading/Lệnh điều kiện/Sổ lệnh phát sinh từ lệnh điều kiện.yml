@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/fco/orderbook?fcoId={{fcoId}}&pageIndex={{pageIndex}}&pageSize={{pageSize}}"
+  url: "{{baseUrl}}/api/v2/fco/orderbook"
   headers:
     - name: User-Agent
       value: "{{userAgent}}"
@@ -34,12 +34,126 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET orderBook
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/fco/orderbook
+  ```
+
+  Uses: Lấy danh sách các lệnh (order) trigger bởi lệnh điều kiện
+
+  Authen: Bearer token
+
+  Header: "Content-Type":"application/json" and "User-Agent":"fctrading application  for customer 123456"
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Trường dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | fcoid | string | Y | ID của lệnh điều kiện |
+  | pageIndex | Number | N | Trang muốn truy vấn. Mặc định là 1 |
+  | pageSize | Number | N | Kích cỡ của trang truy vấn. Mặc định là 20api/v2/fco/orderbook?fcoid= {fcoid}&pageIndex={page}&pageSize={size} |
+
+  #### Output
+
+  | Trường dữ liệu | Kiểu dữ liệu | Mô tả |
+  | --- | --- | --- |
+  | status | string | Tham chiếu sang: FCO status code |
+  | message | string | Thông báo lỗi |
+  | itemsCount | string | Tổng số bản ghi |
+  | pageCount | string | Tổng số trang |
+  | pageNumber | string | Số trang hiện tại |
+  | pageSize | string | Số bản ghi trong 1 trang |
+  | data | json | {mảng các orders trigger bởi dcoId tương ứng} |
+  | fcoId | string | Mã lệnh điều kiện |
+  | accountNo | string | Tài khoản đặt lệnh |
+  | quantity | number | Khối lượng muốn đặt lệnh |
+  | price | string | Giá đặt lệnh |
+  | symbol | string | Mã chứng khoán |
+  | side | string | Loại lệnh (buy/sell) |
+  | orderType | string | Loại lệnh: LO, MP, MTL… |
+  | runningMode | boolean | Kiểu thực hiện điều kiện: |
+  | mainOrder | boolean | Có phải lệnh chính hay không |
+  | attachedOrder | boolean | Có phải lệnh đính kèm hay không |
+  | createdTime | string | Thời gian đặt lệnh |
+  | updatedTime | string | Thời gian cập nhật lệnh |
+  | uniquedId | string | Số hiệu lệnh của hệ thống |
+  | orderId | string | Số hiệu lệnh được ghi nhận |
+  | filledQuantity | number | Khối lượng đã khớp |
+  | osQuantity | number | Khối lượng còn lại |
+  | avgPrice | number | Giá khớp trung bình |
+  | status | string | Trạng thái lệnh:  - RQ: request - lệnh tại QEN chưa vào TAPI - WA: Waiting Approval – Chờ duyệt - RS: Ready to Send Exchange – Chờ gửi lên sàn - SD: Send to Exchange - Đã gửi lên sàn - QU: Queue in Exchange - Chờ khớp tại sàn - PF: partially_filled - lệnh khớp 1 phần - FF: fully_filled - lệnh khớp toàn bộ - FFPC: fully_filled_partially_cancel - khớp một phần, hủy phần còn lại - WM: Waiting Modify – Chờ sửa - WC: Wait Cancel – Chờ hủy - RJ: reject - lệnh đã bị hủy - ERR: error - khi thông tin lệnh gửi đi có lỗi - CL: cancel - lệnh đã hủy - EX: expired - lệnh hết hiệu lực |
+
+  **Ví dụ**
+
+  * Trường hợp thành công
+
+  ```json
+  Input:
+  api/v2/fco/orderbook?fcoId=9d496582-edf5-428e-8e85-c4c56f57bc96&pageIndex=1&pageSize=50
+
+  Output:
+  {
+      "message": "Success",
+      "status": 200,
+      "data": [
+          {
+              "fcoId": "bc40c81e-6a0e-40b9-bd57-6f7bd144ab28",
+              "account": "1234566",
+              "quantity": 4000,
+              "price": "27300",
+              "instrumentId": "SSI",
+              "side": "buy",
+              "orderType": "LO",
+              "isMainOrder": true,
+              "isAttachedOrder": false,
+              "createdTime": "2025/07/08T14:22:40",
+              "updatedTime": "2025/07/08T14:22:43",
+              "uniqueId": null,
+              "orderId": "120051870",
+              "matchedQuantity": 4000,
+              "osQuantity": 0,
+              "avgPrice": 27000.0,
+              "status": "FF",
+              "detail": "0"
+          }
+      ],
+      "pageSize": 50,
+      "pageNumber": 1,
+      "itemsCount": 1,
+      "pageCount": 1.0
+  }
+
+  ```
+
+  * Trường hợp lỗi
+
+  ```json
+  {
+
+  }
+
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/fco/orderbook"
       method: GET
+      params:
+        - name: fcoId
+          value: "FCO001"
+          type: query
+        - name: pageIndex
+          value: "1"
+          type: query
+        - name: pageSize
+          value: "10"
+          type: query
     response:
       status: 200
       statusText: OK

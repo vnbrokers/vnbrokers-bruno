@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/stock/transferHistories?account={{account}}&startDate={{startDate}}&endDate={{endDate}}"
+  url: "{{baseUrl}}/api/v2/stock/transferHistories"
   params:
     - name: account
       value: "{{account}}"
@@ -24,12 +24,84 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET  transferHistories
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/stock/transferHistories
+  ```
+
+  Truy vấn lịch sử giao dịch chuyển nhượng chứng khoán giữa các tài khoản
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản nguồn truy vấn |
+  | startDate | string | Yes | Ngày bắt đầu tìm kiếmĐịnh dạng: dd/mm/yyyy |
+  | endDate | string | Yes | Ngày kết thúc tìm kiếmĐịnh dạng: dd/mm/yyyy |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Mô tả msg call API |
+  | status | number | Trạng thái |
+  | data | list | Thông tn dữ liệu trả ra |
+  | account | string | Số tài khoản |
+  | stockTransferHistories | list | Danh sách thông tin số lượng mã chứng khoán có thể chuyển nhượng |
+  | transactionID | string | ID của giao dịch |
+  | beneficiaryAccount | string | Số tài khoản nhận |
+  | instrumentID | string | Mã chứng khoán |
+  | quantity | number | Khối lượng |
+  | dateTime | string | Thời gian thực hiện |
+  | status | string | Trạng thái |
+  | remark | string | Lý do |
+  | auditRemark | string |  |
+
+  >
+
+  **Lưu ý:**
+
+  * Tìm kiếm startDate - endDate không quá 1 tháng
+  * Thời gian tìm kiếm quá khứ không quá 6 tháng
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  account: 0901351
+  startDate: 10/07/2023
+  enđate: 10/08/2023
+  Output:
+  {
+    "message": "Success",
+    "status": 200,
+    "data": {
+      "account": "0901351",
+      "stockTransferHistories": []
+    }
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/stock/transferHistories"
       method: GET
+      params:
+        - name: account
+          value: "0901358"
+          type: query
+        - name: startDate
+          value: "01/08/2023"
+          type: query
+        - name: endDate
+          value: "31/08/2023"
+          type: query
     response:
       status: 200
       statusText: OK

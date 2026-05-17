@@ -22,6 +22,75 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### POST  createCashInAdvance
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/cash/createCashInAdvance
+  ```
+
+  Tạo giao dịch ứng trước tiền bán
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản nguồn truy vấn |
+  | ciaAmount | string | No | Số tiền muốn ứng trước |
+  | receiveAmount | string | No | Số tiền nhận được |
+  | code | string | Yes | Mã OTP/PIN cần nhập trước khi làm giao dịch |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Mô tả msg call API |
+  | status | number | Trạng thái |
+  | data | list | Thông tn dữ liệu trả ra |
+  | account | string | Số tài khoản |
+  | transactionID | string | Số hiệu giao dịch |
+
+  **Ví dụ**
+
+  * Thành công
+
+  ```json
+  Input:
+  {
+    "account": "8888881",
+    "ciaAmount": 50000,
+    "code": 1234567
+  }
+  Output:
+  {
+    "message": "Success",
+    "status": 200,
+    "data": {
+      "account": "1158851",
+      "transactionID": "20230824-46286"
+    }
+  }
+  ```
+
+  * Lỗi
+
+  ```json
+  Input:
+  {
+    "account": "8888881",
+    "ciaAmount": 50000,
+    "code":1234567
+  }
+  Output:
+  {
+    "message": "Not support derivatives account",
+    "status": 400,
+    "data": null
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success

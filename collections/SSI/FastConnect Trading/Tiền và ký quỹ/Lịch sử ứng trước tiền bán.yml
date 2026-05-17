@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/cash/cashInAdvanceHistories?account={{account}}&startDate={{startDate}}&endDate={{endDate}}"
+  url: "{{baseUrl}}/api/v2/cash/cashInAdvanceHistories"
   params:
     - name: account
       value: "{{account}}"
@@ -24,12 +24,110 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET  cashInAdvanceHistories
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/cash/cashInAdvanceHistories
+  ```
+
+  Truy vấn lịch sử giao dịch ứng trước tiền bán
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản nguồn truy vấn |
+  | fromDate | string | Yes | Ngày bắt đầu tìm kiếmĐịnh dạng: dd/mm/yyyy |
+  | toDate | string | Yes | Ngày kết thúc tìm kiếmĐịnh dạng: dd/mm/yyyy |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Mô tả msg call API |
+  | status | number | Trạng thái |
+  | data | list | Thông tn dữ liệu trả ra |
+  | account | string | Số tài khoản |
+  | ciaHistories | list | Danh sách lịch sử ứng trước tiền bán |
+  | transactionID | string | Mã chi nhánh ngân hàng |
+  | date | string | Ngày thực hiện giao dịch |
+  | totalAmount | number | Tổng số tiền đã ứng |
+  | status | string | Trạng thái giao dịch |
+  | detai | list | Bản ghi lặp lại của giao dịch |
+  | type | string | Loại giao dịch (I: Fee và D & W: ciaAmount) |
+  | value | number | Số tiền đã ứng trước, phí |
+  | settleDate | string | Ngày tiền về của giao dịch Ứng trước tiền bán |
+
+  >
+  **Lưu ý:**
+
+  * Tìm kiếm fromDate - toDate không quá 1 tháng
+  * Thời gian tìm kiếm quá khứ không quá 6 tháng
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  account:0001011
+  fromDate: 10/01/2023
+  toDate: 10/08/2023
+  Output:
+  {
+    "message": "Success",
+    "status": 200,
+    "data": {
+      "account": "0001011",
+      "ciaHistories": [
+        {
+          "transactionID": "20230731-45895",
+          "dateTime": "31/07/2023 09:01:56",
+          "totalAmount": 200000,
+          "details": [
+            {
+              "type": "D",
+              "value": 200000,
+              "settleDate": null
+            },
+            {
+              "type": "I",
+              "value": 50000,
+              "settleDate": null
+            },
+            {
+              "type": "W",
+              "value": 200000,
+              "settleDate": "01/08/2023"
+            }
+          ],
+          "status": "A"
+        }
+          ],
+          "status": "A"
+        }
+      ]
+    }
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/cash/cashInAdvanceHistories"
       method: GET
+      params:
+        - name: account
+          value: "0901358"
+          type: query
+        - name: startDate
+          value: "01/08/2023"
+          type: query
+        - name: endDate
+          value: "31/08/2023"
+          type: query
     response:
       status: 200
       statusText: OK

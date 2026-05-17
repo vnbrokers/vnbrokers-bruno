@@ -39,6 +39,106 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### POST  newOrder
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/fco/neworder
+  ```
+
+  Uses: Đặt lệnh điều kiện & kích hoạt lệnh điều kiện.
+
+  Authen: Bearer token
+
+  Header: "Content-Type":"application/json" and "User-Agent":"fctrading application  for customer 123456"
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | instrumentID | string | Y | Mã chứng khoán. Mã chứng khoán, đối với mã phái sinh thì truyền theo mã 1M, 2M, 1Q, 2Q, VN30FYYMM ( Mã tổng quát và chi tiết phái sinh) |
+  | quantity | number | Y | Khối lượng muốn đặt lệnh |
+  | price | string | N | Giá đặt (đơn vị đồng): 23500/MP/MOK/MTLVí dụ: đặt giá mua SSI: 24000 |
+  | priceSlip | number | N | Khoảng trượt giá (đơn vị đồng).Ví dụ: trượt giá 300 khi đặt giá SSI 24000. Lệnh tìm giá khớp tốt nhất từ 23700 → 24300 |
+  | account | string | Y | Tiểu khoản muốn đặt lệnh: ví dụ tài khoản đuôi 8 đuôi 6 |
+  | fromDate | string | N | Ngày bắt đầu thực hiên lệnh, định dạng dd/MM/yyyy HH:mm:ss. Nếu không truyền thì tính từ lúc tạo thành công |
+  | toDate | string | N | Ngày kết thúc, định dạng dd/MM/yyyy HH:mm:ss. Nếu không truyền thì tính đến 24 giờ kể từ lúc tạo. Chỉ được truyền tối đa 31 ngày kể từ ngày fromDate |
+  | code | string | N | Mã OTP (Nếu đã lưu thì không cần truyền) |
+  | userAgent | string | Y | Agent sử dụng API FCTrading |
+  | deviceId | string | Y | Định danh máy người dùng: MAC |
+  | type | string | Y | Loại lệnh điều kiện: hiện hỗ trợ các lệnh điều kiện· "stop_limit": Stop limit· "stop": Stop· "gtd": Good till Date· "bullbear": lệnh điều kiện Bull Bear· "oco": One cancel the other· "trailing_stop": Trailing Stop· "trailing_stop_limit": Trailing Stop LimitTham chiếu thêm sang mục:FCO và các tham số điền theo từng loại lệnh |
+  | Tham số lệnh điều kiện |  |  |  |
+  | stopPrice | number | N | Giá đặt |
+  | side | string | Y | Loại lệnh (B/ S) |
+  | activePrice | number | N | Giá thực hiện ban đầu |
+  | trailingAmount | number | N | Khoảng trượt giá |
+  | tpActivePrice | number | N | Giá thực hiện chốt lời ban đầu |
+  | slActivePrice | number | N | Giá thực hiện cắt lỗ ban đầu |
+  | tpPrice | string | N | Giá chốt lời. Giá đặt (đơn vị đồng): 23500/MP/MOK/MTL |
+  | slPrice | string | N | Giá cắt lỗ. Giá đặt (đơn vị đồng): 23500/MP/MOK/MTL |
+  | tpSlip | number | N | Khoảng chốt lời |
+  | slSlip | number | N | Khoảng cắt lỗ |
+  | operator | string | N | Dấu cho phép chọn để hỗ trợ biểu thức so sánh kích hoạt lệnh Bao gồm:Các tham số theo từng loại lệnh điều kiện. greater_or_equal: >=equal: =greater: >lesser: lesser_or_equal: Tham chiếu sang:FCO và các tham số điền theo từng loại lệnh để xem ví dụ cho từng loại lệnh |
+
+  #### Output
+
+  | Trường dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | status | string | Tham chiếu sang: FCO status code |
+  | message | string | Thông báo lỗi |
+  | fcoid | string | ID lệnh điều kiện |
+
+  **Ví dụ**
+
+  * Trường hợp thành công
+
+  ```json
+  Input:
+  {
+      "instrumentID": "SSI",
+      "side": "B",
+      "type": "Stop",
+      "price": "25900",
+      "priceSlip": "0",
+      "quantity": 100,
+      "account": "{{MarginAccount}}",
+      "fromDate": "",
+      "toDate": "",
+      "stopPrice": 25950,
+      "activePrice": 0.0,
+      "trailingAmount": 0,
+      "tpActivePrice": 0.0,
+      "slActivePrice": 0.0,
+      "tpPrice": “”,
+      "slPrice": “”,
+      "tpSlip": 0.0,
+      "slSlip": 0.0,
+      "operator": "greater_or_equal",
+      "code": "otpcode",
+      "userAgent": "agent fctrading",
+      "deviceId":"0A:B1:92:D3:5S:8G"
+  }
+
+  Output:
+  {
+  **    "status":200,
+  ****    "message":"success",
+  **    "fcoid":"1c4a6952-7eba-43d5-9890-97fa78917ada"
+  }
+
+  ```
+
+  * Trường hợp lỗi
+
+  ```json
+  {
+      "status":20413,
+      "message":"Price value is require"
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success

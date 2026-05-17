@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/Trading/derivPosition?account={{account_8}}"
+  url: "{{baseUrl}}/api/v2/Trading/derivPosition"
   params:
     - name: account
       value: "{{account_8}}"
@@ -18,12 +18,89 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET  derivativePosition
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/Trading/derivPosition
+  ```
+
+  Truy vấn vị thế của tài khoản phái sinh.
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản phái sinh muốn truy vấn |
+  | querySummary | boolean | Yes | Mode net vị thế: - True: có net vị thế- False: không net vị thế |
+
+  #### Output
+
+  | Dữ liệu | Kiểu dữ liệu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | data | list | List data |
+  | account | string | Số tài khoản |
+  | openPositions | list | Mở vị thế |
+  | closePositions | list | Đóng vị thế |
+  | marketID | string | Mã sàn |
+  | instrumentID | string | Mã chứng khoán |
+  | longQty | number | Vị thế mở |
+  | shortQty | number | Vị thế đóng |
+  | net | number | Net |
+  | bidAvgPrice | number | Giá mua trung bình |
+  | askAvgPrice | number | Giá bán trung bình |
+  | tradePrice | number | Giá khớp |
+  | marketPrice | number | Giá thị trường |
+  | floatingPL | number | Lãi/ Lỗ tạm tính |
+  | tradingPL | number | Lãi/ Lỗ đã chốt |
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  {
+  account: "0901358",
+  querySummary: true
+  }
+  Output:
+  {
+  message: "Success",
+  status: 200,
+  data: {
+         account: "0901358",
+         openPosition: [
+         {
+             marketID: "VNFE",
+             instrumentID: "VN30F2106",
+             longQty: 8,
+             shortQty: 0,
+             net: 8,
+             bidAvgPrice: 0,
+             askAvgPrice: 0,
+             tradePrice: 1452.7,
+             marketPrice: 1452.7,
+             floatingPL: 0,
+             tradingPL: 0
+            }   ],
+          closePosition: [ ]
+      }
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/Trading/derivPosition"
       method: GET
+      params:
+        - name: account
+          value: "0901358"
+          type: query
     response:
       status: 200
       statusText: OK

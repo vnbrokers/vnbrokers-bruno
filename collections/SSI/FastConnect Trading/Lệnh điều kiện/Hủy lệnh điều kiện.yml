@@ -26,6 +26,70 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### POST  cancelOrder
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/fco/cancelorder
+  ```
+
+  Uses: Hủy kích hoạt lệnh điều kiện
+
+  Authen: Bearer token
+
+  Header: "Content-Type":"application/json" and "User-Agent":"fctrading application  for customer 123456"
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Trường dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | fcoid | string | Y | ID của lệnh điều kiện |
+  | code | string | Y | Mã OTP |
+  | userAgent | string | Y | Agent sử dụng API FCTrading |
+  | deviceId | string | Y | Định danh máy người dùng: MAC |
+
+  #### Output
+
+  | Trường dữ liệu | Kiểu dữ liệu | Mô tả |
+  | --- | --- | --- |
+  | status | string | Tham chiếu sang: FCO status code |
+  | message | string | Thông báo lỗi |
+  | fcoid | string | ID lệnh điều kiện |
+
+  **Ví dụ**
+
+  * Trường hợp thành công
+
+  ```json
+  Input:
+  {
+      "fcoId": "9d496582-edf5-428e-8e85-c4c56f57bc96",
+      "code": "otpcode",
+      "userAgent": "agent fctrading",
+      "deviceId":"0A:B1:92:D3:5S:8G"
+  }
+
+  Output:
+  {
+  **    "status":200,
+  **    "message":"Hủy lệnh điều kiện thành công",
+      "dcoid":"1c4a6952-7eba-43d5-9890-97fa78917ada"
+  }
+
+  ```
+
+  * Trường hợp lỗi
+
+  ```json
+  {
+      "status":40904,
+      "message":"85ddfafe-f2d6-4861-b705-9eadb017782b not inprocess or finish. can't deactive"
+  }
+
+  ```
+
 examples:
   - name: 200 Response
     description: Success

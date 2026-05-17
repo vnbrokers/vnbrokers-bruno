@@ -23,6 +23,78 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### POST  vsdCashDW
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/cash/vsdCashDW
+  ```
+
+  Tạo giao dịch nộp/ rút phái sinh
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản nguồn |
+  | amount | number | Yes | Số tiền |
+  | type | string | Yes | Loại giao dịchD = Nộp W = Rút |
+  | remark | string | No | Mô tả nội dung tạo giao dịch |
+  | code | string | No | isSave = false -> Điền PIN/ OTP tùy phương thức xác thựcisSave = true -> Không cần điền |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Mô tả msg call API |
+  | status | number | Trạng thái |
+  | data | list | Thông tn dữ liệu trả ra |
+  | transactionID | string | Số hiệu giao dịch |
+
+  **Ví dụ**
+
+  * Thành công
+
+  ```json
+  Input:
+  {
+    "account": "0901358",
+    "amount": 50000,
+    "type": "D",
+    "remark": "string",
+    "code": "string"
+  }
+  Output:
+  {
+    "message": "Success",
+    "status": 200,
+    "data": {
+      "transactionID": "579108"
+    }
+  }
+  ```
+
+  * Lỗi
+
+  ```json
+  Input:
+  {
+    "account": "0901351",
+    "amount": 50000,
+    "type": "D",
+    "remark": "string",
+    "code":"string"
+  }
+  Output:
+  {
+    "message": "Not support cash transfer with vsd for stock account",
+    "status": 400,
+    "data": null
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success

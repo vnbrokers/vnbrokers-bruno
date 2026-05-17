@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/Trading/cashAcctBal?account={{account}}"
+  url: "{{baseUrl}}/api/v2/Trading/cashAcctBal"
   params:
     - name: account
       value: "{{account}}"
@@ -18,12 +18,91 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET  cashAccountBalance
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/Trading/cashAcctBal
+  ```
+
+  Truy vấn thông tin tiền của tài khoản cơ sở.
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản cơ sở muốn truy vấn |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | data | list | List data |
+  | account | string | Số tài khoản cơ sở |
+  | cashbal | number | Tổng tiền mặt |
+  | cashonhold | number | Tiền bị phong tỏa |
+  | secureamount | number | Secure amount intraday |
+  | withdrawable | number | Số tiền có thể rút |
+  | receivingcasht1 | number | Tiền bán chờ về ngày T1 |
+  | receivingcasht2 | number | Tiền bán chờ về ngày T2 |
+  | matchedbuyvolume | number | Tiền khớp mua trong ngày |
+  | matchedsellvolume | number | Tiền khớp bán trong ngày |
+  | unmatchedbuyvolume | number | Tiền mua chứng khoán chờ khớp |
+  | unmatchedsellvolume | number | Tiền bán chứng khoán chờ khớp |
+  | paidcasht1 | number | Tiền mua chứng khoán ngày T1 |
+  | paidcasht2 | number | Tiền mua chứng khoán ngày T2 |
+  | cia | number | Số tiền ứng trước |
+  | debt | number | Dư nợ |
+  | purchasingpower | number | Sức mua |
+  | totalasset | number | Tổng tài sản |
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  {
+      account: "0901351",
+  }
+  Output:
+  {
+  message: "Success",
+  status: 200,
+  data: {
+  account: "0901351",
+  cashBal: 7459369481,
+  cashOnHold: 0,
+  secureAmount: 0,
+  withdrawable: 7459367581,
+  receivingCashT1: 0,
+  receivingCashT2: 0,
+  matchedBuyVolume: 0,
+  matchedSellVolume: 0,
+  debt: 1900,
+  unMatchedBuyVolume: 0,
+  unMatchedSellVolume: 864619337,
+  paidCashT1: 0,
+  paidCashT2: 0,
+  cia: 0,
+  purchasingPower: 7459367581,
+  totalAssets: 9726161481
+         }
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/Trading/cashAcctBal"
       method: GET
+      params:
+        - name: account
+          value: "0901358"
+          type: query
     response:
       status: 200
       statusText: OK

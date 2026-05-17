@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/cash/cashInAdvanceAmount?account={{account}}"
+  url: "{{baseUrl}}/api/v2/cash/cashInAdvanceAmount"
   params:
     - name: account
       value: "{{account}}"
@@ -18,12 +18,21 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET Số tiền ứng trước tối đa
+
+  `GET cash/cashInAdvanceAmount`
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/cash/cashInAdvanceAmount"
       method: GET
+      params:
+        - name: account
+          value: "0901358"
+          type: query
     response:
       status: 200
       statusText: OK

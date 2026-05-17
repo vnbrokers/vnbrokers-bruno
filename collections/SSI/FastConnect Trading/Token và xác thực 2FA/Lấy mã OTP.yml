@@ -25,6 +25,66 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### POST  GetOTP
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/Trading/GetOTP
+  ```
+
+  Dùng để lấy mã OTP nếu tài khoản đã đăng ký sử dụng SMS OTP và Email OTP.
+
+  >
+  Nếu lấy OTP quá 5 lần mà không xác thực thì dịch vụ OTP sẽ bị tạm khóa.
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | consumerID | string | Yes | ConsumerID trong thông tin kết nối |
+  | consumerSecret | string | Yes | ConsumerSecret trong thông tin kết nối |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+
+  **Ví dụ**
+
+  * Trường hợp thành công
+
+  ```json
+  Input:
+  {
+    "consumerID": "968d7b5940f5437583021aea2b038f35",
+    "consumerSecret": "11ab3fc6af954c59ba646fac016f30cb"
+  }
+  Output:
+  {
+      message: "Success",
+      status: 200
+  }
+  ```
+
+  * Trường hợp lỗi
+
+  ```json
+  Input:
+  {
+    "consumerID": "968d7b5940f5437583021aea2b038f351",
+    "consumerSecret": "11ab3fc6af954c59ba646fac016f30cb"
+  }
+  Output:
+  {
+    "message": "ConsumerID is invalid",
+    "status": 400
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success

@@ -39,6 +39,152 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### POST  NewOrder
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/Trading/NewOrder
+  ```
+
+  Dùng để đặt lệnh, sử dụng cho cả tài khoản cơ sở và phái sinh. Khi gửi thông tin lệnh thành công, api trả 200. Để xem lệnh có đẩy lên sàn thành công hay không cần kết nối streaming để nhận kết quả (hoặc call api oderBook)
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | instrumentID | string | Yes | Mã chứng khoán đặt lệnh |
+  | market | string | Yes | VN: thị trường cơ sởVNFE: thị trường phái sinh |
+  | buySell | string | Yes | B: BuyS: Sell |
+  | orderType | string | Yes | Loại lệnh |
+  | channelID | string | Yes | Kênh đặt lệnh Chỉ hỗ trợ mã TA (FCTrading API) |
+  | price | number | Yes | Giá đặt lệnh: - Nếu loại lệnh là LO -> Giá đặt > 0- Nếu loại lệnh khác LO -> Giá đặt = 0 |
+  | quantity | number | Yes | Khối lượng đặt |
+  | account | string | Yes | Số tài khoản muốn đặt lệnh |
+  | requestID | string | Yes | ID đặt lệnh trong ngày. Bắt buộc 8 số random |
+  | stopOrder | string | Yes | Loại lệnh: True: Nếu là lệnh điều kiện. Chỉ áp dụng cho tài khoản phái sinh.False: nếu là lệnh thường |
+  | stopPrice | number | Yes | Giá đặt mong muốn cắt lỗ/chốt lãiNếu stopOrder = true -> stopPrice > 0 |
+  | stopType | string | Yes | Loại điều kiện. Bắt buộc nhập nếu stopType = true- D: Down- U: Up- V: Trailling Up- E: Trailing Down- O: OCO- B: BullBear |
+  | stopStep | number | Yes | Bước chốt lỗ, chỉ dùng cho lệnh điều kiện BullBear (stopType = B) |
+  | profitStep | number | Yes | Bước chốt lãi, chỉ dùng cho lệnh điện BullBear (stopType = B) |
+  | code | number | No | Trading code: PIN, OTPNếu API Xác thực người dùng input: isSave = false, code bắt buộc điền |
+  | deviceId | string | Yes | Định danh thiết bị |
+  | userAgent | string | No | Tác nhân người dùng |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | data | list | List data |
+  | requestID | string | ID của lệnh gửi |
+  | requestData | string | Dữ liệu yêu cầu |
+  | instrumentID | string | mã chứng khoán đặt lệnh |
+  | marketID | string | Thị trường: VN: thị trường cơ sởVNFE: thị trường phái sinh |
+  | buySell | string | buy (B): mua/Sell (S): bán đã đặt theo orderID của lệnhB: BuyS: Sell |
+  | orderType | string | Loại lệnh |
+  | channelID | string | Kênh đặt lệnh VD: TA (trader API) |
+  | price | number | Giá đặt lệnh: - Nếu loại lệnh là LO -> Giá đặt > 0- Nếu loại lệnh khác LO -> Giá đặt = 0 |
+  | quantity | number | Khối lượng đặt |
+  | account | string | Số tài khoản muốn đặt lệnh: xxxxxx1: Cơ sởxxxxxx8: Phái sinh |
+  | requestID | string | ID đặt lệnh trong ngày. Bắt buộc 8 số random |
+  | stopOrder | string | Loại lệnh: True: Đối với lệnh điều kiện False: Đối với lệnh thường |
+  | stopPrice | number | Giá đặt mong muốn cắt lỗ/chốt lãiNếu stopOrder = true -> stopPrice > 0s |
+  | stopType | string | Loại điều kiện. Bắt buộc nhập nếu stopType = true- D: Down- U: Up- V: Trailling Up- E: Trailing Down- O: OCO- B: BullBear |
+  | stopStep | number | Bước chốt lỗ, chỉ dùng cho lệnh điều kiện BullBear (stopType = B) |
+  | profitStep | number | Bước chốt lãi, chỉ dùng cho lệnh điện BullBear (stopType = B) |
+  | forceSell | boolean | Đánh dấu có phải lệnh forceSell không |
+  | modifiable | boolean | Đánh dấu có cho phép sửa lệnh không |
+  | note | string | Ghi chú với lệnh |
+  | brokerID | string | Mã môi giới |
+
+  **Ví dụ**
+
+  * Thành công
+
+  ```json
+  Input:
+  {
+  instrumentID: "SSI",
+  market: "VN",
+  buySell: "B",
+  orderType: "LO",
+  channelID: "TA",
+  price: 21000,
+  quantity: 300,
+  account: "0901351",
+  stopOrder: false,
+  stopPrice: 0,
+  stopType: "string",
+  stopStep: 0,
+  lossStep: 0,
+  profitStep: 0
+  requestID: "1678195",
+  code: “123456789”,
+  deviceId: "8C-EC-4B-D3-0B-96",
+  userAgent: “FCTrading”
+   }
+   Output:
+   {
+  message: "Success",
+  status: 200,
+  data: {
+  requestID: "1678195",
+  requestData:
+  {
+  instrumentID: "SSI",
+  market: "VN",
+  buySell: "B",
+  orderType: "LO",
+  channelID: "TA",
+  price: 21000,
+  quantity: 300,
+  account: "0901351",
+  stopOrder: false,
+  stopPrice: 0,
+  stopType: "string",
+  stopStep: 0,
+  lossStep: 0,
+  profitStep: 0
+  }
+      }
+  }
+  ```
+
+  * Trường hợp lỗi
+
+  ```json
+  Input:
+  {
+  instrumentID: "SSI",
+  market: "VN",
+  buySell: "B",
+  orderType: "ATO",
+  channelID: "TA",
+  price: 21000,
+  quantity: 300,
+  account: "0901351",
+  stopOrder: false,
+  stopPrice: 0,
+  stopType: "string",
+  stopStep: 0,
+  lossStep: 0,
+  profitStep: 0
+  requestID: "1678195",
+  code: “123456789”,
+  deviceId: "8C-EC-4B-D3-0B-96",
+  userAgent: “FCTrading”
+   }
+  Output:
+   {
+      message: "Price is null or equal zero when order is market order",
+      status: 400,
+      data: null
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success

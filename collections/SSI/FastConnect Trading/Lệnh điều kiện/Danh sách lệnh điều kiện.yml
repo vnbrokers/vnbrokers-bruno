@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/fco/list?pageIndex={{pageIndex}}&pageSize={{pageSize}}"
+  url: "{{baseUrl}}/api/v2/fco/list"
   headers:
     - name: User-Agent
       value: "{{userAgent}}"
@@ -56,12 +56,140 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET list
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/fco/list
+  ```
+
+  Uses: Lấy danh sách các lệnh điều kiện đã tạo
+
+  Authen: Bearer token
+
+  Header: "Content-Type":"application/json" and "User-Agent":"fctrading application  for customer 123456"
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Trường dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | fcoid | string | N | ID của lệnh điều kiện |
+  | account | string | N | Tài khoản đặt lệnh |
+  | type | string | N | Loại lệnh điều kiện: "stop_limit"; "stop"; "gtd"; "bullbear"; "oco"; "trailing_stop"; "trailing_stop_limit"; |
+  | processStatus | string | N | Trạng thái của lệnh điều kiện: hỗ trợ filter nhiều giá trị, ngăn cách nhau bởi dấu phẩy (Ex: WAIT, EXP):   INIT: initial – khởi tạo điều kiện WAIT: waiting - chờ thỏa điều kiện TRI: triggered - đã kích hoạt WC: waiting cancel - chờ hủy điều kiện TER: terminated - đã hủy TRIT: triggered_terminated - đã kích hoạt bị hủy FIS: finish - hoàn thành EXP: expired - hết hiệu lực ERR: Error – Từ chối |
+  | instrumentID | string | N | Mã chứng khoán, hơp đồng |
+  | side | string | N | Loại lệnh buy/sell (B/S) |
+  | fromDate | string | N | Ngày đắt đầu thực hiện lệnh điều kiện dd/MM/yyyy HH:mm:ss |
+  | toDate | string | N | Ngày kết thúc thực hiện lệnh điều kiện dd/MM/yyyy HH:mm:ss |
+  | pageIndex | Number | N | Trang muốn truy vấn. Mặc định là 1 |
+  | pageSize | Number | N | Kích cỡ của trang truy vấn. Mặc định là 20 |
+
+  #### Output
+
+  | Trường dữ liệu | Kiểu dữ liệu | Mô tả |
+  | --- | --- | --- |
+  | status | string | Tham chiếu sang: 7.2 FCO status code |
+  | message | string | Thông báo lỗi |
+  | totalElements | string | Tổng số bản ghi |
+  | totalPages | string | Tổng số trang |
+  | page | string | Số trang hiện tại |
+  | size | string | Số bản ghi trong 1 trang |
+  | fcoList | json | {mảng các lệnh điều kiện đã được tạo}. Bao gồm các thành phần như sau |
+  | dcoId | string | Mã lệnh điều kiện |
+  | userid | string | Tài khoản của khách hàng |
+  | accountNo | string | Tiểu khoản đặt lệnh |
+  | quantit | number | Khối lượng muốn đặt lệnh |
+  | price | string | Giá đặt lệnh |
+  | instrumentID | string | Mã chứng khoán |
+  | side | string | Loại lệnh (buy/sell) |
+  | orderType | string | Loại lệnh: LO, MP, MTL… |
+  | runningMode | boolean | Kiểu thực hiện điều kiện: |
+  | mainOrder | boolean | Có phải lệnh chính hay không |
+  | attachedOrder | boolean | Có phải lệnh đính kèm hay không |
+  | createdTime | string | Thời gian đặt lệnh |
+  | updatedTime | string | Thời gian cập nhật lệnh |
+  | matchedQuality | number | Khối lượng đã khớp |
+  | placeOrder | boolean | Trạng thái phát sinh lệnh con: true: Có lệnh thực phát sinh (xuất hiện lệnh ở Orderbook); false: Chưa có Lệnh thực phát sinh |
+  | status | string | Trạng thái lệnh: Trả trạng thái giống QEngine trả về. |
+  | statusDetail | string | Mô tả trạng thái lệnh |
+  | params | string | Thông tin kích hoạt lệnh |
+
+  **Ví dụ**
+
+  * Trường hợp thành công
+
+  ```json
+  Input:
+  api/v2/fco/list?fcoId=9d496582-edf5-428e-8e85-c4c56f57bc96&account&processStatus
+  &type&instrumentID& side&fromDate&toDate&pageIndex=1&pageSize=50
+
+  Output:
+  {
+      "message": "Success",
+      "status": 200,
+      "data": [
+          {
+              "fcoId": "9d496582-edf5-428e-8e85-c4c56f57bc96",
+              "username": "778899",
+              "account": "7788996",
+              "quantity": 100,
+              "price": "25900",
+              "priceSlip": 0.0,
+              "instrumentID": "ssi",
+              "orderType": null,
+              "createdTime": null,
+              "updatedTime": null,
+              "matchedQuantity": 0,
+              "isPlaceOrder": false,
+              "status": null,
+              "detail": null,
+              "params": {
+                  "stopPrice": 25950.0,
+                  "side": "B",
+                  "activePrice": 0.0,
+                  "trailingAmount": 0.0,
+                  "tpActivePrice": 0.0,
+                  "slActivePrice": 0.0,
+                  "tpPrice": 0.0,
+                  "slPrice": 0.0,
+                  "tpSlip": 0.0,
+                  "slSlip": 0.0,
+                  "operator": "greater_or_equal"
+              }
+          }
+      ],
+      "pageSize": 50,
+      "pageNumber": 1,
+      "itemsCount": 1,
+      "pageCount": 1.0
+  }
+
+  ```
+
+  * Trường hợp lỗi
+
+  ```json
+  {
+  "message": "No active account",
+      "status": 40828
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/fco/list"
       method: GET
+      params:
+        - name: pageIndex
+          value: "1"
+          type: query
+        - name: pageSize
+          value: "10"
+          type: query
     response:
       status: 200
       statusText: OK

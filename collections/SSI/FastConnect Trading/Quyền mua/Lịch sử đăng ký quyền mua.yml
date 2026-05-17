@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/ors/histories?account={{account}}&startDate={{startDate}}&endDate={{endDate}}"
+  url: "{{baseUrl}}/api/v2/ors/histories"
   params:
     - name: account
       value: "{{account}}"
@@ -24,12 +24,87 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET  histories
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/ors/histories
+  ```
+
+  Truy vấn lịch sử giao dịch đăng ký quyền mua
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản nguồn truy vấn |
+  | startDate | string | Yes | Ngày bắt đầu tìm kiếm Định dạng: dd/mm/yyyy |
+  | endDate | string | Yes | Ngày kết thúc tìm kiếmĐịnh dạng: dd/mm/yyyy |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Mô tả msg call API |
+  | status | number | Trạng thái |
+  | data | list | Thông tn dữ liệu trả ra |
+  | account | string | Số tài khoản |
+  | onlineRightSubscriptionHistories | list | Danh sách giao dịch đăng ký quyền mua |
+  | transactionID | string | ID của giao dịch |
+  | dateTime | string | Thời gian yêu cầu |
+  | instrumentID | string | Mã chứng khoán |
+  | ratioFrom | number | Tỉ lệ từ |
+  | subscriptionPrice | number | Giá mua |
+  | subscriptionPeriodFrom | string | Ngày bắt đầu đăng kýĐịnh dạng: dd/mm/yyyy |
+  | subscriptionPeriodTo | string | Hạn đăng ký quyềnĐịnh dạng: dd/mm/yyyy |
+  | exercisedReceivedQty | number | Số chứng khoán đã đăng ký mua |
+  | amount | number | Số tiền đã nộp |
+  | status | string | Tình trạng |
+  | ratioTo | number | Tỉ lệ đến |
+  | underlyingInstrumentID | string | Mã chứng khoán tham chiếu |
+
+  >
+  **Lưu ý:**
+
+  * Tìm kiếm startDate - endDate không quá 1 tháng
+  * Thời gian tìm kiếm quá khứ không quá 1 năm
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  account: 1158851
+  startDate: 10/07/2023
+  endDate: 10/07/2023
+  Output:
+  {
+    "message": "Success",
+    "status": 200,
+    "data": {
+      "account": "1158851",
+      "onlineRightSubscriptionHistories": []
+    }
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/ors/histories"
       method: GET
+      params:
+        - name: account
+          value: "0901358"
+          type: query
+        - name: startDate
+          value: "01/08/2023"
+          type: query
+        - name: endDate
+          value: "31/08/2023"
+          type: query
     response:
       status: 200
       statusText: OK

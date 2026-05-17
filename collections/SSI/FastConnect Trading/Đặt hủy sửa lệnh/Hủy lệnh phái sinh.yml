@@ -42,6 +42,111 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### POST  derCancelOrder
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/Trading/derCancelOrder
+  ```
+
+  Dùng để hủy lệnh phái sinh.
+
+  **Thông tin chi tiết**
+
+  #### First Tab
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | orderID | string | Yes | ID của lệnh |
+  | instrumentID | string | Yes | mã chứng khoán của lệnh |
+  | market | string | Yes | VNFE: thị trường phái sinh |
+  | buySell | string | Yes | buy (B): mua/Sell (S): bán đã đặt theo orderID của lệnhB: BuyS: Sell |
+  | orderType | string | Yes | Loại lệnh |
+  | channelID | string | Yes | Kênh đặt lệnh Chỉ hỗ trợ mã TA (FCTrading API) |
+  | price | number | Yes | Giá đặt lệnh: - Nếu loại lệnh là LO -> Giá đặt > 0- Nếu loại lệnh khác LO -> Giá đặt = 0 |
+  | quantity | number | Yes | Khối lượng đặt |
+  | account | stri |  |  |
+  | requestID | string | Yes | ID đặt lệnh trong ngày. Bắt buộc 8 số random |
+  | code | number | No | Trading code: PIN, OTPNếu API Xác thực người dùng input: isSave = false, code bắt buộc điền |
+  | deviceId | string | Yes | Định dang thiết bị |
+  | userAgent | string | No |  |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | data | list | List data |
+  | requestData | string | Dữ liệu yêu cầu |
+  | instrumentID | string | mã chứng khoán đặt lệnh |
+  | marketID | string | Sàn: VN: thị trường cơ sởVNFE: thị trường phái sinh |
+  | buySell | string | buy (B): mua/Sell (S): bán đã đặt theo orderID của lệnhB: BuyS: Sell |
+  | orderType | string | Loại lệnh |
+  | price | number | Giá đặt lệnh: - Nếu loại lệnh là LO -> Giá đặt > 0- Nếu loại lệnh khác LO -> Giá đặt = 0 |
+  | quantity | number | Khối lượng đặt |
+  | orderID | string | ID của lệnh |
+  | account | string | Số tài khoản |
+
+  **Ví dụ**
+
+  * Thành công
+
+  ```json
+  Input:
+  {
+  orderID: "12658867",
+  account: "1184418",
+  marketID: "VNFE",
+  instrumentID: "VN30F2306",
+  buySell: "B",
+  requestID: "52513603"
+  code:”123456789”,
+  deviceId: "8C-EC-4B-D3-0B-96",
+  userAgent: “FCTrading”
+  }
+  Output:
+  {
+  message: "Success",
+  status: 200,
+  data: {
+      requestID: "52513603",
+      requestData: {
+           orderID: "12658867",
+           account: "1184418",
+           marketID: "VNFE",
+           instrumentID: "VN30F2106",
+           buySell: "B",
+           requestID: "52513603"
+         }
+      }
+  }
+  ```
+
+  * Trường hợp lỗi
+
+  ```json
+  Input:
+  {
+  orderID: " ",
+  account: "0901358",
+  marketID: "VNFE",
+  instrumentID: "VN30F2106",
+  buySell: "B",
+  requestID: "52513603"
+  code:”123456789”,
+  deviceId: "8C-EC-4B-D3-0B-96",
+  userAgent: “FCTrading”
+  }
+  Output:
+  {
+  message: "’Order ID' must not be empty.",
+  status: 400,
+  data: null
+  }
+
+  ```
+
 examples:
   - name: 200 Response
     description: Success

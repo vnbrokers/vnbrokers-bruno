@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/cash/estCashInAdvanceFee?account={{account}}&ciaAmount={{ciaAmount}}"
+  url: "{{baseUrl}}/api/v2/cash/estCashInAdvanceFee"
   params:
     - name: account
       value: "{{account}}"
@@ -21,12 +21,69 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET  estCashInAdvanceFee
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/cash/estCashInAdvanceFee
+  ```
+
+  Truy vấn mức phí của giao dịch Ứng trước tiền bán
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản nguồn truy vấn |
+  | ciaAmount | string | No | Số tiền muốn ứng trước |
+  | receiveAmount | string | No | Số tiền nhận được |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Mô tả msg call API |
+  | status | number | Trạng thái |
+  | data | list | Thông tn dữ liệu trả ra |
+  | account | string | Số tài khoản |
+  | ciaAmount | number | Số tiền ứng trước tiền bán |
+  | receiveAmount | number | Số tiền nhận được |
+  | fee | number | Mức phí |
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  account:0001011
+  ciaAmount: 50000
+  Output:
+  {
+    "message": "Success",
+    "status": 200,
+    "data": {
+      "account": "0001011",
+      "ciaAmount": 0,
+      "receiveAmount": 0,
+      "fee": 0
+    }
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/cash/estCashInAdvanceFee"
       method: GET
+      params:
+        - name: account
+          value: "0901358"
+          type: query
+        - name: ciaAmount
+          value: "50000"
+          type: query
     response:
       status: 200
       statusText: OK

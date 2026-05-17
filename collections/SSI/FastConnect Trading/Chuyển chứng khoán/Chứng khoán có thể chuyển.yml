@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/stock/transferable?account={{account}}"
+  url: "{{baseUrl}}/api/v2/stock/transferable"
   params:
     - name: account
       value: "{{account}}"
@@ -18,12 +18,73 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET  transferable
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/stock/transferable
+  ```
+
+  Truy vấn thông tin số lượng chứng khoán có thể chuyển nhượng của tài khoản
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản nguồn truy vấn |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Mô tả msg call API |
+  | status | number | Trạng thái |
+  | data | list | Thông tn dữ liệu trả ra |
+  | account | string | Số tài khoản |
+  | transferableStocks | list | Danh sách thông tin số lượng mã chứng khoán có thể chuyển nhượng |
+  | instrumentID | string | Mã chứng khoán |
+  | quantity | number | Khối lượng |
+  | instrumentType | string | Loại mã chứng khoán |
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  account: 0901351
+  Output:
+  {
+    "message": "Success",
+    "status": 200,
+    "data": {
+      "account": "0901351",
+      "transferableStocks": [
+        {
+          "instrumentID": "ACB",
+          "quantity": 100,
+          "instrumentType": "EQ"
+        },
+        {
+          "instrumentID": "BTS",
+          "quantity": 300,
+          "instrumentType": "EQ"
+        }
+      ]
+    }
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/stock/transferable"
       method: GET
+      params:
+        - name: account
+          value: "0901358"
+          type: query
     response:
       status: 200
       statusText: OK

@@ -23,6 +23,83 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### POST  create
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/ors/create
+  ```
+
+  Tạo giao dịch đăng ký quyền
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản |
+  | instrumentID | string | Yes | Mã chứng khoán |
+  | entitlementID | string | Yes | Mã quyền |
+  | quantity | number | Yes | Khối lượng |
+  | amount | number | Yes | Số tiền |
+  | code | string | No | Mã OTP/PIN cần nhập trước khi làm giao dịch |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Mô tả msg call API |
+  | status | number | Trạng thái |
+  | data | list | Thông tn dữ liệu trả ra |
+  | account | string | Số tài khoản |
+  | transactionID | string | Số hiệu giao dịch |
+
+  **Ví dụ**
+
+  * Thành công
+
+  ```json
+  Input:
+  {
+     "account": "0901351",
+     "instrumentID": "SSI",
+     "entitlementID": "913312",
+     "quantity": 100,
+     "amount": 1000,
+     "code":"569858"
+   }
+  Output:
+  {
+    "message": "Success",
+    "status": 200,
+    "data": {
+      "account": "0901351",
+      "transactionID": "17509268"
+    }
+  }
+  ```
+
+  * Lỗi
+
+  ```json
+  Input:
+  {
+     "account": "0901351",
+     "instrumentID": "VND",
+     "entitlementID": "913312",
+     "quantity": 100,
+     "amount": 1000,
+     "code":"459865"
+   }
+  Output:
+  {
+    "message": "Invalid ammount (max amount 1,459,882)",
+    "status": 40006,
+    "data": null
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success

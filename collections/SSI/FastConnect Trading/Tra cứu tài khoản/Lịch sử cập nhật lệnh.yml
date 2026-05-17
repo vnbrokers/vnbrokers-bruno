@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/Trading/auditOrderBook?account={{account}}"
+  url: "{{baseUrl}}/api/v2/Trading/auditOrderBook"
   params:
     - name: account
       value: "{{account}}"
@@ -18,12 +18,98 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET  auditOrderBook
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/Trading/auditOrderBook
+  ```
+
+  Trả ra lịch sử cập nhật của lệnh.
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản muốn truy vấn bao gồm Cơ sở và Phái sinh |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | data | list | List data |
+  | uniqueID | string | ID lệnh của bên gửi |
+  | orderID | string | ID lệnh |
+  | buySell | string | Bên mua/ bán |
+  | price | number | Giá đặt |
+  | quantity | number | Khối lượng đặt |
+  | filledQty | string | Khối lượng khớp |
+  | orderStatus | string | Trạng thái lệnh |
+  | marketID | string | Mã sàn |
+  | inputTime | string | Thời gian đặt |
+  | modifiedTime | string | Thời gian cập nhật |
+  | instrumentID | string | Mã chứng khoán |
+  | orderType | string | Loại lệnh |
+  | cancelQty | string | Khối lượng hủy |
+  | avgPrice | string | Giá khớp trung binh |
+  | isForcesell | boolean |  |
+  | isShortsell | boolean |  |
+  | rejectReason | string | Lý do từ chối |
+  | lastErrorEvent | list | Thông tin lệnh hệ thống trả lỗi khi trùng orderID |
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  {
+  account: "1184418"
+  }
+  Output:
+  {
+    "message": "Success",
+    "status": 200,
+    "data": {
+      "account": "1184418",
+      "orders": [
+        {
+          "uniqueID": "73885549",
+          "orderID": "T202306146w273885549",
+          "buySell": "B",
+          "price": 1000,
+          "quantity": 100,
+          "filledQty": 0,
+          "orderStatus": "RJ",
+          "marketID": "VNFE",
+          "inputTime": "1686730747945",
+          "modifiedTime": "1686730747945",
+          "instrumentID": "VN30F2306",
+          "orderType": "LO",
+          "cancelQty": 0,
+          "avgPrice": 0,
+          "isForcesell": "F",
+          "isShortsell": "F",
+          "rejectReason": "Invalid market status",
+          "lastErrorEvent": null
+        }
+      ]
+    }
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/Trading/auditOrderBook"
       method: GET
+      params:
+        - name: account
+          value: "0901358"
+          type: query
     response:
       status: 200
       statusText: OK

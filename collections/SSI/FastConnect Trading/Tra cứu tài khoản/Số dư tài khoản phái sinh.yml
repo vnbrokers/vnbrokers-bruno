@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/Trading/derivAcctBal?account={{account_8}}"
+  url: "{{baseUrl}}/api/v2/Trading/derivAcctBal"
   params:
     - name: account
       value: "{{account_8}}"
@@ -18,12 +18,125 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET  derivativeAccountBalance
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/Trading/derivAcctBal
+  ```
+
+  Kiểm tra số dư tiền tài khoản phái sinh.
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản phái sinh muốn truy vấn |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | data | list | List data |
+  | account | string | Số tài khoản phái sinh |
+  | accountbalance | number | Tổng số dư tiền |
+  | fee | number | Phí |
+  | commission | number | Thuế |
+  | interest | number | Lãi |
+  | Loan | number | Nợ |
+  | deliveryamount | number | Giá trị chuyển giao |
+  | floatingpl | number | Lãi lỗ tạm tính |
+  | totalpl | number | Lãi lỗ vị thế |
+  | marginable | number | Số dư tối thiếu tiền |
+  | depositable | number | Tiền có thể ký quỹ |
+  | rccall | number |  |
+  | withdrawable | number | Tiền có thể rút |
+  | noncashdrawablerccall | number | Giá trị chứng khoán có thể rút |
+  | internalassets | list | Tài sản nội bộ bao gồm:CashValidnoncashtotalvalue:maxvalidnoncashcashwithdrawableEe |
+  | exchangeassets | list | Tài sản ký quỹ bao gồm:CashValidnoncashtotalvalue:maxvalidnoncashcashwithdrawableEe |
+  | internalmargin | list | Margin nội bộ bao gồm:initialmargindeliverymarginmarginreqaccountratiousedlimitwarninglevel1usedlimitwarninglevel2usedlimitwarninglevel3margincall |
+  | exchangemargin | list | Margin ký quỹ bao gồm:marginreqaccountratiousedlimitwarninglevel1usedlimitwarninglevel2usedlimitwarninglevel3margincall |
+  | nav | number | Giá trị tài sản ròng |
+  | origMarginRatio | number | Tỷ lệ ký quỹ ban đầu |
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  {
+      account: "0901358",
+  }
+  Output:
+  {
+  message: "Success",
+  status: 200,
+  data: {
+  account: "0901358",
+  accountBalance: 11166309263,
+  fee: 0,
+  commission: 0,
+  interest: 1514965,
+  loan: 0,
+  deliveryAmount: 0,
+  floatingPL: 0,
+  totalPL: 0,
+  marginable: 0,
+  depositable: 1148597520,
+  rcCall: 0,
+  withdrawable: 10912447363,
+  nonCashDrawableRCCall: 0,
+  internalAssets: {
+  cash: 1165730020,
+  validNonCash: 0,
+  totalValue: 11166309263,
+  maxValidNonCash: 0,
+  cashWithdrawable: 1148597520,
+  ee: 8197059272
+          },
+  exchangeAssets: {
+  cash: 10000579243,
+  validNonCash: 0,
+  totalValue: 10000579243,
+  maxValidNonCash: 0,
+  cashWithdrawable: 9763849843,
+  ee: 7322887382
+           },
+          internalMargin: {
+  initialMargin: 172660800,
+  deliveryMargin: 0,
+  marginReq: 172660800,
+  accountRatio: 1.5462656096416592,
+  usedLimitWarningLevel1: 75,
+  usedLimitWarningLevel2: 85,
+  usedLimitWarningLevel3: 90,
+  marginCall: 0
+          },
+        exchangeMargin: {
+  marginReq: 172660800,
+  accountRatio: 1.7265079932330476,
+  usedLimitWarningLevel1: 75,
+  usedLimitWarningLevel2: 85,
+  usedLimitWarningLevel3: 90,
+  marginCall: 0
+          }
+       }
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/Trading/derivAcctBal"
       method: GET
+      params:
+        - name: account
+          value: "0901358"
+          type: query
     response:
       status: 200
       statusText: OK

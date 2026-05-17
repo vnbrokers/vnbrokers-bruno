@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/ors/exercisableQuantity?account={{account}}&instrumentID={{instrumentID}}"
+  url: "{{baseUrl}}/api/v2/ors/exercisableQuantity"
   params:
     - name: account
       value: "{{account}}"
@@ -21,12 +21,89 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET  exercisableQuantity
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/ors/exercisableQuantity
+  ```
+
+  Truy vấn số lượng chứng khoán có thể thực hiện đăng ký quyền
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản nguồn truy vấn |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Mô tả msg call API |
+  | status | number | Trạng thái |
+  | data | list | Thông tn dữ liệu trả ra |
+  | account | string | Số tài khoản |
+  | exercisableQuantities | list | Danh sách số lượng chứng khoán có thể thực hiện |
+  | entitlementID | string | Mã quyền |
+  | instrumentID | string | Mã chứng khoán |
+  | subscriptionPrice | number | Giá mua |
+  | executedRateFrom | number | Tỉ lệ từ |
+  | subscriptionPeriodFrom | string | Ngày bắt đầu đăng ký quyềnĐịnh dạng: dd/mm/yyyy |
+  | subscriptionPeriodTo | string | Hạn đăng kýĐịnh dạng: dd/mm/yyyy |
+  | exerciseableQuantity | number | Số chứng khoán hưởng quyền |
+  | exerciseableReceiveQuantity | number | Số chứng khoán còn được mua |
+  | exercisedReceiveQuantity | number | Số chứng khoán đã đăng ký mua |
+  | executedRateTo | number | Ngày đăng ký từĐịnh dạng: dd/mm/yyyy |
+  | exercisedQuantity | number | Số lượng thực hiện |
+  | payableDate | string | Ngày dự kiến thanh toánĐịnh dạng: dd/mm/yyyy |
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  account: 0901351
+  Output:
+  {
+    "message": "Success",
+    "status": 200,
+    "data": {
+      "account": "0901351",
+      "exercisableQuantities": [
+        {
+          "entitlementID": "913279",
+          "instrumentID": "HCB",
+          "subscriptionPrice": 10000,
+          "executedRateFrom": 1,
+          "subscriptionPeriodFrom": "03/10/2022",
+          "subscriptionPeriodTo": "03/10/2023",
+          "exerciseableQuantity": 0,
+          "exerciseableReceiveQuantity": 0,
+          "exercisedReceiveQuantity": 0,
+          "executedRateTo": 1,
+          "exercisedQuantity": 0,
+          "payableDate": null
+        }
+        ]
+    }
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/ors/exercisableQuantity"
       method: GET
+      params:
+        - name: account
+          value: "0901358"
+          type: query
+        - name: instrumentID
+          value: "SSI"
+          type: query
     response:
       status: 200
       statusText: OK

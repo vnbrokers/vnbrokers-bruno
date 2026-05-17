@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/ors/dividend?account={{account}}"
+  url: "{{baseUrl}}/api/v2/ors/dividend"
   params:
     - name: account
       value: "{{account}}"
@@ -18,12 +18,99 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET  dividend
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/ors/dividend
+  ```
+
+  Truy vấn thông tin cổ tức bằng tiền, Chứng khoán mà khách hàng được nhận (không phải đăng ký)
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản nguồn truy vấn |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Mô tả msg call API |
+  | status | number | Trạng thái |
+  | data | list | Thông tn dữ liệu trả ra |
+  | account | string | Số tài khoản |
+  | dividends | list | Danh sách cổ tức |
+  | stockDividend | string | Loại hưởng quyền bao gồm: - STOCK DIVIDEND- CASH DIVIDEND- BONUS ISSUE- EXERCISE CW - EXERCISE RIGHTS |
+  | instrumentID | string | Mã chứng khoán |
+  | quantity | number | Số lượng chứng khoán hưởng quyền |
+  | executedRate | string | Tỉ lệ |
+  | closeDate | string | Ngày chốt quyềnĐịnh dạng: dd/mm/yyyy |
+  | paidDate | string | Ngày thực hiệnĐịnh dạng: dd/mm/yyyy |
+  | amount | number | Số tiền nhận được |
+  | status | string | Tình trạng |
+  | receivedQuantity | number | Số chứng khoán nhận được |
+  | issueInstrument | string | Mã chứng khoán được nhận |
+  | distributedFlag | string | Cờ phân bổ |
+  | payableDate | string | Ngày dự kiến Định dạng: dd/mm/yyyy |
+  | subscriptionPrice | number | Giá đăng ký |
+  | subscriptionAmount | number | Số tiền đăng ký |
+  | subscriptionQuantity | number | Khối lượng đăng ký |
+  | subscriptionPeriodFrom | string | Ngày đăng ký từĐịnh dạng: dd/mm/yyyy |
+  | subscriptionPeriodTo | string | Ngày đăng ký đến Định dạng: dd/mm/yyyy |
+  | entitlementID | string | Mã sự kiện quyền |
+  | exchangeID | string | Mã sàn giao dịch (HOSE/HNX/UPCOM) |
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  account: 0901351
+  Output:
+  {
+    "message": "Success",
+    "status": 200,
+    "data": {
+      "account": "0901351",
+      "dividends": [
+        {
+          "stockDividend": "STOCK DIVIDEND",
+          "instrumentID": "SSI",
+          "quantity": 49500,
+          "executedRate": "100:15",
+          "closeDate": "05/10/2020",
+          "paidDate": "07/10/2020",
+          "amount": 0,
+          "status": "A",
+          "receivedQuantity": 7425,
+          "issueInstrument": "SSI",
+          "distributedFlag": "N",
+          "payableDate": null,
+          "subscriptionPrice": 0,
+          "subscriptionAmount": 0,
+          "subscriptionQuantity": 0,
+          "subscriptionPeriodFrom": null,
+          "subscriptionPeriodTo": null,
+          "entitlementID": null
+        }
+        ]
+    }
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/ors/dividend"
       method: GET
+      params:
+        - name: account
+          value: "0901358"
+          type: query
     response:
       status: 200
       statusText: OK

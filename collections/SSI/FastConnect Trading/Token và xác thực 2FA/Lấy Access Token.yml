@@ -35,6 +35,77 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### POST  AccessToken
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/Trading/AccessToken
+  ```
+
+  Dùng để tạo access token truy cập vào các api của FC Trading.
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | consumerID | string | Yes | ConsumerID trong thông tin kết nối |
+  | consumerSecret | string | Yes | ConsumerSecret trong thông tin kết nối |
+  | code | string | No | Mã xác thực khi thực hiện giao dịch, nếu isSave = true thì bắt buộc truyền |
+  | TwoFactorType | string | Yes | Loại xác thực giao dịch của tài khoản, hỗ trợ type = 0 (PIN), type = 1 (OTP) |
+  | isSave | boolean | Yes | Lưu code khi giao dịch có các giá trị: true (hệ thống sẽ lưu PIN/OTP cho đến khi hết hiệu lực), false (các giao dịch lệnh đều cần truyền code) |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | data | list | List data |
+  | accessToken | string | Token kết nối API |
+
+  **Ví dụ**
+
+  * Trường hợp thành công
+
+  ```json
+  Input:
+  {
+    consumerID: "38f5fdfa56b44d5ab8b95895eb588e99",
+    consumerSecret: "6d61bffefc6540fc837c71afd2ca****",
+    twoFactorType: 1,
+    code: "123456789",
+    isSave: false
+  }
+  Output:
+  {
+      message: "Success",
+      status: 200,
+      data: {
+          "accessToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6Ikp****”
+  }
+  ```
+
+  * Trường hợp lỗi
+
+  ```json
+  Input:
+  {
+    consumerID: "38f5fdfa56b44d5ab8b95895eb588e99",
+    consumerSecret: "6d61bffefc6540fc837c71afd2ca****",
+    twoFactorType: 0,
+    code: "123456789",
+    isSave: true
+  }
+  Output:
+  {
+  message: "Key does not exist.",
+  status: 400,
+  data: null
+   }
+  ```
+
 examples:
   - name: 200 Response
     description: Success

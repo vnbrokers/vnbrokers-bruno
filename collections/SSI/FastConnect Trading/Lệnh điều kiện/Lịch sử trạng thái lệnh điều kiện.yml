@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/fco/statusHistory?fcoId={{fcoId}}&pageIndex={{pageIndex}}&pageSize={{pageSize}}"
+  url: "{{baseUrl}}/api/v2/fco/statusHistory"
   headers:
     - name: User-Agent
       value: "{{userAgent}}"
@@ -27,12 +27,132 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET statusHistory
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/fco/statusHistory
+  ```
+
+  Uses: Lấy danh sách trạng thái của lệnh điều kiện
+
+  Authen: Bearer token
+
+  Header: "Content-Type":"application/json" and "User-Agent":"fctrading application  for customer 123456"
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Trường dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | fcoid | string | Y | ID của lệnh điều kiện |
+  | pageIndex | Number | N | Trang muốn truy vấn. Mặc định là 1 |
+  | pageSize | Number | N | Kích cỡ của trang truy vấn. Mặc định là 20api/v2/fco/orderbook?fcoid= {fcoid}&pageIndex={page}&pageSize={size} |
+
+  #### Output
+
+  | Tên trường | Kiểu dữ liệu | Mô tả |
+  | --- | --- | --- |
+  | status | string | Tham chiếu sang: FCO status code |
+  | message | string | Thông báo lỗi |
+  | data | json | {mảng các status của fcoId tương ứng} |
+  | state | string | Trạng thái lệnh |
+  | time | string | Thời gian đổi trạng thái |
+  | code | number | Mã thông báo liên quan đổi trạng thái |
+  | detail | string | Thông báo chi tiết về đổi trạng thái |
+
+  **Ví dụ**
+
+  * Trường hợp thành công
+
+  ```json
+  Input:
+  api/v2/fco/statushistory?fcoId=9d496582-edf5-428e-8e85-c4c56f57bc96
+  &pageIndex=1&pageSize=50
+
+  Output:
+  {
+      "message": "Success",
+      "status": 200,
+      "data": [
+          {
+              "state": "INIT",
+              "time": "03/07/2025 09:13:41",
+              "code": 200,
+              "detail": "Success"
+          },
+          {
+              "state": "WAIT",
+              "time": "03/07/2025 09:13:41",
+              "code": 200,
+              "detail": "state is WAIT"
+          },
+          {
+              "state": "WC",
+              "time": "03/07/2025 09:44:28",
+              "code": 200,
+              "detail": "Success"
+          },
+          {
+              "state": "WC",
+              "time": "03/07/2025 09:44:30",
+              "code": 200,
+              "detail": "state is WC"
+          },
+          {
+              "state": "TER",
+              "time": "03/07/2025 09:44:32",
+              "code": 10001,
+              "detail": "Deactivated conditional order as the order has been cancelled by customer"
+          }
+      ]
+  }
+  ```
+
+  * Trường hợp lỗi
+
+  ```json
+  {
+      "message": "No active account",
+      "status": 40828
+  }
+
+  ```
+
+  ---
+
+  # Agent Instructions: Querying This Documentation
+
+  If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
+
+  Perform an HTTP GET request on the current page URL with the `ask` query parameter:
+
+  ```
+  GET https://guide.ssi.com.vn/ssi-products/tieng-viet/fastconnect-trading/danh-sach-cac-api.md?ask=<question>
+  ```
+
+  The question should be specific, self-contained, and written in natural language.
+  The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
+
+  Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/fco/statusHistory"
       method: GET
+      params:
+        - name: fcoId
+          value: "FCO001"
+          type: query
+        - name: pageIndex
+          value: "1"
+          type: query
+        - name: pageSize
+          value: "10"
+          type: query
     response:
       status: 200
       statusText: OK

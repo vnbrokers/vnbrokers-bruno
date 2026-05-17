@@ -24,6 +24,83 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### POST  transfer
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/stock/transfer
+  ```
+
+  Tạo giao dịch chuyển chứng khoán có trong danh mục giữa các tài khoản cơ sở
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản nguồn |
+  | beneficiaryAccount | string | Yes | Số tài khoản nhận |
+  | exchangeID | string | Yes | Mã sàn |
+  | instrumentID | string | Yes | Mã chứng khoán |
+  | quantity | number | Yes | Khối lượng |
+  | code | string | No | isSave = false -> Điền PIN/ OTP tùy phương thức xác thựcisSave = true -> Không cần điền |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Mô tả msg call API |
+  | status | number | Trạng thái |
+  | data | list | Thông tn dữ liệu trả ra |
+  | account | string | Số tài khoản |
+  | transactionID | string | Số hiệu giao dịch |
+
+  **Ví dụ**
+
+  * Thành công
+
+  ```json
+  Input:
+  {
+    "account": "0901351",
+    "beneficiaryAccount": "0901356",
+    "exchangeID": "HOSE",
+    "instrumentID": "SSI",
+    "quantity": 100,
+    "code": "string"
+  }
+  Output:
+  {
+    "message": "Success",
+    "status": 200,
+    "data": {
+      "account": "0901351",
+      "transactionID": "462764"
+    }
+  }
+  ```
+
+  * Lỗi
+
+  ```json
+  Input:
+  {
+    "account": "0901351",
+    "beneficiaryAccount": "0901356",
+    "exchangeID": "HOSE",
+    "instrumentID": "SSI",
+    "quantity": 100,
+    "code": "string"
+  }
+  Output:
+  {
+    "message": "Account 0901352 is not exist",
+    "status": 400,
+    "data": null
+  }
+  ```
+
 examples:
   - name: 200 Response
     description: Success

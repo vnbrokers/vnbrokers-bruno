@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/api/v2/Trading/orderHistory?account={{account}}&startDate={{startDate}}&endDate={{endDate}}"
+  url: "{{baseUrl}}/api/v2/Trading/orderHistory"
   params:
     - name: account
       value: "{{account}}"
@@ -33,12 +33,107 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+docs: |-
+  ### GET  orderHistory
+
+  ```
+  https://fc-tradeapi.ssi.com.vn/api/v2/Trading/orderHistory
+  ```
+
+  Truy vấn lịch sử lệnh
+
+  **Thông tin chi tiết**
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | account | string | Yes | Số tài khoản muốn truy vấn bao gồm Cơ sở và Phái sinh |
+  | startDate | date | Yes | Ngày bắt đầu tìm kiếmĐịnh dạng dd/mm/yyyy |
+  | endDate | date | Yes | Ngày kết thúc tìm kiếmĐịnh dạng dd/mm/yyyy |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | data | list | List data |
+  | orderHistories | list | Danh sách lịch sử lệnh |
+  | uniqueID | string | ID lệnh của bên gửi |
+  | orderID | string | ID lệnh |
+  | buySell | string | Bên mua/ bán |
+  | price | number | Giá đặt |
+  | quantity | number | Khối lượng đặt |
+  | filledQty | string | Khối lượng khớp |
+  | orderStatus | string | Trạng thái lệnh |
+  | marketID | string | Mã sàn |
+  | inputTime | string | Thời gian đặt |
+  | modifiedTime | string | Thời gian cập nhật |
+  | instrumentID | string | Mã chứng khoán |
+  | orderType | string | Loại lệnh |
+  | cancelQty | string | Khối lượng hủy |
+  | avgPrice | string | Giá khớp trung bình |
+  | isForcesell | boolean |  |
+  | isShortsell | boolean |  |
+  | rejectReason | string | Lý do từ chối |
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  {
+  account: "0901358",
+  startDate: “18/11/2020”,
+  endDate: “18/11/2020”
+  }
+  Output:
+  {
+      message: "Success",
+      status: 200,
+      data: {
+          orderHistories: [
+        {
+                  uniqueID: null,
+                  orderID: "12626539",
+                  buySell: "B",
+                  price: 800.0,
+                  quantity: 10,
+                  filledQty: 0,
+                  orderStatus: "RJ",
+                  marketID: "VNFE",
+                  inputTime: "1603157594668",
+                  modifiedTime: "1603157594668",
+                  instrumentID: "VN30F2012",
+                  orderType: "LO",
+                  cancelQty: 0,
+                  avgPrice: 0.0,
+                  isForcesell: null,
+                  isShortsell: null
+              }
+  ],
+          account: "0901358"
+  **    }
+  ** }
+
+  ```
+
 examples:
   - name: 200 Response
     description: Success
     request:
       url: "{{baseUrl}}/api/v2/Trading/orderHistory"
       method: GET
+      params:
+        - name: account
+          value: "0901358"
+          type: query
+        - name: startDate
+          value: "01/08/2023"
+          type: query
+        - name: endDate
+          value: "31/08/2023"
+          type: query
     response:
       status: 200
       statusText: OK
