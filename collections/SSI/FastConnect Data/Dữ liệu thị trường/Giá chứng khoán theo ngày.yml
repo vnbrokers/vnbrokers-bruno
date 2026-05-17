@@ -5,12 +5,11 @@ info:
 
 http:
   method: GET
-  url: "{{fcDataBaseUrl}}/api/v2/Market/DailyStockPrice"
+  url: "{{fcDataBaseUrl}}/api/v2/Market/DailyStockPrice?symbol={{symbol}}&fromDate={{fromDate}}&toDate={{toDate}}&pageIndex={{pageIndex}}&pageSize={{pageSize}}&market={{market}}"
   params:
     - name: symbol
       value: "{{symbol}}"
       type: query
-      disabled: true
     - name: fromDate
       value: "{{fromDate}}"
       type: query
@@ -26,7 +25,6 @@ http:
     - name: market
       value: "{{market}}"
       type: query
-      disabled: true
   auth: inherit
 
 settings:
@@ -41,6 +39,25 @@ examples:
     request:
       url: "{{fcDataBaseUrl}}/api/v2/Market/DailyStockPrice"
       method: GET
+      params:
+        - name: symbol
+          value: SSI
+          type: query
+        - name: market
+          value: HOSE
+          type: query
+        - name: fromDate
+          value: 19/07/2023
+          type: query
+        - name: toDate
+          value: 19/07/2023
+          type: query
+        - name: pageIndex
+          value: "1"
+          type: query
+        - name: pageSize
+          value: "10"
+          type: query
     response:
       status: 200
       statusText: OK
@@ -53,24 +70,74 @@ examples:
           {
             "data": [
               {
-                "Tradingdate": "10/08/2023",
-                "Symbol": "SSI",
-                "Pricechange": "-500",
-                "Perpricechange": "-1.75",
-                "Ceilingprice": "30600",
-                "Floorprice": "26600",
-                "Refprice": "28600",
-                "Openprice": "28600",
-                "Highestprice": "28850",
-                "Lowestprice": "28100",
-                "Closeprice": "28100",
-                "Averageprice": "28366.91",
-                "Totalmatchvol": "23382100",
-                "Totalmatchval": "663258204999.9850",
-                "Time": "00:00:00"
+                "TradingDate": "19/07/2023",
+                "PriceChange": "-150",
+                "PerPriceChange": "-0.70",
+                "CeilingPrice": "21550",
+                "FloorPrice": "18750",
+                "RefPrice": "20150",
+                "OpenPrice": "20950",
+                "HighestPrice": "20950",
+                "LowestPrice": "20000",
+                "ClosePrice": "20000",
+                "AveragePrice": "20118",
+                "ClosePriceAdjusted": "17392",
+                "TotalMatchVol": "18900",
+                "TotalMatchVal": "380230000",
+                "TotalDealVal": "0",
+                "TotalDealVol": "0",
+                "ForeignBuyVolTotal": "0",
+                "ForeignCurrentRoom": "0",
+                "ForeignSellVolTotal": "0",
+                "ForeignBuyValTotal": "0",
+                "ForeignSellValTotal": "0",
+                "TotalBuyTrade": "0",
+                "TotalBuyTradeVol": "0",
+                "TotalSellTrade": "0",
+                "TotalSellTradeVol": "0",
+                "NetBuySellVol": "0",
+                "NetBuySellVal": "0",
+                "TotalTradedVol": "18900",
+                "TotalTradedValue": "380230000",
+                "Symbol": "HUB",
+                "Time": null
               }
             ],
             "message": "Success",
             "status": "Success",
             "totalRecord": 1
           }
+
+docs: |-
+  ### Giá chứng khoán theo ngày
+
+  Dùng để lấy thông tin giao dịch của mã chứng khoán theo ngày.
+
+  `GET Market/DailyStockPrice`
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | symbol | string | No | Mã chứng khoán |
+  | fromDate | string | Yes | Nếu không chỉ định, lấy ngày hiện tại. Định dạng dd/mm/yyyy |
+  | toDate | string | Yes | Nếu không chỉ định, lấy ngày hiện tại. Định dạng dd/mm/yyyy |
+  | pageIndex | integer | Yes | From 1 to 10. Mặc định 1 |
+  | pageSize | integer | Yes | 10; 20; 50; 100; 1000. Mặc định 10 |
+  | market | string | No | Sàn: HOSE\|HNX\|UPCOM\|DER\|BOND |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | totalRecord | number | Tổng số bản ghi trả ra |
+  | data | list | List data |
+  | TradingDate | string | Ngày giao dịch |
+  | Symbol | string | Mã chứng khoán |
+  | PriceChange | string | Giá thay đổi |
+  | PerPriceChange | string | % giá thay đổi |
+  | OpenPrice/HighestPrice/LowestPrice/ClosePrice | string | Giá giao dịch |
+  | TotalMatchVol | string | Tổng khối lượng khớp |
+  | TotalMatchVal | string | Total match value |

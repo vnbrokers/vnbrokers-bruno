@@ -5,16 +5,14 @@ info:
 
 http:
   method: GET
-  url: "{{fcDataBaseUrl}}/api/v2/Market/SecuritiesDetails"
+  url: "{{fcDataBaseUrl}}/api/v2/Market/SecuritiesDetails?market={{market}}&symbol={{symbol}}&pageIndex={{pageIndex}}&pageSize={{pageSize}}"
   params:
     - name: market
       value: "{{market}}"
       type: query
-      disabled: true
     - name: symbol
       value: "{{symbol}}"
       type: query
-      disabled: true
     - name: pageIndex
       value: "{{pageIndex}}"
       type: query
@@ -35,6 +33,19 @@ examples:
     request:
       url: "{{fcDataBaseUrl}}/api/v2/Market/SecuritiesDetails"
       method: GET
+      params:
+        - name: market
+          value: HOSE
+          type: query
+        - name: symbol
+          value: SSI
+          type: query
+        - name: pageIndex
+          value: "1"
+          type: query
+        - name: pageSize
+          value: "10"
+          type: query
     response:
       status: 200
       statusText: OK
@@ -81,3 +92,31 @@ examples:
             "status": "Success",
             "totalRecord": 1
           }
+
+docs: |-
+  ### Chi tiết mã chứng khoán
+
+  Dùng để lấy thông tin chi tiết của mã chứng khoán.
+
+  `GET Market/SecuritiesDetails`
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | market | string | No | HOSE \| HNX \| UPCOM \| DER. Nếu không chỉ định trả về tất cả thị trường |
+  | symbol | string | No | Nếu không lựa chọn hiển thị tất cả mã chứng khoán |
+  | pageIndex | integer | Yes | From 1 to 10. Mặc định 1 |
+  | pageSize | integer | Yes | 10; 20; 50; 100; 1000. Mặc định 10 |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | totalRecord | number | Tổng số bản ghi trả ra |
+  | data | list | List data |
+  | RType | string | y |
+  | ReportDate | number | Ngày báo cáo, định dạng dd/mm/yyyy |
+  | RepeatedInfo | list | List thông tin chi tiết mã chứng khoán |

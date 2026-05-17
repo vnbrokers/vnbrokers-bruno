@@ -40,6 +40,22 @@ examples:
     request:
       url: "{{fcDataBaseUrl}}/api/v2/Market/DailyOhlc"
       method: GET
+      params:
+        - name: symbol
+          value: SSI
+          type: query
+        - name: fromDate
+          value: 10/08/2023
+          type: query
+        - name: toDate
+          value: 13/08/2023
+          type: query
+        - name: pageIndex
+          value: "1"
+          type: query
+        - name: pageSize
+          value: "10"
+          type: query
     response:
       status: 200
       statusText: OK
@@ -62,9 +78,54 @@ examples:
                 "Close": "28100",
                 "Volume": "23382100",
                 "Value": "663258204999.9850"
+              },
+              {
+                "Symbol": "SSI",
+                "Market": "HOSE",
+                "TradingDate": "11/08/2023",
+                "Time": null,
+                "Open": "28250",
+                "High": "28300",
+                "Low": "27650",
+                "Close": "28150",
+                "Volume": "27536000",
+                "Value": "769411290000.0090"
               }
             ],
             "message": "Success",
             "status": "Success",
-            "totalRecord": 1
+            "totalRecord": 2
           }
+
+docs: |-
+  ### OHLC theo ngày
+
+  Dùng để lấy thông tin open, high, low, close, volume, value của mã chứng khoán theo ngày.
+
+  `GET Market/DailyOhlc`
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | symbol | string | No | Mã của chứng khoán, mã chỉ số, chứng khoán phái sinh |
+  | fromDate | string | Yes | Nếu không chỉ định, lấy ngày hiện tại. Định dạng dd/mm/yyyy |
+  | toDate | string | Yes | Nếu không chỉ định, lấy ngày hiện tại. Định dạng dd/mm/yyyy |
+  | pageIndex | integer | Yes | From 1 to 10. Mặc định 1 |
+  | pageSize | integer | Yes | 10; 20; 50; 100; 1000. Mặc định 10 |
+  | ascending | boolean | No | true/false |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | totalRecord | number | Tổng số bản ghi trả ra |
+  | data | list | List data |
+  | Symbol | string | Mã chứng khoán |
+  | Market | string | Sàn: HOSE \| HNX \| UPCOM |
+  | TradingDate | date | Ngày giao dịch |
+  | Open/High/Low/Close | number | Giá OHLC |
+  | Volume | number | Tổng khối lượng khớp bình thường |
+  | Value | number | Tổng giá trị phù hợp bình thường |

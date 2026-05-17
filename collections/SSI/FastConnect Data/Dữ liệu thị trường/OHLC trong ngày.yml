@@ -32,13 +32,6 @@ http:
       disabled: true
   auth: inherit
 
-runtime:
-  variables:
-    - name: fromDate
-      value: 14/05/2026
-    - name: toDate
-      value: 14/05/2026
-
 settings:
   encodeUrl: true
   timeout: 0
@@ -51,6 +44,22 @@ examples:
     request:
       url: "{{fcDataBaseUrl}}/api/v2/Market/IntradayOhlc"
       method: GET
+      params:
+        - name: symbol
+          value: SSI
+          type: query
+        - name: fromDate
+          value: 14/08/2023
+          type: query
+        - name: toDate
+          value: 14/08/2023
+          type: query
+        - name: pageIndex
+          value: "1"
+          type: query
+        - name: pageSize
+          value: "10"
+          type: query
     response:
       status: 200
       statusText: OK
@@ -64,18 +73,62 @@ examples:
             "data": [
               {
                 "Symbol": "SSI",
-                "Market": "HOSE",
-                "TradingDate": "10/08/2023",
-                "Time": "09:15:00",
-                "Open": "28600",
-                "High": "28850",
-                "Low": "28100",
-                "Close": "28100",
-                "Volume": "23382100",
-                "Value": "663258204999.9850"
+                "Value": "29150",
+                "TradingDate": "14/08/2023",
+                "Time": "14:45:04",
+                "Open": "29150",
+                "High": "29150",
+                "Low": "29150",
+                "Close": "29150",
+                "Volume": "529200"
+              },
+              {
+                "Symbol": "SSI",
+                "Value": "29100",
+                "TradingDate": "14/08/2023",
+                "Time": "14:29:59",
+                "Open": "29050",
+                "High": "29150",
+                "Low": "29050",
+                "Close": "29100",
+                "Volume": "166400"
               }
             ],
             "message": "Success",
             "status": "Success",
-            "totalRecord": 1
+            "totalRecord": 2
           }
+
+docs: |-
+  ### OHLC trong ngày
+
+  Dùng để lấy thông tin open, high, low, close, volume, value của mã chứng khoán theo từng tick data.
+
+  `GET Market/IntradayOhlc`
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | symbol | string | No | Mã của chứng khoán, mã chỉ số, chứng khoán phái sinh |
+  | fromDate | string | Yes | Nếu không chỉ định, lấy ngày hiện tại. Định dạng dd/mm/yyyy |
+  | toDate | string | Yes | Nếu không chỉ định, lấy ngày hiện tại. Định dạng dd/mm/yyyy |
+  | pageIndex | integer | Yes | From 1 to 10. Mặc định 1 |
+  | pageSize | integer | Yes | 10; 20; 50; 100; 1000. Mặc định 10 |
+  | ascending | boolean | No | true/false |
+  | resollution | integer | No | Mặc định 1 minute |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | totalRecord | number | Tổng số bản ghi trả ra |
+  | data | list | List data |
+  | Symbol | string | Mã chứng khoán |
+  | TradingDate | date | Ngày giao dịch |
+  | Time | timestamp | Thời gian |
+  | Open/High/Low/Close | number | Giá OHLC |
+  | Volume | number | Tổng khối lượng khớp bình thường |
+  | Value | number | Tổng giá trị phù hợp bình thường |

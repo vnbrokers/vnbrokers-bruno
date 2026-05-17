@@ -30,6 +30,16 @@ examples:
     request:
       url: "{{fcDataBaseUrl}}/api/v2/Market/Securities"
       method: GET
+      params:
+        - name: market
+          value: HOSE
+          type: query
+        - name: pageIndex
+          value: "1"
+          type: query
+        - name: pageSize
+          value: "10"
+          type: query
     response:
       status: 200
       statusText: OK
@@ -58,3 +68,31 @@ examples:
             "status": "Success",
             "totalRecord": 2
           }
+
+docs: |-
+  ### Danh sách mã chứng khoán
+
+  Dùng để lấy danh sách các mã chứng khoán theo sàn giao dịch.
+
+  `GET Market/Securities`
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | market | string | No | HOSE \| HNX \| UPCOM \| DER. Nếu không chỉ định trả về tất cả thị trường |
+  | pageIndex | integer | Yes | From 1 to 10. Mặc định 1 |
+  | pageSize | integer | Yes | 10; 20; 50; 100; 1000. Mặc định 10 |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | totalRecord | number | Tổng số bản ghi trả ra |
+  | data | list | List data |
+  | Market | string | HOSE \| HNX \| UPCOM \| DER |
+  | Symbol | string | Mã chứng khoán |
+  | StockName | string | Tên công ty chứng khoán |
+  | StockEnName | string | Tên tiếng anh công ty chứng khoán |

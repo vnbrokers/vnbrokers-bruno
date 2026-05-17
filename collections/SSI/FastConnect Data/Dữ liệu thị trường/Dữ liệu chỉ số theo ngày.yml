@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{fcDataBaseUrl}}/api/v2/Market/DailyIndex"
+  url: "{{fcDataBaseUrl}}/api/v2/Market/DailyIndex?indexId={{indexId}}&fromDate={{fromDate}}&toDate={{toDate}}&pageIndex={{pageIndex}}&pageSize={{pageSize}}"
   params:
     - name: indexId
       value: "{{indexId}}"
@@ -40,6 +40,22 @@ examples:
     request:
       url: "{{fcDataBaseUrl}}/api/v2/Market/DailyIndex"
       method: GET
+      params:
+        - name: indexId
+          value: HNX30
+          type: query
+        - name: fromDate
+          value: 14/08/2023
+          type: query
+        - name: toDate
+          value: 14/08/2023
+          type: query
+        - name: pageIndex
+          value: "1"
+          type: query
+        - name: pageSize
+          value: "10"
+          type: query
     response:
       status: 200
       statusText: OK
@@ -52,26 +68,63 @@ examples:
           {
             "data": [
               {
-                "Indexcode": "VNINDEX",
-                "IndexValue": "1220.61",
-                "TradingDate": "10/08/2023",
+                "IndexId": "HNX30",
+                "IndexValue": "510.56",
+                "TradingDate": "14/08/2023",
                 "Time": null,
-                "Change": "0.57",
-                "RatioChange": "0.05",
-                "TotalTrade": "587266",
-                "Totalmatchvol": "851025500",
-                "Totalmatchval": "19053260000000",
-                "IndexName": "VNINDEX",
-                "Advances": "223",
-                "Nochanges": "83",
-                "Declines": "235",
-                "Ceiling": "13",
-                "Floor": "7",
-                "Market": "HOSE",
-                "Exchange": "HOSE"
+                "Change": "19.09",
+                "RatioChange": "3.89",
+                "TotalTrade": "0",
+                "TotalMatchVol": "84693600",
+                "TotalMatchVal": "1836008470000",
+                "TypeIndex": null,
+                "IndexName": "HNX30",
+                "Advances": "21",
+                "NoChanges": "4",
+                "Declines": "5",
+                "Ceilings": "2",
+                "Floors": "0",
+                "TotalDealVol": "2504000",
+                "TotalDealVal": "60256000000",
+                "TotalVol": "87197600",
+                "TotalVal": "1896264470000",
+                "TradingSession": "C"
               }
             ],
             "message": "Success",
             "status": "Success",
             "totalRecord": 1
           }
+
+docs: |-
+  ### Dữ liệu chỉ số theo ngày
+
+  Dùng để lấy kết quả giao dịch của Index tổng hợp hàng ngày.
+
+  `GET Market/DailyIndex`
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | indexId | string | Yes | Các giá trị hợp lệ có thể được truy vấn bởi api getIndexList |
+  | fromDate | string | Yes | Nếu không chỉ định, lấy ngày hiện tại. Định dạng dd/mm/yyyy |
+  | toDate | string | Yes | Nếu không chỉ định, lấy ngày hiện tại. Định dạng dd/mm/yyyy |
+  | pageIndex | integer | Yes | From 1 to 10. Mặc định 1 |
+  | pageSize | integer | Yes | 10; 20; 50; 100; 1000. Mặc định 10 |
+  | ascending | boolean | No | true/false |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | totalRecord | number | Tổng số bản ghi trả ra |
+  | data | list | List data |
+  | IndexId | string | Index ID |
+  | IndexValue | number | Giá trị của rổ index |
+  | TradingDate | date | Ngày giao dịch |
+  | Change | number | Thay đổi của Index |
+  | RatioChange | number | % thay đổi |
+  | TradingSession | string | Phiên giao dịch |

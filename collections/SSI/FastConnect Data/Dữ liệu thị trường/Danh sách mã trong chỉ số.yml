@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{fcDataBaseUrl}}/api/v2/Market/IndexComponents"
+  url: "{{fcDataBaseUrl}}/api/v2/Market/IndexComponents?indexCode={{indexCode}}&pageIndex={{pageIndex}}&pageSize={{pageSize}}"
   params:
     - name: indexCode
       value: "{{indexCode}}"
@@ -30,6 +30,16 @@ examples:
     request:
       url: "{{fcDataBaseUrl}}/api/v2/Market/IndexComponents"
       method: GET
+      params:
+        - name: indexCode
+          value: VN30
+          type: query
+        - name: pageIndex
+          value: "1"
+          type: query
+        - name: pageSize
+          value: "10"
+          type: query
     response:
       status: 200
       statusText: OK
@@ -62,3 +72,32 @@ examples:
             "status": "Success",
             "totalRecord": 1
           }
+
+docs: |-
+  ### Danh sách mã trong chỉ số
+
+  Dùng để lấy danh sách mã chứng khoán trong rổ chỉ số.
+
+  `GET Market/IndexComponents`
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | indexCode | string | Yes | Nhập mã chỉ số để lấy các cổ phiếu cấu thành |
+  | pageIndex | integer | Yes | From 1 to 10. Mặc định 1 |
+  | pageSize | integer | Yes | 10; 20; 50; 100; 1000. Mặc định 10 |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | totalRecord | number | Tổng số bản ghi trả ra |
+  | data | list | List data |
+  | IndexCode | string | Mã code index |
+  | IndexName | string | Tên index |
+  | Exchange | string | Sàn: HOSE\|HNX |
+  | TotalSymbolNo | number | Tổng số mã chứng khoán thuộc index |
+  | IndexComponent | list | List thông tin |
