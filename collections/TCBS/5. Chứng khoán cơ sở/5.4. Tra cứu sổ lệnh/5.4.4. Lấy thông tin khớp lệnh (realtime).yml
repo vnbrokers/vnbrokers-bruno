@@ -1,15 +1,156 @@
 info:
   name: 5.4.4. Lấy thông tin khớp lệnh (realtime)
-  type: http
+  type: websocket
   seq: 4
   tags:
     - get_order_stock_normal
-http:
-  method: GET
-  url: "{{baseUrl}}/ws/aither"
-  auth: inherit
+
+websocket:
+  url: "{{wsBaseUrl}}/ws/aither"
+  message:
+    type: text
+    data: |
+      authenticate|{{wsJwtToken}}
+
 settings:
-  encodeUrl: true
   timeout: 0
-  followRedirects: true
-  maxRedirects: 5
+  keepAliveInterval: 0
+
+docs: |-
+  ## WebSocket thay đổi thông tin lệnh cơ sở
+
+  ### Kết nối
+
+  ```text
+  wss://openapi.tcbs.com.vn/ws/aither
+  ```
+
+  Trong collection dùng:
+
+  ```text
+  {{wsBaseUrl}}/ws/aither
+  ```
+
+  ### Bước 1: Xác thực
+
+  Message xác thực có format:
+
+  ```text
+  authenticate|base64({"jwt":"xxx"})
+  ```
+
+  Trong đó `xxx` là JWT token lấy từ API `get_token`.
+
+  Request này dùng biến `stockOrderJwtPayloadBase64`, là base64 của JSON:
+
+  ```json
+  {"jwt":"{{accessToken}}"}
+  ```
+
+  Ví dụ message gửi đi:
+
+  ```text
+  authenticate|eyJqd3QiOiJpZ3dmVXE5TTJJcVdWaHJGcll5YkVZS1d4QXhEYll6eHoxUnpPa3AwTDBTOTVsck10ckpEYk1nRnd5ODZyOElyIn0=
+  ```
+
+  Server trả về nếu xác thực thành công:
+
+  ```text
+  authenticate|{"success":true,"error":null}
+  ```
+
+  ### Bước 2: Timeout
+
+  Server gửi cấu hình timeout:
+
+  ```text
+  pingTimeout|7
+  ```
+
+  Sau 7 giây nếu client không ping/pong thì kết nối sẽ bị dừng.
+
+  ### Bước 3: Subscribe topic STOCK_ORDER
+
+  Gửi message:
+
+  ```text
+  subscribe|eyJ0b3BpYyI6IlNUT0NLX09SREVSIn0=
+  ```
+
+  Payload trước khi base64:
+
+  ```json
+  {"topic":"STOCK_ORDER"}
+  ```
+
+  ### Bước 4: Giữ kết nối
+
+  Gửi ping mỗi 2 giây:
+
+  ```text
+  ping|1
+  ```
+
+  ### Message nhận được
+
+  ```text
+  message_proto|STOCK_ORDER|{
+    "object": "order",
+    "accountNo": "0001201435",
+    "orderId": "9202412270000098858",
+    "execType": "NB",
+    "orderQtty": 100.0,
+    "symbol": "LUT",
+    "priceType": "LO",
+    "txTime": "12:04:39",
+    "txDate": "2024-12-27T00:00:00.000+07:00",
+    "expDate": "2024-12-27T00:00:00.000+07:00",
+    "timeType": "T",
+    "orStatus": "8",
+    "limitPrice": 500.0,
+    "remainQtty": 100.0,
+    "via": "O",
+    "quotePrice": 500.0,
+    "tradePlace": "005",
+    "matchType": "N",
+    "isDisposal": "N",
+    "isCancel": "Y",
+    "isAmend": "Y",
+    "userName": "6868",
+    "orsOrderId": "9202412270000098858",
+    "secType": "001",
+    "isFOOrder": "Y",
+    "odTimeStamp": "2024-12-27 12:04:39.373390"
+  }
+  ```
+
+  ### Cấu trúc dữ liệu
+
+  | Tên trường | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | object | string | Loại object |
+  | accountNo | string | Số tiểu khoản |
+  | orderId | string | Số hiệu lệnh |
+  | execType | string | Loại lệnh |
+  | orderQtty | string | Khối lượng đặt |
+  | symbol | string | Mã chứng khoán |
+  | priceType | string | Loại giá |
+  | txTime | string | Giờ đặt lệnh |
+  | txDate | string | Ngày đặt lệnh |
+  | expDate | string | Ngày hết hạn |
+  | timeType | string | T: Trong ngày, G: Nhiều ngày |
+  | orStatus | string | 0: Từ chối, 2: Đã gửi, 3: Đã hủy, 4: Đã khớp, 5: Hết hiệu lực, 8: Chờ gửi, 10: Đã sửa, 11: Đang gửi, 12: Khớp hết, A: Đang sửa, C: Đang hủy, S: Hoàn tất |
+  | limitPrice | string | Giá đặt lệnh |
+  | remainQtty | string | Số lượng còn lại |
+  | via | string | Kênh giao dịch: T: Call margin, M: Tổng đài, O: Online |
+  | quotePrice | string | Giá đặt lệnh |
+  | tradePlace | string | 005: UPCOM, 002: HNX, 001: HOSE, 000: BOND |
+  | matchType | string | P: Thỏa thuận, N: Bình thường |
+  | isDisposal | string | Lệnh bán xử lý |
+  | isCancel | string | Y: Cho phép hủy, N: Không cho phép hủy |
+  | isAmend | string | Y: Cho phép sửa, N: Không cho phép sửa |
+  | userName | string | 6868: Online, 8686: Lệnh điều kiện/icopy |
+  | orsOrderId | string | Số hiệu lệnh |
+  | secType | string | 001: Cổ phiếu thường, 002: Cổ phiếu ưu đãi, 003: Trái phiếu chuyển đổi, 005: Tương lai, 006: Trái phiếu, 007: Chứng chỉ ủy thác, 008: Chứng chỉ quỹ, 009: Giấy chứng nhận TG, 011: Chứng quyền |
+  | isFOOrder | string | Y: Lệnh sinh từ FO, N: Lệnh sinh từ BO |
+  | odTimeStamp | string | Thời gian sinh lệnh |

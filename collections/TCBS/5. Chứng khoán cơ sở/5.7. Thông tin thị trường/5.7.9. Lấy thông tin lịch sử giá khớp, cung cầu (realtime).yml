@@ -1,15 +1,211 @@
 info:
-  name: 5.7.9. Lấy thông tin lịch sử giá khớp, cung cầu (realtime)
-  type: http
+  name: 5.7.9. Lấy thông tin lịch sử giá khớp, cung cầu (realtime)
+  type: websocket
   seq: 9
   tags:
     - market_information_stock_normal
-http:
-  method: GET
-  url: "{{baseUrl}}/ws/ouranos/v1/stream"
-  auth: inherit
+
+websocket:
+  url: "{{wsBaseUrl}}/ws/ouranos/v1/stream"
+  message:
+    type: text
+    data: d|a|||{{wsJwtToken}}
+
 settings:
-  encodeUrl: true
   timeout: 0
-  followRedirects: true
-  maxRedirects: 5
+  keepAliveInterval: 0
+
+docs: |-
+  # WebSocket lịch sử giá, cung cầu
+
+  Tài liệu: `Websocket_lich-su-gia_cung-cau_1.0.0.pdf`
+
+  ## Kết nối
+
+  ```text
+  wss://openapi.tcbs.com.vn/ws/ouranos/v1/stream
+  ```
+
+  Trong collection dùng:
+
+  ```text
+  {{wsBaseUrl}}/ws/ouranos/v1/stream
+  ```
+
+  Dữ liệu được gửi dưới dạng text frame.
+
+  ## Bước 1: Xác thực
+
+  Message xác thực có format:
+
+  ```text
+  d|a|||base64(token_openapi)
+  ```
+
+  Trong đó `token_openapi` là JWT token lấy từ API `get_token`.
+
+  Request này dùng biến `marketDataTokenBase64`, là base64 của raw token `{{accessToken}}`.
+
+  Ví dụ:
+
+  ```text
+  d|a|||aWd3ZlVxOU0ySXFXVmhyRnJZeWJFWUtXeEF4RGJZenh6MVJ6T2twMEwwUzk1bHJNdHJKRGJNZ0Z3eTg2cjhJcg==
+  ```
+
+  Server trả về nếu xác thực thành công:
+
+  ```text
+  d|0|{"success":true,"error":null}
+  ```
+
+  Server trả về nếu xác thực thất bại:
+
+  ```text
+  d|0|{"success":false,"error":{"code":"211110","message":"Invalid JWT"}}
+  ```
+
+  Server gửi cấu hình timeout:
+
+  ```text
+  d|33|15
+  ```
+
+  Sau 15 giây nếu client không ping/pong thì kết nối sẽ bị dừng.
+
+  ## Bước 2: Subscribe
+
+  Đăng ký kết nối:
+
+  ```text
+  d|st|<code1+code2+...>|<ticker1,ticker2,...>
+  ```
+
+  Hủy đăng ký kết nối:
+
+  ```text
+  d|ut|<code1+code2+...>|<ticker1,ticker2,...>
+  ```
+
+  Ví dụ đăng ký lịch sử giá và cung cầu cho `POW,TCB,VIC`:
+
+  ```text
+  d|st|C001+C002S60+C002S900|POW,TCB,VIC
+  ```
+
+  Ví dụ hủy đăng ký:
+
+  ```text
+  d|ut|C001+C002S60+C002S900|POW,TCB,VIC
+  ```
+
+  ## Bước 3: Giữ kết nối
+
+  Gửi ping mỗi 2 giây:
+
+  ```text
+  d|po
+  ```
+
+  ## Topic C001: Lịch sử giá
+
+  Ví dụ message:
+
+  ```text
+  C001|TCB|{
+    "symbol": "TCB",
+    "closePrice": 38600.0,
+    "closeVol": 1000.0,
+    "change": 1100.0,
+    "reference": 37500.0,
+    "totalTrading": 2.42776E7,
+    "totalTradingValue": 9.3340061E11,
+    "timeSec": "1755144180",
+    "action": "SD",
+    "unitTimeFrame": "60",
+    "tradingValue": 3.86E7,
+    "buyUpAcc": 1.51419E7,
+    "sellDownAcc": 8481600.0,
+    "bidPrice": 38600.0,
+    "bidVol": 34100.0,
+    "askPrice": 38650.0,
+    "askVol": 89600.0,
+    "prevChange": 1100.0
+  }
+  ```
+
+  | Tên trường | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | symbol | string | Mã chứng khoán |
+  | closePrice | number | Giá khớp |
+  | closeVol | number | Khối lượng khớp 1 phút |
+  | change | number | Thay đổi giá |
+  | reference | number | Giá tham chiếu |
+  | totalTrading | number | Tổng khối lượng |
+  | totalTradingValue | number | Tổng giá trị |
+  | timeSec | string | Thời gian epoch |
+  | action | string | `BU` hoặc `SD` |
+  | unitTimeFrame | string | Khung thời gian |
+  | tradingValue | number | Giá trị khớp 1 phút |
+  | buyUpAcc | number | Mua chủ động tích lũy |
+  | sellDownAcc | number | Bán chủ động tích lũy |
+  | bidPrice | number | Giá đặt mua |
+  | bidVol | number | Khối lượng đặt mua |
+  | askPrice | number | Giá đặt bán |
+  | askVol | number | Khối lượng đặt bán |
+  | prevChange | number | Thay đổi so với giá khớp gần nhất |
+
+  ## Topic C002S60: Cung cầu 1 phút
+
+  Ví dụ message:
+
+  ```text
+  C002S60|TCB|{
+    "symbol": "TCB",
+    "timeSec": "1755144120",
+    "totalBUVol": 200.0,
+    "totalBUVolAcc": 1.51419E7,
+    "totalSDVol": 49700.0,
+    "totalSDVolAcc": 8480600.0,
+    "bsAccRatio": 0.6409948,
+    "unitTimeFrame": "60"
+  }
+  ```
+
+  | Tên trường | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | symbol | string | Mã chứng khoán |
+  | timeSec | string | Thời gian |
+  | totalBUVol | number | Khối lượng mua chủ động |
+  | totalBUVolAcc | number | Khối lượng mua chủ động tích lũy đầu ngày |
+  | totalSDVol | number | Khối lượng bán chủ động |
+  | totalSDVolAcc | number | Khối lượng bán chủ động tích lũy đầu ngày |
+  | bsAccRatio | number | Tỷ lệ mua bán chủ động |
+  | unitTimeFrame | string | `60` |
+
+  ## Topic C002S900: Cung cầu 15 phút
+
+  Ví dụ message:
+
+  ```text
+  C002S900|TCB|{
+    "symbol": "TCB",
+    "timeSec": "1755144120",
+    "totalBUVol": 200.0,
+    "totalBUVolAcc": 1.51419E7,
+    "totalSDVol": 49700.0,
+    "totalSDVolAcc": 8480600.0,
+    "bsAccRatio": 0.6409948,
+    "unitTimeFrame": "900"
+  }
+  ```
+
+  | Tên trường | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | symbol | string | Mã chứng khoán |
+  | timeSec | string | Thời gian |
+  | totalBUVol | number | Khối lượng mua chủ động |
+  | totalBUVolAcc | number | Khối lượng mua chủ động tích lũy đầu ngày |
+  | totalSDVol | number | Khối lượng bán chủ động |
+  | totalSDVolAcc | number | Khối lượng bán chủ động tích lũy đầu ngày |
+  | bsAccRatio | number | Tỷ lệ mua bán chủ động |
+  | unitTimeFrame | string | `900` |

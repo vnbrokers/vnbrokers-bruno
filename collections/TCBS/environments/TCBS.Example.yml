@@ -2,6 +2,8 @@ name: TCBS.Example
 variables:
   - name: baseUrl
     value: https://openapi.tcbs.com.vn
+  - name: wsBaseUrl
+    value: wss://openapi.tcbs.com.vn
   - name: sitBaseUrl
     value: https://openapisit.tcbs.com.vn
   - secret: true
@@ -9,12 +11,14 @@ variables:
   - secret: true
     name: otp
   - secret: true
+  - secret: true
+    name: accessToken
+  - secret: true
+    name: wsJwtToken
     name: accountNo
   - name: orderId
     value: ""
   - name: symbol
     value: TCB
-  - secret: true
-    name: accessToken
   - secret: true
     name: custodyCode

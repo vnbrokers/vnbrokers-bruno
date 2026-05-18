@@ -17,9 +17,17 @@ http:
       }
 
 runtime:
+  variables:
+    - name: otp
+      value: "123456"
   scripts:
     - type: after-response
-      code: bru.setEnvVar("accessToken", res.getBody().token)
+      code: |-
+        const accessToken = res.body?.token;
+        const wsJwtToken = btoa(JSON.stringify({'jwt': accessToken}))
+
+        bru.setEnvVar('accessToken', accessToken)
+        bru.setEnvVar('wsJwtToken', wsJwtToken)
 
 settings:
   encodeUrl: true
