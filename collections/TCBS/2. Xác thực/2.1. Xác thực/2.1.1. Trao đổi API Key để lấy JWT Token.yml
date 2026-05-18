@@ -24,10 +24,11 @@ runtime:
     - type: after-response
       code: |-
         const accessToken = res.body?.token;
-        const wsJwtToken = btoa(JSON.stringify({'jwt': accessToken}))
+        const wsJwtToken = btoa(JSON.stringify({"jwt":accessToken}))
 
         bru.setEnvVar('accessToken', accessToken)
         bru.setEnvVar('wsJwtToken', wsJwtToken)
+        bru.setEnvVar('base64Token',btoa(accessToken))
 
 settings:
   encodeUrl: true

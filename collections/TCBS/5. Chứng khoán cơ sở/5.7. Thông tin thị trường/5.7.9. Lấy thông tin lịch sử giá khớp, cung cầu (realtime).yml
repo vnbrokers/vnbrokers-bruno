@@ -9,7 +9,7 @@ websocket:
   url: "{{wsBaseUrl}}/ws/ouranos/v1/stream"
   message:
     type: text
-    data: d|a|||{{wsJwtToken}}
+    data: d|a|||{{base64Token}}
 
 settings:
   timeout: 0

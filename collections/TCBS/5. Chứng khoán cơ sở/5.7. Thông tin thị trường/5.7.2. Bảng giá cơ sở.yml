@@ -1,15 +1,305 @@
 info:
   name: 5.7.2. Bảng giá cơ sở
-  type: http
+  type: websocket
   seq: 2
   tags:
     - market_information_stock_normal
-http:
-  method: GET
-  url: "{{baseUrl}}/ws/thesis/v1/stream/normal"
-  auth: inherit
+
+websocket:
+  url: "{{wsBaseUrl}}/ws/thesis/v1/stream/normal"
+  message:
+    type: text
+    data: |
+      d|a|||{{base64Token}}
+
 settings:
-  encodeUrl: true
   timeout: 0
-  followRedirects: true
-  maxRedirects: 5
+  keepAliveInterval: 0
+
+docs: |-
+  # WebSocket bảng giá cơ sở
+
+  Tài liệu: `Websocket_bang_gia_1.0.0.pdf`
+
+  ## Kết nối
+
+  ```text
+  wss://openapi.tcbs.com.vn/ws/thesis/v1/stream/normal
+  ```
+
+  Trong collection dùng:
+
+  ```text
+  {{wsBaseUrl}}/ws/thesis/v1/stream/normal
+  ```
+
+  Dữ liệu được gửi dưới dạng text frame.
+
+  ## Bước 1: Xác thực
+
+  Message xác thực có format:
+
+  ```text
+  d|a|||base64(token_openapi)
+  ```
+
+  Request này dùng biến `marketDataTokenBase64`, là base64 của raw token `{{accessToken}}`.
+
+  Server trả về nếu xác thực thành công:
+
+  ```text
+  d|0|{"success":true,"error":null}
+  ```
+
+  Server trả về nếu xác thực thất bại:
+
+  ```text
+  d|0|{"success":false,"error":{"code":"211110","message":"Invalid JWT"}}
+  ```
+
+  Server gửi cấu hình timeout:
+
+  ```text
+  d|33|15
+  ```
+
+  ## Bước 2: Subscribe
+
+  Thay đổi giá realtime theo mã:
+
+  ```text
+  d|s|tk|bp+bi+tm+mp+op+fe|FPT,VCS,PNJ,PTB
+  ```
+
+  Thông tin realtime theo sàn:
+
+  ```text
+  d|s|ro|bp+bi+tm+mp+op+fe|1,2
+  ```
+
+  Thông tin thay đổi index:
+
+  ```text
+  d|s|si|rt|1,2
+  ```
+
+  Thông tin thỏa thuận:
+
+  ```text
+  d|s|pt|ptm+ptb+pts|1,2,3
+  ```
+
+  Mã sàn/index: `1` VN-INDEX, `2` VN30-INDEX, `3` HNX, `4` HNX30-INDEX, `5` UPCOM, `7` Covered warrant, `8` Derivative-VN30, `9` Derivative-VGB5.
+
+  ## Bước 3: Giữ kết nối
+
+  Gửi ping mỗi 2 giây:
+
+  ```text
+  d|p|||
+  ```
+
+  ## Message trả về
+
+  | Prefix | Thuộc tính | Mô tả |
+  | --- | --- | --- |
+  | `s|1|` | `bi` | Bid info |
+  | `s|2|` | `op` | Offer info |
+  | `s|3|` | `fe` | Foreign exchange |
+  | `s|4|` | `bp` | Base price |
+  | `s|5|` | `mp` | Matched price |
+  | `s|6|` | `tm` | Ticker match |
+  | `s|8|` | `rt` | Stock index |
+  | `s|16|` | `pta` | PT Advertisement |
+  | `s|17|` | `ptm` | PT Match |
+
+  ## Bid info `bi`
+
+  ```text
+  s|1|{
+    "symbol": "TCB",
+    "bidPrice01": "24550",
+    "bidPrice02": "24500",
+    "bidPrice03": "24450",
+    "bidQtty01": "137200",
+    "bidQtty02": "354000",
+    "bidQtty03": "292900"
+  }
+  ```
+
+  | Tên trường | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | symbol | string | Mã chứng khoán |
+  | bidPrice01 | string | Giá đặt mua 1 |
+  | bidPrice02 | string | Giá đặt mua 2 |
+  | bidPrice03 | string | Giá đặt mua 3 |
+  | bidQtty01 | string | Khối lượng đặt 1 |
+  | bidQtty02 | string | Khối lượng đặt 2 |
+  | bidQtty03 | string | Khối lượng đặt 3 |
+
+  ## Offer info `op`
+
+  ```text
+  s|2|{
+    "symbol": "TCB",
+    "offerPrice01": "24600",
+    "offerPrice02": "24650",
+    "offerPrice03": "24700",
+    "offerQtty01": "294000",
+    "offerQtty02": "163400",
+    "offerQtty03": "743600"
+  }
+  ```
+
+  | Tên trường | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | symbol | string | Mã chứng khoán |
+  | offerPrice01 | string | Giá đặt bán 1 |
+  | offerPrice02 | string | Giá đặt bán 2 |
+  | offerPrice03 | string | Giá đặt bán 3 |
+  | offerQtty01 | string | Khối lượng đặt 1 |
+  | offerQtty02 | string | Khối lượng đặt 2 |
+  | offerQtty03 | string | Khối lượng đặt 3 |
+
+  ## Foreign exchange `fe`
+
+  ```text
+  s|3|{
+    "symbol": "HPG",
+    "buyForeignQtty": "112400",
+    "sellForeignQtty": "17380",
+    "room": "1773708397"
+  }
+  ```
+
+  | Tên trường | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | symbol | string | Mã chứng khoán |
+  | buyForeignQtty | string | Khối lượng ngoại mua |
+  | sellForeignQtty | string | Khối lượng ngoại bán |
+  | room | string | Room |
+
+  ## Base price `bp`
+
+  ```text
+  s|4|{
+    "symbol": "VPD",
+    "ceilPrice": 25000,
+    "floorPrice": 24100,
+    "refPrice": 24300
+  }
+  ```
+
+  | Tên trường | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | symbol | string | Mã chứng khoán |
+  | ceilPrice | number | Giá trần |
+  | floorPrice | number | Giá sàn |
+  | refPrice | number | Giá tham chiếu |
+
+  ## Matched price `mp`
+
+  ```text
+  s|5|{
+    "symbol": "VPD",
+    "high": "25000",
+    "low": "24100",
+    "avg": 24300.0,
+    "open": "24600"
+  }
+  ```
+
+  | Tên trường | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | symbol | string | Mã chứng khoán |
+  | high | number | Cao |
+  | low | number | Thấp |
+  | avg | number | Trung bình |
+  | open | number | Mở |
+
+  ## Ticker match `tm`
+
+  ```text
+  s|6|{
+    "symbol": "TCB",
+    "matchPrice": "24550",
+    "matchQtty": "5000",
+    "change": 200.0,
+    "changePercent": 0.8213552361396304,
+    "totalVolume": "9745500",
+    "totalValue": "240774655000"
+  }
+  ```
+
+  | Tên trường | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | symbol | string | Mã chứng khoán |
+  | matchPrice | string | Giá khớp |
+  | matchQtty | string | Khối lượng khớp |
+  | change | string | Thay đổi |
+  | changePercent | string | % thay đổi |
+  | totalVolume | string | Tổng khối lượng |
+  | totalValue | string | Tổng giá trị |
+
+  ## Stock index `rt`
+
+  ```text
+  s|8|{
+    "indexNumber": 5,
+    "index": 91.43,
+    "change": 1.75,
+    "changePercent": 1.96,
+    "volume": 5.5936E7,
+    "value": 7.287094199E11,
+    "increase": 246,
+    "decrease": 58,
+    "notChange": 63,
+    "session": "5",
+    "ceilIncrease": 19,
+    "floorDecrease": 8
+  }
+  ```
+
+  | Tên trường | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | indexNumber | number | Index number |
+  | index | number | Chỉ số |
+  | change | number | Thay đổi |
+  | changePercent | number | % thay đổi |
+  | volume | number | Khối lượng |
+  | value | number | Giá trị |
+  | increase | number | Tăng |
+  | decrease | number | Giảm |
+  | notChange | number | Không thay đổi |
+  | session | string | Phiên |
+  | ceilIncrease | number | Trần tăng |
+  | floorDecrease | number | Sàn giảm |
+
+  ## PT Advertisement `pta`
+
+  ```text
+  s|16|{
+    "symbol": "VIC124003",
+    "price": 1.00528E8,
+    "vol": 1000.0,
+    "time": "20250808-04:10:33.917",
+    "status": 1,
+    "color": 5,
+    "orderId": "92025080800181048",
+    "side": "B"
+  }
+  ```
+
+  ## PT Match `ptm`
+
+  ```text
+  s|17|{
+    "symbol": "VND",
+    "price": 23500.0,
+    "vol": 200000.0,
+    "val": 4.7E9,
+    "time": "10:56:50",
+    "color": 4,
+    "accumulatedValue": 4.7E9
+  }
+  ```

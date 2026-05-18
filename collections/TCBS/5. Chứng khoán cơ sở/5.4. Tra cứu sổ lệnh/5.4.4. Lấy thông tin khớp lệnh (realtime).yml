@@ -10,7 +10,7 @@ websocket:
   message:
     type: text
     data: |
-      authenticate|{{wsJwtToken}}
+      authenticate|{{base64Token}}
 
 settings:
   timeout: 0

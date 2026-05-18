@@ -1,15 +1,249 @@
 info:
-  name: 6.3.3. Lấy thông tin khớp lệnh (realtime)
-  type: http
+  name: 6.3.3. Thay đổi thông tin lệnh phái sinh (realtime)
+  type: websocket
   seq: 3
   tags:
     - get_order_derivative
-http:
-  method: GET
-  url: "{{baseUrl}}/ws/nesoi"
-  auth: inherit
+
+websocket:
+  url: "{{wsBaseUrl}}/ws/nesoi"
+  message:
+    type: text
+    data: |
+      authenticate|{{derivativeOrderJwtPayloadBase64}}
+
 settings:
-  encodeUrl: true
   timeout: 0
-  followRedirects: true
-  maxRedirects: 5
+  keepAliveInterval: 0
+
+docs: |-
+  # WebSocket thay đổi thông tin lệnh phái sinh
+
+  Tài liệu: `Websocket_thay_doi_thong_tin_lenh_phai_sinh_1.0.0.pdf`
+
+  ## Kết nối
+
+  ```text
+  wss://openapi.tcbs.com.vn/ws/nesoi
+  ```
+
+  Trong collection dùng:
+
+  ```text
+  {{wsBaseUrl}}/ws/nesoi
+  ```
+
+  ## Bước 1: Xác thực
+
+  Message xác thực có format:
+
+  ```text
+  authenticate|base64({"jwt":"xxx"})
+  ```
+
+  Trong đó `xxx` là JWT token lấy từ API `get_token`.
+
+  Request này dùng biến `derivativeOrderJwtPayloadBase64`, là base64 của JSON:
+
+  ```json
+  {"jwt":"{{accessToken}}"}
+  ```
+
+  Ví dụ message gửi đi:
+
+  ```text
+  authenticate|eyJqd3QiOiJpZ3dmVXE5TTJJcVdWaHJGcll5YkVZS1d4QXhEYll6eHoxUnpPa3AwTDBTOTVsck10ckpEYk1nRnd5ODZyOElyIn0=
+  ```
+
+  Server trả về nếu xác thực thành công:
+
+  ```text
+  authenticate|{"success":true,"error":null}
+  ```
+
+  ## Bước 2: Timeout
+
+  Server gửi cấu hình timeout:
+
+  ```text
+  pingTimeout|45
+  ```
+
+  Sau 45 giây nếu client không ping/pong thì kết nối sẽ bị dừng.
+
+  ## Bước 3: Subscribe topics
+
+  Các topic hỗ trợ:
+
+  | Topic | Mô tả |
+  | --- | --- |
+  | `DE_OPEN_POSITION` | Vị thế mở |
+  | `DE_CONDITIONAL_ORDER` | Sổ lệnh điều kiện |
+  | `DE_ORDER` | Sổ lệnh thường |
+
+  Gửi các message subscribe:
+
+  ```text
+  subscribe|eyJ0b3BpYyI6IkRFX09QRU5fUE9TSVRJT04ifQ==
+  subscribe|eyJ0b3BpYyI6IkRFX0NPTkRJVElPTkFMX09SREVSIn0=
+  subscribe|eyJ0b3BpYyI6IkRFX09SREVSIn0=
+  ```
+
+  Payload trước khi base64:
+
+  ```json
+  {"topic":"DE_OPEN_POSITION"}
+  {"topic":"DE_CONDITIONAL_ORDER"}
+  {"topic":"DE_ORDER"}
+  ```
+
+  ## Bước 4: Giữ kết nối
+
+  Gửi ping mỗi 2 giây:
+
+  ```text
+  ping|1
+  ```
+
+  ## Message `DE_ORDER`
+
+  ```text
+  message_proto|DE_ORDER|{
+    "subAccount": "738764A",
+    "orderNo": "41",
+    "pkOrderNo": "7861546",
+    "orderTime": "14:34:10",
+    "accountCode": "738764A",
+    "side": "B",
+    "symbol": "VN30F2110",
+    "volume": 1,
+    "showPrice": "MTL",
+    "status": "P",
+    "orderStatus": "2",
+    "channel": "D",
+    "group": "FU",
+    "isCancel": "1",
+    "isAmend": "1",
+    "quote": "Y",
+    "orderType": "N",
+    "source": "USER",
+    "traderCode": "8888"
+  }
+  ```
+
+  | Tên trường | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | sub_account | string | Số tài khoản phái sinh |
+  | order_no | string | Số hiệu lệnh |
+  | pk_order_no | string | PK lệnh |
+  | order_time | string | Thời gian đặt lệnh |
+  | account_code | string | Số tài khoản phái sinh |
+  | side | string | Loại lệnh: B/S |
+  | symbol | string | Mã hợp đồng |
+  | volume | int | Khối lượng đặt lệnh |
+  | show_price | string | Giá đặt |
+  | match_volume | int | Khối lượng khớp |
+  | match_price_b_q | double | Giá khớp bình quân |
+  | status | string | Trạng thái lệnh |
+  | order_status | string | Trạng thái lệnh |
+  | channel | string | Kênh đặt lệnh |
+  | group | string | Nhóm lệnh phái sinh, ví dụ `FU` |
+  | cancel_time | string | Thời gian hủy |
+  | is_cancel | string | Có được hủy: 0/1 |
+  | is_amend | string | Có được sửa: 0/1 |
+  | info | string | Thông tin chi tiết nếu lệnh bị từ chối |
+  | max_price | int | Không dùng, luôn là 0 |
+  | match_value | double | Khối lượng khớp |
+  | quote | string | Trạng thái lệnh: C/G/Y |
+  | auto_type | string | Loại lệnh: Arbitrage, SL/TP hoặc rỗng |
+  | product | string | Mã hợp đồng đối ứng với lệnh ABI, chỉ số SL/TP với lệnh SL/TP |
+  | order_type | string | Loại lệnh |
+  | source | string | Nguồn đặt lệnh: SYS/USER |
+  | trader_code | string | Mã kênh đặt lệnh |
+
+  ## Tổ hợp trạng thái `DE_ORDER`
+
+  | status | quote | Mô tả |
+  | --- | --- | --- |
+  | P | G | Chờ khớp trên gateway, có thể hủy trong queue |
+  | P | Y | Lệnh đã vào sở |
+  | P |  | Thông tin trong lệnh có sửa đổi |
+  | PM |  | Lệnh đã khớp |
+  | PC | G | Lệnh chờ xác nhận sửa |
+  | PC | Y | Đã confirm sửa |
+  | PMW | G | Lệnh khớp một phần yêu cầu hủy |
+  | PW |  | Đặt lệnh hủy, chờ hủy |
+  | PWX |  | Lệnh hủy được confirm bởi sở |
+  | PMWX | Y | Lệnh khớp một phần yêu cầu hủy đã được xác nhận |
+
+  ## Message `DE_OPEN_POSITION`
+
+  ```text
+  message_proto|DE_OPEN_POSITION|{
+    "subAccount": "738764A",
+    "symbol": "VN30F2110",
+    "side": "L",
+    "account": "738764A",
+    "lastPrice": 1490.0,
+    "avgRemain": 1504.2857142857142,
+    "imValue": 1.7731E9,
+    "net": 70.0,
+    "pcRemain": -5.59,
+    "vmRemain": -1.0E8,
+    "duedate": "2024-03-30 AD 00:00:00.000+07:00",
+    "netoffvol": 70,
+    "totalVmValue": 0.17
+  }
+  ```
+
+  | Tên trường | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | sub_account | string | Số tiểu khoản phái sinh |
+  | symbol | string | Mã hợp đồng |
+  | side | string | Loại lệnh |
+  | account | string | Số tiểu khoản phái sinh |
+  | last_price | double | Giá hiện tại |
+  | avg_remain | double | Giá trung bình phần còn lại |
+  | im_value | double | Giá trị ký quỹ ban đầu |
+  | net | double | Số vị thế đang nắm giữ |
+  | stoploss | double | Giá stop loss |
+  | takeprofit | double | Giá take profit |
+  | pc_remain | double | % lãi/lỗ vị thế mở |
+  | vm_remain | double | Giá trị VM chưa đóng |
+  | duedate | string | Ngày bán hạn |
+  | netoffvol | int | Số cần netoff |
+  | trigger_type | string | Giá kích hoạt lệnh trailing |
+  | call_back_point | double | Biên trượt của lệnh trailing |
+  | trailing_price | double | Giá lệnh trailing |
+
+  ## Message `DE_CONDITIONAL_ORDER`
+
+  | Tên trường | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | sub_account | string | Số tài khoản phái sinh |
+  | order_no | string | Số hiệu lệnh |
+  | group_order | string | Nhóm lệnh |
+  | pk_order_no | string | PK của lệnh |
+  | account_code | string | Số tài khoản phái sinh |
+  | side | string | Loại lệnh: B/S |
+  | symbol | string | Mã chứng khoán |
+  | volume | int | Khối lượng lệnh |
+  | show_price | string | Giá đặt |
+  | condition | string | Điều kiện |
+  | result | string | Kích hoạt/hủy lệnh: 0/1 |
+  | active_time | string | Thời gian kích hoạt |
+  | send_time | string | Thời gian đặt lệnh |
+  | cancel_time | string | Thời gian hủy lệnh |
+  | group | string | Nhóm lệnh phái sinh, ví dụ `FU` |
+  | channel | string | Kênh đặt lệnh |
+  | so_price | double | Giá stop price |
+  | order_type | string | Loại lệnh |
+  | from_time | string | Có giá trị từ ngày |
+  | exp_time | string | Đến ngày |
+  | status | string | 1: kích hoạt, 2: đã hủy, 3: từ chối |
+  | details | string | Số hiệu lệnh đã kích hoạt |
+  | message | string | Message |
+  | notes | string | SL/TP, Stop order, Arbitrage |
+  | call_back_point | string | Biên trượt của lệnh trailing stop |
+  | trailing_price | string | Giá trailing |
+  | trigger_condition | string | Điều kiện kích hoạt lệnh trailing |

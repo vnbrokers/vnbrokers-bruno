@@ -1,15 +1,173 @@
 info:
   name: 6.7.2. Bảng giá phái sinh
-  type: http
+  type: websocket
   seq: 2
   tags:
     - market_information_derivative
-http:
-  method: GET
-  url: "{{baseUrl}}/ws/thesis/v1/stream/derivative"
-  auth: inherit
+
+websocket:
+  url: "{{wsBaseUrl}}/ws/thesis/v1/stream/derivative"
+  message:
+    type: text
+    data: |
+      d|a|||{{base64Token}}
+
 settings:
-  encodeUrl: true
   timeout: 0
-  followRedirects: true
-  maxRedirects: 5
+  keepAliveInterval: 0
+
+docs: |-
+  # WebSocket bảng giá phái sinh
+
+  Tài liệu: `Websocket_bang_gia_1.0.0.pdf`
+
+  ## Kết nối
+
+  ```text
+  wss://openapi.tcbs.com.vn/ws/thesis/v1/stream/derivative
+  ```
+
+  Trong collection dùng:
+
+  ```text
+  {{wsBaseUrl}}/ws/thesis/v1/stream/derivative
+  ```
+
+  Dữ liệu được gửi dưới dạng text frame.
+
+  ## Bước 1: Xác thực
+
+  Message xác thực có format:
+
+  ```text
+  d|a|||base64(token_openapi)
+  ```
+
+  Request này dùng biến `marketDataTokenBase64`, là base64 của raw token `{{accessToken}}`.
+
+  Server trả về nếu xác thực thành công:
+
+  ```text
+  d|0|{"success":true,"error":null}
+  ```
+
+  Server trả về nếu xác thực thất bại:
+
+  ```text
+  d|0|{"success":false,"error":{"code":"211110","message":"Invalid JWT"}}
+  ```
+
+  Server gửi cấu hình timeout:
+
+  ```text
+  d|33|15
+  ```
+
+  ## Bước 2: Subscribe
+
+  Thay đổi giá realtime theo mã:
+
+  ```text
+  d|s|tk|bp+bi+tm+mp+op+fe|VN30F1M,VN30F2M
+  ```
+
+  Thông tin realtime theo sàn phái sinh:
+
+  ```text
+  d|s|ro|bp+bi+tm+mp+op+fe|8,9
+  ```
+
+  Thông tin thay đổi index phái sinh:
+
+  ```text
+  d|s|si|rt|8,9
+  ```
+
+  Mã sàn/index: `8` Derivative-VN30, `9` Derivative-VGB5.
+
+  ## Bước 3: Giữ kết nối
+
+  Gửi ping mỗi 2 giây:
+
+  ```text
+  d|p|||
+  ```
+
+  ## Message trả về
+
+  | Prefix | Thuộc tính | Mô tả |
+  | --- | --- | --- |
+  | `s|1|` | `bi` | Bid info |
+  | `s|2|` | `op` | Offer info |
+  | `s|3|` | `fe` | Foreign exchange |
+  | `s|4|` | `bp` | Base price |
+  | `s|5|` | `mp` | Matched price |
+  | `s|6|` | `tm` | Ticker match |
+  | `s|8|` | `rt` | Stock index |
+
+  Các payload trả về dùng cùng cấu trúc với bảng giá cơ sở trong `Websocket_bang_gia_1.0.0.pdf`.
+
+  ## Bid info `bi`
+
+  ```text
+  s|1|{
+    "symbol": "TCB",
+    "bidPrice01": "24550",
+    "bidPrice02": "24500",
+    "bidPrice03": "24450",
+    "bidQtty01": "137200",
+    "bidQtty02": "354000",
+    "bidQtty03": "292900"
+  }
+  ```
+
+  ## Offer info `op`
+
+  ```text
+  s|2|{
+    "symbol": "TCB",
+    "offerPrice01": "24600",
+    "offerPrice02": "24650",
+    "offerPrice03": "24700",
+    "offerQtty01": "294000",
+    "offerQtty02": "163400",
+    "offerQtty03": "743600"
+  }
+  ```
+
+  ## Base price `bp`
+
+  ```text
+  s|4|{
+    "symbol": "VPD",
+    "ceilPrice": 25000,
+    "floorPrice": 24100,
+    "refPrice": 24300
+  }
+  ```
+
+  ## Matched price `mp`
+
+  ```text
+  s|5|{
+    "symbol": "VPD",
+    "high": "25000",
+    "low": "24100",
+    "avg": 24300.0,
+    "open": "24600"
+  }
+  ```
+
+  ## Ticker match `tm`
+
+  ```text
+  s|6|{
+    "symbol": "TCB",
+    "matchPrice": "24550",
+    "matchQtty": "5000",
+    "change": 200.0,
+    "changePercent": 0.8213552361396304,
+    "totalVolume": "9745500",
+    "totalValue": "240774655000"
+  }
+  ```
