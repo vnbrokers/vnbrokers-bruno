@@ -1,0 +1,10 @@
+info:
+  name: SignalR
+  type: folder
+  seq: 3
+
+request:
+  auth: inherit
+  variables:
+    - name: connectionData
+      value: '[{"name":"FcMarketDataV2Hub"}]'

@@ -29,28 +29,6 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: |-
-  ### AccessToken
-
-  Dùng để lấy access token truy cập vào các API lấy thông tin hoặc streaming của FastConnect Data.
-
-  `POST Market/AccessToken`
-
-  #### Input
-
-  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
-  | --- | --- | --- | --- |
-  | consumerID | string | Yes | ConsumerID khách hàng lấy được khi Tạo key trên Iboard |
-  | consumerSecret | string | Yes | ConsumerSecret khách hàng lấy được khi Tạo key trên Iboard |
-
-  #### Output
-
-  | Dữ liệu | Kiểu | Mô tả |
-  | --- | --- | --- |
-  | message | string | Thông báo trả ra khi call api |
-  | status | number | Trạng thái |
-  | data.accessToken | string | Token để truy cập vào các API Get thông tin khách hàng hoặc Streaming |
-
 examples:
   - name: 200 Response
     description: Success
@@ -83,3 +61,25 @@ examples:
               "accessToken": "eyJh..."
             }
           }
+
+docs: |-
+  ### AccessToken
+
+  Dùng để lấy access token truy cập vào các API lấy thông tin hoặc streaming của FastConnect Data.
+
+  `POST Market/AccessToken`
+
+  #### Input
+
+  | Dữ liệu | Kiểu | Bắt buộc | Mô tả |
+  | --- | --- | --- | --- |
+  | consumerID | string | Yes | ConsumerID khách hàng lấy được khi Tạo key trên Iboard |
+  | consumerSecret | string | Yes | ConsumerSecret khách hàng lấy được khi Tạo key trên Iboard |
+
+  #### Output
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | message | string | Thông báo trả ra khi call api |
+  | status | number | Trạng thái |
+  | data.accessToken | string | Token để truy cập vào các API Get thông tin khách hàng hoặc Streaming |

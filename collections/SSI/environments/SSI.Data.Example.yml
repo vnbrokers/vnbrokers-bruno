@@ -2,12 +2,18 @@ name: SSI.Example
 variables:
   - name: fcDataBaseUrl
     value: https://fc-data.ssi.com.vn
+  - name: fcDataHubBaseUrl
+    value: https://fc-datahub.ssi.com.vn
+  - name: wsFcDataHubBaseUrl
+    value: wss://fc-datahub.ssi.com.vn
   - secret: true
     name: consumerID
   - secret: true
     name: consumerSecret
   - secret: true
     name: accessToken
+  - secret: true
+    name: connectionToken
   - name: market
     value: HOSE
   - name: symbol
