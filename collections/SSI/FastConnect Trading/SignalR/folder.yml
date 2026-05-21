@@ -1,0 +1,12 @@
+info:
+  name: SignalR
+  type: folder
+  seq: 8
+
+request:
+  auth: inherit
+  variables:
+    - name: connectionData
+      value: '[{"name":"BroadcastHubV2"}]'
+    - name: hubName
+      value: BroadcastHubV2

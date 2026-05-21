@@ -1,0 +1,12 @@
+info:
+  name: Connect websocket
+  type: websocket
+  seq: 2
+
+websocket:
+  url: "{{wsFcTradingHubBaseUrl}}/v2.0/signalr/connect?transport=webSockets&clientProtocol=2.0&connectionToken={{connectionToken}}&connectionData={{connectionData}}&tid=10"
+  auth: inherit
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0

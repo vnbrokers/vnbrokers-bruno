@@ -35,6 +35,42 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{baseUrl}}/api/v2/Trading/AccessToken"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "consumerID": "38f5fdfa56b44d5ab8b95895eb588e99",
+            "consumerSecret": "6d61bffefc6540fc837c71afd2c****",
+            "twoFactorType": 1,
+            "code": "123456789",
+            "isSave": false
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Success",
+            "status": 200,
+            "data": {
+              "accessToken": "eyJh..."
+            }
+          }
+
 docs: |-
   ### POST  AccessToken
 
@@ -105,39 +141,3 @@ docs: |-
   data: null
    }
   ```
-
-examples:
-  - name: 200 Response
-    description: Success
-    request:
-      url: "{{baseUrl}}/api/v2/Trading/AccessToken"
-      method: POST
-      headers:
-        - name: Content-Type
-          value: application/json
-      body:
-        type: json
-        data: |-
-          {
-            "consumerID": "38f5fdfa56b44d5ab8b95895eb588e99",
-            "consumerSecret": "6d61bffefc6540fc837c71afd2c****",
-            "twoFactorType": 1,
-            "code": "123456789",
-            "isSave": false
-          }
-    response:
-      status: 200
-      statusText: OK
-      headers:
-        - name: Content-Type
-          value: application/json
-      body:
-        type: json
-        data: |-
-          {
-            "message": "Success",
-            "status": 200,
-            "data": {
-              "accessToken": "eyJh..."
-            }
-          }

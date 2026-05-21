@@ -1,0 +1,30 @@
+info:
+  name: Request negotiate
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{fcTradingHubBaseUrl}}/v2.0/signalr/negotiate?clientProtocol=2.1&connectionData={{connectionData}}"
+  headers:
+    - name: ""
+      value: ""
+  params:
+    - name: clientProtocol
+      value: "2.1"
+      type: query
+    - name: connectionData
+      value: "{{connectionData}}"
+      type: query
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: res.status === 200 && bru.setEnvVar("connectionToken", res.body.ConnectionToken)
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

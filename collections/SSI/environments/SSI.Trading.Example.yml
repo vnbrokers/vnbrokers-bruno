@@ -1,11 +1,17 @@
 name: SSI.Trading.Example
 variables:
-  - name: fcDataBaseUrl
+  - name: baseUrl
     value: https://fc-tradeapi.ssi.com.vn
+  - name: fcTradingHubBaseUrl
+    value: https://fc-tradehub.ssi.com.vn
+  - name: wsFcTradingHubBaseUrl
+    value: wss://fc-tradehub.ssi.com.vn
   - secret: true
     name: consumerID
   - secret: true
     name: consumerSecret
+  - secret: true
+    name: connectionToken
   - secret: true
     name: privateKey
   - secret: true
