@@ -9,8 +9,7 @@ websocket:
   url: "{{wsBaseUrl}}/ws/thesis/v1/stream/normal"
   message:
     type: text
-    data: |
-      d|a|||{{base64Token}}
+    data: d|a|||{{base64Token}}
 
 settings:
   timeout: 0

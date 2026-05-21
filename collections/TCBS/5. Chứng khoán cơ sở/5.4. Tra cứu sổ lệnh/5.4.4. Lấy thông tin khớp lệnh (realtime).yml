@@ -9,8 +9,7 @@ websocket:
   url: "{{wsBaseUrl}}/ws/aither"
   message:
     type: text
-    data: |
-      authenticate|{{base64Token}}
+    data: authenticate|{{wsJwtToken}}
 
 settings:
   timeout: 0
