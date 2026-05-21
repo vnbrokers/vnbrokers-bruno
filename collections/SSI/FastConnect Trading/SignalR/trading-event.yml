@@ -1,5 +1,5 @@
 info:
-  name: Connect websocket
+  name: Dữ liệu trading (realtime)
   type: websocket
   seq: 2
 

@@ -1,0 +1,172 @@
+info:
+  name: Dữ liệu tổng hợp của thông tin bid/ask và thông tin khớp lệnh
+  type: websocket
+  seq: 9
+
+websocket:
+  url: "{{wsFcDataHubBaseUrl}}/v2.0/signalr/connect?transport=webSockets&clientProtocol=2.0&connectionToken={{connectionToken}}&connectionData={{connectionData}}&tid=10"
+  message:
+    type: json
+    data: |-
+      {
+        "H": "FcMarketDataV2Hub",
+        "M": "SwitchChannels",
+        "A": [
+          "X:All"
+        ],
+        "I": 1
+      }
+  auth: inherit
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  ### Dữ liệu tổng hợp của thông tin bid/ask và thông tin khớp lệnh
+
+  Định dạng: X: \<Danh sách các mã chứng khoán> hoặc ALL \<Toàn bộ mã chứng khoán>
+
+  | # | Dữ liệu | Kiểu | Mô tả |
+  |---|---|---|---|
+  | 1 | Rtype | string | Định dạng: X |
+  | 2 | TradingDate | Date | DD/MM/YYYY |
+  | 3 | Time | Time | Định dạng:HH:MM:SS |
+  | 4 | ISIN | string | Mã ISIN |
+  | 5 | Symbol | string | Mã CK |
+  | 6 | Ceiling | number | Giá cao nhất |
+  | 7 | Floor | number | Giá sàn |
+  | 8 | RefPrice | number | Giá tham chiếu |
+  | 9 | Open | number | Giá mở cửa |
+  | 10 | Close | number | Giá đóng cửa |
+  | 11 | High | number | Giá cao nhất |
+  | 12 | Low | number | Giá thấp nhất |
+  | 13 | Avg | number | Giá trung bình |
+  | 14 | PriorVal  | number | Giá đóng cửa của ngày giao dịch trước đó của ngày báo cáo |
+  | 15 | LastPrice | number | Giá khớp gần nhất |
+  | 16 | Change | number | Thay đổi |
+  | 17 | RatioChange | number | % thay đổi |
+  | 18 | EstMatchedPrice | number | Giá khớp dự kiến |
+  | 19 | LastVol | number | Khối lượng khớp gần nhất |
+  | 20 | TotalVal | number | Tổng giá trị khớp lệnh từ khi thị trường mở cửa đến thời điểm báo cáo. |
+  | 21 | TotalVol | number  | Tổng khối lượng khớp lệnh từ khi mở cửa thị trường đến thời điểm báo cáo. |
+  | 22 | BidPrice1 | number | Giá bid tốt nhất 1 |
+  | 23 | BidVol1 | number | Khối lượng bid tốt nhất 1 |
+  | 24 | BidPrice2 | number | Giá bid tốt nhất 2 |
+  | 25 | BidVol2 | number | Khối lượng bid tốt nhất 2 |
+  | 26 | BidPrice3 | number | Giá bid tốt nhất 3 |
+  | 27 | BidVol3 | number | Khối lượng bid tốt nhất 3 |
+  | 28 | BidPrice4 | number | Giá bid tốt nhất 4 |
+  | 29 | BidVol4 | number | Khối lượng bid tốt nhất 4 |
+  | 30 | BidPrice5 | number | Giá bid tốt nhất 5 |
+  | 31 | BidVol5 | number | Khối lượng bid tốt nhất 5 |
+  | 32 | BidPrice6 | number | Giá bid tốt nhất 6 |
+  | 33 | BidVol6 | number | Khối lượng bid tốt nhất 6 |
+  | 34 | BidPrice7 | number | Giá bid tốt nhất 7 |
+  | 35 | BidVol7 | number | Khối lượng bid tốt nhất 7 |
+  | 36 | BidPrice8 | number | Giá bid tốt nhất 8 |
+  | 37 | BidVol8 | number | Khối lượng bid tốt nhất 8 |
+  | 38 | BidPrice9 | number | Giá bid tốt nhất 9 |
+  | 39 | BidVol9 | number | Khối lượng bid tốt nhất 9 |
+  | 40 | BidPrice10 | number | Giá bid tốt nhất 10 |
+  | 41 | BidVol10 | number | Khối lượng bid tốt nhất 10 |
+  | 42 | AskPrice1 | number | Giá ask tốt nhất 1 |
+  | 43 | AskVol1 | number | Khối lượng ask tốt nhất 1 |
+  | 44 | AskPrice2 | number | Giá ask tốt nhất 2 |
+  | 45 | AskVol2 | number | Khối lượng ask tốt nhất 2 |
+  | 46 | AskPrice3 | number | Giá ask tốt nhất 3 |
+  | 47 | AskVol3 | number | Khối lượng ask tốt nhất 3 |
+  | 48 | AskPrice4 | number | Giá ask tốt nhất 4 |
+  | 49 | AskVol4 | number | Khối lượng ask tốt nhất 4 |
+  | 50 | AskPrice5 | number | Giá ask tốt nhất 5 |
+  | 51 | AskVol5 | number | Khối lượng ask tốt nhất 5 |
+  | 52 | AskPrice6 | number | Giá ask tốt nhất 6 |
+  | 53 | AskVol6 | number | Khối lượng ask tốt nhất 6 |
+  | 54 | AskPrice7 | number | Giá ask tốt nhất 7 |
+  | 55 | AskVol7 | number | Khối lượng ask tốt nhất 7 |
+  | 56 | AskPrice8 | number | Giá ask tốt nhất 8 |
+  | 57 | AskVol8 | number | Khối lượng ask tốt nhất 8 |
+  | 58 | AskPrice9 | number | Giá ask tốt nhất 9 |
+  | 59 | AskVol9 | number | Khối lượng ask tốt nhất 9 |
+  | 60 | AskPrice10 | number | Giá ask tốt nhất 10 |
+  | 61 | AskVol10 | number | Khối lượng ask tốt nhất 10 |
+  | 62 | MarketID |  string |  Sàn giao dịch |
+  | 63 | Exchange |  string |  Sàn giao dịch |
+  | 64 | TradingSession | string | Phiên giao dịch |
+  | 65 | TradingStatus | string | Trạng thái giao dịch  |
+
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  X: ALL 
+  Output:
+  {"DataType":"X",
+  "Content":"{
+  \"RType\":\"X\",
+  \"TradingDate\":\"15/08/2023\",
+  \"Time\":\"10:28:41\",
+  \"Isin\":\"TAR\",
+  \"Symbol\":\"TAR\",
+  \"Ceiling\":23400.0,
+  \"Floor\":19200.0,
+  \"RefPrice\":21300.0,
+  \"Open\":21300.0,
+  \"High\":22300.0,
+  \"Low\":21300.0,
+  \"Close\":21800.0,
+  \"AvgPrice\":21784.0,
+  \"PriorVal\":21300.0,
+  \"LastPrice\":21800.0,
+  \"LastVol\":100.0,
+  \"TotalVal\":27946100000.0,
+  \"TotalVol\":1282900.0,
+  \"BidPrice1\":21800.0,
+  \"BidPrice2\":21700.0,
+  \"BidPrice3\":21600.0,
+  \"BidPrice4\":21500.0,
+  \"BidPrice5\":21400.0,
+  \"BidPrice6\":21300.0,
+  \"BidPrice7\":21200.0,
+  \"BidPrice8\":21100.0,
+  \"BidPrice9\":21000.0,
+  \"BidPrice10\":20900.0,
+  \"BidVol1\":18800.0,
+  \"BidVol2\":35300.0,
+  \"BidVol3\":93600.0,
+  \"BidVol4\":60000.0,
+  \"BidVol5\":45800.0,
+  \"BidVol6\":94500.0,
+  \"BidVol7\":42900.0,
+  \"BidVol8\":48400.0,
+  \"BidVol9\":165900.0,
+  \"BidVol10\":26100.0,
+  \"AskPrice1\":21900.0,
+  \"AskPrice2\":22000.0,
+  \"AskPrice3\":22100.0,
+  \"AskPrice4\":22200.0,
+  \"AskPrice5\":22300.0,
+  \"AskPrice6\":22400.0,
+  \"AskPrice7\":22500.0,
+  \"AskPrice8\":22600.0,
+  \"AskPrice9\":22700.0,
+  \"AskPrice10\":22800.0,
+  \"AskVol1\":50300.0,
+  \"AskVol2\":109800.0,
+  \"AskVol3\":58500.0,
+  \"AskVol4\":152600.0,
+  \"AskVol5\":92200.0,
+  \"AskVol6\":129800.0,
+  \"AskVol7\":178700.0,
+  \"AskVol8\":60100.0,
+  \"AskVol9\":29400.0,
+  \"AskVol10\":17000.0,
+  \"MarketId\":\"HNX\",
+  \"Exchange\":\"HNX\",
+  \"TradingSession\":\"LO\",
+  \"TradingStatus\":\"N\",
+  \"Change\":500.0,
+  \"RatioChange\":2.35,
+  \"EstMatchedPrice\":0.0}"}
+  ```

@@ -1,0 +1,69 @@
+info:
+  name: Dữ liệu Room nước ngoài
+  type: websocket
+  seq: 2
+
+websocket:
+  url: "{{wsFcDataHubBaseUrl}}/v2.0/signalr/connect?transport=webSockets&clientProtocol=2.0&connectionToken={{connectionToken}}&connectionData={{connectionData}}&tid=10"
+  message:
+    type: json
+    data: |-
+      {
+        "H": "FcMarketDataV2Hub",
+        "M": "SwitchChannels",
+        "A": [
+          "R:All"
+        ],
+        "I": 1
+      }
+  auth: inherit
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  ### Dữ liệu Room nước ngoài
+
+  R:\<Danh sách mã chứng khoán>
+
+  Các mã CK được ngăn cách nhau bởi dấu "-". Hoặc có thể nhập ALL để lấy thông tin room của tất cả các mã.&#x20;
+
+  VD: R:SSI hoặc R:SSI-PAN hoặc R:ALL
+
+  | # | Dữ liệu | Kiểu  | Mô tả |
+  |---|---|---|---|
+  | 1 | Rtype | string | Định dạng: R |
+  | 2 | TradingDate | Date | Ngày giao dịchĐịnh dạng: dd/mm/yyyy |
+  | 3 | Time | Time | Định dạng: HH:MM:SS |
+  | 4 | ISIN | string | Mã ISIN |
+  | 5 | Symbol | string | Mã CK |
+  | 6 | TotalRoom | number | Tổng room |
+  | 7 | CurrentRoom  | number | Tổng khối lượng khớp lệnh mà khối ngoại mua từ khi mở cửa thị trường đến thời điểm báo cáo |
+  | 8 | FBuyVol | number | Tổng khối lượng khớp lệnh mà nhà đầu tư nước ngoài mua từ khi mở cửa thị trường đến thời điểm báo cáo |
+  | 9 | FSellVol |  number | Tổng khối lượng khớp lệnh mà nhà đầu tư nước ngoài đã bán từ khi mở cửa thị trường đến thời điểm báo cáo |
+  | 10 | FBuyVal | number | Tổng giá trị mua khớp của khách hàng nước ngoài.Đối với HOSE, streaming tự tính theo công thức:BuyVal = BuyVol * LastPrice (Giá khớp gần nhất) |
+  | 11 | FSellVal | number | Tổng giá trị bán khớp lệnh của khách hàng nước ngoài. Đối với HOSE, streaming tự tính theo công thức:SellVal = SellVol * LastPrice (Giá khớp gần nhất) |
+
+  **Ví dụ**
+
+  ```json
+  R:SSI
+  Output: 
+  {"DataType":"R",
+  "Content":"{
+  \"RType\":\"R\",
+  \"TradingDate\":\"14/08/2023\",
+  \"Time\":\"14:24:02\",
+  \"Isin\":\"SSI\",
+  \"Symbol\":\"SSI\",
+  \"TotalRoom\":1501130137.0,
+  \"CurrentRoom\":806887173.0,
+  \"BuyVol\":863352.0,
+  \"SellVol\":825308.0,
+  \"BuyVal\":25123543200.0,
+  \"SellVal\":24016462800.0,
+  \"MarketId\":\"HOSE\",
+  \"Exchange\":\"HOSE\"}"
+  }
+  ```

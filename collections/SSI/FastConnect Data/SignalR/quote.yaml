@@ -1,0 +1,141 @@
+info:
+  name: Dữ liệu bid/ask
+  type: websocket
+  seq: 7
+
+websocket:
+  url: "{{wsFcDataHubBaseUrl}}/v2.0/signalr/connect?transport=webSockets&clientProtocol=2.0&connectionToken={{connectionToken}}&connectionData={{connectionData}}&tid=10"
+  message:
+    type: json
+    data: |-
+      {
+        "H": "FcMarketDataV2Hub",
+        "M": "SwitchChannels",
+        "A": [
+          "X-Quote:All"
+        ],
+        "I": 1
+      }
+  auth: inherit
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  ### Dữ liệu bid/ask
+
+  Dữ liệu bid/ask của mã chứng khoán
+
+  Định dạng: X-Quote: X hoặc ALL&#x20;
+
+  X: Danh sách các mã chứng khoán
+
+  ALL: Toàn bộ mã chứng khoán
+
+  | # | Dữ liệu | Kiểu | Mô tả |
+  |---|---|---|---|
+  | 1 | Rtype | string | Định dạng: X-QUOTE |
+  | 2 | TradingDate | Date | DD/MM/YYYY |
+  | 3 | Time | Time | Định dạng:HH:MM:SS |
+  | 4 | Symbol | string | Mã CK |
+  | 5 | BidPrice1 | number | Giá bid tốt nhất 1 |
+  | 6 | BidVol1 | number | Khối lượng bid tốt nhất 1 |
+  | 7 | BidPrice2 | number | Giá bid tốt nhất 2 |
+  | 8 | BidVol2 | number | Khối lượng bid tốt nhất 2 |
+  | 9 | BidPrice3 | number | Giá bid tốt nhất 3 |
+  | 10 | BidVol3 | number | Khối lượng bid tốt nhất 3 |
+  | 11 | BidPrice4 | number | Giá bid tốt nhất 4 |
+  | 12 | BidVol4 | number | Khối lượng bid tốt nhất 4 |
+  | 13 | BidPrice5 | number | Giá bid tốt nhất 5 |
+  | 14 | BidVol5 | number | Khối lượng bid tốt nhất 5 |
+  | 15 | BidPrice6 | number | Giá bid tốt nhất 6 |
+  | 16 | BidVol6 | number | Khối lượng bid tốt nhất 6 |
+  | 17 | BidPrice7 | number | Giá bid tốt nhất 7 |
+  | 18 | BidVol7 | number | Khối lượng bid tốt nhất 7 |
+  | 19 | BidPrice8 | number | Giá bid tốt nhất 8 |
+  | 20 | BidVol8 | number | Khối lượng bid tốt nhất 8 |
+  | 21 | BidPrice9 | number | Giá bid tốt nhất 9 |
+  | 22 | BidVol9 | number | Khối lượng bid tốt nhất 9 |
+  | 23 | BidPrice10 | number | Giá bid tốt nhất 10 |
+  | 24 | BidVol10 | number | Khối lượng bid tốt nhất 10 |
+  | 25 | AskPrice1 | number | Giá ask tốt nhất 1 |
+  | 26 | AskVol1 | number | Khối lượng ask tốt nhất 1 |
+  | 27 | AskPrice2 | number | Giá ask tốt nhất 2 |
+  | 28 | AskVol2 | number | Khối lượng ask tốt nhất 2 |
+  | 29 | AskPrice3 | number | Giá ask tốt nhất 3 |
+  | 30 | AskVol3 | number | Khối lượng ask tốt nhất 3 |
+  | 31 | AskPrice4 | number | Giá ask tốt nhất 4 |
+  | 32 | AskVol4 | number | Khối lượng ask tốt nhất 4 |
+  | 33 | AskPrice5 | number | Giá ask tốt nhất 5 |
+  | 34 | AskVol5 | number | Khối lượng ask tốt nhất 5 |
+  | 35 | AskPrice6 | number | Giá ask tốt nhất 6 |
+  | 36 | AskVol6 | number | Khối lượng ask tốt nhất 6 |
+  | 37 | AskPrice7 | number | Giá ask tốt nhất 7 |
+  | 38 | AskVol7 | number | Khối lượng ask tốt nhất 7 |
+  | 39 | AskPrice8 | number | Giá ask tốt nhất 8 |
+  | 40 | AskVol8 | number | Khối lượng ask tốt nhất 8 |
+  | 41 | AskPrice9 | number | Giá ask tốt nhất 9 |
+  | 42 | AskVol9 | number | Khối lượng ask tốt nhất 9 |
+  | 43 | AskPrice10 | number | Giá ask tốt nhất 10 |
+  | 44 | AskVol10 | number | Khối lượng ask tốt nhất 10 |
+  | 45 | MarketID |  string |  Sàn giao dịch |
+  | 46 | Exchange |  string |  Sàn giao dịch |
+  | 47 | TradingSession | string | Phiên giao dịch |
+  | 48 | TradingStatus | string | Trạng thái giao dịch |
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  X-QUOTE: ACB
+  Output:
+  {"DataType":"X-QUOTE",
+  "Content":"{
+  \"TradingDate\":\"14/08/2023\",
+  \"Time\":\"14:00:28\",
+  \"Exchange\":\"HOSE\",
+  \"Symbol\":\"ACB\",
+  \"RType\":\"X-QUOTE\",
+  \"AskPrice1\":22950.0,
+  \"AskPrice2\":23000.0,
+  \"AskPrice3\":23050.0,
+  \"AskPrice4\":0.0,
+  \"AskPrice5\":0.0,
+  \"AskPrice6\":0.0,
+  \"AskPrice7\":0.0,
+  \"AskPrice8\":0.0,
+  \"AskPrice9\":0.0,
+  \"AskPrice10\":0.0,
+  \"AskVol1\":109100.0,
+  \"AskVol2\":208600.0,
+  \"AskVol3\":207200.0,
+  \"AskVol4\":0.0,
+  \"AskVol5\":0.0,
+  \"AskVol6\":0.0,
+  \"AskVol7\":0.0,
+  \"AskVol8\":0.0,
+  \"AskVol9\":0.0,
+  \"AskVol10\":0.0,
+  \"BidPrice1\":22900.0,
+  \"BidPrice2\":22850.0,
+  \"BidPrice3\":22800.0,
+  \"BidPrice4\":0.0,
+  \"BidPrice5\":0.0,
+  \"BidPrice6\":0.0,
+  \"BidPrice7\":0.0,
+  \"BidPrice8\":0.0,
+  \"BidPrice9\":0.0,
+  \"BidPrice10\":0.0,
+  \"BidVol1\":290900.0,
+  \"BidVol2\":454200.0,
+  \"BidVol3\":678800.0,
+  \"BidVol4\":0.0,
+  \"BidVol5\":0.0,
+  \"BidVol6\":0.0,
+  \"BidVol7\":0.0,
+  \"BidVol8\":0.0,
+  \"BidVol9\":0.0,
+  \"BidVol10\":0.0,
+  \"TradingSession\":\"LO\"}"}
+  ```

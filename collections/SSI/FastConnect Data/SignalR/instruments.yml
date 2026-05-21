@@ -1,0 +1,63 @@
+info:
+  name: Connect websocket
+  type: websocket
+  seq: 4
+
+websocket:
+  url: "{{wsFcDataHubBaseUrl}}/v2.0/signalr/connect?transport=webSockets&clientProtocol=2.0&connectionToken={{connectionToken}}&connectionData={{connectionData}}&tid=10"
+  message:
+    type: json
+    data: |-
+      {
+        "H": "FcMarketDataV2Hub",
+        "M": "SwitchChannels",
+        "A": [
+          "F:ALL"
+        ],
+        "I": 1
+      }
+  auth: inherit
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  ### Trạng thái Mã chứng khoán
+
+  Rtype F sẽ trả về thông tin phiên giao dịch và trạng thái giao dịch của mã chứng khoán.&#x20;
+
+  F: \<Danh sách các mã CK>
+
+  **Lưu ý:**  Các mã CK được ngăn cách nhau bởi dấu "-". Hoặc có thể nhập ALL để lấy thông tin room của tất cả các mã.&#x20;
+
+  VD: F: SSI hoặc F:SSI-PAN hoặc F:ALL
+
+  | # | Dữ liệu | Kiểu | Mô tả |
+  |---|---|---|---|
+  | 1 | Rtype | string | Định dạng: F |
+  | 2 | MarketID | string | Sàn giao dịch. Có các giá trị sau: HOSE|HNX|HNXBOND|UPCOM|DER |
+  | 3 | TradingDate | Date | Ngày giao dịch. Định dạng ddmmyyy |
+  | 4 | Time | Time | Thời gian. Định dạng HHMMSS |
+  | 5 | Symbol | String | Mã chứng khoán |
+  | 6 | TradingSession | String | Phiên giao dịch |
+  | 7 | TradingStatus | String | Trạng thái giao dịch |
+
+  **Ví dụ**
+
+  ```json
+  Input: 
+  F: SSI
+  Output: 
+  {"DataType":"F",
+  "Content":"{
+  \"RType\":\"F\",
+  \"MarketId\":\"HOSE\",
+  \"TradingDate\":\"14/08/2023\",
+  \"Time\":\"13:00:00\",
+  \"Symbol\":\"SSI\",
+  \"TradingSession\":\"LO\",
+  \"TradingStatus\":\"N\",
+  \"Exchange\":\"HOSE\"}"
+  }
+  ```

@@ -1,0 +1,66 @@
+info:
+  name: Dữ liệu OHLCV
+  type: websocket
+  seq: 6
+
+websocket:
+  url: "{{wsFcDataHubBaseUrl}}/v2.0/signalr/connect?transport=webSockets&clientProtocol=2.0&connectionToken={{connectionToken}}&connectionData={{connectionData}}&tid=10"
+  message:
+    type: json
+    data: |-
+      {
+        "H": "FcMarketDataV2Hub",
+        "M": "SwitchChannels",
+        "A": [
+          "B:All"
+        ],
+        "I": 1
+      }
+  auth: inherit
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  ### Dữ liệu OHLCV
+
+  Rtype B sẽ trả ra thông tin open, high, low, close, volume của các mã chứng khoán/chỉ số theo tick.&#x20;
+
+  B:\<Mã ck hoặc mã chỉ số>
+
+  **Lưu ý:** Các mã CK/chỉ số được ngăn cách nhau bởi dấu "-". Hoặc có thể nhập ALL để lấy thông tin OHLCV realtime của tất cả các mã.&#x20;
+
+  **Ví dụ:** B:SSI; B:SSI-VN30 hoặc B:ALL
+
+  | # | Tên trường | Kiểu dữ liệu | Mô tả |
+  |---|---|---|---|
+  | 1 | Rtype | String | Có giá trị là B |
+  | 2 | Time | Timestamp | Bao gồm Ngày và Thời gian |
+  | 3 | Symbol | String | Mã chứng khoán/chỉ số |
+  | 4 | Open | Number | Giá mở cửa |
+  | 5 | High | Number | Giá cao nhất |
+  | 6 | Low | Number | Giá thấp nhất |
+  | 7 | Close | Number | Giá đóng cửa |
+  | 8 | Volume | Number | Khối lượng khớp gần nhất |
+  | 9 | Value | Number | Giá trị khớp gần nhất. Tạm thời để bằng 0 |
+
+  **Ví dụ**
+
+  ```json
+  Input: 
+  B:X26
+  Output:
+  {"Datatype": 'B',
+   "Content": '{
+   "RType":"B",
+   "Symbol":"X26",
+   "TradingTime":"14:28:33",
+   "Open":16000,
+   "High":16000,
+   "Low":16000,
+   "Close":16000,
+   "Volume":5000,
+   "Value":0}' 
+   }
+  ```

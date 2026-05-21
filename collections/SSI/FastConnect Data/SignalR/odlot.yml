@@ -1,0 +1,120 @@
+info:
+  name: Dữ liệu Lô lẻ (Odlot)
+  type: websocket
+  seq: 5
+
+websocket:
+  url: "{{wsFcDataHubBaseUrl}}/v2.0/signalr/connect?transport=webSockets&clientProtocol=2.0&connectionToken={{connectionToken}}&connectionData={{connectionData}}&tid=10"
+  message:
+    type: json
+    data: |-
+      {
+        "H": "FcMarketDataV2Hub",
+        "M": "SwitchChannels",
+        "A": [
+          "OL:All"
+        ],
+        "I": 1
+      }
+  auth: inherit
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  ### Dữ liệu Lô lẻ (Odlot)
+
+  Rtype OL sẽ trả ra thông tin giao dịch lô lẻ open, high, low, close, volume của các mã chứng khoán&#x20;
+
+  **OL:All** :  trả về data lô lẻ tất cả các mã thuộc 3 sàn HOSE, HNX, UPCOM)
+
+  **OL:\<Mã chứng khoán>**: chỉ trả ra data của giao dịch lô lẻ cho mã chứng khoán Đăng ký
+
+  **Lưu ý:** Các mã chứng khoán được ngăn cách nhau bởi dấu "-". Hoặc có thể nhập **ALL** để lấy thông tin giao dịch realtime của tất cả các mã.&#x20;
+
+  **Ví dụ:** B:SSI; B:SSI-VND hoặc B:ALL
+
+  | # | Tên trường | Kiểu dữ liệu | Mô tả |
+  |---|---|---|---|
+  | 1 | Rtype | String | Có giá trị là OL |
+  | 2 | TradingDate | String | Ngày giao dịch theo định dạng dd/MM/yyyy |
+  | 3 | Time | Timestamp | Bao gồm Ngày và Thời gian |
+  | 4 | StockNo | Number | Mã chứng khoán dạng số |
+  | 5 | Symbol | String | Mã chứng khoán |
+  | 6 | Ceiling | Number | Giá trần |
+  | 7 | Floor | Number | Giá sàn |
+  | 8 | RefPrice | Number | Giá tham chiếu |
+  | 9 | Open | Number | Giá mở cửa |
+  | 10 | High | Number | Giá cao nhất |
+  | 11 | Low | Number | Giá thấp nhất |
+  | 12 | LastPrice | Number | Giá khớp gần nhất |
+  | 13 | LastVol | Number | Khối lượng khớp gần nhất |
+  | 14 | TotalVal | Number | Tổng giá trị giao dịch của cổ phiếu (cả lô chẵn và lẻ) |
+  | 15 | TotalVol | Number | Tổng khối lượng giao dịch của cổ phiếu |
+  | 16 | BidPrice1  | Number | Giá đặt mua tốt mức 1 |
+  | 17 | BidPrice2  | Number | Giá đặt mua tốt mức 2 |
+  | 18 | BidPrice3  | Number | Giá đặt mua tốt mức 3 |
+  | 19 | BidVol1  | Number | Khối lượng đặt mua tốt mức 1 |
+  | 20 | BidVol2  | Number | Khối lượng đặt mua tốt mức 2 |
+  | 21 | BidVol3  | Number | Khối lượng đặt mua tốt mức 3 |
+  | 22 | AskPrice1  | Number | Giá đặt bán tốt mức 1 |
+  | 23 | AskPrice2  | Number | Giá đặt bán tốt mức 2 |
+  | 24 | AskPrice3  | Number | Giá đặt bán tốt mức 3 |
+  | 25 | AskVol1  | Number | Khối lượng đặt bán tốt mức 1 |
+  | 26 | AskVol2  | Number | Khối lượng đặt bán tốt mức 2 |
+  | 27 | AskVol3 | Number | Khối lượng đặt bán tốt mức 3 |
+  | 28 | Exchange | String | Sàn giao dịch (HOSE/HNX/UPCOM) |
+  | 29 | TradingSession | String | Phiên giao dịch lô lẻ (LO/ATO/ATC/CLOSE/Break) |
+  | 30 | TradingStatus | String | Trạng thái mã chứng khoán N/H (Normal/Halt) |
+  | 31 | Change | Number | Thay đổi giá khớp gần nhất so với tham chiếu |
+  | 32 | RatioChange | Number | Phần trăm thay đổi giá khớp gần nhất so với tham chiếu |
+  | 33 | StockType | String | Loại cổ phiếu (Stock / Bond/ ETF...) |
+
+
+  **Ví dụ**
+
+  ```json
+  Input: 
+  OL:MBB
+  Output:
+  {
+    "DataType": "OL",
+    "Content": {
+      "RType": "OL",
+      "TradingDate": "18/02/2025",
+      "Time": "13:55:03",
+      "StockNo": 2027,
+      "Symbol": "MBB",
+      "Ceiling": 24200,
+      "Floor": 21100,
+      "RefPrice": 22650,
+      "Open": 22650,
+      "High": 22950,
+      "Low": 22600,
+      "LastPrice": 22750,
+      "LastVol": 9193,
+      "TotalVal": 185028289999.99728,
+      "TotalVol": 8135000,
+      "BidPrice1": 22700,
+      "BidPrice2": 22650,
+      "BidPrice3": 22600,
+      "BidVol1": 1108,
+      "BidVol2": 1630,
+      "BidVol3": 2016,
+      "AskPrice1": 22750,
+      "AskPrice2": 22800,
+      "AskPrice3": 22850,
+      "AskVol1": 132,
+      "AskVol2": 548,
+      "AskVol3": 297,
+      "Exchange": "HOSE",
+      "TradingSession": "LO",
+      "TradingStatus": "H",
+      "Change": 100,
+      "RatioChange": 0.44,
+      "StockType": "Stock"
+    }
+  }
+
+  ```

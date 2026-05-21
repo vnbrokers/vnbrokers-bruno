@@ -8,3 +8,20 @@ request:
   variables:
     - name: connectionData
       value: '[{"name":"FcMarketDataV2Hub"}]'
+
+docs:
+  content: |
+    # Dữ liệu streaming
+
+    FastConnect Data hỗ trợ cập nhật dữ liệu thời gian thực thông qua streaming. Ngay sau khi client kết nối, hệ thống sẽ chủ động gửi các thông tin cập nhật tới client khi có thay đổi. Các dữ liệu được streaming bao gồm:&#x20;
+
+    | # | Mã loại dữ liệu | Mô tả | Chú thích |
+    |---|---|---|---|
+    | 1 | F | Trạng thái mã chứng khoán | Xem trạng thái giao dịch và phiên giao dịch |
+    | 2 | X | Thông tin tổng hợp bid/ask và thông tin khớp lệnh |  |
+    | 3 | Quote | Thông tin bid/ask | Sàn HOSE hỗ trợ 3 mức giá. Sàn HNX, UPCOM và phái sinh hỗ trợ 10 mức giá.  |
+    | 4 | Trade | Thông tin khớp lệnh |  |
+    | 5 | B | Thông tin OHLCV |  |
+    | 6 | R | Room nước ngoài |  |
+    | 7 | MI | Thông tin chỉ sô | Xem chi tiết danh sách chỉ số |
+  type: text/markdown

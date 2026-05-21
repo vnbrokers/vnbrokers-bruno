@@ -10,3 +10,560 @@ request:
       value: '[{"name":"BroadcastHubV2"}]'
     - name: hubName
       value: BroadcastHubV2
+
+docs:
+  content: |
+    # Dữ liệu streaming
+
+    ## 1. Order Event
+
+    Thông tin streaming cập nhật trạng thái lệnh về đặt/ hủy/ sửa lệnh bao gồm những thông tin sau:
+
+    | #  | Tên trường    | Kiểu dữ liệu | Mô tả                                                                                                                                                                                                                                                                                       |
+    |----|---------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | 1  | type          | string       | Tên event: orderEvent                                                                                                                                                                                                                                                                       |
+    | 2  | uniqueID      | string       |                                                                                                                                                                                                                                                                                             |
+    | 3  | prefix        | string       |                                                                                                                                                                                                                                                                                             |
+    | 4  | ipAddress     | string       | Được xác định yêu cầu từ Client                                                                                                                                                                                                                                                             |
+    | 5  | notifyID      | string       | Số serrial của msg                                                                                                                                                                                                                                                                          |
+    | 6  | orderID       | string       |                                                                                                                                                                                                                                                                                             |
+    | 7  | instrumentID  | string       | Mã chứng khoán                                                                                                                                                                                                                                                                              |
+    | 8  | buySell       | string       | buy (B): mua/Sell (S): bán đã đặt theo orderID của lệnhB: BuyS: Sell                                                                                                                                                                                                                        |
+    | 9  | orderType     | string       | Loại lệnh: LO|ATO|ATC|MP|MTL|MOK|MAK|PLO                                                                                                                                                                                                                                                    |
+    | 10 | price         | number       | Giá                                                                                                                                                                                                                                                                                         |
+    | 11 | quantity      | number       | Khối lượng                                                                                                                                                                                                                                                                                  |
+    | 12 | marketID      | string       | Sàn: VN: thị trường cơ sởVNFE: thị trường phái sinh                                                                                                                                                                                                                                         |
+    | 13 | origRequestID | string       |                                                                                                                                                                                                                                                                                             |
+    | 14 | account       | string       | Số tài khoản                                                                                                                                                                                                                                                                                |
+    | 15 | cancelQty     | number       | Tổng khối lượng đã hủy                                                                                                                                                                                                                                                                      |
+    | 16 | osqty         | number       | Tổng khối lượng chưa khớp                                                                                                                                                                                                                                                                   |
+    | 17 | filledQty     | number       | Tổng khối lượng khớp                                                                                                                                                                                                                                                                        |
+    | 18 | avgPrice      | number       | Giá trung bình                                                                                                                                                                                                                                                                              |
+    | 19 | channel       | string       | Kênh đặt lệnh                                                                                                                                                                                                                                                                               |
+    | 20 | inputTime     | string       | Unixtime                                                                                                                                                                                                                                                                                    |
+    | 21 | modifiedTime  | string       | Unixtime                                                                                                                                                                                                                                                                                    |
+    | 22 | isForceSell   | Boolean      |                                                                                                                                                                                                                                                                                             |
+    | 23 | orderStatus   | Boolean      | Trạng thái lệnh:WA: Chờ duyệt RS: Chờ gửi SD: Đã gửi QU: Chờ khớp FF: Đã khớp PF: Khớp 1 phần FFPC: Khớp 1 phần hủy phần còn lại WM: Chờ sửa WC: Chờ hủy CL: Đã hủy RJ: Từ chối EX: Hết hiệu lực SOR: Chờ kích hoạt SOS: Đã kích hoạt IAV: Lệnh trước phiên SOI: Lệnh điều kiện trước phiên |
+    | 24 | origOrderID   | string       |                                                                                                                                                                                                                                                                                             |
+    | 25 | rejectReason  | string       |                                                                                                                                                                                                                                                                                             |
+    | 26 | stopOrder     | string       | Loại lệnh: True: Đối với lệnh điều kiện False: Đối với lệnh thường                                                                                                                                                                                                                          |
+    | 27 | stopType      | string       | Loại điều kiện. Bắt buộc nhập nếu stopType = true- D: Down- U: Up- V: Trailling Up- E: Trailing Down- O: OCO- B: BullBear                                                                                                                                                                   |
+    | 28 | stopStep      | number       |                                                                                                                                                                                                                                                                                             |
+    | 29 | stopPrice     | number       |                                                                                                                                                                                                                                                                                             |
+    | 30 | profitPrice   | number       |                                                                                                                                                                                                                                                                                             |
+
+
+    Ví dụ:
+
+    *Streaming đặt lệnh thành công*
+
+    ```json
+    { 
+      instrumentID: "SSI",
+      market: "VN",
+      buySell: "B",
+      orderType: "LO",
+      channelID: "IW",
+      price: 21000,
+      quantity: 300,
+      account: "0901351",
+      stopOrder: false,
+      stopPrice: 0,
+      stopType: "string",
+      stopStep: 0,
+      lossStep: 0,
+      profitStep: 0
+      requestID: "1678195",
+      code: “123456789”,
+      deviceID: "MAC Address",
+      userAgent: “FCTrading”
+     }
+    ```
+
+    ```json
+    {
+    "type":"orderEvent",
+      "data": {
+        "orderID":"12663204",
+        "notifyID":10, 
+        “instrumentID":"VN30F2106",
+        "uniqueID":"30304045",
+        "buySell":"B",
+        “orderType":"LO",
+        "ipAddress":"192.168.202.36",
+        "price":1410,"prefix":"2mw",
+        "quantity":10,
+        "marketID":"VNFE",
+        "origOrderId":"",
+        "account":"0901358",
+        "cancelQty":0,"osQty":10,
+        "filledQty":0,
+        "avgPrice":0,
+        "channel":"TA",
+        "inputTime":"1606277281849",
+        "modifiedTime":"1606277281850",
+        "isForceSell":"F",
+        "isShortSell":"F",
+        "orderStatus":"RS",
+        "rejectReason":"",
+        "origRequestID":"30304045",
+        "stopOrder":false,
+        "stopPrice":0,
+        "stopType":"",
+        "stopStep":0,
+        "profitPrice":0
+      }
+    }
+    ```
+
+    *Streaming đặt lệnh không thành công*
+
+    ```json
+    { 
+      instrumentID: "SSI",
+      market: "VN",
+      buySell: "B",
+      orderType: "LO",
+      channelID: "IW",
+      price: 1600,
+      quantity: 300,
+      account: "0901351",
+      stopOrder: false,
+      stopPrice: 0,
+      stopType: "string",
+      stopStep: 0,
+      lossStep: 0,
+      profitStep: 0
+      requestID: "1678195",
+      code: “123456789”,
+      deviceID: "MAC Address",
+      userAgent: “FCTrading”
+     }
+    ```
+
+    ```json
+    {
+      "type": "orderError",
+      "data": {
+        "message": "Price 1,600.00 exceeds ceiling price 808.50!",
+        "notifyID": 15455,
+        "data": null,
+        "errorCode": "ERR500",
+        "uniqueID": "02365132",
+        "connectionID": "",
+        "ipAddress": "192.168.202.87",
+        "prefix": "23o"
+      }
+    }
+    ```
+
+    *Streaming về sửa lệnh thành công*
+
+    ```json
+    {
+      requestID: "93235974",
+      orderID: "12658867",
+      price: 1410,
+      quantity: 2,
+      account: "0901358",
+      instrumentID: "VN30F2106",
+      marketID: "VNFE",
+      buySell: "B",
+      orderType: "LO"
+      code:”123456789”,
+      deviceID: "MAC Address",
+      userAgent: “FCTrading”
+    }
+    ```
+
+    ```json
+    {
+      "type":"orderEvent",
+      "data": {
+        "orderID":"12663204",
+        "notifyID":11,
+        "instrumentID":"VN30F2106",
+        "uniqueID":"31618366",
+        "buySell":"B",
+        "orderType":"LO",
+        "ipAddress":"192.168.202.36",
+        "price":1410,
+        "prefix":"2mw",
+        "quantity":2,
+        "marketID":"VNFE",
+        "origOrderId":"",
+        "account":"0901358",
+        "cancelQty":0,
+        "osQty":2,
+        "filledQty":0,
+        "avgPrice":0,
+        "channel":"TA",
+        "inputTime":"1606277281849",
+        "modifiedTime":"1606277330852",
+        "isForceSell":"F",
+        "isShortSell":"F",
+        "orderStatus":"RS",
+        "rejectReason":"",
+        "origRequestID":"30304045",
+        "stopOrder": false,
+        "stopPrice":0,
+        "stopType":"",
+        "stopStep":0,
+        "profitPrice":0
+      }
+    }
+    ```
+
+    *Streaming sửa lệnh không thành công*
+
+    ```json
+    {
+      requestID: "93235974",
+      orderID: "12658867",
+      price: 1000,
+      quantity: 2,
+      account: "0901358",
+      instrumentID: "VN30F2106",
+      marketID: "VNFE",
+      buySell: "B",
+      orderType: "LO"
+      code:”123456789”,
+      deviceID: "MAC Address",
+      userAgent: “FCTrading”
+    }
+    ```
+
+    ```json
+    {
+      "type": "orderError",
+      "data": {
+        "message": "Price 1,000.00 exceeds ceiling price 808.50!",
+        "notifyID": 15460,
+        "data": null,
+        "errorCode": "ERR500",
+        "uniqueID": "65896571",
+        "connectionID": "",
+        "ipAddress": "192.168.202.87",
+        "prefix": "23o"
+      }
+    }
+    ```
+
+    *Streaming hủy lệnh thành công*
+
+    ```json
+    {
+      orderID: "12658867",
+      account: "0901358",
+      marketID: "VNFE",
+      instrumentID: "VN30F2106",
+      buySell: "B",
+      requestID: "52513603"
+      code:”123456789”,
+      deviceID: "MAC Address",
+      userAgent: “FCTrading”
+    }
+    ```
+
+    ```json
+    {
+      "type":"orderEvent",
+      "data": {
+        "orderID":"12663204",
+        "notifyID":12,
+        "instrumentID":"VN30F2106",
+        "uniqueID":"59028516",
+        "buySell":"B",
+        "orderType":"LO",
+        "ipAddress":"192.168.202.36",
+        "price":1410
+        ,"prefix":"2mw",
+        "quantity":2,
+        "marketID":"VNFE",
+        "origOrderId":"",
+        "account":"0901358",
+        "cancelQty":2,
+        "osQty":0,
+        "filledQty":0,
+        "avgPrice":0,
+        "channel":"TA",
+        "inputTime":"1606277281849",
+        "modifiedTime":"1606277330861",
+        "isForceSell":"F",
+        "isShortSell":"F",
+        "orderStatus":"CL",
+        "rejectReason":"",
+        "origRequestID":"30304045",
+        "stopOrder": false,
+        "stopPrice":0,
+        "stopType":"",
+        "stopStep":0,
+        "profitPrice":0
+      }
+    }
+    ```
+    *Streaming hủy lệnh không thành công*
+
+    ```json
+    {
+      orderID: "12658867",
+      account: "0901358",
+      marketID: "VNFE",
+      instrumentID: "VN30F2106",
+      buySell: "B",
+      requestID: "52513603"
+      code:”123456789”,
+      deviceID: "MAC Address",
+      userAgent: “FCTrading”
+    }
+    ```
+
+    ```json
+    {
+      "type": "orderError",
+      "data": {
+        "message": "Invalid Order Transition Error!",
+        "notifyID": 15468,
+        "data": null,
+        "errorCode": "ERR500",
+        "uniqueID": "25162310",
+        "ipAddress": ":",
+        "192.168.202.87": ",",
+        "prefix": ":",
+        "23o": "}}"
+      }
+    }
+    ```
+
+    ## 2. OrderError
+
+    Khi yêu cầu đặt/hủy/sửa bị lỗi, hệ thống sẽ cập nhật qua streaming các thông tin như sau:
+
+    | #  | Tên trường     | Kiểu dữ liệu | Mô tả                                                                                                                     |
+    |----|----------------|--------------|---------------------------------------------------------------------------------------------------------------------------|
+    | 1  | type           | string       | Tên event: orderError                                                                                                     |
+    | 2  | data           |              | Thông tin dữ liệu                                                                                                         |
+    | 3  | Detail of data |              |                                                                                                                           |
+    | 4  | uniqueid       | string       |                                                                                                                           |
+    | 5  | ipaddress      | string       |                                                                                                                           |
+    | 6  | notifyID       | string       |                                                                                                                           |
+    | 7  | errorCode      | string       | Mã code lỗi trả ra                                                                                                        |
+    | 8  | message        | string       | Thông tin lệnh lỗi                                                                                                        |
+    | 9  | orderID        | string       | Số hiệu lệnh                                                                                                              |
+    | 10 | instrumentID   | string       | Mã CK                                                                                                                     |
+    | 11 | buySell        | string       | Chiều mua/ bánB: BuyS: Sell                                                                                               |
+    | 12 |                |              |                                                                                                                           |
+    | 13 | prefix         | string       |                                                                                                                           |
+    | 14 | orderType      | string       | Loại lệnh: LO|ATO|ATC|MP|MTL|MOK|MAK|PLO                                                                                  |
+    | 15 | price          | number       | Giá                                                                                                                       |
+    | 16 | quantity       | number       | Khối lượng                                                                                                                |
+    | 17 | marketID       | string       | Sàn                                                                                                                       |
+    | 18 | origOrderID    | string       |                                                                                                                           |
+    | 19 | account        | string       | Số tài khoản                                                                                                              |
+    | 20 | channel        | string       | Kênh                                                                                                                      |
+    | 21 | inputTime      | string       | Thời gian nhận                                                                                                            |
+    | 22 | modifiedTime   | string       | Thời gian sửa lệnh                                                                                                        |
+    | 23 | isForceSell    | Boolean      | Luôn = F                                                                                                                  |
+    | 24 | isShortSell    | Boolean      | Luôn = F                                                                                                                  |
+    | 25 | origRequestID  | string       |                                                                                                                           |
+    | 26 | stopOrder      | string       | True hoặc False                                                                                                           |
+    | 27 | stopPrice      | number       |                                                                                                                           |
+    | 28 | stopType       | string       | Loại điều kiện. Bắt buộc nhập nếu stopType = true- D: Down- U: Up- V: Trailling Up- E: Trailing Down- O: OCO- B: BullBear |
+    | 29 | stopStep       | number       |                                                                                                                           |
+    | 30 | profitPrice    | number       |                                                                                                                           |
+    | 31 | modifiable     | string       |                                                                                                                           |
+    | 32 | note           | string       | Ghi chú                                                                                                                   |
+
+    Ví dụ:
+
+    ```json
+    {
+      "type": "orderError",
+      "data": {
+        "message": "This channel has been block; disallow to place order ",
+        "notifyID": 0,
+        "errorCode": "ORD015",
+        "uniqueID": "6163422",
+        "orderID": "T20230504w3806163422",
+        "instrumentID": "SSI",
+        "ipAddress": "10.255.241.47",
+        "buySell": "B",
+        "prefix": "w38",
+        "orderType": "LO",
+        "price": 19600,
+        "quantity": 200,
+        "marketID": "VN",
+        "origOrderId": "T20230504w3806163422",
+        "account": "0322206",
+        "channel": "TA",
+        "inputTime": "1683165600160",
+        "modifiedTime": "1683165600161",
+        "isForceSell": "F",
+        "isShortSell": "F",
+        "origRequestID": "6163422",
+        "stopOrder": false,
+        "stopPrice": 0,
+        "stopType": "",
+        "stopStep": 0,
+        "profitPrice": 0,
+        "modifiable": false,
+        "note": ""
+      }
+    }
+    ```
+
+    ## 3. Order Match Event
+
+    Thông tin Streaming gồm những trường sau:
+
+    | #  | Tên trường   | Kiểu dữ liệu | Mô tả                         |
+    |----|--------------|--------------|-------------------------------|
+    | 1  | type         | string       | Tên event: orderMatchEvent    |
+    | 2  | data         |              | Thông tin khớp lệnh           |
+    | 3  | orderID      | string       | Thông tin orderID             |
+    | 4  | instrumentID | string       | Mã chứng khoán                |
+    | 5  | ipAddress    | string       | IP xác định từ yêu cầu Client |
+    | 6  | uniqueID     |  string      |                               |
+    | 7  | notifyid     | string       |                               |
+    | 8  | buySell      | string       |                               |
+    | 9  | matchPrice   | number       |  giá khớp                     |
+    | 10 | matchQty     | number       |  khối lượng khớp              |
+    | 11 | prefix       | string       |                               |
+    | 12 | account      | string       |  Số tài khoản                 |
+    | 13 | matchTime    | string       |  Thời gian khớp               |
+
+    Ví dụ:
+
+    ```json
+    {
+      "type": "orderMatchEvent",
+      "data": {
+        "orderID": "16201867",
+        "notifyID": 101180,
+        "instrumentID": "BVS",
+        "uniqueID": "24194396",
+        "buySell": "B",
+        "matchPrice": 1000,
+        "ipAddress": "10.48.41.16",
+        "matchQty": 100,
+        "prefix": "t4c",
+        "account": "1184411",
+        "matchTime": "1656665019000"
+      }
+    }
+    ```
+
+    ## 4. Vị thế phái sinh
+
+    Thông tin streaming vị thế phái sinh bao gồm vị thế mở và vị thế đã đóng trong ngày. 
+
+    | #  | Tên trường   | Kiểu dữ liệu | Mô tả                                |
+    |----|--------------|--------------|--------------------------------------|
+    | 1  | type         | string       | Tên event: clientPortfolioEvent      |
+    | 2  | uniqueid     | string       |                                      |
+    | 3  | connectionid | string       |                                      |
+    | 4  | ipaddress    | string       | IP được xác định từ yêu cầu Client   |
+    | 5  | notifyid     | string       |                                      |
+    | 6  | account      |  string      | Số tài khoản                         |
+    | 7  | marketid     | string       | Thị trường- VNFE: Phái sinh          |
+    | 8  | instrumentid | string       | Mã chứng khoán                       |
+    | 9  | longqty      | number       | Vị thế long                          |
+    | 10 | shortqty     | number       | Vị thế short                         |
+    | 11 | Net          | number       | Vị thế net (Tính bằng long - short). |
+    | 12 | bidavgprice  | number       | Giá mua trung bình                   |
+    | 13 | askavgprice  | number       | Giá bán trung bình                   |
+    | 14 | tradeprice   | number       | Giá khớp                             |
+    | 15 | marketprice  | number       | Giá thị trường                       |
+    | 16 | floatingpl   | number       | Lãi/ Lỗ tạm tính                     |
+    | 17 | tradingpl    | number       | Lãi/ Lỗ đã chốt                      |
+
+    Ví dụ:
+
+    ```json
+    {
+      "type": "clientPortfolioEvent",
+      "data": {
+        "account": "0901358",
+        "notifyID": 27,
+        "data": null,
+        "clientPortfoliosOpen": [
+          {
+            "martketID": "VNFE",
+            "instrumentID": "VN30F2106",
+            "longQty": 9,
+            "shortQty": 0,
+            "net": 9,
+            "bidAvgPrice": 1402.4000244140625,
+            "askAvgPrice": 0,
+            "tradePrice": 0,
+            "marketPrice": 873,
+            "floatingPL": -476460000,
+            "tradingPL": 0
+          },
+          {
+            "martketID": "VNFE",
+            "instrumentID": "VN30F2107",
+            "longQty": 2,
+            "shortQty": 0,
+            "net": 2,
+            "bidAvgPrice": 830,
+            "askAvgPrice": 0,
+            "tradePrice": 0,
+            "marketPrice": 830,
+            "floatingPL": 0,
+            "tradingPL": 0
+          }
+        ],
+        "uniqueID": null,
+        "clientPortfoliosClose": null,
+        "connectionID": "",
+        "ipAddress": null,
+        "prefix": null
+      }
+    }
+    ```
+
+    ## 5. FCO Event
+
+    Thông tin streaming trạng thái lệnh điều kiện 
+
+    | #  | Tên trường        | Kiểu dữ liệu | Mô tả                                                                                                                                   |
+    |----|-------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+    | 1  | type              | string       | Type of event: “fcoEvent”                                                                                                               |
+    | 2  |  data             | json         | Thông tin chi tiết của event                                                                                                            |
+    | 3  |  fcoId            | string       | Id lệnh điều kiện                                                                                                                       |
+    | 4  |  processStatus    |              | Trạng thái lệnh điều kiện                                                                                                               |
+    | 5  |  matchedQuantity  | number       | Khối lượng đã khớp                                                                                                                      |
+    | 6  |  isPlaceOrder     | boolean      | Trạng thái phát sinh lệnh con: true: Có lệnh thực phát sinh (xuất hiện lệnh ở Orderbook); false: Chưa có Lệnh thực phát sinh            |
+    | 7  |  instrumentID     | string       | Mã chứng khoán. Mã chứng khoán, đối với mã phái sinh thì truyền theo mã 1M, 2M, 1Q, 2Q, VN30FYYMM ( Mã tổng quát và chi tiết phái sinh) |
+    | 8  |  quantity         | number       | Khối lượng muốn đặt lệnh                                                                                                                |
+    | 9  |  price            | string       | Giá đặt (đơn vị đồng): 23500/MP/MOK/MTL                                                                                                 |
+    | 10 |  account          |  string      | Tiểu khoản muốn đặt lệnh: ví dụ tài khoản đuôi 8 đuôi 6                                                                                 |
+    | 11 |  updatedTime      |  string      | Ngày bắt đầu thực hiên lệnh, định dạng YYYY/MM/DDThh:mm:ss. Nếu không truyền thì tính từ lúc tạo thành công                             |
+    | 12 |  status           |  string      | Tham chiếu bảng mã lỗi                                                                                                                  |
+    | 13 |  message          |  string      | Thông báo lỗi                                                                                                                           |
+    | 14 |  username         |  string      | ID người dùng tại SSI                                                                                                                   |
+
+    Ví dụ:
+
+    ```json
+    {
+      "type": "fcoEvent",
+      "data": {
+        "fcoId": "7528ac20-a340-4233-8bb7-a2379fc3c638",
+        "notifyID": 1249008,
+        "processStatus": "INIT",
+        "matchedQuantity": 0,
+        "isPlaceOrder": false,    
+        "instrumentID": "ssi",
+        "quantity": 4000,
+        "price": "MP",
+        "account": "1231496",
+        "updatedTime": "1751966448000",
+        "status": "200",
+        "message": "Success",
+        "username": "123149"
+      }
+    }
+    ```
+  type: text/markdown

@@ -1,0 +1,100 @@
+info:
+  name: Dữ liệu chỉ số
+  type: websocket
+  seq: 3
+
+websocket:
+  url: "{{wsFcDataHubBaseUrl}}/v2.0/signalr/connect?transport=webSockets&clientProtocol=2.0&connectionToken={{connectionToken}}&connectionData={{connectionData}}&tid=10"
+  message:
+    type: json
+    data: |-
+      {
+        "H": "FcMarketDataV2Hub",
+        "M": "SwitchChannels",
+        "A": [
+          "MI:All"
+        ],
+        "I": 1
+      }
+  auth: inherit
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  ### Dữ liệu chỉ số
+
+  Rtype MI cung cấp thông tin chỉ số cập nhật của tất cả các sàn HOSE, HNX, UPCOM.&#x20;
+
+  MI:\<Danh sách các mã chỉ số>
+
+  **Lưu ý:** Các mã chỉ số được ngăn cách nhau bởi dấu "-". Hoặc có thể nhập ALL để lấy thông tin của tất cả các chỉ số.&#x20;
+
+  **Ví dụ:** MI:VN30 hoặc MI:VN30-HNXindex hoặc MI:ALL
+
+  | # | Dữ liệu | Kiểu | Mô tả |
+  |---|---|---|---|
+  | 1 | Rtype | String | Định dạng: MI |
+  | 2 | IndexID | String | Index ID |
+  | 3 | IndexValEst | Number | Giá dự tính Index |
+  | 4 | IndexValue | Number | Giá Index |
+  | 5 | Trading Date | Date | Ngày giao dịch |
+  | 6 | Time | Timestamp | Thời gian |
+  | 7 | Change | Number | Thay đổi của Index |
+  | 8 | RatioChange | Number | % thay đổi |
+  | 9 | TotalTrade | Number | Tổng số lệnh khớp (cả thông thường và thỏa thuận) |
+  | 10 | TotalQtty | Number | Tổng khối lượng |
+  | 11 | TotalValue | Number | Tổng giá trị khớp lệnh thông thường |
+  | 12 | TypeIndex | String | Index: “Main” – chỉ số chính như VN30 “Industry” – chỉ số liên quan đến Industry “Khác” – chỉ số không được phân loại. |
+  | 13 | IndexName | String | Tên của Index |
+  | 14 | Advances | Number | Tổng số mã tăng giá |
+  | 15 | Nochanges | Number | Tổng số mã có giá không đổi |
+  | 16 | Declines | Number | Tổng số mã giảm giá |
+  | 17 | Ceiling | Number | Tổng số mã có giá cuối cùng = giá trần |
+  | 18 | Floor | Number | Tổng số mã có giá cuối cùng = giá sàn |
+  | 19 | TotalQttyPT | Number | Tổng số lượng khớp lệnh thông qua |
+  | 20 | TotalValuePT | Number | Tổng giá trị khớp lệnh thỏa thuận |
+  | 21 | TotalQttyOd | Number |   |
+  | 22 | TotalValueOd | Number |   |
+  | 23 | AllQty | Number | Tổng khối lượng khớp của cả thông thường và thỏa thuận |
+  | 24 | AllValue | Number | Tổng giá trị khớp lệnh thông thường và thỏa thuận |
+  | 25 | TradingSession | String | Phiên giao dịch |
+  | 26 | Exchange | String | Sàn giao dịch |
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  MI:VN30
+  Output:
+  {'DataType': 'MI',
+  'Content': {
+  "IndexId":"VN30",
+  “IndexValEst”:1200.03,
+  "IndexValue":1238.76,
+  "PriorIndexValue":1226.16,
+  "TradingDate":"02/04/2021",
+  "Time":"11:28:13",
+  "TotalTrade":0.0,
+  "TotalQtty":191838100.0,
+  "TotalValue":7289093000000.0,
+  "IndexName":"VN30",
+  "Advances":25,
+  "NoChanges":2,
+  "Declines":3,"Ceilings":0,
+  "Floors":0,"Change":12.6,
+  "RatioChange":1.03,
+  "TotalQttyPt":2064000.0,
+  "TotalValuePt":244251000000.0,
+  "Exchange":"HOSE",
+  "AllQty":193902100.0,
+  "AllValue":7533344000000.0,
+  "IndexType":"Main",
+  "TradingSession":null,
+  "MarketId":null,
+  "RType":"MI",
+  "TotalQttyOd":0.0,
+  "TotalValueOd":0.0}'
+  }
+  ```

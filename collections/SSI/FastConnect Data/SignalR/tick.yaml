@@ -1,0 +1,94 @@
+info:
+  name: Dữ liệu khớp lệnh
+  type: websocket
+  seq: 8
+
+websocket:
+  url: "{{wsFcDataHubBaseUrl}}/v2.0/signalr/connect?transport=webSockets&clientProtocol=2.0&connectionToken={{connectionToken}}&connectionData={{connectionData}}&tid=10"
+  message:
+    type: json
+    data: |-
+      {
+        "H": "FcMarketDataV2Hub",
+        "M": "SwitchChannels",
+        "A": [
+          "R:All"
+        ],
+        "I": 1
+      }
+  auth: inherit
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  ### Dữ liệu khớp lệnh
+
+  Định dạng: X-TRADE: X hoặc ALL&#x20;
+
+  X: Danh sách các mã chứng khoán&#x20;
+
+  ALL: Toàn bộ mã chứng khoán
+
+  | # | Dữ liệu | Kiểu | Mô tả |
+  |---|---|---|---|
+  | 1 | Rtype | string | Định dạng: X-TRADE |
+  | 2 | TradingDate | Date | DD/MM/YYYY |
+  | 3 | Time | Time | Định dạng:HH:MM:SS |
+  | 4 | ISIN | string | Mã ISIN |
+  | 5 | Symbol | string | Mã CK |
+  | 6 | Ceiling | number | Giá cao nhất |
+  | 7 | Floor | number | Giá sàn |
+  | 8 | RefPrice | number | Giá tham chiếu |
+  | 9 | Highest | number | Giá cao nhất |
+  | 10 | Lowest | number | Giá thấp nhất |
+  | 11 | AvgPrice | number | Giá trung bình |
+  | 12 | PriorVal  | number | Giá đóng cửa của ngày giao dịch trước đó của ngày báo cáo |
+  | 13 | LastPrice | number | Giá khớp gần nhất |
+  | 14 | Change | number | Thay đổi |
+  | 15 | RatioChange | number | % thay đổi |
+  | 16 | EstMatchedPrice | number | Giá khớp dự kiến |
+  | 17 | LastVol | number | Khối lượng khớp gần nhất |
+  | 18 | TotalVal | number | Tổng giá trị khớp lệnh từ khi thị trường mở cửa đến thời điểm báo cáo. |
+  | 19 | TotalVol | number  | Tổng khối lượng khớp lệnh từ khi mở cửa thị trường đến thời điểm báo cáo. |
+  | 20 | MarketId |  string |  Sàn giao dịch |
+  | 21 | Exchange |  string |  Sàn giao dịch |
+  | 22 | TradingSession | string | Phiên giao dịch |
+  | 23 | TradingStatus | string | Trạng thái giao dịch  |
+  | 24 | Side | string | Chiều mua/ bán SD: BánBU: MuaUnknow: không xác định |
+
+  **Ví dụ**
+
+  ```json
+  Input:
+  X-TRADE: ACB
+  Output:
+  {"DataType":"X-TRADE",
+  "Content":"{
+  \"RType\":\"X-TRADE\",
+  \"TradingDate\":\"14/08/2023\",
+  \"Time\":\"14:07:53\",
+  \"Isin\":\"ACB\",
+  \"Symbol\":\"ACB\",
+  \"Ceiling\":24500.0,
+  \"Floor\":21300.0,
+  \"RefPrice\":22900.0,
+  \"AvgPrice\":22927.93,
+  \"PriorVal\":22900.0,
+  \"LastPrice\":22950.0,
+  \"LastVol\":100.0,
+  \"TotalVal\":201713015000.0,
+  \"TotalVol\":8797700.0,
+  \"MarketId\":\"HOSE\",
+  \"Exchange\":\"HOSE\",
+  \"TradingSession\":\"LO\",
+  \"TradingStatus\":\"N\",
+  \"Change\":50.0,
+  \"RatioChange\":0.22,
+  \"EstMatchedPrice\":22900.0,
+  \"Highest\":23050,
+  \"Lowest\":22800,
+  \"Side\":\"SD\"
+  },"}
+  ```
