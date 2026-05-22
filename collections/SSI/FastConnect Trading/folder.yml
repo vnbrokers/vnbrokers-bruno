@@ -7,7 +7,10 @@ request:
   headers:
     - name: Authorization
       value: Bearer {{accessToken}}
-  auth: inherit
+      disabled: true
+  auth:
+    type: bearer
+    token: "{{accessToken}}"
   variables:
     - name: baseUrl
       value: https://fc-tradeapi.ssi.com.vn

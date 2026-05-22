@@ -7,3 +7,7 @@ request:
   headers:
     - name: Authorization
       value: Bearer {{accessToken}}
+      disabled: true
+  auth:
+    type: bearer
+    token: "{{accessToken}}"
