@@ -5,3 +5,56 @@ info:
 
 request:
   auth: inherit
+
+docs:
+  content: |
+    ### Thông tin kết nối chung
+
+    - Base URL: `wss://ws-openapi.dnse.com.vn`
+    - DNSE cung cấp sẵn bộ SDK đã phân tách theo từng loại dữ liệu để khách hàng có thể sẵn sử dụng. Chi tiết xem [sample SDKs tại đây.](https://github.com/dnse-tech/openapi-sdk)
+    - Định dạng dữ liệu trong SDKs:
+      - `msgpack`: Tốc độ xử lý nhanh, tiết kiệm băng thông
+      - `json`: Phổ biến và dễ đọc trong quá trình phát triển
+    - Cơ chế kết nối:
+      - Một kết nối WebSocket có hiệu lực tối đa 8 giờ, WebSocket Server sẽ chủ động ngắt kết nối sau thời gian này.
+      - Cơ chế để các clients duy trì kết nối ổn định tới WebSocket server DNSE:
+        - WebSocket Server sẽ định kỳ gửi 1 PING message sau mỗi 3 phút.
+        - Mỗi PING message được gửi từ WebSocket đều yêu cầu nhận PONG message phản hồi từ các client trong thời gian tối đa là 1 phút kể từ lúc Server gửi PING. Nếu quá thời hạn 1 phút này, Server sẽ chủ động ngắt kết nối với Client không đáp ứng.
+        - Client được phép gửi PONG message ngay cả khi không nhận được PING từ Server, để chủ động duy trì kết nối. Cách này giúp client giữ kết nối trong các trường hợp PING message bị miss do network issue hoặc các gián đoạn tạm thời khác.
+
+    <details>
+      <summary>Ví dụ</summary>
+
+    - **Case 1: Good interaction**
+      - T+0 min   Server → PING
+      - T+1     Client → PONG
+      - T+3 min   Server → PING
+      - T+4     Client → PONG
+
+      Client phản hồi PONG cho mỗi PING từ Server.
+
+      ✅ Connection remains active
+
+    - **Case 2: Bad interaction**
+      - T+0 min   Server → PING
+      - No PONG back from client
+      - T+1 min   Server disconnects
+
+      Server đóng kết nối do không nhận được PONG trong khoảng thời gian kết nối định kỳ.
+
+      ❌  Dead Connection
+
+    - **Case 3: Client-initiated keepalive**
+      - Within every 3 minutes: Client → PING
+
+      Client có thể chủ động gửi PONG message để duy trì kết nối, đặc biệt trong các tình huống:
+      - Một số thư viện WS thực hiện auto-handle ping/pong hoặc ẩn các ping frames đối với các app/clients
+      - Mobile networks / NATs chủ động ngắt kết nối đối với các idle TCP connections
+      - Miss PING frame từ server
+
+      Do đó, việc cho phép clients định kỳ gửi PONG lên để Server xác nhận client vẫn đang hoạt động.
+
+      ✅ Connection keep alive
+
+    </details>
+  type: text/markdown

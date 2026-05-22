@@ -25,47 +25,66 @@ settings:
   keepAliveInterval: 0
 
 docs: |-
-  OHLC cung cấp thông tin nến (open, high, low, close, volume) theo khung thời gian thực dưới dạng dữ liệu nến đang hình thành và được cập nhật liên tục theo các giao dịch phát sinh. Áp dụng cho Cổ phiếu (stock), Phái sinh (derivative) và Chỉ số thị trường (index) với nhiều khung thời gian (resolution).
+  ### Giao dịch nhà đầu tư nước ngoài (Foreign Investor)
 
-  Input
-  symbol: Mã hoặc danh sách mã chứng khoán hay chỉ số thị trường
-  Lưu ý: Đối với phái sinh, truyền lên symbolType (VD: VN30F1M) thay vì symbol (VD: 41I1G4000).
-  resolution: Khung thời gian của nến (VD: 1, 3, 5, 15, 30, 1H, 1D, 1W)
+  Cung cấp dữ liệu giao dịch của nhà đầu tư nước ngoài theo từng mã chứng khoán, bao gồm khối lượng và giá trị mua/bán,
+  tổng lũy kế trong ngày và room còn lại. Dữ liệu được cập nhật trong phiên giao dịch khi có thay đổi.
 
-  ```
+  #### Input
 
+  - **symbols**: Mã hoặc danh sách mã chứng khoán. Nếu không truyền, hệ thống sẽ trả toàn bộ danh sách mã chứng khoán trên
+    phạm vi thị trường.
+  - **boardId**: Mã bảng giao dịch (VD: G1 – lô chẵn). Nếu không truyền, hệ thống sẽ lấy tất cả các bảng.
+
+  ```json
   {
     "action": "subscribe",
     "channels": [
       {
-        "name": "forgeign.G1.json",
+        "name": "foreign.G1.json",
         "symbols": [
           "HPG"
         ]
       }
     ]
   }
+  ```
 
-  Received message format:
+  #### Payload
+
+  ```json lines
   {
-    "T": "f",
-    "boardId": "G1",
-    "buyTradedAmount": "7079155000",
-    "buyVolume": "259000",
-    "foreignInvestorTypeCode": "10",
-    "foreignerBuyPossibleQuantity": "2453576846",
-    "foreignerOrderLimitQuantity": "2381767907",
     "marketId": "STO",
-    "multicastReceiveTime": "2026-05-11T04:21:11.064442884Z",
-    "sellTradedAmount": "52266730000",
-    "sellVolume": "1912200",
-    "symbol": "HPG",
-    "totalBuyTradedAmount": "7082286400",
-    "totalBuyVolume": "259113",
-    "totalSellTradedAmount": "52270123150",
-    "totalSellVolume": "1912323",
+    //string  // Mã thị trường
+    "boardId": "G1",
+    //string  // Mã bảng giao dịch
     "tradingSessionId": "40",
-    "transactTime": "042100062"
+    //string  // Mã phiên giao dịch hiện tại
+    "symbol": "FPT",
+    //string  // Mã chứng khoán
+    "transactTime": "035200011",
+    //string  // Thời điểm cập nhật
+    "foreignInvestorTypeCode": "10",
+    //string  // Loại nhà đầu tư nước ngoài
+    "sellVolume": 1449400,
+    //integer // Khối lượng bán trong ngày theo bảng giao dịch
+    "sellTradedAmount": 109774810000,
+    //float   // Giá trị bán trong ngày theo bảng giao dịch
+    "buyVolume": 608300,
+    //integer // Khối lượng mua trong ngày theo bảng giao dịch
+    "buyTradedAmount": 46040960000,
+    //float   // Giá trị mua trong ngày theo bảng giao dịch
+    "totalSellVolume": 1449716,
+    //integer // Tổng khối lượng bán trong ngày
+    "totalSellTradedAmount": 109798718600,
+    //float   // Tổng giá trị bán trong ngày
+    "totalBuyVolume": 608370,
+    //integer // Tổng khối lượng mua trong ngày
+    "totalBuyTradedAmount": 46046280000,
+    //float   // Tổng giá trị mua trong ngày
+    "foreignerOrderLimitQuantity": 341884580,
+    //integer // Tổng room sở hữu tối đa của NĐT nước ngoài
+    "foreignerBuyPossibleQuantity": 351900000
+    //integer // Room còn lại có thể mua
   }
-
   ```

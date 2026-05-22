@@ -22,7 +22,7 @@ settings:
   keepAliveInterval: 0
 
 docs: |-
-  ### Chỉ số thị trường (Market Index) {#market-index}
+  ### Chỉ số thị trường (Market Index)
 
   Cung cấp thông tin chỉ số thị trường bao gồm giá trị chỉ số, mức thay đổi, độ rộng thị trường (số mã tăng/giảm/đi ngang)
   và thanh khoản. Dữ liệu được cập nhật liên tục trong phiên giao dịch.

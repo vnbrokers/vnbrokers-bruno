@@ -25,7 +25,18 @@ settings:
   keepAliveInterval: 0
 
 docs: |-
-  ```
+  ### Giá khớp dự kiến (Expected Price)
+
+  Cung cấp thông tin giá đóng cửa, giá khớp dự kiến và khối lượng khớp dự kiến của mã chứng khoán trong các phiên giao
+  dịch khớp lệnh định kỳ ATO và ATC.
+
+  #### Input
+
+  - **symbols**: Mã hoặc danh sách mã chứng khoán. Nếu không truyền, hệ thống sẽ trả toàn bộ danh sách mã chứng khoán trên
+    phạm vi thị trường.
+  - **boardId**: Mã bảng giao dịch (VD: G1 – lô chẵn). Nếu không truyền, hệ thống sẽ lấy tất cả các bảng.
+
+  ```json
   {
     "action": "subscribe",
     "channels": [
@@ -37,43 +48,25 @@ docs: |-
       }
     ]
   }
+  ```
 
+  #### Payload
 
+  ```json lines
   {
-    "T": "q",
-    "bid": [
-      {
-        "price": 27.25,
-        "qtty": 39440
-      },
-      {
-        "price": 27.2,
-        "qtty": 49510
-      },
-      {
-        "price": 27.15,
-        "qtty": 24630
-      }
-    ],
+    "marketId": "DVX",
+    //string    // Mã thị trường niêm yết mã chứng khoán
     "boardId": "G1",
-    "isin": "VN000000HPG4",
-    "marketId": "STO",
-    "multicastReceiveTime": "2026-05-11T03:26:11.102485284Z",
-    "offer": [
-      {
-        "price": 27.3,
-        "qtty": 14230
-      },
-      {
-        "price": 27.35,
-        "qtty": 47820
-      },
-      {
-        "price": 27.4,
-        "qtty": 66970
-      }
-    ],
-    "sendingTime": "2026-05-11T03:26:11.100Z",
-    "symbol": "HPG"
+    //string    // Mã bảng giao dịch
+    "symbol": "41I1G1000",
+    //string    // Mã chứng khoán
+    "isin": "VN41I1G10000",
+    //string    // Mã định danh quốc tế
+    "closePrice": 28.45,
+    //float     // Giá đóng cửa
+    "expectedTradePrice": 28.45,
+    //float     // Giá dự khớp tại thời điểm xác định
+    "expectedTradeQuantity": 133780
+    //integer   // Khối lượng dự khớp tại thời điểm xác định
   }
   ```

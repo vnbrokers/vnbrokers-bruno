@@ -22,17 +22,18 @@ settings:
   timeout: 0
   keepAliveInterval: 0
 
-
 docs: |-
-  Dữ liệu vị trí thời gian thực (Position Event)
-  Cung cấp thông tin chi tiết về vị trí giao dịch trên tài khoản người dùng theo thời gian thực. Hệ thống sẽ đẩy dữ liệu ngay khi có sự thay đổi liên quan đến: vị trí mới, thay đổi trạng thái, hoặc thay đổi giá trị.
+  ### Dữ liệu vị thế thời gian thực (Position Event) {#position-event}
 
-  Input
-  market_type: Phân loại thị trường
-  STOCK: Lệnh giao dịch cơ sở
-  DERIVATIVE: Lệnh giao dịch phái sinh
+  Cung cấp thông tin chi tiết về vị thế giao dịch trên tài khoản người dùng theo thời gian thực. Hệ thống sẽ đẩy dữ liệu ngay khi có sự thay đổi liên quan đến: mở vị thế, đóng vị thế, thay đổi khối lượng, giá vốn, giá đóng, giá thị trường hoặc trạng thái vị thế.
 
-  ```
+  #### Input
+
+  - **market_type**: Phân loại thị trường
+    - `STOCK`: Vị thế thị trường cơ sở
+    - `DERIVATIVE`: Vị thế thị trường phái sinh
+
+  ```json
   {
     "action": "subscribe",
     "channels": [
@@ -42,25 +43,56 @@ docs: |-
       }
     ]
   }
+  ```
 
+
+  #### Payload
+
+  ##### Vị thế phái sinh
+
+  ```json lines
   {
-    "id": 177796763592657,
-    "marketType": "DERIVATIVE",
-    "symbol": "41I1G5000",
-    "accountNo": "0001179019",
-    "status": "OPEN",
-    "loanPackageId": 2278,
-    "side": "NB",
-    "accumulateQuantity": 259,
-    "tradeQuantity": 23,
-    "closedQuantity": 236,
-    "openQuantity": 23,
-    "overNightQuantity": 0,
-    "costPrice": 2036.78986,
-    "marketPrice": 1915.8,
-    "breakEvenPrice": 2037.28116,
-    "averageClosePrice": 2094.28941,
-    "createdDate": "2026-05-05T09:17:50.457893Z",
-    "modifiedDate": "2026-05-08T06:51:04.755263Z"
+    "id": 177796763592657,            // integer  // Id vị thế
+    "accountNo": "0001179019",        // string   // Số tiểu khoản
+    "symbol": "41I1G5000",            // string   // Mã chứng khoán
+    "status": "OPEN",                 // string   // Trạng thái vị thế (OPEN: Đang mở, CLOSED: Đã đóng)
+    "loanPackageId": 2278,            // integer  // Mã gói vay
+    "side": "NB",                     // string   // Chiều vị thế (NB: Mua, NS: Bán)
+    "accumulateQuantity": 247,        // integer  // Tổng khối lượng đã mở được cộng dồn trong vị thế
+    "tradeQuantity": null,            // integer  // Dành cho thị trường cơ sở
+    "closedQuantity": 236,            // integer  // Khối lượng đã đóng
+    "costPrice": 2057.72425,          // float    // Giá vốn trung bình
+    "marketPrice": 2070.0,            // float    // Giá thị trường hiện tại
+    "breakEvenPrice": 2058.21911,     // float    // Giá hòa vốn
+    "openQuantity": 11,               // integer  // Khối lượng vị thế đang mở
+    "overNightQuantity": 0,           // integer  // Khối lượng mở qua đêm
+    "averageClosePrice": 2094.28941,  // float    // Giá đóng trung bình tính trên khối lượng đã đóng
+    "marketType": "DERIVATIVE",       // string   // Loại thị trường
+    "createdDate": "2026-05-05T09:17:50.457893Z", // string // Thời điểm mở vị thế (UTC)
+    "modifiedDate": "2026-05-07T04:19:20.901188117Z" // string // Thời điểm cập nhật gần nhất (UTC)
+  }
+  ```
+  ##### Vị thế cơ sở
+
+  ```json lines
+  {
+    "id": 8426,                       // integer  // Id vị thế
+    "accountNo": "0001179019",        // string   // Số tiểu khoản
+    "symbol": "ACB",                  // string   // Mã chứng khoán
+    "status": "OPEN",                 // string   // Trạng thái vị thế  (OPEN: Đang mở, PENDING_CLOSE: Chờ đóng, CLOSED: Đã đóng, ODD_LOT: Lô lẻ đang mở)
+    "loanPackageId": 5757,            // integer  // Mã gói vay
+    "side": "NB",                     // string   // Chiều vị thế (NB: Mua, NS: Bán)
+    "accumulateQuantity": 2400,       // integer  // Tổng khối lượng đã mở được cộng dồn trong vị thế
+    "tradeQuantity": 2100,            // integer  // Khối lượng có thể bán
+    "closedQuantity": 300,            // integer  // Khối lượng đã đóng
+    "costPrice": 23125.210,           // float    // Giá vốn trung bình
+    "marketPrice": 23100,             // float    // Giá thị trường hiện tại
+    "breakEvenPrice": 23251.3689,     // float    // Giá hòa vốn
+    "openQuantity": 2000,             // integer  // Tổng khối lượng mở trong vị thế
+    "overNightQuantity": null,        // integer  // Dành cho thị trường phái sinh
+    "averageClosePrice": 23816.6667,  // float    // Giá đóng trung bình tính trên khối lượng đã đóng
+    "marketType": "STOCK",            // string   // Loại thị trường
+    "createdDate": "2025-07-28T06:20:21.655809Z", // string // Thời điểm mở vị thế (UTC)
+    "modifiedDate": "2026-05-07T11:10:08.787906Z" // string // Thời điểm cập nhật gần nhất (UTC)
   }
   ```

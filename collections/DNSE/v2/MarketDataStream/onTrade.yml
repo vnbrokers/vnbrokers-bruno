@@ -25,6 +25,19 @@ settings:
   keepAliveInterval: 0
 
 docs: |-
+  ### Dữ liệu khớp lệnh (Trade Extra)
+
+  DNSE cung cấp dữ liệu khớp lệnh của một mã chứng khoán qua 2 Function khác nhau: Trade và Trade Extra. Trade Extra có
+  thêm một số thông tin mà DNSE tự tổng hợp thêm (mua bán chủ động, giá khớp trung bình), nếu người dùng không có nhu cầu
+  lấy các thông tin này thì có thể dùng function Trade đơn thuần để tối ưu hơn về tốc độ nhận dữ liệu.
+
+  #### Input
+
+  - **symbols**: Mã hoặc danh sách mã chứng khoán. Nếu không truyền, hệ thống sẽ trả toàn bộ danh sách mã chứng khoán trên
+    phạm vi thị trường.
+  - **boardId**: Mã bảng giao dịch (VD: G1 – lô chẵn). Nếu không truyền, hệ thống sẽ lấy tất cả các bảng.
+
+
   ```json
   {
     "action": "subscribe",
@@ -39,22 +52,33 @@ docs: |-
   }
   ```
 
-  ```json
+  #### Payload
+
+  ```json lines
   {
-    "T": "t",
+    "marketId": "DVX",
+    //string  // Mã thị trường niêm yết mã chứng khoán
     "boardId": "G1",
-    "grossTradeAmount": 108.75646,
-    "highestPrice": 27.5,
-    "isin": "VN000000HPG4",
-    "lowestPrice": 27.25,
-    "marketId": "STO",
-    "matchPrice": 27.3,
-    "matchQtty": 10,
-    "multicastReceiveTime": "2026-05-11T02:59:34.995840607Z",
-    "openPrice": 27.5,
-    "sendingTime": "2026-05-11T02:59:34.989Z",
-    "symbol": "HPG",
-    "totalVolumeTraded": "397320",
+    //string  // Mã bảng giao dịch
+    "isin": "VN41I1G20009",
+    //string  // Mã định danh quốc tế
+    "symbol": "41I1G2000",
+    //string  // Mã chứng khoán
+    "price": 1999.8,
+    //float   // Giá khớp gần nhất
+    "quantity": 3.0,
+    //float   // Khối lượng khớp gần nhất
+    "totalVolumeTraded": 84164,
+    //integer // Tổng khối lượng khớp trong ngày
+    "grossTradeAmount": 16817.93009,
+    //float   // Tổng giá trị giao dịch trong ngày
+    "highestPrice": 2009.6,
+    //float   // Giá khớp cao nhất trong ngày
+    "lowestPrice": 1988.8,
+    //float   // Giá khớp thấp nhất trong ngày
+    "openPrice": 2005.6,
+    //float   // Giá mở cửa
     "tradingSessionId": "40"
+    //string  // Mã phiên giao dịch hiện tại
   }
   ```

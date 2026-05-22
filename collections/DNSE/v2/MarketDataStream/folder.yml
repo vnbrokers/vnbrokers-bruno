@@ -5,3 +5,88 @@ info:
 
 request:
   auth: inherit
+
+docs:
+  content: |+
+    ### Thông tin kết nối chung
+
+    - Base URL: `wss://ws-openapi.dnse.com.vn`
+    - DNSE cung cấp sẵn bộ SDK đã phân tách theo từng loại dữ liệu để khách hàng có thể sẵn sử dụng. Chi tiết xem [sample SDKs tại đây.](https://github.com/dnse-tech/openapi-sdk)
+    - Định dạng dữ liệu trong SDKs:
+      - `msgpack`: Tốc độ xử lý nhanh, tiết kiệm băng thông
+      - `json`: Phổ biến và dễ đọc trong quá trình phát triển
+    - Cơ chế kết nối:
+      - Một kết nối WebSocket có hiệu lực tối đa 8 giờ, WebSocket Server sẽ chủ động ngắt kết nối sau thời gian này.
+      - Cơ chế để các clients duy trì kết nối ổn định tới WebSocket server DNSE:
+        - WebSocket Server sẽ định kỳ gửi 1 PING message sau mỗi 3 phút.
+        - Mỗi PING message được gửi từ WebSocket đều yêu cầu nhận PONG message phản hồi từ các client trong thời gian tối đa là 1 phút kể từ lúc Server gửi PING. Nếu quá thời hạn 1 phút này, Server sẽ chủ động ngắt kết nối với Client không đáp ứng.
+        - Client được phép gửi PONG message ngay cả khi không nhận được PING từ Server, để chủ động duy trì kết nối. Cách này giúp client giữ kết nối trong các trường hợp PING message bị miss do network issue hoặc các gián đoạn tạm thời khác.
+
+    <details>
+      <summary>Ví dụ</summary>
+
+    - **Case 1: Good interaction**
+      - T+0 min   Server → PING
+      - T+1     Client → PONG
+      - T+3 min   Server → PING
+      - T+4     Client → PONG
+
+      Client phản hồi PONG cho mỗi PING từ Server.
+
+      ✅ Connection remains active
+
+    - **Case 2: Bad interaction**
+      - T+0 min   Server → PING
+      - No PONG back from client
+      - T+1 min   Server disconnects
+
+      Server đóng kết nối do không nhận được PONG trong khoảng thời gian kết nối định kỳ.
+
+      ❌  Dead Connection
+
+    - **Case 3: Client-initiated keepalive**
+      - Within every 3 minutes: Client → PING
+
+      Client có thể chủ động gửi PONG message để duy trì kết nối, đặc biệt trong các tình huống:
+      - Một số thư viện WS thực hiện auto-handle ping/pong hoặc ẩn các ping frames đối với các app/clients
+      - Mobile networks / NATs chủ động ngắt kết nối đối với các idle TCP connections
+      - Miss PING frame từ server
+
+      Do đó, việc cho phép clients định kỳ gửi PONG lên để Server xác nhận client vẫn đang hoạt động.
+
+      ✅ Connection keep alive
+
+    </details>
+
+
+    ### Tổng quan các kênh dữ liệu
+
+    | Kênh dữ liệu <br/>(Function)                | Mô tả <br/>(Description)                                                                                   | Phân loại <br/>(Type) | Tần suất gửi dữ liệu <br/>(Frequency)                          |
+    |---------------------------------------------|------------------------------------------------------------------------------------------------------------|-----------------------|----------------------------------------------------------------|
+    | [Security Definition](#security-definition) | Thông tin giao dịch chứng khoán (giá trần/sàn, trạng thái),<br/>dùng để lấy thông tin biên độ giá đầu ngày | Batch (BOD)           | Gửi 1 lần trước giờ giao dịch (≈ 08:00)                        |
+    | [Trade](#trade)                             | Dữ liệu khớp lệnh theo thời gian thực                                                                      | Real-time             | Cập nhật khi có thay đổi dữ liệu trong phiên liên tục          |
+    | [Trade Extra](#trade)                       | Dữ liệu khớp lệnh nâng cao (chiều mua/bán, giá trung bình)                                                 | Real-time             | Cập nhật khi có thay đổi dữ liệu trong phiên liên tục          |
+    | [Quote](#quote)                             | Độ sâu thị trường (giá chào mua/bán)                                                                       | Real-time             | Cập nhật khi có thay đổi dữ liệu trong phiên giao dịch         |
+    | [OHLC](#ohlc)                               | Dữ liệu nến đang hình thành (Open, High, Low, Close, Volume)                                               | Real-time             | Cập nhật khi có giá khớp trong phiên liên tục                  |
+    | [OHLC Closed](#ohlc-closed)                 | Dữ liệu nến đã đóng (Open, High, Low, Close, Volume)                                                       | Periodic              | Cập nhật khi có dữ liệu đóng nến                               |
+    | [Expected Price](#expected-price)           | Giá và khối lượng dự kiến khớp lệnh trong phiên ATO/ATC                                                    | Real-time             | Cập nhật khi có thay đổi dữ liệu trong phiên định kỳ (ATO/ATC) |
+    | [Market Index](#market-index)               | Thông tin chỉ số thị trường (VNINDEX, HNX…)                                                                | Periodic              | Cập nhật theo chu kỳ 5 giây + tổng hợp cuối ngày               |
+    | [Foreign Investor](#foreign-investor)       | Dữ liệu giao dịch của nhà đầu tư nước ngoài theo từng mã                                                   | Real-time             | Cập nhật khi có thay đổi dữ liệu                               |
+
+    ---
+
+    ### Phân loại dữ liệu (Data Classification)
+
+    Để tối ưu hóa việc phát triển ứng dụng, khách hàng cần nắm rõ đặc tính và cơ chế truyền tải của từng kênh dữ liệu:
+
+    * **Real-time (Dữ liệu thời gian thực):** Dữ liệu được hệ thống chủ động đẩy xuống (Push) ngay khi có sự kiện phát sinh.
+      Cơ chế này đảm bảo độ trễ thấp nhất cho phía Client.
+    * **Periodic (Dữ liệu định kỳ):** Dữ liệu chỉ xuất hiện hoặc được cập nhật vào các khoảng thời gian cố định hoặc theo
+      từng giai đoạn (Phase) của phiên giao dịch.
+    * **Batch Data (Dữ liệu lô):** Dữ liệu Snapshot được xử lý theo đợt lớn.
+        * **BOD (Beginning of Day):** Dữ liệu khởi tạo trước giờ giao dịch (VD: Danh mục mã, Giá trần/sàn).
+        * **EOD (End of Day):** Dữ liệu tổng hợp sau khi kết thúc ngày giao dịch (VD: Giá đóng cửa chính thức).
+
+    ---
+
+  type: text/markdown

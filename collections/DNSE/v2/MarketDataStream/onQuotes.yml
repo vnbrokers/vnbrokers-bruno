@@ -25,7 +25,21 @@ settings:
   keepAliveInterval: 0
 
 docs: |-
-  ```
+  ### Độ sâu thị trường (Quote)
+
+  Cung cấp thông tin giá chào mua và chào bán tốt nhất của mã chứng khoán tại bảng giao dịch cụ thể, cập nhật theo thời
+  gian thực trong phiên giao dịch.
+
+  - Sàn HOSE hỗ trợ 3 mức giá.
+  - Sàn HNX, UPCOM hỗ trợ 10 mức giá.
+
+  #### Input
+
+  - **symbols**: Mã hoặc danh sách mã chứng khoán. Nếu không truyền, hệ thống sẽ trả toàn bộ danh sách mã chứng khoán trên
+    phạm vi thị trường.
+  - **boardId**: Mã bảng giao dịch (VD: G1 – lô chẵn). Nếu không truyền, hệ thống sẽ lấy tất cả các bảng.
+
+  ```json
   {
     "action": "subscribe",
     "channels": [
@@ -37,42 +51,63 @@ docs: |-
       }
     ]
   }
+  ```
 
+  #### Payload
+
+  ```json lines
   {
-    "T": "q",
+    "marketId": "STO",
+    //string  // Mã thị trường niêm yết mã chứng khoán
+    "boardId": "G1",
+    //string  // Mã bảng giao dịch
+    "isin": "VN000000HPG4",
+    //string  // Mã định danh quốc tế
+    "symbol": "HPG",
+    //string  // Mã chứng khoán
     "bid": [
       {
-        "price": 27.25,
-        "qtty": 39440
+        "price": 28.3,
+        //float   // Giá chào mua cao nhất
+        "quantity": 13330.0
+        //float   // Tổng khối lượng chào mua tại mức giá này
       },
       {
-        "price": 27.2,
-        "qtty": 49510
+        "price": 28.25,
+        //float   // Mức giá chào mua tiếp theo
+        "quantity": 40830.0
+        //float   // Tổng khối lượng chào mua tại mức giá này
       },
       {
-        "price": 27.15,
-        "qtty": 24630
+        "price": 28.2,
+        //float   // Mức giá chào mua thấp hơn
+        "quantity": 50490.0
+        //float   // Tổng khối lượng chào mua tại mức giá này
       }
     ],
-    "boardId": "G1",
-    "isin": "VN000000HPG4",
-    "marketId": "STO",
-    "multicastReceiveTime": "2026-05-11T03:26:11.102485284Z",
     "offer": [
       {
-        "price": 27.3,
-        "qtty": 14230
+        "price": 28.35,
+        //float   // Giá chào bán thấp nhất
+        "quantity": 12660.0
+        //float   // Tổng khối lượng chào bán tại mức giá tương ứng
       },
       {
-        "price": 27.35,
-        "qtty": 47820
+        "price": 28.4,
+        //float   // Mức giá chào bán tiếp theo
+        "quantity": 27530.0
+        //float   // Tổng khối lượng chào bán tại mức giá tương ứng
       },
       {
-        "price": 27.4,
-        "qtty": 66970
+        "price": 28.45,
+        //float   // Mức giá chào bán cao hơn
+        "quantity": 26710.0
+        //float   // Tổng khối lượng chào bán tại mức giá tương ứng
       }
     ],
-    "sendingTime": "2026-05-11T03:26:11.100Z",
-    "symbol": "HPG"
+    "totalOfferQtty": 922230,
+    //integer // Tổng khối lượng chào bán
+    "totalBidQtty": 643750
+    //integer // Tổng khối lượng chào mua
   }
   ```

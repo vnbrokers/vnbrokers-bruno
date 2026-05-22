@@ -25,39 +25,97 @@ settings:
   keepAliveInterval: 0
 
 docs: |-
-  OHLC cung cấp thông tin nến (open, high, low, close, volume) theo khung thời gian thực dưới dạng dữ liệu nến đang hình thành và được cập nhật liên tục theo các giao dịch phát sinh. Áp dụng cho Cổ phiếu (stock), Phái sinh (derivative) và Chỉ số thị trường (index) với nhiều khung thời gian (resolution).
+  ### OHLC
 
-  Input
-  symbol: Mã hoặc danh sách mã chứng khoán hay chỉ số thị trường
-  Lưu ý: Đối với phái sinh, truyền lên symbolType (VD: VN30F1M) thay vì symbol (VD: 41I1G4000).
-  resolution: Khung thời gian của nến (VD: 1, 3, 5, 15, 30, 1H, 1D, 1W)
+  OHLC cung cấp thông tin nến (open, high, low, close, volume) theo khung thời gian thực dưới dạng dữ liệu nến đang hình
+  thành và được cập nhật liên tục theo các giao dịch phát sinh. Áp dụng cho Cổ phiếu (stock), Phái sinh (derivative) và
+  Chỉ số thị trường (index) với nhiều khung thời gian (resolution).
+
+  #### Input
+
+  - **symbol**: Mã hoặc danh sách mã chứng khoán hay chỉ số thị trường
+      - Lưu ý: Đối với phái sinh, truyền lên `symbolType` (VD: VN30F1M) thay vì `symbol` (VD: 41I1G4000).
+  - **resolution**: Khung thời gian của nến (VD: 1, 3, 5, 15, 30, 1H, 1D, 1W)
+
+  #### Payload
+
+  *Cổ phiếu*
+
+  ```json lines
+  {
+    "time": 1757992500,
+    //integer   // Thời gian bắt đầu nến
+    "open": 30.4,
+    //float     // Giá mở cửa
+    "high": 30.4,
+    //float     // Giá cao nhất trong nến
+    "low": 30.25,
+    //float     // Giá thấp nhất trong nến
+    "close": 30.3,
+    //float     // Giá đóng cửa
+    "volume": 1398200,
+    //integer   // Khối lượng giao dịch
+    "symbol": "HPG",
+    //string    // Mã chứng khoán
+    "resolution": "15",
+    //string    // Khung thời gian nến
+    "lastUpdated": 1757993014,
+    //integer   // Thời gian cập nhật lần cuối
+    "type": "STOCK"
+    //string    // Loại nhóm thị trường
+  }
   ```
 
+  *Phái sinh*
 
+  ```json lines
   {
-    "action": "subscribe",
-    "channels": [
-      {
-        "name": "ohlc.1.json",
-        "symbols": [
-          "HPG"
-        ]
-      }
-    ]
-  }
-
-
-  {
-    "T": "b",
-    "close": 27.25,
-    "high": 27.3,
-    "lastUpdated": 1778472986,
-    "low": 27.25,
-    "open": 27.25,
+    "time": 1757991840,
+    //integer   // Thời gian bắt đầu nến
+    "open": 1881.2,
+    //float     // Giá mở cửa
+    "high": 1881.2,
+    //float     // Giá cao nhất trong nến
+    "low": 1881.0,
+    //float     // Giá thấp nhất trong nến
+    "close": 1881.2,
+    //float     // Giá đóng cửa
+    "volume": "12",
+    //integer   // Khối lượng giao dịch
+    "symbol": "VN30F1M",
+    //string    // Mã chứng khoán
     "resolution": "1",
-    "symbol": "HPG",
-    "time": 1778472960,
-    "type": "STOCK",
-    "volume": 2400
+    //string    // Khung thời gian nến
+    "lastUpdated": 1757991844,
+    //integer   // Thời gian cập nhật lần cuối
+    "type": "DERIVATIVE"
+    //string    // Loại nhóm thị trường
+  }
+  ```
+
+  *Chỉ số index*
+
+  ```json lines
+  {
+    "time": 1757988000,
+    //integer   // Thời gian bắt đầu nến
+    "open": 1696.87,
+    //float     // Giá mở cửa
+    "high": 1696.87,
+    //float     // Giá cao nhất trong nến
+    "low": 1686.02,
+    //float     // Giá thấp nhất trong nến
+    "close": 1686.31,
+    //float     // Giá đóng cửa
+    "volume": 435873728,
+    //integer   // Khối lượng giao dịch
+    "symbol": "VNINDEX",
+    //string    // Mã chứng khoán
+    "resolution": "1D",
+    //string    // Khung thời gian nến
+    "lastUpdated": 1757993070,
+    //integer   // Thời gian cập nhật lần cuối
+    "type": "INDEX"
+    //string    // Loại nhóm thị trường
   }
   ```

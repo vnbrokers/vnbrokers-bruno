@@ -25,16 +25,29 @@ settings:
   keepAliveInterval: 0
 
 docs: |-
-  Thông tin giao dịch chứng khoán (Security Definition)
-  Cung cấp thông tin về giá trần sàn tham chiếu và trạng thái của mã chứng khoán trong ngày giao dịch. Dữ liệu được hệ thống gửi hai lần vào lúc hệ thống kết thúc chạy dữ liệu cuối ngày (khoảng 8 giờ tối) và vào đầu ngày giao dịch hôm sau (khoảng 8 giờ sáng).
+  ### Thông tin giao dịch chứng khoán (Security Definition)
 
-  Input
-  symbols: Mã hoặc danh sách mã chứng khoán. Nếu không truyền, hệ thống sẽ trả toàn bộ danh sách mã chứng khoán trên phạm vi thị trường.
+  Cung cấp thông tin về giá trần sàn tham chiếu và trạng thái của mã chứng khoán trong ngày giao dịch. Dữ liệu được hệ
+  thống gửi hai lần vào lúc hệ thống kết thúc chạy dữ liệu cuối ngày (khoảng 8 giờ tối) và vào đầu ngày giao dịch hôm
+  sau (khoảng 8 giờ sáng).
 
-  boardId: Mã bảng giao dịch (VD: G1 – lô chẵn). Nếu không truyền, hệ thống sẽ lấy tất cả các bảng.
+  #### Input
 
-  ```
+  - **symbols**: Mã hoặc danh sách mã chứng khoán. Nếu không truyền, hệ thống sẽ trả toàn bộ danh sách mã chứng khoán trên
+    phạm vi thị trường.
+  - **boardId**: Mã bảng giao dịch (VD: G1 – lô chẵn). Nếu không truyền, hệ thống sẽ lấy tất cả các bảng.
 
+    | boardId         | Mô tả                        |
+                |-----------------|------------------------------|
+    | G1              | Lô chẵn                      |
+    | G3              | Board phiên sau giờ (PLO)    |
+    | G4              | Lô lẻ                        |
+    | T1              | Thỏa thuận lô chẵn 9h-14h45  |
+    | T3              | Thỏa thuận lô chẵn 14h45-15h |
+    | T4              | Thỏa thuận lô lẻ 9h-14h45    |
+    | T6              | Thỏa thuận lô lẻ 14h45-15h   |
+
+  ```json
   {
     "action": "subscribe",
     "channels": [
@@ -46,10 +59,12 @@ docs: |-
       }
     ]
   }
+  ```
 
-  Received message format:
+  #### Payload
+
+  ```json lines
   {
-    "T": "sd",
     "marketId": "DVX",
     //string  // Mã thị trường niêm yết mã chứng khoán
     "boardId": "G1",
@@ -83,5 +98,4 @@ docs: |-
     "finalTradeDate": 20260416
     //string  // Ngày giao dịch cuối cùng (đối với mã phái sinh, chứng quyền) 
   }
-
   ```

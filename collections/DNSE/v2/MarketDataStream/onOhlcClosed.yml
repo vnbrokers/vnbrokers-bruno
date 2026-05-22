@@ -27,7 +27,8 @@ settings:
 docs: |-
   ### OHLC đóng nến (OHLC Closed)
 
-  Cung cấp dữ liệu nến đã đóng theo từng khung thời gian (resolution). Dữ liệu chỉ gửi khi kết thúc mỗi khung thời gian và không thay đổi sau đó.
+  Cung cấp dữ liệu nến đã đóng theo từng khung thời gian (resolution). Dữ liệu chỉ gửi khi kết thúc mỗi khung thời gian và
+  không thay đổi sau đó.
 
   #### Input
 
@@ -35,7 +36,7 @@ docs: |-
       - Lưu ý: Đối với phái sinh, truyền lên `symbolType` (VD: VN30F1M) thay vì `symbol` (VD: 41I1G4000).
   - **resolution**: Khung thời gian của nến (VD: 1, 3, 5, 15, 30, 1H, 1D, 1W)
 
-  ```
+  ```json
   {
     "action": "subscribe",
     "channels": [
@@ -47,19 +48,31 @@ docs: |-
       }
     ]
   }
+  ```
 
+  #### Payload
 
+  ```json lines
   {
-    "T": "bc",
-    "close": 27.25,
-    "high": 27.3,
-    "lastUpdated": 1778472986,
-    "low": 27.25,
-    "open": 27.25,
-    "resolution": "1",
+    "time": 1757992500,
+    //integer   // Thời gian bắt đầu nến
+    "open": 30.4,
+    //float     // Giá mở cửa
+    "high": 30.4,
+    //float     // Giá cao nhất trong nến
+    "low": 30.25,
+    //float     // Giá thấp nhất trong nến
+    "close": 30.3,
+    //float     // Giá đóng cửa
+    "volume": 1398200,
+    //integer   // Khối lượng giao dịch
     "symbol": "HPG",
-    "time": 1778472960,
-    "type": "STOCK",
-    "volume": 2400
+    //string    // Mã chứng khoán
+    "resolution": "15",
+    //string    // Khung thời gian nến
+    "lastUpdated": 1757993014,
+    //integer   // Thời gian cập nhật lần cuối
+    "type": "STOCK"
+    //string    // Loại nhóm thị trường
   }
   ```
