@@ -1,0 +1,176 @@
+info:
+  name: Bảng mã dữ liệu
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit
+
+docs:
+  content: |
+    # OrderType
+
+    Các loại lệnh hỗ trợ trên hệ thống bao gồm:
+
+    | # | Loại lệnh | Mô tả                                                                                          |
+    |---|-----------|------------------------------------------------------------------------------------------------|
+    | 1 | LO        | Lệnh giới hạn, áp dụng cho tất cả các sàn                                                      |
+    | 2 | ATO       | Lệnh ATO, chỉ áp dụng cho sàn HOSE, Phái sinh                                                  |
+    | 3 | ATC       | Lệnh ATC, chỉ áp dụng cho sàn HOSE, HNX, Phái sinh                                             |
+    | 4 | MP        | MP - Chỉ áp dụng cho sàn HOSE                                                                  |
+    | 5 | MTL       | MTL - Chỉ áp dụng cho sàn HNX, UPCOM, Phái sinh                                                |
+    | 6 | MOK       | MOK - Chỉ áp dụng cho sàn HNX, UPCOM, Phái sinh                                                |
+    | 7 | MAK       | MAK - Chỉ áp dụng cho sàn HNX, UPCOM, Phái sinh                                                |
+    | 8 | PLO       | Lệnh đặt với giá đóng cửa trong khoảng thời gian từ 14h45 tới 15h00. Chỉ áp dụng cho sàn HNX.  |
+    | 9 | GTD       | GTD                                                                                            |
+
+    # Channel
+
+    Các kênh đặt lệnh
+
+    | # | Channel code | Mô tả (ENG)   | Mô tả (VIE)   |
+    |---|--------------|---------------|---------------|
+    | 1 | TA           | FCTrading API | FCTrading API |
+
+
+    # ErrorCode
+
+    Bảng mã lỗi
+
+    | No        | ErrorCode | Message                                                     |
+    |-----------|-----------|-------------------------------------------------------------|
+    | 1.        | ERR001    | Invalid login ID or password                                |
+    | 2.        | ORD001    | Security ticker does not exist.                             |
+    | 3.        | ORD002    | Price is under floor level                                  |
+    | 4.        | ORD003    | Price exceeds ceiling level.                                |
+    | 5.        | ORD004    | Invalid Price Unit (Spread)                                 |
+    | 6.        | ORD005    | Invalid trading lot/block                                   |
+    | 7.        | ORD006    | Invalid parameters                                          |
+    | 8.        | ORD007    | Quantity exceeds the allowance                              |
+    | 9.        | ORD008    | Total quantity exceeds limit                                |
+    | 10.       | ORD009    | Already exist B/S order of same stock                       |
+    | 11.       | ORD016    | &#x3C;orderType> is not allowed in this session             |
+    | 12.       | ORD017    | This stock is suspended or terminated                       |
+    | 13.       | ORD011    | Cannot be amended in this session                           |
+    | 14.       | ORD012    | This order cannot be modified                               |
+    | 15.       | ORD013    | Order Is Null Error!                                        |
+    | 16.       | ORD014    | Price and Quantity have no changes                          |
+    | 17.       | ORD018    | Odd lot is not allowed                                      |
+    | 18.       | ERR002    | Duplicate Login Session error                               |
+    | 19.       | ORD015    | This channel has been block; disallow to place order        |
+    | 20.       | ORD010    | Invalid Order Type                                          |
+    | 21.       | 400       | BadRequest                                                  |
+    | 22.       | 401       | Unauthorized                                                |
+    | 23.       | 500       | InternalServerError                                         |
+    | 24.       | ORD027    | Client cannot execute this order                            |
+    | 25.       | ORD026    | Client status not allow to trade                            |
+    | 26.       | ORD023    | System receive duplicated price                             |
+    | 27.       | ORD025    | The trading account not opened yet                          |
+    | 28.       | ORD031    | Reduce qty more than outstanding qty                        |
+    | 29.       | ORD034    | Exceed foreign room                                         |
+    | 30.       | ORD036    | Not enough current room                                     |
+    | 31.       | ORD037    | Exceed stock room                                           |
+    | 32.       | ORD038    | Stock out of margin room                                    |
+    | 33.       | ORD039    | DR > BFDL and  insufficient Room                            |
+    | 34.       | ORD040    | Not enough bal                                              |
+    | 35.       | 204       | No such client information                                  |
+    | 36.       | 504       | Time out                                                    |
+    | 37.       | 40001     | Invalid Date time format                                    |
+    | 38.       | 40002     | Invalid Date time range                                     |
+    | 39.       | 40003     | Out of Date time range                                      |
+    | 40.       | 40004     | Out of transaction time                                     |
+    | 41.       | 40005     | Rejected by setting                                         |
+    | 42.       | 40006     | Out of Cash Value                                           |
+    | 43.       | 40008     | Account is prohibit for cash withdrawal                     |
+    | 44.       | 40010     | Prohibit Cash Deposit                                       |
+    | 45.       | 40009     | Out of withdrawal limit                                     |
+    | 46.       | 40007     | Invalid Cash Withdrawal Information                         |
+    | 47.       | 40011     | Invalid VSD Status () to process the record                 |
+    | 48.       | 40012     | AccountTypeNotSupport                                       |
+    | 49.       | 40013     | Cannot modify order                                         |
+    | 50.       | 40014     | Cannot cancel order                                         |
+    | 51.       | ORE674    | Stock is blocked by Black White List                        |
+    | 52.       | 40015     |  Locked action in sequence (Cash/CIA/Stock)                 |
+    | 53.       | 40016     | Too much action with account (accountNo) during (x) seconds |
+    | 54.       | 195       | Hold Pending Stock Qty Fail                                 |
+    | 55.       | ORE078    | Client does not allow to trade through Internet/ Mobile     |
+
+
+    # OrderStatus
+
+    Trạng thái lệnh
+
+    | #  | Trạng thái lệnh | Mô tả (ENG)                      | Mô tả (VN)                   |
+    |----|-----------------|----------------------------------|------------------------------|
+    | 1  | WA              | Waiting Approval                 | Chờ duyệt                    |
+    | 2  | RS              | Ready to Send Exch               | Chờ gửi lên sàn              |
+    | 3  | SD              | Sent to Exch                     | Đang gửi lên sàn             |
+    | 4  | Qu              | Queue in Exch                    | Chờ khớp tại sàn             |
+    | 5  | FF              | Fully Filled                     | Khớp toàn phần               |
+    | 6  | PF              | Partially Filled                 | Khớp một phần                |
+    | 7  | FFPC            | Fully Filled Partially Cancelled | Khớp 1 phần hủy phần còn lại |
+    | 8  | WM              | Waiting Modify                   | Chờ sửa                      |
+    | 9  | WC              | Waiting Cancel                   | Chờ hủy                      |
+    | 10 | CL              | Cancelled                        | Đã hủy                       |
+    | 11 | RJ              | Rejected                         | Từ chối                      |
+    | 12 | EX              | Expired                          | Hết hiệu lực                 |
+    | 13 | SOR             | Stop Order Ready                 | Chờ kích hoạt                |
+    | 14 | SOS             | Stop Order Sent                  | Đã kích hoạt                 |
+    | 15 | IAV             | Pre-Session Order                | Lệnh trước phiên             |
+    | 16 | SOI             | Pre-Session Stop Order           | Lệnh ĐK trước phiên          |
+
+    # FCO Status Code
+
+    Trạng thái lệnh
+
+    | #  | Mã lỗi | Nội dung                                                | Giải thích |
+    |----|--------|---------------------------------------------------------|------------|
+    | 1  | 200    | success                                                 |            |
+    | 2  | 40001  | fromdate {} input is expried                            |            |
+    | 3  | 40002  | todate {} input is expried                              |            |
+    | 4  | 40003  | fromDate must be less than toDate                       |            |
+    | 5  | 20401  | Can't get timeframe checking system                     |            |
+    | 6  | 20402  | Cand't get Condition checking system                    |            |
+    | 7  | 20403  | Can't get Indicator checking system                     |            |
+    | 8  | 20404  | Can't get symbol checking system                        |            |
+    | 9  | 20405  | Cash param input require                                |            |
+    | 10 | 20406  | {module} {username} not found {algoId}                  |            |
+    | 11 | 20407  | {fco} stratery not match with supported                 |            |
+    | 12 | 20408  | Can't get list derivative system                        |            |
+    | 13 | 20409  | Can't get fco checking system                           |            |
+    | 14 | 20410  | Stock side sell not support attach order                |            |
+    | 15 | 20411  | fco {type} can not set stopOrder=True                   |            |
+    | 16 | 20412  | fco {type} can not set price main order                 |            |
+    | 17 | 20413  | Price value is require                                  |            |
+    | 18 | 40101  | Can't register                                          |            |
+    | 19 | 40102  | user {} not register                                    |            |
+    | 20 | 40103  | user stock {} hasn't  accountNo {}                      |            |
+    | 21 | 40104  | user {} hasn't accountNo {} derivative                  |            |
+    | 22 | 40901  | {} is running can't delete                              |            |
+    | 23 | 40902  | {} is actived. can't active more                        |            |
+    | 24 | 40903  | full {} actived. can't active more                      |            |
+    | 25 | 40904  | {} not inprocess or finish. can't deactive              |            |
+    | 26 | 41501  | {filed} – {valid}                                       |            |
+    | 27 | 41502  | datetime  value {} not same type {}                     |            |
+    | 28 | 41503  | indicator  value {} not same type {}                    |            |
+    | 29 | 41504  | line {} error format {}                                 |            |
+    | 30 | 41505  | field {} required                                       |            |
+    | 31 | 41506  | field {} error {}                                       |            |
+    | 32 | 41507  | fco params {} not same type {}                          |            |
+    | 33 | 41601  | proccess {} out range support {}                        |            |
+    | 34 | 41602  | timeframe {} out range support {}                       |            |
+    | 35 | 41603  | Condition {} out range support {}                       |            |
+    | 36 | 41604  | Indicator {} out range support {}                       |            |
+    | 37 | 41605  | Side {} out range support {}                            |            |
+    | 38 | 41606  | Mode {} out range support {}                            |            |
+    | 39 | 41607  | Quantity {} is not positive integer                     |            |
+    | 40 | 41608  | symbol {} not exist                                     |            |
+    | 41 | 41609  | Price value {} is not positive                          |            |
+    | 42 | 41010  | Price {} out range support {}                           |            |
+    | 43 | 41611  | Slip value {} is not positive                           |            |
+    | 44 | 41612  | Fix condition type {} is not supported                  |            |
+    | 45 | 50000  | internal system error                                   |            |
+    | 46 | 41613  | not support channel {}, list channel support {}         |            |
+    | 47 | 20415  | Can't deactive dynamic condition on ato and atc session |            |
+    | 48 | 40005  | todate lesser 1 months from {}                          |            |
+  type: text/markdown
