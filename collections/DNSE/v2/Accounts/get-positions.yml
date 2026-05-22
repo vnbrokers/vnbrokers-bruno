@@ -152,15 +152,46 @@ examples:
           }
 
 docs: |-
-  API trả về danh sách vị thế nắm giữ theo tiểu khoản.
+  Lấy danh sách các vị thế đang nắm giữ trên tài khoản, bao gồm thông tin mã chứng khoán, khối lượng, giá vốn, và các thông tin khác.
 
-  Query Parameters:
-    - marketType (string, required): Loại thị trường (STOCK / DERIVATIVE)
-    - pageSize (string, required): Số lượng bản ghi trên 1 trang
+  <h3 id="getpositions-parameters">Parameters</h3>
 
-  Path Parameters:
-    - accountNo (string): Số tiểu khoản
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |marketType|query|string|true|Loại thị trường |
+  |pageSize|query|string|true|Kích thước trang dữ liệu (page size)|
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
+  |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
+  |version|header|string(date)|false|Phiên bản API |
+  |accountNo|path|string|true|Số tiểu khoản|
+
+  #### Detailed descriptions
+
+  **marketType**: Loại thị trường 
+  - STOCK: Danh sách vị thế cơ sở
+  - DERIVATIVE: Danh sách vị thế phái sinh
 
   Response bao gồm:
-    - Danh sách vị thế: trạng thái, khối lượng, giá vốn, giá thị trường, giá hòa vốn
-    - Thông tin phân trang: pageIndex, pageSize, pageNumber, total
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» data|object|false|none|none|
+  |»» id|integer(int64)|false|none|ID vị thế|
+  |»» symbol|string|false|none|Mã chứng khoán|
+  |»» marketType|string|false|none|Loại thị trường<br>- STOCK: Vị thế cơ sở<br>- DERIVATIVE: Vị thế phái sinh|
+  |»» accountNo|string|false|none|Số tiểu khoản|
+  |»» status|string|false|none|Trạng thái của vị thế<br>- OPEN: Đang mở<br>- PENDING_CLOSE: Chờ đóng<br>- CLOSED: Đã đóng<br>- ODD_LOT: Lô lẻ (cơ sở)|
+  |»» loanPackageId|integer(int32)|false|none|Gói vay cơ sở hoặc phái sinh|
+  |»» side|string|false|none|Loại vị thế<br>- NB: Mua<br>- NS: Bán|
+  |»» accumulateQuantity|integer(int32)|false|none|Khối lượng cộng dồn|
+  |»» tradeQuantity|integer(int32)|false|none|Khối lượng được giao dịch|
+  |»» closedQuantity|integer(int32)|false|none|Khối lượng đã đóng|
+  |»» openQuantity|integer(int32)|false|none|Khối lượng mở|
+  |»» overNightQuantity|integer(int32)|false|none|Khối lượng mở qua đêm (dành cho phái sinh)|
+  |»» costPrice|number(float)|false|none|Giá vốn trung bình của khối lượng mở|
+  |»» averageCostPrice|number(float)|false|none|Giá vốn trung bình|
+  |»» averageClosePrice|number(double)|false|none|Giá đóng trung bình|
+  |»» marketPrice|number(double)|false|none|Giá thị trường|
+  |»» breakEvenPrice|number(double)|false|none|Giá hòa vốn|
+  |»» createdDate|string(date-time)|false|none|Thời điểm mở|
+  |»» modifiedDate|string(date-time)|false|none|Thời điểm cập nhật|

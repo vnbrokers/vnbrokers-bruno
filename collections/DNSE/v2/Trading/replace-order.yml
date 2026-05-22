@@ -1,17 +1,17 @@
 info:
-  name: Hủy lệnh
+  name: Sửa lệnh
   type: http
-  seq: 21
+  seq: 20
 
 http:
-  method: DELETE
-  url: "{{baseUrl}}/accounts/:accountNo/orders/:orderId?marketType=DERIVATIVE&orderCategory=NORMAL"
+  method: PUT
+  url: "{{baseUrl}}/accounts/:accountNo/orders/:orderId?marketType=STOCK&orderCategory=NORMAL"
   headers:
     - name: trading-token
-      value: "{{tradingToken}}"
+      value: "{{TRADING_TOKEN}}"
   params:
     - name: marketType
-      value: DERIVATIVE
+      value: STOCK
       type: query
     - name: orderCategory
       value: NORMAL
@@ -27,7 +27,8 @@ http:
 runtime:
   variables:
     - name: orderId
-      value: "116"
+      value: "1"
+  scripts:
 
 settings:
   encodeUrl: true
@@ -37,12 +38,12 @@ settings:
 
 examples:
   - name: 200 Response
-    description: Thành công – trả về thông tin lệnh sau khi gửi yêu cầu hủy
+    description: Thành công – trả về thông tin lệnh sau khi sửa
     request:
       url: "{{baseUrl}}/accounts/{{accountNo}}/orders/{{orderId}}"
-      method: DELETE
+      method: PUT
       headers:
-        - name: Accept
+        - name: Content-Type
           value: application/json
         - name: X-API-Key
           value: "{{apiKey}}"
@@ -68,31 +69,28 @@ examples:
         data: |-
           {
             "id": 1626,
-            "symbol": "41I1G4000",
+            "accountNo": "0001179019",
             "side": "NS",
+            "loanPackageId": 2278,
+            "symbol": "41I1G4000",
             "orderType": "LO",
-            "orderStatus": "PendingCancel",
-            "loanPackageId": "2278",
+            "orderCategory": "NORMAL",
             "price": 1851,
-            "averagePrice": 0,
             "quantity": 3,
             "fillQuantity": 0,
             "canceledQuantity": 0,
-            "leaveQuantity": 3,
-            "accountNo": "0001179019",
-            "orderCategory": "NORMAL",
             "marketType": "DERIVATIVE",
             "transDate": "2026-03-16",
             "createdDate": "2026-03-24T04:09:50.761146893Z",
-            "modifiedDate": "2026-03-24T04:16:12.469115348Z"
+            "modifiedDate": "2026-03-24T04:14:21.004856492Z"
           }
   - name: 400 Response
     description: Yêu cầu không hợp lệ
     request:
       url: "{{baseUrl}}/accounts/{{accountNo}}/orders/{{orderId}}"
-      method: DELETE
+      method: PUT
       headers:
-        - name: Accept
+        - name: Content-Type
           value: application/json
         - name: X-API-Key
           value: "{{apiKey}}"
@@ -125,9 +123,9 @@ examples:
     description: Lỗi máy chủ
     request:
       url: "{{baseUrl}}/accounts/{{accountNo}}/orders/{{orderId}}"
-      method: DELETE
+      method: PUT
       headers:
-        - name: Accept
+        - name: Content-Type
           value: application/json
         - name: X-API-Key
           value: "{{apiKey}}"
@@ -158,9 +156,13 @@ examples:
           }
 
 docs: |-
-  Gửi yêu cầu hủy lệnh đã đặt theo `orderId.`
+  Gửi yêu cầu sửa lệnh đã đặt theo `orderId`.
 
-  <h3 id="cancelorder-parameters">Parameters</h3>
+  - Với cơ sở, lệnh sửa thành công đồng nghĩa với hủy lệnh cũ và đặt lại lệnh mới, người dùng có thể sửa đồng thời giá và khối lượng.
+      
+  - Với phái sinh, người dùng chỉ có thể sửa hoặc giá hoặc khối lượng. Khối lượng sửa phải lớn hơn khối lượng đã khớp (nếu có).
+
+  <h3 id="replaceorder-parameters">Parameters</h3>
 
   |Name|In|Type|Required|Description|
   |---|---|---|---|---|
@@ -171,33 +173,40 @@ docs: |-
   |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
   |trading-token|header|string|true|Token đặt lệnh|
   |version|header|string(date)|false|Phiên bản API |
+  |body|body|object|false|none|
+  |» price|body|number(double)|false|Giá mới cho lệnh LO|
+  |» quantity|body|integer(int32)|false|Khối lượng mới|
   |accountNo|path|string|true|Số tiểu khoản|
   |orderId|path|integer|true|Id lệnh giao dịch|
 
   #### Detailed descriptions
 
   **marketType**: Loại thị trường 
-  - STOCK: Đặt lệnh cơ sở
-  - DERIVATIVE: Đặt lệnh phái sinh
+  - STOCK: Gói vay giao dịch cơ sở
+  - DERIVATIVE: Gói vay giao dịch phái sinh
 
-  <h3 id="cancelorder-responseschema">Response Schema</h3>
+  **» price**: Giá mới cho lệnh LO
+  - Đối với lệnh cơ sở, có thể sửa cả giá và khối lượng
+  - Đối với lệnh phái sinh, chỉ được sửa hoặc giá hoặc khối lượng
+
+  **» quantity**: Khối lượng mới
+  - Đối với lệnh phái sinh, khối lượng mới phải lớn hơn khối lượng đã khớp (nếu có) của lệnh đã đặt
+
+  <h3 id="replaceorder-responseschema">Response Schema</h3>
 
   |Name|Type|Required|Restrictions|Description|
   |---|---|---|---|---|
   |» id|integer(int32)|false|none|Id lệnh giao dịch|
-  |» symbol|string|false|none|Mã chứng khoán|
+  |» accountNo|string|false|none|Số tiểu khoản|
   |» side|string|false|none|Chiều đặt lệnh<br>- NB: Mua<br>- NS: Bán|
+  |» loanPackageId|integer(int32)|false|none|Mã gói vay|
+  |» symbol|string|false|none|Mã chứng khoán|
   |» orderType|string|false|none|Loại lệnh<br>- LO: Lệnh giới hạn<br>- MOK/MAK/MTL: Lệnh thị trường<br>- ATO/ATC: Lệnh phiên định kỳ mở cửa/đóng cửa<br>- PLO: Lệnh khớp lệnh sau giờ|
-  |» orderStatus|string|false|none|Trạng thái lệnh<br>- PendingNew: Chờ gửi<br>- New: Chờ khớp<br>- PendingReplace: Chờ sửa<br>- PartiallyFilled: Khớp một phần<br>- Filled: Khớp toàn bộ<br>- Canceled: Đã hủy<br>- Rejected: Bị từ chối<br>- Expired: Hết hạn trong phiên<br>- DoneForDay: Giải tỏa trong phiên|
-  |» loanPackageId|string|false|none|Mã gói vay|
+  |» orderCategory|string|false|none|Phân loại lệnh thường (mặc định NORMAL)|
   |» price|number(double)|false|none|Giá đặt|
-  |» averagePrice|number(float)|false|none|Giá khớp trung bình|
   |» quantity|integer(int32)|false|none|Khối lượng đặt|
   |» fillQuantity|integer(int32)|false|none|Khối lượng khớp|
   |» canceledQuantity|integer(int32)|false|none|Khối lượng đã hủy|
-  |» leaveQuantity|integer(int32)|false|none|Khối lượng còn lại|
-  |» accountNo|string|false|none|Số tiểu khoản|
-  |» orderCategory|string|false|none|Phân loại lệnh thường (mặc định NORMAL)|
   |» marketType|string|false|none|Loại thị trường<br>- STOCK: Lệnh cơ sở<br>- DERIVATIVE: Lệnh phái sinh|
   |» transDate|string|false|none|Ngày giao dịch|
   |» createdDate|string(date-time)|false|none|Thời điểm tạo|

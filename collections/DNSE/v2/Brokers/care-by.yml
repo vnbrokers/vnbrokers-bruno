@@ -18,7 +18,7 @@ examples:
   - name: 200 Response
     description: Thành công – trả về danh sách tiểu khoản quản lý
     request:
-      url: https://openapi.dnse.com.vn/brokers/accounts/care-by
+      url: "{{baseUrl}}/brokers/accounts/care-by"
       method: GET
       headers:
         - name: X-API-Key
@@ -69,11 +69,9 @@ examples:
   - name: 400 Response
     description: Yêu cầu không hợp lệ
     request:
-      url: https://openapi.dnse.com.vn/brokers/accounts/care-by
+      url: "{{baseUrl}}/brokers/accounts/care-by"
       method: GET
       headers:
-        - name: X-API-Key
-          value: ""
         - name: X-Aux-Date
           value: ""
         - name: X-Signature
@@ -97,7 +95,7 @@ examples:
   - name: 500 Response
     description: Lỗi máy chủ
     request:
-      url: https://openapi.dnse.com.vn/brokers/accounts/care-by
+      url: "{{baseUrl}}/brokers/accounts/care-by"
       method: GET
       headers:
         - name: X-API-Key
@@ -123,4 +121,34 @@ examples:
             "status": 0
           }
 
-docs: Danh sách tiểu khoản quản lý của môi giới/SACO DNSE.
+docs: |-
+  Truy vấn danh sách tiểu khoản thuộc phạm vi quản lý của Môi giới/SACO DNSE, bao gồm thông tin định danh, giá trị tài sản cơ sở và phái sinh, danh sách quyền theo từng sản phẩm.
+
+  <h3 id="getbrokersaccountscareby-parameters">Parameters</h3>
+
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Aux-Date|header|string|true|Chữ ký xác thực yêu cầu|
+  |X-Signature|header|string|true|Thời gian thực hiện yêu cầu|
+  |version|header|string(date)|false|Phiên bản API |
+
+  <h3 id="getbrokersaccountscareby-responseschema">Response Schema</h3>
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» careBy|[object]|false|none|none|
+  |»» accountNo|string|false|none|Số tiểu khoản khách hàng|
+  |»» fullName|string|false|none|Họ tên khách hàng|
+  |»» custodyCode|string|false|none|Số lưu ký tài khoản khách hàng|
+  |»» underlyingNav|number(double)|false|none|Tài sản ròng cơ sở|
+  |»» derivativeNav|number(double)|false|none|Tài sản phái sinh|
+  |»» totalNav|number(double)|false|none|Tổng tài sản tiểu khoản|
+  |»» dealAccount|boolean|false|none|Tiểu khoản theo Deal hoặc không|
+  |»» derivativeAccount|boolean|false|none|Trạng thái tài khoản phái sinh<br>- ACTIVE: Đang hoạt động<br>- INACTIVE: Ngừng hoạt động|
+  |»» derivative|object|false|none|none|
+  |»»» status|string|false|none|Tiểu khoản được phép giao dịch phái sinh hoặc không|
+  |»» permissions|[object]|false|none|Phạm vi quyền quản lý|
+  |»»» product|string|false|none|Sản phẩm áp dụng:<br>- UNDERLYING_STOCK: Cơ sở<br>- DERIVATIVES_STOCK: Phái sinh|
+  |»»» role|string|false|none|Vai trò trên sản phẩm:<br>- ADVISOR: Theo dõi<br>- BROKER: Giao dịch|
+  |» total|integer(int32)|false|none|Tổng số tiểu khoản quản lý|

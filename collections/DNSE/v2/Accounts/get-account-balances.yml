@@ -25,8 +25,6 @@ examples:
       url: "{{baseUrl}}/accounts/{{accountNo}}/balances"
       method: GET
       headers:
-        - name: X-API-Key
-          value: ""
         - name: X-Aux-Date
           value: ""
         - name: X-Signature
@@ -50,19 +48,19 @@ examples:
         data: |-
           {
             "stock": {
-              "totalCash": 0,
-              "availableCash": 0,
-              "depositInterest": 0,
-              "totalDebt": 0,
-              "depositFeeAmount": 0,
-              "withdrawableCash": 0,
+              "totalCash": 3720308,
+              "availableCash": 3720022,
+              "depositInterest": 286,
+              "totalDebt": 592355,
+              "depositFeeAmount": 405,
+              "withdrawableCash": 3719617,
               "cashDividendReceiving": 0
             },
             "derivative": {
-              "pendingDepositWithdraw": 0,
-              "remainSecure": 0,
-              "usedSecure": 0,
-              "pendingSecure": 0,
+              "pendingDepositWithdraw": 826996062,
+              "remainSecure": 122363429600,
+              "usedSecure": 102098277,
+              "pendingSecure": 826996062,
               "holdTaxAndFee": 0,
               "totalLoanDebt": 0
             }
@@ -73,8 +71,6 @@ examples:
       url: "{{baseUrl}}/accounts/{{accountNo}}/balances"
       method: GET
       headers:
-        - name: X-API-Key
-          value: ""
         - name: X-Aux-Date
           value: ""
         - name: X-Signature
@@ -107,8 +103,6 @@ examples:
       url: "{{baseUrl}}/accounts/{{accountNo}}/balances"
       method: GET
       headers:
-        - name: X-API-Key
-          value: ""
         - name: X-Aux-Date
           value: ""
         - name: X-Signature
@@ -137,27 +131,34 @@ examples:
           }
 
 docs: |-
-  Trả về số dư tài khoản bao gồm tiền mặt, tiền có thể rút, nợ, lãi, cổ tức chờ về và thông tin cọc phái sinh.
+  Truy vấn thông tin số dư tiểu khoản bao gồm tài sản cơ sở và phái sinh. Dữ liệu phục vụ cho việc theo dõi tài sản, kiểm tra sức mua và quản lý nghĩa vụ tài chính của tiểu khoản giao dịch.
 
-  ```json
-  {
-    "stock": {
-      "totalCash": 3720308,
-      "availableCash": 3720022,
-      "depositInterest": 286,
-      "totalDebt": 592355,
-      "depositFeeAmount": 405,
-      "withdrawableCash": 3719617,
-      "cashDividendReceiving": 0
-    },
-    "derivative": {
-      "pendingDepositWithdraw": 826996062,
-      "remainSecure": 122363429600,
-      "usedSecure": 102098277,
-      "pendingSecure": 826996062,
-      "holdTaxAndFee": 0,
-      "totalLoanDebt": 0
-    }
-  }
+  <h3 id="getaccountbalances-parameters">Parameters</h3>
 
-  ```
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
+  |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
+  |version|header|string(date)|false|Phiên bản API |
+  |accountNo|path|string|true|Số tiểu khoản|
+
+  <h3 id="getaccountbalances-responseschema">Response Schema</h3>
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» stock|object|false|none|none|
+  |»» totalCash|integer(int32)|false|none|Tổng tiền (Tiền mặt + Lãi tiền gửi + Tiền bán chờ về + Tiền cổ tức chờ về - Tiền mua trong ngày)|
+  |»» availableCash|integer(int32)|false|none|Tiền mặt hiện có|
+  |»» depositInterest|integer(int32)|false|none|Lãi tiền gửi không kỳ hạn|
+  |»» totalDebt|integer(int32)|false|none|Tổng nợ (Nợ margin tạm thu + Nợ margin còn lại)|
+  |»» depositFeeAmount|integer(int32)|false|none|Phí lưu ký|
+  |»» withdrawableCash|integer(int32)|false|none|Tiền có thể rút|
+  |»» cashDividendReceiving|integer(int32)|false|none|Tiền cổ tức chờ về|
+  |» derivative|object|false|none|none|
+  |»» pendingDepositWithdraw|integer(int32)|false|none|Tiền nộp/rút cọc chờ xử lý|
+  |»» remainSecure|integer(int64)|false|none|Cọc còn lại|
+  |»» usedSecure|integer(int32)|false|none|Cọc đã sử dụng|
+  |»» pendingSecure|integer(int32)|false|none|Cọc chờ duyệt|
+  |»» holdTaxAndFee|integer(int32)|false|none|Thuế và phí tạm giữ|
+  |»» totalLoanDebt|integer(int32)|false|none|Khoản ứng chưa hoàn|

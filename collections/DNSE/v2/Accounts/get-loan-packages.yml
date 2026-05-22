@@ -31,8 +31,6 @@ examples:
       url: "{{baseUrl}}/accounts/{{accountNo}}/loan-packages"
       method: GET
       headers:
-        - name: X-API-Key
-          value: ""
         - name: X-Aux-Date
           value: ""
         - name: X-Signature
@@ -104,8 +102,6 @@ examples:
       url: "{{baseUrl}}/accounts/{{accountNo}}/loan-packages"
       method: GET
       headers:
-        - name: X-API-Key
-          value: ""
         - name: X-Aux-Date
           value: ""
         - name: X-Signature
@@ -144,8 +140,6 @@ examples:
       url: "{{baseUrl}}/accounts/{{accountNo}}/loan-packages"
       method: GET
       headers:
-        - name: X-API-Key
-          value: ""
         - name: X-Aux-Date
           value: ""
         - name: X-Signature
@@ -180,35 +174,60 @@ examples:
           }
 
 docs: |-
-  Trả về danh sách gói vay theo tiểu khoản, bao gồm tỷ lệ vay, biểu phí và thông tin gói vay theo từng loại thị trường.
+  Truy vấn danh sách gói vay để đặt lệnh theo từng mã chứng khoán.
 
-  ```
-  {
-    "symbol": "ACB",
-    "marketType": "STOCK",
-    "loanPackages": [
-      {
-        "id": 1775,
-        "name": "GD Tiền mặt",
-        "initialRate": 1.0,
-        "interestRate": 0.0999,
-        "liquidRate": 0.3,
-        "maintenanceRate": 0.4,
-        "type": "M",
-        "brokerFirmBuyingFeeRate": 0.0,
-        "brokerFirmSellingFeeRate": 0.0
-      },
-      {
-        "id": 1769,
-        "name": "RocketX",
-        "initialRate": 0.5,
-        "interestRate": 0.0999,
-        "liquidRate": 0.3,
-        "maintenanceRate": 0.4,
-        "type": "M",
-        "brokerFirmBuyingFeeRate": 4.5E-4,
-        "brokerFirmSellingFeeRate": 4.5E-4
-      }
-    ]
-  }
-  ```
+  Với giao dịch cơ sở, trả về **tối đa 2 gói vay** bao gồm:
+
+  - Gói tiền mặt: Tỷ lệ ký quỹ tiền mặt 100%, không sử dụng tiền vay margin (`initialRate` = 1)
+      
+  - Gói vay ký quỹ (margin): Tỷ lệ ký quỹ dưới 100%, có sử dụng đòn bẩy tiền vay margin (`initialRate` ≠ 1)
+      
+
+  Với giao dịch phái sinh, tài khoản thường chỉ áp dụng **một gói vay duy nhất** cho tất cả các mã, với bộ tỷ lệ ký quỹ và phí cố định.
+
+  <h3 id="getloanpackages-parameters">Parameters</h3>
+
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |marketType|query|string|true|Loại thị trường |
+  |symbol|query|string|true|Mã chứng khoán|
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
+  |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
+  |version|header|string(date)|false|Phiên bản API |
+  |accountNo|path|string|true|Số tiểu khoản|
+
+  #### Detailed descriptions
+
+  **marketType**: Loại thị trường 
+  - STOCK: Gói vay giao dịch cơ sở
+  - DERIVATIVE: Gói vay giao dịch phái sinh
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» symbolType|string|false|none|Phân loại mã hợp đồng phái sinh theo thời gian đáo hạn (áp dụng cho DERIVATIVE)<br>- VN30F1M: HĐTL chỉ số VN30 1 tháng<br>- VN30F2M: HĐTL chỉ số VN30 2 tháng<br>- VN30F1Q: HĐTL chỉ số VN30 1 quý<br>- VN30F2Q: HĐTL chỉ số VN30 2 quý|
+  |» marketType|string|false|none|Loại thị trường<br>- STOCK: Gói vay giao dịch cơ sở<br>- DERIVATIVE: Gói vay giao dịch phái sinh|
+  |» loanPackages|[object]|false|none|Danh sách gói vay|
+  |»» id|integer(int32)|false|none|Id gói vay|
+  |»» name|string|false|none|Tên gói vay|
+  |»» initialRate|number(double)|false|none|Tỷ lệ ban đầu|
+  |»» maintenanceRate|number(double)|false|none|Tỷ lệ duy trì (call margin)|
+  |»» liquidRate|number(double)|false|none|Tỷ lệ xử lý (force sell)|
+  |»» tradingFee|object|false|none|Thông tin biểu phí phái sinh (áp dụng cho DERIVATIVE)|
+  |»»» id|integer(int32)|false|none|Id chính sách phí phái sinh|
+  |»»» name|string|false|none|Tên chính sách phí|
+  |»»» scope|string|false|none|Phạm vi áp dụng|
+  |»»» channel|string|false|none|Kênh áp dụng|
+  |»»» schemaType|string|false|none|Loại biểu phí<br>FIXED: Phí cố định<br>PROGRESSIVE: Phí lũy tiến|
+  |»»» createdDate|string(date-time)|false|none|Thời điểm áp dụng|
+  |»»» modifiedDate|string(date-time)|false|none|Thời điểm cập nhật|
+  |»»» fixedTradingFee|integer(int32)|false|none|Phí cố định trên 1 hợp đồng|
+  |»»» fixedDailyCloseTradingFee|integer(int32)|false|none|Phí đóng vị thế trong ngày|
+  |»»» progressTradingFee|[object]|false|none|Phí giao dịch lũy tiến|
+  |»»»» fromQuantity|number(double)|false|none|Khối lượng bắt đầu|
+  |»»»» toQuantity|number(double)|false|none|Khối lượng kết thúc|
+  |»»»» fee|number(double)|false|none|Mức phí|
+  |»»» progressDailyCloseTradingFee|[object]|false|none|Phí đóng vị thế trong ngày lũy tiến|
+  |»»»» fromQuantity|number(double)|false|none|Khối lượng bắt đầu|
+  |»»»» toQuantity|number(double)|false|none|Khối lượng kết thúc|
+  |»»»» fee|number(double)|false|none|Mức phí|

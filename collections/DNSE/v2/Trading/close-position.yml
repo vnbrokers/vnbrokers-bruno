@@ -32,7 +32,7 @@ settings:
 
 examples:
   - name: 200 Response
-    description: Thành công – tạo lệnh đóng vị thế
+    description: Thành công - tạo lệnh đóng vị thế
     request:
       url: "{{baseUrl}}/accounts/positions/{{positionId}}/close"
       method: POST
@@ -59,19 +59,19 @@ examples:
         type: json
         data: |-
           {
-            "id": 0,
-            "side": "",
-            "accountNo": "",
-            "symbol": "",
-            "price": 0,
-            "quantity": 0,
-            "orderType": "",
+            "id": 1636,
+            "side": "NS",
+            "accountNo": "0001179019",
+            "symbol": "41I1G4000",
+            "price": 1618.2,
+            "quantity": 1,
+            "orderType": "LO",
             "fillQuantity": 0,
             "leaveQuantity": 0,
             "canceledQuantity": 0,
-            "loanPackageId": 0,
-            "createdDate": "",
-            "modifiedDate": ""
+            "loanPackageId": 2278,
+            "createdDate": "2026-03-24T04:20:55.63",
+            "modifiedDate": "2026-03-24T04:20:55.63"
           }
   - name: 400 Response
     description: Yêu cầu không hợp lệ
@@ -139,19 +139,41 @@ examples:
           }
 
 docs: |-
-  API đóng vị thế phái sinh.
+  Gửi yêu cầu đóng vị thế đang mở của phái sinh theo `positionId`. Đóng vị thế là lệnh đặt ngược chiều với vị thế đang mở, loại lệnh LO, giá đặt là giá trần/sàn của mã phái sinh tương ứng, khối lượng đặt bằng khối lượng mở của vị thế.
 
-  Query Parameters:
-    - marketType (string, required): Chỉ hỗ trợ DERIVATIVE
+  <h3 id="closeposition-parameters">Parameters</h3>
 
-  Header Parameters:
-    - X-API-Key (string, required)
-    - X-Signature (string, required)
-    - X-Aux-Date (string, required)
-    - trading-token (string, required)
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |marketType|query|string|true|Loại thị trường |
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
+  |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
+  |trading-token|header|string|true|Token đặt lệnh|
+  |version|header|string(date)|false|Phiên bản API |
+  |positionId|path|string|true|Id vị thế|
 
-  Path Parameters:
-    - positionId (string): ID vị thế cần đóng
+  #### Detailed descriptions
 
-  Response:
-    - Trả về thông tin lệnh đóng vị thế vừa được tạo.
+  **marketType**: Loại thị trường 
+  - STOCK: Danh sách Deal cơ sở
+  - DERIVATIVE: Danh sách Deal phái sinh
+  Hiện tại chỉ hỗ trợ phái sinh
+
+  <h3 id="closeposition-responseschema">Response Schema</h3>
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» id|integer(int32)|false|none|Id lệnh giao dịch|
+  |» side|string|false|none|Chiều đặt lệnh<br>- NB: Mua<br>- NS: Bán|
+  |» accountNo|string|false|none|Số tiểu khoản|
+  |» symbol|string|false|none|Mã chứng khoán|
+  |» price|number(double)|false|none|Giá đặt|
+  |» quantity|integer(int32)|false|none|Khối lượng đặt|
+  |» orderType|string|false|none|Loại lệnh<br>- LO: Lệnh giới hạn<br>- MOK/MAK/MTL: Lệnh thị trường<br>- ATO/ATC: Lệnh phiên định kỳ mở cửa/đóng cửa<br>- PLO: Lệnh khớp lệnh sau giờ|
+  |» fillQuantity|integer(int32)|false|none|Khối lượng khớp|
+  |» leaveQuantity|integer(int32)|false|none|Khối lượng còn lại|
+  |» canceledQuantity|integer(int32)|false|none|Khối lượng đã hủy|
+  |» loanPackageId|integer(int32)|false|none|Mã gói vay|
+  |» createdDate|string(date-time)|false|none|Thời điểm tạo|
+  |» modifiedDate|string(date-time)|false|none|Thời điểm cập nhật|

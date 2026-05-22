@@ -50,8 +50,6 @@ examples:
       url: "{{baseUrl}}/instruments"
       method: GET
       headers:
-        - name: X-API-Key
-          value: ""
         - name: X-Aux-Date
           value: ""
         - name: X-Signature
@@ -122,8 +120,6 @@ examples:
       url: "{{baseUrl}}/instruments"
       method: GET
       headers:
-        - name: X-API-Key
-          value: ""
         - name: X-Aux-Date
           value: ""
         - name: X-Signature
@@ -182,8 +178,6 @@ examples:
       url: "{{baseUrl}}/instruments"
       method: GET
       headers:
-        - name: X-API-Key
-          value: ""
         - name: X-Aux-Date
           value: ""
         - name: X-Signature

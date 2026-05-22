@@ -1,0 +1,224 @@
+info:
+  name: Lịch sử lệnh
+  type: http
+  seq: 7
+
+http:
+  method: GET
+  url: "{{baseUrl}}/accounts/:accountNo/orders/history?marketType=DERIVATIVE&from=2025-05-01&to=2026-05-01"
+  params:
+    - name: marketType
+      value: DERIVATIVE
+      type: query
+    - name: from
+      value: 2025-05-01
+      type: query
+    - name: to
+      value: 2026-05-01
+      type: query
+    - name: start
+      value: "100"
+      type: query
+      disabled: true
+    - name: accountNo
+      value: "{{accountNo}}"
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công – trả về lịch sử lệnh theo khoảng thời gian
+    request:
+      url: "{{baseUrl}}/accounts/{{accountNo}}/orders/history"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
+      params:
+        - name: marketType
+          value: STOCK
+          type: query
+        - name: from
+          value: 2026-02-15
+          type: query
+        - name: to
+          value: 2026-03-18
+          type: query
+        - name: accountNo
+          value: ""
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "accountNo": "0001179019",
+            "fillQuantity": 0,
+            "total": 8,
+            "start": 0,
+            "end": 8,
+            "marketType": "STOCK",
+            "data": [
+              {
+                "id": "20260312_241",
+                "symbol": "HPG",
+                "side": "NB",
+                "orderType": "LO",
+                "orderStatus": "Expired",
+                "price": 27200,
+                "quantity": 200,
+                "fillQuantity": 0,
+                "leaveQuantity": 0,
+                "canceledQuantity": 200,
+                "averagePrice": 0,
+                "loanPackageId": 5765,
+                "transDate": "2026-03-12",
+                "createdDate": "2026-03-17T06:44:18.813804Z",
+                "modifiedDate": "2026-03-18T15:28:24.44026Z"
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{baseUrl}}/accounts/{{accountNo}}/orders/history"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
+      params:
+        - name: marketType
+          value: ""
+          type: query
+        - name: from
+          value: ""
+          type: query
+        - name: to
+          value: ""
+          type: query
+        - name: accountNo
+          value: ""
+          type: path
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/accounts/{{accountNo}}/orders/history"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
+      params:
+        - name: marketType
+          value: ""
+          type: query
+        - name: from
+          value: ""
+          type: query
+        - name: to
+          value: ""
+          type: query
+        - name: accountNo
+          value: ""
+          type: path
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: |-
+  Lấy danh sách lệnh đã đặt trong một khoảng thời gian nhất định. Thời gian tra cứu tối đa trong vòng 1 năm kể từ ngày hiện tại.
+
+  <h3 id="getordershistory-parameters">Parameters</h3>
+
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |marketType|query|string|true|Loại thị trường |
+  |from|query|string|true|Ngày bắt đầu (yyyy-mm-dd) |
+  |to|query|string|true|Ngày kết thúc (yyyy-mm-dd) |
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
+  |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
+  |version|header|string(date)|false|Phiên bản API |
+  |accountNo|path|string|true|Số tiểu khoản|
+
+  #### Detailed descriptions
+
+  **marketType**: Loại thị trường 
+  - STOCK: Gói vay giao dịch cơ sở
+  - DERIVATIVE: Gói vay giao dịch phái sinh
+
+  **from**: Ngày bắt đầu (yyyy-mm-dd) 
+  - Thời gian tra cứu tối đa trong 1 năm tính từ ngày hiện tại
+
+  **to**: Ngày kết thúc (yyyy-mm-dd) 
+  - Lớn hơn hoặc bằng ngày bắt đầu và không vượt quá ngày hiện tại
+
+  <h3 id="getordershistory-responseschema">Response Schema</h3>
+
+  Status Code **200**
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» accountNo|string|false|none|Số tiểu khoản|
+  |» fillQuantity|integer(int32)|false|none|Tổng khối lượng đã khớp|
+  |» total|integer(int32)|false|none|Tổng số bản ghi|
+  |» start|integer(int32)|false|none|Vị trí bắt đầu của tập bản ghi được trả về|
+  |» end|integer(int32)|false|none|Vị trí kết thúc của tập bản ghi được trả về|
+  |» marketType|string|false|none|Loại thị trường<br>- STOCK: Gói vay giao dịch cơ sở<br>- DERIVATIVE: Gói vay giao dịch phái sinh|
+  |» data|[object]|false|none|Danh sách lệnh giao dịch|
+  |»» id|string|false|none|ID lệnh trên hệ thống|
+  |»» symbol|string|false|none|Mã chứng khoán|
+  |»» side|string|false|none|Chiều giao dịch<br>NB: Mua<br>NS: Bán|
+  |»» orderType|string|false|none|Loại lệnh<br>- LO: Lệnh giới hạn<br>- MOK/MAK/MTL: Lệnh thị trường<br>- ATO/ATC: Lệnh phiên định kỳ mở cửa/đóng cửa<br>- PLO: Lệnh khớp lệnh sau giờ|
+  |»» orderStatus|string|false|none|Trạng thái lệnh<br>- Pending/PendingNew: Chờ gửi<br>- New: Chờ khớp<br>- PartiallyFilled: Khớp một phần<br>- Filled: Khớp toàn bộ<br>- Rejected: Bị từ chối<br>- Expired: Hết hạn trong phiên<br>- DoneForDay: Lệnh được giải tỏa do không khớp trong phiên|
+  |»» price|integer(int32)|false|none|Giá đặt|
+  |»» quantity|integer(int32)|false|none|Khối lượng đặt|
+  |»» fillQuantity|integer(int32)|false|none|Khối lượng đã khớp|
+  |»» leaveQuantity|integer(int32)|false|none|Khối lượng còn lại|
+  |»» canceledQuantity|integer(int32)|false|none|Khối lượng đã huỷ|
+  |»» averagePrice|integer(int32)|false|none|Giá khớp trung bình|
+  |»» loanPackageId|integer(int32)|false|none|ID gói vay|
+  |»» transDate|string|false|none|Ngày giao dịch|
+  |»» createdDate|string(date-time)|false|none|Thời điểm tạo|
+  |»» modifiedDate|string(date-time)|false|none|Thời điểm cập nhật|

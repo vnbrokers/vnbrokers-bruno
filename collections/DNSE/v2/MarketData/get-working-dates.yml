@@ -49,8 +49,6 @@ examples:
       url: https://openapi.dnse.com.vn/market/working-dates
       method: GET
       headers:
-        - name: X-API-Key
-          value: ""
         - name: X-Aux-Date
           value: ""
         - name: X-Signature
@@ -100,4 +98,20 @@ examples:
             "status": 0
           }
 
-docs: Lấy danh sách ngày làm việc của thị trường chứng khoán trong 1 năm.
+docs: |-
+  Truy vấn danh sách ngày làm việc (ngày giao dịch) của thị trường chứng khoán trong vòng 1 năm tính từ ngày hiện tại, đã loại trừ các ngày nghỉ lễ và cuối tuần.
+
+  <h3 id="getmarketworkingdates-parameters">Parameters</h3>
+
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Aux-Date|header|string|true|Chữ ký xác thực yêu cầu|
+  |X-Signature|header|string|true|Thời gian thực hiện yêu cầu|
+  |version|header|string(date)|false|Phiên bản API |
+
+  <h3 id="getmarketworkingdates-responseschema">Response Schema</h3>
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» workingDates|[string]|false|none|Danh sách ngày làm việc|

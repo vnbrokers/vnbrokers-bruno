@@ -38,7 +38,7 @@ settings:
 
 examples:
   - name: 200 Response
-    description: Thành công – trả về lịch sử khớp lệnh theo khoảng thời gian
+    description: Thành công - trả về lịch sử khớp lệnh theo khoảng thời gian
     request:
       url: "{{baseUrl}}/price/{{symbol}}/trades"
       method: GET
@@ -73,8 +73,25 @@ examples:
         type: json
         data: |-
           {
-            "trades": [],
-            "nextPageToken": ""
+            "trades": [
+              {
+                "marketId": "STO",
+                "boardId": "G1",
+                "isin": "VN000000ACB8",
+                "symbol": "ACB",
+                "matchPrice": 22.85,
+                "matchQtty": 10,
+                "side": "UNSPECIFIED",
+                "avgPrice": 22.958,
+                "totalVolumeTraded": 764430,
+                "grossTradeAmount": 175.49849,
+                "highestPrice": 23.25,
+                "lowestPrice": 22.75,
+                "openPrice": 23,
+                "time": "2026-03-12 04:29:57"
+              }
+            ],
+            "nextPageToken": "NDYwMTQ1XzIwMjYtMDMtMTJUMDQ6MjU6MDUu****"
           }
   - name: 400 Response
     description: Yêu cầu không hợp lệ
@@ -152,23 +169,54 @@ examples:
           }
 
 docs: |-
-  API trả về lịch sử khớp lệnh theo mã chứng khoán và khoảng thời gian.
+  Truy vấn thông tin lịch sử khớp lệnh của mã chứng khoán theo bảng giao dịch và khoảng thời gian cụ thể.
 
-  Query Parameters:
-    - boardId (string, required): Mã bảng giao dịch
-        G1: Lô chẵn
-        G4: Lô lẻ
-        T1: Thỏa thuận trong giờ
-        T3: Thỏa thuận sau giờ
-        T4: Thỏa thuận lô lẻ trong giờ
-        T6: Thỏa thuận lô lẻ sau giờ
-    - from (string, required): Timestamp bắt đầu
-    - to (string, required): Timestamp kết thúc
-    - limit (number, optional): Số bản ghi tối đa
+  <h3 id="gethistorytrades-parameters">Parameters</h3>
 
-  Path Parameters:
-    - symbol (string): Mã chứng khoán
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |boardId|query|string|true|Mã bảng giao dịch|
+  |from|query|string|true|Thời gian bắt đầu (timestamp)|
+  |to|query|string|true|Thời gian kết thúc (timestamp)|
+  |limit|query|number|false|none|
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
+  |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
+  |version|header|string(date)|false|Phiên bản API |
+  |symbol|path|string|true|Mã chứng khoán|
 
-  Response bao gồm:
-    - Danh sách giao dịch: giá khớp, khối lượng, giá trị, thời gian
-    - nextPageToken: Token để lấy trang tiếp theo
+  #### Detailed descriptions
+
+  **boardId**: Mã bảng giao dịch
+  - G1: Lô chẵn
+  - G4: Lô lẻ
+  - T1: Thỏa thuận trong giờ (9h - 14h45)
+  - T3: Thỏa thuận sau giờ (14h45 - 15h)
+  - T4: Thỏa thuận lô lẻ trong giờ (9h - 14h45)
+  - T6: Thỏa thuận lô lẻ sau giờ  (14h45 - 15h)
+
+  Truy vấn thông tin lịch sử khớp lệnh của mã chứng khoán theo bảng giao dịch và khoảng thời gian cụ thể.
+
+  <h3 id="gethistorytrades-parameters">Parameters</h3>
+
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |boardId|query|string|true|Mã bảng giao dịch|
+  |from|query|string|true|Thời gian bắt đầu (timestamp)|
+  |to|query|string|true|Thời gian kết thúc (timestamp)|
+  |limit|query|number|false|none|
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
+  |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
+  |version|header|string(date)|false|Phiên bản API |
+  |symbol|path|string|true|Mã chứng khoán|
+
+  #### Detailed descriptions
+
+  **boardId**: Mã bảng giao dịch
+  - G1: Lô chẵn
+  - G4: Lô lẻ
+  - T1: Thỏa thuận trong giờ (9h - 14h45)
+  - T3: Thỏa thuận sau giờ (14h45 - 15h)
+  - T4: Thỏa thuận lô lẻ trong giờ (9h - 14h45)
+  - T6: Thỏa thuận lô lẻ sau giờ  (14h45 - 15h)

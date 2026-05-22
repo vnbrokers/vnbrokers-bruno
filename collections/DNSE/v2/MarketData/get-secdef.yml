@@ -11,9 +11,14 @@ http:
       value: G1
       type: query
     - name: symbol
-      value: HPG
+      value: "{{symbol}}"
       type: path
   auth: inherit
+
+runtime:
+  variables:
+    - name: symbol
+      value: HPG
 
 settings:
   encodeUrl: true
@@ -31,7 +36,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: 2026-05-07
       params:
         - name: boardId
           value: ""
@@ -50,19 +55,19 @@ examples:
         data: |-
           [
             {
-              "marketId": "",
-              "boardId": "",
-              "isin": "",
-              "symbol": "",
-              "productGrpId": "",
-              "securityGroupId": "",
-              "basicPrice": 0,
-              "ceilingPrice": 0,
-              "floorPrice": 0,
-              "securityStatus": "",
-              "symbolAdminStatusCode": "",
-              "symbolTradingMethodStatusCode": "",
-              "symbolTradingSanctionStatusCode": ""
+              "marketId": "STO",
+              "boardId": "G1",
+              "isin": "VN000000HPG4",
+              "symbol": "HPG",
+              "productGrpId": "STO",
+              "securityGroupId": "ST",
+              "basicPrice": 26.8,
+              "ceilingPrice": 28.65,
+              "floorPrice": 24.95,
+              "securityStatus": "UNSPECIFIED",
+              "symbolAdminStatusCode": "NRM",
+              "symbolTradingMethodStatusCode": "NRM",
+              "symbolTradingSanctionStatusCode": "NRM"
             }
           ]
   - name: 400 Response
@@ -74,7 +79,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: 2026-05-07
       params:
         - name: boardId
           value: ""
@@ -105,7 +110,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: 2026-05-07
       params:
         - name: boardId
           value: ""
@@ -129,21 +134,43 @@ examples:
           }
 
 docs: |-
-  API trả về thông tin giao dịch của mã chứng khoán.
+  Truy vấn thông tin về giá trần/sàn/tham chiếu và trạng thái của mã chứng khoán vào ngày giao dịch.
 
-  Query Parameters:
-    - boardId (string, optional): Mã bảng giao dịch
-        G1: Lô chẵn
-        G4: Lô lẻ
-        T1: Thỏa thuận trong giờ
-        T3: Thỏa thuận sau giờ
-        T4: Thỏa thuận lô lẻ trong giờ
-        T6: Thỏa thuận lô lẻ sau giờ
+  <h3 id="getsymbolsecdef-parameters">Parameters</h3>
 
-  Path Parameters:
-    - symbol (string): Mã chứng khoán
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |boardId|query|string|false|Mã bảng giao dịch|
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
+  |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
+  |version|header|string(date)|false|Phiên bản API |
+  |symbol|path|string|true|Mã chứng khoán|
 
-  Response bao gồm:
-    - Giá tham chiếu, giá trần, giá sàn
-    - Trạng thái giao dịch, trạng thái hành chính, trạng thái cơ chế giao dịch
-    - Nhóm sản phẩm, nhóm chứng khoán, mã ISIN
+  #### Detailed descriptions
+
+  **boardId**: Mã bảng giao dịch
+  - G1: Lô chẵn
+  - G4: Lô lẻ
+  - T1: Thỏa thuận trong giờ (9h - 14h45)
+  - T3: Thỏa thuận sau giờ (14h45 - 15h)
+  - T4: Thỏa thuận lô lẻ trong giờ (9h - 14h45)
+  - T6: Thỏa thuận lô lẻ sau giờ  (14h45 - 15h)
+
+  <h3 id="getsymbolsecdef-responseschema">Response Schema</h3>
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» marketId|string|false|none|Mã thị trường niêm yết mã chứng khoán<br>- DVX: Phái sinh sàn HNX<br>- HCX: Trái phiếu doanh nghiệp HNX<br>- STO: Cổ phiếu sàn HOSE<br>- STX: Cổ phiếu sàn HNX<br>- UPX: Cổ phiếu sàn Upcom|
+  |» boardId|string|false|none|Mã bảng giao dịch<br>- G1: Lô chẵn<br>- G4: Lô lẻ<br>- T1: Thỏa thuận trong giờ (9h - 14h45)<br>- T3: Thỏa thuận sau giờ (14h45 - 15h)<br>- T4: Thỏa thuận lô lẻ trong giờ (9h - 14h45)<br>- T6: Thỏa thuận lô lẻ sau giờ (14h45 - 15h)|
+  |» isin|string|false|none|Mã định danh quốc tế|
+  |» symbol|string|false|none|Mã chứng khoán|
+  |» productGrpId|string|false|none|Nhóm sản phẩm theo thị trường<br>-FBX: Hợp đồng tương lai Trái phiếu<br>-FIO: Hợp đồng tương lai Chỉ số<br>-HCX: Trái phiếu Doanh nghiệp HNX<br>-STO: Cổ phiếu sàn HOSE<br>-STX: Cổ phiếu sàn HNX<br>-UPX: Cổ phiếu sàn Upcom|
+  |» securityGroupId|string|false|none|Nhóm chứng khoán<br>- BS: Trái phiếu doanh nghiệp<br>- EF: Quỹ ETF<br>- EW: Chứng quyền<br>- FU: Hợp đồng tương lai<br>- ST: Cổ phiếu|
+  |» basicPrice|number(double)|false|none|Giá tham chiếu ngày giao dịch|
+  |» ceilingPrice|number(double)|false|none|Giá trần ngày giao dịch|
+  |» floorPrice|number(double)|false|none|Giá sàn ngày giao dịch|
+  |» securityStatus|string|false|none|Trạng thái giao dịch của mã chứng khoán<br>- HALT: Ngừng giao dịch<br>- NO_HALT: Không ngừng giao dịch|
+  |» symbolAdminStatusCode|string|false|none|Trạng thái quản lý hành chính mã chứng khoán<br>- CR: Kiểm soát và hạn chế giao dịch<br>- CTR: Kiểm soát<br>- NRM: Bình thường<br>- RES: Hạn chế giao dịch<br>- WFR: Cảnh báo vi phạm BCTC<br>- WID: Cảnh báo vi phạm CBTT<br>- WOV: Cảnh báo vi phạm khác|
+  |» symbolTradingMethodStatusCode|string|false|none|Trạng thái cơ chế giao dịch mã chứng khoán<br>- NRM: Bình thường<br>- NWE: Niêm yết mới (biên độ đặc biệt)<br>- NWN: Niêm yết mới (biên độ thường)<br>- SLS: Giao dịch đặc biệt sau tạm ngưng<br>- SNE: Giao dịch đặc biệt không có giao dịch dài hạn|
+  |» symbolTradingSanctionStatusCode|string|false|none|Tình trạng giao dịch của mã chứng khoán<br>- NRM: Bình thường<br>- SUS: Tạm ngừng giao dịch<br>- DTL: Hủy niêm yết để chuyển sàn<br>- TFR: Ngưng giao dịch do hạn chế|

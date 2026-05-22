@@ -30,8 +30,6 @@ examples:
       url: "{{baseUrl}}/accounts"
       method: GET
       headers:
-        - name: X-API-Key
-          value: ""
         - name: X-Aux-Date
           value: ""
         - name: X-Signature
@@ -70,8 +68,6 @@ examples:
       url: "{{baseUrl}}/accounts"
       method: GET
       headers:
-        - name: X-API-Key
-          value: ""
         - name: X-Aux-Date
           value: ""
         - name: X-Signature
@@ -100,8 +96,6 @@ examples:
       url: "{{baseUrl}}/accounts"
       method: GET
       headers:
-        - name: X-API-Key
-          value: ""
         - name: X-Aux-Date
           value: ""
         - name: X-Signature
@@ -125,4 +119,28 @@ examples:
             "status": 0
           }
 
-docs: Trả về thông tin khách hàng và danh sách tài khoản (deal/derivative).
+docs: |-
+  Truy vấn thông tin định danh của người dùng cùng danh sách tiểu khoản giao dịch, phục vụ cho việc xác định khả năng giao dịch và trạng thái hoạt động của tiểu khoản.
+
+  <h3 id="getaccounts-parameters">Parameters</h3>
+
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
+  |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
+  |version|header|string(date)|false|Phiên bản API |
+
+  <h3 id="getaccounts-responseschema">Response Schema</h3>
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» name|string|false|none|Họ tên khách hàng|
+  |» custodyCode|string|false|none|Số tài khoản lưu ký tại VSD|
+  |» investorId|string|false|none|Mã định danh khách hàng tại DNSE|
+  |» accounts|[object]|false|none|none|
+  |»» id|string|false|none|Số tiểu khoản|
+  |»» dealAccount|boolean|false|none|Tiểu khoản theo DEAL hoặc không|
+  |»» derivativeAccount|boolean|false|none|none|
+  |»» derivative|object|false|none|Trạng thái tài khoản phái sinh<br>ACTIVE: Đang hoạt động<br>INACTIVE: Ngừng hoạt động|
+  |»»» status|string|false|none|Tiểu khoản được phép giao dịch phái sinh hoặc không|

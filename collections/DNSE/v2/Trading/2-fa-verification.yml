@@ -48,7 +48,7 @@ settings:
 
 examples:
   - name: 200 Response
-    description: Thành công – trả về tradingToken
+    description: Thành công - trả về tradingToken
     request:
       url: "{{baseUrl}}/registration/trading-token"
       method: POST
@@ -59,6 +59,13 @@ examples:
           value: "{{apiKey}}"
         - name: version
           value: "2026-05-07"
+      body:
+        type: json
+        data: |-
+          {
+            "otpType": "email_otp",
+            "passcode": "519752"
+          }
     response:
       status: 200
       statusText: OK
@@ -69,7 +76,7 @@ examples:
         type: json
         data: |-
           {
-            "tradingToken": ""
+            "tradingToken": "9ab81e9c-8a81-45aa-8190-b69a1c17****"
           }
   - name: 400 Response
     description: Yêu cầu không hợp lệ
@@ -125,15 +132,28 @@ examples:
           }
 
 docs: |-
-  API xác thực mã OTP để lấy tradingToken phục vụ đặt lệnh.
+  Xác thực mã OTP theo phương thức xác thực (Email OTP hoặc Smart OTP) đã đăng ký để lấy Trading Token. Đây là thông tin bắt buộc để xác thực quyền giao dịch, có hiệu lực trong 8 tiếng.
 
-  Body Parameters:
-    - otpType (string, required): Phương thức xác thực OTP
-        email_otp: OTP gửi qua email
-        smart_otp: OTP từ ứng dụng Smart OTP
-    - passcode (string, required): Mã OTP
+  <h3 id="2faverification-parameters">Parameters</h3>
 
-  Response:
-    - tradingToken: Token dùng để đặt lệnh
-    - 400: Thông tin không hợp lệ
-    - 500: Lỗi hệ thống
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
+  |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
+  |version|header|string(date)|false|Phiên bản API |
+  |body|body|object|false|none|
+  |» otpType|body|string|false|Phương thức xác thực OTP|
+  |» passcode|body|string|false|Mã OTP tương ứng với phương thức xác thực|
+
+  #### Detailed descriptions
+
+  **» otpType**: Phương thức xác thực OTP
+  - email_otp: Áp dụng cho tài khoản đăng ký phương thức xác thực lớp thứ 2 là Email OTP
+  - smart_otp: Áp dụng cho tài khoản đăng ký phương thức xác thực lớp thứ 2 là Smart OTP
+
+  <h3 id="2faverification-responseschema">Response Schema</h3>
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» tradingToken|string|false|none|Token đặt lệnh|

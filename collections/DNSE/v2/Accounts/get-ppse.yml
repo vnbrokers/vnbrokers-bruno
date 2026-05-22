@@ -1,17 +1,23 @@
 info:
-  name: Lấy sổ lệnh theo tiểu khoản
+  name: Lấy sức mua, sức bán theo tiểu khoản
   type: http
-  seq: 5
+  seq: 4
 
 http:
   method: GET
-  url: "{{baseUrl}}/accounts/:accountNo/orders?marketType=DERIVATIVE&orderCategory=NORMAL"
+  url: "{{baseUrl}}/accounts/:accountNo/ppse?marketType=STOCK&symbol=ACB&loanPackageId=1769&price=22100"
   params:
     - name: marketType
-      value: DERIVATIVE
+      value: STOCK
       type: query
-    - name: orderCategory
-      value: NORMAL
+    - name: symbol
+      value: ACB
+      type: query
+    - name: loanPackageId
+      value: "1769"
+      type: query
+    - name: price
+      value: "22100"
       type: query
     - name: accountNo
       value: "{{accountNo}}"
@@ -26,13 +32,11 @@ settings:
 
 examples:
   - name: 200 Response
-    description: Thành công - trả về danh sách lệnh giao dịch
+    description: Thành công - trả về sức mua và sức bán
     request:
-      url: "{{baseUrl}}/accounts/{{accountNo}}/orders"
+      url: "{{baseUrl}}/accounts/{{accountNo}}/ppse"
       method: GET
       headers:
-        - name: X-API-Key
-          value: ""
         - name: X-Aux-Date
           value: ""
         - name: X-Signature
@@ -48,7 +52,13 @@ examples:
         - name: marketType
           value: ""
           type: query
-        - name: orderCategory
+        - name: symbol
+          value: ""
+          type: query
+        - name: loanPackageId
+          value: ""
+          type: query
+        - name: price
           value: ""
           type: query
     response:
@@ -61,38 +71,16 @@ examples:
         type: json
         data: |-
           {
-            "orders": [
-              {
-                "id": 0,
-                "side": "",
-                "accountNo": "",
-                "symbol": "",
-                "price": 0,
-                "priceSecure": 0,
-                "averagePrice": 0,
-                "quantity": 0,
-                "fillQuantity": 0,
-                "canceledQuantity": 0,
-                "leaveQuantity": 0,
-                "orderType": "",
-                "orderCategory": "",
-                "orderStatus": "",
-                "loanPackageId": 0,
-                "marketType": "",
-                "transDate": "",
-                "createdDate": "",
-                "modifiedDate": ""
-              }
-            ]
+            "qmaxBuy": 1209,
+            "qmaxSell": 700,
+            "price": 23000
           }
   - name: 400 Response
     description: Yêu cầu không hợp lệ
     request:
-      url: "{{baseUrl}}/accounts/{{accountNo}}/orders"
+      url: "{{baseUrl}}/accounts/{{accountNo}}/ppse"
       method: GET
       headers:
-        - name: X-API-Key
-          value: ""
         - name: X-Aux-Date
           value: ""
         - name: X-Signature
@@ -108,7 +96,13 @@ examples:
         - name: marketType
           value: ""
           type: query
-        - name: orderCategory
+        - name: symbol
+          value: ""
+          type: query
+        - name: loanPackageId
+          value: ""
+          type: query
+        - name: price
           value: ""
           type: query
     response:
@@ -128,11 +122,9 @@ examples:
   - name: 500 Response
     description: Lỗi máy chủ
     request:
-      url: "{{baseUrl}}/accounts/{{accountNo}}/orders"
+      url: "{{baseUrl}}/accounts/{{accountNo}}/ppse"
       method: GET
       headers:
-        - name: X-API-Key
-          value: ""
         - name: X-Aux-Date
           value: ""
         - name: X-Signature
@@ -148,7 +140,13 @@ examples:
         - name: marketType
           value: ""
           type: query
-        - name: orderCategory
+        - name: symbol
+          value: ""
+          type: query
+        - name: loanPackageId
+          value: ""
+          type: query
+        - name: price
           value: ""
           type: query
     response:
@@ -167,20 +165,32 @@ examples:
           }
 
 docs: |-
-  Trả về danh sách lệnh giao dịch theo tiểu khoản, bao gồm thông tin giá, khối lượng, trạng thái và loại lệnh.
+  Lấy thông tin sức mua và sức bán của tiểu khoản theo mã chứng khoán và gói vay để kiểm tra khả năng đặt lệnh trước khi giao dịch.
 
-  Query Parameters
-  marketType
-  string
-  required
-  Loại thị trường
+  <h3 id="getppse-parameters">Parameters</h3>
 
-  STOCK: Sổ lệnh cơ sở
-  DERIVATIVE: Sổ lệnh phái sinh
-  Example: STOCK
-  orderCategory
-  string
-  required
-  Phân loại lệnh thường, lệnh điều kiện (mặc định NORMAL)
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |marketType|query|string|true|Loại thị trường |
+  |symbol|query|string|true|Mã chứng khoán|
+  |loanPackageId|query|string|true|Id gói vay|
+  |price|query|string|true|Giá đặt lệnh|
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
+  |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
+  |version|header|string(date)|false|Phiên bản API |
+  |accountNo|path|integer|true|Số tiểu khoản|
 
-  Example: NORMAL
+  #### Detailed descriptions
+
+  **marketType**: Loại thị trường 
+  - STOCK: Gói vay giao dịch cơ sở
+  - DERIVATIVE: Gói vay giao dịch phái sinh
+
+  <h3 id="getppse-responseschema">Response Schema</h3>
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» qmaxBuy|integer(int32)|false|none|Khối lượng mua tối đa|
+  |» qmaxSell|integer(int32)|false|none|Khối lượng bán tối đa|
+  |» price|number(double)|false|none|Giá đặt|

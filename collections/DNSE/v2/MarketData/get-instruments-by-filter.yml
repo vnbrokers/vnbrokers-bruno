@@ -73,11 +73,26 @@ examples:
         type: json
         data: |-
           {
-            "data": [],
-            "total": 0,
+            "data": [
+              {
+                "symbol": "ACB",
+                "marketId": "STO",
+                "securityGroupId": "ST",
+                "symbolType": "",
+                "listedDate": "2020-12-09",
+                "shortName": "Ngân hàng Á Châu",
+                "name": "Ngân hàng TMCP Á Châu",
+                "indexName": [
+                  "VN100",
+                  "VN30"
+                ]
+              }
+            ],
+            "total": 5,
             "page": 1,
-            "pageSize": 0
+            "pageSize": 100
           }
+
   - name: 400 Response
     description: Yêu cầu không hợp lệ
     request:
@@ -136,26 +151,57 @@ examples:
           }
 
 docs: |-
-  API trả về thông tin chi tiết của mã chứng khoán.
+  Truy vấn danh sách thông tin cơ bản của các mã chứng khoán theo điều kiện lọc.
 
-  Query Parameters:
-    - symbol (string, required): Danh sách mã chứng khoán, phân tách bằng dấu phẩy
-    - marketId (string, optional): Mã thị trường niêm yết
-        STO: HOSE
-        STX: HNX
-        UPX: UPCOM
-        DVX: Phái sinh
-        HCX: Trái phiếu doanh nghiệp
-    - securityGroupId (string, optional): Nhóm chứng khoán
-        ST: Cổ phiếu
-        EF: ETF
-        EW: Chứng quyền
-        FU: Hợp đồng tương lai
-        BS: Trái phiếu
-    - indexName (string, optional): Chỉ số thị trường (VN30, VN100, HNX30)
-    - limit (number, optional): Số bản ghi mỗi trang
-    - page (number, optional): Trang hiện tại
+  <h3 id="getinstruments-parameters">Parameters</h3>
 
-  Response bao gồm:
-    - Thông tin mã chứng khoán: tên, ngày niêm yết, nhóm ngành, chỉ số liên quan
-    - Thông tin phân trang: total, page, pageSize
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |symbol|query|string|false|Danh sách mã chứng khoán|
+  |marketId|query|string|false|Mã thị trường niêm yết|
+  |securityGroupId|query|string|false|Nhóm chứng khoán|
+  |indexName|query|string|false|Chỉ số thị trường |
+  |limit|query|integer|false|Số bản ghi trên mỗi trang|
+  |page|query|integer|false|Phân trang hiện tại|
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
+  |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
+  |version|header|string(date)|false|Phiên bản API |
+
+  #### Detailed descriptions
+
+  **marketId**: Mã thị trường niêm yết
+  - STO: Cổ phiếu sàn HOSE
+  - STX: Cổ phiếu sàn HNX
+  - UPX: Cổ phiếu sàn UPCOM
+  - DVX: Phái sinh
+  - HCX: Trái phiếu doanh nghiệp
+
+  **securityGroupId**: Nhóm chứng khoán
+  - ST: Cổ phiếu
+  - EF: Quỹ ETF
+  - EW: Chứng quyền
+  - FU: Hợp đồng tương lai
+  - BS: Trái phiếu
+
+  **indexName**: Chỉ số thị trường 
+  - VN30: Top 30 cổ phiếu sàn HOSE
+  - VN100: Top 100 cổ phiếu sàn HOSE
+  - HNX30: Top 30 cổ phiếu sàn HNX
+
+  <h3 id="getinstruments-responseschema">Response Schema</h3>
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» data|[object]|false|none|Danh sách thông tin mã chứng khoán|
+  |»» symbol|string|false|none|Mã chứng khoán|
+  |»» marketId|string|false|none|Mã thị trường niêm yết<br>- STO: Cổ phiếu sàn HOSE<br>- STX: Cổ phiếu sàn HNX<br>- UPX: Cổ phiếu sàn UPCOM<br>- DVX: Phái sinh<br>- HCX: Trái phiếu doanh nghiệp|
+  |»» securityGroupId|string|false|none|Nhóm chứng khoán<br>- ST: Cổ phiếu<br>- EF: Quỹ ETF<br>- EW: Chứng quyền<br>- FU: Hợp đồng tương lai<br>- BS: Trái phiếu|
+  |»» symbolType|string|false|none|Phân loại mã hợp đồng phái sinh theo thời gian đáo hạn (áp dụng cho DERIVATIVE)<br>- VN30F1M: HĐTL chỉ số VN30 1 tháng<br>- VN30F2M: HĐTL chỉ số VN30 2 tháng<br>- VN30F1Q: HĐTL chỉ số VN30 1 quý<br>- VN30F2Q: HĐTL chỉ số VN30 2 quý|
+  |»» listedDate|string|false|none|Ngày niêm yết|
+  |»» shortName|string|false|none|Tên viết tắt của tổ chức phát hành|
+  |»» name|string|false|none|Tên đầy đủ của tổ chức phát hành|
+  |»» indexName|[string]|false|none|Danh sách chỉ số mà mã chứng khoán thuộc về (nếu có)|
+  |» total|integer(int32)|false|none|Tổng số bản ghi|
+  |» page|integer(int32)|false|none|Trang hiện tại (bắt đầu từ 1)|
+  |» pageSize|integer(int32)|false|none|Số bản ghi trên mỗi trang|

@@ -87,14 +87,15 @@ examples:
           }
 
 docs: |-
-  API gửi mã OTP đến email của người dùng để xác thực.
+  Gửi yêu cầu nhận mã OTP qua Email, chỉ áp dụng cho các tài khoản đang sử dụng phương thức xác thực lớp thứ hai là Email OTP.
 
-  Header Parameters:
-    - X-API-Key (string, required): API Key được cấp khi đăng ký dịch vụ
-    - X-Aux-Date (string, required): Thời gian thực hiện yêu cầu
-    - X-Signature (string, required): Chữ ký xác thực yêu cầu
+  <h3 id="sendemailotp-parameters">Parameters</h3>
 
-  Response:
-    - 200: OTP đã được gửi thành công
-    - 400: Thông tin nhập không hợp lệ
-    - 500: Lỗi hệ thống
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
+  |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
+  |version|header|string(date)|false|Phiên bản API |
+
+  
