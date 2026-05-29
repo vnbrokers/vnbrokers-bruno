@@ -1,0 +1,229 @@
+info:
+  name: Lịch sử sự kiện quyền
+  type: http
+  seq: 9
+
+http:
+  method: GET
+  url: "{{baseUrl}}/accounts/:accountNo/corporate-action-history?symbol=ACB&caType=cashDividend&caStatus=pending&pageIndex=0&pageSize=100"
+  params:
+    - name: symbol
+      value: ACB
+      type: query
+    - name: caType
+      value: cashDividend
+      type: query
+    - name: caStatus
+      value: pending
+      type: query
+    - name: pageIndex
+      value: "0"
+      type: query
+    - name: pageSize
+      value: "100"
+      type: query
+    - name: accountNo
+      value: "{{accountNo}}"
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công – trả về danh sách vị thế nắm giữ
+    request:
+      url: "{{baseUrl}}/accounts/{{accountNo}}/positions"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: 2026-05-07
+      params:
+        - name: accountNo
+          value: ""
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "positions": [
+              {
+                "id": 177796763592657,
+                "marketType": "DERIVATIVE",
+                "symbol": "41I1G5000",
+                "accountNo": "0001179019",
+                "status": "OPEN",
+                "loanPackageId": 2278,
+                "side": "NB",
+                "accumulateQuantity": 259,
+                "tradeQuantity": 23,
+                "closedQuantity": 236,
+                "openQuantity": 23,
+                "overNightQuantity": 0,
+                "costPrice": 2036.78986,
+                "marketPrice": 1915.8,
+                "breakEvenPrice": 2037.28116,
+                "averageClosePrice": 2094.28941,
+                "createdDate": "2026-05-05T09:17:50.457893Z",
+                "modifiedDate": "2026-05-08T06:51:04.755263Z"
+              }
+            ],
+            "pageIndex": 0,
+            "pageSize": 20,
+            "pageNumber": 1,
+            "total": 3
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{baseUrl}}/accounts/{{accountNo}}/positions"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: 2026-05-07
+      params:
+        - name: accountNo
+          value: ""
+          type: path
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/accounts/{{accountNo}}/positions"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: 2026-05-07
+      params:
+        - name: accountNo
+          value: ""
+          type: path
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: |-
+  Lấy thông tin chi tiết của một vị thế cơ sở hoặc phái sinh đang mở theo `positionId.`
+
+  <h3 id="getcorporateactionhistory-parameters">Parameters</h3>
+
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |symbol|query|string|false|Mã chứng khoán|
+  |caType|query|string|false|Phân loại sự kiện quyền |
+  |caStatus|query|string|false|Trạng thái xử lý sự kiện quyền |
+  |pageIndex|query|integer|false|Trang hiện tại|
+  |pageSize|query|integer|false|Số lượng bản ghi trên mỗi trang|
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
+  |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
+  |version|header|string|false|Phiên bản API |
+  |accountNo|path|integer|true|Số tiểu khoản|
+
+  #### Detailed descriptions
+
+  **caType**: Phân loại sự kiện quyền 
+  - cashDividend: Sự kiện quyền trả cổ tức bằng tiền
+  - stockDividend: Sự kiện quyền trả cổ tức cổ phiếu
+  - stockBonus: Sự kiện quyền trả cổ phiếu thưởng 
+  - rightsOffering: Sự kiện quyền mua cổ phiếu phát hành thêm
+
+  **caStatus**: Trạng thái xử lý sự kiện quyền 
+  - pending: Quyền đang chờ xử lý hoặc đang được thực hiện
+  - completed: Quyền đã được xử lý hoàn tất
+  - canceled: Quyền đã hủy thành công
+
+  <h3 id="getcorporateactionhistory-responseschema">Response Schema</h3>
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» accountNo|string|false|none|Số tiểu khoản|
+  |» data|object|false|none|Danh sách quyền chứng khoán của tiểu khoản, được phân loại theo từng loại quyền|
+  |»» cashDividend|[object]|false|none|Danh sách quyền trả cổ tức bằng tiền|
+  |»»» id|integer(int32)|false|none|ID sự kiện quyền|
+  |»»» symbol|string|false|none|Mã chứng khoán|
+  |»»» caStatus|string|false|none|Trạng thái xử lý sự kiện quyền<br>- pending: Quyền đang chờ xử lý hoặc đang được thực hiện<br>- completed: Quyền đã được xử lý hoàn tất<br>- canceled: Quyền đã hủy thành công|
+  |»»» recordDate|string|false|none|Ngày đăng ký cuối cùng sự kiện quyền|
+  |»»» processDate|string|false|none|Ngày thanh toán dự kiến|
+  |»»» holdingQuantity|integer(int32)|false|none|Số lượng chứng khoán sở hữu tại ngày chốt quyền|
+  |»»» dividendValue|integer(int32)|false|none|Giá trị cổ tức trên mỗi cổ phiếu|
+  |»»» grossAmount|integer(int32)|false|none|Tổng giá trị tiền cổ tức trước thuế|
+  |»»» taxAmount|integer(int32)|false|none|Số tiền thuế bị khấu trừ|
+  |»»» netAmount|integer(int32)|false|none|Số tiền thực nhận sau thuế|
+  |»» stockDividend|[object]|false|none|Danh sách quyền trả cổ tức bằng cổ phiếu|
+  |»»» id|integer(int32)|false|none|ID sự kiện quyền|
+  |»»» symbol|string|false|none|Mã chứng khoán|
+  |»»» caStatus|string|false|none|Trạng thái xử lý sự kiện quyền<br>- pending: Quyền đang chờ xử lý hoặc đang được thực hiện<br>- completed: Quyền đã được xử lý hoàn tất<br>- canceled: Quyền đã hủy thành công|
+  |»»» recordDate|string|false|none|Ngày đăng ký cuối cùng sự kiện quyền|
+  |»»» processDate|string|false|none|Ngày phân phối cổ phiếu cổ tức dự kiến|
+  |»»» holdingQuantity|integer(int32)|false|none|Số lượng chứng khoán sở hữu tại ngày chốt quyền|
+  |»»» ratio|string|false|none|Tỷ lệ thực hiện quyền nhận cổ tức bằng cổ phiếu|
+  |»»» receivedQuantity|integer(int32)|false|none|Số lượng cổ phiếu cổ tức được nhận|
+  |»» stockBonus|[object]|false|none|Danh sách quyền trả cổ phiếu thưởng|
+  |»»» id|integer(int32)|false|none|ID sự kiện quyền|
+  |»»» symbol|string|false|none|Mã chứng khoán|
+  |»»» caStatus|string|false|none|Trạng thái xử lý sự kiện quyền<br>- pending: Quyền đang chờ xử lý hoặc đang được thực hiện<br>- completed: Quyền đã được xử lý hoàn tất<br>- canceled: Quyền đã hủy thành công|
+  |»»» recordDate|string|false|none|Ngày đăng ký cuối cùng sự kiện quyền|
+  |»»» processDate|string|false|none|Ngày phân phối cổ phiếu thưởng dự kiến|
+  |»»» holdingQuantity|integer(int32)|false|none|Số lượng chứng khoán sở hữu tại ngày chốt quyền|
+  |»»» ratio|string|false|none|Tỷ lệ thực hiện quyền nhận cổ phiếu thưởng|
+  |»»» receivedQuantity|integer(int32)|false|none|Số lượng cổ phiếu thưởng khách hàng được nhận|
+  |»» rightsOffering|[object]|false|none|Danh sách quyền mua cổ phiếu phát hành thêm|
+  |»»» id|integer(int32)|false|none|ID sự kiện quyền|
+  |»»» symbol|string|false|none|Mã chứng khoán|
+  |»»» caStatus|string|false|none|Trạng thái xử lý sự kiện quyền<br>- pending: Quyền đang chờ xử lý hoặc đang được thực hiện<br>- completed: Quyền đã được xử lý hoàn tất<br>- canceled: Quyền đã hủy thành công|
+  |»»» recordDate|string|false|none|Ngày đăng ký cuối cùng sự kiện quyền để xác định quyền mua|
+  |»»» processDate|string|false|none|Ngày phân phối cổ phiếu quyền mua dự kiến|
+  |»»» holdingQuantity|integer(int32)|false|none|Số lượng chứng khoán sở hữu tại ngày chốt quyền|
+  |»»» ratio|string|false|none|Tỷ lệ thực hiện quyền mua cổ phiếu|
+  |»»» rightPrice|integer(int32)|false|none|Giá đăng ký mua cổ phiếu phát hành thêm|
+  |»»» rightsQuantity|integer(int32)|false|none|Số lượng quyền mua được phân bổ trên tài khoản|
+  |»»» registeredQuantity|integer(int32)|false|none|Số lượng cổ phiếu phát hành thêm đã đăng ký mua|
+  |»»» startDateTransfer|string|false|none|Ngày bắt đầu được phép chuyển nhượng quyền mua|
+  |»»» endDateTransfer|string|false|none|Ngày kết thúc chuyển nhượng quyền mua|
+  |»»» startDateSubscription|string|false|none|Ngày bắt đầu đăng ký thực hiện quyền mua|
+  |»»» endDateSubscription|string|false|none|Ngày kết thúc đăng ký thực hiện quyền mua|
+  |» pagination|object|false|none|Thông tin phân trang dữ liệu|
+  |»» pageIndex|integer(int32)|false|none|Trang hiện tại|
+  |»» pageSize|integer(int32)|false|none|Số lượng bản ghi trên mỗi trang|
+  |»» totalRecords|integer(int32)|false|none|Tổng số bản ghi|

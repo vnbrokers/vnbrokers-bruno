@@ -73,7 +73,9 @@ examples:
           {
             "qmaxBuy": 1209,
             "qmaxSell": 700,
-            "price": 23000
+            "price": 23000,
+            "pp0Buy": 0,
+            "pp0Sell": 0
           }
   - name: 400 Response
     description: Yêu cầu không hợp lệ
@@ -194,3 +196,5 @@ docs: |-
   |» qmaxBuy|integer(int32)|false|none|Khối lượng mua tối đa|
   |» qmaxSell|integer(int32)|false|none|Khối lượng bán tối đa|
   |» price|number(double)|false|none|Giá đặt|
+  |» pp0Buy|number(double)|false|none||
+  |» pp0Sell|number(double)|false|none||

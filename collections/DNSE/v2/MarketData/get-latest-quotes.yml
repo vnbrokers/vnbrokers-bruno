@@ -1,0 +1,196 @@
+info:
+  name: Dữ liệu bid/ask gần nhất
+  type: http
+  seq: 3
+
+http:
+  method: GET
+  url: "{{baseUrl}}/price/:symbol/quotes/latest?boardId=G1"
+  params:
+    - name: boardId
+      value: G1
+      type: query
+    - name: symbol
+      value: "{{symbol}}"
+      type: path
+  auth: inherit
+
+runtime:
+  variables:
+    - name: symbol
+      value: ACB
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công – trả về dữ liệu OHLC theo khoảng thời gian
+    request:
+      url: "{{baseUrl}}/price/ohlc"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: 2026-05-07
+      params:
+        - name: boardId
+          value: G1
+          type: query
+        - name: symbol
+          value: ACB
+      type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "quotes": [
+              {
+                "marketId": "STO",
+                "boardId": "G1",
+                "isin": "VN000000ACB8",
+                "symbol": "ACB",
+                "bid": [
+                  {
+                    "price": 24.55,
+                    "quantity": 60590
+                  },
+                  {
+                    "price": 24.5,
+                    "quantity": 30250
+                  },
+                  {
+                    "price": 24.45,
+                    "quantity": 19600
+                  }
+                ],
+                "offer": [
+                  {
+                    "price": 24.6,
+                    "quantity": 10450
+                  },
+                  {
+                    "price": 24.65,
+                    "quantity": 8450
+                  },
+                  {
+                    "price": 24.7,
+                    "quantity": 23080
+                  }
+                ],
+                "totalOfferQtty": 0,
+                "totalBidQtty": 0,
+                "time": "2026-05-27 09:49:01.001"
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{baseUrl}}/price/ohlc"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: 2026-05-07
+      params:
+        - name: boardId
+          value: G1
+          type: query
+        - name: symbol
+          value: ACB
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/price/ohlc"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: 2026-05-07
+      params:
+        - name: boardId
+          value: G1
+          type: query
+        - name: symbol
+          value: ACB
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: |-
+  Dữ liệu bid/ask gần nhất
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» quotes|[object]|false|none|Danh sách dữ liệu|
+  |»» marketId|string|false|none|Mã thị trường niêm yết mã chứng khoán|
+  |»» boardId|string|false|none|Mã bảng giao dịch|
+  |»» isin|string|false|none|Mã định danh quốc tế|
+  |»» symbol|string|false|none|Mã chứng khoán|
+  |»» bid|[object]|false|none|Danh sách các mức giá chào mua|
+  |»»» price|number(float)|false|none|Giá chào mua|
+  |»»» quantity|integer(int32)|false|none|Khối lượng chào mua tại mức giá tương ứng|
+  |»» offer|[object]|false|none|Danh sách các mức giá chào bán|
+  |»»» price|number(double)|false|none|Giá chào bán|
+  |»»» quantity|integer(int32)|false|none|Khối lượng chào bán tại mức giá tương ứng|
+  |»» totalOfferQtty|integer(int32)|false|none|Tổng khối lượng chào bán|
+  |»» totalBidQtty|integer(int32)|false|none|Tổng khối lượng chào mua|
+  |»» time|string|false|none|Thời gian trong các message giá của sàn trả về (YYYY-MM-DD HH:mm:ss.SSS (GMT+7))|
+  |» nextPageToken|string|false|none|Token dùng để phân trang và truy vấn dữ liệu trang tiếp theo|
+
+  <h3 id="getohlchistory-responseschema">Response Schema</h3>
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» quotes|[object]|false|none|Danh sách dữ liệu bid/ask|
+  |»» marketId|string|false|none|Mã thị trường niêm yết mã chứng khoán|
+  |»» boardId|string|false|none|Mã bảng giao dịch|
+  |»» isin|string|false|none|Mã định danh quốc tế|
+  |»» symbol|string|false|none|Mã chứng khoán|
+  |»» bid|[object]|false|none|Danh sách các mức giá chào mua|
+  |»»» price|number(double)|false|none|Giá chào mua|
+  |»»» quantity|integer(int32)|false|none|Khối lượng chào mua tại mức giá tương ứng|
+  |»» offer|[object]|false|none|Danh sách các mức giá chào bán|
+  |»»» price|number(double)|false|none|Giá chào bán|
+  |»»» quantity|integer(int32)|false|none|Khối lượng chào bán tại mức giá tương ứng|
+  |»» totalOfferQtty|integer(int32)|false|none|Tổng khối lượng chào bán|
+  |»» totalBidQtty|integer(int32)|false|none|Tổng khối lượng chào mua|
+  |»» time|string|false|none|Thời gian trong các message giá của sàn trả về (YYYY-MM-DD HH:mm:ss.SSS (GMT+7))|
