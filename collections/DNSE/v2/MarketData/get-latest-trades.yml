@@ -69,7 +69,7 @@ examples:
                 "highestPrice": 23.55,
                 "lowestPrice": 23.35,
                 "openPrice": 23.5,
-                "time": "2026-03-19 04:08:29"
+                "time": "2026-05-27 09:43:32.706"
               }
             ]
           }
@@ -178,4 +178,4 @@ docs: |-
   |»» highestPrice|number(double)|false|none|Giá khớp cao nhất trong ngày|
   |»» lowestPrice|number(double)|false|none|Giá khớp thấp nhất trong ngày|
   |»» openPrice|number(float)|false|none|Giá mở cửa|
-  |»» time|string|false|none|Thời gian khớp lệnh (theo định dạng yyyy-MM-dd HH:mm:ss)|
+  |»» time|string|false|none|Thời gian khớp lệnh (theo định dạng yyyy-MM-dd HH:mm:ss.SSS) (GMT+7)|

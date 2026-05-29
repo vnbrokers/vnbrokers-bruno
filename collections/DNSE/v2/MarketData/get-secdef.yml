@@ -67,7 +67,10 @@ examples:
               "securityStatus": "UNSPECIFIED",
               "symbolAdminStatusCode": "NRM",
               "symbolTradingMethodStatusCode": "NRM",
-              "symbolTradingSanctionStatusCode": "NRM"
+              "symbolTradingSanctionStatusCode": "NRM",
+              "finalTradeDate": null,
+              "listingDate": "2007-11-15T00:00:00Z",
+              "time": "2026-05-26 22:01:01.303"
             }
           ]
   - name: 400 Response
@@ -174,3 +177,6 @@ docs: |-
   |» symbolAdminStatusCode|string|false|none|Trạng thái quản lý hành chính mã chứng khoán<br>- CR: Kiểm soát và hạn chế giao dịch<br>- CTR: Kiểm soát<br>- NRM: Bình thường<br>- RES: Hạn chế giao dịch<br>- WFR: Cảnh báo vi phạm BCTC<br>- WID: Cảnh báo vi phạm CBTT<br>- WOV: Cảnh báo vi phạm khác|
   |» symbolTradingMethodStatusCode|string|false|none|Trạng thái cơ chế giao dịch mã chứng khoán<br>- NRM: Bình thường<br>- NWE: Niêm yết mới (biên độ đặc biệt)<br>- NWN: Niêm yết mới (biên độ thường)<br>- SLS: Giao dịch đặc biệt sau tạm ngưng<br>- SNE: Giao dịch đặc biệt không có giao dịch dài hạn|
   |» symbolTradingSanctionStatusCode|string|false|none|Tình trạng giao dịch của mã chứng khoán<br>- NRM: Bình thường<br>- SUS: Tạm ngừng giao dịch<br>- DTL: Hủy niêm yết để chuyển sàn<br>- TFR: Ngưng giao dịch do hạn chế|
+  |» finalTradeDate|any|false|none|Ngày giao dịch cuối cùng|
+  |» listingDate|string(date-time)|false|none|Ngày niêm yết|
+  |» time|string|false|none|Thời gian ghi nhận (theo định dạng yyyy-MM-dd HH:mm:ss.SSS) (GMT+7)|

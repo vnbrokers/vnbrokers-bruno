@@ -88,7 +88,7 @@ examples:
                 "highestPrice": 23.25,
                 "lowestPrice": 22.75,
                 "openPrice": 23,
-                "time": "2026-03-12 04:29:57"
+                "time": "2026-03-12 11:29:35.784"
               }
             ],
             "nextPageToken": "NDYwMTQ1XzIwMjYtMDMtMTJUMDQ6MjU6MDUu****"
@@ -220,3 +220,26 @@ docs: |-
   - T3: Thỏa thuận sau giờ (14h45 - 15h)
   - T4: Thỏa thuận lô lẻ trong giờ (9h - 14h45)
   - T6: Thỏa thuận lô lẻ sau giờ  (14h45 - 15h)
+
+  <h3 id="gethistorytrades-responseschema">Response Schema</h3>
+
+  Status Code **200**
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» trades|[object]|false|none|Danh sách giao dịch|
+  |»» marketId|string|false|none|Mã thị trường|
+  |»» boardId|string|false|none|Mã bảng giao dịch|
+  |»» isin|string|false|none|Mã định danh quốc tế|
+  |»» symbol|string|false|none|Mã chứng khoán|
+  |»» matchPrice|number(double)|false|none|Giá khớp gần nhất|
+  |»» matchQtty|integer(int32)|false|none|Khối lượng khớp gần nhất|
+  |»» side|string|false|none|Chiều giao dịch|
+  |»» avgPrice|number(double)|false|none|Giá khớp trung bình|
+  |»» totalVolumeTraded|integer(int32)|false|none|Tổng khối lượng giao dịch trong ngày|
+  |»» grossTradeAmount|number(double)|false|none|Tổng giá trị giao dịch trong ngày|
+  |»» highestPrice|number(float)|false|none|Giá cao nhất trong ngày|
+  |»» lowestPrice|number(float)|false|none|Giá thấp nhất trong ngày|
+  |»» openPrice|integer(int32)|false|none|Giá mở cửa|
+  |»» time|string|false|none|Thời gian trong các message giá của sàn trả về (YYYY-MM-DD HH:mm:ss.SSS (GMT+7))|
+  |» nextPageToken|string|false|none|Token dùng để lấy trang tiếp theo|

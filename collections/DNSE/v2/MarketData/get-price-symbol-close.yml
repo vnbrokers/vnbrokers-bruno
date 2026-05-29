@@ -58,7 +58,7 @@ examples:
                 "isin": "VN000000HPG4",
                 "symbol": "HPG",
                 "closePrice": 26.8,
-                "time": "2026-04-08 02:14:59"
+                "time": "2026-04-08 02:14:59.775"
               }
             ]
           }
@@ -162,4 +162,4 @@ docs: |-
   |»» isin|string|false|none|Mã định danh quốc tế|
   |»» symbol|string|false|none|Mã chứng khoán|
   |»» closePrice|number(double)|false|none|Giá đóng cửa gần nhất|
-  |»» time|string|false|none|Thời gian ghi nhận|
+  |»» time|string|false|none|Thời gian ghi nhận (theo định dạng yyyy-MM-dd HH:mm:ss.SSS) (GMT+7)|
