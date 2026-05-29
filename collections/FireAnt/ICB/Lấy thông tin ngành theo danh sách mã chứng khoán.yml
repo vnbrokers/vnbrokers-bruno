@@ -1,0 +1,96 @@
+info:
+  name: Lấy thông tin ngành theo danh sách mã chứng khoán
+  type: http
+  seq: 9
+  tags:
+    - ICB
+
+http:
+  method: GET
+  url: "{{baseUrl}}/icb/industry-info"
+  params:
+    - name: symbols
+      value: ""
+      type: query
+      description: Danh sách mã chứng khoán, cách nhau bởi dấu phẩy
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://accounts.fireant.vn/connect/authorize
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: symbols-read
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+      source: access_token
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/icb/industry-info"
+      method: GET
+      params:
+        - name: symbols
+          value: ""
+          type: query
+          description: Danh sách mã chứng khoán, cách nhau bởi dấu phẩy
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "symbol": "",
+              "sectorKind": "",
+              "isFinancial": false,
+              "icbCode": "",
+              "icbHierarchy": {
+                "lv1": "",
+                "lv2": "",
+                "lv3": "",
+                "lv4": ""
+              },
+              "label": {
+                "vi": "",
+                "en": ""
+              },
+              "exchange": ""
+            }
+          ]
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/icb/industry-info"
+      method: GET
+      params:
+        - name: symbols
+          value: ""
+          type: query
+          description: Danh sách mã chứng khoán, cách nhau bởi dấu phẩy
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

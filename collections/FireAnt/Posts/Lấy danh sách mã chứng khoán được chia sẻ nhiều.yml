@@ -1,0 +1,96 @@
+info:
+  name: Lấy danh sách mã chứng khoán được chia sẻ nhiều
+  type: http
+  seq: 32
+  tags:
+    - Posts
+
+http:
+  method: GET
+  url: "{{baseUrl}}/posts/popular-symbols/:period"
+  params:
+    - name: period
+      value: ""
+      type: path
+      description: "Giai đoạn (today: Hôm nay, weekly: Trong tuần, monthly: Trong tháng)"
+    - name: limit
+      value: ""
+      type: query
+      description: Số lượng tối đa bản ghi lấy về (Dùng để phân trang, mặc địch là 20)
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://accounts.fireant.vn/connect/authorize
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: posts-read
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+      source: access_token
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/posts/popular-symbols/:period"
+      method: GET
+      params:
+        - name: period
+          value: ""
+          type: path
+          description: "Giai đoạn (today: Hôm nay, weekly: Trong tuần, monthly: Trong tháng)"
+        - name: limit
+          value: ""
+          type: query
+          description: Số lượng tối đa bản ghi lấy về (Dùng để phân trang, mặc địch là 20)
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "symbol": "",
+              "points": 0,
+              "color": ""
+            }
+          ]
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/posts/popular-symbols/:period"
+      method: GET
+      params:
+        - name: period
+          value: ""
+          type: path
+          description: "Giai đoạn (today: Hôm nay, weekly: Trong tuần, monthly: Trong tháng)"
+        - name: limit
+          value: ""
+          type: query
+          description: Số lượng tối đa bản ghi lấy về (Dùng để phân trang, mặc địch là 20)
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

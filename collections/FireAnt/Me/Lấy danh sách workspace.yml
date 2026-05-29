@@ -1,0 +1,68 @@
+info:
+  name: Lấy danh sách workspace
+  type: http
+  seq: 75
+  tags:
+    - Me
+
+http:
+  method: GET
+  url: "{{baseUrl}}/me/workspaces"
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://accounts.fireant.vn/connect/authorize
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: user-data-read
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+      source: access_token
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/me/workspaces"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "id": 0,
+              "name": "",
+              "description": "",
+              "lastUpdated": "",
+              "state": {}
+            }
+          ]
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/me/workspaces"
+      method: GET
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

@@ -1,0 +1,100 @@
+info:
+  name: Danh sách trái phiếu sắp đáo hạn
+  type: http
+  seq: 8
+  tags:
+    - Bond
+
+http:
+  method: GET
+  url: "{{baseUrl}}/bonds/stats/bonds/maturing-soon"
+  params:
+    - name: days
+      value: ""
+      type: query
+      description: Số ngày
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://accounts.fireant.vn/connect/authorize
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: symbols-read
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+      source: access_token
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/bonds/stats/bonds/maturing-soon"
+      method: GET
+      params:
+        - name: days
+          value: ""
+          type: query
+          description: Số ngày
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "bondCode": "",
+              "issuerName": "",
+              "tenorPeriod": 0,
+              "issueDate": "",
+              "maturityDate": "",
+              "bondRate": 0,
+              "bondRateType": "",
+              "currentListedVolume": 0,
+              "status": "",
+              "infoObj": {
+                "bondCode": "",
+                "issuerInstitutionID": 0,
+                "issuerSymbol": "",
+                "issueICBCode": "",
+                "icbNameLv1": "",
+                "icbNameLv2": "",
+                "icbNameLv3": "",
+                "icbNameLv4": ""
+              }
+            }
+          ]
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/bonds/stats/bonds/maturing-soon"
+      method: GET
+      params:
+        - name: days
+          value: ""
+          type: query
+          description: Số ngày
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

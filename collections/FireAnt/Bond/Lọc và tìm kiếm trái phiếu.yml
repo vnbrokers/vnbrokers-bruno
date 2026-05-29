@@ -1,0 +1,148 @@
+info:
+  name: Lọc và tìm kiếm trái phiếu
+  type: http
+  seq: 2
+  tags:
+    - Bond
+
+http:
+  method: POST
+  url: "{{baseUrl}}/bonds/filter"
+  body:
+    type: json
+    data: |-
+      {
+        "bondTypeID": 0,
+        "bondRateTypeID": 0,
+        "currencyID": 0,
+        "marketID": 0,
+        "icbCode": "",
+        "issueFormID": 0,
+        "issueMethodID": 0,
+        "statusID": 0,
+        "issuerName": "",
+        "issuerInstitutionID": 0,
+        "issuerSymbol": "",
+        "isListing": 0,
+        "issueDateFrom": "",
+        "issueDateTo": "",
+        "maturityDateFrom": "",
+        "maturityDateTo": "",
+        "minBondRate": 0,
+        "maxBondRate": 0,
+        "minTenorMonths": 0,
+        "maxTenorMonths": 0,
+        "top": 0,
+        "sortBy": 0
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/bonds/filter"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "bondTypeID": 0,
+            "bondRateTypeID": 0,
+            "currencyID": 0,
+            "marketID": 0,
+            "icbCode": "",
+            "issueFormID": 0,
+            "issueMethodID": 0,
+            "statusID": 0,
+            "issuerName": "",
+            "issuerInstitutionID": 0,
+            "issuerSymbol": "",
+            "isListing": 0,
+            "issueDateFrom": "",
+            "issueDateTo": "",
+            "maturityDateFrom": "",
+            "maturityDateTo": "",
+            "minBondRate": 0,
+            "maxBondRate": 0,
+            "minTenorMonths": 0,
+            "maxTenorMonths": 0,
+            "top": 0,
+            "sortBy": 0
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "bondCode": "",
+              "issuerName": "",
+              "tenorPeriod": 0,
+              "issueDate": "",
+              "maturityDate": "",
+              "bondRate": 0,
+              "bondRateType": "",
+              "currentListedVolume": 0,
+              "status": "",
+              "infoObj": {
+                "bondCode": "",
+                "issuerInstitutionID": 0,
+                "issuerSymbol": "",
+                "issueICBCode": "",
+                "icbNameLv1": "",
+                "icbNameLv2": "",
+                "icbNameLv3": "",
+                "icbNameLv4": ""
+              }
+            }
+          ]
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/bonds/filter"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "bondTypeID": 0,
+            "bondRateTypeID": 0,
+            "currencyID": 0,
+            "marketID": 0,
+            "icbCode": "",
+            "issueFormID": 0,
+            "issueMethodID": 0,
+            "statusID": 0,
+            "issuerName": "",
+            "issuerInstitutionID": 0,
+            "issuerSymbol": "",
+            "isListing": 0,
+            "issueDateFrom": "",
+            "issueDateTo": "",
+            "maturityDateFrom": "",
+            "maturityDateTo": "",
+            "minBondRate": 0,
+            "maxBondRate": 0,
+            "minTenorMonths": 0,
+            "maxTenorMonths": 0,
+            "top": 0,
+            "sortBy": 0
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

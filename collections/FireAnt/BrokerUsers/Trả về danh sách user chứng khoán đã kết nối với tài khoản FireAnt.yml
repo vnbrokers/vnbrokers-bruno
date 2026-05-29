@@ -1,0 +1,57 @@
+info:
+  name: Trả về danh sách user chứng khoán đã kết nối với tài khoản FireAnt
+  type: http
+  seq: 1
+  tags:
+    - BrokerUsers
+
+http:
+  method: GET
+  url: "{{baseUrl}}/broker-users"
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://accounts.fireant.vn/connect/authorize
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: accounts-read
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+      source: access_token
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/broker-users"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "userId": 0,
+              "userName": "",
+              "brokerId": "",
+              "brokerName": "",
+              "linkedUserName": ""
+            }
+          ]

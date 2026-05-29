@@ -1,0 +1,60 @@
+info:
+  name: Lấy số lượng tin tức
+  type: http
+  seq: 13
+  tags:
+    - Academy
+
+http:
+  method: GET
+  url: "{{baseUrl}}/academy/news/recordCount"
+  params:
+    - name: isHot
+      value: ""
+      type: query
+      description: Lọc theo tin nổi bật
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://accounts.fireant.vn/connect/authorize
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: academy-read
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+      source: access_token
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/academy/news/recordCount"
+      method: GET
+      params:
+        - name: isHot
+          value: ""
+          type: query
+          description: Lọc theo tin nổi bật
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "0"

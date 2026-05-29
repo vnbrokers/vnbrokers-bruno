@@ -1,0 +1,152 @@
+info:
+  name: Trả về danh sách lệnh đặt trong phiên
+  type: http
+  seq: 1
+  tags:
+    - Orders
+
+http:
+  method: GET
+  url: "{{baseUrl}}/broker-users/:userId/accounts/:accountId/orders"
+  params:
+    - name: userId
+      value: ""
+      type: path
+      description: Id của user đã kết nối vào tài khoản FireAnt
+    - name: accountId
+      value: ""
+      type: path
+      description: Id tài khoản tại công ty chứng khoán của user
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://accounts.fireant.vn/connect/authorize
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: orders-read
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+      source: access_token
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/broker-users/:userId/accounts/:accountId/orders"
+      method: GET
+      params:
+        - name: userId
+          value: ""
+          type: path
+          description: Id của user đã kết nối vào tài khoản FireAnt
+        - name: accountId
+          value: ""
+          type: path
+          description: Id tài khoản tại công ty chứng khoán của user
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "id": "",
+              "instrument": "",
+              "instrumentItem": {
+                "instrument": "",
+                "symbol": "",
+                "name": "",
+                "exchange": "",
+                "unit": 0,
+                "type": "",
+                "supportStopOrder": false,
+                "supportLimitOrder": false
+              },
+              "qty": 0,
+              "qtyType": 0,
+              "side": "",
+              "type": "",
+              "filledQty": 0,
+              "avgPrice": 0,
+              "limitPrice": 0,
+              "stopPrice": 0,
+              "lastModified": 0,
+              "status": ""
+            }
+          ]
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/broker-users/:userId/accounts/:accountId/orders"
+      method: GET
+      params:
+        - name: userId
+          value: ""
+          type: path
+          description: Id của user đã kết nối vào tài khoản FireAnt
+        - name: accountId
+          value: ""
+          type: path
+          description: Id tài khoản tại công ty chứng khoán của user
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""
+  - name: 403 Response
+    description: Lỗi kết nối tài khoản liên kết tại công ty chứng khoán. Cần liên kết lại tài khoản giao dịch
+    request:
+      url: "{{baseUrl}}/broker-users/:userId/accounts/:accountId/orders"
+      method: GET
+      params:
+        - name: userId
+          value: ""
+          type: path
+          description: Id của user đã kết nối vào tài khoản FireAnt
+        - name: accountId
+          value: ""
+          type: path
+          description: Id tài khoản tại công ty chứng khoán của user
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""
+  - name: 404 Response
+    description: User không tồn tại
+    request:
+      url: "{{baseUrl}}/broker-users/:userId/accounts/:accountId/orders"
+      method: GET
+      params:
+        - name: userId
+          value: ""
+          type: path
+          description: Id của user đã kết nối vào tài khoản FireAnt
+        - name: accountId
+          value: ""
+          type: path
+          description: Id tài khoản tại công ty chứng khoán của user
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

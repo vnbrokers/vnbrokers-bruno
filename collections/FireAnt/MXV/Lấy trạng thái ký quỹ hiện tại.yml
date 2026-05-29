@@ -1,0 +1,123 @@
+info:
+  name: Lấy trạng thái ký quỹ hiện tại
+  type: http
+  seq: 6
+  tags:
+    - MXV
+
+http:
+  method: GET
+  url: "{{baseUrl}}/mxv/account/margin-status"
+  params:
+    - name: accountType
+      value: "0"
+      type: query
+      description: Loại tài khoản (0 = FUTURE, 1 = NANO, 2 = MXV)
+      disabled: true
+    - name: accountType
+      value: "1"
+      type: query
+      description: Loại tài khoản (0 = FUTURE, 1 = NANO, 2 = MXV)
+      disabled: true
+    - name: accountType
+      value: "2"
+      type: query
+      description: Loại tài khoản (0 = FUTURE, 1 = NANO, 2 = MXV)
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://accounts.fireant.vn/connect/authorize
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: user-data-read
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+      source: access_token
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{baseUrl}}/mxv/account/margin-status"
+      method: GET
+      params:
+        - name: accountType
+          value: "0"
+          type: query
+          description: Loại tài khoản (0 = FUTURE, 1 = NANO, 2 = MXV)
+          disabled: true
+        - name: accountType
+          value: "1"
+          type: query
+          description: Loại tài khoản (0 = FUTURE, 1 = NANO, 2 = MXV)
+          disabled: true
+        - name: accountType
+          value: "2"
+          type: query
+          description: Loại tài khoản (0 = FUTURE, 1 = NANO, 2 = MXV)
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "investorCode": "",
+            "currency": "",
+            "depositProcessMethod": "",
+            "sodBalance": 0,
+            "sodBalanceUSD": 0,
+            "eodBalance": 0,
+            "eodBalanceUSD": 0,
+            "currentBalance": 0,
+            "changedAmount": 0,
+            "changedAmountUSD": 0,
+            "change": 0,
+            "changePercentage": 0,
+            "availableMargin": 0,
+            "availableMarginProvisional": 0,
+            "initialRequiredMargin": 0,
+            "initialRequiredMarginUSD": 0,
+            "initialRequiredMarginProvisional": 0,
+            "initialRequiredMarginProvisionalUSD": 0,
+            "maxInitialRequiredMarginProvisional": 0,
+            "additionalMargin": 0,
+            "netMargin": 0,
+            "netMarginUSD": 0,
+            "marginRatio": 0,
+            "marginRatioColor": "",
+            "actualProfitVND": 0,
+            "actualProfitUSD": 0,
+            "estimatedProfitVND": 0,
+            "estimatedProfitUSD": 0,
+            "totalProfitVND": 0,
+            "optionsActualProfitVND": 0,
+            "optionsActualProfitUSD": 0,
+            "optionsEstimatedProfitVND": 0,
+            "optionsEstimatedProfitUSD": 0,
+            "mvoVND": 0,
+            "mvoUSD": 0,
+            "transactionFee": 0,
+            "pendingTransactionFee": 0,
+            "generalFee": 0,
+            "interest": 0,
+            "premiumFeeVND": 0,
+            "premiumFeeUSD": 0
+          }

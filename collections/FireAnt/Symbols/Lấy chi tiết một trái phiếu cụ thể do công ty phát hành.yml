@@ -1,0 +1,138 @@
+info:
+  name: Lấy chi tiết một trái phiếu cụ thể do công ty phát hành
+  type: http
+  seq: 33
+  tags:
+    - Symbols
+
+http:
+  method: GET
+  url: "{{baseUrl}}/symbols/:symbol/bonds/:bondCode"
+  params:
+    - name: symbol
+      value: ""
+      type: path
+      description: Mã chứng khoán của công ty (tổ chức phát hành)
+    - name: bondCode
+      value: ""
+      type: path
+      description: Mã trái phiếu
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://accounts.fireant.vn/connect/authorize
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: symbols-read
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+      source: access_token
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/symbols/:symbol/bonds/:bondCode"
+      method: GET
+      params:
+        - name: symbol
+          value: ""
+          type: path
+          description: Mã chứng khoán của công ty (tổ chức phát hành)
+        - name: bondCode
+          value: ""
+          type: path
+          description: Mã trái phiếu
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "bondCode": "",
+            "detail": {
+              "bondCode": "",
+              "isin": "",
+              "issuerName": "",
+              "issuerSymbol": "",
+              "issuerListingStatus": false,
+              "institutionID": 0,
+              "issuerICBCode": "",
+              "bondName": "",
+              "bondType": "",
+              "market": "",
+              "status": "",
+              "couponRate": "",
+              "couponRateType": "",
+              "interestPaymentMethod": "",
+              "issueDate": "",
+              "maturityDate": "",
+              "tenorPeriod": "",
+              "faceValue": 0,
+              "currency": "",
+              "totalIssuedValue": 0,
+              "currentListedValue": 0,
+              "issueForm": "",
+              "issueMethod": ""
+            },
+            "history": [
+              {
+                "registrationNo": 0,
+                "registrationType": "",
+                "reason": "",
+                "volume": 0,
+                "value": 0,
+                "registrationCert": "",
+                "registrationDate": ""
+              }
+            ],
+            "cashFlows": [
+              {
+                "periodNo": 0,
+                "periodStart": "",
+                "periodEnd": "",
+                "paymentDate": "",
+                "bondRate": 0,
+                "yearFraction": 0,
+                "interestAmount": 0,
+                "principalAmount": 0,
+                "totalCashflow": 0
+              }
+            ]
+          }
+  - name: 404 Response
+    description: Không tìm thấy mã trái phiếu
+    request:
+      url: "{{baseUrl}}/symbols/:symbol/bonds/:bondCode"
+      method: GET
+      params:
+        - name: symbol
+          value: ""
+          type: path
+          description: Mã chứng khoán của công ty (tổ chức phát hành)
+        - name: bondCode
+          value: ""
+          type: path
+          description: Mã trái phiếu
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

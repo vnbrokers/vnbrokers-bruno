@@ -1,0 +1,143 @@
+info:
+  name: Lấy danh sách người dùng tích cực
+  type: http
+  seq: 3
+  tags:
+    - Users
+
+http:
+  method: GET
+  url: "{{baseUrl}}/users/active"
+  params:
+    - name: period
+      value: ""
+      type: query
+      description: "Khoảng thời gian thống kê (0: 1 tuần, 1: 1 tháng, 2: 1 năm, 3: tất cả, mặc định là 1 tháng)"
+      disabled: true
+    - name: offset
+      value: ""
+      type: query
+      description: Vị trí bản ghi đầu tiên lấy về (Dùng để phân trang, mặc địch là 0)
+      disabled: true
+    - name: limit
+      value: ""
+      type: query
+      description: Số lượng tối đa bản ghi lấy về (Dùng để phân trang, mặc địch là 20)
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://accounts.fireant.vn/connect/authorize
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: users-read
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+      source: access_token
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/users/active"
+      method: GET
+      params:
+        - name: period
+          value: ""
+          type: query
+          description: "Khoảng thời gian thống kê (0: 1 tuần, 1: 1 tháng, 2: 1 năm, 3: tất cả, mặc định là 1 tháng)"
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Vị trí bản ghi đầu tiên lấy về (Dùng để phân trang, mặc địch là 0)
+          disabled: true
+        - name: limit
+          value: ""
+          type: query
+          description: Số lượng tối đa bản ghi lấy về (Dùng để phân trang, mặc địch là 20)
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "id": "",
+              "name": "",
+              "bio": "",
+              "isAuthentic": false,
+              "followed": false
+            }
+          ]
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/users/active"
+      method: GET
+      params:
+        - name: period
+          value: ""
+          type: query
+          description: "Khoảng thời gian thống kê (0: 1 tuần, 1: 1 tháng, 2: 1 năm, 3: tất cả, mặc định là 1 tháng)"
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Vị trí bản ghi đầu tiên lấy về (Dùng để phân trang, mặc địch là 0)
+          disabled: true
+        - name: limit
+          value: ""
+          type: query
+          description: Số lượng tối đa bản ghi lấy về (Dùng để phân trang, mặc địch là 20)
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""
+  - name: 404 Response
+    description: User không tồn tại
+    request:
+      url: "{{baseUrl}}/users/active"
+      method: GET
+      params:
+        - name: period
+          value: ""
+          type: query
+          description: "Khoảng thời gian thống kê (0: 1 tuần, 1: 1 tháng, 2: 1 năm, 3: tất cả, mặc định là 1 tháng)"
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Vị trí bản ghi đầu tiên lấy về (Dùng để phân trang, mặc địch là 0)
+          disabled: true
+        - name: limit
+          value: ""
+          type: query
+          description: Số lượng tối đa bản ghi lấy về (Dùng để phân trang, mặc địch là 20)
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

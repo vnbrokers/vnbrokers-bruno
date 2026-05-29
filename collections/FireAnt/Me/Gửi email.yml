@@ -1,0 +1,89 @@
+info:
+  name: Gửi email
+  type: http
+  seq: 8
+  tags:
+    - Me
+
+http:
+  method: POST
+  url: "{{baseUrl}}/me/emails"
+  body:
+    type: json
+    data: |-
+      {
+        "sender": "",
+        "receiver": "",
+        "subject": "",
+        "template": "",
+        "parameters": ""
+      }
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://accounts.fireant.vn/connect/authorize
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: user-data-write
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+      source: access_token
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/me/emails"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "sender": "",
+            "receiver": "",
+            "subject": "",
+            "template": "",
+            "parameters": ""
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/me/emails"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "sender": "",
+            "receiver": "",
+            "subject": "",
+            "template": "",
+            "parameters": ""
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

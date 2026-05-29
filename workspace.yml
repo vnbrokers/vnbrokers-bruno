@@ -14,6 +14,8 @@ collections:
     path: "collections/SSI"
   - name: "TCBS"
     path: "collections/TCBS"
+  - name: "FireAnt RESTFUL API"
+    path: "collections/FireAnt"
 
 specs:
   - name: "TCBS iFlash Open API"

@@ -1,0 +1,94 @@
+info:
+  name: Retrieve Investor’s trading contract list
+  type: http
+  seq: 7
+  tags:
+    - Fmarket
+
+http:
+  method: POST
+  url: "{{baseUrl}}/fmarket/accounts/trading-contract-list"
+  body:
+    type: json
+    data: |-
+      {
+        "fmarket_id": ""
+      }
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://accounts.fireant.vn/connect/authorize
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: user-data-write
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+      source: access_token
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/fmarket/accounts/trading-contract-list"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "fmarket_id": ""
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "trading_contract_id": 0,
+              "trading_contract_no": "",
+              "trading_contract_url": "",
+              "status": "",
+              "is_sign": false,
+              "is_allow_sign": false,
+              "issuer_info": {
+                "id": 0,
+                "name": "",
+                "short_name": "",
+                "website": "",
+                "avatar_url": ""
+              }
+            }
+          ]
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/fmarket/accounts/trading-contract-list"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "fmarket_id": ""
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

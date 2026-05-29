@@ -1,0 +1,86 @@
+info:
+  name: Lấy liên kết dùng để mở tài khoản tại công ty chứng khoán.
+  type: http
+  seq: 3
+  tags:
+    - Brokers
+
+http:
+  method: GET
+  url: "{{baseUrl}}/brokers/:brokerId/open-account-url"
+  params:
+    - name: brokerId
+      value: ""
+      type: path
+      description: "Id của công ty chứng khoán (VD: BSC,...)"
+    - name: requestId
+      value: ""
+      type: query
+      description: Id tham chiếu ứng với yêu cầu mở tài khoản
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://accounts.fireant.vn/connect/authorize
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: accounts-write
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+      source: access_token
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/brokers/:brokerId/open-account-url"
+      method: GET
+      params:
+        - name: brokerId
+          value: ""
+          type: path
+          description: "Id của công ty chứng khoán (VD: BSC,...)"
+        - name: requestId
+          value: ""
+          type: query
+          description: Id tham chiếu ứng với yêu cầu mở tài khoản
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+  - name: 404 Response
+    description: Công ty chứng khoán không tồn tại
+    request:
+      url: "{{baseUrl}}/brokers/:brokerId/open-account-url"
+      method: GET
+      params:
+        - name: brokerId
+          value: ""
+          type: path
+          description: "Id của công ty chứng khoán (VD: BSC,...)"
+        - name: requestId
+          value: ""
+          type: query
+          description: Id tham chiếu ứng với yêu cầu mở tài khoản
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

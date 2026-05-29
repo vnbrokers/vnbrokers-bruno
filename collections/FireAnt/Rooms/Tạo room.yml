@@ -1,0 +1,135 @@
+info:
+  name: Tạo room
+  type: http
+  seq: 7
+  tags:
+    - Rooms
+
+http:
+  method: POST
+  url: "{{baseUrl}}/rooms"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "",
+        "description": "",
+        "privacy": 0,
+        "visibility": 0,
+        "coverImage": "",
+        "topics": [],
+        "symbols": [],
+        "inviteFollowers": false
+      }
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://accounts.fireant.vn/connect/authorize
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: posts-write
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+      source: access_token
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/rooms"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "name": "",
+            "description": "",
+            "privacy": 0,
+            "visibility": 0,
+            "coverImage": "",
+            "topics": [],
+            "symbols": [],
+            "inviteFollowers": false
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "info": {
+              "roomID": 0,
+              "status": 0,
+              "privacy": 0,
+              "visibility": 0,
+              "name": "",
+              "description": "",
+              "approved": false,
+              "createdDate": "",
+              "promotionLevel": 0,
+              "invitationID": 0,
+              "requestID": 0,
+              "role": 0,
+              "blocked": false,
+              "verified": false,
+              "lastActivityDate": "",
+              "topics": [
+                {
+                  "topicID": 0,
+                  "name": "",
+                  "description": ""
+                }
+              ],
+              "symbols": [
+                {
+                  "symbol": "",
+                  "weight": 0
+                }
+              ]
+            },
+            "totalMembers": 0,
+            "totalPosts": 0,
+            "totalRequests": 0,
+            "totalBlockedUsers": 0,
+            "totalPendingPosts": 0
+          }
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/rooms"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "name": "",
+            "description": "",
+            "privacy": 0,
+            "visibility": 0,
+            "coverImage": "",
+            "topics": [],
+            "symbols": [],
+            "inviteFollowers": false
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""
