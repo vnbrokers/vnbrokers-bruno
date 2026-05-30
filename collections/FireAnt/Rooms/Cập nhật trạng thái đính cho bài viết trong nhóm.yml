@@ -23,22 +23,7 @@ http:
       {
         "isSticky": false
       }
-  auth:
-    type: oauth2
-    flow: implicit
-    authorizationUrl: https://accounts.fireant.vn/connect/authorize
-    callbackUrl: "{{oauth_callback_url}}"
-    credentials:
-      clientId: "{{oauth_client_id}}"
-    scope: posts-write
-    state: "{{oauth_state}}"
-    tokenConfig:
-      placement:
-        header: Bearer
-      source: access_token
-    settings:
-      autoFetchToken: false
-      autoRefreshToken: true
+  auth: inherit
 
 settings:
   encodeUrl: true

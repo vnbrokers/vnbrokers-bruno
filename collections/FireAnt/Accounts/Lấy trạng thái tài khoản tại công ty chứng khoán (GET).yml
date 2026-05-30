@@ -17,22 +17,7 @@ http:
       value: ""
       type: path
       description: Id tài khoản tại công ty chứng khoán của user.
-  auth:
-    type: oauth2
-    flow: implicit
-    authorizationUrl: https://accounts.fireant.vn/connect/authorize
-    callbackUrl: "{{oauth_callback_url}}"
-    credentials:
-      clientId: "{{oauth_client_id}}"
-    scope: accounts-read
-    state: "{{oauth_state}}"
-    tokenConfig:
-      placement:
-        header: Bearer
-      source: access_token
-    settings:
-      autoFetchToken: false
-      autoRefreshToken: true
+  auth: inherit
 
 settings:
   encodeUrl: true
