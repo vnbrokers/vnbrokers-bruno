@@ -28,22 +28,22 @@ settings:
 
 examples:
   - name: 200 Response
-    description: Thành công – trả về dữ liệu OHLC theo khoảng thời gian
+    description: Thành công – trả về dữ liệu bid/ask gần nhất
     request:
-      url: "{{baseUrl}}/price/ohlc"
+      url: "{{baseUrl}}/price/{{symbol}}/quotes/latest"
       method: GET
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-05-07"
       params:
         - name: boardId
           value: G1
           type: query
         - name: symbol
           value: ACB
-      type: path
+          type: path
     response:
       status: 200
       statusText: OK
@@ -97,19 +97,20 @@ examples:
   - name: 400 Response
     description: Yêu cầu không hợp lệ
     request:
-      url: "{{baseUrl}}/price/ohlc"
+      url: "{{baseUrl}}/price/{{symbol}}/quotes/latest"
       method: GET
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-05-07"
       params:
         - name: boardId
-          value: G1
+          value: ""
           type: query
         - name: symbol
-          value: ACB
+          value: ""
+          type: path
     response:
       status: 400
       statusText: Bad Request
@@ -127,19 +128,20 @@ examples:
   - name: 500 Response
     description: Lỗi máy chủ
     request:
-      url: "{{baseUrl}}/price/ohlc"
+      url: "{{baseUrl}}/price/{{symbol}}/quotes/latest"
       method: GET
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-05-07"
       params:
         - name: boardId
-          value: G1
+          value: ""
           type: query
         - name: symbol
-          value: ACB
+          value: ""
+          type: path
     response:
       status: 500
       statusText: Internal Server Error

@@ -50,16 +50,16 @@ examples:
           value: ""
           type: path
         - name: marketType
-          value: ""
+          value: STOCK
           type: query
         - name: symbol
-          value: ""
+          value: ACB
           type: query
         - name: loanPackageId
-          value: ""
+          value: "1769"
           type: query
         - name: price
-          value: ""
+          value: "22100"
           type: query
     response:
       status: 200

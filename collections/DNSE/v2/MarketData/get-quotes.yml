@@ -37,15 +37,15 @@ settings:
 
 examples:
   - name: 200 Response
-    description: Thành công – trả về dữ liệu OHLC theo khoảng thời gian
+    description: Thành công – trả về lịch sử bid/ask
     request:
-      url: "{{baseUrl}}/price/ohlc"
+      url: "{{baseUrl}}/price/{{symbol}}/quotes"
       method: GET
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-05-07"
       params:
         - name: boardId
           value: G1
@@ -116,16 +116,16 @@ examples:
   - name: 400 Response
     description: Yêu cầu không hợp lệ
     request:
-      url: "{{baseUrl}}/price/ohlc"
+      url: "{{baseUrl}}/price/{{symbol}}/quotes"
       method: GET
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-05-07"
       params:
         - name: boardId
-          value: G1
+          value: ""
           type: query
         - name: from
           value: "1780022000"
@@ -137,7 +137,7 @@ examples:
           value: "100"
           type: query
         - name: symbol
-          value: ACB
+          value: ""
           type: path
     response:
       status: 400
@@ -156,16 +156,16 @@ examples:
   - name: 500 Response
     description: Lỗi máy chủ
     request:
-      url: "{{baseUrl}}/price/ohlc"
+      url: "{{baseUrl}}/price/{{symbol}}/quotes"
       method: GET
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-05-07"
       params:
         - name: boardId
-          value: G1
+          value: ""
           type: query
         - name: from
           value: "1780022000"
@@ -177,7 +177,7 @@ examples:
           value: "100"
           type: query
         - name: symbol
-          value: ACB
+          value: ""
           type: path
     response:
       status: 500

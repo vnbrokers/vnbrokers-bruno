@@ -35,16 +35,35 @@ settings:
 
 examples:
   - name: 200 Response
-    description: Thành công – trả về danh sách vị thế nắm giữ
+    description: Thành công – trả về lịch sử sự kiện quyền
     request:
-      url: "{{baseUrl}}/accounts/{{accountNo}}/positions"
+      url: "{{baseUrl}}/accounts/{{accountNo}}/corporate-action-history"
       method: GET
       headers:
+        - name: X-Aux-Date
+          value: ""
+        - name: X-Signature
+          value: ""
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-05-07"
       params:
+        - name: symbol
+          value: ACB
+          type: query
+        - name: caType
+          value: cashDividend
+          type: query
+        - name: caStatus
+          value: pending
+          type: query
+        - name: pageIndex
+          value: "0"
+          type: query
+        - name: pageSize
+          value: "100"
+          type: query
         - name: accountNo
           value: ""
           type: path
@@ -58,44 +77,62 @@ examples:
         type: json
         data: |-
           {
-            "positions": [
-              {
-                "id": 177796763592657,
-                "marketType": "DERIVATIVE",
-                "symbol": "41I1G5000",
-                "accountNo": "0001179019",
-                "status": "OPEN",
-                "loanPackageId": 2278,
-                "side": "NB",
-                "accumulateQuantity": 259,
-                "tradeQuantity": 23,
-                "closedQuantity": 236,
-                "openQuantity": 23,
-                "overNightQuantity": 0,
-                "costPrice": 2036.78986,
-                "marketPrice": 1915.8,
-                "breakEvenPrice": 2037.28116,
-                "averageClosePrice": 2094.28941,
-                "createdDate": "2026-05-05T09:17:50.457893Z",
-                "modifiedDate": "2026-05-08T06:51:04.755263Z"
-              }
-            ],
-            "pageIndex": 0,
-            "pageSize": 20,
-            "pageNumber": 1,
-            "total": 3
+            "accountNo": "0001179019",
+            "data": {
+              "cashDividend": [
+                {
+                  "id": 12345,
+                  "symbol": "ACB",
+                  "caStatus": "pending",
+                  "recordDate": "2026-05-15",
+                  "processDate": "2026-06-10",
+                  "holdingQuantity": 1000,
+                  "dividendValue": 1000,
+                  "grossAmount": 1000000,
+                  "taxAmount": 50000,
+                  "netAmount": 950000
+                }
+              ],
+              "stockDividend": [],
+              "stockBonus": [],
+              "rightsOffering": []
+            },
+            "pagination": {
+              "pageIndex": 0,
+              "pageSize": 100,
+              "totalRecords": 1
+            }
           }
   - name: 400 Response
     description: Yêu cầu không hợp lệ
     request:
-      url: "{{baseUrl}}/accounts/{{accountNo}}/positions"
+      url: "{{baseUrl}}/accounts/{{accountNo}}/corporate-action-history"
       method: GET
       headers:
+        - name: X-Aux-Date
+          value: ""
+        - name: X-Signature
+          value: ""
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-05-07"
       params:
+        - name: symbol
+          value: ""
+          type: query
+        - name: caType
+          value: ""
+          type: query
+        - name: caStatus
+          value: ""
+          type: query
+        - name: pageIndex
+          value: ""
+          type: query
+        - name: pageSize
+          value: ""
+          type: query
         - name: accountNo
           value: ""
           type: path
@@ -116,14 +153,33 @@ examples:
   - name: 500 Response
     description: Lỗi máy chủ
     request:
-      url: "{{baseUrl}}/accounts/{{accountNo}}/positions"
+      url: "{{baseUrl}}/accounts/{{accountNo}}/corporate-action-history"
       method: GET
       headers:
+        - name: X-Aux-Date
+          value: ""
+        - name: X-Signature
+          value: ""
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-05-07"
       params:
+        - name: symbol
+          value: ""
+          type: query
+        - name: caType
+          value: ""
+          type: query
+        - name: caStatus
+          value: ""
+          type: query
+        - name: pageIndex
+          value: ""
+          type: query
+        - name: pageSize
+          value: ""
+          type: query
         - name: accountNo
           value: ""
           type: path
