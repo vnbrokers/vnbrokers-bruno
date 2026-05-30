@@ -8,6 +8,79 @@ http:
   url: "{{baseUrl}}/brokers/accounts/care-by"
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "CareByResponse",
+            "type": "object",
+            "properties": {
+              "careBy": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "accountNo": {
+                      "type": "string"
+                    },
+                    "fullName": {
+                      "type": "string"
+                    },
+                    "custodyCode": {
+                      "type": "string"
+                    },
+                    "underlyingNav": {
+                      "type": "number"
+                    },
+                    "derivativeNav": {
+                      "type": "number"
+                    },
+                    "totalNav": {
+                      "type": "number"
+                    },
+                    "dealAccount": {
+                      "type": "boolean"
+                    },
+                    "derivativeAccount": {
+                      "type": "boolean"
+                    },
+                    "derivative": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "permissions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "product": {
+                            "type": "string"
+                          },
+                          "role": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "total": {
+                "type": "integer"
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

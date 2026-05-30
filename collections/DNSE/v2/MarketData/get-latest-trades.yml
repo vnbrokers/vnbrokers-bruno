@@ -20,6 +20,70 @@ runtime:
     - name: symbol
       value: HPG
 
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetLatestTradesResponse",
+            "type": "object",
+            "properties": {
+              "trades": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "marketId": {
+                      "type": "string"
+                    },
+                    "boardId": {
+                      "type": "string"
+                    },
+                    "isin": {
+                      "type": "string"
+                    },
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "matchPrice": {
+                      "type": "number"
+                    },
+                    "matchQtty": {
+                      "type": "integer"
+                    },
+                    "side": {
+                      "type": "string"
+                    },
+                    "avgPrice": {
+                      "type": "number"
+                    },
+                    "totalVolumeTraded": {
+                      "type": "integer"
+                    },
+                    "grossTradeAmount": {
+                      "type": "number"
+                    },
+                    "highestPrice": {
+                      "type": "number"
+                    },
+                    "lowestPrice": {
+                      "type": "number"
+                    },
+                    "openPrice": {
+                      "type": "number"
+                    },
+                    "time": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
 settings:
   encodeUrl: true
   timeout: 0

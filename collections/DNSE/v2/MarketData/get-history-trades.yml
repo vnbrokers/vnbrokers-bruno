@@ -28,8 +28,77 @@ runtime:
   variables:
     - name: symbol
       value: ACB
-  scripts:
 
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetHistoryTradesResponse",
+            "type": "object",
+            "properties": {
+              "trades": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "marketId": {
+                      "type": "string"
+                    },
+                    "boardId": {
+                      "type": "string"
+                    },
+                    "isin": {
+                      "type": "string"
+                    },
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "matchPrice": {
+                      "type": "number"
+                    },
+                    "matchQtty": {
+                      "type": "integer"
+                    },
+                    "side": {
+                      "type": "string"
+                    },
+                    "avgPrice": {
+                      "type": "number"
+                    },
+                    "totalVolumeTraded": {
+                      "type": "integer"
+                    },
+                    "grossTradeAmount": {
+                      "type": "number"
+                    },
+                    "highestPrice": {
+                      "type": "number"
+                    },
+                    "lowestPrice": {
+                      "type": "number"
+                    },
+                    "openPrice": {
+                      "type": "integer"
+                    },
+                    "time": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "nextPageToken": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
 settings:
   encodeUrl: true
   timeout: 0
@@ -242,4 +311,4 @@ docs: |-
   |»» lowestPrice|number(float)|false|none|Giá thấp nhất trong ngày|
   |»» openPrice|integer(int32)|false|none|Giá mở cửa|
   |»» time|string|false|none|Thời gian trong các message giá của sàn trả về (YYYY-MM-DD HH:mm:ss.SSS (GMT+7))|
-  |» nextPageToken|string|false|none|Token dùng để lấy trang tiếp theo|
+  |» nextPageToken|string or null|false|none|Token dùng để lấy trang tiếp theo|

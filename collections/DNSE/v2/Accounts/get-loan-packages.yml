@@ -18,6 +18,117 @@ http:
       type: path
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetLoanPackagesResponse",
+            "type": "object",
+            "properties": {
+              "symbolType": {
+                "type": "string"
+              },
+              "marketType": {
+                "type": "string"
+              },
+              "loanPackages": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "initialRate": {
+                      "type": "number"
+                    },
+                    "maintenanceRate": {
+                      "type": "number"
+                    },
+                    "liquidRate": {
+                      "type": "number"
+                    },
+                    "tradingFee": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "scope": {
+                          "type": "string"
+                        },
+                        "channel": {
+                          "type": "string"
+                        },
+                        "schemaType": {
+                          "type": "string"
+                        },
+                        "createdDate": {
+                          "type": "string"
+                        },
+                        "modifiedDate": {
+                          "type": "string"
+                        },
+                        "fixedTradingFee": {
+                          "type": "integer"
+                        },
+                        "fixedDailyCloseTradingFee": {
+                          "type": "integer"
+                        },
+                        "progressTradingFee": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "fromQuantity": {
+                                "type": "number"
+                              },
+                              "toQuantity": {
+                                "type": "number"
+                              },
+                              "fee": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        },
+                        "progressDailyCloseTradingFee": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "fromQuantity": {
+                                "type": "number"
+                              },
+                              "toQuantity": {
+                                "type": "number"
+                              },
+                              "fee": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

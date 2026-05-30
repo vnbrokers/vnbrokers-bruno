@@ -10,6 +10,18 @@ http:
 
 runtime:
   scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "SendEmailOtpResponse",
+            "type": "object",
+            "properties": {}
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
 
 settings:
   encodeUrl: true

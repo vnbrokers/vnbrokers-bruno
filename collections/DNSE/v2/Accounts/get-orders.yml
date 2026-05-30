@@ -18,6 +18,87 @@ http:
       type: path
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetOrdersResponse",
+            "type": "object",
+            "properties": {
+              "orders": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "side": {
+                      "type": "string"
+                    },
+                    "accountNo": {
+                      "type": "string"
+                    },
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": "number"
+                    },
+                    "priceSecure": {
+                      "type": "number"
+                    },
+                    "averagePrice": {
+                      "type": "number"
+                    },
+                    "quantity": {
+                      "type": "integer"
+                    },
+                    "fillQuantity": {
+                      "type": "integer"
+                    },
+                    "canceledQuantity": {
+                      "type": "integer"
+                    },
+                    "leaveQuantity": {
+                      "type": "integer"
+                    },
+                    "orderType": {
+                      "type": "string"
+                    },
+                    "orderCategory": {
+                      "type": "string"
+                    },
+                    "orderStatus": {
+                      "type": "string"
+                    },
+                    "loanPackageId": {
+                      "type": "integer"
+                    },
+                    "marketType": {
+                      "type": "string"
+                    },
+                    "transDate": {
+                      "type": "string"
+                    },
+                    "createdDate": {
+                      "type": "string"
+                    },
+                    "modifiedDate": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

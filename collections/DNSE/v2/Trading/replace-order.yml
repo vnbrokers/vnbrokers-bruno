@@ -28,8 +28,66 @@ runtime:
   variables:
     - name: orderId
       value: "1"
-  scripts:
 
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "ReplaceOrderResponse",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "accountNo": {
+                "type": "string"
+              },
+              "side": {
+                "type": "string"
+              },
+              "loanPackageId": {
+                "type": "integer"
+              },
+              "symbol": {
+                "type": "string"
+              },
+              "orderType": {
+                "type": "string"
+              },
+              "orderCategory": {
+                "type": "string"
+              },
+              "price": {
+                "type": "number"
+              },
+              "quantity": {
+                "type": "integer"
+              },
+              "fillQuantity": {
+                "type": "integer"
+              },
+              "canceledQuantity": {
+                "type": "integer"
+              },
+              "marketType": {
+                "type": "string"
+              },
+              "transDate": {
+                "type": "string"
+              },
+              "createdDate": {
+                "type": "string"
+              },
+              "modifiedDate": {
+                "type": "string"
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
 settings:
   encodeUrl: true
   timeout: 0

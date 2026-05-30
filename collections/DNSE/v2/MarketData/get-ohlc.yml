@@ -24,8 +24,61 @@ http:
       type: query
   auth: inherit
 
+
 runtime:
   scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetOhlcResponse",
+            "type": "object",
+            "properties": {
+              "t": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "o": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "h": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "l": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "c": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "v": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "nextTime": {
+                "type": "integer"
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
 
 settings:
   encodeUrl: true

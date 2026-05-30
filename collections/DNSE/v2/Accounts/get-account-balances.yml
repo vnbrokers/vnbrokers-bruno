@@ -12,6 +12,71 @@ http:
       type: path
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetAccountBalancesResponse",
+            "type": "object",
+            "properties": {
+              "stock": {
+                "type": "object",
+                "properties": {
+                  "totalCash": {
+                    "type": "integer"
+                  },
+                  "availableCash": {
+                    "type": "integer"
+                  },
+                  "depositInterest": {
+                    "type": "integer"
+                  },
+                  "totalDebt": {
+                    "type": "integer"
+                  },
+                  "depositFeeAmount": {
+                    "type": "integer"
+                  },
+                  "withdrawableCash": {
+                    "type": "integer"
+                  },
+                  "cashDividendReceiving": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "derivative": {
+                "type": "object",
+                "properties": {
+                  "pendingDepositWithdraw": {
+                    "type": "integer"
+                  },
+                  "remainSecure": {
+                    "type": "integer"
+                  },
+                  "usedSecure": {
+                    "type": "integer"
+                  },
+                  "pendingSecure": {
+                    "type": "integer"
+                  },
+                  "holdTaxAndFee": {
+                    "type": "integer"
+                  },
+                  "totalLoanDebt": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

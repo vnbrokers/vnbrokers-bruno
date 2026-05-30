@@ -27,6 +27,196 @@ http:
       type: path
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetCorporateActionHistoryResponse",
+            "type": "object",
+            "properties": {
+              "accountNo": {
+                "type": "string"
+              },
+              "data": {
+                "type": "object",
+                "properties": {
+                  "cashDividend": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "symbol": {
+                          "type": "string"
+                        },
+                        "caStatus": {
+                          "type": "string"
+                        },
+                        "recordDate": {
+                          "type": "string"
+                        },
+                        "processDate": {
+                          "type": "string"
+                        },
+                        "holdingQuantity": {
+                          "type": "integer"
+                        },
+                        "dividendValue": {
+                          "type": "integer"
+                        },
+                        "grossAmount": {
+                          "type": "integer"
+                        },
+                        "taxAmount": {
+                          "type": "integer"
+                        },
+                        "netAmount": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "stockDividend": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "symbol": {
+                          "type": "string"
+                        },
+                        "caStatus": {
+                          "type": "string"
+                        },
+                        "recordDate": {
+                          "type": "string"
+                        },
+                        "processDate": {
+                          "type": "string"
+                        },
+                        "holdingQuantity": {
+                          "type": "integer"
+                        },
+                        "ratio": {
+                          "type": "string"
+                        },
+                        "receivedQuantity": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "stockBonus": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "symbol": {
+                          "type": "string"
+                        },
+                        "caStatus": {
+                          "type": "string"
+                        },
+                        "recordDate": {
+                          "type": "string"
+                        },
+                        "processDate": {
+                          "type": "string"
+                        },
+                        "holdingQuantity": {
+                          "type": "integer"
+                        },
+                        "ratio": {
+                          "type": "string"
+                        },
+                        "receivedQuantity": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "rightsOffering": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "symbol": {
+                          "type": "string"
+                        },
+                        "caStatus": {
+                          "type": "string"
+                        },
+                        "recordDate": {
+                          "type": "string"
+                        },
+                        "processDate": {
+                          "type": "string"
+                        },
+                        "holdingQuantity": {
+                          "type": "integer"
+                        },
+                        "ratio": {
+                          "type": "string"
+                        },
+                        "rightPrice": {
+                          "type": "integer"
+                        },
+                        "rightsQuantity": {
+                          "type": "integer"
+                        },
+                        "registeredQuantity": {
+                          "type": "integer"
+                        },
+                        "startDateTransfer": {
+                          "type": "string"
+                        },
+                        "endDateTransfer": {
+                          "type": "string"
+                        },
+                        "startDateSubscription": {
+                          "type": "string"
+                        },
+                        "endDateSubscription": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "pagination": {
+                "type": "object",
+                "properties": {
+                  "pageIndex": {
+                    "type": "integer"
+                  },
+                  "pageSize": {
+                    "type": "integer"
+                  },
+                  "totalRecords": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

@@ -5,16 +5,16 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/accounts/:accountNo/orders/history?marketType=DERIVATIVE&from=2025-05-01&to=2026-05-01"
+  url: "{{baseUrl}}/accounts/:accountNo/orders/history?marketType=DERIVATIVE&from=2026-05-01&to=2026-06-01"
   params:
     - name: marketType
       value: DERIVATIVE
       type: query
     - name: from
-      value: 2025-05-01
+      value: 2026-05-01
       type: query
     - name: to
-      value: 2026-05-01
+      value: 2026-06-01
       type: query
     - name: start
       value: "100"
@@ -24,6 +24,99 @@ http:
       value: "{{accountNo}}"
       type: path
   auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetOrdersHistoryResponse",
+            "type": "object",
+            "properties": {
+              "accountNo": {
+                "type": "string"
+              },
+              "fillQuantity": {
+                "type": "integer"
+              },
+              "total": {
+                "type": "integer"
+              },
+              "start": {
+                "type": "integer"
+              },
+              "end": {
+                "type": "integer"
+              },
+              "marketType": {
+                "type": "string"
+              },
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "side": {
+                      "type": "string"
+                    },
+                    "orderType": {
+                      "type": "string"
+                    },
+                    "orderStatus": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": "number"
+                    },
+                    "quantity": {
+                      "type": "integer"
+                    },
+                    "fillQuantity": {
+                      "type": "integer"
+                    },
+                    "leaveQuantity": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ]
+                    },
+                    "canceledQuantity": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ]
+                    },
+                    "averagePrice": {
+                      "type": "number"
+                    },
+                    "loanPackageId": {
+                      "type": "integer"
+                    },
+                    "transDate": {
+                      "type": "string"
+                    },
+                    "createdDate": {
+                      "type": "string"
+                    },
+                    "modifiedDate": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
 
 settings:
   encodeUrl: true
@@ -41,7 +134,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: 2026-05-07
       params:
         - name: marketType
           value: STOCK
@@ -100,7 +193,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: 2026-05-07
       params:
         - name: marketType
           value: ""
@@ -137,7 +230,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: 2026-05-07
       params:
         - name: marketType
           value: ""
@@ -212,12 +305,12 @@ docs: |-
   |»» side|string|false|none|Chiều giao dịch<br>NB: Mua<br>NS: Bán|
   |»» orderType|string|false|none|Loại lệnh<br>- LO: Lệnh giới hạn<br>- MOK/MAK/MTL: Lệnh thị trường<br>- ATO/ATC: Lệnh phiên định kỳ mở cửa/đóng cửa<br>- PLO: Lệnh khớp lệnh sau giờ|
   |»» orderStatus|string|false|none|Trạng thái lệnh<br>- Pending/PendingNew: Chờ gửi<br>- New: Chờ khớp<br>- PartiallyFilled: Khớp một phần<br>- Filled: Khớp toàn bộ<br>- Rejected: Bị từ chối<br>- Expired: Hết hạn trong phiên<br>- DoneForDay: Lệnh được giải tỏa do không khớp trong phiên|
-  |»» price|integer(int32)|false|none|Giá đặt|
+  |»» price|number(double)|false|none|Giá đặt|
   |»» quantity|integer(int32)|false|none|Khối lượng đặt|
   |»» fillQuantity|integer(int32)|false|none|Khối lượng đã khớp|
-  |»» leaveQuantity|integer(int32)|false|none|Khối lượng còn lại|
-  |»» canceledQuantity|integer(int32)|false|none|Khối lượng đã huỷ|
-  |»» averagePrice|integer(int32)|false|none|Giá khớp trung bình|
+  |»» leaveQuantity|integer(int32) or null|false|none|Khối lượng còn lại|
+  |»» canceledQuantity|integer(int32) or null|false|none|Khối lượng đã huỷ|
+  |»» averagePrice|number(double)|false|none|Giá khớp trung bình|
   |»» loanPackageId|integer(int32)|false|none|ID gói vay|
   |»» transDate|string|false|none|Ngày giao dịch|
   |»» createdDate|string(date-time)|false|none|Thời điểm tạo|

@@ -26,6 +26,104 @@ runtime:
     - name: orderId
       value: "116"
 
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetOrderDetailResponse",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "side": {
+                "type": "string"
+              },
+              "accountNo": {
+                "type": "string"
+              },
+              "symbol": {
+                "type": "string"
+              },
+              "price": {
+                "type": "number"
+              },
+              "quantity": {
+                "type": "integer"
+              },
+              "orderType": {
+                "type": "string"
+              },
+              "loanPackageId": {
+                "type": "integer"
+              },
+              "orderCategory": {
+                "type": "string"
+              },
+              "orderStatus": {
+                "type": "string"
+              },
+              "fillQuantity": {
+                "type": "integer"
+              },
+              "lastQuantity": {
+                "type": "integer"
+              },
+              "lastPrice": {
+                "type": "number"
+              },
+              "averagePrice": {
+                "type": "number"
+              },
+              "transDate": {
+                "type": "string"
+              },
+              "taxRate": {
+                "type": "integer"
+              },
+              "exchangeFeeRate": {
+                "type": "integer"
+              },
+              "feeRate": {
+                "type": "integer"
+              },
+              "leaveQuantity": {
+                "type": "integer"
+              },
+              "canceledQuantity": {
+                "type": "integer"
+              },
+              "error": {
+                "type": "string"
+              },
+              "marketType": {
+                "type": "string"
+              },
+              "priceSecure": {
+                "type": "number"
+              },
+              "createdDate": {
+                "type": "string"
+              },
+              "modifiedDate": {
+                "type": "string"
+              },
+              "metadata": {
+                "type": "string"
+              },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
 settings:
   encodeUrl: true
   timeout: 0

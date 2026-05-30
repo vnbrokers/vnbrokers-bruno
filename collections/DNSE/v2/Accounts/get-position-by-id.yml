@@ -20,6 +20,94 @@ runtime:
     - name: positionId
       value: "2183078"
 
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetPositionByIdResponse",
+            "type": "object",
+            "properties": {
+              "positions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "marketType": {
+                      "type": "string"
+                    },
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "accountNo": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "loanPackageId": {
+                      "type": "integer"
+                    },
+                    "side": {
+                      "type": "string"
+                    },
+                    "accumulateQuantity": {
+                      "type": "integer"
+                    },
+                    "tradeQuantity": {
+                      "type": "integer"
+                    },
+                    "closedQuantity": {
+                      "type": "integer"
+                    },
+                    "openQuantity": {
+                      "type": "integer"
+                    },
+                    "overNightQuantity": {
+                      "type": "integer"
+                    },
+                    "costPrice": {
+                      "type": "number"
+                    },
+                    "marketPrice": {
+                      "type": "number"
+                    },
+                    "breakEvenPrice": {
+                      "type": "number"
+                    },
+                    "averageClosePrice": {
+                      "type": "number"
+                    },
+                    "createdDate": {
+                      "type": "string"
+                    },
+                    "modifiedDate": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "pageIndex": {
+                "type": "integer"
+              },
+              "pageSize": {
+                "type": "integer"
+              },
+              "pageNumber": {
+                "type": "integer"
+              },
+              "total": {
+                "type": "integer"
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
 settings:
   encodeUrl: true
   timeout: 0

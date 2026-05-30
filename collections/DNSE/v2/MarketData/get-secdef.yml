@@ -20,6 +20,74 @@ runtime:
     - name: symbol
       value: HPG
 
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetSecdefResponse",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "marketId": {
+                  "type": "string"
+                },
+                "boardId": {
+                  "type": "string"
+                },
+                "isin": {
+                  "type": "string"
+                },
+                "symbol": {
+                  "type": "string"
+                },
+                "productGrpId": {
+                  "type": "string"
+                },
+                "securityGroupId": {
+                  "type": "string"
+                },
+                "basicPrice": {
+                  "type": "number"
+                },
+                "ceilingPrice": {
+                  "type": "number"
+                },
+                "floorPrice": {
+                  "type": "number"
+                },
+                "securityStatus": {
+                  "type": "string"
+                },
+                "symbolAdminStatusCode": {
+                  "type": "string"
+                },
+                "symbolTradingMethodStatusCode": {
+                  "type": "string"
+                },
+                "symbolTradingSanctionStatusCode": {
+                  "type": "string"
+                },
+                "finalTradeDate": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "listingDate": {
+                  "type": "string"
+                },
+                "time": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
 settings:
   encodeUrl: true
   timeout: 0
@@ -161,6 +229,8 @@ docs: |-
   - T6: Thỏa thuận lô lẻ sau giờ  (14h45 - 15h)
 
   <h3 id="getsymbolsecdef-responseschema">Response Schema</h3>
+
+  Response là một mảng các object theo schema bên dưới.
 
   |Name|Type|Required|Restrictions|Description|
   |---|---|---|---|---|

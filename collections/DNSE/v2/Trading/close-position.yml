@@ -22,8 +22,60 @@ runtime:
   variables:
     - name: positionId
       value: "123"
-  scripts:
 
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "ClosePositionResponse",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "side": {
+                "type": "string"
+              },
+              "accountNo": {
+                "type": "string"
+              },
+              "symbol": {
+                "type": "string"
+              },
+              "price": {
+                "type": "number"
+              },
+              "quantity": {
+                "type": "integer"
+              },
+              "orderType": {
+                "type": "string"
+              },
+              "fillQuantity": {
+                "type": "integer"
+              },
+              "leaveQuantity": {
+                "type": "integer"
+              },
+              "canceledQuantity": {
+                "type": "integer"
+              },
+              "loanPackageId": {
+                "type": "integer"
+              },
+              "createdDate": {
+                "type": "string"
+              },
+              "modifiedDate": {
+                "type": "string"
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
 settings:
   encodeUrl: true
   timeout: 0
