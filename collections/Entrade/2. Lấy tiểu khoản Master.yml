@@ -12,6 +12,95 @@ runtime:
   scripts:
     - type: after-response
       code: res.status === 200 && bru.setEnvVar("investorAccountId", String(res.body.id))
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "InvestorAccount",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "investorId": {
+                "type": "number"
+              },
+              "orderSecure": {
+                "type": "number"
+              },
+              "derivativeOrderSecure": {
+                "type": "number"
+              },
+              "dealSecure": {
+                "type": "number"
+              },
+              "initDerivativeDealSecures": {
+                "type": "array",
+                "items": {}
+              },
+              "derivativeDealSecure": {
+                "type": "number"
+              },
+              "tradingFeeSecure": {
+                "type": "number"
+              },
+              "totalCash": {
+                "type": "number"
+              },
+              "sellingTaxSecure": {
+                "type": "number"
+              },
+              "orderMoneyAdvanceFeeSecure": {
+                "type": "number"
+              },
+              "receivable": {
+                "type": "number"
+              },
+              "taxCredit": {
+                "type": "number"
+              },
+              "initCash": {
+                "type": "number"
+              },
+              "holdOvernightSecure": {
+                "type": "number"
+              },
+              "originalReferenceBonus": {
+                "type": "number"
+              },
+              "referenceBonus": {
+                "type": "number"
+              },
+              "netDerivativeOrderSecure": {
+                "type": "number"
+              },
+              "createdDate": {
+                "type": "string"
+              },
+              "modifiedDate": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "availableCash": {
+                "type": "number"
+              },
+              "withdrawalCash": {
+                "type": "number"
+              },
+              "purchasingPower": {
+                "type": "number"
+              }
+            }
+          }
+
+          res.status 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
 
 settings:
   encodeUrl: true
