@@ -20,7 +20,9 @@ http:
 runtime:
   scripts:
     - type: after-response
-      code: bru.setEnvVar("token", res.getBody().token)
+      code: |-
+        res.status ===200 && bru.setEnvVar("token", res.body.token)
+        res.status ===200 && bru.setEnvVar("investorId", JSON.parse(Buffer.from(res.body.token.split(".")[1], "base64").toString("utf8")).investorIdStr)
 
 settings:
   encodeUrl: true

@@ -6,7 +6,6 @@ info:
 http:
   method: POST
   url: "{{baseUrl}}/derivative/orders"
-  headers:
   body:
     type: json
     data: |-
@@ -35,7 +34,7 @@ runtime:
       value: "1"
   scripts:
     - type: after-response
-      code: bru.setEnvVar("orderId", res.getBody().id)
+      code: res.status === 200 && bru.setEnvVar("orderId", res.body.id)
 
 settings:
   encodeUrl: true

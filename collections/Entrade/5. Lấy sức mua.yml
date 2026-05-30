@@ -6,7 +6,6 @@ info:
 http:
   method: GET
   url: "{{baseUrl}}/derivative/investors/:investorId/ppse?bankMarginPortfolioId={{bankMarginPortfolioId}}&price=0&symbol=41I1G5000&side=NB"
-  headers:
   params:
     - name: bankMarginPortfolioId
       value: "{{bankMarginPortfolioId}}"
@@ -28,7 +27,7 @@ http:
 runtime:
   scripts:
     - type: after-response
-      code: bru.setEnvVar("qmax", res.getBody().qmax)
+      code: res.status === 200 && bru.setEnvVar("qmax", res.body.qmax)
 
 settings:
   encodeUrl: true

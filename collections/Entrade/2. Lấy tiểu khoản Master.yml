@@ -6,16 +6,12 @@ info:
 http:
   method: GET
   url: "{{baseUrl}}/investors/{{investorId}}/investor_account"
-  headers:
   auth: inherit
 
 runtime:
   scripts:
     - type: after-response
-      code: |-
-        bru.setEnvVar("investorAccountId", String(res.getBody().id))
-
-        console.log(res.body.availableCash)
+      code: res.status === 200 && bru.setEnvVar("investorAccountId", String(res.body.id))
 
 settings:
   encodeUrl: true
