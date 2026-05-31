@@ -28,6 +28,68 @@ http:
       disabled: true
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "Symbol": {
+                      "type": "string"
+                    },
+                    "Market": {
+                      "type": "string"
+                    },
+                    "TradingDate": {
+                      "type": "string"
+                    },
+                    "Time": {
+                      "type": "null"
+                    },
+                    "Open": {
+                      "type": "string"
+                    },
+                    "High": {
+                      "type": "string"
+                    },
+                    "Low": {
+                      "type": "string"
+                    },
+                    "Close": {
+                      "type": "string"
+                    },
+                    "Volume": {
+                      "type": "string"
+                    },
+                    "Value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "message": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "totalRecord": {
+                "type": "number"
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

@@ -18,6 +18,56 @@ http:
       type: query
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string"
+              },
+              "status": {
+                "type": "number"
+              },
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "transactionID": {
+                      "type": "string"
+                    },
+                    "senderAccount": {
+                      "type": "string"
+                    },
+                    "receiverAccount": {
+                      "type": "string"
+                    },
+                    "amount": {
+                      "type": "number"
+                    },
+                    "dateTime": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "remark": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

@@ -12,6 +12,99 @@ http:
       type: query
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string"
+              },
+              "status": {
+                "type": "number"
+              },
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "account": {
+                      "type": "string"
+                    },
+                    "accountbalance": {
+                      "type": "number"
+                    },
+                    "fee": {
+                      "type": "number"
+                    },
+                    "commission": {
+                      "type": "number"
+                    },
+                    "interest": {
+                      "type": "number"
+                    },
+                    "loan": {
+                      "type": "number"
+                    },
+                    "deliveryamount": {
+                      "type": "number"
+                    },
+                    "floatingpl": {
+                      "type": "number"
+                    },
+                    "totalpl": {
+                      "type": "number"
+                    },
+                    "marginable": {
+                      "type": "number"
+                    },
+                    "depositable": {
+                      "type": "number"
+                    },
+                    "rccall": {
+                      "type": "number"
+                    },
+                    "withdrawable": {
+                      "type": "number"
+                    },
+                    "noncashdrawablerccall": {
+                      "type": "number"
+                    },
+                    "internalassets": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "exchangeassets": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "internalmargin": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "exchangemargin": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "nav": {
+                      "type": "number"
+                    },
+                    "origMarginRatio": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

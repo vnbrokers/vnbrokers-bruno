@@ -12,6 +12,86 @@ http:
       type: query
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string"
+              },
+              "status": {
+                "type": "number"
+              },
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "account": {
+                      "type": "string"
+                    },
+                    "cashbal": {
+                      "type": "number"
+                    },
+                    "cashonhold": {
+                      "type": "number"
+                    },
+                    "secureamount": {
+                      "type": "number"
+                    },
+                    "withdrawable": {
+                      "type": "number"
+                    },
+                    "receivingcasht1": {
+                      "type": "number"
+                    },
+                    "receivingcasht2": {
+                      "type": "number"
+                    },
+                    "matchedbuyvolume": {
+                      "type": "number"
+                    },
+                    "matchedsellvolume": {
+                      "type": "number"
+                    },
+                    "unmatchedbuyvolume": {
+                      "type": "number"
+                    },
+                    "unmatchedsellvolume": {
+                      "type": "number"
+                    },
+                    "paidcasht1": {
+                      "type": "number"
+                    },
+                    "paidcasht2": {
+                      "type": "number"
+                    },
+                    "cia": {
+                      "type": "number"
+                    },
+                    "debt": {
+                      "type": "number"
+                    },
+                    "purchasingpower": {
+                      "type": "number"
+                    },
+                    "totalasset": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0
