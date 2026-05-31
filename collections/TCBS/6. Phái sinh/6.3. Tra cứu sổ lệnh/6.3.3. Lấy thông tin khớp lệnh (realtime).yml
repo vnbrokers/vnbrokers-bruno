@@ -10,7 +10,7 @@ websocket:
   message:
     type: text
     data: |
-      authenticate|{{derivativeOrderJwtPayloadBase64}}
+      authenticate|{{wsJwtBase64Token}}
 
 settings:
   timeout: 0
@@ -43,7 +43,7 @@ docs: |-
 
   Trong đó `xxx` là JWT token lấy từ API `get_token`.
 
-  Request này dùng biến `derivativeOrderJwtPayloadBase64`, là base64 của JSON:
+  Request này dùng biến `wsJwtBase64Token`, là base64 của JSON:
 
   ```json
   {"jwt":"{{accessToken}}"}

@@ -9,22 +9,16 @@ variables:
   - secret: true
     name: apiKey
   - secret: true
-    name: otp
+    name: accessToken
+  - secret: true
+    name: wsBase64Token
+  - secret: true
+    name: wsJwtBase64Token
+  - secret: true
+    name: custodyCode
   - secret: true
     name: accountNo
   - name: orderId
     value: ""
   - name: symbol
     value: TCB
-  - secret: true
-    name: accessToken
-  - secret: true
-    name: stockOrderJwtPayloadBase64
-  - secret: true
-    name: derivativeOrderJwtPayloadBase64
-  - secret: true
-    name: marketDataTokenBase64
-  - secret: true
-    name: custodyCode
-  - secret: true
-    name: base64Token

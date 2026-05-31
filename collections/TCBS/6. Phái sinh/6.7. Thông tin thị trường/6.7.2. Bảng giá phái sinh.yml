@@ -10,7 +10,7 @@ websocket:
   message:
     type: text
     data: |
-      d|a|||{{base64Token}}
+      d|a|||{{wsBase64Token}}
 
 settings:
   timeout: 0
@@ -43,7 +43,7 @@ docs: |-
   d|a|||base64(token_openapi)
   ```
 
-  Request này dùng biến `marketDataTokenBase64`, là base64 của raw token `{{accessToken}}`.
+  Request này dùng biến `wsBase64Token`, là base64 của raw token `{{accessToken}}`.
 
   Server trả về nếu xác thực thành công:
 

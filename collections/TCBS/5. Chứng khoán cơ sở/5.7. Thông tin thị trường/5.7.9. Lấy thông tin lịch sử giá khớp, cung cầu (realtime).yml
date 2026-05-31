@@ -9,7 +9,7 @@ websocket:
   url: "{{wsBaseUrl}}/ws/ouranos/v1/stream"
   message:
     type: text
-    data: d|a|||{{base64Token}}
+    data: d|a|||{{wsBase64Token}}
 
 settings:
   timeout: 0
@@ -44,7 +44,7 @@ docs: |-
 
   Trong đó `token_openapi` là JWT token lấy từ API `get_token`.
 
-  Request này dùng biến `marketDataTokenBase64`, là base64 của raw token `{{accessToken}}`.
+  Request này dùng biến `wsBase64Token`, là base64 của raw token `{{accessToken}}`.
 
   Ví dụ:
 
