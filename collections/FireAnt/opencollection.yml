@@ -15,7 +15,9 @@ config:
       bypassProxy: ""
 
 request:
-  auth: inherit
+  auth:
+    type: bearer
+    token: "{{accessToken}}"
 bundled: false
 extensions:
   bruno:
