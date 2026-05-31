@@ -51,6 +51,116 @@ http:
         - `1`: Chờ khớp
         - `2`: Đã khớp
   auth: inherit
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "cmd": {
+                "type": "string"
+              },
+              "rc": {
+                "type": "string"
+              },
+              "rs": {
+                "type": "string"
+              },
+              "oID": {
+                "type": "string"
+              },
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "orderNo": {
+                      "type": "string"
+                    },
+                    "pk_orderNo": {
+                      "type": "string"
+                    },
+                    "refId": {
+                      "type": "string"
+                    },
+                    "orderTime": {
+                      "type": "string"
+                    },
+                    "accountCode": {
+                      "type": "string"
+                    },
+                    "side": {
+                      "type": "string"
+                    },
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "volume": {
+                      "type": "string"
+                    },
+                    "showPrice": {
+                      "type": "string"
+                    },
+                    "matchVolume": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "orderStatus": {
+                      "type": "string"
+                    },
+                    "channel": {
+                      "type": "string"
+                    },
+                    "group": {
+                      "type": "string"
+                    },
+                    "cancelTime": {
+                      "type": "string"
+                    },
+                    "isCancel": {
+                      "type": "string"
+                    },
+                    "isAmend": {
+                      "type": "string"
+                    },
+                    "info": {
+                      "type": "string"
+                    },
+                    "maxPrice": {
+                      "type": "string"
+                    },
+                    "matchValue": {
+                      "type": "string"
+                    },
+                    "quote": {
+                      "type": "string"
+                    },
+                    "autoType": {
+                      "type": "string"
+                    },
+                    "product": {
+                      "type": "string"
+                    },
+                    "orderType": {
+                      "type": "string"
+                    },
+                    "source": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

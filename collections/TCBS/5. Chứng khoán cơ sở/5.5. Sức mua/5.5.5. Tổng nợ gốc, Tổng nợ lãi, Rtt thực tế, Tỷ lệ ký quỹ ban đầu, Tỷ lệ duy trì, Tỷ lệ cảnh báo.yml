@@ -13,6 +13,53 @@ http:
       type: path
       description: Số tài khoản margin
   auth: inherit
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "accountNo": {
+                  "type": "string"
+                },
+                "riskPolicy": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "rtt": {
+                  "type": "number"
+                },
+                "outstanding": {
+                  "type": "number"
+                },
+                "accruedInterest": {
+                  "type": "number"
+                },
+                "dueAmount": {
+                  "type": "number"
+                },
+                "overdueAmount": {
+                  "type": "number"
+                },
+                "riskStatus": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "totalFeeDebt": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

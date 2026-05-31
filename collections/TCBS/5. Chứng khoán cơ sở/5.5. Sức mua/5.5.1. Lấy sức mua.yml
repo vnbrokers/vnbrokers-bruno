@@ -13,6 +13,63 @@ http:
       type: path
       description: Số tiểu khoản
   auth: inherit
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "accountNo": {
+                "type": "string"
+              },
+              "custodyID": {
+                "type": "string"
+              },
+              "symbol": {
+                "type": "string"
+              },
+              "price": {
+                "type": "string"
+              },
+              "pp0": {
+                "type": "string"
+              },
+              "ppse": {
+                "type": "string"
+              },
+              "ppseref": {
+                "type": "string"
+              },
+              "maxBuyQuantity": {
+                "type": "string"
+              },
+              "realMaxBuyQuantity": {
+                "type": "string"
+              },
+              "minBuyQuantity": {
+                "type": "string"
+              },
+              "marginRatioLoan": {
+                "type": "string"
+              },
+              "marginPriceLoan": {
+                "type": "string"
+              },
+              "rateBrkS": {
+                "type": "string"
+              },
+              "rateBrkB": {
+                "type": "string"
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

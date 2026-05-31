@@ -31,6 +31,59 @@ http:
       disabled: true
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "response": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "custodyID": {
+                      "type": "string"
+                    },
+                    "transactionCode": {
+                      "type": "string"
+                    },
+                    "debitAmount": {
+                      "type": "number"
+                    },
+                    "transactionName": {
+                      "type": "string"
+                    },
+                    "descriptions": {
+                      "type": "string"
+                    },
+                    "businessDate": {
+                      "type": "string"
+                    },
+                    "transactionNum": {
+                      "type": "string"
+                    },
+                    "accountNo": {
+                      "type": "string"
+                    },
+                    "transationDate": {
+                      "type": "string"
+                    },
+                    "creditAmount": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

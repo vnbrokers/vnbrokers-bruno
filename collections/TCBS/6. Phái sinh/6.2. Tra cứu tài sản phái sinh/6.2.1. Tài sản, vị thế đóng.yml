@@ -30,6 +30,77 @@ http:
       type: query
       description: Số dòng
   auth: inherit
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "cmd": {
+                "type": "string"
+              },
+              "rc": {
+                "type": "string"
+              },
+              "rs": {
+                "type": "string"
+              },
+              "oID": {
+                "type": "string"
+              },
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "side": {
+                      "type": "string"
+                    },
+                    "openPrice": {
+                      "type": "number"
+                    },
+                    "closePrice": {
+                      "type": "number"
+                    },
+                    "closePosition": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "fee": {
+                      "type": "number"
+                    },
+                    "tax": {
+                      "type": "number"
+                    },
+                    "closeVM": {
+                      "type": "number"
+                    },
+                    "unrealize": {
+                      "type": "number"
+                    },
+                    "closePC": {
+                      "type": "number"
+                    },
+                    "time": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

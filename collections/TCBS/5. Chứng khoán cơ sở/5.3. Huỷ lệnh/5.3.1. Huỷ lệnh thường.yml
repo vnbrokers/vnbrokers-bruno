@@ -23,6 +23,64 @@ http:
         ]
       }
   auth: inherit
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "details": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "deleted": {
+                            "type": "string"
+                          },
+                          "errorCode": {
+                            "type": "string"
+                          },
+                          "errorMesage": {
+                            "type": "string"
+                          },
+                          "orderID": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "object": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "object": {
+                "type": "string"
+              },
+              "pageIndex": {
+                "type": "number"
+              },
+              "pageSize": {
+                "type": "number"
+              },
+              "totalCount": {
+                "type": "number"
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

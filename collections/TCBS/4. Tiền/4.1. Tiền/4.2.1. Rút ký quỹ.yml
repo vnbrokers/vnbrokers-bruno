@@ -17,6 +17,37 @@ http:
         "paymentContent": "RUT TIEN KY QUY"
       }
   auth: inherit
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "cmd": {
+                "type": "string"
+              },
+              "rc": {
+                "type": "string"
+              },
+              "rs": {
+                "type": "string"
+              },
+              "oID": {
+                "type": "string"
+              },
+              "data": {
+                "type": "array",
+                "items": {}
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

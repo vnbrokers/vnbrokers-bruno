@@ -8,6 +8,116 @@ http:
   method: GET
   url: "{{baseUrl}}/tartarus/v1/derivatives"
   auth: inherit
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "ceilPrice": {
+                      "type": "number"
+                    },
+                    "floorPrice": {
+                      "type": "number"
+                    },
+                    "refPrice": {
+                      "type": "number"
+                    },
+                    "bidPrice01": {
+                      "type": "number"
+                    },
+                    "bidPrice02": {
+                      "type": "number"
+                    },
+                    "bidPrice03": {
+                      "type": "number"
+                    },
+                    "bidQtty01": {
+                      "type": "number"
+                    },
+                    "bidQtty02": {
+                      "type": "number"
+                    },
+                    "bidQtty03": {
+                      "type": "number"
+                    },
+                    "offerPrice01": {
+                      "type": "number"
+                    },
+                    "offerPrice02": {
+                      "type": "number"
+                    },
+                    "offerPrice03": {
+                      "type": "number"
+                    },
+                    "offerQtty01": {
+                      "type": "number"
+                    },
+                    "offerQtty02": {
+                      "type": "number"
+                    },
+                    "offerQtty03": {
+                      "type": "number"
+                    },
+                    "matchPrice": {
+                      "type": "number"
+                    },
+                    "matchQtty": {
+                      "type": "number"
+                    },
+                    "change": {
+                      "type": "number"
+                    },
+                    "changePercent": {
+                      "type": "number"
+                    },
+                    "open": {
+                      "type": "number"
+                    },
+                    "high": {
+                      "type": "number"
+                    },
+                    "low": {
+                      "type": "number"
+                    },
+                    "totalVol": {
+                      "type": "number"
+                    },
+                    "openVol": {
+                      "type": "number"
+                    },
+                    "buyForeignQtty": {
+                      "type": "number"
+                    },
+                    "sellForeignQtty": {
+                      "type": "number"
+                    },
+                    "expiryDate": {
+                      "type": "string"
+                    },
+                    "avg": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

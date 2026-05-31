@@ -13,6 +13,142 @@ http:
       type: path
       description: Số tiểu khoản
   auth: inherit
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "object": {
+                "type": "string"
+              },
+              "totalCount": {
+                "type": "number"
+              },
+              "pageSize": {
+                "type": "number"
+              },
+              "pageIndex": {
+                "type": "number"
+              },
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "object": {
+                      "type": "string"
+                    },
+                    "iaInfos": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "partner": {
+                            "type": "string"
+                          },
+                          "available": {
+                            "type": "number"
+                          },
+                          "hold": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "pp0forBF": {
+                      "type": "number"
+                    },
+                    "bankAvlBalanceBF": {
+                      "type": "number"
+                    },
+                    "bodBalance": {
+                      "type": "number"
+                    },
+                    "cashBalance": {
+                      "type": "number"
+                    },
+                    "accountNo": {
+                      "type": "string"
+                    },
+                    "custodyID": {
+                      "type": "string"
+                    },
+                    "fullName": {
+                      "type": "string"
+                    },
+                    "balance": {
+                      "type": "number"
+                    },
+                    "avlAdvanceAmount": {
+                      "type": "number"
+                    },
+                    "buyingAmount": {
+                      "type": "number"
+                    },
+                    "blockAmount": {
+                      "type": "number"
+                    },
+                    "cashDevident": {
+                      "type": "number"
+                    },
+                    "bankAvlBalance": {
+                      "type": "number"
+                    },
+                    "bankBlockAmount": {
+                      "type": "number"
+                    },
+                    "avlWithdraw": {
+                      "type": "number"
+                    },
+                    "pp0": {
+                      "type": "number"
+                    },
+                    "secureAmtPO": {
+                      "type": "number"
+                    },
+                    "bondBlockAmount": {
+                      "type": "number"
+                    },
+                    "mBlockAmount": {
+                      "type": "number"
+                    },
+                    "fundBlockAmount": {
+                      "type": "number"
+                    },
+                    "avalBondBlockAmount": {
+                      "type": "number"
+                    },
+                    "depoFee": {
+                      "type": "number"
+                    },
+                    "bCashDividend": {
+                      "type": "number"
+                    },
+                    "sCashDividend": {
+                      "type": "number"
+                    },
+                    "dsecured": {
+                      "type": "number"
+                    },
+                    "adused": {
+                      "type": "number"
+                    },
+                    "mrused": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

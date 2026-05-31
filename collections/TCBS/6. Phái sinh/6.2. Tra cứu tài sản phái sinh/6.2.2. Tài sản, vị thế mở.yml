@@ -17,6 +17,101 @@ http:
       type: query
       description: Tiểu khoản phái sinh
   auth: inherit
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "cmd": {
+                "type": "string"
+              },
+              "rc": {
+                "type": "string"
+              },
+              "rs": {
+                "type": "string"
+              },
+              "oID": {
+                "type": "string"
+              },
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "im": {
+                      "type": "string"
+                    },
+                    "deliver": {
+                      "type": "string"
+                    },
+                    "receive": {
+                      "type": "string"
+                    },
+                    "net": {
+                      "type": "number"
+                    },
+                    "side": {
+                      "type": "string"
+                    },
+                    "account": {
+                      "type": "string"
+                    },
+                    "wasp": {
+                      "type": "number"
+                    },
+                    "wapb": {
+                      "type": "number"
+                    },
+                    "lastPrice": {
+                      "type": "number"
+                    },
+                    "imValue": {
+                      "type": "number"
+                    },
+                    "vmValue": {
+                      "type": "number"
+                    },
+                    "mrValue": {
+                      "type": "number"
+                    },
+                    "duedate": {
+                      "type": "string"
+                    },
+                    "netoffvol": {
+                      "type": "number"
+                    },
+                    "avg_remain": {
+                      "type": "number"
+                    },
+                    "vm_remain": {
+                      "type": "number"
+                    },
+                    "pc_remain": {
+                      "type": "string"
+                    },
+                    "stoploss": {
+                      "type": "string"
+                    },
+                    "takeprofit": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

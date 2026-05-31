@@ -19,6 +19,202 @@ http:
       description: Số tài khoản
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "basicInfo": {
+                "type": "object",
+                "properties": {
+                  "tcbsId": {
+                    "type": "string"
+                  },
+                  "code105C": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "depository": {
+                    "type": "string"
+                  }
+                }
+              },
+              "personalInfo": {
+                "type": "object",
+                "properties": {
+                  "fullName": {
+                    "type": "string"
+                  },
+                  "fullNameNoAccent": {
+                    "type": "string"
+                  },
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "phoneNumber": {
+                    "type": "string"
+                  },
+                  "gender": {
+                    "type": "string"
+                  },
+                  "birthday": {
+                    "type": "string"
+                  },
+                  "contactAddress": {
+                    "type": "string"
+                  },
+                  "permanentAddress": {
+                    "type": "string"
+                  },
+                  "nationality": {
+                    "type": "string"
+                  },
+                  "nationalityName": {
+                    "type": "string"
+                  },
+                  "taxIdNumber": {
+                    "type": "string"
+                  },
+                  "acronym": {
+                    "type": "string"
+                  },
+                  "createdDate": {
+                    "type": "string"
+                  },
+                  "updatedDate": {
+                    "type": "string"
+                  },
+                  "flowOpenAccount": {
+                    "type": "string"
+                  },
+                  "avatarUrl": {
+                    "type": "string"
+                  },
+                  "businessType": {
+                    "type": "string"
+                  },
+                  "ppBusinessType": {
+                    "type": "string"
+                  },
+                  "ppBusinessField": {
+                    "type": "string"
+                  },
+                  "ppBusinessTypeName": {
+                    "type": "string"
+                  },
+                  "ppBusinessFieldName": {
+                    "type": "string"
+                  },
+                  "identityCard": {
+                    "type": "object",
+                    "properties": {
+                      "object": {
+                        "type": "string"
+                      },
+                      "idNumner": {
+                        "type": "string"
+                      },
+                      "idPlace": {
+                        "type": "string"
+                      },
+                      "idDate": {
+                        "type": "string"
+                      },
+                      "expireDate": {
+                        "type": "string"
+                      },
+                      "idType": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "bankAccounts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "accountNo": {
+                      "type": "string"
+                    },
+                    "accountName": {
+                      "type": "string"
+                    },
+                    "accountNameNoAccent": {
+                      "type": "string"
+                    },
+                    "bankCode": {
+                      "type": "string"
+                    },
+                    "bankName": {
+                      "type": "string"
+                    },
+                    "branchCode": {
+                      "type": "string"
+                    },
+                    "bankType": {
+                      "type": "string"
+                    },
+                    "bankSys": {
+                      "type": "string"
+                    },
+                    "authorized": {
+                      "type": "string"
+                    },
+                    "bankAccountType": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "bankSubAccounts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "accountNo": {
+                      "type": "string"
+                    },
+                    "accountName": {
+                      "type": "string"
+                    },
+                    "accountType": {
+                      "type": "string"
+                    },
+                    "accountTypeName": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "isDefault": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

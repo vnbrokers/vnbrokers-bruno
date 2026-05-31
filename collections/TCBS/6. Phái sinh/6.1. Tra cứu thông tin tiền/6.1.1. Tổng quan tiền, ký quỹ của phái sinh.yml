@@ -25,6 +25,146 @@ http:
         - `1`: Chỉ lấy tiền
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "cmd": {
+                "type": "string"
+              },
+              "rc": {
+                "type": "string"
+              },
+              "rs": {
+                "type": "string"
+              },
+              "oID": {
+                "type": "string"
+              },
+              "data": {
+                "type": "object",
+                "properties": {
+                  "cash": {
+                    "type": "string"
+                  },
+                  "stock": {
+                    "type": "string"
+                  },
+                  "collateral": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "net": {
+                    "type": "string"
+                  },
+                  "tyle": {
+                    "type": "string"
+                  },
+                  "im": {
+                    "type": "string"
+                  },
+                  "vm": {
+                    "type": "string"
+                  },
+                  "dm": {
+                    "type": "string"
+                  },
+                  "mr": {
+                    "type": "string"
+                  },
+                  "avaiCash": {
+                    "type": "string"
+                  },
+                  "avaiColla": {
+                    "type": "string"
+                  },
+                  "vmunpay": {
+                    "type": "string"
+                  },
+                  "info": {
+                    "type": "string"
+                  },
+                  "color": {
+                    "type": "string"
+                  },
+                  "vm_eod": {
+                    "type": "string"
+                  },
+                  "others": {
+                    "type": "string"
+                  },
+                  "tax": {
+                    "type": "string"
+                  },
+                  "feeCTCK": {
+                    "type": "string"
+                  },
+                  "feeHNX": {
+                    "type": "string"
+                  },
+                  "cashWithdraw": {
+                    "type": "string"
+                  },
+                  "tienbosung": {
+                    "type": "string"
+                  },
+                  "cashavaiwithdraw": {
+                    "type": "string"
+                  },
+                  "assets": {
+                    "type": "string"
+                  },
+                  "nav": {
+                    "type": "string"
+                  },
+                  "cashOut": {
+                    "type": "string"
+                  },
+                  "unrelizeVM": {
+                    "type": "string"
+                  },
+                  "feePos": {
+                    "type": "string"
+                  },
+                  "feeMan": {
+                    "type": "string"
+                  },
+                  "product": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "debt": {
+                    "type": "string"
+                  },
+                  "w1": {
+                    "type": "string"
+                  },
+                  "w2": {
+                    "type": "string"
+                  },
+                  "limit": {
+                    "type": "string"
+                  },
+                  "package": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

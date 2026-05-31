@@ -28,6 +28,80 @@ http:
       description: Chỉ số đầu để phân trang ngược
       disabled: true
   auth: inherit
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "page": {
+                "type": "number"
+              },
+              "size": {
+                "type": "number"
+              },
+              "headIndex": {
+                "type": "number"
+              },
+              "numberOfItems": {
+                "type": "number"
+              },
+              "total": {
+                "type": "number"
+              },
+              "ticker": {
+                "type": "string"
+              },
+              "d": {
+                "type": "string"
+              },
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "p": {
+                      "type": "number"
+                    },
+                    "v": {
+                      "type": "number"
+                    },
+                    "cp": {
+                      "type": "number"
+                    },
+                    "rcp": {
+                      "type": "number"
+                    },
+                    "a": {
+                      "type": "string"
+                    },
+                    "ba": {
+                      "type": "number"
+                    },
+                    "sa": {
+                      "type": "number"
+                    },
+                    "hl": {
+                      "type": "string"
+                    },
+                    "pcp": {
+                      "type": "number"
+                    },
+                    "t": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

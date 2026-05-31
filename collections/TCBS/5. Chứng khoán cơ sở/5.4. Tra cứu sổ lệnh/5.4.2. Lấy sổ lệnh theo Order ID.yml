@@ -17,6 +17,146 @@ http:
       type: path
       description: Order ID
   auth: inherit
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "object": {
+                "type": "string"
+              },
+              "pageSize": {
+                "type": "string"
+              },
+              "pageIndex": {
+                "type": "string"
+              },
+              "totalCount": {
+                "type": "number"
+              },
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "object": {
+                      "type": "string"
+                    },
+                    "accountNo": {
+                      "type": "string"
+                    },
+                    "orderID": {
+                      "type": "string"
+                    },
+                    "execType": {
+                      "type": "string"
+                    },
+                    "orderQtty": {
+                      "type": "string"
+                    },
+                    "execQtty": {
+                      "type": "string"
+                    },
+                    "codeID": {
+                      "type": "string"
+                    },
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "priceType": {
+                      "type": "string"
+                    },
+                    "txtime": {
+                      "type": "string"
+                    },
+                    "txdate": {
+                      "type": "string"
+                    },
+                    "expDate": {
+                      "type": "string"
+                    },
+                    "timeType": {
+                      "type": "string"
+                    },
+                    "orStatus": {
+                      "type": "string"
+                    },
+                    "feeAcr": {
+                      "type": "string"
+                    },
+                    "limitPrice": {
+                      "type": "string"
+                    },
+                    "cancelQtty": {
+                      "type": "string"
+                    },
+                    "remainQtty": {
+                      "type": "string"
+                    },
+                    "via": {
+                      "type": "string"
+                    },
+                    "quotePrice": {
+                      "type": "string"
+                    },
+                    "matchPrice": {
+                      "type": "string"
+                    },
+                    "tradePlace": {
+                      "type": "string"
+                    },
+                    "matchType": {
+                      "type": "string"
+                    },
+                    "isDisposal": {
+                      "type": "string"
+                    },
+                    "isCancel": {
+                      "type": "string"
+                    },
+                    "isAmend": {
+                      "type": "string"
+                    },
+                    "userName": {
+                      "type": "string"
+                    },
+                    "orsOrderID": {
+                      "type": "string"
+                    },
+                    "sectype": {
+                      "type": "string"
+                    },
+                    "isFOOrder": {
+                      "type": "string"
+                    },
+                    "odTimeStamp": {
+                      "type": "string"
+                    },
+                    "matchAmount": {
+                      "type": "number"
+                    },
+                    "mmType": {
+                      "type": "string"
+                    },
+                    "bRatio": {
+                      "type": "number"
+                    },
+                    "taxSellAmout": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

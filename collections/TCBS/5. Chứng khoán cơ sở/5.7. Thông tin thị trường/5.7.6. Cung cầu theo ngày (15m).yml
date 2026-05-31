@@ -36,6 +36,59 @@ http:
         - all (Tất cả loại nhà đầu tư)
       disabled: true
   auth: inherit
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "ticker": {
+                "type": "string"
+              },
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "bu": {
+                      "type": "number"
+                    },
+                    "bms": {
+                      "type": "number"
+                    },
+                    "bup": {
+                      "type": "number"
+                    },
+                    "sd": {
+                      "type": "number"
+                    },
+                    "sms": {
+                      "type": "number"
+                    },
+                    "sdp": {
+                      "type": "number"
+                    },
+                    "bsr": {
+                      "type": "number"
+                    },
+                    "t": {
+                      "type": "string"
+                    },
+                    "s": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

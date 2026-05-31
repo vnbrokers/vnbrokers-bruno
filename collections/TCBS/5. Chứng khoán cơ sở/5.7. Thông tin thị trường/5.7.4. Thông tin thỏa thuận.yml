@@ -14,6 +14,111 @@ http:
       description: "Rổ chứng khoán: \n- `1`: Hose\n- `2`: HNX\n- `3`: Upcom\n"
       disabled: true
   auth: inherit
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "buyAdv": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": "number"
+                    },
+                    "vol": {
+                      "type": "number"
+                    },
+                    "time": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "number"
+                    },
+                    "color": {
+                      "type": "number"
+                    },
+                    "orderId": {
+                      "type": "string"
+                    },
+                    "side": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "sellAdv": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": "number"
+                    },
+                    "vol": {
+                      "type": "number"
+                    },
+                    "time": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "number"
+                    },
+                    "color": {
+                      "type": "number"
+                    },
+                    "orderId": {
+                      "type": "string"
+                    },
+                    "side": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "match": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": "number"
+                    },
+                    "vol": {
+                      "type": "number"
+                    },
+                    "val": {
+                      "type": "number"
+                    },
+                    "time": {
+                      "type": "string"
+                    },
+                    "accumulatedValue": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

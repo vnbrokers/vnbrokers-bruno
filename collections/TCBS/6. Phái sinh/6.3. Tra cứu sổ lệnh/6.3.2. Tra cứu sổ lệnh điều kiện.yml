@@ -51,6 +51,110 @@ http:
         - `VN30F2303,B`: Lọc theo mã
         - `ALL,B`: Lọc theo L/S
   auth: inherit
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "cmd": {
+                "type": "string"
+              },
+              "rc": {
+                "type": "string"
+              },
+              "rs": {
+                "type": "string"
+              },
+              "oID": {
+                "type": "string"
+              },
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "orderNo": {
+                      "type": "string"
+                    },
+                    "groupOrder": {
+                      "type": "string"
+                    },
+                    "pk_orderNo": {
+                      "type": "string"
+                    },
+                    "accountCode": {
+                      "type": "string"
+                    },
+                    "side": {
+                      "type": "string"
+                    },
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "showPrice": {
+                      "type": "string"
+                    },
+                    "volume": {
+                      "type": "string"
+                    },
+                    "condition": {
+                      "type": "string"
+                    },
+                    "result": {
+                      "type": "string"
+                    },
+                    "active_time": {
+                      "type": "string"
+                    },
+                    "send_time": {
+                      "type": "string"
+                    },
+                    "cancel_time": {
+                      "type": "string"
+                    },
+                    "group": {
+                      "type": "string"
+                    },
+                    "channel": {
+                      "type": "string"
+                    },
+                    "maxPrice": {
+                      "type": "string"
+                    },
+                    "soPrice": {
+                      "type": "string"
+                    },
+                    "orderType": {
+                      "type": "string"
+                    },
+                    "from_time": {
+                      "type": "string"
+                    },
+                    "exp_time": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "string"
+                    },
+                    "notes": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

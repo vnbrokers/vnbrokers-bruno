@@ -13,6 +13,113 @@ http:
       type: path
       description: Số tiểu khoản
   auth: inherit
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "object": {
+                "type": "string"
+              },
+              "accountNo": {
+                "type": "string"
+              },
+              "custodyID": {
+                "type": "string"
+              },
+              "fullName": {
+                "type": "string"
+              },
+              "stock": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "secType": {
+                      "type": "string"
+                    },
+                    "secTypeName": {
+                      "type": "string"
+                    },
+                    "availableTrading": {
+                      "type": "string"
+                    },
+                    "mortgaged": {
+                      "type": "number"
+                    },
+                    "t0": {
+                      "type": "number"
+                    },
+                    "t1": {
+                      "type": "number"
+                    },
+                    "t2": {
+                      "type": "number"
+                    },
+                    "blocked": {
+                      "type": "number"
+                    },
+                    "securedQuantity": {
+                      "type": "number"
+                    },
+                    "sellRemain": {
+                      "type": "number"
+                    },
+                    "exercisedCA": {
+                      "type": "number"
+                    },
+                    "unexercisedCA": {
+                      "type": "number"
+                    },
+                    "stockDividend": {
+                      "type": "number"
+                    },
+                    "cashDividend": {
+                      "type": "number"
+                    },
+                    "waitForTrade": {
+                      "type": "number"
+                    },
+                    "waitForTransfer": {
+                      "type": "number"
+                    },
+                    "waitForWithdraw": {
+                      "type": "number"
+                    },
+                    "currentPrice": {
+                      "type": "number"
+                    },
+                    "costPrice": {
+                      "type": "number"
+                    },
+                    "sellExec": {
+                      "type": "number"
+                    },
+                    "onHold": {
+                      "type": "number"
+                    },
+                    "totalQtty": {
+                      "type": "number"
+                    },
+                    "settlement": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

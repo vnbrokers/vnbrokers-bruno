@@ -14,6 +14,119 @@ http:
       description: "Rổ chứng khoán: \n- `1`: Hose\n- `2`: VN30\n- `3`: HNX\n- `4`. HNX30\n- `5`: Upcom\n- `10`:Midcap\n- `11`:Vn100\n- `12`:Vnallshare\n- `13`:VNsmallcap\n- `14`:VNxallshare\n- `15`:Vn50\n- `16`:Vnsi\n"
       disabled: true
   auth: inherit
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "ceilPrice": {
+                      "type": "number"
+                    },
+                    "floorPrice": {
+                      "type": "number"
+                    },
+                    "refPrice": {
+                      "type": "number"
+                    },
+                    "bidPrice01": {
+                      "type": "number"
+                    },
+                    "bidPrice02": {
+                      "type": "number"
+                    },
+                    "bidPrice03": {
+                      "type": "number"
+                    },
+                    "bidQtty01": {
+                      "type": "number"
+                    },
+                    "bidQtty02": {
+                      "type": "number"
+                    },
+                    "bidQtty03": {
+                      "type": "number"
+                    },
+                    "offerPrice01": {
+                      "type": "number"
+                    },
+                    "offerPrice02": {
+                      "type": "number"
+                    },
+                    "offerPrice03": {
+                      "type": "number"
+                    },
+                    "offerQtty01": {
+                      "type": "number"
+                    },
+                    "offerQtty02": {
+                      "type": "number"
+                    },
+                    "offerQtty03": {
+                      "type": "number"
+                    },
+                    "matchPrice": {
+                      "type": "number"
+                    },
+                    "matchQtty": {
+                      "type": "number"
+                    },
+                    "change": {
+                      "type": "number"
+                    },
+                    "changePercent": {
+                      "type": "number"
+                    },
+                    "open": {
+                      "type": "number"
+                    },
+                    "high": {
+                      "type": "number"
+                    },
+                    "low": {
+                      "type": "number"
+                    },
+                    "totalVolume": {
+                      "type": "number"
+                    },
+                    "totalValue": {
+                      "type": "number"
+                    },
+                    "buyForeignQtty": {
+                      "type": "number"
+                    },
+                    "sellForeignQtty": {
+                      "type": "number"
+                    },
+                    "room": {
+                      "type": "string"
+                    },
+                    "avg": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "tradingDate": {
+                "type": "string"
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

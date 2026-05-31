@@ -30,6 +30,68 @@ http:
       disabled: true
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "response": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "remainingInterestFee": {
+                      "type": "number"
+                    },
+                    "releasedDay": {
+                      "type": "number"
+                    },
+                    "printAmount": {
+                      "type": "string"
+                    },
+                    "paidInterestFee": {
+                      "type": "number"
+                    },
+                    "intAmount": {
+                      "type": "string"
+                    },
+                    "releaseDate": {
+                      "type": "string"
+                    },
+                    "rate2": {
+                      "type": "number"
+                    },
+                    "overDueDate": {
+                      "type": "string"
+                    },
+                    "paidFee": {
+                      "type": "number"
+                    },
+                    "releasedAmount": {
+                      "type": "number"
+                    },
+                    "remainingFee": {
+                      "type": "number"
+                    },
+                    "intPaid": {
+                      "type": "number"
+                    },
+                    "prinPaid": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0
