@@ -12,6 +12,53 @@ http:
       type: query
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "total": {
+                "type": "number"
+              },
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "investorId": {
+                      "type": "string"
+                    },
+                    "investorAccountId": {
+                      "type": "number"
+                    },
+                    "cutLossRate": {
+                      "type": "number"
+                    },
+                    "trailingEnabled": {
+                      "type": "boolean"
+                    },
+                    "createdDate": {
+                      "type": "string"
+                    },
+                    "modifiedDate": {
+                      "type": "string"
+                    },
+                    "maxCutLossRate": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

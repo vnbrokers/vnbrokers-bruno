@@ -40,6 +40,49 @@ runtime:
     - name: type
       value: STOP
 
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "investorId": {
+                "type": "string"
+              },
+              "investorAccountId": {
+                "type": "number"
+              },
+              "bankMarginPortfolioId": {
+                "type": "number"
+              },
+              "symbol": {
+                "type": "string"
+              },
+              "condition": {
+                "type": "string"
+              },
+              "targetPrice": {
+                "type": "number"
+              },
+              "targetSide": {
+                "type": "string"
+              },
+              "targetQuantity": {
+                "type": "number"
+              },
+              "type": {
+                "type": "string"
+              },
+              "expiredTime": {
+                "type": "string"
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
 settings:
   encodeUrl: true
   timeout: 0

@@ -27,6 +27,134 @@ http:
       disabled: true
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "side": {
+                      "type": "string"
+                    },
+                    "investorId": {
+                      "type": "number"
+                    },
+                    "investorAccountId": {
+                      "type": "number"
+                    },
+                    "bankId": {
+                      "type": "number"
+                    },
+                    "bankAccountId": {
+                      "type": "number"
+                    },
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": "number"
+                    },
+                    "quantity": {
+                      "type": "number"
+                    },
+                    "orderType": {
+                      "type": "string"
+                    },
+                    "orderStatus": {
+                      "type": "string"
+                    },
+                    "fillQuantity": {
+                      "type": "number"
+                    },
+                    "lastQuantity": {
+                      "type": "number"
+                    },
+                    "lastPrice": {
+                      "type": "number"
+                    },
+                    "averagePrice": {
+                      "type": "number"
+                    },
+                    "createdDate": {
+                      "type": "string"
+                    },
+                    "modifiedDate": {
+                      "type": "string"
+                    },
+                    "bankMarginPortfolioId": {
+                      "type": "number"
+                    },
+                    "dealId": {
+                      "type": "number"
+                    },
+                    "tradingFee": {
+                      "type": "number"
+                    },
+                    "tradingTax": {
+                      "type": "number"
+                    },
+                    "orderSecure": {
+                      "type": "number"
+                    },
+                    "priceSecure": {
+                      "type": "number"
+                    },
+                    "marginRate": {
+                      "type": "number"
+                    },
+                    "quantitySecure": {
+                      "type": "number"
+                    },
+                    "leavesQuantity": {
+                      "type": "number"
+                    },
+                    "externalId": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "maker": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "number"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "fillValue": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "total": {
+                "type": "number"
+              },
+              "start": {
+                "type": "number"
+              },
+              "end": {
+                "type": "number"
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

@@ -34,6 +34,37 @@ runtime:
       value: "0.07"
       disabled: true
 
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "cutLossRate": {
+                "type": "number"
+              },
+              "investorAccountId": {
+                "type": "number"
+              },
+              "trailingEnabled": {
+                "type": "boolean"
+              },
+              "investorId": {
+                "type": "number"
+              },
+              "autoIncreaseDealRate": {
+                "type": "boolean"
+              },
+              "enableAutoDealDepositNoti": {
+                "type": "boolean"
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
 settings:
   encodeUrl: true
   timeout: 0

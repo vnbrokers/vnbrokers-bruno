@@ -27,6 +27,302 @@ http:
       disabled: true
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "bankId": {
+                      "type": "number"
+                    },
+                    "bankAccountId": {
+                      "type": "number"
+                    },
+                    "investorId": {
+                      "type": "number"
+                    },
+                    "investorAccountId": {
+                      "type": "number"
+                    },
+                    "bankMarginPortfolioId": {
+                      "type": "number"
+                    },
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "side": {
+                      "type": "string"
+                    },
+                    "positionCostPrice": {
+                      "type": "number"
+                    },
+                    "stockClosePrice": {
+                      "type": "number"
+                    },
+                    "averageCostPrice": {
+                      "type": "number"
+                    },
+                    "averageClosedPrice": {
+                      "type": "number"
+                    },
+                    "adjustedCostPrice": {
+                      "type": "number"
+                    },
+                    "openQuantity": {
+                      "type": "number"
+                    },
+                    "closedQuantity": {
+                      "type": "number"
+                    },
+                    "initialQuantity": {
+                      "type": "number"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "currentMarginRate": {
+                      "type": "number"
+                    },
+                    "cash": {
+                      "type": "number"
+                    },
+                    "cashSecure": {
+                      "type": "number"
+                    },
+                    "receivable": {
+                      "type": "number"
+                    },
+                    "loan": {
+                      "type": "number"
+                    },
+                    "secure": {
+                      "type": "number"
+                    },
+                    "additionalSecure": {
+                      "type": "number"
+                    },
+                    "interest": {
+                      "type": "number"
+                    },
+                    "totalDebt": {
+                      "type": "number"
+                    },
+                    "tradingFeeAmount": {
+                      "type": "number"
+                    },
+                    "marginExcessAmount": {
+                      "type": "number"
+                    },
+                    "marginCallAmount": {
+                      "type": "number"
+                    },
+                    "sellingTaxAmount": {
+                      "type": "number"
+                    },
+                    "moneyAdvanceFeeAmount": {
+                      "type": "number"
+                    },
+                    "moneyAdvanceAmount": {
+                      "type": "number"
+                    },
+                    "stockBorrowFee": {
+                      "type": "number"
+                    },
+                    "positionRealizedProfit": {
+                      "type": "number"
+                    },
+                    "lastRealizedProfit": {
+                      "type": "number"
+                    },
+                    "positionUnrealizedProfit": {
+                      "type": "number"
+                    },
+                    "receivedQuantity": {
+                      "type": "number"
+                    },
+                    "positionType": {
+                      "type": "number"
+                    },
+                    "createdDate": {
+                      "type": "string"
+                    },
+                    "modifiedDate": {
+                      "type": "string"
+                    },
+                    "investorSettlementAmount": {
+                      "type": "number"
+                    },
+                    "bankSettlementAmount": {
+                      "type": "number"
+                    },
+                    "sourDebtPayment": {
+                      "type": "number"
+                    },
+                    "tradingTaxAmount": {
+                      "type": "number"
+                    },
+                    "closedPositionFeeAmount": {
+                      "type": "number"
+                    },
+                    "netProfit": {
+                      "type": "number"
+                    },
+                    "unrealizedTotalTaxAndFee": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "assetManagementOvernightFeeAmount": {
+                      "type": "number"
+                    },
+                    "unrealizedTradingTaxFactor": {
+                      "type": "number"
+                    },
+                    "accumulatedSecure": {
+                      "type": "number"
+                    },
+                    "breakEvenPrice": {
+                      "type": "number"
+                    },
+                    "collectedInterestAndFee": {
+                      "type": "number"
+                    },
+                    "releasedSecureAndProfit": {
+                      "type": "number"
+                    },
+                    "dailyReleasedSecureAndProfit": {
+                      "type": "number"
+                    },
+                    "dailyReleasedNetProfit": {
+                      "type": "number"
+                    },
+                    "totalInterestAndFeeWithoutClosingTax": {
+                      "type": "number"
+                    },
+                    "orderIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "totalInterestAndFee": {
+                      "type": "number"
+                    },
+                    "coInvestTax": {
+                      "type": "number"
+                    },
+                    "fixedNetProfit": {
+                      "type": "number"
+                    },
+                    "overdueInterestRate": {
+                      "type": "number"
+                    },
+                    "dailyStockBorrowFee": {
+                      "type": "number"
+                    },
+                    "companySecureRate": {
+                      "type": "number"
+                    },
+                    "closedPositionFee": {
+                      "type": "number"
+                    },
+                    "moneyAdvanceRate": {
+                      "type": "number"
+                    },
+                    "assetManagementOvernightFee": {
+                      "type": "number"
+                    },
+                    "overnightRate": {
+                      "type": "number"
+                    },
+                    "sellingTaxRate": {
+                      "type": "number"
+                    },
+                    "bankSecureRate": {
+                      "type": "number"
+                    },
+                    "vsdSecureRate": {
+                      "type": "number"
+                    },
+                    "tradingTaxRate": {
+                      "type": "number"
+                    },
+                    "coInvestTaxRate": {
+                      "type": "number"
+                    },
+                    "settled": {
+                      "type": "boolean"
+                    },
+                    "remainingTradeableQuantity": {
+                      "type": "number"
+                    },
+                    "marginStatus": {
+                      "type": "string"
+                    },
+                    "totalFee": {
+                      "type": "number"
+                    },
+                    "netProfitRate": {
+                      "type": "number"
+                    },
+                    "initialMarginRate": {
+                      "type": "number"
+                    },
+                    "interestRate": {
+                      "type": "number"
+                    },
+                    "tradingFeeRate": {
+                      "type": "number"
+                    },
+                    "marginRate": {
+                      "type": "number"
+                    },
+                    "maintenanceRate": {
+                      "type": "number"
+                    },
+                    "additionalRate": {
+                      "type": "number"
+                    },
+                    "liquidateMarginRate": {
+                      "type": "number"
+                    },
+                    "closed": {
+                      "type": "boolean"
+                    },
+                    "state": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "total": {
+                "type": "number"
+              },
+              "start": {
+                "type": "number"
+              },
+              "end": {
+                "type": "number"
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

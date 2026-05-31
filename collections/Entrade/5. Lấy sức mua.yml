@@ -29,6 +29,49 @@ runtime:
     - type: after-response
       code: res.status === 200 && bru.setEnvVar("qmax", res.body.qmax)
 
+
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "investorId": {
+                "type": "number"
+              },
+              "investorAccountId": {
+                "type": "number"
+              },
+              "bankMarginPortfolioId": {
+                "type": "number"
+              },
+              "symbol": {
+                "type": "string"
+              },
+              "price": {
+                "type": "number"
+              },
+              "ppse": {
+                "type": "number"
+              },
+              "qmax": {
+                "type": "number"
+              },
+              "side": {
+                "type": "string"
+              },
+              "dealId": {
+                "type": "number"
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
 settings:
   encodeUrl: true
   timeout: 0
