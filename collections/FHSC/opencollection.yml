@@ -1,0 +1,20 @@
+opencollection: 1.0.0
+
+info:
+  name: Finhay OpenAPI
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
+
+request:
+  headers:
+    - name: Content-Type
+      value: application/json
