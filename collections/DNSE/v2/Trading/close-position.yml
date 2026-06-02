@@ -8,7 +8,7 @@ http:
   url: "{{baseUrl}}/accounts/positions/:positionId/close?marketType=DERIVATIVE"
   headers:
     - name: trading-token
-      value: "{{TRADING_TOKEN}}"
+      value: "{{tradingToken}}"
   params:
     - name: marketType
       value: DERIVATIVE

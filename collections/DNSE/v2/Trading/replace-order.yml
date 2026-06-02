@@ -8,7 +8,7 @@ http:
   url: "{{baseUrl}}/accounts/:accountNo/orders/:orderId?marketType=STOCK&orderCategory=NORMAL"
   headers:
     - name: trading-token
-      value: "{{TRADING_TOKEN}}"
+      value: "{{tradingToken}}"
   params:
     - name: marketType
       value: STOCK
@@ -22,13 +22,23 @@ http:
     - name: orderId
       value: "{{orderId}}"
       type: path
+  body:
+    type: json
+    data: |-
+      {
+        "price": {{price}},
+        "quantity": {{quantity}}
+      }
   auth: inherit
 
 runtime:
   variables:
     - name: orderId
       value: "1"
-
+    - name: price
+      value: "10000"
+    - name: quantity
+      value: "1"
   scripts:
     - type: tests
       code: |-
@@ -88,6 +98,7 @@ runtime:
 
           res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
         });
+
 settings:
   encodeUrl: true
   timeout: 0
@@ -108,7 +119,7 @@ examples:
         - name: trading-token
           value: "{{tradingToken}}"
         - name: version
-          value: "2026-05-07"
+          value: 2026-05-07
       params:
         - name: marketType
           value: DERIVATIVE
@@ -155,7 +166,7 @@ examples:
         - name: trading-token
           value: "{{tradingToken}}"
         - name: version
-          value: "2026-05-07"
+          value: 2026-05-07
       params:
         - name: marketType
           value: ""
@@ -190,7 +201,7 @@ examples:
         - name: trading-token
           value: "{{tradingToken}}"
         - name: version
-          value: "2026-05-07"
+          value: 2026-05-07
       params:
         - name: marketType
           value: DERIVATIVE
