@@ -29,6 +29,9 @@ runtime:
                     "fullName": {
                       "type": "string"
                     },
+                    "investorId": {
+                      "type": "string"
+                    },
                     "custodyCode": {
                       "type": "string"
                     },
@@ -116,6 +119,7 @@ examples:
               {
                 "accountNo": "0335000633",
                 "fullName": "Hoang Tu Mai",
+                "investorId": "1000009250",
                 "custodyCode": "064C1MAI20",
                 "underlyingNav": 21345678901,
                 "derivativeNav": 32789123456,
@@ -213,6 +217,7 @@ docs: |-
   |» careBy|[object]|false|none|none|
   |»» accountNo|string|false|none|Số tiểu khoản khách hàng|
   |»» fullName|string|false|none|Họ tên khách hàng|
+  |»» investorId|string|false|none|Mã định danh khách hàng tại DNSE|
   |»» custodyCode|string|false|none|Số lưu ký tài khoản khách hàng|
   |»» underlyingNav|number(double)|false|none|Tài sản ròng cơ sở|
   |»» derivativeNav|number(double)|false|none|Tài sản phái sinh|

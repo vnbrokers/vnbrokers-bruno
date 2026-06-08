@@ -1,0 +1,287 @@
+info:
+  name: Cấu hình chốt lời, cắt lỗ của vị thế
+  type: http
+  seq: 10
+
+http:
+  method: GET
+  url: "{{baseUrl}}/accounts/positions/:positionId/pnl-configs?marketType=DERIVATIVE"
+  params:
+    - name: marketType
+      value: DERIVATIVE
+      type: query
+    - name: positionId
+      value: "{{positionId}}"
+      type: path
+  auth: inherit
+
+runtime:
+  variables:
+    - name: positionId
+      value: "177952229647243"
+
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetPnlConfigsPositionResponse",
+            "type": "object",
+            "properties": {
+              "accountNo": {
+                "type": "string"
+              },
+              "positionId": {
+                "type": "integer"
+              },
+              "configs": {
+                "type": "object",
+                "properties": {
+                  "takeProfit": {
+                    "type": "object",
+                    "properties": {
+                      "enabled": {
+                        "type": "boolean"
+                      },
+                      "strategy": {
+                        "type": "string"
+                      },
+                      "rate": {
+                        "type": "number"
+                      },
+                      "deltaPrice": {
+                        "type": "number"
+                      },
+                      "orderMethod": {
+                        "type": "string"
+                      },
+                      "orderDeltaPrice": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "stopLoss": {
+                    "type": "object",
+                    "properties": {
+                      "enabled": {
+                        "type": "boolean"
+                      },
+                      "strategy": {
+                        "type": "string"
+                      },
+                      "rate": {
+                        "type": "number"
+                      },
+                      "deltaPrice": {
+                        "type": "number"
+                      },
+                      "orderMethod": {
+                        "type": "string"
+                      },
+                      "orderDeltaPrice": {
+                        "type": "number"
+                      },
+                      "trailingEnabled": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              },
+              "createdDate": {
+                "type": "string"
+              },
+              "modifiedDate": {
+                "type": "string"
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công - trả về cấu hình chốt lời, cắt lỗ của vị thế
+    request:
+      url: "{{baseUrl}}/accounts/positions/{{positionId}}/pnl-configs"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
+      params:
+        - name: marketType
+          value: DERIVATIVE
+          type: query
+        - name: positionId
+          value: ""
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "accountNo": "0001179019",
+            "positionId": 177952229647243,
+            "configs": {
+              "takeProfit": {
+                "enabled": true,
+                "strategy": "DELTA_PRICE",
+                "rate": 0.52,
+                "deltaPrice": 162.8,
+                "orderMethod": "FASTEST",
+                "orderDeltaPrice": 2
+              },
+              "stopLoss": {
+                "enabled": true,
+                "strategy": "PNL_RATE",
+                "rate": -0.34,
+                "deltaPrice": 50.3,
+                "orderMethod": "DELTA_PRICE",
+                "orderDeltaPrice": 10.5,
+                "trailingEnabled": true
+              }
+            },
+            "createdDate": "2026-06-02T02:47:36.384761Z",
+            "modifiedDate": "2026-06-03T07:52:08.00923505Z"
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{baseUrl}}/accounts/positions/{{positionId}}/pnl-configs"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
+      params:
+        - name: marketType
+          value: ""
+          type: query
+        - name: positionId
+          value: ""
+          type: path
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/accounts/positions/{{positionId}}/pnl-configs"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: "2026-05-07"
+      params:
+        - name: marketType
+          value: ""
+          type: query
+        - name: positionId
+          value: ""
+          type: path
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: |-
+  Lấy cấu hình chốt lời, cắt lỗ của vị thế đang nắm giữ theo `positionId.`
+
+  <h3 id="getpnlconfigsposition-parameters">Parameters</h3>
+
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |marketType|query|string|true|Loại thị trường |
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
+  |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
+  |version|header|string|false|Phiên bản API |
+  |positionId|path|integer|true|Id vị thế |
+
+  #### Detailed descriptions
+
+  **marketType**: Loại thị trường
+  - STOCK: Deal cơ sở
+  - DERIVATIVE: Deal phái sinh
+  Hiện tại chỉ hỗ trợ phái sinh
+
+  <h3 id="getpnlconfigsposition-responseschema">Response Schema</h3>
+
+  Status Code **200**
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» accountNo|string|false|none|Số tiểu khoản chứng khoán|
+  |» positionId|integer(int64)|false|none|ID vị thế|
+  |» configs|object|false|none|Cấu hình chốt lời và cắt lỗ của vị thế|
+  |»» takeProfit|object|false|none|Cấu hình chốt lời (Take Profit)|
+  |»»» enabled|boolean|false|none|Bật/tắt chức năng chốt lời|
+  |»»» strategy|string|false|none|Chiến lược kích hoạt chốt lời<br>- PNL_RATE: Kích hoạt theo tỷ lệ %<br>- DELTA_PRICE: Kích hoạt theo mức chênh lệch giá|
+  |»»» rate|number(double)|false|none|Tỷ lệ % so với giá hòa vốn, dùng để kích hoạt chốt lời khi strategy = PNL_RATE. Giá trị phải lớn hơn 0|
+  |»»» deltaPrice|number(double)|false|none|Mức chênh lệch giá so với giá hòa vốn, dùng để kích hoạt chốt lời khi strategy = DELTA_PRICE. Giá trị phải lớn hơn 0|
+  |»»» orderMethod|string|false|none|Phương thức đặt lệnh khi điều kiện chốt lời được kích hoạt.<br>- FASTEST: Lệnh khớp ngay với giá đặt là giá trần/sàn tùy theo chiều vị thế Bán/Mua<br>- DELTA_PRICE: Lệnh đặt theo biên độ giá so với giá kích hoạt|
+  |»»» orderDeltaPrice|integer(int32)|false|none|Biên độ giá đặt lệnh khi orderMethod = DELTA_PRICE. Bằng 0 khi orderMethod = FASTEST|
+  |»» stopLoss|object|false|none|Cấu hình cắt lỗ (Stop Loss)|
+  |»»» enabled|boolean|false|none|Bật/tắt chức năng cắt lỗ|
+  |»»» strategy|string|false|none|Chiến lược kích hoạt cắt lỗ<br>- PNL_RATE: Kích hoạt theo tỷ lệ %<br>- DELTA_PRICE: Kích hoạt theo mức chênh lệch giá.|
+  |»»» rate|number(double)|false|none|Tỷ lệ % so với giá hòa vốn, dùng để kích hoạt chốt lời khi strategy = PNL_RATE. Giá trị hợp lệ trong khoảng [-1.0, 0)|
+  |»»» deltaPrice|number(double)|false|none|Mức chênh lệch giá so với giá hòa vốn, dùng để kích hoạt chốt lời khi strategy = DELTA_PRICE. Giá trị phải lớn hơn 0|
+  |»»» orderMethod|string|false|none|Phương thức đặt lệnh khi điều kiện chốt lời được kích hoạt.<br>- FASTEST: Lệnh khớp ngay với giá đặt là giá trần/sàn tùy theo chiều vị thế Bán/Mua<br>- DELTA_PRICE: Lệnh đặt theo biên độ giá so với giá kích hoạt|
+  |»»» orderDeltaPrice|number(float)|false|none|Biên độ giá đặt lệnh khi orderMethod = DELTA_PRICE. Bằng 0 khi orderMethod = FASTEST|
+  |»»» trailingEnabled|boolean|false|none|Bật/tắt cơ chế Trailing Stop. Lưu ý cơ chế này chỉ hoạt động khi chức năng cắt lỗ được bật|
+  |» createdDate|string(date-time)|false|none|Thời điểm cấu hình được tạo|
+  |» modifiedDate|string(date-time)|false|none|Thời điểm cập nhật cấu hình gần nhất|
+
+  Status Code **400**
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» code|string|false|none|none|
+  |» message|string|false|none|none|
+  |» status|integer|false|none|none|
+
+  Status Code **500**
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» code|string|false|none|none|
+  |» message|string|false|none|none|
+  |» status|integer|false|none|none|
