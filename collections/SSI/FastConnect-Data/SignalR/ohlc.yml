@@ -36,7 +36,7 @@ docs: |-
   | # | Tên trường | Kiểu dữ liệu | Mô tả |
   |---|---|---|---|
   | 1 | Rtype | string | Có giá trị là B |
-  | 2 | TradingDate | string | Ngày giao dịch dd/MM/yyyy |
+  | 2 | TradingDate | string | Ngày giao dịch dd/mm/yyyy |
   | 3 | Time | string | Thời gian giao dịch hh:MM:ss |
   | 4 | Symbol | string | Mã chứng khoán/chỉ số |
   | 5 | Open | number | Giá mở cửa |
