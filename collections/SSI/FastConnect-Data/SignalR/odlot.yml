@@ -37,39 +37,39 @@ docs: |-
 
   | # | Tên trường | Kiểu dữ liệu | Mô tả |
   |---|---|---|---|
-  | 1 | Rtype | String | Có giá trị là OL |
-  | 2 | TradingDate | String | Ngày giao dịch theo định dạng dd/MM/yyyy |
-  | 3 | Time | Timestamp | Bao gồm Ngày và Thời gian |
-  | 4 | StockNo | Number | Mã chứng khoán dạng số |
-  | 5 | Symbol | String | Mã chứng khoán |
-  | 6 | Ceiling | Number | Giá trần |
-  | 7 | Floor | Number | Giá sàn |
-  | 8 | RefPrice | Number | Giá tham chiếu |
-  | 9 | Open | Number | Giá mở cửa |
-  | 10 | High | Number | Giá cao nhất |
-  | 11 | Low | Number | Giá thấp nhất |
-  | 12 | LastPrice | Number | Giá khớp gần nhất |
-  | 13 | LastVol | Number | Khối lượng khớp gần nhất |
-  | 14 | TotalVal | Number | Tổng giá trị giao dịch của cổ phiếu (cả lô chẵn và lẻ) |
-  | 15 | TotalVol | Number | Tổng khối lượng giao dịch của cổ phiếu |
-  | 16 | BidPrice1  | Number | Giá đặt mua tốt mức 1 |
-  | 17 | BidPrice2  | Number | Giá đặt mua tốt mức 2 |
-  | 18 | BidPrice3  | Number | Giá đặt mua tốt mức 3 |
-  | 19 | BidVol1  | Number | Khối lượng đặt mua tốt mức 1 |
-  | 20 | BidVol2  | Number | Khối lượng đặt mua tốt mức 2 |
-  | 21 | BidVol3  | Number | Khối lượng đặt mua tốt mức 3 |
-  | 22 | AskPrice1  | Number | Giá đặt bán tốt mức 1 |
-  | 23 | AskPrice2  | Number | Giá đặt bán tốt mức 2 |
-  | 24 | AskPrice3  | Number | Giá đặt bán tốt mức 3 |
-  | 25 | AskVol1  | Number | Khối lượng đặt bán tốt mức 1 |
-  | 26 | AskVol2  | Number | Khối lượng đặt bán tốt mức 2 |
-  | 27 | AskVol3 | Number | Khối lượng đặt bán tốt mức 3 |
-  | 28 | Exchange | String | Sàn giao dịch (HOSE/HNX/UPCOM) |
-  | 29 | TradingSession | String | Phiên giao dịch lô lẻ (LO/ATO/ATC/CLOSE/Break) |
-  | 30 | TradingStatus | String | Trạng thái mã chứng khoán N/H (Normal/Halt) |
-  | 31 | Change | Number | Thay đổi giá khớp gần nhất so với tham chiếu |
-  | 32 | RatioChange | Number | Phần trăm thay đổi giá khớp gần nhất so với tham chiếu |
-  | 33 | StockType | String | Loại cổ phiếu (Stock / Bond/ ETF...) |
+  | 1 | Rtype | string | Có giá trị là OL |
+  | 2 | TradingDate | string | Ngày giao dịch dd/MM/yyyy |
+  | 3 | Time | string | Thời gian giao dịch hh:MM:ss |
+  | 4 | StockNo | number | Mã chứng khoán dạng số |
+  | 5 | Symbol | string | Mã chứng khoán |
+  | 6 | Ceiling | number | Giá trần |
+  | 7 | Floor | number | Giá sàn |
+  | 8 | RefPrice | number | Giá tham chiếu |
+  | 9 | Open | number | Giá mở cửa |
+  | 10 | High | number | Giá cao nhất |
+  | 11 | Low | number | Giá thấp nhất |
+  | 12 | LastPrice | number | Giá khớp gần nhất |
+  | 13 | LastVol | number | Khối lượng khớp gần nhất |
+  | 14 | TotalVal | number | Tổng giá trị giao dịch của cổ phiếu (cả lô chẵn và lẻ) |
+  | 15 | TotalVol | number | Tổng khối lượng giao dịch của cổ phiếu |
+  | 16 | BidPrice1  | number | Giá đặt mua tốt mức 1 |
+  | 17 | BidPrice2  | number | Giá đặt mua tốt mức 2 |
+  | 18 | BidPrice3  | number | Giá đặt mua tốt mức 3 |
+  | 19 | BidVol1  | number | Khối lượng đặt mua tốt mức 1 |
+  | 20 | BidVol2  | number | Khối lượng đặt mua tốt mức 2 |
+  | 21 | BidVol3  | number | Khối lượng đặt mua tốt mức 3 |
+  | 22 | AskPrice1  | number | Giá đặt bán tốt mức 1 |
+  | 23 | AskPrice2  | number | Giá đặt bán tốt mức 2 |
+  | 24 | AskPrice3  | number | Giá đặt bán tốt mức 3 |
+  | 25 | AskVol1  | number | Khối lượng đặt bán tốt mức 1 |
+  | 26 | AskVol2  | number | Khối lượng đặt bán tốt mức 2 |
+  | 27 | AskVol3 | number | Khối lượng đặt bán tốt mức 3 |
+  | 28 | Exchange | string | Sàn giao dịch (HOSE/HNX/UPCOM) |
+  | 29 | TradingSession | string | Phiên giao dịch lô lẻ (LO/ATO/ATC/CLOSE/Break) |
+  | 30 | TradingStatus | string | Trạng thái mã chứng khoán N/H (Normal/Halt) |
+  | 31 | Change | number | Thay đổi giá khớp gần nhất so với tham chiếu |
+  | 32 | RatioChange | number | Phần trăm thay đổi giá khớp gần nhất so với tham chiếu |
+  | 33 | StockType | string | Loại cổ phiếu (Stock / Bond/ ETF...) |
 
 
   **Ví dụ**

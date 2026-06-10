@@ -39,8 +39,8 @@ docs: |-
   | 2 | IndexID | String | Index ID |
   | 3 | IndexValEst | Number | Giá dự tính Index |
   | 4 | IndexValue | Number | Giá Index |
-  | 5 | Trading Date | Date | Ngày giao dịch |
-  | 6 | Time | Timestamp | Thời gian |
+  | 5 | TradingDate | String | Ngày giao dịch theo định dạng dd/MM/yyyy |
+  | 6 | Time | String | Thời gian theo định dạng hh:MM:ss |
   | 7 | Change | Number | Thay đổi của Index |
   | 8 | RatioChange | Number | % thay đổi |
   | 9 | TotalTrade | Number | Tổng số lệnh khớp (cả thông thường và thỏa thuận) |

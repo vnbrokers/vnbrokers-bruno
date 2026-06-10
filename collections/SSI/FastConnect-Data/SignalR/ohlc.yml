@@ -35,15 +35,16 @@ docs: |-
 
   | # | Tên trường | Kiểu dữ liệu | Mô tả |
   |---|---|---|---|
-  | 1 | Rtype | String | Có giá trị là B |
-  | 2 | Time | Timestamp | Bao gồm Ngày và Thời gian |
-  | 3 | Symbol | String | Mã chứng khoán/chỉ số |
-  | 4 | Open | Number | Giá mở cửa |
-  | 5 | High | Number | Giá cao nhất |
-  | 6 | Low | Number | Giá thấp nhất |
-  | 7 | Close | Number | Giá đóng cửa |
-  | 8 | Volume | Number | Khối lượng khớp gần nhất |
-  | 9 | Value | Number | Giá trị khớp gần nhất. Tạm thời để bằng 0 |
+  | 1 | Rtype | string | Có giá trị là B |
+  | 2 | TradingDate | string | Ngày giao dịch dd/MM/yyyy |
+  | 3 | Time | string | Thời gian giao dịch hh:MM:ss |
+  | 4 | Symbol | string | Mã chứng khoán/chỉ số |
+  | 5 | Open | number | Giá mở cửa |
+  | 6 | High | number | Giá cao nhất |
+  | 7 | Low | number | Giá thấp nhất |
+  | 8 | Close | number | Giá đóng cửa |
+  | 9 | Volume | number | Khối lượng khớp gần nhất |
+  | 10 | Value | number | Giá trị khớp gần nhất. Tạm thời để bằng 0 |
 
   **Ví dụ**
 
@@ -55,7 +56,8 @@ docs: |-
    "Content": '{
    "RType":"B",
    "Symbol":"X26",
-   "TradingTime":"14:28:33",
+   "TradingDate":"14/08/2023",
+   "Time":"14:28:33",
    "Open":16000,
    "High":16000,
    "Low":16000,

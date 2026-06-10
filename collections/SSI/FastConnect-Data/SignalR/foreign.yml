@@ -34,8 +34,8 @@ docs: |-
   | # | Dữ liệu | Kiểu  | Mô tả |
   |---|---|---|---|
   | 1 | Rtype | string | Định dạng: R |
-  | 2 | TradingDate | Date | Ngày giao dịchĐịnh dạng: dd/mm/yyyy |
-  | 3 | Time | Time | Định dạng: HH:MM:SS |
+  | 2 | TradingDate | string | Ngày giao dịch dd/MM/yyyy |
+  | 3 | Time | string | Thời gian giao dịch hh:MM:ss |
   | 4 | ISIN | string | Mã ISIN |
   | 5 | Symbol | string | Mã CK |
   | 6 | TotalRoom | number | Tổng room |
