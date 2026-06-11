@@ -1,0 +1,87 @@
+info:
+  name: onBrokerOrders
+  type: websocket
+  seq: 3
+
+websocket:
+  url: "{{wsBaseUrl}}/v1/stream?encoding=json"
+  message:
+    type: json
+    data: |-
+      {
+        "action": "subscribe",
+        "channels": [
+          {
+            "name": "order.broker.STOCK.{{investorId}}.json",
+            "symbols": []
+          }
+        ]
+      }
+
+runtime:
+  variables:
+    - name: marketType
+      value: STOCK
+    - name: investorId
+      value: ""
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  ### Dữ liệu lệnh thời gian thực (Broker Order Event)
+
+  Cung cấp thông tin chi tiết về lệnh giao dịch trên tài khoản khách hàng thuộc quản lý của Môi giới. Hệ thống sẽ đẩy dữ liệu ngay khi có sự thay đổi liên quan đến: lệnh mới, thay đổi trạng thái, hoặc thay đổi giá khớp, khối lượng khớp.
+
+  #### Channel
+
+  `order.broker.{market_type}.{investor_id}.{encoding}`
+
+  - **market_type**: Phân loại thị trường
+    - `STOCK`: Lệnh giao dịch cơ sở
+    - `DERIVATIVE`: Lệnh giao dịch phái sinh
+  - **investor_id**: Mã định danh tài khoản khách hàng tại DNSE, được trả về từ endpoint Danh sách tiểu khoản quản lý (`GET /brokers/accounts/care-by`).
+  - **encoding**: Định dạng dữ liệu `msgpack` hoặc `json`.
+
+  #### Giới hạn kết nối
+
+  - Mỗi kết nối WebSocket chỉ hỗ trợ subscribe Broker Order Event cho duy nhất một `investor_id`.
+  - Chỉ được sử dụng các `investor_id` đã được ủy quyền cho Môi giới. Hệ thống sẽ trả về lỗi phân quyền nếu tài khoản không thuộc danh sách được phân quyền.
+
+  #### Input
+
+  ```json
+  {
+    "action": "subscribe",
+    "channels": [
+      {
+        "name": "order.broker.STOCK.1000009250.json",
+        "symbols": []
+      }
+    ]
+  }
+  ```
+
+  #### Payload
+
+  ```json lines
+  {
+    "id": 596,                        // integer  // Id lệnh giao dịch
+    "side": "NS",                     // string   // Chiều đặt lệnh (NB: Mua, NS: Bán)
+    "accountNo": "0001179019",        // string   // Số tiểu khoản
+    "symbol": "41I1G5000",            // string   // Mã chứng khoán
+    "orderType": "LO",                // string   // Loại lệnh
+    "price": 1920.0,                  // float    // Giá đặt
+    "quantity": 5,                    // integer  // Khối lượng đặt
+    "fillQuantity": 2,                // integer  // Khối lượng khớp
+    "canceledQuantity": 0,            // integer  // Khối lượng đã hủy
+    "leaveQuantity": 3,               // integer  // Khối lượng còn lại chưa khớp
+    "orderStatus": "PartiallyFilled", // string   // Trạng thái lệnh
+    "loanPackageId": 2278,            // integer  // Mã gói vay
+    "marketType": "DERIVATIVE",       // string   // Loại thị trường
+    "transDate": "2026-04-06T00:00:00Z", // string   // Ngày giao dịch
+    "createdDate": "2026-04-13T04:24:05.274Z", // string   // Thời điểm tạo (UTC)
+    "modifiedDate": "2026-04-13T04:28:27.749Z" // string   // Thời điểm cập nhật (UTC)
+  }
+  ```

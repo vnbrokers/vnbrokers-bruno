@@ -1,0 +1,64 @@
+info:
+  name: VN30 dự tính (Estimated VN30)
+  type: websocket
+  seq: 12
+
+websocket:
+  url: "{{wsBaseUrl}}/v1/stream?encoding=json"
+  message:
+    type: json
+    data: |-
+      {
+        "action": "subscribe",
+        "channels": [
+          {
+            "name": "estimated_market_index.VN30.json"
+          }
+        ]
+      }
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  ### Chỉ số VN30 dự tính (Estimated VN30)
+
+  Cung cấp thông tin chỉ số VN30 dự tính trong phiên giao dịch, bao gồm giá trị chỉ số dự tính,
+  mức tăng/giảm so với giá tham chiếu và số lượng mã tăng, giảm, đứng giá.
+  Dữ liệu được cập nhật theo thời gian thực khi có thay đổi.
+
+  #### Input
+
+  - **estimated_market_index**: Kênh dữ liệu chỉ số dự tính
+
+    | Giá trị | Mô tả |
+    |---------|-------|
+    | VN30 | Chỉ số VN30 dự tính |
+
+  #### Payload
+
+  ```json lines
+  {
+    "indexName": "VN30",
+    //string  // Tên chỉ số
+    "valueIndexes": 1948.57,
+    //float   // Giá trị VN30 dự tính
+    "changedValue": -37.71,
+    //float   // Mức tăng/giảm của chỉ số so với giá tham chiếu
+    "changedRatio": -1.9,
+    //float   // Tỷ lệ (%) tăng/giảm của chỉ số so với giá tham chiếu
+    "fluctuationUpIssueCount": 5,
+    //integer // Số lượng mã có giá tăng
+    "fluctuationDownIssueCount": 25,
+    //integer // Số lượng mã có giá giảm
+    "fluctuationSteadinessIssueCount": 0,
+    //integer // Số lượng mã có giá không đổi
+    "grossTradeAmount": 6391.86,
+    //float   // Tổng giá trị giao dịch của các mã trong rổ VN30
+    "totalVolumeTraded": 184907600,
+    //integer // Tổng khối lượng giao dịch của các mã trong rổ VN30
+    "time": "2026-06-08 13:56:29.371"
+    //string  // Thời điểm cập nhật dữ liệu
+  }
+  ```
