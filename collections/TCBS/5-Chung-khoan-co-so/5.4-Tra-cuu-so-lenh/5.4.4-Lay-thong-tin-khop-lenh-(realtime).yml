@@ -131,7 +131,7 @@ docs: |-
   | accountNo | string | Số tiểu khoản |
   | orderId | string | Số hiệu lệnh |
   | execType | string | Loại lệnh |
-  | orderQtty | string | Khối lượng đặt |
+  | orderQtty | float | Khối lượng đặt |
   | symbol | string | Mã chứng khoán |
   | priceType | string | Loại giá |
   | txTime | string | Giờ đặt lệnh |
@@ -139,10 +139,10 @@ docs: |-
   | expDate | string | Ngày hết hạn |
   | timeType | string | T: Trong ngày, G: Nhiều ngày |
   | orStatus | string | 0: Từ chối, 2: Đã gửi, 3: Đã hủy, 4: Đã khớp, 5: Hết hiệu lực, 8: Chờ gửi, 10: Đã sửa, 11: Đang gửi, 12: Khớp hết, A: Đang sửa, C: Đang hủy, S: Hoàn tất |
-  | limitPrice | string | Giá đặt lệnh |
-  | remainQtty | string | Số lượng còn lại |
+  | limitPrice | float | Giá đặt lệnh |
+  | remainQtty | float | Số lượng còn lại |
   | via | string | Kênh giao dịch: T: Call margin, M: Tổng đài, O: Online |
-  | quotePrice | string | Giá đặt lệnh |
+  | quotePrice | float | Giá đặt lệnh |
   | tradePlace | string | 005: UPCOM, 002: HNX, 001: HOSE, 000: BOND |
   | matchType | string | P: Thỏa thuận, N: Bình thường |
   | isDisposal | string | Lệnh bán xử lý |
