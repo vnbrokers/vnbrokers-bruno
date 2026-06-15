@@ -46,10 +46,10 @@ runtime:
                       "type": "string"
                     },
                     "secTypeName": {
-                      "type": "string"
+                      "type": ["string", "null"]
                     },
                     "availableTrading": {
-                      "type": "string"
+                      "type": "integer"
                     },
                     "mortgaged": {
                       "type": "number"
@@ -109,7 +109,7 @@ runtime:
                       "type": "number"
                     },
                     "settlement": {
-                      "type": "number"
+                      "type": "string"
                     }
                   }
                 }
