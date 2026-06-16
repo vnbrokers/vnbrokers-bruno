@@ -55,7 +55,8 @@ settings:
 
 examples:
   - name: 200 Response
-    description: OK Loại bút toán 1: success, < 0: error Chi tiết lỗi
+    description: |-
+      OK Loại bút toán 1: success, < 0: error Chi tiết lỗi
     request:
       url: "{{baseUrl}}/khronos/v1/order/condition/cancel"
       method: POST
