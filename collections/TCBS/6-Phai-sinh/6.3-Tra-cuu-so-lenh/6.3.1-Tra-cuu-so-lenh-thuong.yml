@@ -35,7 +35,7 @@ http:
       disabled: true
     - name: orderType
       type: query
-      description: |
+      description: |-
         filter theo Loại lệnh:
         - ``: Tất cả
         - `3`: Arbitrage
@@ -45,7 +45,7 @@ http:
     - name: status
       value: '0'
       type: query
-      description: |
+      description: |-
         filter theo trạng thái:
         - `0`: Tất cả
         - `1`: Chờ khớp
@@ -169,7 +169,8 @@ settings:
 
 examples:
   - name: 200 Response
-    description: OK Loại bút toán 1: success, < 0: error Chi tiết lỗi
+    description: |-
+      OK Loại bút toán 1: success, < 0: error Chi tiết lỗi
     request:
       url: "{{baseUrl}}/khronos/v1/order/in-day"
       method: GET

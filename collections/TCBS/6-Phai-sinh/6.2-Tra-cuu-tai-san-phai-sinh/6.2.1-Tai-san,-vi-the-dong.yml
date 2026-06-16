@@ -109,7 +109,8 @@ settings:
 
 examples:
   - name: 200 Response
-    description: OK Loại bút toán 1: success, < 0: error null
+    description: |-
+      OK Loại bút toán 1: success, < 0: error null
     request:
       url: "{{baseUrl}}/khronos/v1/account/portfolio/position/close"
       method: GET

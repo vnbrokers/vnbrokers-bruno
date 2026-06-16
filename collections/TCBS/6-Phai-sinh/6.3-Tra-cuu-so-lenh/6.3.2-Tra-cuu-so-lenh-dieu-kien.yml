@@ -27,7 +27,7 @@ http:
     - name: orderStatus
       value: '0'
       type: query
-      description: |
+      description: |-
         filter theo trạng thái:
         - `0`: Tất cả
         - `1`: Chờ kích hoạt
@@ -36,7 +36,7 @@ http:
     - name: orderType
       value: ALL,ALL
       type: query
-      description: |
+      description: |-
         filter theo loại lệnh:
         - ``: Tất cả
         - `3`: Arbitrage
@@ -45,7 +45,7 @@ http:
     - name: Symbol
       value: "{{symbol}}"
       type: query
-      description: |
+      description: |-
         filter theo mã HĐTL và theo vị thế:
         - `ALL,ALL`: Lọc ALL
         - `VN30F2303,B`: Lọc theo mã
@@ -163,7 +163,8 @@ settings:
 
 examples:
   - name: 200 Response
-    description: OK Loại bút toán 1: success, < 0: error Chi tiết lỗi
+    description: |-
+      OK Loại bút toán 1: success, < 0: error Chi tiết lỗi
     request:
       url: "{{baseUrl}}/khronos/v1/order/condition/detail"
       method: GET
