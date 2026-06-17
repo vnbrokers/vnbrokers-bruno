@@ -100,17 +100,18 @@ docs: |-
 
   ## Message trả về
 
-  | Prefix | Thuộc tính | Mô tả |
-  | --- | --- | --- |
-  | `s|1|` | `bi` | Bid info |
-  | `s|2|` | `op` | Offer info |
-  | `s|3|` | `fe` | Foreign exchange |
-  | `s|4|` | `bp` | Base price |
-  | `s|5|` | `mp` | Matched price |
-  | `s|6|` | `tm` | Ticker match |
-  | `s|8|` | `rt` | Stock index |
-  | `s|16|` | `pta` | PT Advertisement |
-  | `s|17|` | `ptm` | PT Match |
+  |Prefix|Thuộc tính|CW|DE|Mô tả|
+  | --------| --------------| ------| ------| ------------------|
+  |bi|1|28|23|Bid info|
+  |op|2|29|24|Offer info|
+  |fe|3|30|25|Foreign|
+  |bp|4|31\*|26\*|Base price|
+  |mp|5|32|27|Matched price|
+  |tm|6|18|21|Ticker match|
+  |rt|8|||Stock index|
+  |pta|16|||PT Advertisement|
+  |ptm|17|||PT Match|
+
 
   ## Bid info `bi`
 

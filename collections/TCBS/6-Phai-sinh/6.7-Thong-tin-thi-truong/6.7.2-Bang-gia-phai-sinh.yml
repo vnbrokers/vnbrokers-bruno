@@ -95,15 +95,18 @@ docs: |-
 
   ## Message trả về
 
-  | Prefix | Thuộc tính | Mô tả |
-  | --- | --- | --- |
-  | `s|1|` | `bi` | Bid info |
-  | `s|2|` | `op` | Offer info |
-  | `s|3|` | `fe` | Foreign exchange |
-  | `s|4|` | `bp` | Base price |
-  | `s|5|` | `mp` | Matched price |
-  | `s|6|` | `tm` | Ticker match |
-  | `s|8|` | `rt` | Stock index |
+  |Prefix|Thuộc tính|CW|DE|Mô tả|
+  | --------| --------------| ------| ------| ------------------|
+  |bi|1|28|23|Bid info|
+  |op|2|29|24|Offer info|
+  |fe|3|30|25|Foreign|
+  |bp|4|31\*|26\*|Base price|
+  |mp|5|32|27|Matched price|
+  |tm|6|18|21|Ticker match|
+  |rt|8|||Stock index|
+  |pta|16|||PT Advertisement|
+  |ptm|17|||PT Match|
+
 
   Các payload trả về dùng cùng cấu trúc với bảng giá cơ sở trong `Websocket_bang_gia_1.0.0.pdf`.
 
