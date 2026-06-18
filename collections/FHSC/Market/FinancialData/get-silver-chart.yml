@@ -1,0 +1,34 @@
+info:
+  name: Biểu đồ bạc (GET)
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{baseUrl}}/market/financial-data/silver-chart"
+  params:
+    - name: days
+      value: "30"
+      type: query
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### GET /market/financial-data/silver-chart
+
+  Dữ liệu lịch sử giá bạc trong N ngày.
+
+  **Params:**
+  | Param | Type | Default | Description |
+  |-------|------|---------|-------------|
+  | days | number | 30 | Số ngày |
+
+  **Response key:** `data`

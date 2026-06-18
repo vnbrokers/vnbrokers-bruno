@@ -1,0 +1,44 @@
+info:
+  name: Lịch sử NAV
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{baseUrl}}/fund-trading/public/fund-certificates/{{fundName}}/nav-histories?period=ALL_TIME"
+  params:
+    - name: period
+      value: ALL_TIME
+      type: query
+  auth: inherit
+
+runtime:
+  variables:
+    - name: fundName
+      value: DCDS
+  scripts:
+    - type: tests
+      code: test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  ### GET /fund-trading/public/fund-certificates/{fund}/nav-histories
+
+  Lịch sử giá NAV của quỹ so với benchmark.
+
+  **Path params:**
+  | Param | Type | Description |
+  |-------|------|-------------|
+  | fund | string | Tên/mã quỹ |
+
+  **Query params:**
+  | Param | Type | Default |
+  |-------|------|---------|
+  | period | string | `ALL_TIME` |
+
+  **Response key:** `data`

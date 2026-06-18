@@ -16,6 +16,8 @@ collections:
     path: "collections/TCBS"
   - name: "FireAnt RESTFUL API"
     path: "collections/FireAnt"
+  - name: "FHSC OpenAPI (Finhay)"
+    path: "collections/FHSC"
 
 specs:
   - name: "TCBS iFlash Open API"

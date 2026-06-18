@@ -1,0 +1,43 @@
+info:
+  name: Lịch sử lệnh
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{baseUrl}}/trading/sub-accounts/{{subAccountNormal}}/orders"
+  params:
+    - name: fromDate
+      value: ""
+      type: query
+    - name: toDate
+      value: ""
+      type: query
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### GET /trading/sub-accounts/{subAccountId}/orders
+
+  Lịch sử lệnh mua/bán trong khoảng thời gian.
+
+  **Path params:**
+  | Param | Type | Description |
+  |-------|------|-------------|
+  | subAccountId | string | ID tiểu khoản |
+
+  **Query params:**
+  | Param | Type | Description |
+  |-------|------|-------------|
+  | fromDate | string | Từ ngày (yyyy-MM-dd) |
+  | toDate | string | Đến ngày (yyyy-MM-dd) |
+
+  **Response key:** `result`

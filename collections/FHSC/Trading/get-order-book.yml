@@ -1,0 +1,31 @@
+info:
+  name: Sổ lệnh trong ngày
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{baseUrl}}/trading/v1/accounts/{{subAccountOrder}}/order-book"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### GET /trading/v1/accounts/{subAccountId}/order-book
+
+  Danh sách lệnh trong ngày hiện tại.
+
+  **Path params:**
+  | Param | Type | Description |
+  |-------|------|-------------|
+  | subAccountId | string | ID tiểu khoản order (`.4`) |
+
+  **Response key:** `result`
+  - `allowamend`, `allowcancel`: string flags cho phép sửa/hủy

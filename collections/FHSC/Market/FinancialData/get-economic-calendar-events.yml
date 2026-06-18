@@ -1,0 +1,38 @@
+info:
+  name: Lịch kinh tế (GET)
+  type: http
+  seq: 13
+
+http:
+  method: GET
+  url: "{{baseUrl}}/market/financial-data/economic-calendar-events"
+  params:
+    - name: weeks
+      value: "1"
+      type: query
+    - name: country
+      value: Vietnam
+      type: query
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### GET /market/financial-data/economic-calendar-events
+
+  Sự kiện kinh tế sắp tới (CPI, họp Fed,...).
+
+  **Params:**
+  | Param | Type | Default | Description |
+  |-------|------|---------|-------------|
+  | weeks | number | 1 | Số tuần |
+  | country | string | - | `China`, `Vietnam`, `United States`, etc. |
+
+  **Response key:** `data`

@@ -1,0 +1,44 @@
+info:
+  name: Kiểm tra sức mua/bán
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/trading/v2/accounts/{{subAccountOrder}}/available-trade"
+  params:
+    - name: orderSide
+      value: BUY
+      type: query
+    - name: symbol
+      value: "{{symbol}}"
+      type: query
+    - name: quotePrice
+      value: "0"
+      type: query
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### GET /trading/v2/accounts/{subAccountId}/available-trade
+
+  Kiểm tra sức mua/sức bán trước khi đặt lệnh.
+
+  **Params:**
+  | Param | Type | Required | Description |
+  |-------|------|----------|-------------|
+  | orderSide | string | Yes | `BUY` hoặc `SELL` |
+  | symbol | string | Yes | Mã cổ phiếu |
+  | quotePrice | number | Yes | Giá tham chiếu (0 = giá thị trường) |
+
+  **Response key:** `result`
+  - BUY: `result.pp0` = sức mua (VND)
+  - SELL: `result.trade` = số cổ phiếu có thể bán

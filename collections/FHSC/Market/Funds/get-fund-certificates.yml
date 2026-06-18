@@ -1,0 +1,41 @@
+info:
+  name: Danh sách quỹ
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/fund-trading/public/fund-certificates?fund-type=STOCK_FUND"
+  params:
+    - name: fund-type
+      value: STOCK_FUND
+      type: query
+    - name: fund-company-id
+      value: ""
+      type: query
+      disabled: true
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  ### GET /fund-trading/public/fund-certificates
+
+  Danh sách quỹ mở, sắp xếp theo lợi nhuận 1 năm.
+
+  **Params:**
+  | Param | Type | Description |
+  |-------|------|-------------|
+  | fund-type | string | `STOCK_FUND`, `BOND_FUND`, `BALANCE_FUND` |
+  | fund-company-id | string | ID công ty quản lý quỹ |
+
+  **Response key:** `data`

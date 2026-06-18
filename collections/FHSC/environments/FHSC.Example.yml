@@ -1,0 +1,26 @@
+name: FHSC.Example
+variables:
+  - name: baseUrl
+    value: https://open-api.fhsc.com.vn
+  - secret: true
+    name: apiKey
+  - secret: true
+    name: apiSecret
+  - secret: true
+    name: userId
+  - secret: true
+    name: subAccountNormal
+  - secret: true
+    name: subAccountMargin
+  - secret: true
+    name: subAccountOrder
+  - secret: true
+    name: subAccountExtOrder
+  - name: agentName
+    value: bruno
+  - name: symbol
+    value: VNM
+  - name: exchange
+    value: HOSE
+  - secret: true
+    name: twoFaToken

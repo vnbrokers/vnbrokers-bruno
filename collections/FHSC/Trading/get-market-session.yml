@@ -1,0 +1,36 @@
+info:
+  name: Phiên giao dịch
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{baseUrl}}/trading/market/session"
+  params:
+    - name: exchange
+      value: "{{exchange}}"
+      type: query
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### GET /trading/market/session
+
+  Trạng thái phiên giao dịch hiện tại (Open/Closed) và loại lệnh khả dụng.
+
+  **Params:**
+  | Param | Type | Required | Description |
+  |-------|------|----------|-------------|
+  | exchange | string | Yes | Sàn: `HOSE`, `HNX`, `UPCOM`, `HCX` |
+
+  **Response key:** `result`
+  - `exchange_session`: `OPEN`, `PRE_OPEN`, `PRE_CLOSE`, `CLOSED`
+  - `available_order_types`: danh sách loại lệnh khả dụng

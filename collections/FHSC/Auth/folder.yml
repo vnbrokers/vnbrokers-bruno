@@ -1,0 +1,7 @@
+info:
+  name: Auth & UAM
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

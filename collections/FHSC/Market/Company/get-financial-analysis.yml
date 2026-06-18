@@ -1,0 +1,40 @@
+info:
+  name: Phân tích tài chính
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{baseUrl}}/market/company-financial/analysis?symbol={{symbol}}&period=annual"
+  params:
+    - name: symbol
+      value: "{{symbol}}"
+      type: query
+    - name: period
+      value: annual
+      type: query
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  ### GET /market/company-financial/analysis
+
+  Xu hướng chỉ số tài chính qua các kỳ.
+
+  **Params:**
+  | Param | Type | Required | Description |
+  |-------|------|----------|-------------|
+  | symbol | string | Yes | Mã cổ phiếu |
+  | period | string | No | `annual` (mặc định) hoặc `quarterly` |
+
+  **Response key:** `data`

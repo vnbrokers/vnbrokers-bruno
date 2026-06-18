@@ -1,0 +1,48 @@
+info:
+  name: Dữ liệu lịch sử OHLCV
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{baseUrl}}/market/price-histories-chart?symbol={{symbol}}&resolution=1D&from=1780622000&to=1781742000"
+  params:
+    - name: symbol
+      value: "{{symbol}}"
+      type: query
+    - name: resolution
+      value: 1D
+      type: query
+    - name: from
+      value: "1780622000"
+      type: query
+    - name: to
+      value: "1781742000"
+      type: query
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  ### GET /market/price-histories-chart
+
+  Dữ liệu OHLCV lịch sử cho biểu đồ nến.
+
+  **Params:**
+  | Param | Type | Required | Description |
+  |-------|------|----------|-------------|
+  | symbol | string | Yes | Mã cổ phiếu |
+  | resolution | string | Yes | `1D`, `1H`, `4H`, `30`, `15`, `5` (mặc định `1D`) |
+  | from | number | Yes | Timestamp **giây** (không phải ms) |
+  | to | number | Yes | Timestamp **giây** |
+
+  **Response key:** `data`

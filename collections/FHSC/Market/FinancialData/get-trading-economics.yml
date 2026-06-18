@@ -1,0 +1,42 @@
+info:
+  name: Dữ liệu kinh tế quốc tế (GET)
+  type: http
+  seq: 10
+
+http:
+  method: GET
+  url: "{{baseUrl}}/market/financial-data/trading-economics"
+  params:
+    - name: country
+      value: Vietnam
+      type: query
+    - name: category
+      value: GDP
+      type: query
+    - name: year
+      value: ""
+      type: query
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### GET /market/financial-data/trading-economics
+
+  Chỉ số kinh tế lịch sử theo quốc gia và danh mục.
+
+  **Params:**
+  | Param | Type | Required | Description |
+  |-------|------|----------|-------------|
+  | country | string | Yes | `China`, `Euro Area`, `Japan`, `United States`, `United Kingdom`, `Vietnam` |
+  | category | string | No | `GDP`, `Labour`, `Prices`, `Money`, `Trade`, `Government`, `Business`, `Consumer`, `Housing` |
+  | year | number | No | Năm |
+
+  **Response key:** `data`

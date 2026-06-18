@@ -1,0 +1,37 @@
+info:
+  name: Thu hồi session 2FA
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{baseUrl}}/auth/v1/openapi/2fa/revoke"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "session_token": "{{twoFaToken}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### POST /auth/v1/openapi/2fa/revoke
+
+  Thu hồi session 2FA hiện tại (cả server + local).
+
+  **Input:**
+  | Field | Type | Description |
+  |-------|------|-------------|
+  | session_token | string | JWT session token cần thu hồi |

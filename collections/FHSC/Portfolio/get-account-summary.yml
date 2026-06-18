@@ -1,0 +1,30 @@
+info:
+  name: Chi tiết tài khoản
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{baseUrl}}/trading/accounts/{{subAccountNormal}}/summary"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### GET /trading/accounts/{subAccountId}/summary
+
+  Chi tiết tài khoản giao dịch: tiền mặt, sức mua, dư nợ.
+
+  **Path params:**
+  | Param | Type | Description |
+  |-------|------|-------------|
+  | subAccountId | string | ID tiểu khoản (dùng `$SUB_ACCOUNT_NORMAL` hoặc `$SUB_ACCOUNT_MARGIN`) |
+
+  **Response key:** `result`

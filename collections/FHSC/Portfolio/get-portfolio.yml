@@ -1,0 +1,30 @@
+info:
+  name: Danh mục cổ phiếu
+  type: http
+  seq: 3
+
+http:
+  method: GET
+  url: "{{baseUrl}}/trading/v2/sub-accounts/{{subAccountNormal}}/portfolio"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### GET /trading/v2/sub-accounts/{subAccountId}/portfolio
+
+  Danh mục cổ phiếu: số lượng, giá vốn, giá thị trường, P&L thời gian thực.
+
+  **Path params:**
+  | Param | Type | Description |
+  |-------|------|-------------|
+  | subAccountId | string | ID tiểu khoản |
+
+  **Response key:** `data`

@@ -1,0 +1,38 @@
+info:
+  name: Chỉ số toàn cầu & Tài sản (GET)
+  type: http
+  seq: 14
+
+http:
+  method: GET
+  url: "{{baseUrl}}/market/financial-data/market"
+  params:
+    - name: type
+      value: SP500
+      type: query
+    - name: limit
+      value: "50"
+      type: query
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### GET /market/financial-data/market
+
+  Giá lịch sử cho chỉ số toàn cầu, cổ phiếu Mag7, hàng hóa, forex.
+
+  **Params:**
+  | Param | Type | Description |
+  |-------|------|-------------|
+  | type | string | Bắt buộc. SP500, NASDAQ, APPLE, GOLD, EURUSD... |
+  | limit | number | Mặc định 50, tối đa 500 |
+
+  **Response:** `[{date, value}]` sắp xếp giảm dần.

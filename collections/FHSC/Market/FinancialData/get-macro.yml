@@ -1,0 +1,45 @@
+info:
+  name: Chỉ số vĩ mô (GET)
+  type: http
+  seq: 9
+
+http:
+  method: GET
+  url: "{{baseUrl}}/market/financial-data/macro?type=CPI&country=VN"
+  params:
+    - name: type
+      value: CPI
+      type: query
+    - name: country
+      value: VN
+      type: query
+    - name: period
+      value: ""
+      type: query
+      disabled: true
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  ### GET /market/financial-data/macro
+
+  Chỉ số vĩ mô: CPI, PMI, lãi suất quốc gia.
+
+  **Params:**
+  | Param | Type | Required | Description |
+  |-------|------|----------|-------------|
+  | type | string | Yes | Loại chỉ số (CPI, PMI, GOVERNMENT_10Y_BOND_YIELD, etc.) |
+  | country | string | Yes | Quốc gia (VN, US; JP, DE chỉ cho GOVERNMENT_10Y_BOND_YIELD) |
+  | period | string | No | Kỳ |
+
+  **Response key:** `data`

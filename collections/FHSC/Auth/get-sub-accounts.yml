@@ -1,0 +1,30 @@
+info:
+  name: Danh sách tiểu khoản
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{baseUrl}}/users/v1/users/{{userId}}/sub-accounts"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### GET /users/v1/users/{userId}/sub-accounts
+
+  Lấy danh sách tiểu khoản giao dịch của người dùng.
+
+  **Output:**
+  | Field | Type | Description |
+  |-------|------|-------------|
+  | type | string | Loại tiểu khoản (NORMAL, MARGIN) |
+  | id | string | ID tiểu khoản |
+  | sub_account_ext | string | Extended ID dùng cho write operations |

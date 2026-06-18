@@ -1,0 +1,30 @@
+info:
+  name: Tổng quan tài sản
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/users/v3/users/{{userId}}/assets/summary"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### GET /users/v3/users/{userId}/assets/summary
+
+  Tổng quan tài sản tổng hợp (NAV) trên tất cả sản phẩm Finhay.
+
+  **Path params:**
+  | Param | Type | Description |
+  |-------|------|-------------|
+  | userId | string | ID người dùng |
+
+  **Response key:** `data`

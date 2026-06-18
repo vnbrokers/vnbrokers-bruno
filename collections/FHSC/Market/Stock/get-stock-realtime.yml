@@ -1,0 +1,38 @@
+info:
+  name: Giá cổ phiếu thời gian thực
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/market/stock-realtime?symbol={{symbol}}"
+  params:
+    - name: symbol
+      value: "{{symbol}}"
+      type: query
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  ### GET /market/stock-realtime
+
+  Lấy giá cổ phiếu thời gian thực.
+
+  **Params (chọn 1 trong 3):**
+  | Param | Type | Description |
+  |-------|------|-------------|
+  | symbol | string | Mã cổ phiếu (vd: VNM) |
+  | symbols | string | Nhiều mã, phân cách bằng dấu phẩy |
+  | exchange | string | Sàn giao dịch (HOSE, HNX, UPCOM) |
+
+  **Response key:** `result`

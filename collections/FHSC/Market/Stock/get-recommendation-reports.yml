@@ -1,0 +1,30 @@
+info:
+  name: Báo cáo khuyến nghị
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{baseUrl}}/market/recommendation-reports/{{symbol}}"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### GET /market/recommendation-reports/{symbol}
+
+  Báo cáo khuyến nghị chuyên nghiệp từ các công ty chứng khoán.
+
+  **Path params:**
+  | Param | Type | Description |
+  |-------|------|-------------|
+  | symbol | string | Mã cổ phiếu |
+
+  **Response key:** `data`

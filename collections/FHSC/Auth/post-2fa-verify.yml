@@ -1,0 +1,52 @@
+info:
+  name: Xác thực OTP 2FA
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{baseUrl}}/auth/v1/openapi/2fa/verify"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "ticket_id": "{{ticketId}}",
+        "otp_code": "{{otpCode}}"
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: ticketId
+      value: ""
+    - name: otpCode
+      value: ""
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+        test("has session_token", () => expect(res.body).to.have.property("session_token"));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### POST /auth/v1/openapi/2fa/verify
+
+  Xác thực mã OTP và lưu session JWT.
+
+  **Input:**
+  | Field | Type | Description |
+  |-------|------|-------------|
+  | ticket_id | string | ID ticket từ request |
+  | otp_code | string | Mã OTP 6 số |
+
+  **Output:**
+  | Field | Type | Description |
+  |-------|------|-------------|
+  | session_token | string | JWT session token (X-FH-2FA-TOKEN) |
+  | expires_at | string | Thời gian hết hạn (ISO 8601) |
+  | expires_at_epoch | number | Thời gian hết hạn (epoch) |

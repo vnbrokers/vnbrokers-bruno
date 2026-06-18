@@ -1,0 +1,53 @@
+info:
+  name: Sửa lệnh
+  type: http
+  seq: 6
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/trading/oa/sub-accounts/{{subAccountOrder}}/orders/{{orderId}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "quantity": 200,
+        "price": 26000
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: orderId
+      value: ""
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+  timeout: 30000
+
+docs: |-
+  ### PUT /trading/oa/sub-accounts/{subAccountId}/orders/{orderId}
+
+  Sửa lệnh: thay đổi số lượng và/hoặc giá lệnh đang chờ.
+
+  **Path params:**
+  | Param | Type | Description |
+  |-------|------|-------------|
+  | subAccountId | string | ID tiểu khoản order |
+  | orderId | string | ID lệnh cần sửa |
+
+  **Body:**
+  | Field | Type | Description |
+  |-------|------|-------------|
+  | quantity | number | Số lượng mới |
+  | price | number | Giá mới |
+
+  **Response key:** `result`
+  - Yêu cầu `allowamend = true` từ order-book
+  - Yêu cầu 2FA session

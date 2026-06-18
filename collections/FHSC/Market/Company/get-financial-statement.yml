@@ -1,0 +1,45 @@
+info:
+  name: Báo cáo tài chính
+  type: http
+  seq: 3
+
+http:
+  method: GET
+  url: "{{baseUrl}}/market/v2/financial-statement/statement?symbol={{symbol}}&type=income-statement&period=annual"
+  params:
+    - name: symbol
+      value: "{{symbol}}"
+      type: query
+    - name: type
+      value: income-statement
+      type: query
+    - name: period
+      value: annual
+      type: query
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  ### GET /market/v2/financial-statement/statement
+
+  Báo cáo tài chính: income statement, balance sheet, cash flow.
+
+  **Params:**
+  | Param | Type | Required | Description |
+  |-------|------|----------|-------------|
+  | symbol | string | Yes | Mã cổ phiếu |
+  | type | string | Yes | `income-statement`, `balance-sheet`, `cash-flow` |
+  | period | string | No | `annual` (mặc định) hoặc `quarterly` |
+  | limit | number | No | Số lượng bản ghi |
+
+  **Response key:** `data`

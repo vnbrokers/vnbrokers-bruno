@@ -1,0 +1,51 @@
+info:
+  name: Hủy lệnh
+  type: http
+  seq: 7
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/trading/oa/sub-accounts/{{subAccountOrder}}/orders/{{orderId}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "sub_account": "{{subAccountExtOrder}}"
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: orderId
+      value: ""
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+  timeout: 30000
+
+docs: |-
+  ### DELETE /trading/oa/sub-accounts/{subAccountId}/orders/{orderId}
+
+  Hủy lệnh đang chờ. DELETE request có body.
+
+  **Path params:**
+  | Param | Type | Description |
+  |-------|------|-------------|
+  | subAccountId | string | ID tiểu khoản order |
+  | orderId | string | ID lệnh cần hủy |
+
+  **Body:**
+  | Field | Type | Description |
+  |-------|------|-------------|
+  | sub_account | string | Extended ID tiểu khoản order |
+
+  **Response key:** `result`
+  - Yêu cầu `allowcancel = true` từ order-book
+  - Yêu cầu 2FA session

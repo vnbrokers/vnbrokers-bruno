@@ -1,0 +1,56 @@
+info:
+  name: Đặt lệnh
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{baseUrl}}/trading/oa/sub-accounts/{{subAccountOrder}}/orders"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "sub_account": "{{subAccountExtOrder}}",
+        "side": "BUY",
+        "symbol": "HPG",
+        "quantity": 100,
+        "type": "LIMIT",
+        "limit_price": 25500,
+        "market_price": null,
+        "stock_type": "STOCK"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+  timeout: 30000
+
+docs: |-
+  ### POST /trading/oa/sub-accounts/{subAccountId}/orders
+
+  Đặt lệnh mua/bán chứng khoán. Yêu cầu 2FA session hợp lệ.
+
+  **Body:**
+  | Field | Type | Required | Description |
+  |-------|------|----------|-------------|
+  | sub_account | string | Yes | Extended ID tiểu khoản order (`.4`) |
+  | side | string | Yes | `BUY` / `SELL` |
+  | symbol | string | Yes | Mã chứng khoán |
+  | quantity | number | Yes | Số lượng |
+  | type | string | Yes | `LIMIT` / `MARKET` |
+  | limit_price | number | No | Giá giới hạn (nếu type = LIMIT) |
+  | market_price | string | No | `ATO`, `ATC`, `MP`, `MTL` (nếu type = MARKET) |
+  | stock_type | string | Yes | `STOCK` |
+
+  **Response key:** `result`
+  - Yêu cầu header `X-FH-2FA-TOKEN`
+  - Cần thực hiện 6 bước Safety Protocol trước khi gọi

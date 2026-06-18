@@ -1,0 +1,47 @@
+info:
+  name: Yêu cầu OTP 2FA
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{baseUrl}}/auth/v1/openapi/2fa/request"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "channel": "EMAIL"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+        test("has ticket_id", () => expect(res.body).to.have.property("ticket_id"));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### POST /auth/v1/openapi/2fa/request
+
+  Yêu cầu gửi mã OTP qua email để xác thực 2FA.
+
+  Giới hạn: tối đa 5 OTP/ngày.
+
+  **Input:**
+  | Field | Type | Description |
+  |-------|------|-------------|
+  | channel | string | Kênh nhận OTP (EMAIL) |
+
+  **Output:**
+  | Field | Type | Description |
+  |-------|------|-------------|
+  | ticket_id | string | ID của ticket OTP |
+  | masked_destination | string | Địa chỉ email đã che (vd: u***@gmail.com) |
+  | expires_at | string | Thời gian hết hạn (ISO 8601) |

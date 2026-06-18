@@ -1,0 +1,34 @@
+info:
+  name: Chỉ số thị trường thời gian thực
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{baseUrl}}/market/index-realtime"
+  params:
+    - name: index
+      value: VNINDEX,VN30,HNXINDEX
+      type: query
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### GET /market/index-realtime
+
+  Lấy giá trị chỉ số thị trường thời gian thực.
+
+  **Params:**
+  | Param | Type | Description |
+  |-------|------|-------------|
+  | index | string | Bắt buộc. Một hoặc nhiều mã chỉ số (VD: VNINDEX,VN30,HNXINDEX,UPCOMINDEX,HNX30) |
+
+  **Response key:** `result` (luôn là array)

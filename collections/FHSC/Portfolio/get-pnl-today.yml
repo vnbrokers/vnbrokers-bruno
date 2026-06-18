@@ -1,0 +1,30 @@
+info:
+  name: Lợi nhuận hàng ngày
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{baseUrl}}/trading/pnl-today/{{userId}}"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### GET /trading/pnl-today/{userId}
+
+  Lợi nhuận/thua lỗ trong ngày giao dịch hiện tại.
+
+  **Path params:**
+  | Param | Type | Description |
+  |-------|------|-------------|
+  | userId | string | ID người dùng |
+
+  **Response key:** `data`

@@ -1,37 +1,33 @@
-opencollection: 1.0.0
-
 info:
-  name: FHSC OpenAPI (Finhay)
-config:
-  proxy:
-    inherit: true
-    config:
-      protocol: http
-      hostname: ""
-      port: ""
-      auth:
-        username: ""
-        password: ""
-      bypassProxy: ""
+  name: Finhay OpenAPI (FHSC)
+  type: folder
+  seq: 0
 
 request:
   headers:
-    - name: Content-Type
-      value: application/json
-    - name: Accept
-      value: application/json
+    - name: X-FH-APIKEY
+      value: "{{apiKey}}"
+    - name: X-FH-USER-ID
+      value: "{{userId}}"
+    - name: X-FH-TIMESTAMP
+      value: "{{timestamp}}"
+    - name: X-FH-NONCE
+      value: "{{nonce}}"
+    - name: X-FH-SIGNATURE
+      value: "{{signature}}"
+    - name: X-FH-OPENAPI-AGENT
+      value: "{{agentName}}"
+    - name: X-FH-OPENAPI-SKILL-VERSION
+      value: 2.0.0
+    - name: User-Agent
+      value: "finhay-skills-hub/bruno@2.0.0 ({{agentName}}; linux)"
   auth:
-    type: apikey
-    key: X-FH-APIKEY
-    value: "{{apiKey}}"
-    placement: header
+    type: none
   scripts:
     - type: before-request
       code: |- # pragma: allowlist secret
-        if (bru.isSafeMode()) {
-          throw new Error("This script can only be run in Developer mode.");
-        }
         const { sign } = require("./signer");
+
         const method = req.getMethod();
         const rawUrl = bru.interpolate(req.getUrl());
         const url = new URL(rawUrl);
@@ -45,7 +41,7 @@ request:
         let bodyHash = "";
         let ts, sigStr;
 
-
+        (async () => {
           if (body) {
             bodyHash = await sign.bodyHash(body);
             const r = await sign.signature(method, path, query, bodyHash, apiSecret);
@@ -53,11 +49,9 @@ request:
             sigStr = r.sig;
             req.setHeader("X-FH-BODYHASH", bodyHash);
           } else {
-            
             const r = await sign.signature(method, path, query, "", apiSecret);
             ts = r.ts;
             sigStr = r.sig;
-            
           }
 
           const nonce = sign.nonce();
@@ -70,7 +64,10 @@ request:
           req.setHeader("X-FH-NONCE", nonce);
           req.setHeader("X-FH-SIGNATURE", sigStr);
           req.setHeader("X-FH-APIKEY", bru.getEnvVar("apiKey"));
-          !!bru.getEnvVar("userId") && req.setHeader("X-FH-USER-ID", bru.getEnvVar("userId"));
-          !!bru.getEnvVar("twoFaToken") && req.setHeader("X-FH-2FA-TOKEN", bru.getEnvVar("twoFaToken"));
-bundled: false
-extensions: {}
+          req.setHeader("X-FH-USER-ID", bru.getEnvVar("userId"));
+
+          const twoFa = bru.getEnvVar("twoFaToken");
+          if (twoFa) {
+            req.setHeader("X-FH-2FA-TOKEN", twoFa);
+          }
+        })();

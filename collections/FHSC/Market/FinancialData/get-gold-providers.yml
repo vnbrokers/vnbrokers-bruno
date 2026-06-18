@@ -1,0 +1,25 @@
+info:
+  name: Giá vàng theo nhà cung cấp (GET)
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{baseUrl}}/market/financial-data/gold-providers"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### GET /market/financial-data/gold-providers
+
+  Giá vàng từ các nhà cung cấp: PNJ, DOJI, SJC, BTMC,...
+
+  **Response key:** `data`

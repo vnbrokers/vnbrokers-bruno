@@ -55,7 +55,7 @@ git checkout -b testing
 - [SSI FastConnect Trading](https://guide.ssi.com.vn/ssi-products/tieng-viet/fastconnect-trading)
 - [TCBS iFlash Open API](https://developers.tcbs.com.vn/)
 - [Bruno Variables](https://docs.usebruno.com/variables/overview)
-
+- [FHSC OpenAPI](https://fhsc.com.vn/)
 
 ## Miễn trừ trách nhiệm
 

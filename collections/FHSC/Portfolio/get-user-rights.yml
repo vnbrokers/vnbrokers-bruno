@@ -1,0 +1,30 @@
+info:
+  name: Quyền lợi corporate-action
+  type: http
+  seq: 6
+
+http:
+  method: GET
+  url: "{{baseUrl}}/trading/v5/account/{{subAccountNormal}}/user-rights"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("status 200", () => expect(res.status).to.equal(200));
+
+settings:
+  encodeUrl: true
+
+docs: |-
+  ### GET /trading/v5/account/{subAccountId}/user-rights
+
+  Quyền lợi corporate-action: cổ tức, quyền mua, ĐHCĐ, chuyển đổi.
+
+  **Path params:**
+  | Param | Type | Description |
+  |-------|------|-------------|
+  | subAccountId | string | ID tiểu khoản |
+
+  **Response key:** `result`
