@@ -30,7 +30,7 @@ cd vnbrokers-bruno
 
 mise trust
 mise install
-mise generate git-pre-commit --write --task=check-leaks
+mise run gen-githooks
 
 git checkout -b testing
 
