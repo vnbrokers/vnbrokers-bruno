@@ -1,0 +1,279 @@
+info:
+  name: Dữ liệu NĐT nước ngoài
+  type: http
+  seq: 6
+
+http:
+  method: GET
+  url: "{{baseUrl}}/price/:symbol/foreign-trading?boardId=G1&from=1781139600&to=1781172000"
+  params:
+    - name: boardId
+      value: G1
+      type: query
+    - name: from
+      value: "1781139600"
+      type: query
+    - name: to
+      value: "1781172000"
+      type: query
+    - name: limit
+      value: ""
+      type: query
+    - name: order
+      value: ""
+      type: query
+    - name: symbol
+      value: "{{symbol}}"
+      type: path
+  auth: inherit
+
+runtime:
+  variables:
+    - name: symbol
+      value: ACB
+
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetForeignTradingResponse",
+            "type": "object",
+            "properties": {
+              "foreigners": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "marketId": { "type": "string" },
+                    "boardId": { "type": "string" },
+                    "symbol": { "type": "string" },
+                    "tradingSessionId": { "type": "string" },
+                    "sellVolume": { "type": "integer" },
+                    "sellTradedAmount": { "type": "integer" },
+                    "buyVolume": { "type": "integer" },
+                    "buyTradedAmount": { "type": "integer" },
+                    "totalSellVolume": { "type": "integer" },
+                    "totalSellTradedAmount": { "type": "integer" },
+                    "totalBuyVolume": { "type": "integer" },
+                    "totalBuyTradedAmount": { "type": "integer" },
+                    "foreignerOrderLimitQuantity": { "type": "integer" },
+                    "foreignerBuyPossibleQuantity": { "type": "integer" },
+                    "time": { "type": "string" }
+                  }
+                }
+              },
+              "nextPageToken": {
+                "type": ["string", "null"]
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công - trả về dữ liệu nhà đầu tư nước ngoài
+    request:
+      url: "{{baseUrl}}/price/{{symbol}}/foreign-trading"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: "2026-06-23"
+      params:
+        - name: boardId
+          value: G1
+          type: query
+        - name: from
+          value: "1781139600"
+          type: query
+        - name: to
+          value: "1781172000"
+          type: query
+        - name: limit
+          value: ""
+          type: query
+        - name: order
+          value: ""
+          type: query
+        - name: symbol
+          value: ""
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "foreigners": [
+              {
+                "marketId": "STO",
+                "boardId": "G1",
+                "symbol": "ACB",
+                "tradingSessionId": "99",
+                "sellVolume": 1239300,
+                "sellTradedAmount": 32683015000,
+                "buyVolume": 1299400,
+                "buyTradedAmount": 34345090000,
+                "totalSellVolume": 1239352,
+                "totalSellTradedAmount": 32684385850,
+                "totalBuyVolume": 1299415,
+                "totalBuyTradedAmount": 34345486100,
+                "foreignerOrderLimitQuantity": 1743293567,
+                "foreignerBuyPossibleQuantity": 2053706002,
+                "time": "2026-06-11 15:33:00.368"
+              }
+            ],
+            "nextPageToken": ""
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{baseUrl}}/price/{{symbol}}/foreign-trading"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: "2026-06-23"
+      params:
+        - name: boardId
+          value: ""
+          type: query
+        - name: from
+          value: ""
+          type: query
+        - name: to
+          value: ""
+          type: query
+        - name: limit
+          value: ""
+          type: query
+        - name: order
+          value: ""
+          type: query
+        - name: symbol
+          value: ""
+          type: path
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/price/{{symbol}}/foreign-trading"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: "2026-06-23"
+      params:
+        - name: boardId
+          value: ""
+          type: query
+        - name: from
+          value: ""
+          type: query
+        - name: to
+          value: ""
+          type: query
+        - name: limit
+          value: ""
+          type: query
+        - name: order
+          value: ""
+          type: query
+        - name: symbol
+          value: ""
+          type: path
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0
+          }
+
+docs: |-
+  Truy vấn thông tin dữ liệu nhà đầu tư nước ngoài.
+
+  <h3 id="get-foreign-trading-parameters">Parameters</h3>
+
+  |Name|In|Type|Required|Description|
+  |---|---|---|---|---|
+  |boardId|query|string|false|Mã bảng giao dịch|
+  |from|query|integer|true|Thời gian bắt đầu (timestamp)|
+  |to|query|integer|true|Thời gian kết thúc (timestamp) (không vượt quá 1 ngày)|
+  |limit|query|integer|false|none|
+  |order|query|string|false|none|
+  |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
+  |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
+  |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
+  |version|header|string|false|Phiên bản API |
+  |symbol|path|string|true|Mã chứng khoán|
+
+  #### Detailed descriptions
+
+  **boardId**: Mã bảng giao dịch
+  - G1: Lô chẵn
+  - G4: Lô lẻ
+  - T1: Thỏa thuận trong giờ (9h - 14h45)
+  - T3: Thỏa thuận sau giờ (14h45 - 15h)
+  - T4: Thỏa thuận lô lẻ trong giờ (9h - 14h45)
+  - T6: Thỏa thuận lô lẻ sau giờ  (14h45 - 15h)
+
+  <h3 id="get-foreign-trading-responseschema">Response Schema</h3>
+
+  Status Code **200**
+
+  |Name|Type|Required|Restrictions|Description|
+  |---|---|---|---|---|
+  |» foreigners|[object]|false|none|none|
+  |»» marketId|string|false|none|Mã thị trường niêm yết mã chứng khoán|
+  |»» boardId|string|false|none|Mã bảng giao dịch|
+  |»» symbol|string|false|none|Mã chứng khoán|
+  |»» tradingSessionId|string|false|none|Mã phiên giao dịch hiện tại|
+  |»» sellVolume|integer(int32)|false|none|Khối lượng bán khớp lệnh của NĐT nước ngoài trong phiên|
+  |»» sellTradedAmount|integer(int64)|false|none|Giá trị bán khớp lệnh của NĐT nước ngoài trong phiên|
+  |»» buyVolume|integer(int32)|false|none|Khối lượng mua khớp lệnh của NĐT nước ngoài trong phiên|
+  |»» buyTradedAmount|integer(int64)|false|none|Giá trị mua khớp lệnh của NĐT nước ngoài trong phiên|
+  |»» totalSellVolume|integer(int32)|false|none|Tổng khối lượng bán lũy kế của NĐT nước ngoài|
+  |»» totalSellTradedAmount|integer(int64)|false|none|Tổng giá trị bán lũy kế của NĐT nước ngoài|
+  |»» totalBuyVolume|integer(int32)|false|none|Tổng khối lượng mua lũy kế của NĐT nước ngoài|
+  |»» totalBuyTradedAmount|integer(int64)|false|none|Tổng giá trị mua lũy kế của NĐT nước ngoài|
+  |»» foreignerOrderLimitQuantity|integer(int32)|false|none|Giới hạn khối lượng sở hữu tối đa cho NĐT nước ngoài|
+  |»» foreignerBuyPossibleQuantity|integer(int32)|false|none|Khối lượng còn lại NĐT nước ngoài được phép mua|
+  |»» time|string|false|none|Thời gian trong message giá của sàn (YYYY-MM-DD HH:mm:ss.SSS (GMT+7))|
+  |» nextPageToken|string or null|false|none|Token dùng để lấy trang dữ liệu tiếp theo|
