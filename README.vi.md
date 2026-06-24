@@ -50,12 +50,12 @@ git checkout -b testing
 
 - [DNSE API Platform](https://developers.dnse.com.vn/docs/guide/intro/api_platform)
 - [Entrade](https://hdsd2.entrade.com.vn/entrade-api)
-- [FireAnt RESTful API v1](https://api.fireant.vn/)
 - [SSI FastConnect Data](https://guide.ssi.com.vn/ssi-products/tieng-viet/fastconnect-data)
 - [SSI FastConnect Trading](https://guide.ssi.com.vn/ssi-products/tieng-viet/fastconnect-trading)
 - [TCBS iFlash Open API](https://developers.tcbs.com.vn/)
-- [Bruno Variables](https://docs.usebruno.com/variables/overview)
 - [FHSC OpenAPI](https://fhsc.com.vn/)
+
+- [Bruno Variables](https://docs.usebruno.com/variables/overview)
 
 ## Miễn trừ trách nhiệm
 

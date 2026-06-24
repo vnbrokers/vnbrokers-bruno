@@ -1,6 +1,0 @@
-name: FireAnt.Example
-variables:
-  - name: baseUrl
-    value: https://api.fireant.vn
-  - secret: true
-    name: accessToken

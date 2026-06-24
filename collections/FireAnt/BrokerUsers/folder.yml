@@ -1,7 +1,0 @@
-info:
-  name: BrokerUsers
-  type: folder
-  seq: 1
-
-request:
-  auth: inherit
