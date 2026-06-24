@@ -1,0 +1,4788 @@
+openapi: 3.0.3
+info:
+  title: FHSC OpenAPI (Finhay)
+  version: 2.0.0
+  description: Consolidated OpenAPI v3 document generated from finhay/finhay-skills-hub
+servers:
+- url: https://open-api.fhsc.com.vn
+  description: Default Finhay Open API base URL from finhay.sh
+tags:
+- name: Market
+  description: Market data, price history, news, funds, and financial datasets
+- name: Portfolio
+  description: Read-only portfolio, balances, holdings, rights, and performance
+- name: Trading
+  description: Order placement, amendment, cancellation, order book, and market session checks
+- name: Helper
+  description: Client-support endpoints inferred from finhay.sh for user/account discovery and 2FA session management
+security:
+- XFHApiKey: []
+  XFHUserId: []
+  XFHTimestamp: []
+  XFHNonce: []
+  XFHSignature: []
+paths:
+  /users/v1/users/me:
+    get:
+      summary: Get current user profile (minimal inferred shape)
+      operationId: getCurrentUser
+      tags:
+      - Portfolio
+      - Helper
+      description: Inferred helper endpoint used by finhay.sh infer to resolve USER_ID. The exact backend schema is not formally documented in the repository; this definition captures the fields consumed by the CLI.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCurrentUserResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '429':
+          $ref: '#/components/responses/RateLimitedError'
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+      x-inferred-from: 'finhay.sh: CMD_INFER'
+  /users/v1/users/{userId}/sub-accounts:
+    get:
+      summary: List sub-accounts for a user (inferred shape)
+      operationId: getUserSubAccounts
+      tags:
+      - Portfolio
+      - Helper
+      description: Inferred helper endpoint used by finhay.sh infer to discover SUB_ACCOUNT_* values. The client accepts either result[] or data[] as the array container.
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 123456
+        description: User ID previously resolved from /users/v1/users/me
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSubAccountsResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '429':
+          $ref: '#/components/responses/RateLimitedError'
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+      x-inferred-from: 'finhay.sh: CMD_INFER'
+  /auth/v1/openapi/2fa/request:
+    post:
+      summary: Request a 2FA OTP ticket
+      operationId: requestTwoFactorOtp
+      tags:
+      - Trading
+      - Helper
+      description: Inferred helper endpoint used by finhay.sh 2fa request and the automatic OTP recovery flow for write-order endpoints.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TwoFactorRequestPayload'
+      responses:
+        '200':
+          description: OTP request accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TwoFactorRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '429':
+          $ref: '#/components/responses/RateLimitedError'
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+        XFHBodyHash: []
+      x-inferred-from: 'finhay.sh: CMD_2FA request / _2FA_INTERACTIVE_FLOW'
+  /auth/v1/openapi/2fa/verify:
+    post:
+      summary: Verify an OTP ticket and create a 2FA session
+      operationId: verifyTwoFactorOtp
+      tags:
+      - Trading
+      - Helper
+      description: Inferred helper endpoint used by finhay.sh 2fa verify and the automatic OTP recovery flow for write-order endpoints.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TwoFactorVerifyPayload'
+      responses:
+        '200':
+          description: 2FA verification successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TwoFactorVerifyResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '429':
+          $ref: '#/components/responses/RateLimitedError'
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+        XFHBodyHash: []
+      x-inferred-from: 'finhay.sh: CMD_2FA verify / _2FA_INTERACTIVE_FLOW'
+  /auth/v1/openapi/2fa/revoke:
+    post:
+      summary: Revoke an active 2FA session
+      operationId: revokeTwoFactorSession
+      tags:
+      - Trading
+      - Helper
+      description: Inferred helper endpoint used by finhay.sh 2fa revoke. Response shape is permissive because the repository does not document it beyond successful invocation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TwoFactorRevokePayload'
+      responses:
+        '200':
+          description: 2FA session revoked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TwoFactorRevokeResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '429':
+          $ref: '#/components/responses/RateLimitedError'
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+        XFHBodyHash: []
+      x-inferred-from: 'finhay.sh: CMD_2FA revoke'
+  /market/financial-data/bank-interest-rates:
+    get:
+      summary: Get bank interest rates
+      operationId: getBankInterestRates
+      tags:
+      - Market
+      - Financial Data
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    description: 'Bank interest rate data. Structure depends on cached data. Returns empty object `{}` if data has not been cached yet.
+
+                      '
+      x-source-file: skills/finhay-market/references/endpoints/bank-interest-rates.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/company-financial/analysis:
+    get:
+      summary: Get company financial analysis over time
+      operationId: getCompanyFinancialAnalysis
+      tags:
+      - Market
+      - Company Financial
+      parameters:
+      - name: symbol
+        in: query
+        required: true
+        schema:
+          type: string
+          example: VNM
+        description: Stock symbol (uppercase alphanumeric)
+      - name: period
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - annual
+          - quarterly
+          example: annual
+        description: Reporting period. Defaults to annual if omitted.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: '0'
+                  message:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FinancialAnalysisEntry'
+      x-source-file: skills/finhay-market/references/endpoints/company-financial-analysis.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/company-financial/overview:
+    get:
+      summary: Get company financial overview
+      operationId: getCompanyFinancialOverview
+      tags:
+      - Market
+      - Company Financial
+      parameters:
+      - name: symbol
+        in: query
+        required: true
+        schema:
+          type: string
+          example: VNM
+        description: Stock symbol (uppercase alphanumeric, e.g. `VNM`)
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: '0'
+                  message:
+                    type: string
+                    example: success
+                  data:
+                    $ref: '#/components/schemas/FinancialOverview'
+      x-source-file: skills/finhay-market/references/endpoints/company-financial-overview.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/financial-data/cryptos/top-trending:
+    get:
+      summary: Get top trending cryptocurrencies
+      operationId: getTopTrendingCryptos
+      tags:
+      - Market
+      - Financial Data
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CryptoCurrency'
+      x-source-file: skills/finhay-market/references/endpoints/cryptos-top-trending.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/financial-data/economic-calendar-events:
+    get:
+      summary: Get upcoming economic calendar events
+      operationId: getEconomicCalendarEvents
+      tags:
+      - Market
+      - Financial Data
+      parameters:
+      - name: weeks
+        in: query
+        required: false
+        description: Number of weeks ahead to fetch events (default 1)
+        schema:
+          type: integer
+          default: 1
+          example: 2
+      - name: country
+        in: query
+        required: false
+        description: Filter by country name. Must match exactly one of the supported values.
+        schema:
+          type: string
+          enum:
+          - China
+          - Euro Area
+          - Japan
+          - United States
+          - United Kingdom
+          - Vietnam
+          example: China
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EconomicCalendarEvent'
+      x-source-file: skills/finhay-market/references/endpoints/economic-calendar-events.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/financial-data:
+    get:
+      summary: Get all financial data
+      operationId: getFinancialData
+      tags:
+      - Market
+      - Financial Data
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FinancialData'
+      x-source-file: skills/finhay-market/references/endpoints/financial-data.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/v2/financial-statement/statement:
+    get:
+      summary: Get financial statement (v2 — metric-value format)
+      operationId: getFinancialStatementV2
+      tags:
+      - Market
+      - Company Financial
+      parameters:
+      - name: symbol
+        in: query
+        required: true
+        schema:
+          type: string
+          example: VNM
+        description: Stock symbol (uppercase alphanumeric)
+      - name: type
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - income-statement
+          - balance-sheet
+          - cash-flow
+          example: income-statement
+        description: Statement type
+      - name: period
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - annual
+          - quarterly
+          example: annual
+        description: Reporting period
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 5
+          default: 5
+          example: 5
+        description: Number of periods to return (1–5, default 5)
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: '0'
+                  message:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FinancialMetricValue'
+      x-source-file: skills/finhay-market/references/endpoints/financial-statement.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /fund-trading/public/fund-certificates/benchmark/growth:
+    get:
+      summary: Simulate growth of a VND investment across funds
+      operationId: getGrowthBenchmark
+      tags:
+      - Market
+      - Funds
+      parameters:
+      - name: fund-names
+        in: query
+        required: true
+        schema:
+          type: string
+          example: VESAF,DCDS
+        description: Comma-separated fund short names.
+      - name: amount
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 10000000
+        description: Investment amount in VND.
+      - name: period
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - BEGIN_THE_YEAR
+          - ONE_MONTH
+          - THREE_MONTHS
+          - SIX_MONTHS
+          - ONE_YEAR
+          - THREE_YEARS
+          - FIVE_YEARS
+          - SEVEN_YEARS
+          - TEN_YEARS
+          - ALL_TIME
+          example: ONE_YEAR
+        description: Time window over which to simulate growth.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: '0'
+                  message:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GrowthBenchmark'
+      x-source-file: skills/finhay-market/references/endpoints/fund-benchmark.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /fund-trading/public/fund-certificates/benchmark/nav:
+    get:
+      summary: Compare NAV time series across funds
+      operationId: getNavBenchmark
+      tags:
+      - Market
+      - Funds
+      parameters:
+      - name: fund-names
+        in: query
+        required: true
+        schema:
+          type: string
+          example: VESAF,DCDS
+        description: Comma-separated fund short names.
+      - name: period
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - BEGIN_THE_YEAR
+          - ONE_MONTH
+          - THREE_MONTHS
+          - SIX_MONTHS
+          - ONE_YEAR
+          - THREE_YEARS
+          - FIVE_YEARS
+          - SEVEN_YEARS
+          - TEN_YEARS
+          - ALL_TIME
+          example: ONE_YEAR
+        description: Either `period` OR both `from-month` + `to-month` must be provided.
+      - name: from-month
+        in: query
+        required: false
+        schema:
+          type: string
+          example: 2024-01
+        description: Start month (`yyyy-MM`). Required if `period` omitted.
+      - name: to-month
+        in: query
+        required: false
+        schema:
+          type: string
+          example: 2024-12
+        description: End month (`yyyy-MM`). Required if `period` omitted.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: '0'
+                  message:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/NavBenchmark'
+      x-source-file: skills/finhay-market/references/endpoints/fund-benchmark.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /fund-trading/public/fund-companies:
+    get:
+      summary: Get all fund management companies
+      operationId: getFundCompanies
+      tags:
+      - Market
+      - Funds
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: '0'
+                  message:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FundCompany'
+      x-source-file: skills/finhay-market/references/endpoints/fund-companies.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /fund-trading/public/fund-certificates/{fundName}/suggestions:
+    get:
+      summary: Get suggested similar funds
+      operationId: getFundSuggestions
+      tags:
+      - Market
+      - Funds
+      parameters:
+      - name: fundName
+        in: path
+        required: true
+        schema:
+          type: string
+          example: VESAF
+        description: Fund short name.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: '0'
+                  message:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SuggestedFund'
+      x-source-file: skills/finhay-market/references/endpoints/fund-details.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/funds/{fund}/months:
+    get:
+      summary: Get available fund months
+      operationId: getFundMonths
+      tags:
+      - Market
+      - Funds
+      parameters:
+      - name: fund
+        in: path
+        required: true
+        description: Fund code
+        schema:
+          type: string
+          example: DCDS
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    description: List of available months
+                    items:
+                      type: string
+                    example:
+                    - 2024-01
+                    - 2024-02
+                    - 2024-03
+      x-source-file: skills/finhay-market/references/endpoints/fund-months.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /fund-trading/public/fund-certificates/{fundName}/nav-histories:
+    get:
+      summary: Get fund NAV history with benchmark
+      operationId: getFundNavHistories
+      tags:
+      - Market
+      - Funds
+      parameters:
+      - name: fundName
+        in: path
+        required: true
+        schema:
+          type: string
+          example: VESAF
+        description: Fund short name.
+      - name: period
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - BEGIN_THE_YEAR
+          - ONE_MONTH
+          - THREE_MONTHS
+          - SIX_MONTHS
+          - ONE_YEAR
+          - THREE_YEARS
+          - FIVE_YEARS
+          - SEVEN_YEARS
+          - TEN_YEARS
+          - ALL_TIME
+          default: ALL_TIME
+          example: ONE_YEAR
+        description: Time window. Defaults to `ALL_TIME` when omitted.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: '0'
+                  message:
+                    type: string
+                    example: success
+                  data:
+                    $ref: '#/components/schemas/NavHistories'
+      x-source-file: skills/finhay-market/references/endpoints/fund-nav-history.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/funds/{fund}/portfolio:
+    get:
+      summary: Get fund portfolio
+      operationId: getFundPortfolio
+      tags:
+      - Market
+      - Funds
+      parameters:
+      - name: fund
+        in: path
+        required: true
+        description: Fund code
+        schema:
+          type: string
+          example: DCDS
+      - name: month
+        in: query
+        required: false
+        description: Month in format to filter portfolio (e.g. `2024-01`). If omitted, returns the latest available month.
+        schema:
+          type: string
+          example: 2024-01
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/PortfolioFund'
+      x-source-file: skills/finhay-market/references/endpoints/fund-portfolio.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /fund-trading/public/fund-certificates:
+    get:
+      summary: Get fund list
+      operationId: getFundCertificates
+      tags:
+      - Market
+      - Funds
+      parameters:
+      - name: fund-type
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - STOCK_FUND
+          - BOND_FUND
+          - BALANCE_FUND
+          example: STOCK_FUND
+        description: Fund category.
+      - name: fund-company-id
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          example: 12
+        description: Filter by management company ID. See `/fund-trading/public/fund-companies`.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: '0'
+                  message:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FundCertificate'
+      x-source-file: skills/finhay-market/references/endpoints/funds.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/financial-data/global-news:
+    get:
+      summary: List global financial news
+      operationId: getGlobalNewsList
+      tags:
+      - Market
+      - Financial Data
+      parameters:
+      - name: category
+        in: query
+        required: false
+        description: Filter by news category
+        schema:
+          type: string
+          enum:
+          - forex
+          - commodities
+          - economic-indicators
+          - stock-market
+          - cryptocurrency
+          example: stock-market
+      - name: page
+        in: query
+        required: false
+        description: Page number (min 1, default 1)
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          example: 1
+      - name: page_size
+        in: query
+        required: false
+        description: Number of items per page (min 1, max 50, default 20)
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+          default: 20
+          example: 20
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: '0'
+                  message:
+                    type: string
+                    example: success
+                  data:
+                    $ref: '#/components/schemas/GlobalNewsPage'
+      x-source-file: skills/finhay-market/references/endpoints/global-news.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/financial-data/global-news/{id}:
+    get:
+      summary: Get global news article detail
+      operationId: getGlobalNewsDetail
+      tags:
+      - Market
+      - Financial Data
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Article ID (from list endpoint)
+        schema:
+          type: integer
+          example: 12
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: '0'
+                  message:
+                    type: string
+                    example: success
+                  data:
+                    $ref: '#/components/schemas/GlobalNewsDetail'
+        '404':
+          description: Article not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: '404'
+                  message:
+                    type: string
+                    example: Global news not found
+                  data:
+                    nullable: true
+      x-source-file: skills/finhay-market/references/endpoints/global-news.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/financial-data/gold-chart:
+    get:
+      summary: Get gold price chart data
+      operationId: getGoldChartData
+      tags:
+      - Market
+      - Financial Data
+      parameters:
+      - name: days
+        in: query
+        required: false
+        description: Number of days of history to return. Defaults to `30`.
+        schema:
+          type: integer
+          default: 30
+          example: 30
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    description: Chart data points
+                    items:
+                      type: object
+      x-source-file: skills/finhay-market/references/endpoints/gold-chart.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/financial-data/gold-providers:
+    get:
+      summary: Get gold prices by provider
+      operationId: getGoldProviderData
+      tags:
+      - Market
+      - Financial Data
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CommodityIndexData'
+      x-source-file: skills/finhay-market/references/endpoints/gold-providers.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/financial-data/gold:
+    get:
+      summary: Get gold price data
+      operationId: getGoldData
+      tags:
+      - Market
+      - Financial Data
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CommodityIndexData'
+      x-source-file: skills/finhay-market/references/endpoints/gold.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/index-realtime:
+    get:
+      summary: Get realtime market index data
+      operationId: getIndexRealtime
+      tags:
+      - Market
+      - Stock
+      parameters:
+      - name: index
+        in: query
+        description: 'Index code(s), comma-separated. Pass one (`VNINDEX`) or many (`VNINDEX,HNX30`). One result entry is returned per code.
+
+          '
+        required: true
+        schema:
+          type: string
+          enum:
+          - VNINDEX
+          - HNXINDEX
+          - UPCOMINDEX
+          - VN30
+          - HNX30
+          example: VNINDEX
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  result:
+                    description: Array of `IndexRealtime` — one entry per requested index code.
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/IndexRealtime'
+        '400':
+          description: Invalid request
+      x-source-file: skills/finhay-market/references/endpoints/index-realtime.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/financial-data/macro:
+    get:
+      summary: Get macroeconomic data
+      operationId: getMacroData
+      tags:
+      - Market
+      - Financial Data
+      parameters:
+      - name: type
+        in: query
+        required: true
+        description: Macro data type
+        schema:
+          type: string
+          enum:
+          - IIP
+          - CPI
+          - PMI
+          - PCE
+          - CORE_PCE
+          - NFP
+          - FED_FUNDS_RATE
+          - INTERBANK_RATE
+          - GOVERNMENT_10Y_BOND_YIELD
+          - UNEMPLOYMENT_RATE
+      - name: country
+        in: query
+        required: true
+        description: Country code. Most types support VN and US only. JP and DE are only valid for GOVERNMENT_10Y_BOND_YIELD.
+        schema:
+          type: string
+          enum:
+          - VN
+          - US
+          - JP
+          - DE
+      - name: period
+        in: query
+        required: false
+        description: Time period filter
+        schema:
+          type: string
+          enum:
+          - ONE_MONTH
+          - ONE_YEAR
+          - YTD
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MacroData'
+      x-source-file: skills/finhay-market/references/endpoints/macro.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/financial-data/market:
+    get:
+      summary: Get global market data by type
+      operationId: getMarketData
+      tags:
+      - Market
+      - Financial Data
+      parameters:
+      - name: type
+        in: query
+        required: true
+        description: Market data type
+        schema:
+          type: string
+          enum:
+          - SP500
+          - DOW_JONES
+          - NASDAQ
+          - RUSSELL2000
+          - VIX
+          - DXY
+          - KOSPI
+          - HANGSENG
+          - SHANGHAI
+          - NIKKEI
+          - APPLE
+          - MICROSOFT
+          - ALPHABET
+          - AMAZON
+          - META
+          - NVIDIA
+          - TESLA
+          - GOLD
+          - SILVER
+          - COPPER
+          - CRUDE_OIL
+          - BRENT_OIL
+          - NATURAL_GAS
+          - EURUSD
+          - USDJPY
+          - GBPUSD
+      - name: limit
+        in: query
+        required: false
+        description: Number of data points to return (default 50, max 500)
+        schema:
+          type: integer
+          default: 50
+          minimum: 1
+          maximum: 500
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MarketData'
+      x-source-file: skills/finhay-market/references/endpoints/market-data.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/financial-data/metal-providers:
+    get:
+      summary: Get gold and silver prices by provider
+      operationId: getMetalProviderData
+      tags:
+      - Market
+      - Financial Data
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CommodityIndexData'
+      x-source-file: skills/finhay-market/references/endpoints/metal-providers.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/news:
+    get:
+      summary: Get stock events / corporate actions
+      operationId: getStockEvents
+      tags:
+      - Market
+      - News
+      parameters:
+      - name: stock
+        in: query
+        required: false
+        description: Single stock symbol (e.g. VNM)
+        schema:
+          type: string
+          example: VNM
+      - name: stocks
+        in: query
+        required: false
+        description: Comma-separated list of stock symbols (e.g. VNM,VIC,HPG)
+        schema:
+          type: string
+          example: VNM,VIC,HPG
+      - name: from_date
+        in: query
+        required: false
+        description: Start date filter in DD/MM/YYYY format. Defaults to 1 year ago from today when omitted.
+        schema:
+          type: string
+          example: 01/01/2024
+      - name: to_date
+        in: query
+        required: false
+        description: End date filter in DD/MM/YYYY format. Only applied when both from_date and to_date are provided.
+        schema:
+          type: string
+          example: 31/12/2024
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: '0'
+                  message:
+                    type: string
+                    example: success
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StockEventResponse'
+      x-source-file: skills/finhay-market/references/endpoints/news.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/price-histories-chart:
+    get:
+      summary: Get price history chart data
+      operationId: getPriceHistoriesChart
+      tags:
+      - Market
+      - Price History
+      parameters:
+      - name: symbol
+        in: query
+        required: true
+        description: Stock symbol
+        schema:
+          type: string
+          example: VNM
+      - name: resolution
+        in: query
+        required: true
+        description: Chart resolution. Defaults to `1D`.
+        schema:
+          type: string
+          enum:
+          - 1D
+          - 5
+          - 15
+          - 30
+          - 1H
+          - 4H
+      - name: from
+        in: query
+        required: true
+        description: Start timestamp in **seconds** (Unix epoch). Not milliseconds.
+        schema:
+          type: integer
+          minimum: 0
+          example: 1704067200
+      - name: to
+        in: query
+        required: true
+        description: End timestamp in **seconds** (Unix epoch). Not milliseconds.
+        schema:
+          type: integer
+          minimum: 0
+          example: 1711929600
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/PriceHistoriesChart'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 400
+                  error_code:
+                    type: string
+                    example: '400'
+                  message:
+                    type: string
+                    example: Invalid symbol
+      x-source-file: skills/finhay-market/references/endpoints/price-histories-chart.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/recommendation-reports/{symbol}:
+    get:
+      summary: Get recommendation reports by symbol
+      operationId: getRecommendationReportsBySymbol
+      tags:
+      - Market
+      - Reports
+      parameters:
+      - name: symbol
+        in: path
+        required: true
+        description: Stock symbol
+        schema:
+          type: string
+          example: VNM
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    oneOf:
+                    - type: array
+                      items: {}
+                      description: Empty array when no reports found
+                      example: []
+                    - $ref: '#/components/schemas/RecommendationReportResponse'
+      x-source-file: skills/finhay-market/references/endpoints/recommendation-reports.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/financial-data/silver-chart:
+    get:
+      summary: Get silver price chart data
+      operationId: getSilverChartData
+      tags:
+      - Market
+      - Financial Data
+      parameters:
+      - name: days
+        in: query
+        required: false
+        description: Number of days of history to return. Defaults to `30`.
+        schema:
+          type: integer
+          default: 30
+          example: 30
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    description: Chart data points
+                    items:
+                      type: object
+      x-source-file: skills/finhay-market/references/endpoints/silver-chart.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/financial-data/silver:
+    get:
+      summary: Get silver price data
+      operationId: getSilverData
+      tags:
+      - Market
+      - Financial Data
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CommodityIndexData'
+      x-source-file: skills/finhay-market/references/endpoints/silver.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/stock-realtime:
+    get:
+      summary: Get realtime stock data
+      operationId: getStockRealtime
+      tags:
+      - Market
+      - Stock
+      parameters:
+      - name: symbol
+        in: query
+        description: Single stock symbol (e.g. `VNM`). Mutually exclusive with `symbols` and `exchange`.
+        required: false
+        schema:
+          type: string
+          example: VNM
+      - name: symbols
+        in: query
+        description: Comma-separated stock symbols (e.g. `VNM,FPT,VIC`). Mutually exclusive with `symbol` and `exchange`.
+        required: false
+        schema:
+          type: string
+          example: VNM,FPT,VIC
+      - name: exchange
+        in: query
+        description: Exchange code to get all stocks in an exchange. Mutually exclusive with `symbol` and `symbols`.
+        required: false
+        schema:
+          type: string
+          enum:
+          - HOSE
+          - HNX
+          - UPCOM
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  result:
+                    description: 'Single `StockRealtime` object when `symbol` is used; array of `StockRealtime` when `symbols` or `exchange` is used.
+
+                      '
+                    oneOf:
+                    - $ref: '#/components/schemas/StockRealtime'
+                    - type: array
+                      items:
+                        $ref: '#/components/schemas/StockRealtime'
+        '400':
+          description: Invalid request — more than one of `symbol`, `symbols`, `exchange` provided
+      x-source-file: skills/finhay-market/references/endpoints/stock-realtime.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /market/financial-data/trading-economics:
+    get:
+      summary: Get Trading Economics indicator data
+      operationId: getTradingEconomicsData
+      tags:
+      - Market
+      - Financial Data
+      parameters:
+      - name: country
+        in: query
+        required: true
+        description: Country name
+        schema:
+          type: string
+          enum:
+          - China
+          - Euro Area
+          - Japan
+          - United States
+          - United Kingdom
+          - Vietnam
+          example: China
+      - name: category
+        in: query
+        required: false
+        description: Indicator category filter
+        schema:
+          type: string
+          enum:
+          - GDP
+          - Labour
+          - Prices
+          - Money
+          - Trade
+          - Government
+          - Business
+          - Consumer
+          - Housing
+          example: Prices
+      - name: year
+        in: query
+        required: false
+        description: Filter by year (2000–2100)
+        schema:
+          type: integer
+          minimum: 2000
+          maximum: 2100
+          example: 2024
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TradingEconomicsData'
+      x-source-file: skills/finhay-market/references/endpoints/trading-economics.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /trading/accounts/{subAccountId}/summary:
+    get:
+      summary: Get account summary
+      operationId: getAccountSummary
+      tags:
+      - Portfolio
+      - Account
+      parameters:
+      - name: subAccountId
+        in: path
+        required: true
+        description: Sub-account ID
+        schema:
+          type: string
+          example: '0001234567'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  result:
+                    $ref: '#/components/schemas/SummaryAccountResponse'
+      x-source-file: skills/finhay-portfolio/references/endpoints/account-summary.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /users/v3/users/{userId}/assets/summary:
+    get:
+      summary: Get user assets summary
+      operationId: getVNSCAssetsSummaryV3
+      tags:
+      - Portfolio
+      - Account
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        description: User ID
+        schema:
+          type: integer
+          example: 123456
+      - name: cache-control
+        in: query
+        required: false
+        description: Cache control policy
+        schema:
+          type: string
+          enum:
+          - CACHE
+          - NOCACHE
+          default: CACHE
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/UserAssetsSummaryResponse'
+      x-source-file: skills/finhay-portfolio/references/endpoints/assets.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /trading/sub-accounts/{subAccountId}/orders:
+    get:
+      summary: Get order history
+      operationId: getOrders
+      tags:
+      - Portfolio
+      - Orders
+      parameters:
+      - name: subAccountId
+        in: path
+        required: true
+        description: Sub-account ID
+        schema:
+          type: string
+          example: '0001234567'
+      - name: fromDate
+        in: query
+        required: true
+        description: Start date (inclusive)
+        schema:
+          type: string
+          format: date
+          example: '2024-01-01'
+      - name: toDate
+        in: query
+        required: true
+        description: End date (inclusive)
+        schema:
+          type: string
+          format: date
+          example: '2024-01-31'
+      - name: page
+        in: query
+        required: false
+        description: Page number
+        schema:
+          type: integer
+          default: 1
+          example: 1
+      - name: orderStatus
+        in: query
+        required: false
+        description: Filter by order status
+        schema:
+          type: string
+          default: ALL
+          example: ALL
+      - name: symbol
+        in: query
+        required: false
+        description: Filter by stock symbol
+        schema:
+          type: string
+          default: ALL
+          example: ALL
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  result:
+                    $ref: '#/components/schemas/OrderHistoryResult'
+      x-source-file: skills/finhay-portfolio/references/endpoints/orders.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /trading/pnl-today/{userId}:
+    get:
+      summary: Get today's PnL
+      operationId: getPnlToday
+      tags:
+      - Portfolio
+      - PnL
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        description: User ID
+        schema:
+          type: integer
+          format: int64
+          example: 123456
+      - name: sub-account-id
+        in: query
+        required: false
+        description: Sub-account ID filter. Use `ALL` for all sub-accounts.
+        schema:
+          type: string
+          default: ALL
+          example: '0001234567'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/PnlTodayResponse'
+      x-source-file: skills/finhay-portfolio/references/endpoints/pnl-today.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /trading/v2/sub-accounts/{subAccountId}/portfolio:
+    get:
+      summary: Get portfolio
+      operationId: getPortfolio
+      tags:
+      - Portfolio
+      parameters:
+      - name: subAccountId
+        in: path
+        required: true
+        description: Sub-account ID
+        schema:
+          type: string
+          example: '0001234567'
+      - name: cache-control
+        in: query
+        required: false
+        description: Cache control policy
+        schema:
+          type: string
+          enum:
+          - CACHE
+          - NOCACHE
+          default: NOCACHE
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/GetPortfolioResponse'
+      x-source-file: skills/finhay-portfolio/references/endpoints/portfolio.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /trading/v5/account/{subAccountId}/user-rights:
+    get:
+      summary: Get user rights
+      operationId: getUserRights
+      tags:
+      - Portfolio
+      - User Rights
+      parameters:
+      - name: subAccountId
+        in: path
+        required: true
+        description: Sub-account ID
+        schema:
+          type: string
+          example: '0001234567'
+      - name: fromDate
+        in: query
+        required: false
+        description: Start date filter
+        schema:
+          type: string
+          format: date
+          example: '2024-01-01'
+      - name: toDate
+        in: query
+        required: false
+        description: End date filter
+        schema:
+          type: string
+          format: date
+          example: '2024-12-31'
+      - name: catType
+        in: query
+        required: false
+        description: 'Category type filter (comma-separated for multiple). Use `ALL` for all types.
+
+          '
+        schema:
+          type: string
+          default: ALL
+      - name: isCom
+        in: query
+        required: false
+        description: Is company event filter
+        schema:
+          type: string
+          default: ALL
+      - name: symbol
+        in: query
+        required: false
+        description: Filter by stock symbol
+        schema:
+          type: string
+          default: ALL
+      - name: status
+        in: query
+        required: false
+        description: 'Filter by registration status (comma-separated for multiple). Use `ALL` for all statuses.
+
+          '
+        schema:
+          type: string
+          default: ALL
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserRight'
+      x-source-file: skills/finhay-portfolio/references/endpoints/user-rights.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /trading/v2/accounts/{subAccountId}/available-trade:
+    get:
+      summary: Get buying power (BUY) / sellable quantity (SELL) for a symbol
+      operationId: getAvailableTrade
+      tags:
+      - Trading
+      - Order Execution
+      parameters:
+      - name: subAccountId
+        in: path
+        required: true
+        description: Sub-account ID
+        schema:
+          type: string
+          example: 0001229509
+      - name: orderSide
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - BUY
+          - SELL
+      - name: symbol
+        in: query
+        required: true
+        schema:
+          type: string
+          example: HPG
+      - name: quotePrice
+        in: query
+        required: true
+        description: Intended order price in VND; 0 = use current/market price
+        schema:
+          type: integer
+          format: int64
+          example: 0
+      responses:
+        '200':
+          description: Available-trade result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    description: '"0" = success; any other value = error'
+                    example: '0'
+                  message:
+                    type: string
+                    nullable: true
+                  popup_message:
+                    type: string
+                    nullable: true
+                  title:
+                    type: string
+                    nullable: true
+                  result:
+                    $ref: '#/components/schemas/AvailableTradeResult'
+      x-source-file: skills/finhay-trading/references/endpoints/available-trade.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /trading/oa/sub-accounts/{subAccountId}/orders/{orderId}:
+    delete:
+      summary: Cancel an existing order
+      operationId: cancelOrder
+      tags:
+      - Trading
+      - Order Execution
+      parameters:
+      - name: subAccountId
+        in: path
+        required: true
+        description: Sub-account ID
+        schema:
+          type: string
+      - name: orderId
+        in: path
+        required: true
+        description: Order ID to cancel (from order-book)
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelOrderRequest'
+      responses:
+        '200':
+          description: Cancellation result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    nullable: true
+                  message:
+                    type: string
+                    nullable: true
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OrderResponse'
+      x-source-file: skills/finhay-trading/references/endpoints/cancel-order.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+        XFH2FAToken: []
+    put:
+      summary: Modify an existing order
+      operationId: updateOrder
+      tags:
+      - Trading
+      - Order Execution
+      parameters:
+      - name: subAccountId
+        in: path
+        required: true
+        description: Sub-account ID
+        schema:
+          type: string
+      - name: orderId
+        in: path
+        required: true
+        description: Order ID to modify (from order-book)
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrderRequest'
+      responses:
+        '200':
+          description: Modification result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    nullable: true
+                  message:
+                    type: string
+                    nullable: true
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OrderResponse'
+      x-source-file: skills/finhay-trading/references/endpoints/modify-order.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+        XFHBodyHash: []
+        XFH2FAToken: []
+  /trading/market/session:
+    get:
+      summary: Get market session info
+      operationId: getMarketSession
+      tags:
+      - Trading
+      - Market
+      parameters:
+      - name: exchange
+        in: query
+        required: true
+        description: Exchange code
+        schema:
+          type: string
+          enum:
+          - HOSE
+          - HNX
+          - UPCOM
+          - HCX
+          example: HOSE
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  result:
+                    $ref: '#/components/schemas/ExchangeSessionInfo'
+      x-source-file: skills/finhay-trading/references/endpoints/market-session.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /trading/v1/accounts/{subAccountId}/order-book/{orderId}:
+    get:
+      summary: Get order book detail
+      operationId: getOrderBookDetail
+      tags:
+      - Trading
+      - Orders
+      parameters:
+      - name: subAccountId
+        in: path
+        required: true
+        description: Sub-account ID
+        schema:
+          type: string
+          example: '0001234567'
+      - name: orderId
+        in: path
+        required: true
+        description: Order ID
+        schema:
+          type: string
+          example: ORD123456
+      - name: cache-control
+        in: query
+        required: false
+        description: Cache control policy
+        schema:
+          type: string
+          enum:
+          - CACHE
+          - NOCACHE
+          default: NOCACHE
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/OrderBookEntry'
+      x-source-file: skills/finhay-trading/references/endpoints/order-book-detail.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /trading/v1/accounts/{subAccountId}/order-book:
+    get:
+      summary: Get order book
+      operationId: getOrderBook
+      tags:
+      - Trading
+      - Orders
+      parameters:
+      - name: subAccountId
+        in: path
+        required: true
+        description: Sub-account ID
+        schema:
+          type: string
+          example: '0001234567'
+      - name: cache-control
+        in: query
+        required: false
+        description: Cache control policy
+        schema:
+          type: string
+          enum:
+          - CACHE
+          - NOCACHE
+          default: NOCACHE
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OrderBookEntry'
+      x-source-file: skills/finhay-trading/references/endpoints/order-book.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+  /trading/oa/sub-accounts/{subAccountId}/orders:
+    post:
+      summary: Place a new order
+      operationId: createOrder
+      tags:
+      - Trading
+      - Order Execution
+      parameters:
+      - name: subAccountId
+        in: path
+        required: true
+        description: Sub-account ID (e.g. "0881234567")
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '200':
+          description: Order result (may contain per-order errors in result[].code)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    nullable: true
+                  message:
+                    type: string
+                    nullable: true
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OrderResponse'
+      x-source-file: skills/finhay-trading/references/endpoints/place-order.md
+      security:
+      - XFHApiKey: []
+        XFHUserId: []
+        XFHTimestamp: []
+        XFHNonce: []
+        XFHSignature: []
+        XFHBodyHash: []
+        XFH2FAToken: []
+components:
+  securitySchemes:
+    XFHApiKey:
+      type: apiKey
+      in: header
+      name: X-FH-APIKEY
+      description: Finhay API key
+    XFHUserId:
+      type: apiKey
+      in: header
+      name: X-FH-USER-ID
+      description: Finhay user ID; resolved by CLI infer flow
+    XFHTimestamp:
+      type: apiKey
+      in: header
+      name: X-FH-TIMESTAMP
+      description: Unix timestamp in milliseconds
+    XFHNonce:
+      type: apiKey
+      in: header
+      name: X-FH-NONCE
+      description: Random nonce used in request signing
+    XFHSignature:
+      type: apiKey
+      in: header
+      name: X-FH-SIGNATURE
+      description: HMAC-SHA256 signature over timestamp, method, path, and optional body hash
+    XFHBodyHash:
+      type: apiKey
+      in: header
+      name: X-FH-BODYHASH
+      description: SHA256 hex digest of the JSON request body; required for write operations with a body
+    XFH2FAToken:
+      type: apiKey
+      in: header
+      name: X-FH-2FA-TOKEN
+      description: Daily OTP-backed 2FA session token required for place/modify/cancel order endpoints
+    XFHOpenApiSkillVersion:
+      type: apiKey
+      in: header
+      name: X-FH-OPENAPI-SKILL-VERSION
+      description: Optional client skill version metadata header sent by finhay.sh
+    XFHOpenApiOS:
+      type: apiKey
+      in: header
+      name: X-FH-OPENAPI-OS
+      description: Optional client OS metadata header sent by finhay.sh
+    XFHOpenApiAgent:
+      type: apiKey
+      in: header
+      name: X-FH-OPENAPI-AGENT
+      description: Optional client agent metadata header sent by finhay.sh
+  schemas:
+    FinancialAnalysisEntry:
+      type: object
+      description: 'Financial metrics for one period. Contains `year` always; `quarter` is present only when period=quarterly. All other fields are dynamic metric codes (e.g. pe, roe, eps, pb) with numeric or null values.
+
+        '
+      properties:
+        year:
+          type: integer
+          example: 2023
+        quarter:
+          type: integer
+          nullable: true
+          description: Present only for quarterly period (1–4)
+          example: 2
+      additionalProperties:
+        type: number
+        nullable: true
+    FinancialOverview:
+      type: object
+      properties:
+        pe:
+          type: number
+          nullable: true
+          description: Price-to-Earnings ratio
+        pb:
+          type: number
+          nullable: true
+          description: Price-to-Book ratio
+        ev_ebitda:
+          type: number
+          nullable: true
+          description: EV/EBITDA ratio
+        industry:
+          type: object
+          description: Industry average ratios
+          properties:
+            pe:
+              type: number
+              nullable: true
+            pb:
+              type: number
+              nullable: true
+            ev_ebitda:
+              type: number
+              nullable: true
+        gross_margin:
+          type: number
+          nullable: true
+          description: Gross profit margin
+        roe:
+          type: number
+          nullable: true
+          description: Return on Equity
+        eps:
+          type: number
+          nullable: true
+          description: Earnings per Share
+        dividend_yield:
+          type: number
+          nullable: true
+        nim:
+          type: number
+          nullable: true
+          description: Net Interest Margin (banks only)
+        margin_loan_to_equity_ratio:
+          type: number
+          nullable: true
+          description: Margin loan to equity ratio (securities firms only)
+        roa:
+          type: number
+          nullable: true
+          description: Return on Assets
+    CryptoCurrency:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Cryptocurrency name
+          example: Bitcoin
+        symbol:
+          type: string
+          description: Cryptocurrency symbol
+          example: BTC
+        icon_url:
+          type: string
+          description: Icon URL
+          example: https://example.com/btc.png
+        price:
+          type: number
+          description: Current price in USD
+          example: 67500.25
+        formatted_price:
+          type: string
+          description: Price formatted in Vietnamese locale
+          example: 67.500,25
+        percent_change_1h:
+          type: number
+          description: Price change in the last 1 hour (%)
+          example: 0.5
+        percent_change_24h:
+          type: number
+          description: Price change in the last 24 hours (%)
+          example: -1.2
+        percent_change_7d:
+          type: number
+          description: Price change in the last 7 days (%)
+          example: 3.8
+        percent_change_30d:
+          type: number
+          description: Price change in the last 30 days (%)
+          example: 12.5
+        market_cap:
+          type: number
+          description: Market capitalization in USD
+          example: 1325000000000
+        last_30d_chart:
+          type: string
+          description: URL or data for 30-day sparkline chart
+    EconomicCalendarEvent:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        date:
+          type: string
+          description: Event date in `YYYY-MM-DD` format
+          example: '2026-04-25'
+        country:
+          type: string
+          description: Country name
+          enum:
+          - China
+          - Euro Area
+          - Japan
+          - United States
+          - United Kingdom
+          - Vietnam
+          example: United States
+        event:
+          type: string
+          description: Event name
+          example: Fed Interest Rate Decision
+        actual:
+          type: string
+          description: Actual value (empty if not yet released)
+          example: 5.50%
+        previous:
+          type: string
+          description: Previous period value
+          example: 5.25%
+        consensus:
+          type: string
+          description: Market consensus forecast
+          example: 5.50%
+        forecast:
+          type: string
+          description: Analyst forecast
+          example: 5.50%
+        impact:
+          type: integer
+          description: Impact level (1 = low, 2 = medium, 3 = high)
+          example: 3
+        category:
+          type: string
+          description: Event category
+          example: Interest Rate
+    FinancialData:
+      type: object
+      properties:
+        financial_type:
+          type: string
+          description: Type of financial data
+          enum:
+          - GOLD
+          - SILVER
+          - CRYPTO
+          - BANK_INTEREST_RATE
+          - USD_EXCHANGE_RATE
+        name:
+          type: string
+          description: Display name of the financial type
+        values:
+          type: array
+          description: 'Array of financial data values. Shape varies by `financial_type`: single-value types use `FinancialDataSingleValue`, buy/sell types use `FinancialDataBuySellValue`, USD/VND types use `FinancialDataUSDVNDValue`.
+
+            '
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/FinancialDataSingleValue'
+            - $ref: '#/components/schemas/FinancialDataBuySellValue'
+            - $ref: '#/components/schemas/FinancialDataUSDVNDValue'
+        last_updated:
+          type: string
+          description: ISO timestamp of last update
+    FinancialDataSingleValue:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: number
+        change_percent:
+          type: number
+    FinancialDataBuySellValue:
+      type: object
+      properties:
+        name:
+          type: string
+        buy_value:
+          type: number
+        sell_value:
+          type: number
+        change_percent:
+          type: number
+    FinancialDataUSDVNDValue:
+      type: object
+      properties:
+        name:
+          type: string
+        usd_value:
+          type: number
+        vnd_value:
+          type: number
+    FinancialMetricValue:
+      type: object
+      description: One metric value for one period.
+      properties:
+        symbol:
+          type: string
+          example: VNM
+        metricCode:
+          type: string
+          description: Metric identifier (e.g. "tongDoanhThu", "lnst")
+          example: tongDoanhThu
+        metricValue:
+          type: number
+          example: 12500000000000
+        timeType:
+          type: string
+          description: Period type identifier
+          example: annual
+        year:
+          type: integer
+          example: 2023
+        quarter:
+          type: integer
+          description: 0 for annual records
+          example: 0
+    GrowthBenchmark:
+      type: object
+      properties:
+        fund_name:
+          type: string
+          example: VESAF
+        profit_percent:
+          type: number
+          example: 18.4
+        current_amount:
+          type: integer
+          description: Projected portfolio value in VND.
+          example: 11840000
+    NavBenchmark:
+      type: object
+      properties:
+        fund_name:
+          type: string
+          example: VESAF
+        nav_records:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                example: '2024-12-31'
+              navpf:
+                type: number
+                example: 18234.56
+              change_percent:
+                type: number
+                example: 1.24
+    FundCompany:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 12
+        name:
+          type: string
+          example: Công ty Quản lý quỹ Vietcombank
+        short_name:
+          type: string
+          example: VCBF
+        image_url:
+          type: string
+          format: uri
+    SuggestedFund:
+      type: object
+      properties:
+        fund_name:
+          type: string
+          example: DCDS
+        criteria:
+          type: string
+          enum:
+          - NET_ASSET_EQUIVALENT
+          - GROWTH_EQUIVALENT
+          description: 'How the fund was matched:
+
+            - `NET_ASSET_EQUIVALENT`: similar AUM size.
+
+            - `GROWTH_EQUIVALENT`: similar historical growth profile.
+
+            '
+    NavHistories:
+      type: object
+      properties:
+        nav_histories:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                example: '2025-04-30'
+              nav:
+                type: number
+                example: 18234.56
+              benchmark_value:
+                type: number
+                description: Benchmark index value on the same date.
+                example: 1284.91
+        benchmark_name:
+          type: string
+          description: Benchmark name (e.g. `VN-INDEX` for stock funds).
+          example: VN-INDEX
+    PortfolioFund:
+      type: object
+      properties:
+        month:
+          type: string
+          description: Portfolio month
+          example: 2024-01
+        entries:
+          type: array
+          description: Portfolio holdings sorted by per_nav descending
+          items:
+            $ref: '#/components/schemas/PortfolioFundEntry'
+        stocks_info:
+          type: array
+          description: Realtime stock info for the holdings
+          items:
+            $ref: '#/components/schemas/StockInfoV1'
+    PortfolioFundEntry:
+      type: object
+      properties:
+        fund_code:
+          type: string
+          example: DCDS
+        symbol:
+          type: string
+          example: FPT
+        sector:
+          type: string
+          example: Technology
+        per_nav:
+          type: number
+          description: Percentage of NAV
+          example: 8.5
+        month:
+          type: string
+          example: 2024-01
+    StockInfoV1:
+      type: object
+      properties:
+        symbol:
+          type: string
+          example: FPT
+        name:
+          type: string
+          example: CTCP FPT
+        exchange:
+          type: string
+          enum:
+          - HOSE
+          - HNX
+          - UPCOM
+        floor:
+          type: number
+          description: Floor price
+        ceiling:
+          type: number
+          description: Ceiling price
+        reference:
+          type: number
+          description: Reference price
+        stock_type:
+          type: string
+          enum:
+          - STOCK
+          - ETF
+          - BOND
+          - CW
+          - FUTURES
+        price:
+          type: number
+        price_change:
+          type: number
+        price_change_percent:
+          type: number
+        volume:
+          type: number
+          nullable: true
+        total_volume:
+          type: number
+          nullable: true
+    FundCertificate:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 21
+        name:
+          type: string
+          example: VESAF
+        type:
+          type: string
+          enum:
+          - STOCK_FUND
+          - BOND_FUND
+          - BALANCE_FUND
+        aum:
+          type: integer
+          description: Assets under management in VND.
+          example: 1500000000000
+        rating:
+          type: number
+          example: 4.5
+    GlobalNewsPage:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalNewsListItem'
+        page_total:
+          type: integer
+          description: Number of items in the current page
+        total:
+          type: integer
+          description: Total number of matching articles
+        current_page:
+          type: integer
+        next_page:
+          type: integer
+          nullable: true
+        previous_page:
+          type: integer
+          nullable: true
+    GlobalNewsListItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Article ID (use for detail lookup)
+        title:
+          type: string
+        url:
+          type: string
+          description: Original article URL
+        description:
+          type: string
+          nullable: true
+          description: Short summary of the article
+        provider:
+          type: string
+          nullable: true
+          description: News source/provider name
+        published_at:
+          type: string
+          format: date-time
+          description: Publication timestamp (ISO 8601)
+        category:
+          type: string
+          enum:
+          - forex
+          - commodities
+          - economic-indicators
+          - stock-market
+          - cryptocurrency
+    GlobalNewsDetail:
+      allOf:
+      - $ref: '#/components/schemas/GlobalNewsListItem'
+      - type: object
+        properties:
+          content:
+            type: string
+            nullable: true
+            description: Full article body/content
+    CommodityIndexData:
+      type: object
+      properties:
+        index:
+          type: string
+          description: Index identifier
+          example: SJC_GOLD
+        name:
+          type: string
+          description: Display name
+          example: Vàng SJC
+        short_name:
+          type: string
+          description: Short display name
+          example: SJC
+        buy_value:
+          type: number
+          description: Buy price
+          example: 92500000
+        sell_value:
+          type: number
+          description: Sell price
+          example: 94500000
+        usd_value:
+          type: number
+          description: USD equivalent value
+        vnd_value:
+          type: number
+          description: VND value
+        date:
+          type: string
+          description: Price date
+        provider:
+          type: string
+          description: Data provider name
+          example: SJC
+        provider_icon:
+          type: string
+          nullable: true
+          description: Provider icon URL
+        updated_at:
+          type: string
+          description: Last update timestamp
+        change_percent:
+          type: number
+          description: Price change percentage
+        buy_value_change_percent:
+          type: number
+          description: Buy value change percentage
+        sell_value_change_percent:
+          type: number
+          description: Sell value change percentage
+    IndexRealtime:
+      type: object
+      properties:
+        index:
+          type: string
+          example: VNINDEX
+          description: Index code (echoes the requested `index`).
+        indexValue:
+          type: number
+          example: 1792.6
+          description: Current index points value.
+        change:
+          type: number
+          example: 2.07
+          description: Point change from reference.
+        changePercent:
+          type: number
+          example: 0.12
+          description: Percent change from reference (already in percent units, e.g. 0.12 = 0.12%).
+        reference:
+          type: number
+          example: 1790.53
+          description: Reference value — previous session close.
+        allQuantity:
+          type: integer
+          format: int64
+          example: 248009131
+          description: Total matched volume across the market (shares).
+        allValue:
+          type: number
+          description: Total matched trading value across the market (VND).
+        advances:
+          type: integer
+          description: Number of advancing symbols.
+        declines:
+          type: integer
+          description: Number of declining symbols.
+        nochanges:
+          type: integer
+          description: Number of unchanged symbols.
+        ceiling:
+          type: integer
+          description: Number of symbols at ceiling price.
+        floor:
+          type: integer
+          description: Number of symbols at floor price.
+        values:
+          type: array
+          items:
+            type: number
+          description: Intraday index point series (index-aligned with times/volumes).
+        volumes:
+          type: array
+          items:
+            type: number
+          description: Intraday volume series (index-aligned with times/values).
+        times:
+          type: array
+          items:
+            type: integer
+            format: int64
+          description: Intraday timestamp series — Unix ms.
+        advancesArr:
+          type: array
+          items:
+            type: integer
+          description: Intraday advancing-symbol series. KRX indices only.
+        declinesArr:
+          type: array
+          items:
+            type: integer
+          description: Intraday declining-symbol series. KRX indices only.
+        nochangesArr:
+          type: array
+          items:
+            type: integer
+          description: Intraday unchanged-symbol series. KRX indices only.
+        ceilings:
+          type: array
+          items:
+            type: integer
+          description: Intraday ceiling-count series. KRX indices only.
+        floors:
+          type: array
+          items:
+            type: integer
+          description: Intraday floor-count series. KRX indices only.
+        sessionInExchange:
+          type: string
+          description: Current trading session state of the exchange.
+        name:
+          type: string
+          example: VNINDEX
+          description: Index name (currently same as `index`).
+    MacroData:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Macro data type
+          enum:
+          - IIP
+          - CPI
+          - PMI
+          - PCE
+          - CORE_PCE
+          - NFP
+          - GOODS_RETAIL
+          - SERVICE_RETAIL
+          - TOTAL_EXPORT
+          - FDI_EXPORT
+          - DOMESTIC_EXPORT
+          - FED_FUNDS_RATE
+          - INTERBANK_RATE
+          - GOVERNMENT_10Y_BOND_YIELD
+          - UNEMPLOYMENT_RATE
+          example: CPI
+        country:
+          type: string
+          enum:
+          - VN
+          - US
+          example: VN
+        month:
+          type: string
+          description: Year-month in `YYYY-MM` format
+          example: 2024-03
+        value:
+          type: number
+          description: Macro indicator value
+          example: 3.5
+        date:
+          type: string
+          nullable: true
+          description: Exact date in `YYYY-MM-DD` format (if available)
+          example: '2024-03-15'
+    MarketData:
+      type: object
+      properties:
+        type:
+          type: string
+          example: SP500
+        country:
+          type: string
+          enum:
+          - US
+          - KR
+          - HK
+          - CN
+          - JP
+          - UK
+          example: US
+        date:
+          type: string
+          description: Date in YYYY-MM-DD format
+          example: '2026-04-22'
+        year:
+          type: integer
+          example: 2026
+        month:
+          type: integer
+          example: 4
+        value:
+          type: number
+          example: 5234.18
+    StockEventResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          nullable: true
+          description: Event ID
+        path:
+          type: string
+          nullable: true
+          description: Internal path/slug of the event
+        title:
+          type: string
+          nullable: true
+          description: Event title
+        stock:
+          type: string
+          description: Stock symbol
+          example: VNM
+        body:
+          type: string
+          nullable: true
+          description: Event body/content
+        createdDate:
+          type: string
+          description: Formatted creation date (DD/MM - HH:mm)
+          example: 15/07 - 08:30
+        actionDate:
+          type: string
+          nullable: true
+          description: Date the corporate action takes effect
+        gdkhqDate:
+          type: string
+          nullable: true
+          description: Ex-rights date (ngày GDKHQ)
+        eventType:
+          type: string
+          nullable: true
+          description: Event type code
+        eventTypeName:
+          type: string
+          nullable: true
+          description: Human-readable event type name
+        createdAt:
+          type: string
+          format: date-time
+          nullable: true
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+        url:
+          type: string
+          nullable: true
+          description: Full URL to the event detail page
+    PriceHistoriesChart:
+      type: object
+      description: 'Columnar arrays — all arrays are the same length. `time[i]`, `open[i]`, `close[i]`, `high[i]`, `low[i]`, `volume[i]` represent one data point.
+
+        '
+      properties:
+        symbol:
+          type: string
+          example: VNM
+        resolution:
+          type: string
+          enum:
+          - 1D
+          - 5
+          - 15
+          - 30
+          - 1H
+          - 4H
+          example: 1D
+        time:
+          type: array
+          description: Unix timestamps (seconds)
+          items:
+            type: number
+          example:
+          - 1704067200
+          - 1704153600
+        open:
+          type: array
+          description: Open prices
+          items:
+            type: number
+          example:
+          - 72000
+          - 72500
+        close:
+          type: array
+          description: Close prices
+          items:
+            type: number
+          example:
+          - 72500
+          - 73000
+        high:
+          type: array
+          description: High prices
+          items:
+            type: number
+          example:
+          - 73000
+          - 73500
+        low:
+          type: array
+          description: Low prices
+          items:
+            type: number
+          example:
+          - 71500
+          - 72000
+        volume:
+          type: array
+          description: Trading volumes
+          items:
+            type: number
+          example:
+          - 1500000
+          - 1800000
+    RecommendationReportResponse:
+      type: object
+      properties:
+        recommendation:
+          type: string
+          nullable: true
+          description: Latest recommendation description (from the first/most recent report)
+        recommendationReports:
+          type: array
+          items:
+            $ref: '#/components/schemas/IndexRecommendationReport'
+    IndexRecommendationReport:
+      type: object
+      properties:
+        stock:
+          type: string
+          description: Stock symbol
+          example: VNM
+        title:
+          type: string
+          nullable: true
+          description: Report title
+        source:
+          type: string
+          nullable: true
+          description: Report source, defaults to `VietStock`
+          example: VietStock
+        recommendation_price:
+          type: number
+          nullable: true
+          description: Recommended entry price (currently always `null`)
+        target_price:
+          type: number
+          nullable: true
+          description: Target price
+          example: 85000
+        publish_date:
+          type: string
+          format: date-time
+          nullable: true
+          description: Report publish date
+        description:
+          type: string
+          nullable: true
+          description: Report description/summary
+        download_url:
+          type: string
+          nullable: true
+          description: URL to download the full report PDF
+        created_at:
+          type: string
+          format: date-time
+          nullable: true
+        updated_at:
+          type: string
+          format: date-time
+          nullable: true
+    StockRealtime:
+      type: object
+      properties:
+        symbol:
+          type: string
+          example: VNM
+        price:
+          type: number
+          nullable: true
+          example: 72500
+        volume:
+          type: number
+          nullable: true
+        change:
+          type: number
+          nullable: true
+          description: Price change from reference
+        changePercent:
+          type: number
+          nullable: true
+          description: Price change percentage from reference
+        ceiling:
+          type: number
+          nullable: true
+          description: Ceiling price
+        floor:
+          type: number
+          nullable: true
+          description: Floor price
+        reference:
+          type: number
+          nullable: true
+          description: Reference price
+        average:
+          type: number
+          nullable: true
+          description: Average (medium) price
+        high:
+          type: number
+          nullable: true
+        low:
+          type: number
+          nullable: true
+        open:
+          type: number
+          nullable: true
+        close:
+          type: number
+          nullable: true
+          description: Same as `price`
+        buyPrice1:
+          type: number
+          nullable: true
+        buyPrice2:
+          type: number
+          nullable: true
+        buyPrice3:
+          type: number
+          nullable: true
+        buyVol1:
+          type: number
+          nullable: true
+        buyVol2:
+          type: number
+          nullable: true
+        buyVol3:
+          type: number
+          nullable: true
+        sellPrice1:
+          type: number
+          nullable: true
+        sellPrice2:
+          type: number
+          nullable: true
+        sellPrice3:
+          type: number
+          nullable: true
+        sellVol1:
+          type: number
+          nullable: true
+        sellVol2:
+          type: number
+          nullable: true
+        sellVol3:
+          type: number
+          nullable: true
+        totalVolume:
+          type: number
+          nullable: true
+        totalValue:
+          type: number
+          nullable: true
+        foreignBought:
+          type: number
+          nullable: true
+        foreignSold:
+          type: number
+          nullable: true
+        foreignRemain:
+          type: number
+          nullable: true
+        remainBid:
+          type: number
+          nullable: true
+        remainAsk:
+          type: number
+          nullable: true
+        stockType:
+          type: string
+          enum:
+          - STOCK
+          - ETF
+          - BOND
+          - CW
+          - FUTURES
+          description: Normalized stock type
+        exchange:
+          type: string
+          enum:
+          - HOSE
+          - HNX
+          - UPCOM
+          description: Normalized exchange code
+        name:
+          type: string
+          example: CTCP Sữa Việt Nam
+        createdAt:
+          type: number
+          description: Unix timestamp
+        pe:
+          type: number
+          nullable: true
+        pb:
+          type: number
+          nullable: true
+        roe:
+          type: number
+          nullable: true
+        marketCap:
+          type: number
+          nullable: true
+        marketCapCategory:
+          type: string
+          nullable: true
+          enum:
+          - Micro Cap
+          - Small Cap
+          - Mid Cap
+          - Large Cap
+        hasNewestNews:
+          type: boolean
+        stockSummary:
+          type: string
+          nullable: true
+        additionalInfo:
+          type: object
+          nullable: true
+        symbolStatus:
+          type: string
+          nullable: true
+          description: KRX stocks only
+        symbolStatusCode:
+          type: string
+          nullable: true
+          description: KRX stocks only
+        floorCode:
+          type: string
+          nullable: true
+          description: KRX stocks only
+        influenceScore:
+          type: number
+          nullable: true
+        outstandingShares:
+          type: number
+          nullable: true
+    TradingEconomicsData:
+      type: object
+      properties:
+        indicator:
+          type: string
+          description: Indicator name
+          example: Inflation Rate
+        country:
+          type: string
+          description: Country name
+          enum:
+          - China
+          - Euro Area
+          - Japan
+          - United States
+          - United Kingdom
+          - Vietnam
+          example: China
+        category:
+          type: string
+          description: Indicator category
+          enum:
+          - GDP
+          - Labour
+          - Prices
+          - Money
+          - Trade
+          - Government
+          - Business
+          - Consumer
+          - Housing
+          example: Prices
+        lastValue:
+          type: number
+          nullable: true
+          description: Most recent value
+          example: 0.1
+        previousValue:
+          type: number
+          nullable: true
+          description: Prior period value
+          example: -0.1
+        year:
+          type: integer
+          description: Year of the data point
+          example: 2024
+        month:
+          type: integer
+          description: Month of the data point (1–12)
+          example: 3
+        unit:
+          type: string
+          description: Unit of measurement
+          example: '%'
+    SummaryAccountResponse:
+      type: object
+      properties:
+        balance:
+          type: integer
+          format: int64
+          description: Available balance
+        ci_balance:
+          type: integer
+          format: int64
+        td_balance:
+          type: integer
+          format: int64
+        interest_balance:
+          type: integer
+          format: int64
+        ca_receiving:
+          type: integer
+          format: int64
+        receiving_t1:
+          type: integer
+          format: int64
+          description: Receiving amount T+1
+        receiving_t2:
+          type: integer
+          format: int64
+          description: Receiving amount T+2
+        receiving_t3:
+          type: integer
+          format: int64
+          description: Receiving amount T+3
+        securities_amt:
+          type: integer
+          format: int64
+          description: Securities amount
+        total_debt_amt:
+          type: integer
+          format: int64
+          description: Total debt amount
+        secure_amt:
+          type: integer
+          format: int64
+        trf_buy_amt:
+          type: integer
+          format: int64
+        margin_amt:
+          type: integer
+          format: int64
+          description: Margin amount
+        t0_debt_amt:
+          type: integer
+          format: int64
+          description: T+0 debt amount
+        advanced_amt:
+          type: integer
+          format: int64
+          description: Advanced amount
+        df_debt_amt:
+          type: integer
+          format: int64
+        td_debt_amt:
+          type: integer
+          format: int64
+        cidepo_fee_acr:
+          type: integer
+          format: int64
+        net_asset_value:
+          type: integer
+          format: int64
+          description: Net asset value
+        mrcr_limit:
+          type: integer
+          format: int64
+          description: Margin credit limit
+        debt_amt:
+          type: integer
+          format: int64
+        advance_max_amt_fee:
+          type: integer
+          format: int64
+        receiving_amt:
+          type: integer
+          format: int64
+        margin_rate:
+          type: integer
+          format: int64
+          description: Margin rate
+        sms_fee_amt:
+          type: integer
+          format: int64
+        ibroker_fee_amt:
+          type: integer
+          format: int64
+        hold_balance:
+          type: integer
+          format: int64
+        mri_rate:
+          type: integer
+          format: int64
+        mrm_rate:
+          type: integer
+          format: int64
+        cidepo_fee:
+          type: integer
+          format: int64
+        td_int_amt:
+          type: integer
+          format: int64
+        add_vnd:
+          type: integer
+          format: int64
+        add_vnd_1:
+          type: integer
+          format: int64
+        core_bank:
+          type: string
+          description: Core bank code
+        bankacct_no:
+          type: string
+          description: Bank account number
+        bank_name:
+          type: string
+          description: Bank name
+        emk_amt:
+          type: integer
+          format: int64
+        baldefovd:
+          type: string
+        mrcr_limit_max:
+          type: integer
+          format: int64
+          description: Maximum margin credit limit
+    UserAssetsSummaryResponse:
+      type: object
+      properties:
+        net_asset_value:
+          type: number
+          description: Total net asset value
+        products:
+          $ref: '#/components/schemas/ProductsSummary'
+        money:
+          $ref: '#/components/schemas/MoneySummary'
+        debt:
+          $ref: '#/components/schemas/DebtSummary'
+        pnl:
+          $ref: '#/components/schemas/PnlSummary'
+    ProductsSummary:
+      type: object
+      properties:
+        total:
+          type: number
+          description: Total product value
+        stock:
+          type: number
+          description: Stock value
+        fund:
+          type: number
+          description: Fund value
+        saving:
+          type: number
+          nullable: true
+          description: Saving amount
+        bond:
+          type: number
+          description: HayBond value
+        hay0:
+          type: number
+          description: Hay0 NAV
+        hay0_interest:
+          type: number
+          description: Hay0 interest
+        hay0_depositing:
+          type: number
+          description: Hay0 amount being deposited
+        hay0_withdrawing:
+          type: number
+          description: Hay0 amount being withdrawn
+    MoneySummary:
+      type: object
+      properties:
+        total:
+          type: number
+          description: Total cash
+        ci_balance:
+          type: number
+          description: Cash balance in account
+        ca_receiving:
+          type: number
+          description: Dividend cash pending
+        emk_amt:
+          type: number
+          description: Other blocked funds
+        receiving_amt:
+          type: number
+          description: Cash to receive
+        baldefovd:
+          type: number
+          description: Available withdrawable amount
+    DebtSummary:
+      type: object
+      properties:
+        total:
+          type: number
+          description: Total debt
+        secure_amount:
+          type: number
+          description: Secured loan amount
+        advance_amt:
+          type: number
+          description: Advanced amount
+        sms_fee_amt:
+          type: number
+          description: SMS fee amount
+        cidepo_fee_acr:
+          type: number
+          description: CIDEPO fee accrual
+        owe_deposit:
+          type: number
+          description: Deposit owed
+    PnlSummary:
+      type: object
+      properties:
+        stock:
+          $ref: '#/components/schemas/PnlEntry'
+        fund:
+          $ref: '#/components/schemas/PnlEntry'
+    PnlEntry:
+      type: object
+      properties:
+        pnl:
+          type: number
+          description: Profit/loss amount
+        pnl_rate:
+          type: number
+          description: Profit/loss rate
+    OrderHistoryResult:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderHistoryEntry'
+    OrderHistoryEntry:
+      type: object
+      properties:
+        order_id:
+          type: string
+          description: Order ID
+        account_id:
+          type: string
+        transaction_date:
+          type: string
+          description: Transaction date
+        symbol:
+          type: string
+          example: VNM
+        order_side:
+          type: string
+          enum:
+          - BUY
+          - SELL
+          - UNKNOWN
+          description: Order side
+        order_quantity:
+          type: integer
+          format: int64
+          description: Ordered quantity
+        limit_price:
+          type: integer
+          format: int64
+          description: Limit (quote) price
+        market_price:
+          type: string
+          description: Market price at order time
+        execute_quantity:
+          type: integer
+          format: int64
+          description: Executed quantity
+        execute_price:
+          type: integer
+          format: int64
+          description: Executed price
+        order_status:
+          type: string
+          enum:
+          - WAITING_TO_ACTIVATE
+          - WAITING_TO_SEND
+          - SENDING
+          - SENT
+          - FIXING
+          - FIXED
+          - CANCELLED
+          - CANCELLING
+          - MATCHED
+          - EXPIRED
+          - MATCHED_ALL
+          - REJECTED
+          - COMPLETED
+          - FAILED
+          - EXPIRED_ACTIVATION_TIME
+          - EXPIRED_AUTHORIZATION
+          - RECEIVED
+          - INTERNAL_SENDING
+          - INTERNAL_CANCELLED
+          - SENDING_TO_CORE
+          - CANCEL_BY_STOCK_EVENT
+          - WAIT_FOR_ACCEPTING
+          - ACCEPTED
+          - ACCEPTING
+          - REJECTING
+          - UNKNOWN
+        fee_amount:
+          type: integer
+          format: int64
+          description: Fee amount
+        tax_amount:
+          type: integer
+          format: int64
+          description: Tax amount
+        execute_amount:
+          type: integer
+          format: int64
+          description: Executed amount
+        order_type:
+          type: string
+          enum:
+          - LO
+          - MP
+          - ATO
+          - ATC
+          - MAK
+          - MOK
+          - MTL
+          - PLO
+          - FOK
+          - FAK
+          description: Order type
+    PnlTodayResponse:
+      type: object
+      properties:
+        sub_account_id:
+          type: string
+          description: Sub-account ID or `ALL`
+          example: '0001234567'
+        pnl_amount:
+          type: integer
+          format: int64
+          description: Today's PnL amount (VND)
+          example: 1500000
+        pnl_rate:
+          type: number
+          format: double
+          description: Today's PnL rate (percentage)
+          example: 2.5
+    GetPortfolioResponse:
+      type: object
+      properties:
+        portfolio:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortfolioEntry'
+        is_snapshot:
+          type: boolean
+          description: Whether the data is from a cached snapshot
+    PortfolioEntry:
+      type: object
+      properties:
+        sub_account_id:
+          type: string
+        symbol:
+          type: string
+          example: VNM
+        securities_type:
+          type: string
+          description: Type of securities
+        total:
+          type: integer
+          format: int64
+          description: Total shares held
+        available:
+          type: integer
+          format: int64
+          description: Shares available to sell
+        blocked:
+          type: integer
+          format: int64
+          description: Blocked shares
+        mortgage:
+          type: integer
+          format: int64
+          description: Mortgaged shares
+        vsd_mortgage:
+          type: integer
+          format: int64
+          description: VSD mortgaged shares
+        restrict:
+          type: integer
+          format: int64
+          description: Restricted shares
+        receiving_right:
+          type: integer
+          format: int64
+        receiving_t0:
+          type: integer
+          format: int64
+          description: Receiving shares T+0
+        receiving_t1:
+          type: integer
+          format: int64
+          description: Receiving shares T+1
+        receiving_t2:
+          type: integer
+          format: int64
+          description: Receiving shares T+2
+        matching_amount:
+          type: integer
+          format: int64
+        withdraw:
+          type: integer
+          format: int64
+        cost_price:
+          type: integer
+          format: int64
+          description: Average cost price
+        basic_price:
+          type: integer
+          format: int64
+          description: Basic (reference) price
+        is_sellable:
+          type: boolean
+          description: Whether the stock can be sold
+        custodycd:
+          type: string
+        pnl_amount:
+          type: integer
+          format: int64
+          description: Profit/Loss amount
+        pnl_rate:
+          type: number
+          format: double
+          description: Profit/Loss rate (percentage)
+        close_price:
+          type: integer
+          format: int64
+          description: Close (current) price
+        cost_price_amount:
+          type: integer
+          format: int64
+          description: Total cost value
+        basic_price_amount:
+          type: integer
+          format: int64
+          description: Total basic value
+        total_pnl:
+          type: integer
+          format: int64
+          description: Total PnL
+        sending_t0:
+          type: integer
+          format: int64
+        sending_t1:
+          type: integer
+          format: int64
+        sending_t2:
+          type: integer
+          format: int64
+        has_newest_news:
+          type: boolean
+          description: Whether the stock has recent news
+        trade:
+          type: integer
+          format: int64
+          deprecated: true
+          description: Deprecated field
+    UserRight:
+      type: object
+      properties:
+        accountId:
+          type: string
+        depositoryNumber:
+          type: string
+        fullName:
+          type: string
+        ownNumberOfShare:
+          type: integer
+          format: int64
+          description: Number of shares owned at record date
+        ratio:
+          type: string
+          description: Right ratio (e.g. "1:5")
+        status:
+          type: string
+          enum:
+          - WAIT_FOR_REVIEW
+          - WAIT_EXECUTED
+          - WAITING_FOR_APPROVE
+          - NAVIGATING
+          - COMPLETED
+          - ALLOCATION_COMPLETED
+          - CANCELED
+          - EMPTY_STOCK
+          - APPROVED
+          - REJECTED
+          - READY_FOR_TRADE
+          - READY_FOR_CLOSE
+          - STOCK_ALLOTTED
+          - MONEY_ALLOTTED
+          - PARTIALLY_DONE
+          - VERIFIED
+          - DELETED
+          - REGISTERED
+          description: Corporate action status
+        userRightRegisterStatus:
+          type: string
+          enum:
+          - UNREGISTER
+          - REGISTERED
+          - EXPIRED
+          - RECEIVED
+          - PARTIAL_REGISTERED
+          - PENDING
+          - PARTIAL_RECEIVED
+          - WAIT_REGISTER
+          - REGISTERED_V2
+          - WAIT_RECEIVE
+          - WAIT_STOCK
+          - PARTIAL_RECEIVED_V2
+          - UNKNOWN
+          description: User registration status
+        caMastId:
+          type: string
+          description: Corporate action master ID
+        amount:
+          type: integer
+          format: int64
+        symbol:
+          type: string
+          example: VNM
+        toSymbol:
+          type: string
+          nullable: true
+          description: Target symbol (for stock conversion events)
+        numberOfWaitingStock:
+          type: integer
+          format: int64
+        waitingAmountForReturn:
+          type: integer
+          format: int64
+        rightOffRate:
+          type: string
+          description: Right offering rate
+        buyPrice:
+          type: integer
+          format: int64
+          description: Subscription price (for stock rights)
+        allowRegister:
+          type: boolean
+          description: Whether registration is allowed
+        totalStocksCanBuy:
+          type: integer
+          format: int64
+        totalPayAmount:
+          type: integer
+          format: int64
+        startDate:
+          type: string
+          format: date
+        finishDate:
+          type: string
+          format: date
+        startDateTransfer:
+          type: string
+          format: date
+        actionDate:
+          type: string
+          format: date
+          description: Record date / Ex-date
+        finishDateTransfer:
+          type: string
+          format: date
+        reportDate:
+          type: string
+          format: date
+          description: Used for sorting (descending)
+        type:
+          type: string
+          enum:
+          - OTC_BOND_INTEREST
+          - SHAREHOLDER_MEETING
+          - SOLICIT_SHAREHOLDER_OPINIONS
+          - CASH_DIVIDEND
+          - STOCK_DIVIDEND
+          - STOCK_RIGHT
+          - BOND_INTEREST
+          - BOND_PRINCIPAL_AND_INTEREST
+          - CONVERT_BONDS_TO_STOCKS
+          - CONVERT_STOCKS_TO_OTHER_STOCKS
+          - BONUS_SHARES
+          - VOTING_RIGHTS
+          - CONVERTIBLE_BOND
+          - TRANSFER_PENDING_STOCKS
+          - WARRANT_DIVIDENDS
+          description: Type of corporate action
+        stockName:
+          type: string
+        totalVolume:
+          type: integer
+          format: int64
+        totalValue:
+          type: integer
+          format: int64
+        referencePrice:
+          type: integer
+          format: int64
+        closePrice:
+          type: integer
+          format: int64
+        ceilingPrice:
+          type: integer
+          format: int64
+        floorPrice:
+          type: integer
+          format: int64
+        predictPrice:
+          type: integer
+          format: int64
+        changePrice:
+          type: integer
+          format: int64
+        hasRead:
+          type: boolean
+          description: Whether the user has read this right notification
+    AvailableTradeResult:
+      type: object
+      properties:
+        pp0:
+          type: integer
+          format: int64
+          description: 'Buying power in VND — the max amount available to BUY {symbol} at quotePrice. Use for BUY: check pp0 >= quantity * quotePrice.
+
+            '
+        ppse:
+          type: integer
+          format: int64
+          description: Max shares after settlement (purchasing power after settlement)
+        maxqtty:
+          type: integer
+          format: int64
+          description: Max quantity cap from the broker
+        trade:
+          type: integer
+          format: int64
+          description: 'Number of shares of {symbol} available to SELL. Use for SELL: check trade >= quantity.
+
+            '
+        balance:
+          type: integer
+          format: int64
+          description: Account cash balance (VND)
+        cash_pending_send:
+          type: integer
+          format: int64
+          description: Cash pending transfer (VND)
+        mortgage:
+          type: integer
+          format: int64
+          description: Mortgage value (VND)
+        marginrate:
+          type: number
+          description: Margin rate
+        mrratioloan:
+          type: number
+          nullable: true
+          description: Margin ratio loan
+    CancelOrderRequest:
+      type: object
+      required:
+      - sub_account
+      properties:
+        sub_account:
+          type: string
+          description: Extended sub-account ID (use SUB_ACCOUNT_EXT_ORDER — must end in `.4`)
+          example: 120C000008.4
+    ExchangeSessionInfo:
+      type: object
+      properties:
+        exchange:
+          type: string
+          enum:
+          - HOSE
+          - HNX
+          - UPCOM
+          - HCX
+          description: Exchange code
+          example: HOSE
+        exchange_session:
+          type: string
+          enum:
+          - OPEN
+          - PROGRESS
+          - BREAK
+          - CLOSED
+          - PRE_CLOSED
+          - PUT_THROUGH
+          - POST_SESSION
+          - CA
+          description: 'Current session: `OPEN` = ATO (opening auction), `PROGRESS` = continuous matching, `BREAK` = lunch break, `CLOSED` = market closed, `PRE_CLOSED` = ATC (closing auction), `PUT_THROUGH` = put-through session, `POST_SESSION` = HNX post-session, `CA` = periodic auction
+
+            '
+        available_order_types:
+          type: array
+          description: Order types available in the current session
+          items:
+            type: string
+            enum:
+            - LO
+            - MP
+            - ATO
+            - ATC
+            - MAK
+            - MOK
+            - MTL
+            - PLO
+            - FOK
+            - FAK
+          example:
+          - LO
+          - MP
+          - ATC
+    UpdateOrderRequest:
+      type: object
+      properties:
+        quantity:
+          type: integer
+          format: int64
+          minimum: 1
+          description: New quantity
+        price:
+          type: integer
+          format: int64
+          description: New limit price in VND
+    OrderBookEntry:
+      properties:
+        strategy_id:
+          type: string
+          nullable: true
+          description: Strategy ID if the order is linked to a strategy
+        custodycd:
+          type: string
+        txdate:
+          type: string
+          description: Transaction date
+        custid:
+          type: string
+        afacctno:
+          type: string
+          description: Account number
+        orderid:
+          type: string
+          description: Order ID
+        odorderid:
+          type: string
+        txtime:
+          type: string
+          description: Transaction time
+        symbol:
+          type: string
+          example: VNM
+        allowcancel:
+          type: string
+          description: Whether cancel is allowed
+        allowamend:
+          type: string
+          description: Whether amendment is allowed
+        side_code:
+          type: string
+          description: Side code (raw)
+        side:
+          type: string
+          description: Side display name (BUY/SELL)
+        price:
+          type: integer
+          format: int64
+        pricetype:
+          type: string
+          description: Price type code
+        via_code:
+          type: string
+          description: Order channel code
+        via:
+          type: string
+          description: Order channel name
+        qtty:
+          type: integer
+          format: int64
+          description: Order quantity
+        execqtty:
+          type: integer
+          format: int64
+          description: Executed quantity
+        execamt:
+          type: integer
+          format: int64
+          description: Executed amount
+        execprice:
+          type: integer
+          format: int64
+          description: Executed price
+        remainqtty:
+          type: integer
+          format: int64
+          description: Remaining quantity
+        remainamt:
+          type: integer
+          format: int64
+          description: Remaining amount
+        status_code:
+          type: string
+          description: Status code (raw)
+        status:
+          type: string
+          description: Status display name
+        tlname:
+          type: string
+        username:
+          type: string
+        hosesession:
+          type: string
+          description: HOSE session info
+        cancelqtty:
+          type: integer
+          format: int64
+        adjustqtty:
+          type: integer
+          format: int64
+        isdisposal:
+          type: string
+        rootorderid:
+          type: string
+        timetype:
+          type: string
+        timetypevalue:
+          type: string
+        feedbackmsg:
+          type: string
+          description: Feedback message from exchange
+        quoteqtty:
+          type: integer
+          format: int64
+        limitprice:
+          type: number
+          format: double
+        odtimestamp:
+          type: string
+        matchtype_code:
+          type: string
+        producttypename:
+          type: string
+        afacctno_ext:
+          type: string
+        side_:
+          type: string
+        via_:
+          type: string
+        status_:
+          type: string
+        matchtype_:
+          type: string
+    CreateOrderRequest:
+      type: object
+      required:
+      - side
+      - symbol
+      - quantity
+      - type
+      properties:
+        sub_account:
+          type: string
+          description: Extended sub-account ID (must end in `.4` — the order-execution account)
+          example: 120C000008.4
+        side:
+          type: string
+          enum:
+          - BUY
+          - SELL
+          description: Order side
+        symbol:
+          type: string
+          description: Stock symbol (e.g. HPG, VNM, FPT)
+          example: HPG
+        quantity:
+          type: integer
+          format: int64
+          minimum: 1
+          description: Number of shares
+          example: 100
+        type:
+          type: string
+          enum:
+          - LIMIT
+          - MARKET
+          description: Order type. Determines which price field to use.
+        limit_price:
+          type: integer
+          format: int64
+          nullable: true
+          description: Limit price in VND. Set when type=LIMIT, null when type=MARKET.
+          example: 25500
+        market_price:
+          type: string
+          nullable: true
+          enum:
+          - MP
+          - ATO
+          - ATC
+          - MAK
+          - MOK
+          - MTL
+          - PLO
+          - FOK
+          - FAK
+          description: Market price type. Set when type=MARKET, null when type=LIMIT.
+        stock_type:
+          type: string
+          enum:
+          - STOCK
+          - BOND
+          - FUND_CERTIFICATE
+          - WARRANT
+          - ETF
+          description: Securities type. Default STOCK for most orders.
+          default: STOCK
+    OrderResponse:
+      type: object
+      properties:
+        order_id:
+          type: string
+          description: Exchange order ID
+        account_id:
+          type: string
+        transaction_date:
+          type: string
+        symbol:
+          type: string
+        order_side:
+          type: string
+          enum:
+          - BUY
+          - SELL
+        order_quantity:
+          type: integer
+          format: int64
+        limit_price:
+          type: integer
+          format: int64
+        market_price:
+          type: string
+        execute_quantity:
+          type: integer
+          format: int64
+        execute_price:
+          type: integer
+          format: int64
+        order_status:
+          type: string
+          enum:
+          - RECEIVED
+          - SENT
+          - MATCHED
+          - CANCELLED
+          - REJECTED
+          - FAILED
+          description: Initial status after placement (usually RECEIVED or SENT)
+        fee_amount:
+          type: number
+        tax_amount:
+          type: number
+        execute_amount:
+          type: integer
+          format: int64
+        order_type:
+          type: string
+          enum:
+          - LO
+          - MP
+          - ATO
+          - ATC
+          - MAK
+          - MOK
+          - MTL
+          - PLO
+          - FOK
+          - FAK
+        code:
+          type: string
+          nullable: true
+          description: Error code if order was rejected. See error-codes.md.
+        rejected_reason:
+          type: string
+          nullable: true
+          description: Human-readable rejection reason
+        lot:
+          type: string
+          enum:
+          - EVEN
+          - ODD
+          description: EVEN = round lot (≥100 shares), ODD = odd lot (1-99 shares)
+    StandardError:
+      type: object
+      properties:
+        error_code:
+          type: string
+          nullable: true
+          description: Application-level error code
+        message:
+          type: string
+          nullable: true
+          description: Human-readable status or error message
+        data:
+          nullable: true
+        result:
+          nullable: true
+        status:
+          type: integer
+          nullable: true
+          description: HTTP-like status field used by some endpoints
+    ApiSuccessEnvelope:
+      type: object
+      properties:
+        status:
+          type: integer
+          nullable: true
+        error_code:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+      additionalProperties: true
+    UserProfileLite:
+      type: object
+      description: Minimal user profile object inferred from finhay.sh infer flow.
+      properties:
+        user_id:
+          type: integer
+          example: 123456
+      required:
+      - user_id
+      additionalProperties: true
+    GetCurrentUserResponse:
+      type: object
+      description: Schema inferred from finhay.sh. The client reads data.user_id from this payload.
+      properties:
+        status:
+          type: integer
+          nullable: true
+        error_code:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/UserProfileLite'
+      additionalProperties: true
+    SubAccount:
+      type: object
+      description: Schema inferred from finhay.sh infer flow.
+      properties:
+        type:
+          type: string
+          example: normal
+          description: Sub-account type; client uppercases this to build env vars such as SUB_ACCOUNT_NORMAL
+        id:
+          type: string
+          example: '0001234567'
+        sub_account_ext:
+          type: string
+          example: 120C000008.4
+          description: Extended sub-account ID. Values ending with .4 are treated as the order-execution account by finhay.sh.
+      additionalProperties: true
+    GetSubAccountsResponse:
+      type: object
+      description: Schema inferred from finhay.sh. The client accepts either result[] or data[] for the sub-account array.
+      properties:
+        status:
+          type: integer
+          nullable: true
+        error_code:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubAccount'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubAccount'
+      additionalProperties: true
+    TwoFactorRequestPayload:
+      type: object
+      required:
+      - channel
+      properties:
+        channel:
+          type: string
+          enum:
+          - EMAIL
+          example: EMAIL
+    TwoFactorRequestResponse:
+      type: object
+      description: Schema inferred from finhay.sh; ticket_id and masked_destination are consumed by the client.
+      properties:
+        ticket_id:
+          type: string
+          example: 2fa-ticket-abc123
+        masked_destination:
+          type: string
+          example: j***@example.com
+        message:
+          type: string
+          nullable: true
+        error_code:
+          type: string
+          nullable: true
+      required:
+      - ticket_id
+      additionalProperties: true
+    TwoFactorVerifyPayload:
+      type: object
+      required:
+      - ticket_id
+      - otp_code
+      properties:
+        ticket_id:
+          type: string
+        otp_code:
+          type: string
+          example: '123456'
+    TwoFactorVerifyResponse:
+      type: object
+      description: Schema inferred from finhay.sh; session_token, expires_at, and expires_at_epoch are consumed by the client.
+      properties:
+        session_token:
+          type: string
+          example: eyJhbGciOi...
+        expires_at:
+          type: string
+          format: date-time
+          example: '2026-06-22T17:00:00Z'
+        expires_at_epoch:
+          type: integer
+          description: Unix epoch seconds
+        message:
+          type: string
+          nullable: true
+        error_code:
+          type: string
+          nullable: true
+      required:
+      - session_token
+      additionalProperties: true
+    TwoFactorRevokePayload:
+      type: object
+      required:
+      - session_token
+      properties:
+        session_token:
+          type: string
+    TwoFactorRevokeResponse:
+      type: object
+      description: Schema is not explicitly documented in the repository; represented as a permissive success envelope inferred from CLI usage.
+      properties:
+        status:
+          type: integer
+          nullable: true
+        error_code:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+      additionalProperties: true
+  responses:
+    UnauthorizedError:
+      description: Authentication failed or credentials/signature invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+    ForbiddenError:
+      description: Forbidden. For trading writes this may indicate OTP session required/expired/invalid/revoked.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+    RateLimitedError:
+      description: Rate limited
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+  parameters:
+    CacheControl:
+      name: cache-control
+      in: query
+      required: false
+      description: Cache control policy
+      schema:
+        type: string
+        enum:
+        - CACHE
+        - NOCACHE
+  headers: {}
+externalDocs:
+  description: Source repository
+  url: https://github.com/vnbrokers/finhay-skills-hub

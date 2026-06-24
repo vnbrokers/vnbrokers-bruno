@@ -24,5 +24,7 @@ specs:
     path: "openapi/TCBS iFlash Open API.yaml"
   - name: "DNSE OpenAPI v2"
     path: "openapi/DNSE OpenAPI v2.yaml"
+  - name: "FHSC OpenAPI"
+    path: "openapi/FHSC OpenAPI.yaml"
 
 docs: "VNBrokers - A Collection of OpenAPIs from Vietnamese Securities Companies"
