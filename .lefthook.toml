@@ -1,0 +1,4 @@
+[[remotes]]
+git_url = "https://github.com/vnbrokers/.github"
+ref = "main"
+configs = ["lefthook.common.toml"]
