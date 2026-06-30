@@ -1,0 +1,60 @@
+info:
+  name: onTradingSession
+  type: websocket
+  seq: 4
+
+websocket:
+  url: "{{wsBaseUrl}}/v1/stream?encoding=json"
+  message:
+    type: text
+    data: |-
+      {
+        "action": "subscribe",
+        "channels": [
+          {
+            "name": "session.STO.G1.json"
+          }
+        ]
+      }
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  ### Thông tin phiên (Session)
+
+  Cung cấp thông tin phiên giao dịch của các sàn theo bảng giao dịch và nhóm sản phẩm thị trường.
+
+  #### Channel
+
+  >  **session.\{product_group_id\}.\{board_id\}.\{encoding\}**
+
+  #### Input
+
+  - `tsc_prod_grp_id`: Mã nhóm sản phẩm thị trường.
+  - `board_id`: Mã bảng giao dịch (VD: G1 – lô chẵn).
+
+  ```json
+  {
+    "action": "subscribe",
+    "channels": [
+      {
+        "name": "session.STO.G1.json"
+      }
+    ]
+  }
+  ```
+
+  #### Payload
+
+  ```json lines
+  {
+    "marketId":"DVX",      // string // Mã thị trường niêm yết mã chứng khoán
+    "boardId":"G1",        // string // Mã bảng giao dịch
+    "eventId":"AB2",       // string // Mã sự kiện chuyển trạng thái phiên giao dịch
+    "tradingSessionId":"40",  // string // Mã phiên giao dịch hiện tại
+    "tscProdGrpId":"STO",         // string // Mã nhóm sản phẩm thị trường
+    "time":"2025-10-01T02:15:00.487Z" //string  // Thời điểm cập nhật dữ liệu
+  }
+  ```

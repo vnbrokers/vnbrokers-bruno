@@ -1,0 +1,89 @@
+info:
+  name: onBrokerPositions
+  type: websocket
+  seq: 4
+
+websocket:
+  url: "{{wsBaseUrl}}/v1/stream?encoding=json"
+  message:
+    type: json
+    data: |-
+      {
+        "action": "subscribe",
+        "channels": [
+          {
+            "name": "position.broker.STOCK.{{investorId}}.json",
+            "symbols": []
+          }
+        ]
+      }
+
+runtime:
+  variables:
+    - name: marketType
+      value: STOCK
+    - name: investorId
+      value: ""
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  ### Dữ liệu vị thế thời gian thực (Broker Position Event)
+
+  Cung cấp thông tin chi tiết về vị thế đang nắm giữ trên tài khoản khách hàng thuộc quản lý của Môi giới. Hệ thống sẽ đẩy dữ liệu ngay khi có sự thay đổi liên quan đến: mở vị thế, đóng vị thế, thay đổi khối lượng, giá vốn, giá đóng, giá thị trường hoặc trạng thái vị thế.
+
+  #### Channel
+
+  `position.broker.{market_type}.{investor_id}.{encoding}`
+
+  - **market_type**: Phân loại thị trường
+    - `STOCK`: Vị thế thị trường cơ sở
+    - `DERIVATIVE`: Vị thế thị trường phái sinh
+  - **investor_id**: Mã định danh tài khoản khách hàng tại DNSE, được trả về từ endpoint Danh sách tiểu khoản quản lý (`GET /brokers/accounts/care-by`).
+  - **encoding**: Định dạng dữ liệu `msgpack` hoặc `json`.
+
+  #### Giới hạn kết nối
+
+  - Mỗi kết nối WebSocket chỉ hỗ trợ subscribe Broker Position Event cho duy nhất một `investor_id`.
+  - Chỉ được sử dụng các `investor_id` đã được ủy quyền cho Môi giới. Hệ thống sẽ trả về lỗi phân quyền nếu tài khoản không thuộc danh sách được phân quyền.
+
+  #### Input
+
+  ```json
+  {
+    "action": "subscribe",
+    "channels": [
+      {
+        "name": "position.broker.STOCK.1000009250.json",
+        "symbols": []
+      }
+    ]
+  }
+  ```
+
+  #### Payload
+
+  ```json lines
+  {
+    "id": 177796763592657,            // integer  // Id vị thế
+    "accountNo": "0001179019",        // string   // Số tiểu khoản
+    "symbol": "41I1G5000",            // string   // Mã chứng khoán
+    "status": "OPEN",                 // string   // Trạng thái vị thế (OPEN: Đang mở, CLOSED: Đã đóng)
+    "loanPackageId": 2278,            // integer  // Mã gói vay
+    "side": "NB",                     // string   // Chiều vị thế (NB: Mua, NS: Bán)
+    "accumulateQuantity": 247,        // integer  // Tổng khối lượng đã mở được cộng dồn trong vị thế
+    "tradeQuantity": null,            // integer  // Dành cho thị trường cơ sở
+    "closedQuantity": 236,            // integer  // Khối lượng đã đóng
+    "costPrice": 2057.72425,          // float    // Giá vốn trung bình
+    "marketPrice": 2070.0,            // float    // Giá thị trường hiện tại
+    "breakEvenPrice": 2058.21911,     // float    // Giá hòa vốn
+    "openQuantity": 11,               // integer  // Khối lượng vị thế đang mở
+    "overNightQuantity": 0,           // integer  // Khối lượng mở qua đêm
+    "averageClosePrice": 2094.28941,  // float    // Giá đóng trung bình tính trên khối lượng đã đóng
+    "marketType": "DERIVATIVE",       // string   // Loại thị trường
+    "createdDate": "2026-05-05T09:17:50.457893Z", // string // Thời điểm mở vị thế (UTC)
+    "modifiedDate": "2026-05-07T04:19:20.901188117Z" // string // Thời điểm cập nhật gần nhất (UTC)
+  }
+  ```
