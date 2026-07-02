@@ -93,4 +93,27 @@ docs: |-
   #### Raw stream message
   
   ```json
+  {
+    "T": "f",
+    "boardId": "G1",
+    "buyTradedAmount": 3662680000,
+    "buyVolume": 50000,
+    "foreignInvestorTypeCode": "10",
+    "foreignerBuyPossibleQuantity": 316769484,
+    "foreignerOrderLimitQuantity": 303619836,
+    "marketId": "STO",
+    "multicastReceiveTime": {
+      "Nanos": 975375202,
+      "Seconds": 1782976519
+    },
+    "sellTradedAmount": 31726100000,
+    "sellVolume": 434100,
+    "symbol": "STB",
+    "totalBuyTradedAmount": 3662680000,
+    "totalBuyVolume": 50000,
+    "totalSellTradedAmount": 31726100000,
+    "totalSellVolume": 434100,
+    "tradingSessionId": "40",
+    "transactTime": "071500077"
+  }
   ```
