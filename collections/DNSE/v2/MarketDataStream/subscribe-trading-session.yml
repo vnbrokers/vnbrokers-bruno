@@ -64,12 +64,19 @@ docs: |-
   ```json
   {
     "T": "s",
-    "marketId":"DVX",
-    "boardId":"G1",
-    "eventId":"AB2",
-    "tradingSessionId":"40",
-    "tscProdGrpId":"STO",
-    "sendingTime":"2025-10-01T02:15:00.487Z"
-    "_receivedAt":"2025-10-01T02:15:00.487Z"
-  }    
+    "boardId": "G1",
+    "boardIdOriginal": "AL",
+    "eventId": "AW8",
+    "marketId": "STO",
+    "multicastReceiveTime": {
+      "Nanos": 660250421,
+      "Seconds": 1782966600
+    },
+    "sendingTime": {
+      "Nanos": 662000000,
+      "Seconds": 1782966600
+    },
+    "tradingSessionId": "UNSPECIFIED",
+    "tscProdGrpId": "STO"
+  }
   ```
