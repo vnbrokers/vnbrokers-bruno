@@ -58,3 +58,18 @@ docs: |-
     "time":"2025-10-01T02:15:00.487Z" //string  // Thời điểm cập nhật dữ liệu
   }
   ```
+
+  #### Raw stream message
+
+  ```json
+  {
+    "T": "s",
+    "marketId":"DVX",
+    "boardId":"G1",
+    "eventId":"AB2",
+    "tradingSessionId":"40",
+    "tscProdGrpId":"STO",
+    "sendingTime":"2025-10-01T02:15:00.487Z"
+    "_receivedAt":"2025-10-01T02:15:00.487Z"
+  }    
+  ```

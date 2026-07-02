@@ -70,3 +70,8 @@ docs: |-
     //integer   // Khối lượng dự khớp tại thời điểm xác định
   }
   ```
+
+  #### Raw stream message:
+
+  ```json
+  ```

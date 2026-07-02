@@ -87,3 +87,33 @@ docs: |-
     //string  // Mã phiên giao dịch hiện tại
   }
   ```
+
+  #### Raw stream message
+
+  ```json
+  {
+    "T": "te",
+    "avgPrice": 23.529,
+    "boardId": "G1",
+    "grossTradeAmount": 100.603425,
+    "highestPrice": 23.65,
+    "isin": "VN000000HPG4",
+    "lowestPrice": 23.45,
+    "marketId": "STO",
+    "matchPrice": 23.45,
+    "matchQtty": 150,
+    "multicastReceiveTime": {
+      "Nanos": 448799357,
+      "Seconds": 1782964423
+    },
+    "openPrice": 23.5,
+    "side": "SELL",
+    "symbol": "HPG",
+    "time": {
+      "Nanos": 449000000,
+      "Seconds": 1782964423
+    },
+    "totalVolumeTraded": 427580,
+    "tradingSessionId": "40"
+  }
+  ```  

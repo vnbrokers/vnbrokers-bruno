@@ -88,3 +88,9 @@ docs: |-
     //integer // Room còn lại có thể mua
   }
   ```
+
+
+  #### Raw stream message
+  
+  ```json
+  ```

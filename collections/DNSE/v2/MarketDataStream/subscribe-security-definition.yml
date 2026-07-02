@@ -99,3 +99,8 @@ docs: |-
     //string  // Ngày giao dịch cuối cùng (đối với mã phái sinh, chứng quyền) 
   }
   ```
+
+  #### Raw stream message
+
+  ```json
+  ```

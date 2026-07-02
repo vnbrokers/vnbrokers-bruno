@@ -62,3 +62,25 @@ docs: |-
     //string  // Thời điểm cập nhật dữ liệu
   }
   ```
+
+  #### Raw stream message
+
+  ```json
+  {
+    "T": "emi",
+    "action": "estimated_market_index_update",
+    "marketIndex": {
+      "changedRatio": -0.1,
+      "changedValue": -1.95,
+      "fluctuationDownIssueCount": 19,
+      "fluctuationSteadinessIssueCount": 6,
+      "fluctuationUpIssueCount": 5,
+      "grossTradeAmount": 2463.53,
+      "indexName": "VN30",
+      "time": "2026-07-02 10:45:44.852",
+      "totalVolumeTraded": 86289600,
+      "valueIndexes": 2011.4
+    },
+    "timestamp": 1782963944855
+  }
+  ```

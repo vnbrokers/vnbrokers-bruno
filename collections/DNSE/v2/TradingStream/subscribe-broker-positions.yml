@@ -87,3 +87,8 @@ docs: |-
     "modifiedDate": "2026-05-07T04:19:20.901188117Z" // string // Thời điểm cập nhật gần nhất (UTC)
   }
   ```
+
+  #### Raw stream message
+  
+  ```json
+  ```

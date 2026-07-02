@@ -111,3 +111,69 @@ docs: |-
     //integer // Tổng khối lượng chào mua
   }
   ```
+
+  #### Raw stream message
+
+  ```json
+  {
+    "T": "q",
+    "bid": [
+      {
+        "price": 23.45,
+        "qtty": 53120
+      },
+      {
+        "price": 23.4,
+        "qtty": 79240
+      },
+      {
+        "price": 23.35,
+        "qtty": 75080
+      }
+    ],
+    "boardId": "G1",
+    "isin": "VN000000HPG4",
+    "marketId": "STO",
+    "multicastReceiveTime": {
+      "Nanos": 487386393,
+      "Seconds": 1782965020
+    },
+    "offer": [
+      {
+        "price": 23.5,
+        "qtty": 14840
+      },
+      {
+        "price": 23.55,
+        "qtty": 23430
+      },
+      {
+        "price": 23.6,
+        "qtty": 49430
+      }
+    ],
+    "symbol": "HPG",
+    "time": {
+      "Nanos": 489000000,
+      "Seconds": 1782965020
+    }
+  }
+  ```
+
+  #### Raw stream message
+
+  ```json
+  {
+    "T": "b",
+    "close": 23.5,
+    "high": 23.5,
+    "lastUpdated": 1782965181,
+    "low": 23.45,
+    "open": 23.45,
+    "resolution": "1",
+    "symbol": "HPG",
+    "time": 1782965160,
+    "type": "STOCK",
+    "volume": 2600
+  }
+  ```

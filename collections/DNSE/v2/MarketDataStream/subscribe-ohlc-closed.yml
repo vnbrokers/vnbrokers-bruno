@@ -76,3 +76,21 @@ docs: |-
     //string    // Loại nhóm thị trường
   }
   ```
+
+  #### Raw stream message
+
+  ```json
+  {
+    "T": "bc",
+    "close": 23.5,
+    "high": 23.5,
+    "lastUpdated": 1782965181,
+    "low": 23.45,
+    "open": 23.45,
+    "resolution": "1",
+    "symbol": "HPG",
+    "time": 1782965160,
+    "type": "STOCK",
+    "volume": 2600
+  }
+  ```

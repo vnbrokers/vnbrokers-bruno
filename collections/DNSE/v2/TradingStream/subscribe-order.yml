@@ -68,3 +68,7 @@ docs: |+
   }
   ```
 
+  #### Raw stream message
+  
+  ```json
+  ```

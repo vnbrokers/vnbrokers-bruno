@@ -116,3 +116,43 @@ docs: |-
     //string  // Thời điểm cập nhật
   }
   ```
+
+  #### Raw stream message
+  
+  ```json
+  {
+    "T": "mi",
+    "blkTrdAccTrdVal": 405.67389565,
+    "blkTrdAccTrdVol": 14313531,
+    "changedRatio": 0.16,
+    "changedValue": 3.269999999999982,
+    "contauctAccTrdVal": 2675.3469569,
+    "contauctAccTrdVol": 91978426,
+    "currencyCode": "VND",
+    "fluctuationDownIssueCount": 17,
+    "fluctuationDownIssueVolume": 35543518,
+    "fluctuationSteadinessIssueCount": 4,
+    "fluctuationSteadinessIssueVolume": 13221728,
+    "fluctuationUpIssueCount": 9,
+    "fluctuationUpIssueVolume": 57526711,
+    "grossTradeAmount": 3081.02085255,
+    "highestValueIndexes": 2024.3,
+    "indexName": "VN30",
+    "indexTypeCode": "101",
+    "lowestValueIndexes": 2011.17,
+    "marketId": "STO",
+    "marketIndexClass": "HSX",
+    "multicastReceiveTime": {
+      "Nanos": 50953993,
+      "Seconds": 1782964675
+    },
+    "priorValueIndexes": 2013.35,
+    "totalVolumeTraded": 106291957,
+    "tradingSessionId": "40",
+    "transactTime": {
+      "Nanos": 4000000,
+      "Seconds": 1782964675
+    },
+    "valueIndexes": 2016.62
+  }
+  ```
