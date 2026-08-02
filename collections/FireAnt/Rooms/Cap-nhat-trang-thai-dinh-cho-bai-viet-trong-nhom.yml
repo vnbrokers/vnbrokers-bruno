@@ -1,0 +1,89 @@
+info:
+  name: Cập nhật trạng thái đính cho bài viết trong nhóm
+  type: http
+  seq: 23
+  tags:
+    - Rooms
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/rooms/:roomId/posts/:postId/sticky"
+  params:
+    - name: roomId
+      value: ""
+      type: path
+      description: Id nhóm
+    - name: postId
+      value: ""
+      type: path
+      description: Id của bài viết
+  body:
+    type: json
+    data: |-
+      {
+        "isSticky": false
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/rooms/:roomId/posts/:postId/sticky"
+      method: PUT
+      params:
+        - name: roomId
+          value: ""
+          type: path
+          description: Id nhóm
+        - name: postId
+          value: ""
+          type: path
+          description: Id của bài viết
+      body:
+        type: json
+        data: |-
+          {
+            "isSticky": false
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{}"
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/rooms/:roomId/posts/:postId/sticky"
+      method: PUT
+      params:
+        - name: roomId
+          value: ""
+          type: path
+          description: Id nhóm
+        - name: postId
+          value: ""
+          type: path
+          description: Id của bài viết
+      body:
+        type: json
+        data: |-
+          {
+            "isSticky": false
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

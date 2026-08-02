@@ -1,0 +1,64 @@
+info:
+  name: Lấy danh sách trái phiếu theo mã tổ chức phát hành
+  type: http
+  seq: 3
+  tags:
+    - Bond
+
+http:
+  method: GET
+  url: "{{baseUrl}}/bonds/issuer/:symbol"
+  params:
+    - name: symbol
+      value: ""
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{baseUrl}}/bonds/issuer/:symbol"
+      method: GET
+      params:
+        - name: symbol
+          value: ""
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "bondCode": "",
+              "issuerName": "",
+              "tenorPeriod": 0,
+              "issueDate": "",
+              "maturityDate": "",
+              "bondRate": 0,
+              "bondRateType": "",
+              "currentListedVolume": 0,
+              "status": "",
+              "infoObj": {
+                "bondCode": "",
+                "issuerInstitutionID": 0,
+                "issuerSymbol": "",
+                "issueICBCode": "",
+                "icbNameLv1": "",
+                "icbNameLv2": "",
+                "icbNameLv3": "",
+                "icbNameLv4": ""
+              }
+            }
+          ]

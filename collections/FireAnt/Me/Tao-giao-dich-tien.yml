@@ -1,0 +1,94 @@
+info:
+  name: Tạo giao dịch tiền
+  type: http
+  seq: 97
+  tags:
+    - Me
+
+http:
+  method: POST
+  url: "{{baseUrl}}/me/money-transactions"
+  body:
+    type: json
+    data: |-
+      {
+        "transactionTypeID": 0,
+        "amount": 0,
+        "destinationBankID": 0,
+        "destinationBankAccountNo": "",
+        "destinationBankAccountName": "",
+        "destinationBankBranch": "",
+        "otp": ""
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/me/money-transactions"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "transactionTypeID": 0,
+            "amount": 0,
+            "destinationBankID": 0,
+            "destinationBankAccountNo": "",
+            "destinationBankAccountName": "",
+            "destinationBankBranch": "",
+            "otp": ""
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "transactionID": 0,
+            "transactionTypeID": 0,
+            "amount": 0,
+            "status": "",
+            "accountID": 0,
+            "destinationBankID": 0,
+            "destinationBankAccountNo": "",
+            "destinationBankAccountName": "",
+            "destinationBankBranch": "",
+            "notes": "",
+            "createdDate": "",
+            "updatedDate": ""
+          }
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/me/money-transactions"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "transactionTypeID": 0,
+            "amount": 0,
+            "destinationBankID": 0,
+            "destinationBankAccountNo": "",
+            "destinationBankAccountName": "",
+            "destinationBankBranch": "",
+            "otp": ""
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

@@ -1,0 +1,78 @@
+info:
+  name: Lấy thông tin thuật ngữ theo ID
+  type: http
+  seq: 6
+  tags:
+    - Investopedia
+
+http:
+  method: GET
+  url: "{{baseUrl}}/investopedia/terms/:termId"
+  params:
+    - name: termId
+      value: ""
+      type: path
+      description: ID của thuật ngữ
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/investopedia/terms/:termId"
+      method: GET
+      params:
+        - name: termId
+          value: ""
+          type: path
+          description: ID của thuật ngữ
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "termId": 0,
+              "categoryId": 0,
+              "category": {
+                "categoryID": 0,
+                "name": ""
+              },
+              "termKey": "",
+              "name": "",
+              "englishName": "",
+              "excerpt": "",
+              "content": "",
+              "created": "",
+              "modified": "",
+              "views": 0,
+              "videoUrl": ""
+            }
+          ]
+  - name: 404 Response
+    description: Thuật ngữ không tồn tại
+    request:
+      url: "{{baseUrl}}/investopedia/terms/:termId"
+      method: GET
+      params:
+        - name: termId
+          value: ""
+          type: path
+          description: ID của thuật ngữ
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

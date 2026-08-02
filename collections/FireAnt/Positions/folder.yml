@@ -1,0 +1,7 @@
+info:
+  name: Positions
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

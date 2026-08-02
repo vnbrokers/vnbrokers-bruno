@@ -1,0 +1,50 @@
+info:
+  name: Lấy danh sách danh mục thuật ngữ
+  type: http
+  seq: 7
+  tags:
+    - Investopedia
+
+http:
+  method: GET
+  url: "{{baseUrl}}/investopedia/terms/categories"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/investopedia/terms/categories"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "categoryID": 0,
+              "name": ""
+            }
+          ]
+  - name: 500 Response
+    description: Lỗi hệ thống
+    request:
+      url: "{{baseUrl}}/investopedia/terms/categories"
+      method: GET
+    response:
+      status: 500
+      statusText: Internal Server Error
+      body:
+        type: text
+        data: ""

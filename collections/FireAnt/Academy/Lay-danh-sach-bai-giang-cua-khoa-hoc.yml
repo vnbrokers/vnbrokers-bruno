@@ -1,0 +1,71 @@
+info:
+  name: Lấy danh sách bài giảng của khóa học
+  type: http
+  seq: 8
+  tags:
+    - Academy
+
+http:
+  method: GET
+  url: "{{baseUrl}}/academy/courses/:courseId/lessons"
+  params:
+    - name: courseId
+      value: ""
+      type: path
+      description: ID của khóa hoc
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/academy/courses/:courseId/lessons"
+      method: GET
+      params:
+        - name: courseId
+          value: ""
+          type: path
+          description: ID của khóa hoc
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "lessonId": 0,
+              "lessonName": "",
+              "hasAttachedFile": false,
+              "content": "",
+              "videoUrl": "",
+              "courseId": 0,
+              "positionIndex": 0,
+              "course": ""
+            }
+          ]
+  - name: 404 Response
+    description: Khóa học không tồn tại
+    request:
+      url: "{{baseUrl}}/academy/courses/:courseId/lessons"
+      method: GET
+      params:
+        - name: courseId
+          value: ""
+          type: path
+          description: ID của khóa hoc
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

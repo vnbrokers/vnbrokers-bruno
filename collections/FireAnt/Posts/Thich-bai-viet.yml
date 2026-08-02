@@ -1,0 +1,59 @@
+info:
+  name: Thích bài viết
+  type: http
+  seq: 19
+  tags:
+    - Posts
+
+http:
+  method: POST
+  url: "{{baseUrl}}/posts/:postId/likes"
+  params:
+    - name: postId
+      value: ""
+      type: path
+      description: ID bài viết
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/posts/:postId/likes"
+      method: POST
+      params:
+        - name: postId
+          value: ""
+          type: path
+          description: ID bài viết
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "0"
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/posts/:postId/likes"
+      method: POST
+      params:
+        - name: postId
+          value: ""
+          type: path
+          description: ID bài viết
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

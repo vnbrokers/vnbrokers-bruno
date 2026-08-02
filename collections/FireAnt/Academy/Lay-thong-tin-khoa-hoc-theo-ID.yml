@@ -1,0 +1,108 @@
+info:
+  name: Lấy thông tin khóa học theo ID
+  type: http
+  seq: 3
+  tags:
+    - Academy
+
+http:
+  method: GET
+  url: "{{baseUrl}}/academy/courses/:courseId"
+  params:
+    - name: courseId
+      value: ""
+      type: path
+      description: ID của khóa học
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/academy/courses/:courseId"
+      method: GET
+      params:
+        - name: courseId
+          value: ""
+          type: path
+          description: ID của khóa học
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "courseId": 0,
+              "name": "",
+              "duration": 0,
+              "lessonsAmount": 0,
+              "timetable": "",
+              "description": "",
+              "content": "",
+              "objective": "",
+              "level": "",
+              "fee": 0,
+              "subject": {
+                "subjectId": 0,
+                "name": ""
+              },
+              "isHot": false,
+              "image": "",
+              "introduction": "",
+              "isOnline": false,
+              "classId": 0,
+              "teachers": [
+                {
+                  "roleId": 0,
+                  "id": "",
+                  "userName": "",
+                  "name": "",
+                  "introduction": "",
+                  "gender": 0,
+                  "photo": ""
+                }
+              ],
+              "lessons": [
+                {
+                  "lessonId": 0,
+                  "lessonName": "",
+                  "hasAttachedFile": false,
+                  "content": "",
+                  "videoUrl": "",
+                  "courseId": 0,
+                  "positionIndex": 0,
+                  "course": ""
+                }
+              ],
+              "type": 0,
+              "benefit": "",
+              "revenueCatId": ""
+            }
+          ]
+  - name: 404 Response
+    description: Bài giảng không tồn tại
+    request:
+      url: "{{baseUrl}}/academy/courses/:courseId"
+      method: GET
+      params:
+        - name: courseId
+          value: ""
+          type: path
+          description: ID của khóa học
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

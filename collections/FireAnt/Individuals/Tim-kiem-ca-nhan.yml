@@ -1,0 +1,102 @@
+info:
+  name: Tìm kiếm cá nhân
+  type: http
+  seq: 1
+  tags:
+    - Individuals
+
+http:
+  method: GET
+  url: "{{baseUrl}}/individuals/search"
+  params:
+    - name: keywords
+      value: ""
+      type: query
+      description: Từ khóa tìm kiếm
+    - name: offset
+      value: ""
+      type: query
+      description: Vị trí bản ghi đầu tiên lấy về (Dùng để phân trang, mặc địch là 0)
+      disabled: true
+    - name: limit
+      value: ""
+      type: query
+      description: Số lượng tối đa bản ghi lấy về (Dùng để phân trang, mặc địch là 20)
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/individuals/search"
+      method: GET
+      params:
+        - name: keywords
+          value: ""
+          type: query
+          description: Từ khóa tìm kiếm
+        - name: offset
+          value: ""
+          type: query
+          description: Vị trí bản ghi đầu tiên lấy về (Dùng để phân trang, mặc địch là 0)
+          disabled: true
+        - name: limit
+          value: ""
+          type: query
+          description: Số lượng tối đa bản ghi lấy về (Dùng để phân trang, mặc địch là 20)
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "individualID": 0,
+              "name": "",
+              "gender": 0,
+              "hasPhoto": false,
+              "symbol": "",
+              "positionName": "",
+              "institutionName": "",
+              "institutionIsListing": false,
+              "institutionSymbol": ""
+            }
+          ]
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/individuals/search"
+      method: GET
+      params:
+        - name: keywords
+          value: ""
+          type: query
+          description: Từ khóa tìm kiếm
+        - name: offset
+          value: ""
+          type: query
+          description: Vị trí bản ghi đầu tiên lấy về (Dùng để phân trang, mặc địch là 0)
+          disabled: true
+        - name: limit
+          value: ""
+          type: query
+          description: Số lượng tối đa bản ghi lấy về (Dùng để phân trang, mặc địch là 20)
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

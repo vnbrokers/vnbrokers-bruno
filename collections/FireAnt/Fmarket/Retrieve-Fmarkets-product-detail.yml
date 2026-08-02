@@ -1,0 +1,126 @@
+info:
+  name: Retrieve Fmarket’s product detail
+  type: http
+  seq: 28
+  tags:
+    - Fmarket
+
+http:
+  method: POST
+  url: "{{baseUrl}}/fmarket/markets/get-product-detail"
+  body:
+    type: json
+    data: |-
+      {
+        "product_id": ""
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/fmarket/markets/get-product-detail"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "product_id": ""
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": 0,
+            "name": "",
+            "short_name": "",
+            "code": "",
+            "description": "",
+            "min_purchase_value": 0,
+            "max_purchase_value": 0,
+            "expected_profit": 0,
+            "approval_date_label": "",
+            "sale_payment_term": 0,
+            "order_book_closed_time_label": "",
+            "receive_money_closed_time_label": "",
+            "trading_session": 0,
+            "trading_session_format": "",
+            "product_fee_lst": [
+              {
+                "type": "",
+                "begin_operator": "",
+                "begin_volume": 0,
+                "end_operator": "",
+                "end_volume": 0,
+                "fee": 0,
+                "dest_product_id": 0
+              }
+            ],
+            "management_fee": 0,
+            "min_purchase_fee": 0,
+            "max_purchase_fee": 0,
+            "min_sale_fee": 0,
+            "max_sale_fee": 0,
+            "nav": 0,
+            "nav_date": "",
+            "nav_to_previous_value": 0,
+            "nav_to_previous": 0,
+            "nav_to_last_year": 0,
+            "min_holding_volume": 0,
+            "fund_asset_type": {
+              "id": 0,
+              "name": "",
+              "code": ""
+            },
+            "issuer_info": {
+              "id": 0,
+              "name": "",
+              "short_name": "",
+              "website": "",
+              "avatar_url": ""
+            },
+            "asset_allocations": [
+              {
+                "id": 0,
+                "name": ""
+              }
+            ],
+            "nav_change": {
+              "nav_to_3_months": 0,
+              "nav_to_6_months": 0,
+              "nav_to_12_months": 0,
+              "nav_to_36_months": 0,
+              "nav_to_beginning": 0,
+              "annualized_return_36_months": 0
+            }
+          }
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/fmarket/markets/get-product-detail"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "product_id": ""
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

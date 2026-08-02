@@ -1,0 +1,95 @@
+info:
+  name: Lấy danh sách các danh mục trái phiếu
+  type: http
+  seq: 1
+  tags:
+    - Bond
+
+http:
+  method: GET
+  url: "{{baseUrl}}/bonds/categories"
+  params:
+    - name: option
+      value: ""
+      type: query
+      description: 0:Issuer, 1:Type, 2:RateType, 3:Currency, 4:Exchange, 5:ICB, 6:Form, 7:Method, 8:Status
+    - name: icbLevel
+      value: ""
+      type: query
+      description: Cấp ngành (áp dụng khi option=5)
+      disabled: true
+    - name: isListing
+      value: ""
+      type: query
+      description: "1: Đang niêm yết, 0: Hủy niêm yết"
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/bonds/categories"
+      method: GET
+      params:
+        - name: option
+          value: ""
+          type: query
+          description: 0:Issuer, 1:Type, 2:RateType, 3:Currency, 4:Exchange, 5:ICB, 6:Form, 7:Method, 8:Status
+        - name: icbLevel
+          value: ""
+          type: query
+          description: Cấp ngành (áp dụng khi option=5)
+          disabled: true
+        - name: isListing
+          value: ""
+          type: query
+          description: "1: Đang niêm yết, 0: Hủy niêm yết"
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "code": "",
+              "name": ""
+            }
+          ]
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/bonds/categories"
+      method: GET
+      params:
+        - name: option
+          value: ""
+          type: query
+          description: 0:Issuer, 1:Type, 2:RateType, 3:Currency, 4:Exchange, 5:ICB, 6:Form, 7:Method, 8:Status
+        - name: icbLevel
+          value: ""
+          type: query
+          description: Cấp ngành (áp dụng khi option=5)
+          disabled: true
+        - name: isListing
+          value: ""
+          type: query
+          description: "1: Đang niêm yết, 0: Hủy niêm yết"
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

@@ -1,0 +1,74 @@
+info:
+  name: Lấy thông tin định giá
+  type: http
+  seq: 23
+  tags:
+    - Symbols
+
+http:
+  method: GET
+  url: "{{baseUrl}}/symbols/:symbol/estimated-price"
+  params:
+    - name: symbol
+      value: ""
+      type: path
+      description: Mã chứng khoán
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/symbols/:symbol/estimated-price"
+      method: GET
+      params:
+        - name: symbol
+          value: ""
+          type: path
+          description: Mã chứng khoán
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "estimatedPriceDCF": 0,
+            "proportionDCF": 0,
+            "estimatedPricePE": 0,
+            "proportionPE": 0,
+            "estimatedPricePB": 0,
+            "proportionPB": 0,
+            "estimatedPriceGraham1": 0,
+            "proportionGraham1": 0,
+            "estimatedPriceGraham2": 0,
+            "proportionGraham2": 0,
+            "estimatedPriceGraham3": 0,
+            "proportionGraham3": 0,
+            "composedPrice": 0
+          }
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/symbols/:symbol/estimated-price"
+      method: GET
+      params:
+        - name: symbol
+          value: ""
+          type: path
+          description: Mã chứng khoán
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

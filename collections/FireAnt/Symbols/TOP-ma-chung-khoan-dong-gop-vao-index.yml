@@ -1,0 +1,98 @@
+info:
+  name: TOP mã chứng khoán đóng góp vào index
+  type: http
+  seq: 5
+  tags:
+    - Symbols
+
+http:
+  method: GET
+  url: "{{baseUrl}}/symbols/contribute-to-index"
+  params:
+    - name: exchange
+      value: ""
+      type: query
+      description: Sàn (HSX, HNX, UPCOM)
+      disabled: true
+    - name: type
+      value: ""
+      type: query
+      description: "Loại top (1: Đóng góp tăng index, 2: Đóng góp giảm index)"
+      disabled: true
+    - name: count
+      value: ""
+      type: query
+      description: Số lượng bản ghi
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/symbols/contribute-to-index"
+      method: GET
+      params:
+        - name: exchange
+          value: ""
+          type: query
+          description: Sàn (HSX, HNX, UPCOM)
+          disabled: true
+        - name: type
+          value: ""
+          type: query
+          description: "Loại top (1: Đóng góp tăng index, 2: Đóng góp giảm index)"
+          disabled: true
+        - name: count
+          value: ""
+          type: query
+          description: Số lượng bản ghi
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "symbol": "",
+              "value": 0
+            }
+          ]
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/symbols/contribute-to-index"
+      method: GET
+      params:
+        - name: exchange
+          value: ""
+          type: query
+          description: Sàn (HSX, HNX, UPCOM)
+          disabled: true
+        - name: type
+          value: ""
+          type: query
+          description: "Loại top (1: Đóng góp tăng index, 2: Đóng góp giảm index)"
+          disabled: true
+        - name: count
+          value: ""
+          type: query
+          description: Số lượng bản ghi
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

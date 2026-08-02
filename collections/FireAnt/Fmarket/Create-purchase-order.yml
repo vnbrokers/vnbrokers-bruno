@@ -1,0 +1,167 @@
+info:
+  name: Create purchase order
+  type: http
+  seq: 11
+  tags:
+    - Fmarket
+
+http:
+  method: POST
+  url: "{{baseUrl}}/fmarket/orders/create-purchase-order/request"
+  body:
+    type: json
+    data: |-
+      {
+        "fmarket_id": "",
+        "product_id": 0,
+        "amount": 0
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/fmarket/orders/create-purchase-order/request"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "fmarket_id": "",
+            "product_id": 0,
+            "amount": 0
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "verification_id": "",
+            "verification_token_required": false,
+            "verification_token_expire_time": 0,
+            "code": "",
+            "type": "",
+            "type_label": "",
+            "create_date": 0,
+            "create_date_format": "",
+            "amount": 0,
+            "amount_net": 0,
+            "price": 0,
+            "volume": 0,
+            "fee_percent": 0,
+            "fee_amount": 0,
+            "product": {
+              "id": 0,
+              "name": "",
+              "code": "",
+              "short_name": "",
+              "nav": 0,
+              "approval_date_label": "",
+              "sale_payment_term": 0,
+              "order_book_closed_time_label": "",
+              "receive_money_closed_time_label": "",
+              "trading_session": 0,
+              "trading_session_format": "",
+              "nav_date": "",
+              "nav_to_previous_value": 0,
+              "nav_to_previous": 0,
+              "issuer_info": {
+                "id": 0,
+                "name": "",
+                "short_name": "",
+                "website": "",
+                "avatar_url": ""
+              },
+              "nav_change": {
+                "nav_to_3_months": 0,
+                "nav_to_6_months": 0,
+                "nav_to_12_months": 0,
+                "nav_to_36_months": 0,
+                "nav_to_beginning": 0,
+                "annualized_return_36_months": 0
+              }
+            },
+            "dst_product": {
+              "id": 0,
+              "name": "",
+              "code": "",
+              "short_name": "",
+              "nav": 0,
+              "approval_date_label": "",
+              "sale_payment_term": 0,
+              "order_book_closed_time_label": "",
+              "receive_money_closed_time_label": "",
+              "trading_session": 0,
+              "trading_session_format": "",
+              "nav_date": "",
+              "nav_to_previous_value": 0,
+              "nav_to_previous": 0,
+              "issuer_info": {
+                "id": 0,
+                "name": "",
+                "short_name": "",
+                "website": "",
+                "avatar_url": ""
+              },
+              "nav_change": {
+                "nav_to_3_months": 0,
+                "nav_to_6_months": 0,
+                "nav_to_12_months": 0,
+                "nav_to_36_months": 0,
+                "nav_to_beginning": 0,
+                "annualized_return_36_months": 0
+              }
+            },
+            "investor_bank_acc": {
+              "bank_id": "",
+              "bank_swift_code": "",
+              "bank_name": "",
+              "bank_branch": "",
+              "bank_acc_no": "",
+              "bank_acc_name": "",
+              "bin_code": ""
+            },
+            "receive_money_bank_acc": {
+              "bank_id": "",
+              "bank_swift_code": "",
+              "bank_name": "",
+              "bank_branch": "",
+              "bank_acc_no": "",
+              "bank_acc_name": "",
+              "bin_code": ""
+            },
+            "transfer_content": "",
+            "tax_percent": 0,
+            "tax_amount": 0
+          }
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/fmarket/orders/create-purchase-order/request"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "fmarket_id": "",
+            "product_id": 0,
+            "amount": 0
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

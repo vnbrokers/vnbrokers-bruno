@@ -1,0 +1,72 @@
+info:
+  name: Lấy lịch dòng tiền tương lai của trái phiếu
+  type: http
+  seq: 5
+  tags:
+    - Bond
+
+http:
+  method: GET
+  url: "{{baseUrl}}/bonds/:bondCode/cashflow"
+  params:
+    - name: bondCode
+      value: ""
+      type: path
+      description: Mã trái phiếu
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/bonds/:bondCode/cashflow"
+      method: GET
+      params:
+        - name: bondCode
+          value: ""
+          type: path
+          description: Mã trái phiếu
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "periodNo": 0,
+              "periodStart": "",
+              "periodEnd": "",
+              "paymentDate": "",
+              "bondRate": 0,
+              "yearFraction": 0,
+              "interestAmount": 0,
+              "principalAmount": 0,
+              "totalCashflow": 0
+            }
+          ]
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/bonds/:bondCode/cashflow"
+      method: GET
+      params:
+        - name: bondCode
+          value: ""
+          type: path
+          description: Mã trái phiếu
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

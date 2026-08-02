@@ -1,0 +1,403 @@
+info:
+  name: Sửa bài viết
+  type: http
+  seq: 22
+  tags:
+    - Posts
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/posts/:postId"
+  params:
+    - name: postId
+      value: ""
+      type: path
+      description: Id bài viết
+  body:
+    type: json
+    data: |-
+      {
+        "approved": false,
+        "date": "",
+        "title": "",
+        "description": "",
+        "type": 0,
+        "videoUrl": "",
+        "videoThumbnailUrl": "",
+        "videoWidth": 0,
+        "videoHeight": 0,
+        "language": "",
+        "expertUserID": "",
+        "postGroupID": 0,
+        "postSourceID": 0,
+        "isSourceContentFull": false,
+        "postSourceUrl": "",
+        "isTop": false,
+        "content": "",
+        "link": "",
+        "linkTitle": "",
+        "linkDescription": "",
+        "linkImage": "",
+        "roomID": 0,
+        "referToPostID": 0,
+        "replyToPostID": 0,
+        "sentiment": 0,
+        "images": [
+          {
+            "imageID": 0,
+            "base64Image": "",
+            "imageUrl": ""
+          }
+        ],
+        "files": [
+          {
+            "fileID": 0,
+            "fileName": "",
+            "fileExtension": "",
+            "base64Content": "",
+            "fileContentUrl": ""
+          }
+        ],
+        "symbols": [],
+        "individuals": [],
+        "hashTags": [],
+        "users": [],
+        "videoType": 0,
+        "isVideo": false,
+        "isEmagazine": false,
+        "isInfographic": false,
+        "newsType": 0,
+        "summary": "",
+        "isLivestream": false,
+        "streamingUrl": "",
+        "streamingKey": "",
+        "youtubeStreamingUrl": "",
+        "youtubeStreamingKey": "",
+        "facebookStreamingUrl": "",
+        "facebookStreamingKey": "",
+        "livestreamAction": false,
+        "livestreamActionTitle": "",
+        "livestreamActionUrl": "",
+        "livestreamActionRoute": "",
+        "repliesDisabled": false,
+        "repliesModerationRequired": false,
+        "pendingApproval": false,
+        "isAIGenerated": false,
+        "contentURL": "",
+        "hasSummary": false
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/posts/:postId"
+      method: PUT
+      params:
+        - name: postId
+          value: ""
+          type: path
+          description: Id bài viết
+      body:
+        type: json
+        data: |-
+          {
+            "approved": false,
+            "date": "",
+            "title": "",
+            "description": "",
+            "type": 0,
+            "videoUrl": "",
+            "videoThumbnailUrl": "",
+            "videoWidth": 0,
+            "videoHeight": 0,
+            "language": "",
+            "expertUserID": "",
+            "postGroupID": 0,
+            "postSourceID": 0,
+            "isSourceContentFull": false,
+            "postSourceUrl": "",
+            "isTop": false,
+            "content": "",
+            "link": "",
+            "linkTitle": "",
+            "linkDescription": "",
+            "linkImage": "",
+            "roomID": 0,
+            "referToPostID": 0,
+            "replyToPostID": 0,
+            "sentiment": 0,
+            "images": [
+              {
+                "imageID": 0,
+                "base64Image": "",
+                "imageUrl": ""
+              }
+            ],
+            "files": [
+              {
+                "fileID": 0,
+                "fileName": "",
+                "fileExtension": "",
+                "base64Content": "",
+                "fileContentUrl": ""
+              }
+            ],
+            "symbols": [],
+            "individuals": [],
+            "hashTags": [],
+            "users": [],
+            "videoType": 0,
+            "isVideo": false,
+            "isEmagazine": false,
+            "isInfographic": false,
+            "newsType": 0,
+            "summary": "",
+            "isLivestream": false,
+            "streamingUrl": "",
+            "streamingKey": "",
+            "youtubeStreamingUrl": "",
+            "youtubeStreamingKey": "",
+            "facebookStreamingUrl": "",
+            "facebookStreamingKey": "",
+            "livestreamAction": false,
+            "livestreamActionTitle": "",
+            "livestreamActionUrl": "",
+            "livestreamActionRoute": "",
+            "repliesDisabled": false,
+            "repliesModerationRequired": false,
+            "pendingApproval": false,
+            "isAIGenerated": false,
+            "contentURL": "",
+            "hasSummary": false
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "postID": 0,
+            "userName": "",
+            "user": {
+              "id": "",
+              "name": "",
+              "bio": "",
+              "isAuthentic": false,
+              "followed": false
+            },
+            "title": "",
+            "description": "",
+            "summary": "",
+            "hasSummary": false,
+            "type": 0,
+            "newsType": 0,
+            "videoUrl": "",
+            "videoThumbnailUrl": "",
+            "videoWidth": 0,
+            "videoHeight": 0,
+            "language": "",
+            "postGroup": {
+              "postGroupID": 0,
+              "name": "",
+              "description": ""
+            },
+            "postSource": {
+              "postSourceID": 0,
+              "name": "",
+              "url": ""
+            },
+            "isSourceContentFull": false,
+            "postSourceUrl": "",
+            "content": "",
+            "originalContent": "",
+            "contentURL": "",
+            "isAIGenerated": false,
+            "date": "",
+            "priority": 0,
+            "hasImage": false,
+            "hasFile": false,
+            "link": "",
+            "linkImage": "",
+            "linkTitle": "",
+            "linkDescription": "",
+            "sentiment": 0,
+            "approved": false,
+            "isTop": false,
+            "isExpertIdea": false,
+            "liked": false,
+            "totalLikes": 0,
+            "totalReplies": 0,
+            "totalShares": 0,
+            "replyToPostID": 0,
+            "referToPostID": 0,
+            "taggedSymbols": [
+              {
+                "symbol": "",
+                "price": 0,
+                "change": 0,
+                "percentChange": 0,
+                "changeSince": 0,
+                "percentChangeSince": 0
+              }
+            ],
+            "taggedIndividuals": [
+              {
+                "individualID": 0,
+                "name": ""
+              }
+            ],
+            "taggedHashTags": [
+              {
+                "hashTagID": 0,
+                "symbol": "",
+                "name": ""
+              }
+            ],
+            "taggedUsers": [
+              {
+                "userID": "",
+                "name": ""
+              }
+            ],
+            "images": [
+              {
+                "imageID": 0,
+                "base64Image": "",
+                "imageUrl": ""
+              }
+            ],
+            "files": [
+              {
+                "fileID": 0,
+                "fileName": "",
+                "fileExtension": "",
+                "base64Content": "",
+                "fileContentUrl": ""
+              }
+            ],
+            "roomID": 0,
+            "roomName": "",
+            "isRoomSticky": false,
+            "videoType": 0,
+            "isVideo": false,
+            "isEmagazine": false,
+            "isInfographic": false,
+            "lastRepliedDate": "",
+            "isLivestream": false,
+            "livestreamStarted": false,
+            "livestreamEnded": false,
+            "streamingUrl": "",
+            "streamingKey": "",
+            "youtubeStreamingUrl": "",
+            "youtubeStreamingKey": "",
+            "facebookStreamingUrl": "",
+            "facebookStreamingKey": "",
+            "livestreamAction": false,
+            "livestreamActionTitle": "",
+            "livestreamActionUrl": "",
+            "livestreamActionRoute": "",
+            "repliesDisabled": false,
+            "repliesModerationRequired": false,
+            "pendingApproval": false
+          }
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/posts/:postId"
+      method: PUT
+      params:
+        - name: postId
+          value: ""
+          type: path
+          description: Id bài viết
+      body:
+        type: json
+        data: |-
+          {
+            "approved": false,
+            "date": "",
+            "title": "",
+            "description": "",
+            "type": 0,
+            "videoUrl": "",
+            "videoThumbnailUrl": "",
+            "videoWidth": 0,
+            "videoHeight": 0,
+            "language": "",
+            "expertUserID": "",
+            "postGroupID": 0,
+            "postSourceID": 0,
+            "isSourceContentFull": false,
+            "postSourceUrl": "",
+            "isTop": false,
+            "content": "",
+            "link": "",
+            "linkTitle": "",
+            "linkDescription": "",
+            "linkImage": "",
+            "roomID": 0,
+            "referToPostID": 0,
+            "replyToPostID": 0,
+            "sentiment": 0,
+            "images": [
+              {
+                "imageID": 0,
+                "base64Image": "",
+                "imageUrl": ""
+              }
+            ],
+            "files": [
+              {
+                "fileID": 0,
+                "fileName": "",
+                "fileExtension": "",
+                "base64Content": "",
+                "fileContentUrl": ""
+              }
+            ],
+            "symbols": [],
+            "individuals": [],
+            "hashTags": [],
+            "users": [],
+            "videoType": 0,
+            "isVideo": false,
+            "isEmagazine": false,
+            "isInfographic": false,
+            "newsType": 0,
+            "summary": "",
+            "isLivestream": false,
+            "streamingUrl": "",
+            "streamingKey": "",
+            "youtubeStreamingUrl": "",
+            "youtubeStreamingKey": "",
+            "facebookStreamingUrl": "",
+            "facebookStreamingKey": "",
+            "livestreamAction": false,
+            "livestreamActionTitle": "",
+            "livestreamActionUrl": "",
+            "livestreamActionRoute": "",
+            "repliesDisabled": false,
+            "repliesModerationRequired": false,
+            "pendingApproval": false,
+            "isAIGenerated": false,
+            "contentURL": "",
+            "hasSummary": false
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

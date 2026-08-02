@@ -1,0 +1,58 @@
+info:
+  name: Lấy danh sách ngân hàng được hỗ trợ
+  type: http
+  seq: 98
+  tags:
+    - Me
+
+http:
+  method: GET
+  url: "{{baseUrl}}/me/banks"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/me/banks"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "bankID": 0,
+              "code": "",
+              "name": "",
+              "shortName": "",
+              "swiftCode": "",
+              "bin": "",
+              "logo": "",
+              "transferSupported": false,
+              "lookupSupported": false,
+              "fMarketBankID": 0
+            }
+          ]
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/me/banks"
+      method: GET
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

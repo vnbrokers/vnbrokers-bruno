@@ -1,0 +1,111 @@
+info:
+  name: Retrieve assets
+  type: http
+  seq: 27
+  tags:
+    - Fmarket
+
+http:
+  method: POST
+  url: "{{baseUrl}}/fmarket/assets/filter-assets"
+  body:
+    type: json
+    data: |-
+      {
+        "fmarket_id": "",
+        "page": 0,
+        "page_size": 0
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/fmarket/assets/filter-assets"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "fmarket_id": "",
+            "page": 0,
+            "page_size": 0
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "page": 0,
+            "page_size": 0,
+            "total_items": 0,
+            "items": [
+              {
+                "code": "",
+                "create_date": 0,
+                "create_date_format": "",
+                "purchase_price": 0,
+                "current_price": 0,
+                "current_volume": 0,
+                "current_amount": 0,
+                "gain_amount": 0,
+                "gain_percent": 0,
+                "allowed_sale": false,
+                "allowed_sale_volume": 0,
+                "allowed_convert": false,
+                "allowed_convert_volume": 0,
+                "extra": {},
+                "product_program": {
+                  "id": 0,
+                  "name": "",
+                  "code": ""
+                },
+                "product": {
+                  "id": 0,
+                  "name": "",
+                  "code": "",
+                  "short_name": "",
+                  "nav": 0,
+                  "fund_asset_type": "",
+                  "issuer_info": {
+                    "id": 0,
+                    "name": "",
+                    "short_name": "",
+                    "website": "",
+                    "avatar_url": ""
+                  }
+                }
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/fmarket/assets/filter-assets"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "fmarket_id": "",
+            "page": 0,
+            "page_size": 0
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""

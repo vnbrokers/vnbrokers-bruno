@@ -1,0 +1,72 @@
+info:
+  name: Lấy nội dung mẫu biểu đồ
+  type: http
+  seq: 54
+  tags:
+    - Me
+
+http:
+  method: GET
+  url: "{{baseUrl}}/me/chart-templates/:templateID"
+  params:
+    - name: templateID
+      value: ""
+      type: path
+      description: ID mẫu biểu đồ
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công
+    request:
+      url: "{{baseUrl}}/me/chart-templates/:templateID"
+      method: GET
+      params:
+        - name: templateID
+          value: ""
+          type: path
+          description: ID mẫu biểu đồ
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "chartTemplateID": 0,
+            "name": "",
+            "description": "",
+            "userName": "",
+            "symbol": "",
+            "interval": "",
+            "state": "",
+            "template": "",
+            "lastUpdated": "",
+            "sharing": false,
+            "isSystem": false
+          }
+  - name: 400 Response
+    description: Có lỗi khi thực hiện thao tác
+    request:
+      url: "{{baseUrl}}/me/chart-templates/:templateID"
+      method: GET
+      params:
+        - name: templateID
+          value: ""
+          type: path
+          description: ID mẫu biểu đồ
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""
