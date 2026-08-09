@@ -9,19 +9,24 @@ http:
   headers:
     - name: trading-token
       value: "{{tradingToken}}"
+      description: "Token xác thực giao dịch."
   params:
     - name: marketType
       value: STOCK
       type: query
+      description: "Loại thị trường"
     - name: orderCategory
       value: NORMAL
       type: query
+      description: "Phân loại lệnh thường, lệnh điều kiện (mặc định NORMAL)"
     - name: accountNo
       value: "{{accountNo}}"
       type: path
+      description: "Số tiểu khoản"
     - name: orderId
       value: "{{orderId}}"
       type: path
+      description: "Id lệnh giao dịch"
   body:
     type: json
     data: |-
@@ -119,7 +124,7 @@ examples:
         - name: trading-token
           value: "{{tradingToken}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-07-23"
       params:
         - name: marketType
           value: DERIVATIVE
@@ -166,7 +171,7 @@ examples:
         - name: trading-token
           value: "{{tradingToken}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-07-23"
       params:
         - name: marketType
           value: ""
@@ -201,7 +206,7 @@ examples:
         - name: trading-token
           value: "{{tradingToken}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-07-23"
       params:
         - name: marketType
           value: DERIVATIVE
@@ -251,8 +256,9 @@ docs: |-
   #### Detailed descriptions
 
   **marketType**: Loại thị trường 
-  - STOCK: Gói vay giao dịch cơ sở
-  - DERIVATIVE: Gói vay giao dịch phái sinh
+  - STOCK: Giao dịch cơ sở
+  - DERIVATIVE: Giao dịch phái sinh
+  - BOND: Giao dịch trái phiếu
 
   **» price**: Giá mới cho lệnh LO
   - Đối với lệnh cơ sở, có thể sửa cả giá và khối lượng

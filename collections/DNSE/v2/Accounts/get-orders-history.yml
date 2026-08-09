@@ -10,19 +10,19 @@ http:
     - name: marketType
       value: DERIVATIVE
       type: query
+      description: "Loại thị trường"
     - name: from
-      value: 2026-05-01
+      value: "2026-05-01"
       type: query
+      description: "Ngày bắt đầu (yyyy-mm-dd)"
     - name: to
-      value: 2026-06-01
+      value: "2026-06-01"
       type: query
-    - name: start
-      value: "100"
-      type: query
-      disabled: true
+      description: "Ngày kết thúc (yyyy-mm-dd)"
     - name: accountNo
       value: "{{accountNo}}"
       type: path
+      description: "Số tiểu khoản"
   auth: inherit
 
 runtime:
@@ -134,16 +134,16 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-07-23"
       params:
         - name: marketType
           value: STOCK
           type: query
         - name: from
-          value: 2026-02-15
+          value: "2026-02-15"
           type: query
         - name: to
-          value: 2026-03-18
+          value: "2026-03-18"
           type: query
         - name: accountNo
           value: ""
@@ -193,7 +193,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-07-23"
       params:
         - name: marketType
           value: ""
@@ -230,7 +230,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-07-23"
       params:
         - name: marketType
           value: ""

@@ -5,23 +5,28 @@ info:
 
 http:
   method: POST
-  url: "{{baseUrl}}/accounts/orders?marketType=DERIVATIVE"
+  url: "{{baseUrl}}/accounts/:accountNo/orders?marketType=DERIVATIVE&orderCategory=NORMAL"
   headers:
     - name: trading-token
       value: "{{tradingToken}}"
+      description: "Token xác thực giao dịch."
   params:
     - name: marketType
       value: DERIVATIVE
       type: query
+      description: "Loại thị trường: STOCK, DERIVATIVE hoặc BOND."
     - name: orderCategory
       value: NORMAL
       type: query
-      disabled: true
+      description: "Phân loại lệnh: NORMAL, STOP hoặc OCO."
+    - name: accountNo
+      value: "{{accountNo}}"
+      type: path
+      description: "Số tiểu khoản."
   body:
     type: json
     data: |2-
           {
-            "accountNo": "{{accountNo}}",
             "loanPackageId": {{loanPackageId}},
             "orderType": "{{orderType}}",
             "price": {{price}},
@@ -35,7 +40,6 @@ runtime:
   variables:
     - name: accountNo
       value: "1"
-      disabled: true
     - name: loanPackageId
       value: "1775"
     - name: orderType
@@ -59,7 +63,7 @@ runtime:
             "type": "object",
             "properties": {
               "id": {
-                "type": "integer"
+                "type": "string"
               },
               "symbol": {
                 "type": "string"
@@ -124,7 +128,7 @@ examples:
   - name: 200 Response
     description: Thành công – trả về thông tin lệnh vừa đặt
     request:
-      url: "{{baseUrl}}/accounts/orders"
+      url: "{{baseUrl}}/accounts/{{accountNo}}/orders"
       method: POST
       headers:
         - name: Content-Type
@@ -134,7 +138,7 @@ examples:
         - name: trading-token
           value: "{{tradingToken}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: DERIVATIVE
@@ -142,6 +146,20 @@ examples:
         - name: orderCategory
           value: NORMAL
           type: query
+        - name: accountNo
+          value: "{{accountNo}}"
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+            "symbol": "41I1G4000",
+            "loanPackageId": 2278,
+            "orderType": "LO",
+            "price": 1861.5,
+            "quantity": 3,
+            "side": "NS"
+          }
     response:
       status: 200
       statusText: OK
@@ -152,7 +170,7 @@ examples:
         type: json
         data: |-
           {
-            "id": 1626,
+            "id": "1626",
             "symbol": "41I1G4000",
             "side": "NS",
             "orderType": "LO",
@@ -173,7 +191,7 @@ examples:
   - name: 400 Response
     description: Yêu cầu không hợp lệ
     request:
-      url: "{{baseUrl}}/accounts/orders"
+      url: "{{baseUrl}}/accounts/{{accountNo}}/orders"
       method: POST
       headers:
         - name: Content-Type
@@ -183,7 +201,7 @@ examples:
         - name: trading-token
           value: "{{tradingToken}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: ""
@@ -191,6 +209,9 @@ examples:
         - name: orderCategory
           value: ""
           type: query
+        - name: accountNo
+          value: "{{accountNo}}"
+          type: path
     response:
       status: 400
       statusText: Bad Request
@@ -208,7 +229,7 @@ examples:
   - name: 500 Response
     description: Lỗi máy chủ
     request:
-      url: "{{baseUrl}}/accounts/orders"
+      url: "{{baseUrl}}/accounts/{{accountNo}}/orders"
       method: POST
       headers:
         - name: Content-Type
@@ -218,7 +239,7 @@ examples:
         - name: trading-token
           value: "{{tradingToken}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: DERIVATIVE
@@ -226,6 +247,9 @@ examples:
         - name: orderCategory
           value: NORMAL
           type: query
+        - name: accountNo
+          value: "{{accountNo}}"
+          type: path
     response:
       status: 500
       statusText: Internal Server Error
@@ -242,33 +266,39 @@ examples:
           }
 
 docs: |-
-  Gửi yêu cầu đặt lệnh giao dịch cơ sở hoặc phái sinh trên tài khoản.
+  Gửi yêu cầu đặt lệnh thường, lệnh dừng hoặc OCO cho thị trường cơ sở, phái sinh và trái phiếu.
 
   <h3 id="placeorder-parameters">Parameters</h3>
 
   |Name|In|Type|Required|Description|
   |---|---|---|---|---|
   |marketType|query|string|true|Loại thị trường |
-  |orderCategory|query|string|true|Phân loại lệnh thường, lệnh điều kiện (mặc định NORMAL)|
+  |orderCategory|query|string|true|Phân loại lệnh NORMAL, STOP hoặc OCO|
   |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
   |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
   |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
   |trading-token|header|string|true|Token đặt lệnh|
   |version|header|string(date)|false|Phiên bản API |
   |body|body|object|false|none|
-  |» accountNo|body|string|false|Số tiểu khoản|
   |» loanPackageId|body|integer(int32)|false|Id gói vay|
   |» orderType|body|string|false|Loại lệnh|
   |» price|body|number(double)|false|Giá đặt lệnh|
   |» quantity|body|integer(int32)|false|Khối lượng đặt lệnh|
   |» side|body|string|false|Loại lệnh|
   |» symbol|body|string|false|Mã chứng khoán|
+  |» stopPrice|body|number(double)|false|Giá điều kiện kích hoạt lệnh STOP hoặc OCO|
+  |» stopOrderPrice|body|number(double)|false|Giá đặt lệnh cắt lỗ của lệnh OCO|
+  |» conditionOperator|body|string|false|Điều kiện kích hoạt >= hoặc <= của lệnh STOP|
+  |» durationType|body|string|false|Hiệu lực GTD của STOP hoặc DAY của OCO|
+  |» durationDateTime|body|string(date-time)|false|Thời điểm hết hiệu lực khi durationType là GTD|
+  |accountNo|path|string|true|Số tiểu khoản|
 
   #### Detailed descriptions
 
   **marketType**: Loại thị trường 
-  - STOCK: Đặt lệnh cơ sở
-  - DERIVATIVE: Đặt lệnh phái sinh
+  - STOCK: Giao dịch cơ sở, hỗ trợ NORMAL và STOP
+  - DERIVATIVE: Giao dịch phái sinh, hỗ trợ NORMAL, STOP và OCO
+  - BOND: Giao dịch trái phiếu, chỉ hỗ trợ NORMAL
 
   **» orderType**: Loại lệnh
   - LO: Lệnh giới hạn
@@ -285,7 +315,7 @@ docs: |-
 
   |Name|Type|Required|Restrictions|Description|
   |---|---|---|---|---|
-  |» id|integer(int32)|false|none|Id lệnh giao dịch|
+  |» id|string|false|none|ID lệnh giao dịch|
   |» symbol|string|false|none|Mã chứng khoán|
   |» side|string|false|none|Chiều đặt lệnh<br>NB: Mua<br>NS: Bán|
   |» orderType|string|false|none|Loại lệnh<br>- LO: Lệnh giới hạn<br>- MOK/MAK/MTL: Lệnh thị trường<br>- ATO/ATC: Lệnh phiên định kỳ mở cửa/đóng cửa<br>- PLO: Lệnh khớp lệnh sau giờ|

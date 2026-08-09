@@ -10,9 +10,11 @@ http:
     - name: boardId
       value: G1
       type: query
+      description: "Mã bảng giao dịch"
     - name: symbol
       value: "{{symbol}}"
       type: path
+      description: "Mã chứng khoán"
   auth: inherit
 
 runtime:
@@ -76,7 +78,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-07-23"
       params:
         - name: boardId
           value: G1
@@ -111,7 +113,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-07-23"
       params:
         - name: boardId
           value: ""
@@ -148,7 +150,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-07-23"
       params:
         - name: boardId
           value: ""

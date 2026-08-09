@@ -10,12 +10,15 @@ http:
     - name: marketType
       value: STOCK
       type: query
+      description: "Loại thị trường"
     - name: symbol
       value: ACB
       type: query
+      description: "Mã chứng khoán"
     - name: accountNo
       value: "{{accountNo}}"
       type: path
+      description: "Số tiểu khoản"
   auth: inherit
 
 runtime:
@@ -149,7 +152,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: accountNo
           value: ""
@@ -220,7 +223,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: accountNo
           value: ""
@@ -258,7 +261,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: accountNo
           value: ""
@@ -313,11 +316,12 @@ docs: |-
   **marketType**: Loại thị trường 
   - STOCK: Gói vay giao dịch cơ sở
   - DERIVATIVE: Gói vay giao dịch phái sinh
+  - BOND: Gói vay giao dịch trái phiếu
 
   |Name|Type|Required|Restrictions|Description|
   |---|---|---|---|---|
   |» symbolType|string|false|none|Phân loại mã hợp đồng phái sinh theo thời gian đáo hạn (áp dụng cho DERIVATIVE)<br>- VN30F1M: HĐTL chỉ số VN30 1 tháng<br>- VN30F2M: HĐTL chỉ số VN30 2 tháng<br>- VN30F1Q: HĐTL chỉ số VN30 1 quý<br>- VN30F2Q: HĐTL chỉ số VN30 2 quý|
-  |» marketType|string|false|none|Loại thị trường<br>- STOCK: Gói vay giao dịch cơ sở<br>- DERIVATIVE: Gói vay giao dịch phái sinh|
+  |» marketType|string|false|none|Loại thị trường<br>- STOCK: Gói vay giao dịch cơ sở<br>- DERIVATIVE: Gói vay giao dịch phái sinh<br>- BOND: Gói vay giao dịch trái phiếu|
   |» loanPackages|[object]|false|none|Danh sách gói vay|
   |»» id|integer(int32)|false|none|Id gói vay|
   |»» name|string|false|none|Tên gói vay|

@@ -16,16 +16,21 @@ config:
 
 request:
   headers:
-    - name: X-Api-Key
+    - name: X-API-Key
       value: "{{apiKey}}"
+      description: "API Key được cấp khi đăng ký dịch vụ."
     - name: X-Signature
       value: "{{X-Signature}}"
+      description: "Chữ ký xác thực yêu cầu."
     - name: X-Aux-Date
       value: "{{X-Aux-Date}}"
+      description: "Thời gian thực hiện yêu cầu."
     - name: Content-Type
       value: application/json
-    - name: Version
-      value: "2026-05-07"
+      description: "Định dạng dữ liệu của request."
+    - name: version
+      value: "2026-07-23"
+      description: "Phiên bản API theo định dạng YYYY-MM-DD."
   auth:
     type: apikey
     key: X-API-Key

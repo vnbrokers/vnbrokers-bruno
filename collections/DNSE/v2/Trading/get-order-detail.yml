@@ -10,15 +10,19 @@ http:
     - name: marketType
       value: DERIVATIVE
       type: query
+      description: "Loại thị trường"
     - name: orderCategory
       value: NORMAL
       type: query
+      description: "Phân loại lệnh thường, lệnh điều kiện (mặc định NORMAL)"
     - name: accountNo
       value: "{{accountNo}}"
       type: path
+      description: "Số tiểu khoản"
     - name: orderId
       value: "{{orderId}}"
       type: path
+      description: "Id lệnh giao dịch"
   auth: inherit
 
 runtime:
@@ -112,12 +116,6 @@ runtime:
               },
               "metadata": {
                 "type": "string"
-              },
-              "reports": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
               }
             }
           }
@@ -142,7 +140,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: DERIVATIVE
@@ -185,8 +183,7 @@ examples:
             "priceSecure": 1706.1,
             "createdDate": "2026-03-23T03:10:06.556826794Z",
             "modifiedDate": "2026-03-23T04:07:45.683977124Z",
-            "metadata": "{\"orderSession\":\"OPEN\",\"dealId\":\"1.77410795472387E14\",\"releaseSecureOnFilled\":\"false\",\"originMaker\":\"1000005917-close_deal_177410795472387\",\"dtaAccountNo\":\"D000113702\",\"isForeigner\":false,\"probType\":\"CUSTOMER\",\"eventNo\":5}",
-            "reports": []
+            "metadata": "{\"orderSession\":\"OPEN\",\"dealId\":\"1.77410795472387E14\",\"releaseSecureOnFilled\":\"false\",\"originMaker\":\"1000005917-close_deal_177410795472387\",\"dtaAccountNo\":\"D000113702\",\"isForeigner\":false,\"probType\":\"CUSTOMER\",\"eventNo\":5}"
           }
   - name: 400 Response
     description: Yêu cầu không hợp lệ
@@ -199,7 +196,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: ""
@@ -232,7 +229,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: DERIVATIVE
@@ -274,8 +271,9 @@ docs: |-
   #### Detailed descriptions
 
   **marketType**: Loại thị trường 
-  - STOCK: Sổ lệnh cơ sở
-  - DERIVATIVE: Sổ lệnh phái sinh
+  - STOCK: Giao dịch cơ sở
+  - DERIVATIVE: Giao dịch phái sinh
+  - BOND: Giao dịch trái phiếu
 
   <h3 id="getorderdetail-responseschema">Response Schema</h3>
 
@@ -307,4 +305,3 @@ docs: |-
   |» createdDate|string(date-time)|false|none|Thời điểm tạo lệnh|
   |» modifiedDate|string(date-time)|false|none|Thời điểm cập nhật lệnh|
   |» metadata|string|false|none|Thông tin bổ sung của lệnh|
-  |» reports|[any]|false|none|Danh sách trạng thái lệnh cơ sở theo từng lần cập nhật|

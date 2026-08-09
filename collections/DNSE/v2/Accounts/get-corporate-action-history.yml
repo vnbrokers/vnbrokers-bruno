@@ -10,21 +10,27 @@ http:
     - name: symbol
       value: ACB
       type: query
+      description: "Mã chứng khoán"
     - name: caType
       value: cashDividend
       type: query
+      description: "Phân loại sự kiện quyền"
     - name: caStatus
       value: pending
       type: query
+      description: "Trạng thái xử lý sự kiện quyền"
     - name: pageIndex
       value: "0"
       type: query
+      description: "Trang hiện tại"
     - name: pageSize
       value: "100"
       type: query
+      description: "Số lượng bản ghi trên mỗi trang"
     - name: accountNo
       value: "{{accountNo}}"
       type: path
+      description: "Số tiểu khoản"
   auth: inherit
 
 runtime:
@@ -237,7 +243,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: symbol
           value: ACB
@@ -306,7 +312,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: symbol
           value: ""
@@ -353,7 +359,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: symbol
           value: ""

@@ -10,18 +10,23 @@ http:
     - name: marketType
       value: STOCK
       type: query
+      description: "Loại thị trường"
     - name: symbol
       value: ACB
       type: query
+      description: "Mã chứng khoán"
     - name: loanPackageId
       value: "1769"
       type: query
+      description: "Id gói vay"
     - name: price
       value: "22100"
       type: query
+      description: "Giá đặt lệnh"
     - name: accountNo
       value: "{{accountNo}}"
       type: path
+      description: "Số tiểu khoản"
   auth: inherit
 
 runtime:
@@ -46,7 +51,7 @@ runtime:
               "pp0Buy": {
                 "type": "number"
               },
-              "pp0Sell": {
+              "pp0Short": {
                 "type": "number"
               }
             }
@@ -75,7 +80,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: accountNo
           value: ""
@@ -106,7 +111,7 @@ examples:
             "qmaxSell": 700,
             "price": 23000,
             "pp0Buy": 0,
-            "pp0Sell": 0
+            "pp0Short": 0
           }
   - name: 400 Response
     description: Yêu cầu không hợp lệ
@@ -121,7 +126,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: accountNo
           value: ""
@@ -165,7 +170,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: accountNo
           value: ""
@@ -217,8 +222,9 @@ docs: |-
   #### Detailed descriptions
 
   **marketType**: Loại thị trường 
-  - STOCK: Gói vay giao dịch cơ sở
-  - DERIVATIVE: Gói vay giao dịch phái sinh
+  - STOCK: Giao dịch cơ sở
+  - DERIVATIVE: Giao dịch phái sinh
+  - BOND: Giao dịch trái phiếu
 
   <h3 id="getppse-responseschema">Response Schema</h3>
 
@@ -228,4 +234,4 @@ docs: |-
   |» qmaxSell|integer(int32)|false|none|Khối lượng bán tối đa|
   |» price|number(double)|false|none|Giá đặt|
   |» pp0Buy|number(double)|false|none||
-  |» pp0Sell|number(double)|false|none||
+  |» pp0Short|number(double)|false|none|Giá trị sức bán khống còn lại|

@@ -10,12 +10,15 @@ http:
     - name: marketType
       value: DERIVATIVE
       type: query
+      description: "Loại thị trường"
     - name: pageSize
       value: "20"
       type: query
+      description: "Kích thước trang dữ liệu (page size)"
     - name: accountNo
       value: "{{accountNo}}"
       type: path
+      description: "Số tiểu khoản"
   auth: inherit
 
 runtime:
@@ -112,7 +115,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: DERIVATIVE
@@ -169,7 +172,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: ""
@@ -203,7 +206,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: ""

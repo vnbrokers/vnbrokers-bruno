@@ -5,17 +5,28 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/accounts/:accountNo/orders?marketType=DERIVATIVE&orderCategory=NORMAL"
+  url: "{{baseUrl}}/accounts/:accountNo/orders?marketType=DERIVATIVE&orderCategory=NORMAL&pageIndex=0&pageSize=10"
   params:
     - name: marketType
       value: DERIVATIVE
       type: query
+      description: "Loại thị trường"
     - name: orderCategory
       value: NORMAL
       type: query
+      description: "Phân loại lệnh thường, lệnh điều kiện (mặc định NORMAL)"
+    - name: pageIndex
+      value: "0"
+      type: query
+      description: "Chỉ số trang hiện tại, bắt đầu từ 0."
+    - name: pageSize
+      value: "10"
+      type: query
+      description: "Số bản ghi trên mỗi trang."
     - name: accountNo
       value: "{{accountNo}}"
       type: path
+      description: "Số tiểu khoản"
   auth: inherit
 
 runtime:
@@ -34,7 +45,7 @@ runtime:
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "integer"
+                      "type": "string"
                     },
                     "side": {
                       "type": "string"
@@ -92,6 +103,18 @@ runtime:
                     }
                   }
                 }
+              },
+              "pageIndex": {
+                "type": "integer"
+              },
+              "pageSize": {
+                "type": "integer"
+              },
+              "totalPages": {
+                "type": "integer"
+              },
+              "totalRecords": {
+                "type": "integer"
               }
             }
           }
@@ -119,7 +142,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: accountNo
           value: ""
@@ -129,6 +152,12 @@ examples:
           type: query
         - name: orderCategory
           value: ""
+          type: query
+        - name: pageIndex
+          value: "0"
+          type: query
+        - name: pageSize
+          value: "10"
           type: query
     response:
       status: 200
@@ -142,7 +171,7 @@ examples:
           {
             "orders": [
               {
-                "id": 141,
+                "id": "141",
                 "side": "NB",
                 "accountNo": "0001179019",
                 "symbol": "BCM",
@@ -162,7 +191,11 @@ examples:
                 "createdDate": "2026-03-24T03:15:22.226297778Z",
                 "modifiedDate": "2026-03-24T03:15:22.358568266Z"
               }
-            ]
+            ],
+            "pageIndex": 0,
+            "pageSize": 10,
+            "totalPages": 1,
+            "totalRecords": 1
           }
   - name: 400 Response
     description: Yêu cầu không hợp lệ
@@ -177,7 +210,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: accountNo
           value: ""
@@ -187,6 +220,12 @@ examples:
           type: query
         - name: orderCategory
           value: ""
+          type: query
+        - name: pageIndex
+          value: "0"
+          type: query
+        - name: pageSize
+          value: "10"
           type: query
     response:
       status: 400
@@ -215,7 +254,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: accountNo
           value: ""
@@ -225,6 +264,12 @@ examples:
           type: query
         - name: orderCategory
           value: ""
+          type: query
+        - name: pageIndex
+          value: "0"
+          type: query
+        - name: pageSize
+          value: "10"
           type: query
     response:
       status: 500
@@ -249,7 +294,9 @@ docs: |-
   |Name|In|Type|Required|Description|
   |---|---|---|---|---|
   |marketType|query|string|true|Loại thị trường |
-  |orderCategory|query|string|true|Phân loại lệnh thường, lệnh điều kiện (mặc định NORMAL)|
+  |orderCategory|query|string|true|Phân loại lệnh NORMAL, STOP hoặc OCO|
+  |pageIndex|query|integer|true|Chỉ số trang hiện tại, bắt đầu từ 0|
+  |pageSize|query|integer|true|Số bản ghi trên mỗi trang|
   |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
   |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
   |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
@@ -259,8 +306,14 @@ docs: |-
   #### Detailed descriptions
 
   **marketType**: Loại thị trường 
-  - STOCK: Sổ lệnh cơ sở
-  - DERIVATIVE: Sổ lệnh phái sinh
+  - STOCK: Giao dịch cơ sở
+  - DERIVATIVE: Giao dịch phái sinh
+  - BOND: Giao dịch trái phiếu
+
+  **orderCategory**: Phân loại lệnh
+  - NORMAL: Lệnh thường cơ sở, phái sinh hoặc trái phiếu
+  - STOP: Lệnh dừng có điều kiện cơ sở hoặc phái sinh
+  - OCO: Lệnh OCO phái sinh
 
   <h3 id="getorders-responseschema">Response Schema</h3>
 
@@ -269,7 +322,7 @@ docs: |-
   |Name|Type|Required|Restrictions|Description|
   |---|---|---|---|---|
   |» orders|[object]|false|none|Danh sách lệnh giao dịch|
-  |»» id|integer(int32)|false|none|Id lệnh giao dịch|
+  |»» id|string|false|none|ID lệnh giao dịch|
   |»» side|string|false|none|Chiều giao dịch<br>NB: Mua<br>NS: Bán|
   |»» accountNo|string|false|none|Số tiểu khoản|
   |»» symbol|string|false|none|Mã chứng khoán|
@@ -288,3 +341,7 @@ docs: |-
   |»» transDate|string|false|none|Ngày giao dịch|
   |»» createdDate|string(date-time)|false|none|Thời điểm tạo|
   |»» modifiedDate|string(date-time)|false|none|Thời điểm cập nhật|
+  |» pageIndex|integer(int32)|false|none|Chỉ số trang hiện tại|
+  |» pageSize|integer(int32)|false|none|Số bản ghi trên mỗi trang|
+  |» totalPages|integer(int32)|false|none|Tổng số trang|
+  |» totalRecords|integer(int32)|false|none|Tổng số bản ghi|

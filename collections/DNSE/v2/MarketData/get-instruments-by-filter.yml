@@ -10,21 +10,27 @@ http:
     - name: symbol
       value: ACB
       type: query
+      description: "Danh sách mã chứng khoán"
     - name: marketId
       value: STO
       type: query
+      description: "Mã thị trường niêm yết"
     - name: securityGroupId
       value: ST
       type: query
+      description: "Nhóm chứng khoán"
     - name: indexName
       value: VN30
       type: query
+      description: "Chỉ số thị trường"
     - name: limit
       value: "10"
       type: query
+      description: "Số bản ghi trên mỗi trang"
     - name: page
       value: "1"
       type: query
+      description: "Phân trang hiện tại"
   auth: inherit
 
 runtime:
@@ -103,7 +109,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: symbol
           value: SSI,SHS,ACB,HUT,DSE
@@ -162,7 +168,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: symbol
           value: ""
@@ -190,7 +196,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: symbol
           value: ""
