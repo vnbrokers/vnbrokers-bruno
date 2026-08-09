@@ -1,0 +1,42 @@
+info:
+  name: trade-order-place
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v3/trading/order"
+  body:
+    type: json
+    data: |-
+      {
+        "accountNo": "0001234",
+        "symbol": "SSI",
+        "side": "B",
+        "orderType": "LO",
+        "quantity": 1000,
+        "price": "30000",
+        "deviceId": "{{deviceId}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response returns success", function () {
+          expect(res.status).to.be.oneOf([200]);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |- 
+  ### POST /api/v3/trading/order
+
+  Đặt lệnh mới.
+
+  Authentication: Bearer token.

@@ -1,0 +1,30 @@
+info:
+  name: trade-position
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v3/trading/position?clientId={{clientId}}&accountNo={{accountNo}}&querySummary={{querySummary}}"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response returns success", function () {
+          expect(res.status).to.be.oneOf([200]);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |- 
+  ### GET /api/v3/trading/position
+
+  Lấy thông tin vị thế cho tài khoản.
+
+  Authentication: Bearer token.

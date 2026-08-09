@@ -1,0 +1,30 @@
+info:
+  name: data-marketFile
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v3/data/file?symbol={{symbol}}&timeFrame={{timeFrame}}&index={{index}}&fromDate={{fromDate}}&toDate={{toDate}}"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response returns success", function () {
+          expect(res.status).to.be.oneOf([200]);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |- 
+  ### GET /api/v3/data/file
+
+  Lấy đường dẫn file CSV dữ liệu thị trường theo ngày giao dịch và khung thời gian. File dữ liệu sẽ được hệ thống chuẩn bị sẵn và cung cấp đường dẫn tải về trong vòng 30 phút kể từ khi nhận được yêu cầu. Sau 30 phút, đường dẫn tải về sẽ không còn hiệu lực và khách hàng cần gửi lại yêu cầu để nhận được đường dẫn mới. Dữ liệu trong file sẽ bao gồm các trường symbol, tradingDate, open, high, low, close, volume.
+
+  Authentication: Bearer token.

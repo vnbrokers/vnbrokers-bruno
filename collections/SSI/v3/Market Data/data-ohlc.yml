@@ -1,0 +1,30 @@
+info:
+  name: data-ohlc
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v3/data/ohlc?symbol={{symbol}}&from={{from}}&to={{to}}&timeFrame={{timeFrame}}&pageIndex={{pageIndex}}&pageSize={{pageSize}}"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response returns success", function () {
+          expect(res.status).to.be.oneOf([200]);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |- 
+  ### GET /api/v3/data/ohlc
+
+  Lấy dữ liệu nến OHLCV theo khoảng thời gian. Thời gian cung cấp 1 năm gần nhất cho dữ liệu intraday, dữ liệu daily cung cấp từ khi mã chứng khoán được giao dịch.
+
+  Authentication: Bearer token.

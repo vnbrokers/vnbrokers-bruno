@@ -1,0 +1,28 @@
+info:
+  name: Kết nối WebSocket
+  type: websocket
+  seq: 1
+
+websocket:
+  url: "{{wsBaseUrl}}"
+  message:
+    type: json
+    data: |-
+      {
+        "client_id": "{{clientId}}",
+        "api_key": "{{apiKey}}",
+        "api_secret": "{{apiSecret}}",
+        "access_token": "{{accessToken}}"
+      }
+  auth: inherit
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  ### WebSocket connection
+
+  Endpoint: `wss://stream.ssi.com.vn`
+
+  Kết nối cần access token còn hiệu lực. Sau khi reconnect phải subscribe lại các topic.

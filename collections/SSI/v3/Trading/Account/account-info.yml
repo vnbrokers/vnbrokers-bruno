@@ -1,0 +1,92 @@
+info:
+  name: Account Info
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v3/account/info"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["accountNo", "accountType"],
+              "properties": {
+                "accountNo": {
+                  "type": "string"
+                },
+                "accountType": {
+                  "type": "string",
+                  "enum": ["CASH", "MARGIN", "DERIVATIVE"]
+                }
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  ### GET Account Info
+
+  ```
+  https://api.ssi.com.vn/api/v3/account/info
+  ```
+
+  Lấy danh sách tài khoản giao dịch của khách hàng.
+
+  **Authorization**
+
+  Bearer token lấy từ nhóm Authentication của SSI FastConnect v3.
+
+  **Response 200**
+
+  | Dữ liệu | Kiểu | Mô tả |
+  | --- | --- | --- |
+  | accountNo | string | Số tài khoản giao dịch |
+  | accountType | string | Loại tài khoản: CASH, MARGIN hoặc DERIVATIVE |
+
+examples:
+  - name: 200 Response
+    description: Success
+    request:
+      url: "{{baseUrl}}/api/v3/account/info"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{accessToken}}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "accountNo": "0001234",
+              "accountType": "CASH"
+            },
+            {
+              "accountNo": "0001234",
+              "accountType": "MARGIN"
+            }
+          ]

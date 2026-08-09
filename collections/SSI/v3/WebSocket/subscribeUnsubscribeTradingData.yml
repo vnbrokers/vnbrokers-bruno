@@ -1,0 +1,26 @@
+info:
+  name: Sub/Unsub Trading Data
+  type: websocket
+  seq: 3
+
+websocket:
+  url: "{{wsBaseUrl}}"
+  message:
+    type: json
+    data: |-
+      {
+        "method": "SUBSCRIBE",
+        "channel": "TRADING",
+        "topics": [
+          "order.{{accountNo}}",
+          "portfolio.{{accountNo}}"
+        ]
+      }
+  auth: inherit
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  Subscribe dữ liệu lệnh và danh mục theo tài khoản. Đổi `method` thành `UNSUBSCRIBE` để hủy.

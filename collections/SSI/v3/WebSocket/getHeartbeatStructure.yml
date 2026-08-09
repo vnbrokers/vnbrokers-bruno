@@ -1,0 +1,25 @@
+info:
+  name: Heartbeat và Subscription
+  type: websocket
+  seq: 2
+
+websocket:
+  url: "{{wsBaseUrl}}"
+  message:
+    type: json
+    data: |-
+      {
+        "method": "PONG",
+        "channel": "HEARTBEAT",
+        "time": "{{heartbeatTime}}"
+      }
+  auth: inherit
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0
+
+docs: |-
+  Phản hồi `PONG` khi server gửi `PING` trên channel `HEARTBEAT`.
+
+  Có thể dùng `LIST_SUBSCRIPTION` để kiểm tra các topic đang đăng ký.

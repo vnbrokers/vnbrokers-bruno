@@ -1,0 +1,62 @@
+name: SSI.Example
+variables:
+  - name: baseUrl
+    value: https://api.ssi.com.vn
+  - name: wsBaseUrl
+    value: wss://stream.ssi.com.vn
+  - secret: true
+    name: apiKey
+  - secret: true
+    name: apiSecret
+  - secret: true
+    name: privateKey
+  - secret: true
+    name: accessToken
+  - secret: true
+    name: refreshToken
+  - secret: true
+    name: otp
+  - secret: true
+    name: accountNo
+  - secret: true
+    name: deviceId
+  - name: clientId
+    value: ""
+  - name: symbol
+    value: SSI
+  - name: board
+    value: HOSE
+  - name: index
+    value: VN30
+  - name: tradingDate
+    value: "2026/01/01"
+  - name: timeFrame
+    value: 1d
+  - name: type
+    value: stop_limit
+  - name: processStatus
+    value: INIT
+  - name: side
+    value: B
+  - name: querySummary
+    value: "true"
+  - name: heartbeatTime
+    value: "dd-mm-yyyy hh-mm-ss"
+  - name: fcoId
+    value: ""
+  - name: from
+    value: "2026/01/01"
+  - name: to
+    value: "2026/01/31"
+  - name: fromDate
+    value: "2026/01/01"
+  - name: toDate
+    value: "2026/01/31"
+  - name: pageIndex
+    value: "1"
+  - name: pageSize
+    value: "10"
+  - name: price
+    value: "30000"
+  - name: orderStatus
+    value: PD

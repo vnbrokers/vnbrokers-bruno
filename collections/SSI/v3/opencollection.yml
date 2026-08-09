@@ -1,7 +1,7 @@
 opencollection: 1.0.0
 
 info:
-  name: SSI FastConnect v2
+  name: SSI FastConnect v3
 config:
   proxy:
     inherit: true

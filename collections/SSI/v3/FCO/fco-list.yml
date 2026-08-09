@@ -1,0 +1,30 @@
+info:
+  name: fco-list
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v3/trading/fco/list?fcoId={{fcoId}}&accountNo={{accountNo}}&type={{type}}&processStatus={{processStatus}}&symbol={{symbol}}&side={{side}}&from={{from}}&to={{to}}&pageIndex={{pageIndex}}&pageSize={{pageSize}}"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response returns success", function () {
+          expect(res.status).to.be.oneOf([200]);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |- 
+  ### GET /api/v3/trading/fco/list
+
+  Lấy danh sách các lệnh điều kiện đã tạo theo bộ lọc.
+
+  Authentication: Bearer token.

@@ -1,0 +1,42 @@
+info:
+  name: fco-order-place
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v3/trading/fco/order"
+  body:
+    type: json
+    data: |-
+      {
+        "accountNo": "0001234",
+        "deviceId": "{{deviceId}}",
+        "symbol": "SSI",
+        "side": "B",
+        "type": "stop_limit",
+        "price": "30000",
+        "quantity": 1000
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("response returns success", function () {
+          expect(res.status).to.be.oneOf([200]);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |- 
+  ### POST /api/v3/trading/fco/order
+
+  Đặt lệnh điều kiện mới. Hỗ trợ các loại lệnh điều kiện bao gồm stop, stop_limit, gtd, bullbear, oco, trailing_stop, trailing_stop_limit.
+
+  Authentication: Bearer token.

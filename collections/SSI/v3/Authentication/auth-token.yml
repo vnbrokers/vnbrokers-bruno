@@ -1,0 +1,44 @@
+info:
+  name: auth-token
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v3/auth/token"
+  body:
+    type: json
+    data: |-
+      {
+        "apiKey": "{{apiKey}}",
+        "apiSecret": "{{apiSecret}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        if (res.status === 200 && res.body && res.body.accessToken) {
+          bru.setEnvVar('accessToken', res.body.accessToken);
+          bru.setEnvVar('refreshToken', res.body.refreshToken);
+        }
+
+    - type: tests
+      code: |-
+        test("response returns success", function () {
+          expect(res.status).to.be.oneOf([200]);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |- 
+  ### POST /api/v3/auth/token
+
+  Xác thực apiKey/apiSecret để lấy access token và refresh token (kèm thông tin hết hạn).
+
+  Authentication: Không yêu cầu Bearer token.
