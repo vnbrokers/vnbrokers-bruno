@@ -1,0 +1,4 @@
+name: SSI.Example
+variables:
+  - name: baseUrl
+    value: https://api.ssi.com.vn
