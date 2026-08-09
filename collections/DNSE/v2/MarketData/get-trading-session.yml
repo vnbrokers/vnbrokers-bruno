@@ -68,7 +68,7 @@ examples:
         - name: X-Signature
           value: "{{X-Signature}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: tscProdGrpId
           value: STO
@@ -108,7 +108,7 @@ examples:
         - name: X-Signature
           value: "{{X-Signature}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: tscProdGrpId
           value: ""
@@ -140,7 +140,7 @@ examples:
         - name: X-Signature
           value: "{{X-Signature}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: tscProdGrpId
           value: ""

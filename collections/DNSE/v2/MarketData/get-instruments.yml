@@ -115,36 +115,30 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: symbol
           value: ""
           type: query
-          description: "Danh sách mã chứng khoán, phân tách bằng dấu phẩy. Ví dụ: 'SSI,SHS,ACB'."
         - name: marketId
           value: ""
           type: query
-          description: "Mã thị trường niêm yết: STO, STX, UPX, DVX, HCX."
           disabled: true
         - name: securityGroupId
           value: ""
           type: query
-          description: "Nhóm chứng khoán: ST, EF, EW, FU, BS."
           disabled: true
         - name: indexName
           value: ""
           type: query
-          description: "Tên chỉ số thị trường: VN30, VN100, HNX30."
           disabled: true
         - name: limit
           value: ""
           type: query
-          description: Số bản ghi trên mỗi trang.
           disabled: true
         - name: page
           value: ""
           type: query
-          description: Trang hiện tại (bắt đầu từ 1).
           disabled: true
     response:
       status: 200
@@ -185,36 +179,30 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: symbol
           value: ""
           type: query
-          description: "Danh sách mã chứng khoán, phân tách bằng dấu phẩy. Ví dụ: 'SSI,SHS,ACB'."
         - name: marketId
           value: ""
           type: query
-          description: "Mã thị trường niêm yết: STO, STX, UPX, DVX, HCX."
           disabled: true
         - name: securityGroupId
           value: ""
           type: query
-          description: "Nhóm chứng khoán: ST, EF, EW, FU, BS."
           disabled: true
         - name: indexName
           value: ""
           type: query
-          description: "Tên chỉ số thị trường: VN30, VN100, HNX30."
           disabled: true
         - name: limit
           value: ""
           type: query
-          description: Số bản ghi trên mỗi trang.
           disabled: true
         - name: page
           value: ""
           type: query
-          description: Trang hiện tại (bắt đầu từ 1).
           disabled: true
     response:
       status: 400
@@ -243,36 +231,30 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: symbol
           value: ""
           type: query
-          description: "Danh sách mã chứng khoán, phân tách bằng dấu phẩy. Ví dụ: 'SSI,SHS,ACB'."
         - name: marketId
           value: ""
           type: query
-          description: "Mã thị trường niêm yết: STO, STX, UPX, DVX, HCX."
           disabled: true
         - name: securityGroupId
           value: ""
           type: query
-          description: "Nhóm chứng khoán: ST, EF, EW, FU, BS."
           disabled: true
         - name: indexName
           value: ""
           type: query
-          description: "Tên chỉ số thị trường: VN30, VN100, HNX30."
           disabled: true
         - name: limit
           value: ""
           type: query
-          description: Số bản ghi trên mỗi trang.
           disabled: true
         - name: page
           value: ""
           type: query
-          description: Trang hiện tại (bắt đầu từ 1).
           disabled: true
     response:
       status: 500

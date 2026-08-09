@@ -10,18 +10,23 @@ http:
     - name: symbol
       value: ACB
       type: query
+      description: "Mã chứng khoán"
     - name: type
       value: STOCK
       type: query
+      description: "Loại thị trường"
     - name: resolution
       value: "15"
       type: query
+      description: "Khung thời gian nến"
     - name: from
       value: "1773657310"
       type: query
+      description: "Thời gian bắt đầu"
     - name: to
       value: "1773830110"
       type: query
+      description: "Thời gian kết thúc"
   auth: inherit
 
 
@@ -96,7 +101,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: symbol
           value: ACB
@@ -153,7 +158,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: symbol
           value: ""
@@ -193,7 +198,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: symbol
           value: ""

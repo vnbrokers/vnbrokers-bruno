@@ -5,17 +5,20 @@ info:
 
 http:
   method: POST
-  url: "{{baseUrl}}/accounts/positions/:positionId/close?marketType=DERIVATIVE"
+  url: "{{baseUrl}}/positions/:positionId/close?marketType=DERIVATIVE"
   headers:
     - name: trading-token
       value: "{{tradingToken}}"
+      description: "Token xác thực giao dịch."
   params:
     - name: marketType
       value: DERIVATIVE
       type: query
+      description: "Loại thị trường"
     - name: positionId
       value: "{{positionId}}"
       type: path
+      description: "Id vị thế"
   auth: inherit
 
 runtime:
@@ -86,7 +89,7 @@ examples:
   - name: 200 Response
     description: Thành công - tạo lệnh đóng vị thế
     request:
-      url: "{{baseUrl}}/accounts/positions/{{positionId}}/close"
+      url: "{{baseUrl}}/positions/{{positionId}}/close"
       method: POST
       headers:
         - name: Accept
@@ -96,7 +99,7 @@ examples:
         - name: trading-token
           value: "{{tradingToken}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: DERIVATIVE
@@ -128,7 +131,7 @@ examples:
   - name: 400 Response
     description: Yêu cầu không hợp lệ
     request:
-      url: "{{baseUrl}}/accounts/positions/{{positionId}}/close"
+      url: "{{baseUrl}}/positions/{{positionId}}/close"
       method: POST
       headers:
         - name: Accept
@@ -138,7 +141,7 @@ examples:
         - name: trading-token
           value: "{{tradingToken}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: ""
@@ -160,7 +163,7 @@ examples:
   - name: 500 Response
     description: Lỗi máy chủ
     request:
-      url: "{{baseUrl}}/accounts/positions/{{positionId}}/close"
+      url: "{{baseUrl}}/positions/{{positionId}}/close"
       method: POST
       headers:
         - name: Accept
@@ -170,7 +173,7 @@ examples:
         - name: trading-token
           value: "{{tradingToken}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: DERIVATIVE

@@ -10,21 +10,27 @@ http:
     - name: boardId
       value: G1
       type: query
+      description: "Mã bảng giao dịch"
     - name: from
       value: "1781139600"
       type: query
+      description: "Thời gian bắt đầu (timestamp)"
     - name: to
       value: "1781172000"
       type: query
+      description: "Thời gian kết thúc (timestamp) (không vượt quá 1 ngày)"
     - name: limit
       value: ""
       type: query
+      description: "Số lượng bản ghi tối đa trả về."
     - name: order
       value: ""
       type: query
+      description: "Thứ tự sắp xếp kết quả."
     - name: symbol
       value: "{{symbol}}"
       type: path
+      description: "Mã chứng khoán"
   auth: inherit
 
 runtime:

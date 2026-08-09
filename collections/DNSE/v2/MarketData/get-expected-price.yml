@@ -1,0 +1,213 @@
+info:
+  name: Giá dự khớp
+  type: http
+  seq: 8
+
+http:
+  method: GET
+  url: "{{baseUrl}}/price/:symbol/expected-price?boardId=G1&from=1785742800&to=1785829200"
+  params:
+    - name: boardId
+      value: G1
+      type: query
+      description: "Mã bảng giao dịch: G1 (lô chẵn), G4 (lô lẻ), T1/T3/T4/T6 (thỏa thuận)."
+    - name: from
+      value: "1785742800"
+      type: query
+      description: "Thời gian bắt đầu theo Unix timestamp."
+    - name: to
+      value: "1785829200"
+      type: query
+      description: "Thời gian kết thúc theo Unix timestamp; khoảng truy vấn không vượt quá 1 ngày."
+    - name: limit
+      value: "100"
+      type: query
+      description: "Số lượng bản ghi tối đa trả về."
+      disabled: true
+    - name: nextPageToken
+      value: ""
+      type: query
+      description: "Token dùng để lấy trang dữ liệu tiếp theo."
+      disabled: true
+    - name: symbol
+      value: "{{symbol}}"
+      type: path
+      description: "Mã chứng khoán."
+  auth: inherit
+
+runtime:
+  variables:
+    - name: symbol
+      value: HPG
+
+  scripts:
+    - type: tests
+      code: |-
+        test("response matches the schema", function () {
+          const schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetExpectedPriceResponse",
+            "type": "object",
+            "properties": {
+              "expectedPrices": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "marketId": { "type": "string" },
+                    "boardId": { "type": "string" },
+                    "isin": { "type": "string" },
+                    "symbol": { "type": "string" },
+                    "closePrice": { "type": "number" },
+                    "expectedTradePrice": { "type": "number" },
+                    "expectedTradeQuantity": { "type": "integer" },
+                    "time": { "type": "string" }
+                  }
+                }
+              },
+              "nextPageToken": {
+                "type": ["string", "null"]
+              }
+            }
+          }
+
+          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Thành công - trả về danh sách giá dự khớp
+    request:
+      url: "{{baseUrl}}/price/{{symbol}}/expected-price"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: "2026-07-23"
+      params:
+        - name: boardId
+          value: G1
+          type: query
+        - name: from
+          value: "1785742800"
+          type: query
+        - name: to
+          value: "1785829200"
+          type: query
+        - name: limit
+          value: "100"
+          type: query
+          disabled: true
+        - name: nextPageToken
+          value: ""
+          type: query
+          disabled: true
+        - name: symbol
+          value: "{{symbol}}"
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "expectedPrices": [
+              {
+                "marketId": "STO",
+                "boardId": "G1",
+                "isin": "VN000000HPG4",
+                "symbol": "HPG",
+                "closePrice": 0,
+                "expectedTradePrice": 94.1,
+                "expectedTradeQuantity": 2000,
+                "time": "2026-08-03 14:40:05.148"
+              }
+            ],
+            "nextPageToken": null
+          }
+  - name: 400 Response
+    description: Yêu cầu không hợp lệ
+    request:
+      url: "{{baseUrl}}/price/{{symbol}}/expected-price"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: "2026-07-23"
+      params:
+        - name: from
+          value: ""
+          type: query
+        - name: to
+          value: ""
+          type: query
+        - name: symbol
+          value: "{{symbol}}"
+          type: path
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "OA-003",
+            "message": "Thông tin nhập không hợp lệ",
+            "status": 400
+          }
+  - name: 500 Response
+    description: Lỗi máy chủ
+    request:
+      url: "{{baseUrl}}/price/{{symbol}}/expected-price"
+      method: GET
+      headers:
+        - name: X-API-Key
+          value: "{{apiKey}}"
+        - name: version
+          value: "2026-07-23"
+      params:
+        - name: from
+          value: "1785742800"
+          type: query
+        - name: to
+          value: "1785829200"
+          type: query
+        - name: symbol
+          value: "{{symbol}}"
+          type: path
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "OA-009",
+            "message": "Lỗi hệ thống",
+            "status": 500
+          }
+
+docs: |-
+  Truy vấn thông tin giá dự khớp của mã chứng khoán trong phiên khớp lệnh định kỳ.
+
+  **Query params:** `boardId`, `from`, `to`, `limit`, `nextPageToken`.
+
+  Response trả về danh sách `expectedPrices` và `nextPageToken`. Thời gian ghi nhận có định dạng `YYYY-MM-DD HH:mm:ss.SSS` theo GMT+7.

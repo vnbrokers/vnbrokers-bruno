@@ -5,14 +5,16 @@ info:
 
 http:
   method: GET
-  url: "{{baseUrl}}/accounts/positions/:positionId?marketType=STOCK"
+  url: "{{baseUrl}}/positions/:positionId?marketType=STOCK"
   params:
     - name: marketType
       value: STOCK
       type: query
+      description: "Loại thị trường"
     - name: positionId
       value: "{{positionId}}"
       type: path
+      description: "Id vị thế"
   auth: inherit
 
 runtime:
@@ -29,79 +31,62 @@ runtime:
             "title": "GetPositionByIdResponse",
             "type": "object",
             "properties": {
-              "positions": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer"
-                    },
-                    "marketType": {
-                      "type": "string"
-                    },
-                    "symbol": {
-                      "type": "string"
-                    },
-                    "accountNo": {
-                      "type": "string"
-                    },
-                    "status": {
-                      "type": "string"
-                    },
-                    "loanPackageId": {
-                      "type": "integer"
-                    },
-                    "side": {
-                      "type": "string"
-                    },
-                    "accumulateQuantity": {
-                      "type": "integer"
-                    },
-                    "tradeQuantity": {
-                      "type": "integer"
-                    },
-                    "closedQuantity": {
-                      "type": "integer"
-                    },
-                    "openQuantity": {
-                      "type": "integer"
-                    },
-                    "overNightQuantity": {
-                      "type": "integer"
-                    },
-                    "costPrice": {
-                      "type": "number"
-                    },
-                    "marketPrice": {
-                      "type": "number"
-                    },
-                    "breakEvenPrice": {
-                      "type": "number"
-                    },
-                    "averageClosePrice": {
-                      "type": "number"
-                    },
-                    "createdDate": {
-                      "type": "string"
-                    },
-                    "modifiedDate": {
-                      "type": "string"
-                    }
-                  }
-                }
-              },
-              "pageIndex": {
+              "id": {
                 "type": "integer"
               },
-              "pageSize": {
+              "marketType": {
+                "type": "string"
+              },
+              "symbol": {
+                "type": "string"
+              },
+              "accountNo": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "loanPackageId": {
                 "type": "integer"
               },
-              "pageNumber": {
+              "side": {
+                "type": "string"
+              },
+              "accumulateQuantity": {
                 "type": "integer"
               },
-              "total": {
+              "tradeQuantity": {
                 "type": "integer"
+              },
+              "closedQuantity": {
+                "type": "integer"
+              },
+              "openQuantity": {
+                "type": "integer"
+              },
+              "overNightQuantity": {
+                "type": ["integer", "null"]
+              },
+              "costPrice": {
+                "type": "number"
+              },
+              "averageCostPrice": {
+                "type": "number"
+              },
+              "averageClosePrice": {
+                "type": "number"
+              },
+              "marketPrice": {
+                "type": "number"
+              },
+              "breakEvenPrice": {
+                "type": "number"
+              },
+              "createdDate": {
+                "type": "string"
+              },
+              "modifiedDate": {
+                "type": "string"
               }
             }
           }
@@ -118,13 +103,13 @@ examples:
   - name: 200 Response
     description: Thành công - trả về chi tiết vị thế theo ID
     request:
-      url: "{{baseUrl}}/accounts/positions/{{positionId}}"
+      url: "{{baseUrl}}/positions/{{positionId}}"
       method: GET
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: DERIVATIVE
@@ -142,38 +127,36 @@ examples:
         type: json
         data: |-
           {
-            "data": {
-              "id": 177410795472387,
-              "symbol": "41I1G4000",
-              "marketType": "DERIVATIVE",
-              "accountNo": "0001179019",
-              "status": "OPEN",
-              "loanPackageId": 2278,
-              "side": "NB",
-              "accumulateQuantity": 6,
-              "tradeQuantity": 1,
-              "closedQuantity": 5,
-              "openQuantity": 1,
-              "overNightQuantity": 0,
-              "costPrice": 1834.5,
-              "averageCostPrice": 1834.5,
-              "averageClosePrice": 1750.96,
-              "marketPrice": 1706.1,
-              "breakEvenPrice": 1834.95691,
-              "createdDate": "2026-03-23T03:08:32.773651Z",
-              "modifiedDate": "2026-03-23T04:07:45.692156Z"
-            }
+            "id": 177410795472387,
+            "symbol": "41I1G4000",
+            "marketType": "DERIVATIVE",
+            "accountNo": "0001179019",
+            "status": "OPEN",
+            "loanPackageId": 2278,
+            "side": "NB",
+            "accumulateQuantity": 6,
+            "tradeQuantity": 1,
+            "closedQuantity": 5,
+            "openQuantity": 1,
+            "overNightQuantity": 0,
+            "costPrice": 1834.5,
+            "averageCostPrice": 1834.5,
+            "averageClosePrice": 1750.96,
+            "marketPrice": 1706.1,
+            "breakEvenPrice": 1834.95691,
+            "createdDate": "2026-03-23T03:08:32.773651Z",
+            "modifiedDate": "2026-03-23T04:07:45.692156Z"
           }
   - name: 400 Response
     description: Yêu cầu không hợp lệ
     request:
-      url: "{{baseUrl}}/accounts/positions/{{positionId}}"
+      url: "{{baseUrl}}/positions/{{positionId}}"
       method: GET
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: ""
@@ -198,13 +181,13 @@ examples:
   - name: 500 Response
     description: Lỗi máy chủ
     request:
-      url: "{{baseUrl}}/accounts/positions/{{positionId}}"
+      url: "{{baseUrl}}/positions/{{positionId}}"
       method: GET
       headers:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: ""
@@ -249,26 +232,22 @@ docs: |-
 
   |Name|Type|Required|Restrictions|Description|
   |---|---|---|---|---|
-  |» positions|[object]|false|none|none|
-  |»» id|integer(int64)|false|none|ID vị thế|
-  |»» marketType|string|false|none|Loại thị trường<br>- STOCK: Gói vay giao dịch cơ sở<br>- DERIVATIVE: Gói vay giao dịch phái sinh|
-  |»» symbol|string|false|none|Mã chứng khoán|
-  |»» accountNo|string|false|none|Số tiểu khoản|
-  |»» status|string|false|none|Trạng thái của vị thế<br>OPEN: Đang mở<br>- PENDING_CLOSE: Chờ đóng<br>- CLOSED: Đã đóng<br>- ODD_LOT: Lô lẻ (cơ sở)|
-  |»» loanPackageId|integer(int32)|false|none|Gói vay cơ sở hoặc phái sinh|
-  |»» side|string|false|none|Loại vị thế<br>- NB: Mua<br>- NS: Bán|
-  |»» accumulateQuantity|integer(int32)|false|none|Khối lượng cộng dồn của vị thế|
-  |»» tradeQuantity|integer(int32)|false|none|Khối lượng được giao dịch (cơ sở)|
-  |»» closedQuantity|integer(int32)|false|none|Khối lượng đã đóng|
-  |»» openQuantity|integer(int32)|false|none|Khối lượng mở|
-  |»» overNightQuantity|integer(int32)|false|none|Khối lượng mở qua đêm (phái sinh)|
-  |»» costPrice|number(float)|false|none|Giá vốn trung bình của khối lượng mở|
-  |»» marketPrice|number(double)|false|none|Giá thị trường|
-  |»» breakEvenPrice|number(double)|false|none|Giá hòa vốn|
-  |»» averageClosePrice|number(double)|false|none|Giá đóng trung bình của khối lượng đã đóng|
-  |»» createdDate|string(date-time)|false|none|Thời điểm mở|
-  |»» modifiedDate|string(date-time)|false|none|Thời điểm cập nhật|
-  |» pageIndex|integer(int32)|false|none|Kích thước trang dữ liệu (dành cho phái sinh)|
-  |» pageSize|integer(int32)|false|none|Số bản ghi trên 1 trang (dành cho phái sinh)|
-  |» pageNumber|integer(int32)|false|none|Số trang (chỉ dành cho phái sinh)|
-  |» total|integer(int32)|false|none|Tổng số vị thế (chỉ dành cho phái sinh)|
+  |» id|integer(int64)|false|none|ID vị thế|
+  |» marketType|string|false|none|Loại thị trường|
+  |» symbol|string|false|none|Mã chứng khoán|
+  |» accountNo|string|false|none|Số tiểu khoản|
+  |» status|string|false|none|Trạng thái của vị thế|
+  |» loanPackageId|integer(int32)|false|none|Gói vay cơ sở hoặc phái sinh|
+  |» side|string|false|none|Chiều vị thế|
+  |» accumulateQuantity|integer(int32)|false|none|Khối lượng cộng dồn|
+  |» tradeQuantity|integer(int32)|false|none|Khối lượng được giao dịch|
+  |» closedQuantity|integer(int32)|false|none|Khối lượng đã đóng|
+  |» openQuantity|integer(int32)|false|none|Khối lượng mở|
+  |» overNightQuantity|integer(int32)|false|none|Khối lượng mở qua đêm|
+  |» costPrice|number(double)|false|none|Giá vốn trung bình|
+  |» averageCostPrice|number(double)|false|none|Giá vốn trung bình|
+  |» averageClosePrice|number(double)|false|none|Giá đóng trung bình|
+  |» marketPrice|number(double)|false|none|Giá thị trường|
+  |» breakEvenPrice|number(double)|false|none|Giá hòa vốn|
+  |» createdDate|string(date-time)|false|none|Thời điểm mở|
+  |» modifiedDate|string(date-time)|false|none|Thời điểm cập nhật|

@@ -10,6 +10,7 @@ http:
     - name: accountNo
       value: "{{accountNo}}"
       type: path
+      description: Số tiểu khoản
   auth: inherit
 
 runtime:
@@ -38,6 +39,12 @@ runtime:
                     "type": "integer"
                   },
                   "depositFeeAmount": {
+                    "type": "integer"
+                  },
+                  "secureAmount": {
+                    "type": "integer"
+                  },
+                  "orderSecured": {
                     "type": "integer"
                   },
                   "withdrawableCash": {
@@ -70,6 +77,22 @@ runtime:
                     "type": "integer"
                   }
                 }
+              },
+              "bond": {
+                "type": "object",
+                "properties": {
+                  "totalValue": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "egg": {
+                "type": "object",
+                "properties": {
+                  "totalValue": {
+                    "type": "integer"
+                  }
+                }
               }
             }
           }
@@ -97,7 +120,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: accountNo
           value: ""
@@ -118,6 +141,8 @@ examples:
               "depositInterest": 286,
               "totalDebt": 592355,
               "depositFeeAmount": 405,
+              "secureAmount": 11174173,
+              "orderSecured": 7903713,
               "withdrawableCash": 3719617,
               "cashDividendReceiving": 0
             },
@@ -128,6 +153,12 @@ examples:
               "pendingSecure": 826996062,
               "holdTaxAndFee": 0,
               "totalLoanDebt": 0
+            },
+            "bond": {
+              "totalValue": 40102762100
+            },
+            "egg": {
+              "totalValue": 6849005
             }
           }
   - name: 400 Response
@@ -143,7 +174,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: accountNo
           value: ""
@@ -175,7 +206,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: accountNo
           value: ""
@@ -218,6 +249,8 @@ docs: |-
   |»» depositInterest|integer(int32)|false|none|Lãi tiền gửi không kỳ hạn|
   |»» totalDebt|integer(int32)|false|none|Tổng nợ (Nợ margin tạm thu + Nợ margin còn lại)|
   |»» depositFeeAmount|integer(int32)|false|none|Phí lưu ký|
+  |»» secureAmount|integer(int32)|false|none|Tổng tiền ký quỹ|
+  |»» orderSecured|integer(int32)|false|none|Số tiền đang được phong tỏa cho các lệnh giao dịch|
   |»» withdrawableCash|integer(int32)|false|none|Tiền có thể rút|
   |»» cashDividendReceiving|integer(int32)|false|none|Tiền cổ tức chờ về|
   |» derivative|object|false|none|none|
@@ -227,3 +260,7 @@ docs: |-
   |»» pendingSecure|integer(int32)|false|none|Cọc chờ duyệt|
   |»» holdTaxAndFee|integer(int32)|false|none|Thuế và phí tạm giữ|
   |»» totalLoanDebt|integer(int32)|false|none|Khoản ứng chưa hoàn|
+  |» bond|object|false|none|Thông tin tài sản trái phiếu|
+  |»» totalValue|integer(int64)|false|none|Tổng giá trị tài sản trái phiếu|
+  |» egg|object|false|none|Thông tin tài sản trứng vàng|
+  |»» totalValue|integer(int32)|false|none|Tổng giá trị tài sản trứng|

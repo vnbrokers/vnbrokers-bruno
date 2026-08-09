@@ -9,19 +9,24 @@ http:
   headers:
     - name: trading-token
       value: "{{tradingToken}}"
+      description: "Token xác thực giao dịch."
   params:
     - name: marketType
       value: DERIVATIVE
       type: query
+      description: "Loại thị trường"
     - name: orderCategory
       value: NORMAL
       type: query
+      description: "Phân loại lệnh thường, lệnh điều kiện (mặc định NORMAL)"
     - name: accountNo
       value: "{{accountNo}}"
       type: path
+      description: "Số tiểu khoản"
     - name: orderId
       value: "{{orderId}}"
       type: path
+      description: "ID lệnh giao dịch dạng chuỗi."
   auth: inherit
 
 runtime:
@@ -39,7 +44,7 @@ runtime:
             "type": "object",
             "properties": {
               "id": {
-                "type": "integer"
+                "type": "string"
               },
               "symbol": {
                 "type": "string"
@@ -117,7 +122,7 @@ examples:
         - name: trading-token
           value: "{{tradingToken}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: DERIVATIVE
@@ -135,7 +140,7 @@ examples:
         type: json
         data: |-
           {
-            "id": 1626,
+            "id": "1626",
             "symbol": "41I1G4000",
             "side": "NS",
             "orderType": "LO",
@@ -167,7 +172,7 @@ examples:
         - name: trading-token
           value: "{{tradingToken}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: ""
@@ -202,7 +207,7 @@ examples:
         - name: trading-token
           value: "{{tradingToken}}"
         - name: version
-          value: "2026-05-07"
+          value: "2026-07-23"
       params:
         - name: marketType
           value: DERIVATIVE
@@ -233,26 +238,32 @@ docs: |-
   |Name|In|Type|Required|Description|
   |---|---|---|---|---|
   |marketType|query|string|true|Loại thị trường |
-  |orderCategory|query|string|true|Phân loại lệnh thường, lệnh điều kiện (mặc định NORMAL)|
+  |orderCategory|query|string|true|Phân loại lệnh NORMAL, STOP hoặc OCO|
   |X-API-Key|header|string|true|API Key được cấp khi đăng ký dịch vụ|
   |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
   |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
   |trading-token|header|string|true|Token đặt lệnh|
   |version|header|string(date)|false|Phiên bản API |
   |accountNo|path|string|true|Số tiểu khoản|
-  |orderId|path|integer|true|Id lệnh giao dịch|
+  |orderId|path|string|true|ID lệnh giao dịch|
 
   #### Detailed descriptions
 
   **marketType**: Loại thị trường 
   - STOCK: Đặt lệnh cơ sở
   - DERIVATIVE: Đặt lệnh phái sinh
+  - BOND: Đặt lệnh trái phiếu
+
+  **orderCategory**: Phân loại lệnh
+  - NORMAL: Lệnh thường cơ sở, phái sinh hoặc trái phiếu
+  - STOP: Lệnh dừng có điều kiện cơ sở hoặc phái sinh
+  - OCO: Lệnh OCO phái sinh
 
   <h3 id="cancelorder-responseschema">Response Schema</h3>
 
   |Name|Type|Required|Restrictions|Description|
   |---|---|---|---|---|
-  |» id|integer(int32)|false|none|Id lệnh giao dịch|
+  |» id|string|false|none|ID lệnh giao dịch|
   |» symbol|string|false|none|Mã chứng khoán|
   |» side|string|false|none|Chiều đặt lệnh<br>- NB: Mua<br>- NS: Bán|
   |» orderType|string|false|none|Loại lệnh<br>- LO: Lệnh giới hạn<br>- MOK/MAK/MTL: Lệnh thị trường<br>- ATO/ATC: Lệnh phiên định kỳ mở cửa/đóng cửa<br>- PLO: Lệnh khớp lệnh sau giờ|

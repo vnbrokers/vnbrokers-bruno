@@ -10,16 +10,20 @@ http:
     - name: marketType
       value: DERIVATIVE
       type: query
+      description: "Loại thị trường"
     - name: orderCategory
       value: NORMAL
       type: query
+      description: "Phân loại lệnh thường, lệnh điều kiện (mặc định NORMAL)"
       disabled: true
     - name: accountNo
       value: "{{accountNo}}"
       type: path
+      description: "Số tiểu khoản"
     - name: orderId
       value: "{{orderId}}"
       type: path
+      description: "Id lệnh giao dịch"
   auth: inherit
 
 runtime:
@@ -215,7 +219,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-07-23"
       params:
         - name: marketType
           value: DERIVATIVE
@@ -276,7 +280,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-07-23"
       params:
         - name: marketType
           value: ""
@@ -313,7 +317,7 @@ examples:
         - name: X-API-Key
           value: "{{apiKey}}"
         - name: version
-          value: 2026-05-07
+          value: "2026-07-23"
       params:
         - name: marketType
           value: ""
@@ -362,7 +366,8 @@ docs: |-
 
   **marketType**: Loại thị trường 
   - STOCK: Lệnh cơ sở
-  - DERIVATIVE: Sổ lệnh phái sinh (hiện tại chỉ hỗ trợ phái sinh) 
+  - DERIVATIVE: Lệnh phái sinh
+  - BOND: Lệnh trái phiếu
 
   |Name|Type|Required|Restrictions|Description|
   |---|---|---|---|---|
