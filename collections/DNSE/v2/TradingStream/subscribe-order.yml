@@ -6,17 +6,40 @@ info:
 websocket:
   url: "{{wsBaseUrl}}/v1/stream?encoding=json"
   message:
-    type: json
-    data: |-
-      {
-        "action": "subscribe",
-        "channels": [
+    - title: message 1
+      selected: false
+      message:
+        type: json
+        data: |-
           {
-            "name": "order.STOCK.json",
-            "symbols": []
+            "action":"auth",
+            "api_key":"{{apiKey}}",
+            "signature":"{{wsSignature}}",
+            "timestamp":{{wsTimestamp}},
+            "nonce":"{{wsNonce}}"
           }
-        ]
-      }
+    - title: message 2
+      selected: false
+      message:
+        type: json
+        data: |-
+          {
+            "action": "pong"
+          }
+    - title: message 3
+      selected: true
+      message:
+        type: json
+        data: |-
+          {
+            "action": "subscribe",
+            "channels": [
+              {
+                "name": "order.STOCK.json",
+                "symbols": []
+              }
+            ]
+          }
 
 settings:
   timeout: 0
