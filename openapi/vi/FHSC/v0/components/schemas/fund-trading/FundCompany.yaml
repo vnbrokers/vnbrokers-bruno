@@ -1,0 +1,19 @@
+type: object
+description: 1 công ty quản lý quỹ.
+properties:
+  id:
+    type: integer
+    description: ID công ty (dùng làm giá trị `fund-company-id`).
+    example: 12
+  name:
+    type: string
+    description: Tên đầy đủ.
+    example: Công ty Quản lý quỹ Vietcombank
+  short_name:
+    type: string
+    description: Tên viết tắt.
+    example: VCBF
+  image_url:
+    type: string
+    format: uri
+    description: URL logo công ty.

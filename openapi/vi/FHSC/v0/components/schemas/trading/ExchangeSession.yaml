@@ -1,0 +1,31 @@
+type: string
+description: |
+  Trạng thái phiên giao dịch hiện tại của 1 sàn.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `OPEN` | ATO — phiên khớp mở cửa |
+  | `PROGRESS` | Khớp lệnh liên tục |
+  | `BREAK` | Nghỉ giữa trưa |
+  | `CLOSED` | Đã đóng cửa |
+  | `PRE_CLOSED` | ATC — phiên khớp đóng cửa |
+  | `PUT_THROUGH` | Phiên thoả thuận |
+  | `POST_SESSION` | Phiên sau giờ khớp lệnh (HNX) |
+  | `CA` | Khớp lệnh định kỳ |
+enum:
+  - OPEN
+  - PROGRESS
+  - BREAK
+  - CLOSED
+  - PRE_CLOSED
+  - PUT_THROUGH
+  - POST_SESSION
+  - CA
+x-enum-varnames:
+  - OPEN
+  - PROGRESS
+  - BREAK
+  - CLOSED
+  - PRE_CLOSED
+  - PUT_THROUGH
+  - POST_SESSION
+  - CA

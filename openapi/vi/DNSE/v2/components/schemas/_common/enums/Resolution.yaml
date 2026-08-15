@@ -1,0 +1,11 @@
+type: string
+description: Khung thời gian nến.
+enum:
+  - '1' # 1 phút
+  - '3' # 3 phút
+  - '5' # 5 phút
+  - '15' # 15 phút
+  - '30' # 30 phút
+  - '1H' # 1 giờ
+  - '1D' # 1 ngày
+  - '1W' # 1 tuần

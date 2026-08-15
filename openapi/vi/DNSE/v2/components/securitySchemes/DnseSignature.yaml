@@ -1,0 +1,4 @@
+type: apiKey
+in: header
+name: X-Signature
+description: Chữ ký xác thực request được tạo từ API key secret và X-Aux-Date.

@@ -1,0 +1,46 @@
+type: object
+description: 1 sự kiện trong lịch kinh tế (CPI release, Fed meeting, PMI, …).
+properties:
+  id:
+    type: integer
+    description: Mã định danh sự kiện trong nguồn.
+    example: 1
+  date:
+    type: string
+    format: date
+    description: Ngày diễn ra sự kiện, format `YYYY-MM-DD`.
+    example: '2026-04-25'
+  country:
+    allOf:
+      - $ref: 'EconomicCountry.yaml'
+    description: Quốc gia của sự kiện.
+  event:
+    type: string
+    description: Tên sự kiện (ví dụ "Fed Interest Rate Decision", "CPI MoM").
+    example: Fed Interest Rate Decision
+  actual:
+    type: string
+    description: Giá trị thực tế đã công bố. Chuỗi rỗng `""` nếu sự kiện chưa diễn ra.
+    example: 5.50%
+  previous:
+    type: string
+    description: Giá trị kỳ trước.
+    example: 5.25%
+  consensus:
+    type: string
+    description: Đồng thuận thị trường (consensus forecast).
+    example: 5.50%
+  forecast:
+    type: string
+    description: Dự báo nhà phân tích.
+    example: 5.50%
+  impact:
+    type: integer
+    minimum: 1
+    maximum: 3
+    description: Mức độ ảnh hưởng — `1` = thấp, `2` = trung bình, `3` = cao.
+    example: 3
+  category:
+    type: string
+    description: Phân loại sự kiện (ví dụ "Interest Rate", "Inflation", "Employment").
+    example: Interest Rate

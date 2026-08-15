@@ -1,0 +1,6 @@
+name: period
+in: query
+required: false
+description: Khoảng thời gian truy vấn.
+schema:
+  $ref: '../schemas/fund-trading/FundPeriod.yaml'

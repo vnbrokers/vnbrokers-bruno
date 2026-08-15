@@ -1,0 +1,7 @@
+type: object
+description: |
+  Dữ liệu lãi suất tiền gửi ngân hàng. 
+  `additionalProperties: true` là **chủ ý** — đây là endpoint duy nhất
+  trong API có shape thật sự phụ thuộc vào data. Các endpoint khác nên khai
+  báo field rõ ràng.
+additionalProperties: true

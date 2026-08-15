@@ -1,0 +1,13 @@
+type: string
+description: |
+  Phía của lệnh.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `BUY`  | Lệnh mua |
+  | `SELL` | Lệnh bán |
+enum:
+  - BUY
+  - SELL
+x-enum-varnames:
+  - BUY
+  - SELL

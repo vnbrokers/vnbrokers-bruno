@@ -1,0 +1,16 @@
+type: string
+description: |
+  Khoảng thời gian lọc dữ liệu vĩ mô.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `ONE_MONTH` | 1 tháng gần nhất |
+  | `ONE_YEAR` | 1 năm gần nhất |
+  | `YTD` | Từ đầu năm đến nay |
+enum:
+  - ONE_MONTH
+  - ONE_YEAR
+  - YTD
+x-enum-varnames:
+  - ONE_MONTH
+  - ONE_YEAR
+  - YTD

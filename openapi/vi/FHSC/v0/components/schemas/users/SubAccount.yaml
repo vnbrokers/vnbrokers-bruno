@@ -1,0 +1,41 @@
+type: object
+description: |
+  1 item tiểu khoản trong response của
+  `GET /users/v1/users/{userId}/sub-accounts`.
+  Bootstrap flow dùng `id` (làm `subAccountId` cho path) và `type` (chọn
+  `Normal` hay `Margin` tuỳ nhu cầu).
+properties:
+  id:
+    type: string
+    description: ID tiểu khoản. Dùng làm giá trị thay cho path variable `{subAccountId}`.
+    example: '0001234567'
+  cust_id:
+    type: string
+    description: ID khách hàng cha (chung cho mọi tiểu khoản của 1 user).
+    example: '0001234500'
+  name:
+    type: string
+    description: Họ tên đầy đủ của user.
+    example: Nguyễn Văn A
+  depository_number:
+    type: string
+    description: Số lưu ký chứng khoán do VSDC cấp.
+    example: 120C001234
+  product_type_name:
+    type: string
+    description: |
+      Hậu tố loại sản phẩm trong `sub_account_ext`. `.1` cho tiểu khoản
+      thường, `.6` cho tiểu khoản margin.
+    example: '.1'
+  sub_account_ext:
+    type: string
+    description: Định danh tiểu khoản dạng mở rộng (`{depository_number}{product_type_name}`).
+    example: 120C001234.1
+  type:
+    type: string
+    description: Loại tiểu khoản — `Normal` (tiểu khoản thường) hoặc `Margin` (tiểu khoản ký quỹ).
+    example: Normal
+required:
+  - id
+  - sub_account_ext
+  - type

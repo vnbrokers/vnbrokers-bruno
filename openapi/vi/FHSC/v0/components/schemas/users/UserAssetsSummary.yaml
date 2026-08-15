@@ -1,0 +1,18 @@
+type: object
+description: |
+  Tổng quan tài sản / số dư của user qua mọi loại sản phẩm (stock, fund,
+  bond, hay0), kèm tiền mặt, dư nợ và PnL.
+  Với user Level 0 / 1, `products.stock`, `products.fund`, `products.bond`
+  và các entry trong `pnl` đều trả về `0`. `products.saving` có thể `null`.
+properties:
+  net_asset_value:
+    type: number
+    description: Total net asset value.
+  products:
+    $ref: 'ProductsSummary.yaml'
+  money:
+    $ref: 'MoneySummary.yaml'
+  debt:
+    $ref: 'DebtSummary.yaml'
+  pnl:
+    $ref: 'PnlSummary.yaml'

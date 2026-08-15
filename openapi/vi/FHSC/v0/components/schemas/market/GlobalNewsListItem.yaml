@@ -1,0 +1,35 @@
+type: object
+description: 1 item tin tức tài chính toàn cầu trong response danh sách.
+properties:
+  id:
+    type: integer
+    description: ID bài báo — dùng để gọi endpoint chi tiết.
+    example: 12
+  title:
+    type: string
+    description: Tiêu đề bài báo.
+  url:
+    type: string
+    description: URL bài báo gốc tại nguồn.
+  description:
+    type:
+      - string
+      - 'null'
+    description: Tóm tắt ngắn (nullable).
+  provider:
+    type:
+      - string
+      - 'null'
+    description: Tên nguồn / nhà cung cấp (nullable).
+  published_at:
+    type: string
+    format: date-time
+    description: Thời điểm xuất bản (ISO 8601).
+  category:
+    $ref: 'GlobalNewsCategory.yaml'
+required:
+  - id
+  - title
+  - url
+  - published_at
+  - category

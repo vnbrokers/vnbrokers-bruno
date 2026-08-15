@@ -1,0 +1,67 @@
+get:
+  operationId: bootstrapGetSubAccounts
+  tags:
+    - Khởi tạo
+  security:
+    - FinhayApiKey: []
+      FinhayTimestamp: []
+      FinhayNonce: []
+      FinhaySignature: []
+  summary: Danh sách tiểu khoản của user
+  description: |
+    Trả về danh sách tiểu khoản của user. Mỗi entry có `id` (dùng làm path
+    variable `{subAccountId}`), `type` (`Normal` hoặc `Margin`),
+    `sub_account_ext`, cùng các field hồ sơ user (`cust_id`, `name`,
+    `depository_number`, `product_type_name`).
+
+    Đây là **bước 2 của bootstrap flow**, gọi sau `bootstrapGetMe`. Cache
+    danh sách tiểu khoản tương tự `user_id`. Khi user thao tác trading thì
+    chọn entry có `type` đúng nhu cầu — `Normal` cho tài khoản thường,
+    `Margin` cho tài khoản ký quỹ.
+
+    Là endpoint Tier 2 → cần đủ 4 header HMAC.
+  parameters:
+    - $ref: '../../components/parameters/UserId.yaml'
+  responses:
+    '200':
+      description: Trả về mảng `result[]` các tiểu khoản đã mở của user.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/users/SubAccountsResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            result:
+              - id: '0001234567'
+                cust_id: '0001234500'
+                name: Nguyễn Văn A
+                depository_number: 120C001234
+                product_type_name: '.1'
+                sub_account_ext: 120C001234.1
+                type: Normal
+              - id: '0001234568'
+                cust_id: '0001234500'
+                name: Nguyễn Văn A
+                depository_number: 120C001234
+                product_type_name: '.6'
+                sub_account_ext: 120C001234.6
+                type: Margin
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl \
+          -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          -H "X-FH-TIMESTAMP: $TIMESTAMP_MS" \
+          -H "X-FH-NONCE: $NONCE_UUID" \
+          -H "X-FH-SIGNATURE: $SIGNATURE_HEX" \
+          "https://open-api.fhsc.com.vn/users/v1/users/$USER_ID/sub-accounts"

@@ -1,0 +1,13 @@
+type: string
+description: |
+  Tiêu chí khớp khi gợi ý quỹ tương tự (`/fund-certificates/{fundName}/suggestions`).
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `NET_ASSET_EQUIVALENT` | Quy mô AUM tương đương |
+  | `GROWTH_EQUIVALENT` | Profile tăng trưởng tương đương |
+enum:
+  - NET_ASSET_EQUIVALENT
+  - GROWTH_EQUIVALENT
+x-enum-varnames:
+  - NET_ASSET_EQUIVALENT
+  - GROWTH_EQUIVALENT

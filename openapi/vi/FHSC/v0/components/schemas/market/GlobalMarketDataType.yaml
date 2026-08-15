@@ -1,0 +1,99 @@
+type: string
+description: |
+  Mã instrument cho dữ liệu thị trường toàn cầu (chỉ số / cổ phiếu Mag7 /
+  hàng hoá / tỷ giá ngoại hối). Dùng cho `/market/financial-data/market`.
+  ### US Indices
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `SP500` | S&P 500 |
+  | `DOW_JONES` | Dow Jones |
+  | `NASDAQ` | Nasdaq Composite |
+  | `RUSSELL2000` | Russell 2000 |
+  | `VIX` | Chỉ số biến động VIX |
+  | `DXY` | US Dollar Index |
+  ### Asian Indices
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `KOSPI` | Hàn Quốc — KOSPI |
+  | `HANGSENG` | Hong Kong — Hang Seng |
+  | `SHANGHAI` | Trung Quốc — Shanghai Composite |
+  | `NIKKEI` | Nhật Bản — Nikkei 225 |
+  ### Big-tech stocks (Mag7)
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `APPLE` | Apple (AAPL) |
+  | `MICROSOFT` | Microsoft (MSFT) |
+  | `ALPHABET` | Alphabet / Google (GOOGL) |
+  | `AMAZON` | Amazon (AMZN) |
+  | `META` | Meta Platforms (META) |
+  | `NVIDIA` | NVIDIA (NVDA) |
+  | `TESLA` | Tesla (TSLA) |
+  ### Commodities
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `GOLD` | Vàng (USD/oz) |
+  | `SILVER` | Bạc (USD/oz) |
+  | `COPPER` | Đồng |
+  | `CRUDE_OIL` | Dầu thô WTI |
+  | `BRENT_OIL` | Dầu Brent |
+  | `NATURAL_GAS` | Khí tự nhiên |
+  ### Forex
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `EURUSD` | EUR/USD |
+  | `USDJPY` | USD/JPY |
+  | `GBPUSD` | GBP/USD |
+enum:
+  - SP500
+  - DOW_JONES
+  - NASDAQ
+  - RUSSELL2000
+  - VIX
+  - DXY
+  - KOSPI
+  - HANGSENG
+  - SHANGHAI
+  - NIKKEI
+  - APPLE
+  - MICROSOFT
+  - ALPHABET
+  - AMAZON
+  - META
+  - NVIDIA
+  - TESLA
+  - GOLD
+  - SILVER
+  - COPPER
+  - CRUDE_OIL
+  - BRENT_OIL
+  - NATURAL_GAS
+  - EURUSD
+  - USDJPY
+  - GBPUSD
+x-enum-varnames:
+  - SP500
+  - DOW_JONES
+  - NASDAQ
+  - RUSSELL2000
+  - VIX
+  - DXY
+  - KOSPI
+  - HANGSENG
+  - SHANGHAI
+  - NIKKEI
+  - APPLE
+  - MICROSOFT
+  - ALPHABET
+  - AMAZON
+  - META
+  - NVIDIA
+  - TESLA
+  - GOLD
+  - SILVER
+  - COPPER
+  - CRUDE_OIL
+  - BRENT_OIL
+  - NATURAL_GAS
+  - EURUSD
+  - USDJPY
+  - GBPUSD

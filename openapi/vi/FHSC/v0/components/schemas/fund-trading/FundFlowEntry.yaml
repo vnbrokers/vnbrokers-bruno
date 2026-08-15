@@ -1,0 +1,27 @@
+type: object
+description: |
+  1 dòng trong bảng xếp hạng quỹ theo dòng tiền ròng. Dùng chung trong
+  response của `benchmark/operation` (trong field `fund_flows[]`).
+properties:
+  fund_name:
+    type: string
+    example: VESAF
+  month:
+    type: string
+    description: Tháng, format `YYYY-MM`.
+    example: 2025-04
+  fund_flow:
+    type: integer
+    format: int64
+    description: Dòng tiền ròng (VND) = `fund_inflow` − `fund_outflow`.
+    example: 25000000000
+  fund_inflow:
+    type: integer
+    format: int64
+    description: Tổng dòng tiền vào (VND).
+    example: 80000000000
+  fund_outflow:
+    type: integer
+    format: int64
+    description: Tổng dòng tiền ra (VND).
+    example: 55000000000

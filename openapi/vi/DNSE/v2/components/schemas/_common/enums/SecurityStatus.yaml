@@ -1,0 +1,5 @@
+type: string
+description: Trạng thái của mã chứng khoán.
+enum:
+  - 'HALT' # Ngừng giao dịch
+  - 'NO_HALT' # Không ngừng giao dịch

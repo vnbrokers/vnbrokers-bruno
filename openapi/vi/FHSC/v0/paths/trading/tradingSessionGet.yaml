@@ -1,0 +1,46 @@
+get:
+  operationId: tradingSessionGet
+  tags:
+    - Phiên giao dịch
+  summary: Trạng thái phiên giao dịch
+  description: |
+    Trạng thái phiên giao dịch hiện tại của 1 sàn cùng danh sách order type
+    đang được nhận. Ví dụ `ATO` chỉ khả dụng trong phiên `OPEN` của HOSE,
+    `ATC` chỉ khả dụng phiên `CLOSE`. Dùng để gating UI place-order.
+  parameters:
+    - name: exchange
+      in: query
+      required: true
+      description: Mã sàn giao dịch (`HOSE`, `HNX`, `UPCOM`).
+      schema:
+        $ref: '../../components/schemas/market/Exchange.yaml'
+  responses:
+    '200':
+      description: Trả về `result` chứa `exchange_session` (trạng thái phiên) và `available_order_types` (mảng order type khả dụng).
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/trading/MarketSessionResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            result:
+              exchange: HOSE
+              exchange_session: PROGRESS
+              available_order_types:
+                - LO
+                - MP
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/trading/market/session?exchange=HOSE"

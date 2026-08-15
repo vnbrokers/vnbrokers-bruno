@@ -1,0 +1,7 @@
+description: |
+  Unix timestamp (giây) — thời điểm window rate limit reset. Client nhận
+  `429 Too Many Requests` nên chờ đến thời điểm này rồi retry.
+schema:
+  type: integer
+  format: int64
+  example: 1713441600

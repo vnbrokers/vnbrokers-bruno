@@ -1,0 +1,28 @@
+type: string
+description: |
+  Phân loại công cụ tài chính.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `STOCK` | Cổ phiếu thường |
+  | `ETF` | Quỹ ETF |
+  | `BOND` | Trái phiếu |
+  | `FUND_CERTIFICATE` | Chứng chỉ quỹ (mở / đóng) |
+  | `WARRANT` | Chứng quyền có bảo đảm |
+  | `CW` | Chứng quyền có bảo đảm (alias dùng trên realtime) |
+  | `FUTURES` | Hợp đồng tương lai phái sinh |
+enum:
+  - STOCK
+  - ETF
+  - BOND
+  - FUND_CERTIFICATE
+  - WARRANT
+  - CW
+  - FUTURES
+x-enum-varnames:
+  - STOCK
+  - ETF
+  - BOND
+  - FUND_CERTIFICATE
+  - WARRANT
+  - CW
+  - FUTURES

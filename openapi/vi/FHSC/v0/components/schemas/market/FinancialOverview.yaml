@@ -1,0 +1,68 @@
+type: object
+description: Các chỉ số và tỷ số tài chính quan trọng của 1 mã stock.
+properties:
+  pe:
+    type:
+      - number
+      - 'null'
+    description: Price-to-Earnings ratio.
+  pb:
+    type:
+      - number
+      - 'null'
+    description: Price-to-Book ratio.
+  ev_ebitda:
+    type:
+      - number
+      - 'null'
+    description: EV / EBITDA ratio.
+  industry:
+    type: object
+    description: Industry-average ratios.
+    properties:
+      pe:
+        type:
+          - number
+          - 'null'
+      pb:
+        type:
+          - number
+          - 'null'
+      ev_ebitda:
+        type:
+          - number
+          - 'null'
+  gross_margin:
+    type:
+      - number
+      - 'null'
+    description: Gross profit margin.
+  roe:
+    type:
+      - number
+      - 'null'
+    description: Return on Equity.
+  eps:
+    type:
+      - number
+      - 'null'
+    description: Earnings per Share.
+  dividend_yield:
+    type:
+      - number
+      - 'null'
+  nim:
+    type:
+      - number
+      - 'null'
+    description: Net Interest Margin (banks only).
+  margin_loan_to_equity_ratio:
+    type:
+      - number
+      - 'null'
+    description: Margin loan to equity ratio (securities firms only).
+  roa:
+    type:
+      - number
+      - 'null'
+    description: Return on Assets.

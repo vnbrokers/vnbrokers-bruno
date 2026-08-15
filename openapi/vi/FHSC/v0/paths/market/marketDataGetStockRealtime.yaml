@@ -1,0 +1,86 @@
+get:
+  operationId: marketDataGetStockRealtime
+  tags:
+    - Dữ liệu giao dịch
+  summary: Giá stock realtime
+  description: |
+    Giá realtime của stock kèm các chỉ số cơ bản — giá hiện tại, % thay đổi,
+    trần / sàn / tham chiếu, OHLC trong phiên, khối lượng / giá trị giao
+    dịch, cap, P/E, P/B, ROE.
+
+    **Phải truyền đúng 1** trong 3 query (mutually exclusive): `symbol`
+    (1 mã), `symbols` (danh sách mã, comma-separated, tối đa 50 mã), hoặc
+    `exchange` (toàn bộ stock thuộc 1 sàn). Truyền >1 sẽ bị reject với 400.
+
+    Shape response thay đổi theo input — `symbol` → 1 object trong `result`;
+    `symbols` / `exchange` → array trong `result`. Client cần xử lý cả 2
+    trường hợp.
+  parameters:
+    - name: symbol
+      in: query
+      required: false
+      description: Mã stock đơn lẻ. Loại trừ lẫn với `symbols` và `exchange`.
+      schema:
+        type: string
+        example: VNM
+    - name: symbols
+      in: query
+      required: false
+      description: Danh sách mã stock, phân tách bằng dấu phẩy. Loại trừ lẫn với `symbol` và `exchange`.
+      schema:
+        type: string
+        example: VNM,FPT,VIC
+    - name: exchange
+      in: query
+      required: false
+      description: Mã exchange (trả về toàn bộ stock thuộc exchange này). Loại trừ lẫn với `symbol` và `symbols`.
+      schema:
+        $ref: '../../components/schemas/market/Exchange.yaml'
+  responses:
+    '200':
+      description: Trả về snapshot giá realtime trong `result`. Là 1 object khi truyền `symbol`; là array khi truyền `symbols` / `exchange`.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/market/StockRealtimeResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            result:
+              symbol: VNM
+              price: 72500
+              change: 500
+              changePercent: 0.69
+              ceiling: 77500
+              floor: 67500
+              reference: 72000
+              open: 72000
+              high: 73000
+              low: 71500
+              close: 72500
+              totalVolume: 1500000
+              totalValue: 108750000000
+              stockType: STOCK
+              exchange: HOSE
+              name: CTCP Sữa Việt Nam
+              createdAt: 1713441600
+              pe: 16.8
+              pb: 4.2
+              roe: 0.25
+              marketCap: 150000000000000
+              marketCapCategory: Large Cap
+              hasNewestNews: false
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/market/stock-realtime?symbol=VNM"

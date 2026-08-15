@@ -1,0 +1,132 @@
+type: object
+description: |
+  1 row trong sổ lệnh của ngày. Dùng chung cho
+  `/trading/v1/accounts/{subAccountId}/order-book` (array) và
+  `/trading/v1/accounts/{subAccountId}/order-book/{orderId}` (đơn lẻ).
+properties:
+  custodycd:
+    type: string
+  txdate:
+    type: string
+    description: Transaction date.
+  custid:
+    type: string
+  afacctno:
+    type: string
+    description: Account number.
+  orderid:
+    type: string
+    description: Order ID.
+  odorderid:
+    type: string
+  txtime:
+    type: string
+    description: Transaction time.
+  symbol:
+    type: string
+    example: VNM
+  allowcancel:
+    type: string
+    description: Whether cancel is allowed.
+  allowamend:
+    type: string
+    description: Whether amendment is allowed.
+  side_code:
+    type: string
+    description: Side code (raw).
+  side:
+    type: string
+    description: Side display name (BUY/SELL).
+  price:
+    type: integer
+    format: int64
+  pricetype:
+    type: string
+    description: Price type code.
+  via_code:
+    type: string
+    description: Order channel code.
+  via:
+    type: string
+    description: Order channel name.
+  qtty:
+    type: integer
+    format: int64
+    description: Order quantity.
+  execqtty:
+    type: integer
+    format: int64
+    description: Executed quantity.
+  execamt:
+    type: integer
+    format: int64
+    description: Executed amount.
+  execprice:
+    type: integer
+    format: int64
+    description: Executed price.
+  remainqtty:
+    type: integer
+    format: int64
+    description: Remaining quantity.
+  remainamt:
+    type: integer
+    format: int64
+    description: Remaining amount.
+  status_code:
+    type: string
+    description: Status code (raw).
+  status:
+    type: string
+    description: Status display name.
+  tlname:
+    type: string
+  username:
+    type: string
+  hosesession:
+    type: string
+    description: HOSE session info.
+  cancelqtty:
+    type: integer
+    format: int64
+  adjustqtty:
+    type: integer
+    format: int64
+  isdisposal:
+    type: string
+  rootorderid:
+    type: string
+  timetype:
+    type: string
+  timetypevalue:
+    type: string
+  feedbackmsg:
+    type: string
+    description: Feedback message from exchange.
+  quoteqtty:
+    type: integer
+    format: int64
+  limitprice:
+    type: number
+    format: double
+  odtimestamp:
+    type: string
+  matchtype_code:
+    type: string
+  producttypename:
+    type: string
+  afacctno_ext:
+    type: string
+  side_:
+    type: string
+  via_:
+    type: string
+  status_:
+    type: string
+  matchtype_:
+    type: string
+  strategy_id:
+    type:
+      - string
+      - 'null'
+    description: Strategy ID if the order is linked to a strategy (only populated for `/order-book/{orderId}` detail).

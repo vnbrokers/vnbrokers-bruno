@@ -1,0 +1,84 @@
+get:
+  operationId: corporateGetGlobalNews
+  tags:
+    - Tin tức-sự kiện
+  summary: Tin tức tài chính toàn cầu (phân trang)
+  description: |
+    Danh sách tin tức tài chính toàn cầu kèm phân trang, có thể lọc theo
+    `category` (forex / commodities / economic-indicators / stock-market /
+    cryptocurrency).
+
+    Trả về `data.results[]` cùng các field phân trang (`page_total`, `total`,
+    `current_page`, `next_page`, `previous_page`). Dùng `id` của từng item
+    để gọi endpoint chi tiết lấy nội dung đầy đủ.
+  parameters:
+    - name: category
+      in: query
+      required: false
+      description: Lọc theo phân loại tin tức. Bỏ qua để lấy mọi category.
+      schema:
+        $ref: '../../components/schemas/market/GlobalNewsCategory.yaml'
+    - name: page
+      in: query
+      required: false
+      description: Số trang cần lấy (1-indexed). Mặc định `1`.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+        example: 1
+    - name: page_size
+      in: query
+      required: false
+      description: Số item / trang. Mặc định `20`, tối đa `50`.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 20
+        example: 20
+  responses:
+    '200':
+      description: Trả về `data` là wrapper trang chứa `results[]` cộng metadata phân trang.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/market/GlobalNewsListResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              results:
+                - id: 12
+                  title: Fed signals rate hold at next meeting
+                  url: https://example.com/news/fed-rate-hold
+                  description: Fed officials signaled the federal funds rate will likely remain unchanged…
+                  provider: Reuters
+                  published_at: '2026-04-22T08:30:00Z'
+                  category: economic-indicators
+                - id: 13
+                  title: Gold hits record high on safe-haven demand
+                  url: https://example.com/news/gold-record
+                  description: Spot gold surged past $2,400/oz overnight…
+                  provider: Bloomberg
+                  published_at: '2026-04-22T07:15:00Z'
+                  category: commodities
+              page_total: 20
+              total: 1234
+              current_page: 1
+              next_page: 2
+              previous_page: null
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/market/financial-data/global-news?category=stock-market&page=1&page_size=20"

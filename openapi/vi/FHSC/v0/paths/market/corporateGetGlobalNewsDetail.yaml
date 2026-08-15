@@ -1,0 +1,56 @@
+get:
+  operationId: corporateGetGlobalNewsDetail
+  tags:
+    - Tin tức-sự kiện
+  summary: Chi tiết 1 bài tin tức tài chính toàn cầu
+  description: |
+    Chi tiết đầy đủ 1 bài tin tức theo `id`. Response kế thừa toàn bộ field
+    của item trong danh sách kèm thêm `content` (nội dung đầy đủ bài báo).
+
+    Trả về `404` với `error_code: "404"` nếu bài viết không tồn tại.
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: ID bài báo lấy từ endpoint danh sách (`corporateGetGlobalNews`).
+      schema:
+        type: integer
+        example: 12
+  responses:
+    '200':
+      description: Trả về `data` chứa toàn bộ field của item trong danh sách + `content` (nội dung đầy đủ).
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/market/GlobalNewsDetailResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              id: 12
+              title: Fed signals rate hold at next meeting
+              url: https://example.com/news/fed-rate-hold
+              description: Fed officials signaled the federal funds rate will likely remain unchanged…
+              provider: Reuters
+              published_at: '2026-04-22T08:30:00Z'
+              category: economic-indicators
+              content: |
+                Federal Reserve officials are leaning toward keeping the federal funds
+                rate unchanged at their upcoming meeting, several policymakers signaled
+                this week. The shift comes as inflation data continues to come in…
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '404':
+      $ref: '../../components/responses/NotFound.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/market/financial-data/global-news/12"

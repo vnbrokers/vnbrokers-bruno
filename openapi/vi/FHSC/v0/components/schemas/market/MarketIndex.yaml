@@ -1,0 +1,22 @@
+type: string
+description: |
+  Mã chỉ số thị trường chứng khoán Việt Nam.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `VNINDEX` | Chỉ số tổng hợp sàn HOSE |
+  | `HNXINDEX` | Chỉ số tổng hợp sàn HNX |
+  | `UPCOMINDEX` | Chỉ số thị trường UPCoM |
+  | `VN30` | Rổ 30 mã vốn hoá lớn & thanh khoản cao trên HOSE |
+  | `HNX30` | Rổ 30 mã vốn hoá lớn & thanh khoản cao trên HNX |
+enum:
+  - VNINDEX
+  - HNXINDEX
+  - UPCOMINDEX
+  - VN30
+  - HNX30
+x-enum-varnames:
+  - VNINDEX
+  - HNXINDEX
+  - UPCOMINDEX
+  - VN30
+  - HNX30

@@ -1,0 +1,8 @@
+type: string
+description: Tình trạng giao dịch của mã chứng khoán.
+enum:
+  - 'UNSPECIFIED' # Không xác định
+  - 'NRM' # Bình thường
+  - 'SUS' # Tạm ngừng
+  - 'DTL' # Hủy niêm yết chuyển sàn
+  - 'TFR' # Ngưng giao dịch do hạn chế

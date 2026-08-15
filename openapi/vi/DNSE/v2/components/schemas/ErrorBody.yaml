@@ -1,0 +1,16 @@
+type: object
+required:
+  - status
+  - code
+  - message
+properties:
+  status:
+    type: integer
+    format: int32
+    description: Mã HTTP.
+  code:
+    type: string
+    description: Mã lỗi DNSE.
+  message:
+    type: string
+    description: Thông điệp lỗi.

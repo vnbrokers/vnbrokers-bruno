@@ -1,0 +1,80 @@
+get:
+  operationId: portfolioGetHoldings
+  tags:
+    - Danh mục đầu tư
+  security:
+    - FinhayApiKey: []
+      FinhayTimestamp: []
+      FinhayNonce: []
+      FinhaySignature: []
+  summary: Danh mục stock đang nắm giữ của tiểu khoản
+  description: |
+    Danh mục stock đang nắm giữ của 1 tiểu khoản, kèm `cost_price` (giá vốn),
+    `basic_price` (giá tham chiếu), `close_price` (giá đóng cửa gần nhất),
+    cùng PnL theo vị thế (`pnl_amount`, `pnl_rate`, `total_pnl`).
+
+    Field `is_snapshot` = `true` khi response là snapshot cuối phiên (ngoài
+    giờ giao dịch); `false` khi đang trong phiên (giá realtime).
+  parameters:
+    - $ref: '../../components/parameters/SubAccountId.yaml'
+  responses:
+    '200':
+      description: Trả về `data` gồm `is_snapshot` (boolean) và `portfolio[]` — mỗi item là 1 vị thế stock kèm khối lượng, giá vốn, PnL.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/trading/PortfolioResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              is_snapshot: false
+              portfolio:
+                - sub_account_id: '0001234567'
+                  symbol: VNM
+                  securities_type: STOCK
+                  total: 1000
+                  available: 1000
+                  blocked: 0
+                  mortgage: 0
+                  vsd_mortgage: 0
+                  restrict: 0
+                  receiving_right: 0
+                  receiving_t0: 0
+                  receiving_t1: 0
+                  receiving_t2: 0
+                  matching_amount: 0
+                  withdraw: 0
+                  cost_price: 68000
+                  basic_price: 72000
+                  is_sellable: true
+                  custodycd: '0123456'
+                  pnl_amount: 4500000
+                  pnl_rate: 6.62
+                  close_price: 72500
+                  cost_price_amount: 68000000
+                  basic_price_amount: 72000000
+                  total_pnl: 4500000
+                  sending_t0: 0
+                  sending_t1: 0
+                  sending_t2: 0
+                  has_newest_news: false
+                  trade: 0
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl \
+          -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          -H "X-FH-TIMESTAMP: $TIMESTAMP_MS" \
+          -H "X-FH-NONCE: $NONCE_UUID" \
+          -H "X-FH-SIGNATURE: $SIGNATURE_HEX" \
+          "https://open-api.fhsc.com.vn/trading/v2/sub-accounts/$SUB_ACCOUNT_NORMAL/portfolio"

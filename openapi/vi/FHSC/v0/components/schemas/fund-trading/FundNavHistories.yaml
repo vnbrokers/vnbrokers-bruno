@@ -1,0 +1,14 @@
+type: object
+description: |
+  Lịch sử NAV của quỹ kèm chuỗi benchmark cùng khoảng thời gian — phục vụ
+  vẽ chart trên cùng trục X.
+properties:
+  nav_histories:
+    type: array
+    description: Mảng điểm NAV theo thời gian.
+    items:
+      $ref: 'FundNavHistoryPoint.yaml'
+  benchmark_name:
+    type: string
+    description: Tên benchmark (ví dụ `VN-INDEX` cho quỹ cổ phiếu).
+    example: VN-INDEX

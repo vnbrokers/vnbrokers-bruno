@@ -1,0 +1,13 @@
+type: object
+description: |
+  Profile user trả về từ `GET /users/v1/users/me`.
+  Chỉ `user_id` là field luôn có — bootstrap flow chỉ cần field này. Các
+  field khác là chuẩn của endpoint user Finhay.
+properties:
+  user_id:
+    type: integer
+    format: int64
+    description: User ID của Finhay. Dùng làm path variable `{userId}` ở mọi endpoint user-scoped.
+    example: 123456
+required:
+  - user_id

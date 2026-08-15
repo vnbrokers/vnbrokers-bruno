@@ -1,0 +1,39 @@
+get:
+  operationId: fundsTopAum
+  tags:
+    - Quỹ mở
+  summary: Danh sách quỹ theo AUM
+  description: Danh sách quỹ theo tổng tài sản đang quản lý (AUM), phân theo `fund-type`.
+  parameters:
+    - $ref: '../../components/parameters/FundTypeQuery.yaml'
+  responses:
+    '200':
+      description: Trả về `data` mảng các quỹ kèm AUM, sort giảm dần.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/fund-trading/FundTopAumResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - fund_name: VESAF
+                month: 2025-04
+                aum: 1500000000000
+              - fund_name: DCDS
+                month: 2025-04
+                aum: 980000000000
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/fund-trading/public/fund-certificates/top-aum?fund-type=STOCK_FUND"

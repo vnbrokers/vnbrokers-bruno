@@ -1,0 +1,66 @@
+type: object
+description: 1 sự kiện doanh nghiệp của stock.
+properties:
+  id:
+    type:
+      - integer
+      - 'null'
+    description: Event ID.
+  path:
+    type:
+      - string
+      - 'null'
+    description: Internal path/slug of the event.
+  title:
+    type:
+      - string
+      - 'null'
+    description: Event title.
+  stock:
+    type: string
+    description: Stock symbol.
+    example: VNM
+  body:
+    type:
+      - string
+      - 'null'
+    description: Event body / content.
+  createdDate:
+    type: string
+    description: Formatted creation date (`DD/MM - HH:mm`).
+    example: 15/07 - 08:30
+  actionDate:
+    type:
+      - string
+      - 'null'
+    description: Date the corporate action takes effect.
+  gdkhqDate:
+    type:
+      - string
+      - 'null'
+    description: Ex-rights date (ngày GDKHQ).
+  eventType:
+    type:
+      - string
+      - 'null'
+    description: Event type code.
+  eventTypeName:
+    type:
+      - string
+      - 'null'
+    description: Human-readable event type name.
+  createdAt:
+    type:
+      - string
+      - 'null'
+    format: date-time
+  updatedAt:
+    type:
+      - string
+      - 'null'
+    format: date-time
+  url:
+    type:
+      - string
+      - 'null'
+    description: Full URL to the event detail page.

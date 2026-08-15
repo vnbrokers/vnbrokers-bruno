@@ -1,0 +1,7 @@
+name: fundName
+in: path
+required: true
+description: Mã ngắn (short name) của quỹ — ví dụ `VESAF`, `DCDS`, `VCBF-BCF`.
+schema:
+  type: string
+  example: VESAF

@@ -1,0 +1,107 @@
+get:
+  operationId: getAccountsAccountNoPpse
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Sức mua, sức bán
+  parameters:
+    - name: marketType
+      in: query
+      required: true
+      description: |-
+        Loại thị trường 
+        - STOCK: Gói vay giao dịch cơ sở
+        - DERIVATIVE: Gói vay giao dịch phái sinh
+      deprecated: false
+      schema:
+        type: string
+      example: STOCK
+    - name: symbol
+      in: query
+      required: true
+      description: Mã chứng khoán
+      deprecated: false
+      schema:
+        type: string
+      example: ACB
+    - name: loanPackageId
+      in: query
+      required: true
+      description: Id gói vay
+      deprecated: false
+      schema:
+        type: string
+      example: '5757'
+    - name: price
+      in: query
+      required: true
+      description: Giá đặt lệnh
+      deprecated: false
+      schema:
+        type: string
+      example: '23000'
+  responses:
+    '200':
+      description: OK
+      headers:
+        Content-Length:
+          $ref: '../../components/headers/ContentLength.yaml'
+        Date:
+          $ref: '../../components/headers/Date.yaml'
+        Vary:
+          $ref: '../../components/headers/Vary.yaml'
+        X-Ratelimit-Limit:
+          $ref: '../../components/headers/XRateLimitLimit.yaml'
+        X-Ratelimit-Remaining:
+          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+        X-Ratelimit-Reset:
+          $ref: '../../components/headers/XRateLimitReset.yaml'
+        X-Tyk-Api-Expires:
+          schema:
+            type: string
+          example: Thu, 02 Jan 3000 15:04:00 UTC
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              qmaxBuy:
+                type: integer
+                format: int32
+                example: 1209
+                description: Khối lượng mua tối đa
+              qmaxSell:
+                type: integer
+                format: int32
+                example: 700
+                description: Khối lượng bán tối đa
+              pp0Buy:
+                type: number
+                description: Sức mua tối đa
+              pp0Short:
+                type: number
+                description: Sức bán khống tối đa
+              price:
+                type: number
+                format: double
+                example: 23000
+                description: Giá đặt
+          example:
+            qmaxBuy: 1203
+            qmaxSell: 700
+            price: 23000
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  tags:
+    - account
+parameters:
+  - name: accountNo
+    in: path
+    required: true
+    description: Số tiểu khoản
+    schema:
+      type: integer
+    example: '0001179019'

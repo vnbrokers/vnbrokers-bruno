@@ -1,0 +1,39 @@
+type: string
+description: |
+  Mã loại lệnh thị trường — set vào field `market_price` khi `type` =
+  `MARKET` ở `POST /trading/oa/sub-accounts/{subAccountId}/orders`.
+  | Giá trị | Tên | Mô tả |
+  |---------|-----|-------|
+  | `MP`  | Market Price | Khớp tại giá tốt nhất hiện có (HOSE — ORS auto-convert sang `MTL`). |
+  | `ATO` | At The Open | Khớp tại phiên mở cửa. |
+  | `ATC` | At The Close | Khớp tại phiên đóng cửa. |
+  | `MAK` | Make and Kill | Khớp một phần, phần còn lại huỷ (HNX — ORS auto-convert sang `FAK`). |
+  | `MOK` | Make or Kill | Khớp toàn bộ hoặc huỷ (HNX — ORS auto-convert sang `FOK`). |
+  | `MTL` | Match To Limit | Khớp theo giá thị trường rồi chuyển phần dư thành limit. |
+  | `PLO` | Post Limit Order | Lệnh limit sau phiên ATC (HNX only). |
+  | `FOK` | Fill or Kill | Khớp toàn bộ hoặc huỷ — dạng chuẩn hoá của `MOK`. |
+  | `FAK` | Fill and Kill | Khớp một phần, huỷ phần còn lại — dạng chuẩn hoá của `MAK`. |
+  Hỗ trợ order type theo sàn:
+  - HOSE: `LO`, `MP`, `ATO`, `ATC`, `MTL`
+  - HNX: `LO`, `MTL`, `MOK`, `MAK`, `PLO`, `ATC`
+  - UPCOM / HCX: chỉ `LO`
+enum:
+  - MP
+  - ATO
+  - ATC
+  - MAK
+  - MOK
+  - MTL
+  - PLO
+  - FOK
+  - FAK
+x-enum-varnames:
+  - MP
+  - ATO
+  - ATC
+  - MAK
+  - MOK
+  - MTL
+  - PLO
+  - FOK
+  - FAK

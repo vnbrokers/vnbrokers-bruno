@@ -1,0 +1,31 @@
+get:
+  operationId: getPriceSymbolQuotesLatest
+  tags:
+    - market-data
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Dữ liệu bid/ask gần nhất
+  parameters:
+    - name: symbol
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: boardId
+      in: query
+      schema:
+        $ref: '../../components/schemas/_common/enums/BoardId.yaml'
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

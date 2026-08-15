@@ -1,0 +1,16 @@
+type: object
+description: |
+  Phân bổ tài sản của quỹ. 3 field cộng lại bằng 100 (%).
+properties:
+  bond:
+    type: integer
+    description: Tỷ trọng trái phiếu (%).
+    example: 65
+  stock:
+    type: integer
+    description: Tỷ trọng cổ phiếu (%).
+    example: 30
+  others:
+    type: integer
+    description: Tỷ trọng tiền mặt và công cụ khác (%).
+    example: 5

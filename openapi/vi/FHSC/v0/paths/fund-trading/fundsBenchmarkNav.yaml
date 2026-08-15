@@ -1,0 +1,57 @@
+get:
+  operationId: fundsBenchmarkNav
+  tags:
+    - Quỹ mở
+  summary: So sánh chuỗi NAV theo thời gian của nhiều quỹ
+  description: |
+    Chuỗi NAV theo thời gian của nhiều quỹ — phục vụ vẽ chart so sánh trên
+    cùng trục X.
+
+    **Phải truyền** `period` HOẶC cả `from-month` + `to-month` (cùng lúc).
+    Server trả `400` nếu vi phạm.
+  parameters:
+    - $ref: '../../components/parameters/FundNamesCsv.yaml'
+    - $ref: '../../components/parameters/FundPeriodQuery.yaml'
+    - $ref: '../../components/parameters/FromMonth.yaml'
+    - $ref: '../../components/parameters/ToMonth.yaml'
+  responses:
+    '200':
+      description: Trả về `data` mảng quỹ kèm `nav_records[]`.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/fund-trading/FundNavBenchmarkResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - fund_name: VESAF
+                nav_records:
+                  - date: '2024-12-31'
+                    navpf: 18234.56
+                    change_percent: 1.24
+                  - date: '2025-01-31'
+                    navpf: 18452.1
+                    change_percent: 1.19
+              - fund_name: DCDS
+                nav_records:
+                  - date: '2024-12-31'
+                    navpf: 15234.1
+                    change_percent: 0.84
+                  - date: '2025-01-31'
+                    navpf: 15422.6
+                    change_percent: 1.24
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/fund-trading/public/fund-certificates/benchmark/nav?fund-names=VESAF,DCDS&period=ONE_YEAR"

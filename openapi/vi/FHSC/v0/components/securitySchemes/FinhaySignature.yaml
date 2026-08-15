@@ -1,0 +1,13 @@
+type: apiKey
+in: header
+name: X-FH-SIGNATURE
+description: |
+  HMAC-SHA256 của canonical signing payload, encode hex (lowercase).
+  Signing payload:
+  ```
+  {X-FH-TIMESTAMP}\n{METHOD}\n{REQUEST_PATH}[?{QUERY}]\n{BODYHASH}
+  ```
+  - `?{QUERY}` chỉ nối vào path khi request có query string.
+  - `{BODYHASH}` là chuỗi rỗng khi body rỗng (vẫn không có newline sau đó).
+  Được tính per-request bởi signing middleware. **Không** set thủ công — dùng
+  middleware mẫu trong README.

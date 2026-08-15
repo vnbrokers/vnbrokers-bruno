@@ -1,0 +1,15 @@
+type: object
+description: 1 dòng trong bảng xếp hạng quỹ theo AUM.
+properties:
+  fund_name:
+    type: string
+    example: VESAF
+  month:
+    type: string
+    description: Tháng, format `YYYY-MM`.
+    example: 2025-04
+  aum:
+    type: integer
+    format: int64
+    description: AUM (VND).
+    example: 1500000000000

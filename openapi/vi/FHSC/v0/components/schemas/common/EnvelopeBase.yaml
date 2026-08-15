@@ -1,0 +1,14 @@
+type: object
+description: |
+  Các field chung của envelope trong mọi response của Finhay API.
+  - `error_code` là `"0"` (string) khi thành công, mã khác `"0"` khi lỗi.
+  - `message` là thông điệp ngắn từ server.
+properties:
+  error_code:
+    type: string
+    description: '`"0"` khi thành công, khác `"0"` khi lỗi.'
+    example: '0'
+  message:
+    type: string
+    description: Thông điệp trạng thái dễ đọc.
+    example: success

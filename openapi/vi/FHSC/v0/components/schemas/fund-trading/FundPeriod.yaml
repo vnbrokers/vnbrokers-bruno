@@ -1,0 +1,37 @@
+type: string
+description: |
+  Khoảng thời gian truy vấn NAV / benchmark cho quỹ mở.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `BEGIN_THE_YEAR` | Từ đầu năm đến nay (YTD) |
+  | `ONE_MONTH` | 1 tháng gần nhất |
+  | `THREE_MONTHS` | 3 tháng gần nhất |
+  | `SIX_MONTHS` | 6 tháng gần nhất |
+  | `ONE_YEAR` | 1 năm gần nhất |
+  | `THREE_YEARS` | 3 năm gần nhất |
+  | `FIVE_YEARS` | 5 năm gần nhất |
+  | `SEVEN_YEARS` | 7 năm gần nhất |
+  | `TEN_YEARS` | 10 năm gần nhất |
+  | `ALL_TIME` | Toàn bộ lịch sử (≈ 20 năm) |
+enum:
+  - BEGIN_THE_YEAR
+  - ONE_MONTH
+  - THREE_MONTHS
+  - SIX_MONTHS
+  - ONE_YEAR
+  - THREE_YEARS
+  - FIVE_YEARS
+  - SEVEN_YEARS
+  - TEN_YEARS
+  - ALL_TIME
+x-enum-varnames:
+  - BEGIN_THE_YEAR
+  - ONE_MONTH
+  - THREE_MONTHS
+  - SIX_MONTHS
+  - ONE_YEAR
+  - THREE_YEARS
+  - FIVE_YEARS
+  - SEVEN_YEARS
+  - TEN_YEARS
+  - ALL_TIME

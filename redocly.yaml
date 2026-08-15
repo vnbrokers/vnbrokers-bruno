@@ -1,0 +1,15 @@
+extends:
+  - recommended
+
+apis:
+  dnse-v2:
+    root: openapi/vi/DNSE/v2/openapi.yaml
+  fhsc-v0:
+    root: openapi/vi/FHSC/v0/openapi.yaml
+
+
+rules:
+  operation-operationId: error
+  operation-tag-defined: error
+  no-ambiguous-paths: off
+  info-license: off

@@ -1,0 +1,15 @@
+allOf:
+  - $ref: '../common/EnvelopeBase.yaml'
+  - type: object
+    required:
+      - result
+    properties:
+      result:
+        type: array
+        description: |
+          Mảng kết quả — thông thường chứa **đúng 1** entry phản ánh trạng
+          thái lệnh sau khi huỷ. `order_status` thường là `CANCELLED`
+          (huỷ toàn bộ) hoặc giữ nguyên kèm phần `execute_quantity` cũ
+          nếu lệnh đã khớp một phần (chỉ huỷ phần unmatched).
+        items:
+          $ref: 'OrderExecutionResult.yaml'

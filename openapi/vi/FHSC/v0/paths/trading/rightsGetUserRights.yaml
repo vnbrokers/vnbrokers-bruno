@@ -1,0 +1,79 @@
+get:
+  operationId: rightsGetUserRights
+  tags:
+    - Quyền cổ đông
+  security:
+    - FinhayApiKey: []
+      FinhayTimestamp: []
+      FinhayNonce: []
+      FinhaySignature: []
+  summary: Quyền cổ đông của tiểu khoản
+  description: |
+    Quyền cổ đông (cổ tức, quyền mua stock, bỏ phiếu, …) của tiểu khoản.
+    Kết quả được sort theo `reportDate` giảm dần.
+  parameters:
+    - $ref: '../../components/parameters/SubAccountId.yaml'
+  responses:
+    '200':
+      description: Trả về `result` mảng các quyền cổ đông của tiểu khoản, sort theo `reportDate` giảm dần.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/trading/UserRightsResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            result:
+              - accountId: '0001234567'
+                depositoryNumber: '0123456'
+                fullName: Nguyen Van A
+                ownNumberOfShare: 1000
+                ratio: '1:1'
+                status: COMPLETED
+                userRightRegisterStatus: RECEIVED
+                caMastId: CAM987
+                amount: 1000000
+                symbol: VNM
+                toSymbol: null
+                numberOfWaitingStock: 0
+                waitingAmountForReturn: 0
+                rightOffRate: '0'
+                buyPrice: 0
+                allowRegister: false
+                totalStocksCanBuy: 0
+                totalPayAmount: 0
+                startDate: '2024-03-01'
+                finishDate: '2024-03-31'
+                startDateTransfer: '2024-03-05'
+                actionDate: '2024-03-15'
+                finishDateTransfer: '2024-03-20'
+                reportDate: '2024-03-15'
+                type: CASH_DIVIDEND
+                stockName: CTCP Sữa Việt Nam
+                totalVolume: 0
+                totalValue: 0
+                referencePrice: 72000
+                closePrice: 72500
+                ceilingPrice: 77500
+                floorPrice: 67500
+                predictPrice: 0
+                changePrice: 500
+                hasRead: true
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl \
+          -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          -H "X-FH-TIMESTAMP: $TIMESTAMP_MS" \
+          -H "X-FH-NONCE: $NONCE_UUID" \
+          -H "X-FH-SIGNATURE: $SIGNATURE_HEX" \
+          "https://open-api.fhsc.com.vn/trading/v5/account/$SUB_ACCOUNT_NORMAL/user-rights"

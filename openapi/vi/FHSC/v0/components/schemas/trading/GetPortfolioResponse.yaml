@@ -1,0 +1,13 @@
+type: object
+description: |
+  Payload portfolio — trường `data` của
+  `GET /trading/v2/sub-accounts/{subAccountId}/portfolio`.
+  `is_snapshot` cho biết response có phải từ cache hay không.
+properties:
+  portfolio:
+    type: array
+    items:
+      $ref: 'PortfolioEntry.yaml'
+  is_snapshot:
+    type: boolean
+    description: Whether the data is from a cached snapshot.

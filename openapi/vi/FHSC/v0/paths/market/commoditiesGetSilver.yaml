@@ -1,0 +1,48 @@
+get:
+  operationId: commoditiesGetSilver
+  tags:
+    - Hàng hoá
+  summary: Giá bạc
+  description: |
+    Giá bạc trong nước (PNJ và các nhà cung cấp) cùng giá bạc thế giới
+    (đã quy đổi). Row shape giống endpoint `/gold` — `vnd_value` đơn vị
+    **VND/lượng**, `usd_value` đơn vị **USD/oz**.
+  responses:
+    '200':
+      description: Trả về `data` mảng các record giá bạc theo nhà cung cấp.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/market/SilverResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - index: SILVER_PNJ
+                name: Bạc PNJ
+                short_name: PNJ
+                buy_value: 980000
+                sell_value: 1050000
+                usd_value: 28
+                vnd_value: 1050000
+                date: '2024-04-18'
+                provider: PNJ
+                provider_icon: null
+                updated_at: '2024-04-18T10:00:00Z'
+                change_percent: 0.15
+                buy_value_change_percent: 0.12
+                sell_value_change_percent: 0.18
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/market/financial-data/silver"

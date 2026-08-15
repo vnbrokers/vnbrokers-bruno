@@ -1,0 +1,41 @@
+get:
+  operationId: fundsListCompanies
+  tags:
+    - Quỹ mở
+  summary: Danh sách công ty quản lý quỹ
+  description: |
+    Toàn bộ công ty quản lý quỹ. Trường `id` dùng làm giá trị filter
+    `fund-company-id` ở endpoint `fundsListCertificates`.
+  responses:
+    '200':
+      description: Trả về `data` mảng các công ty quản lý quỹ.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/fund-trading/FundCompaniesResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - id: 12
+                name: Công ty Quản lý quỹ Vietcombank
+                short_name: VCBF
+                image_url: https://cdn.finhay.com/funds/vcbf.png
+              - id: 13
+                name: Công ty TNHH Quản lý Quỹ SSI
+                short_name: SSIAM
+                image_url: https://cdn.finhay.com/funds/ssiam.png
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/fund-trading/public/fund-companies"

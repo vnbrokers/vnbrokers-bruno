@@ -1,0 +1,215 @@
+put:
+  operationId: ordersModify
+  tags:
+    - Thực thi lệnh
+  security:
+    - FinhayApiKey: []
+      FinhayTimestamp: []
+      FinhayNonce: []
+      FinhaySignature: []
+      FinhayBodyHash: []
+      FinhayTwoFactor: []
+  summary: Sửa lệnh
+  description: |
+    > ⚠️ Endpoint đang ở giai đoạn **preview**.
+
+    Sửa `quantity` và / hoặc `price` của 1 lệnh đang chờ khớp. Yêu cầu
+    **Tier 2 HMAC + X-FH-BODYHASH + X-FH-2FA-TOKEN**.
+
+    **Bắt buộc** truyền header `device-id` — định danh thiết bị đặt
+    lệnh do client cung cấp (phục vụ tuân thủ quy định giao dịch).
+
+    **Pre-check bắt buộc**: gọi
+    `GET /trading/v1/accounts/{subAccountId}/order-book/{orderId}` trước
+    để xác nhận lệnh đang ở trạng thái sửa được (`SENT`,
+    `WAITING_TO_SEND`). Không sửa được khi `order_status` là `MATCHED`,
+    `MATCHED_ALL`, `CANCELLED`, `COMPLETED`, `FAILED`, `REJECTED`.
+
+    Với lệnh **đã khớp một phần**, server trả `result[].code = -701111`
+    và chỉ áp dụng thay đổi cho phần unmatched. Reference cũ giữ nguyên
+    `order_id`.
+
+    Body phải có **ít nhất 1** trong 2 field; bỏ trống cả 2 sẽ trả 400.
+  x-badges:
+    - name: Preview
+      color: orange
+  parameters:
+    - $ref: '../../components/parameters/SubAccountId.yaml'
+    - $ref: '../../components/parameters/OrderId.yaml'
+    - $ref: '../../components/parameters/DeviceId.yaml'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/trading/ModifyOrderRequest.yaml'
+        example:
+          quantity: 200
+          price: 26000
+  responses:
+    '200':
+      description: |
+        Server đã xử lý request. **Phải đọc `result[].code`** — non-null
+        nghĩa là sàn từ chối hoặc lệnh đã khớp một phần (`-701111`).
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/trading/ModifyOrderResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            result:
+              - order_id: ORD123456
+                account_id: 120C000008.1
+                transaction_date: '2026-05-28'
+                symbol: HPG
+                order_side: BUY
+                order_quantity: 200
+                limit_price: 26000
+                market_price: null
+                execute_quantity: 0
+                execute_price: 0
+                order_status: SENT
+                fee_amount: 0
+                tax_amount: 0
+                execute_amount: 0
+                order_type: LO
+                code: null
+                rejected_reason: null
+                lot: EVEN
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '403':
+      $ref: '../../components/responses/Forbidden.yaml'
+    '404':
+      $ref: '../../components/responses/NotFound.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        BODY='{"quantity":200,"price":26000}'
+        BODY_HASH=$(printf '%s' "$BODY" | openssl dgst -sha256 -hex | awk '{print $2}')
+
+        curl -X PUT \
+          -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          -H "X-FH-TIMESTAMP: $TIMESTAMP_MS" \
+          -H "X-FH-NONCE: $NONCE_UUID" \
+          -H "X-FH-SIGNATURE: $SIGNATURE_HEX" \
+          -H "X-FH-BODYHASH: $BODY_HASH" \
+          -H "X-FH-2FA-TOKEN: $FINHAY_2FA_TOKEN" \
+          -H "device-id: $DEVICE_ID" \
+          -H "Content-Type: application/json" \
+          -d "$BODY" \
+          "https://open-api.fhsc.com.vn/trading/oa/sub-accounts/$SUB_ACCOUNT_NORMAL/orders/ORD123456"
+delete:
+  operationId: ordersCancel
+  tags:
+    - Thực thi lệnh
+  security:
+    - FinhayApiKey: []
+      FinhayTimestamp: []
+      FinhayNonce: []
+      FinhaySignature: []
+      FinhayBodyHash: []
+      FinhayTwoFactor: []
+  summary: Huỷ lệnh
+  description: |
+    > ⚠️ Endpoint đang ở giai đoạn **preview**.
+
+    Huỷ 1 lệnh đang chờ khớp. Yêu cầu **Tier 2 HMAC + X-FH-BODYHASH +
+    X-FH-2FA-TOKEN**.
+
+    **Bắt buộc** truyền header `device-id` — định danh thiết bị đặt
+    lệnh do client cung cấp (phục vụ tuân thủ quy định giao dịch).
+
+    **Pre-check bắt buộc**: gọi
+    `GET /trading/v1/accounts/{subAccountId}/order-book/{orderId}` trước
+    để xác nhận lệnh đang ở trạng thái huỷ được (`SENT`,
+    `WAITING_TO_SEND`, `SENDING`). Không huỷ được khi `order_status` là
+    `MATCHED`, `MATCHED_ALL`, `CANCELLED`, `COMPLETED`, `FAILED`.
+
+    Với lệnh **đã khớp một phần**, huỷ chỉ áp dụng cho phần unmatched —
+    phần đã khớp vẫn giữ trong `execute_quantity`.
+  x-badges:
+    - name: Preview
+      color: orange
+  parameters:
+    - $ref: '../../components/parameters/SubAccountId.yaml'
+    - $ref: '../../components/parameters/OrderId.yaml'
+    - $ref: '../../components/parameters/DeviceId.yaml'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/trading/CancelOrderRequest.yaml'
+        example:
+          sub_account: 120C000008.1
+  responses:
+    '200':
+      description: |
+        Server đã xử lý request. **Phải đọc `result[].order_status`** để
+        xác nhận lệnh đã được huỷ (`CANCELLED`) hoặc `result[].code` để
+        biết lý do nếu huỷ thất bại.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/trading/CancelOrderResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            result:
+              - order_id: ORD123456
+                account_id: 120C000008.1
+                transaction_date: '2026-05-28'
+                symbol: HPG
+                order_side: BUY
+                order_quantity: 100
+                limit_price: 25500
+                market_price: null
+                execute_quantity: 0
+                execute_price: 0
+                order_status: CANCELLED
+                fee_amount: 0
+                tax_amount: 0
+                execute_amount: 0
+                order_type: LO
+                code: null
+                rejected_reason: null
+                lot: EVEN
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '403':
+      $ref: '../../components/responses/Forbidden.yaml'
+    '404':
+      $ref: '../../components/responses/NotFound.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        BODY='{"sub_account":"120C000008.1"}'
+        BODY_HASH=$(printf '%s' "$BODY" | openssl dgst -sha256 -hex | awk '{print $2}')
+
+        curl -X DELETE \
+          -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          -H "X-FH-TIMESTAMP: $TIMESTAMP_MS" \
+          -H "X-FH-NONCE: $NONCE_UUID" \
+          -H "X-FH-SIGNATURE: $SIGNATURE_HEX" \
+          -H "X-FH-BODYHASH: $BODY_HASH" \
+          -H "X-FH-2FA-TOKEN: $FINHAY_2FA_TOKEN" \
+          -H "device-id: $DEVICE_ID" \
+          -H "Content-Type: application/json" \
+          -d "$BODY" \
+          "https://open-api.fhsc.com.vn/trading/oa/sub-accounts/$SUB_ACCOUNT_NORMAL/orders/ORD123456"

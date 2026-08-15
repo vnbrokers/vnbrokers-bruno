@@ -1,0 +1,5 @@
+type: object
+description: |
+  1 khoản nắm giữ trong danh mục của quỹ. Cấu trúc **phụ thuộc loại quỹ** —
+  quỹ cổ phiếu, quỹ trái phiếu, quỹ cân bằng đều có bộ field khác nhau.
+additionalProperties: true

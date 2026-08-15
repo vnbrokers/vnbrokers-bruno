@@ -1,0 +1,8 @@
+name: from_date
+in: query
+required: false
+description: |
+  Ngày bắt đầu của bộ lọc tin tức / sự kiện doanh nghiệp.
+schema:
+  type: string
+  example: 01/01/2024

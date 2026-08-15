@@ -1,0 +1,9 @@
+type: object
+description: 1 quỹ tương tự được gợi ý.
+properties:
+  fund_name:
+    type: string
+    description: Tên ngắn của quỹ được gợi ý.
+    example: DCDS
+  criteria:
+    $ref: 'FundSuggestionCriteria.yaml'

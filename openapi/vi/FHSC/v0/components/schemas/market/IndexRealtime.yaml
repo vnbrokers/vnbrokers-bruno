@@ -1,0 +1,110 @@
+type: object
+description: |
+  Snapshot realtime của 1 chỉ số thị trường (VNINDEX, HNX30, …).
+  Lưu ý:
+  - `change` / `reference` / `indexValue` tính theo **điểm chỉ số** (không
+    phải VND).
+  - `changePercent` đã ở **đơn vị phần trăm** (vd `0.12` nghĩa là 0.12%),
+    không phải tỉ lệ 0–1.
+  - Các field breadth (`advances` / `declines` / …) và chuỗi intraday
+    (`values` / `volumes` / `times`) **chỉ trả về ở chế độ đầy đủ**; nhóm
+    `*Arr` / `ceilings` / `floors` chỉ áp dụng cho index trên hệ thống KRX.
+    Tuỳ phiên / sàn, một số field có thể vắng mặt.
+required:
+  - index
+  - indexValue
+  - change
+  - changePercent
+  - reference
+properties:
+  index:
+    type: string
+    description: Mã chỉ số được trả về (echo lại giá trị `index` đã truyền).
+    example: VNINDEX
+  indexValue:
+    type: number
+    description: Giá trị điểm hiện tại của chỉ số.
+    example: 1792.6
+  change:
+    type: number
+    description: Thay đổi điểm so với `reference`.
+    example: 2.07
+  changePercent:
+    type: number
+    description: '% thay đổi so với `reference` (đơn vị phần trăm).'
+    example: 0.12
+  reference:
+    type: number
+    description: Giá trị tham chiếu — điểm đóng cửa phiên giao dịch trước.
+    example: 1790.53
+  allQuantity:
+    type: integer
+    format: int64
+    description: Tổng khối lượng khớp toàn thị trường của chỉ số (số cổ phiếu).
+    example: 248009131
+  allValue:
+    type: number
+    description: Tổng giá trị giao dịch khớp toàn thị trường của chỉ số (VND).
+  advances:
+    type: integer
+    description: Số mã tăng giá.
+  declines:
+    type: integer
+    description: Số mã giảm giá.
+  nochanges:
+    type: integer
+    description: Số mã đứng giá.
+  ceiling:
+    type: integer
+    description: Số mã tăng trần.
+  floor:
+    type: integer
+    description: Số mã giảm sàn.
+  values:
+    type: array
+    description: Chuỗi điểm chỉ số trong phiên (khớp vị trí với `times` / `volumes`).
+    items:
+      type: number
+  volumes:
+    type: array
+    description: Chuỗi khối lượng khớp trong phiên (khớp vị trí với `times` / `values`).
+    items:
+      type: number
+  times:
+    type: array
+    description: Chuỗi mốc thời gian trong phiên — Unix timestamp (mili-giây).
+    items:
+      type: integer
+      format: int64
+  advancesArr:
+    type: array
+    description: Chuỗi số mã tăng giá theo thời gian trong phiên. Chỉ áp dụng cho index KRX.
+    items:
+      type: integer
+  declinesArr:
+    type: array
+    description: Chuỗi số mã giảm giá theo thời gian trong phiên. Chỉ áp dụng cho index KRX.
+    items:
+      type: integer
+  nochangesArr:
+    type: array
+    description: Chuỗi số mã đứng giá theo thời gian trong phiên. Chỉ áp dụng cho index KRX.
+    items:
+      type: integer
+  ceilings:
+    type: array
+    description: Chuỗi số mã tăng trần theo thời gian trong phiên. Chỉ áp dụng cho index KRX.
+    items:
+      type: integer
+  floors:
+    type: array
+    description: Chuỗi số mã giảm sàn theo thời gian trong phiên. Chỉ áp dụng cho index KRX.
+    items:
+      type: integer
+  sessionInExchange:
+    type: string
+    description: Trạng thái phiên giao dịch hiện tại của sàn (tham chiếu giá trị `ExchangeSession`).
+  name:
+    type: string
+    description: Tên chỉ số (hiện trùng với `index`).
+    example: VNINDEX

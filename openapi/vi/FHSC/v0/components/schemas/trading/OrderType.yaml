@@ -1,0 +1,37 @@
+type: string
+description: |
+  Loại order được đặt.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `LO` | Giới hạn (Limit Order) |
+  | `MP` | Khớp giá thị trường |
+  | `ATO` | Phiên mở cửa |
+  | `ATC` | Phiên đóng cửa |
+  | `MAK` | Khớp và huỷ |
+  | `MOK` | Khớp hoặc huỷ toàn bộ |
+  | `MTL` | Khớp đến giới hạn rồi chuyển limit |
+  | `PLO` | Post-limit (HNX, sau giờ khớp chính) |
+  | `FOK` | Khớp toàn bộ hoặc huỷ |
+  | `FAK` | Khớp phần nào được và huỷ phần còn lại |
+enum:
+  - LO
+  - MP
+  - ATO
+  - ATC
+  - MAK
+  - MOK
+  - MTL
+  - PLO
+  - FOK
+  - FAK
+x-enum-varnames:
+  - LO
+  - MP
+  - ATO
+  - ATC
+  - MAK
+  - MOK
+  - MTL
+  - PLO
+  - FOK
+  - FAK

@@ -1,0 +1,15 @@
+allOf:
+  - $ref: '../common/EnvelopeBase.yaml'
+  - type: object
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        items:
+          $ref: 'FinancialData.yaml'
+      traceId:
+        type: string
+        format: uuid
+        description: Request trace ID do server sinh, dùng để debug và đối chiếu log.
+        example: 5ecb0251-aa07-421c-876c-89d6a7c67461

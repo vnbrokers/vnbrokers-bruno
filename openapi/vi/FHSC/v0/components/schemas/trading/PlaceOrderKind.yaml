@@ -1,0 +1,14 @@
+type: string
+description: |
+  Kiểu định giá khi đặt lệnh — quyết định field giá nào phải set trong
+  request body.
+  | Giá trị | Ý nghĩa | Field giá phải set |
+  |---------|---------|--------------------|
+  | `LIMIT`  | Lệnh giới hạn — khớp tại đúng giá `limit_price` hoặc tốt hơn. | `limit_price` (VND); `market_price` = `null`. |
+  | `MARKET` | Lệnh thị trường — khớp theo logic của order type chỉ định. | `market_price` (enum `MarketPriceCode`); `limit_price` = `null`. |
+enum:
+  - LIMIT
+  - MARKET
+x-enum-varnames:
+  - LIMIT
+  - MARKET

@@ -1,0 +1,134 @@
+type: object
+description: |
+  Chi tiết tiểu khoản, trả về từ `/trading/accounts/{subAccountId}/summary`.
+  Mọi giá trị tiền là `int64` VND trừ khi ghi chú khác.
+properties:
+  balance:
+    type: integer
+    format: int64
+    description: Available balance.
+  ci_balance:
+    type: integer
+    format: int64
+  td_balance:
+    type: integer
+    format: int64
+  interest_balance:
+    type: integer
+    format: int64
+  ca_receiving:
+    type: integer
+    format: int64
+  receiving_t1:
+    type: integer
+    format: int64
+    description: Receiving amount T+1.
+  receiving_t2:
+    type: integer
+    format: int64
+    description: Receiving amount T+2.
+  receiving_t3:
+    type: integer
+    format: int64
+    description: Receiving amount T+3.
+  securities_amt:
+    type: integer
+    format: int64
+    description: Securities amount.
+  total_debt_amt:
+    type: integer
+    format: int64
+    description: Total debt amount.
+  secure_amt:
+    type: integer
+    format: int64
+  trf_buy_amt:
+    type: integer
+    format: int64
+  margin_amt:
+    type: integer
+    format: int64
+    description: Margin amount.
+  t0_debt_amt:
+    type: integer
+    format: int64
+    description: T+0 debt amount.
+  advanced_amt:
+    type: integer
+    format: int64
+    description: Advanced amount.
+  df_debt_amt:
+    type: integer
+    format: int64
+  td_debt_amt:
+    type: integer
+    format: int64
+  cidepo_fee_acr:
+    type: integer
+    format: int64
+  net_asset_value:
+    type: integer
+    format: int64
+    description: Net asset value.
+  mrcr_limit:
+    type: integer
+    format: int64
+    description: Margin credit limit.
+  debt_amt:
+    type: integer
+    format: int64
+  advance_max_amt_fee:
+    type: integer
+    format: int64
+  receiving_amt:
+    type: integer
+    format: int64
+  margin_rate:
+    type: integer
+    format: int64
+    description: Margin rate.
+  sms_fee_amt:
+    type: integer
+    format: int64
+  ibroker_fee_amt:
+    type: integer
+    format: int64
+  hold_balance:
+    type: integer
+    format: int64
+  mri_rate:
+    type: integer
+    format: int64
+  mrm_rate:
+    type: integer
+    format: int64
+  cidepo_fee:
+    type: integer
+    format: int64
+  td_int_amt:
+    type: integer
+    format: int64
+  add_vnd:
+    type: integer
+    format: int64
+  add_vnd_1:
+    type: integer
+    format: int64
+  core_bank:
+    type: string
+    description: Core bank code.
+  bankacct_no:
+    type: string
+    description: Bank account number.
+  bank_name:
+    type: string
+    description: Bank name.
+  emk_amt:
+    type: integer
+    format: int64
+  baldefovd:
+    type: string
+  mrcr_limit_max:
+    type: integer
+    format: int64
+    description: Maximum margin credit limit.

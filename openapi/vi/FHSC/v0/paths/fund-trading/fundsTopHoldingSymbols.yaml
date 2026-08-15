@@ -1,0 +1,39 @@
+get:
+  operationId: fundsTopHoldingSymbols
+  tags:
+    - Quỹ mở
+  summary: Danh sách mã được nhiều quỹ giữ nhất
+  description: |
+    Danh sách mã stock được nhiều quỹ giữ nhất — tổng hợp qua **mọi loại
+    quỹ** (không có filter `fund-type`).
+  responses:
+    '200':
+      description: Trả về `data` mảng symbol kèm số lượng quỹ đang giữ, sort giảm dần.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/fund-trading/FundTopHoldingSymbolsResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - symbol: VNM
+                number_of_funds: 17
+              - symbol: FPT
+                number_of_funds: 15
+              - symbol: HPG
+                number_of_funds: 13
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/fund-trading/public/fund-certificates/top-holding-symbols"

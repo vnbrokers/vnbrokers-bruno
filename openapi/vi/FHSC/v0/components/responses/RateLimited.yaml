@@ -1,0 +1,11 @@
+description: Vượt giới hạn rate limit. Chờ đến thời điểm `X-RateLimit-Reset` rồi thử lại.
+headers:
+  X-RateLimit-Reset:
+    $ref: '../headers/XRateLimitReset.yaml'
+content:
+  application/json:
+    schema:
+      $ref: '../schemas/common/ErrorBody.yaml'
+    example:
+      error_code: '429'
+      message: Too many requests

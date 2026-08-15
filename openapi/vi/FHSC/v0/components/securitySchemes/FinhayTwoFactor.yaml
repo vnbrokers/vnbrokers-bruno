@@ -1,0 +1,16 @@
+type: apiKey
+in: header
+name: X-FH-2FA-TOKEN
+description: |
+  Daily 2FA session JWT do server cấp sau khi user xác thực qua OTP. Áp
+  dụng cho các write operation nhạy cảm (đặt / sửa / huỷ lệnh) — phải đi
+  cùng đủ 4 header HMAC + `X-FH-BODYHASH`.
+  Token có tuổi thọ **1 ngày giao dịch** và được scope theo `apiKey`. Khi
+  hết hạn hoặc bị revoke, server trả `HTTP 403` với 1 trong các
+  `error_code`:
+  - `OTP_SESSION_REQUIRED` — chưa có session, cần khởi tạo OTP flow.
+  - `OTP_SESSION_EXPIRED` — session đã hết hạn.
+  - `OTP_SESSION_INVALID` — token không hợp lệ / chữ ký sai.
+  - `OTP_SESSION_REVOKED` — bị thu hồi (user logout, đổi key, …).
+  Khi gặp 403 thuộc các mã trên, client phải chạy lại OTP flow để xin
+  token mới rồi retry request.

@@ -1,0 +1,13 @@
+type: string
+description: |
+  Mã quốc gia cho dữ liệu vĩ mô.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `VN` | Việt Nam |
+  | `US` | Mỹ |
+enum:
+  - VN
+  - US
+x-enum-varnames:
+  - VN
+  - US

@@ -1,0 +1,46 @@
+get:
+  operationId: performanceGetPnlToday
+  tags:
+    - Lãi-lỗ
+  security:
+    - FinhayApiKey: []
+      FinhayTimestamp: []
+      FinhayNonce: []
+      FinhaySignature: []
+  summary: Lãi-lỗ hôm nay
+  description: |
+    Lãi / lỗ trong ngày của user, tổng hợp qua mọi tiểu khoản.
+  parameters:
+    - $ref: '../../components/parameters/UserId.yaml'
+  responses:
+    '200':
+      description: Trả về `data` chứa `pnl_amount` (lãi / lỗ tuyệt đối) và `pnl_rate` (% so với portfolio) tổng hợp qua mọi tiểu khoản.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/trading/PnlTodayResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              sub_account_id: ALL
+              pnl_amount: 1500000
+              pnl_rate: 2.5
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl \
+          -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          -H "X-FH-TIMESTAMP: $TIMESTAMP_MS" \
+          -H "X-FH-NONCE: $NONCE_UUID" \
+          -H "X-FH-SIGNATURE: $SIGNATURE_HEX" \
+          "https://open-api.fhsc.com.vn/trading/pnl-today/$USER_ID"

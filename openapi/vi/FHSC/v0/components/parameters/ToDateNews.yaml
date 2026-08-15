@@ -1,0 +1,8 @@
+name: to_date
+in: query
+required: false
+description: |
+  Ngày kết thúc của bộ lọc tin tức / sự kiện doanh nghiệp.
+schema:
+  type: string
+  example: 31/12/2024

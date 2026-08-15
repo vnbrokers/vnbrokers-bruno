@@ -1,0 +1,221 @@
+type: object
+description: |
+  Giá realtime của 1 mã stock.
+  Lưu ý:
+  - `close` luôn bằng `price`.
+  - `stockType` được chuẩn hoá: ETF bị hardcode thành `ETF`; `exchange` bị
+    hardcode thành `HOSE` cho ETF bất kể giá trị trong DB.
+  - `marketCapCategory` được tính từ `marketCap`: Micro (<100 tỷ), Small
+    (<1 nghìn tỷ), Mid (<10 nghìn tỷ), Large (≥10 nghìn tỷ VND).
+  - `symbolStatus`, `symbolStatusCode`, `floorCode` chỉ set cho stock KRX.
+properties:
+  symbol:
+    type: string
+    example: VNM
+  price:
+    type:
+      - number
+      - 'null'
+    example: 72500
+  volume:
+    type:
+      - number
+      - 'null'
+  change:
+    type:
+      - number
+      - 'null'
+    description: Price change from reference.
+  changePercent:
+    type:
+      - number
+      - 'null'
+    description: Price change percentage from reference.
+  ceiling:
+    type:
+      - number
+      - 'null'
+    description: Ceiling price.
+  floor:
+    type:
+      - number
+      - 'null'
+    description: Floor price.
+  reference:
+    type:
+      - number
+      - 'null'
+    description: Reference price.
+  average:
+    type:
+      - number
+      - 'null'
+    description: Average (medium) price.
+  high:
+    type:
+      - number
+      - 'null'
+  low:
+    type:
+      - number
+      - 'null'
+  open:
+    type:
+      - number
+      - 'null'
+  close:
+    type:
+      - number
+      - 'null'
+    description: Same as `price`.
+  buyPrice1:
+    type:
+      - number
+      - 'null'
+  buyPrice2:
+    type:
+      - number
+      - 'null'
+  buyPrice3:
+    type:
+      - number
+      - 'null'
+  buyVol1:
+    type:
+      - number
+      - 'null'
+  buyVol2:
+    type:
+      - number
+      - 'null'
+  buyVol3:
+    type:
+      - number
+      - 'null'
+  sellPrice1:
+    type:
+      - number
+      - 'null'
+  sellPrice2:
+    type:
+      - number
+      - 'null'
+  sellPrice3:
+    type:
+      - number
+      - 'null'
+  sellVol1:
+    type:
+      - number
+      - 'null'
+  sellVol2:
+    type:
+      - number
+      - 'null'
+  sellVol3:
+    type:
+      - number
+      - 'null'
+  totalVolume:
+    type:
+      - number
+      - 'null'
+  totalValue:
+    type:
+      - number
+      - 'null'
+  foreignBought:
+    type:
+      - number
+      - 'null'
+  foreignSold:
+    type:
+      - number
+      - 'null'
+  foreignRemain:
+    type:
+      - number
+      - 'null'
+  remainBid:
+    type:
+      - number
+      - 'null'
+  remainAsk:
+    type:
+      - number
+      - 'null'
+  stockType:
+    allOf:
+      - $ref: 'StockType.yaml'
+    description: Normalized instrument type.
+  exchange:
+    allOf:
+      - $ref: 'Exchange.yaml'
+    description: Normalized exchange code.
+  name:
+    type: string
+    example: CTCP Sữa Việt Nam
+  createdAt:
+    type: number
+    description: Unix timestamp (seconds).
+  pe:
+    type:
+      - number
+      - 'null'
+  pb:
+    type:
+      - number
+      - 'null'
+  roe:
+    type:
+      - number
+      - 'null'
+  marketCap:
+    type:
+      - number
+      - 'null'
+  marketCapCategory:
+    type:
+      - string
+      - 'null'
+    enum:
+      - Micro Cap
+      - Small Cap
+      - Mid Cap
+      - Large Cap
+  hasNewestNews:
+    type: boolean
+  stockSummary:
+    type:
+      - string
+      - 'null'
+  additionalInfo:
+    type:
+      - object
+      - 'null'
+    description: |
+      Object chứa các thông tin bổ sung không có cấu trúc cố định. Shape
+      thay đổi theo symbol và nguồn dữ liệu.
+  symbolStatus:
+    type:
+      - string
+      - 'null'
+    description: Chỉ áp dụng cho stock niêm yết tại KRX.
+  symbolStatusCode:
+    type:
+      - string
+      - 'null'
+    description: Chỉ áp dụng cho stock niêm yết tại KRX.
+  floorCode:
+    type:
+      - string
+      - 'null'
+    description: KRX stocks only.
+  influenceScore:
+    type:
+      - number
+      - 'null'
+  outstandingShares:
+    type:
+      - number
+      - 'null'

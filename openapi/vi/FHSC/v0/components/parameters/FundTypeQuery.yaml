@@ -1,0 +1,6 @@
+name: fund-type
+in: query
+required: true
+description: Phân loại quỹ cần truy vấn.
+schema:
+  $ref: '../schemas/fund-trading/FundType.yaml'

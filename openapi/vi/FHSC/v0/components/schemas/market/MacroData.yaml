@@ -1,0 +1,25 @@
+type: object
+description: 1 điểm dữ liệu vĩ mô.
+properties:
+  type:
+    allOf:
+      - $ref: 'MacroType.yaml'
+    description: Macro indicator code.
+  country:
+    allOf:
+      - $ref: 'Country.yaml'
+    description: Country code.
+  month:
+    type: string
+    description: Year-month in `YYYY-MM` format.
+    example: 2024-03
+  value:
+    type: number
+    description: Macro indicator value.
+    example: 3.5
+  date:
+    type:
+      - string
+      - 'null'
+    description: Exact date in `YYYY-MM-DD` format (if available in source data).
+    example: '2024-03-15'

@@ -1,0 +1,21 @@
+type: object
+description: Số dư tiền mặt.
+properties:
+  total:
+    type: number
+    description: Total cash.
+  ci_balance:
+    type: number
+    description: Cash balance in account.
+  ca_receiving:
+    type: number
+    description: Dividend cash pending.
+  emk_amt:
+    type: number
+    description: Other blocked funds.
+  receiving_amt:
+    type: number
+    description: Cash to receive.
+  baldefovd:
+    type: number
+    description: Available withdrawable amount.

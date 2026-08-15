@@ -1,0 +1,13 @@
+name: device-id
+in: header
+required: true
+description: |
+  Định danh thiết bị đặt lệnh — chuỗi định danh (device identifier) của thiết
+  bị mà người dùng dùng để đặt / sửa / huỷ lệnh. Do client cung cấp theo mỗi
+  request, phục vụ tuân thủ quy định giao dịch chứng khoán (lưu vết thiết bị
+  giao dịch). Không lấy từ token / phiên xác thực.
+schema:
+  type: string
+  minLength: 1
+  maxLength: 64
+  example: a1b2c3d4-5e6f-7890-abcd-ef1234567890

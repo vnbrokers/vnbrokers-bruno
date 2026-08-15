@@ -1,0 +1,56 @@
+get:
+  operationId: fundsBenchmarkOperation
+  tags:
+    - Quỹ mở
+  summary: So sánh các chỉ số hoạt động (AUM / số nhà đầu tư / dòng tiền) của nhiều quỹ
+  description: |
+    So sánh AUM hiện tại, số nhà đầu tư, tổng dòng tiền và chi tiết dòng
+    tiền theo tháng của nhiều quỹ trong khoảng thời gian chỉ định.
+
+    **Phải truyền** `period` HOẶC cả `from-month` + `to-month` (cùng lúc).
+    Server trả `400` nếu vi phạm.
+  parameters:
+    - $ref: '../../components/parameters/FundNamesCsv.yaml'
+    - $ref: '../../components/parameters/FundPeriodQuery.yaml'
+    - $ref: '../../components/parameters/FromMonth.yaml'
+    - $ref: '../../components/parameters/ToMonth.yaml'
+  responses:
+    '200':
+      description: Trả về `data` mảng quỹ kèm AUM, biến động số nhà đầu tư, chi tiết dòng tiền.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/fund-trading/FundOperationBenchmarkResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - fund_name: VESAF
+                image_url: https://cdn.finhay.com/funds/vesaf.png
+                aum: 1500000000000
+                changed_aum: 120000000000
+                changed_aum_percent: 8.7
+                investors: 12450
+                changed_investors: 350
+                changed_investors_percent: 2.89
+                total_fund_flow: 80000000000
+                fund_flows:
+                  - fund_name: VESAF
+                    month: 2024-12
+                    fund_flow: 25000000000
+                    fund_inflow: 80000000000
+                    fund_outflow: 55000000000
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/fund-trading/public/fund-certificates/benchmark/operation?fund-names=VESAF,DCDS&period=ONE_YEAR"

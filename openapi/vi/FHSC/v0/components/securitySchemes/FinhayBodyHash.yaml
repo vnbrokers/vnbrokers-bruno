@@ -1,0 +1,13 @@
+type: apiKey
+in: header
+name: X-FH-BODYHASH
+description: |
+  SHA-256 của raw request body, encode hex (lowercase). **Bắt buộc khi
+  request có body** (POST / PUT / PATCH). Có thể bỏ qua — hoặc gửi chuỗi
+  rỗng — khi body rỗng.
+  Là segment cuối của canonical signing payload
+  (`{timestamp}\n{method}\n{path}[?{query}]\n{bodyHash}`). Server dùng giá
+  trị client gửi lên để verify chữ ký; server **không** tự hash lại body,
+  nên client phải hash đúng chuỗi bytes đã gửi đi.
+  Được tính per-request bởi signing middleware. **Không** set thủ công —
+  xem middleware mẫu trong tài liệu Authentication.

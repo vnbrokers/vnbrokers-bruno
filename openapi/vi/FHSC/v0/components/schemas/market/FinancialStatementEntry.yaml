@@ -1,0 +1,28 @@
+type: object
+description: |
+  1 row báo cáo tài chính cho 1 kỳ, trả về từ
+  `/market/v2/financial-statement/statement`. `year` luôn có; `quarter`
+  chỉ có khi `period=quarterly` (giá trị `1`–`4`).
+  Các key còn lại là **metric code động** (tên romanized tiếng Việt, ví
+  dụ `luuchuyentienthuantuhoatdongkinhdoanh`, `tienvatuongduongtiendaunam`,
+  `loinhuanlotruocthue`, …) nhận giá trị số hoặc `null`. Bộ key phụ thuộc
+  vào tham số `type` — income-statement, balance-sheet và cash-flow có bộ
+  field khác nhau, mỗi loại mấy chục field. Tham chiếu
+  `additionalProperties` trong schema là nguồn chuẩn.
+properties:
+  year:
+    type: integer
+    description: Fiscal year.
+    example: 2025
+  quarter:
+    type:
+      - integer
+      - 'null'
+    description: Quarter (`1`–`4`) for quarterly rows; null for annual.
+    example: 4
+additionalProperties:
+  type:
+    - number
+    - 'null'
+required:
+  - year

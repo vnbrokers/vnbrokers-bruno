@@ -1,0 +1,34 @@
+type: object
+description: Giá trị tài sản chia theo loại sản phẩm.
+properties:
+  total:
+    type: number
+    description: Total product value.
+  stock:
+    type: number
+    description: Stock value.
+  fund:
+    type: number
+    description: Fund value.
+  saving:
+    type:
+      - number
+      - 'null'
+    description: Saving amount (may be null).
+  bond:
+    type: number
+    description: |
+      HayBond product value. **Lưu ý**: field này chỉ đại diện cho sản phẩm
+      HayBond — KHÔNG phải trái phiếu doanh nghiệp / chính phủ thông thường.
+  hay0:
+    type: number
+    description: Hay0 NAV.
+  hay0_interest:
+    type: number
+    description: Hay0 interest.
+  hay0_depositing:
+    type: number
+    description: Hay0 amount being deposited.
+  hay0_withdrawing:
+    type: number
+    description: Hay0 amount being withdrawn.

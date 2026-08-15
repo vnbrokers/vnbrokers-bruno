@@ -1,0 +1,72 @@
+post:
+  operationId: postRegistrationTradingToken
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Xác thực OTP
+  responses:
+    '200':
+      description: OK
+      headers:
+        Content-Length:
+          $ref: '../../components/headers/ContentLength.yaml'
+        Date:
+          $ref: '../../components/headers/Date.yaml'
+        Vary:
+          $ref: '../../components/headers/Vary.yaml'
+        X-Frame-Options:
+          $ref: '../../components/headers/XFrameOptions.yaml'
+        X-Ratelimit-Limit:
+          $ref: '../../components/headers/XRateLimitLimit.yaml'
+        X-Ratelimit-Remaining:
+          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+        X-Ratelimit-Reset:
+          $ref: '../../components/headers/XRateLimitReset.yaml'
+        X-Request-Id:
+          $ref: '../../components/headers/XRequestId.yaml'
+        X-Tyk-Api-Expires:
+          deprecated: false
+          schema: {}
+          example: Thu, 02 Jan 3000 15:04:00 UTC
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              tradingToken:
+                type: string
+                example: # 9ab81e9c-8a81-45aa-8190-b69a1c179d52
+                description: Token đặt lệnh
+          example:
+            tradingToken: 9ab81e9c-8a81-45aa-8190-b69a1c179d52 #gitleaks:allow
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  tags:
+    - trading
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            otpType:
+              type: string
+              example: email_otp
+              description: >-
+                Phương thức xác thực OTP
+
+                - email_otp: Áp dụng cho tài khoản đăng ký phương thức xác
+                thực lớp thứ 2 là Email OTP
+
+                - smart_otp: Áp dụng cho tài khoản đăng ký phương thức xác
+                thực lớp thứ 2 là Smart OTP
+            passcode:
+              type: string
+              example: '519752'
+              description: Mã OTP tương ứng với phương thức xác thực
+        example:
+          otpType: email_otp
+          passcode: '569542'

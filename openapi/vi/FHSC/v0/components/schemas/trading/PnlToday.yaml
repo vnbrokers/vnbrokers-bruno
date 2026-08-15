@@ -1,0 +1,17 @@
+type: object
+description: Lãi / lỗ hôm nay của user, tổng hợp qua mọi tiểu khoản.
+properties:
+  sub_account_id:
+    type: string
+    description: ID tiểu khoản hoặc `ALL`.
+    example: '0001234567'
+  pnl_amount:
+    type: integer
+    format: int64
+    description: Số tiền lãi / lỗ hôm nay (VND).
+    example: 1500000
+  pnl_rate:
+    type: number
+    format: double
+    description: Tỷ lệ lãi / lỗ hôm nay (%).
+    example: 2.5

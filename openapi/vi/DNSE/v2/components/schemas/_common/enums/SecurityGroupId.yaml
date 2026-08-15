@@ -1,0 +1,10 @@
+type: string
+description: Định danh nhóm chứng khoán.
+enum:
+  - 'UNSPECIFIED' # Không xác định
+  - 'BS' # Trái phiếu doanh nghiệp
+  - 'EF' # Quỹ ETF
+  - 'EW' # Chứng quyền
+  - 'FU' # Hợp đồng tương lai
+  - 'SR' # Quyền mua
+  - 'ST' # Cổ phiếu

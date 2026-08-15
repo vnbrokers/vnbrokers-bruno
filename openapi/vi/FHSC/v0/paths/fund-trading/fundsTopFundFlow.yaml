@@ -1,0 +1,43 @@
+get:
+  operationId: fundsTopFundFlow
+  tags:
+    - Quỹ mở
+  summary: Danh sách quỹ theo dòng tiền ròng
+  description: Danh sách quỹ theo dòng tiền ròng trong kỳ, phân theo `fund-type`.
+  parameters:
+    - $ref: '../../components/parameters/FundTypeQuery.yaml'
+  responses:
+    '200':
+      description: Trả về `data` mảng các quỹ kèm dòng tiền chi tiết, sort giảm dần.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/fund-trading/FundTopFundFlowResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - fund_name: VESAF
+                month: 2025-04
+                fund_flow: 25000000000
+                fund_inflow: 80000000000
+                fund_outflow: 55000000000
+              - fund_name: DCDS
+                month: 2025-04
+                fund_flow: 15000000000
+                fund_inflow: 50000000000
+                fund_outflow: 35000000000
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/fund-trading/public/fund-certificates/top-fund-flow?fund-type=BOND_FUND"

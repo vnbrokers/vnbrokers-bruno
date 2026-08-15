@@ -1,0 +1,351 @@
+get:
+  operationId: getAccountsAccountNoOrders
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Sổ lệnh
+  parameters:
+    - name: marketType
+      in: query
+      required: true
+      description: |-
+        Loại thị trường 
+        - STOCK: Sổ lệnh cơ sở
+        - DERIVATIVE: Sổ lệnh phái sinh
+        - BOND: Sổ lệnh trái phiếu
+      deprecated: false
+      schema:
+        type: string
+      example: STOCK
+    - name: orderCategory
+      in: query
+      required: true
+      description: Phân loại lệnh thường, lệnh điều kiện (mặc định NORMAL)
+      deprecated: false
+      schema:
+        type: string
+      example: NORMAL
+    - name: pageIndex
+      in: query
+      required: true
+      description: Chỉ số trang hiện tại, bắt đầu từ 0
+      schema:
+        type: integer
+        format: int32
+      example: 0
+    - name: pageSize
+      in: query
+      required: true
+      description: Số bản ghi trên mỗi trang
+      schema:
+        type: integer
+        format: int32
+      example: 10
+  responses:
+    '200':
+      description: OK
+      headers:
+        Content-Length:
+          $ref: '../../components/headers/ContentLength.yaml'
+        Date:
+          $ref: '../../components/headers/Date.yaml'
+        Vary:
+          $ref: '../../components/headers/Vary.yaml'
+        X-Ratelimit-Limit:
+          $ref: '../../components/headers/XRateLimitLimit.yaml'
+        X-Ratelimit-Remaining:
+          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+        X-Ratelimit-Reset:
+          $ref: '../../components/headers/XRateLimitReset.yaml'
+        X-Tyk-Api-Expires:
+          schema:
+            type: string
+          example: Thu, 02 Jan 3000 15:04:00 UTC
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              orders:
+                type: array
+                example:
+                  - id: 141
+                    side: NB
+                    accountNo: '0001179019'
+                    symbol: BCM
+                    price: 51200
+                    priceSecure: 51200
+                    averagePrice: 0
+                    quantity: 300
+                    fillQuantity: 0
+                    canceledQuantity: 0
+                    leaveQuantity: 300
+                    orderType: LO
+                    orderCategory: NORMAL
+                    orderStatus: New
+                    loanPackageId: 7937
+                    marketType: STOCK
+                    transDate: '2026-03-16'
+                    createdDate: '2026-03-24T03:15:22.226297778Z'
+                    modifiedDate: '2026-03-24T03:15:22.358568266Z'
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: '141'
+                      description: Id lệnh giao dịch
+                    side:
+                      type: string
+                      example: NB
+                      description: |-
+                        Chiều giao dịch
+                        NB: Mua
+                        NS: Bán
+                    accountNo:
+                      type: string
+                      example: '0001179019'
+                      description: Số tiểu khoản
+                    symbol:
+                      type: string
+                      example: BCM
+                      description: Mã chứng khoán
+                    price:
+                      type: number
+                      format: double
+                      example: 51200
+                      description: Giá đặt
+                    priceSecure:
+                      type: number
+                      format: double
+                      example: 51200
+                      description: Giá dùng để kiểm tra sức mua/đặt lệnh
+                    averagePrice:
+                      type: number
+                      format: double
+                      example: 0
+                      description: Giá khớp trung bình
+                    quantity:
+                      type: integer
+                      format: int32
+                      example: 300
+                      description: Khối lượng đặt
+                    fillQuantity:
+                      type: integer
+                      format: int32
+                      example: 0
+                      description: Khối lượng đã khớp
+                    canceledQuantity:
+                      type: integer
+                      format: int32
+                      example: 0
+                      description: Khối lượng đã hủy
+                    leaveQuantity:
+                      type: integer
+                      format: int32
+                      example: 300
+                      description: Khối lượng còn lại
+                    orderType:
+                      type: string
+                      example: LO
+                      description: |-
+                        Loại lệnh
+                        - LO: Lệnh giới hạn
+                        - MOK/MAK/MTL: Lệnh thị trường
+                        - ATO/ATC: Lệnh phiên định kỳ mở cửa/đóng cửa
+                        - PLO: Lệnh khớp lệnh sau giờ
+                    orderCategory:
+                      type: string
+                      example: NORMAL
+                      description: >-
+                        Phân loại lệnh thường, lệnh điều kiện (mặc định
+                        NORMAL)
+                    orderStatus:
+                      type: string
+                      example: New
+                      description: >-
+                        Trạng thái lệnh
+
+                        - Pending/PendingNew: Chờ gửi
+
+                        - New: Chờ khớp
+
+                        - PendingReplace: Chờ sửa
+
+                        - PendingCancel: Chờ hủy
+
+                        - PartiallyFilled: Khớp một phần
+
+                        - Filled: Khớp toàn bộ
+
+                        - Canceled: Đã hủy
+
+                        - Rejected: Bị từ chối
+
+                        - Expired: Hết hạn trong phiên
+
+                        - DoneForDay: Lệnh được giải tỏa do không khớp trong
+                        phiên
+                    loanPackageId:
+                      type: integer
+                      format: int32
+                      example: 7937
+                      description: Gói vay áp dụng cho mã chứng khoán
+                    marketType:
+                      type: string
+                      example: STOCK
+                      description: |-
+                        Loại thị trường
+                        STOCK: Lệnh cơ sở
+                        DERIVATIVE: Lệnh phái sinh
+                        BOND: Lệnh trái phiếu
+                    transDate:
+                      type: string
+                      example: '2026-03-16'
+                      description: Ngày giao dịch
+                    createdDate:
+                      type: string
+                      format: date-time
+                      example: '2026-03-24T03:15:22.226297778Z'
+                      description: Thời điểm tạo
+                    modifiedDate:
+                      type: string
+                      format: date-time
+                      example: '2026-03-24T03:15:22.358568266Z'
+                      description: Thời điểm cập nhật
+                description: Danh sách lệnh giao dịch
+              pageIndex:
+                type: integer
+              pageSize:
+                type: integer
+              totalPages:
+                type: integer
+              totalRecords:
+                type: integer
+          example:
+            orders:
+              - id: 141
+                side: NB
+                accountNo: '0001179019'
+                symbol: BCM
+                price: 51200
+                priceSecure: 51200
+                averagePrice: 0
+                quantity: 300
+                fillQuantity: 0
+                canceledQuantity: 0
+                leaveQuantity: 300
+                orderType: LO
+                orderCategory: NORMAL
+                orderStatus: New
+                loanPackageId: 7937
+                marketType: STOCK
+                transDate: '2026-03-16'
+                createdDate: '2026-03-24T03:15:22.226297778Z'
+                modifiedDate: '2026-03-24T03:15:22.358568266Z'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+post:
+  operationId: postAccountsAccountNoOrders
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+      DnseTradingToken: []
+  summary: Đặt lệnh
+  parameters:
+    - name: marketType
+      in: query
+      required: true
+      description: Loại thị trường: STOCK, DERIVATIVE hoặc BOND.
+      schema:
+        type: string
+        enum: [STOCK, DERIVATIVE, BOND]
+    - name: orderCategory
+      in: query
+      description: Phân loại lệnh: NORMAL, STOP hoặc OCO.
+      schema:
+        type: string
+        enum: [NORMAL, STOP, OCO]
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required: [loanPackageId, orderType, price, quantity, side, symbol]
+          properties:
+            loanPackageId:
+              type: integer
+            orderType:
+              type: string
+            price:
+              type: number
+            quantity:
+              type: integer
+            side:
+              type: string
+            symbol:
+              type: string
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              symbol:
+                type: string
+              side:
+                type: string
+              orderType:
+                type: string
+              orderStatus:
+                type: string
+              price:
+                type: number
+              averagePrice:
+                type: number
+              quantity:
+                type: integer
+              fillQuantity:
+                type: integer
+              canceledQuantity:
+                type: integer
+              leaveQuantity:
+                type: integer
+              accountNo:
+                type: string
+              marketType:
+                type: string
+              orderCategory:
+                type: string
+              transDate:
+                type: string
+              createdDate:
+                type: string
+                format: date-time
+              modifiedDate:
+                type: string
+                format: date-time
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  tags:
+    - account
+parameters:
+  - name: accountNo
+    in: path
+    required: true
+    description: Số tiểu khoản
+    deprecated: false
+    schema:
+      type: string
+    example: '0001179019'

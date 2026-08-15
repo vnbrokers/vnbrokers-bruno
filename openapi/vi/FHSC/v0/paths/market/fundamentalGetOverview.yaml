@@ -1,0 +1,56 @@
+get:
+  operationId: fundamentalGetOverview
+  tags:
+    - Phân tích cơ bản
+  summary: Chỉ số tài chính tổng quan của doanh nghiệp
+  description: |
+    Các chỉ số tài chính quan trọng của 1 mã stock. `industry` chứa giá trị
+    trung bình của ngành cho cùng bộ chỉ số. `nim` chỉ có ý nghĩa với ngân
+    hàng; `margin_loan_to_equity_ratio` chỉ có với công ty chứng khoán.
+  parameters:
+    - name: symbol
+      in: query
+      required: true
+      description: Mã stock (chữ hoa, chữ số).
+      schema:
+        type: string
+        example: VNM
+  responses:
+    '200':
+      description: Trả về `data` chứa các chỉ số tài chính của stock; `industry` chứa giá trị trung bình ngành để so sánh.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/market/FinancialOverviewResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              pe: 16.8
+              pb: 4.2
+              ev_ebitda: 12.3
+              industry:
+                pe: 18.1
+                pb: 3.6
+                ev_ebitda: 13
+              gross_margin: 0.42
+              roe: 0.25
+              eps: 4300
+              dividend_yield: 0.055
+              nim: null
+              margin_loan_to_equity_ratio: null
+              roa: 0.16
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/market/company-financial/overview?symbol=VNM"

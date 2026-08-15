@@ -1,0 +1,12 @@
+description: |
+  Không đủ quyền — IP bị chặn, scope bị từ chối, hoặc 2FA session
+  (`X-FH-2FA-TOKEN`) chưa có / hết hạn / không hợp lệ / bị revoke. Khi
+  `error_code` là 1 trong `OTP_SESSION_REQUIRED|EXPIRED|INVALID|REVOKED`,
+  client cần chạy lại OTP flow để lấy token mới rồi retry request.
+content:
+  application/json:
+    schema:
+      $ref: '../schemas/common/ErrorBody.yaml'
+    example:
+      error_code: OTP_SESSION_EXPIRED
+      message: 2FA session has expired

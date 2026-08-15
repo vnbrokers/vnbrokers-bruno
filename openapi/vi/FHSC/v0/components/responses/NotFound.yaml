@@ -1,0 +1,8 @@
+description: Tài nguyên không tồn tại — `error_code` mô tả cụ thể loại tài nguyên không tìm thấy.
+content:
+  application/json:
+    schema:
+      $ref: '../schemas/common/ErrorBody.yaml'
+    example:
+      error_code: '404'
+      message: Not found

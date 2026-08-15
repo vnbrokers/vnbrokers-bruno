@@ -1,0 +1,9 @@
+name: fund-names
+in: query
+required: true
+description: |
+  Danh sách mã quỹ phân tách bằng dấu phẩy (server parse bằng `split(",")`,
+  không hỗ trợ syntax repeated query).
+schema:
+  type: string
+  example: VESAF,DCDS

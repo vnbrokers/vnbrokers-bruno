@@ -1,0 +1,4 @@
+type: apiKey
+in: header
+name: X-Aux-Date
+description: Thời gian thực hiện request, dùng trong cơ chế ký request của DNSE.

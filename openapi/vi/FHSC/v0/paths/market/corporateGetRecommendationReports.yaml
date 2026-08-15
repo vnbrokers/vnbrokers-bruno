@@ -1,0 +1,59 @@
+get:
+  operationId: corporateGetRecommendationReports
+  tags:
+    - Tin tức-sự kiện
+  summary: Báo cáo khuyến nghị theo stock
+  description: |
+    Báo cáo khuyến nghị (research report) của các công ty chứng khoán cho 1
+    mã stock. Khi stock có báo cáo, `data` là object chứa `recommendation`
+    (khuyến nghị mới nhất, plain text) và `recommendationReports[]` (danh
+    sách báo cáo gốc kèm download URL). Khi stock không có báo cáo nào,
+    `data` là `[]`.
+
+    Source: VietStock và một số nhà phân tích khác — xem field `source` của
+    mỗi report.
+  parameters:
+    - name: symbol
+      in: path
+      required: true
+      description: Mã stock viết hoa (3–4 ký tự, ví dụ `VNM`, `FPT`, `HPG`). Yêu cầu khớp chính xác với mã niêm yết.
+      schema:
+        type: string
+        example: VNM
+  responses:
+    '200':
+      description: 'Trả về `data` chứa `recommendation` (latest) và `recommendationReports[]` (full list); `data: []` khi stock không có báo cáo.'
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/market/RecommendationReportsResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              recommendation: Mua — upside 15% tới giá mục tiêu 85.000đ.
+              recommendationReports:
+                - stock: VNM
+                  title: VNM — Update Q1 2024
+                  source: VietStock
+                  recommendation_price: null
+                  target_price: 85000
+                  publish_date: '2024-04-10T09:00:00Z'
+                  description: Mua — upside 15% tới giá mục tiêu 85.000đ.
+                  download_url: https://vietstock.vn/reports/vnm-q1-2024.pdf
+                  created_at: '2024-04-10T09:00:00Z'
+                  updated_at: '2024-04-10T09:00:00Z'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/market/recommendation-reports/VNM"

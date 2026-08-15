@@ -1,0 +1,112 @@
+type: object
+description: |
+  1 stock đang nắm giữ trong portfolio. `close_price` được enrich từ dữ
+  liệu realtime. `trade` đã deprecated.
+properties:
+  sub_account_id:
+    type: string
+  symbol:
+    type: string
+    example: VNM
+  securities_type:
+    type: string
+    description: Instrument classification (see `StockType` enum).
+  total:
+    type: integer
+    format: int64
+    description: Total shares held.
+  available:
+    type: integer
+    format: int64
+    description: Shares available to sell.
+  blocked:
+    type: integer
+    format: int64
+    description: Blocked shares.
+  mortgage:
+    type: integer
+    format: int64
+    description: Mortgaged shares.
+  vsd_mortgage:
+    type: integer
+    format: int64
+    description: VSD mortgaged shares.
+  restrict:
+    type: integer
+    format: int64
+    description: Restricted shares.
+  receiving_right:
+    type: integer
+    format: int64
+  receiving_t0:
+    type: integer
+    format: int64
+    description: Receiving shares T+0.
+  receiving_t1:
+    type: integer
+    format: int64
+    description: Receiving shares T+1.
+  receiving_t2:
+    type: integer
+    format: int64
+    description: Receiving shares T+2.
+  matching_amount:
+    type: integer
+    format: int64
+  withdraw:
+    type: integer
+    format: int64
+  cost_price:
+    type: integer
+    format: int64
+    description: Average cost price.
+  basic_price:
+    type: integer
+    format: int64
+    description: Basic (reference) price.
+  is_sellable:
+    type: boolean
+    description: Whether the stock can be sold.
+  custodycd:
+    type: string
+  pnl_amount:
+    type: integer
+    format: int64
+    description: Profit/Loss amount.
+  pnl_rate:
+    type: number
+    format: double
+    description: Profit/Loss rate (percentage).
+  close_price:
+    type: integer
+    format: int64
+    description: Close (current) price.
+  cost_price_amount:
+    type: integer
+    format: int64
+    description: Total cost value.
+  basic_price_amount:
+    type: integer
+    format: int64
+    description: Total basic value.
+  total_pnl:
+    type: integer
+    format: int64
+    description: Total PnL.
+  sending_t0:
+    type: integer
+    format: int64
+  sending_t1:
+    type: integer
+    format: int64
+  sending_t2:
+    type: integer
+    format: int64
+  has_newest_news:
+    type: boolean
+    description: Whether the stock has recent news.
+  trade:
+    type: integer
+    format: int64
+    deprecated: true
+    description: Deprecated field.

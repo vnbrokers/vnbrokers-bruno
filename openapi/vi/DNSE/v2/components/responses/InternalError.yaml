@@ -1,0 +1,27 @@
+description: Lỗi hệ thống.
+headers:
+  Content-Length:
+    $ref: '../headers/ContentLength.yaml'
+  Date:
+    $ref: '../headers/Date.yaml'
+  Vary:
+    $ref: '../headers/Vary.yaml'
+  X-Ratelimit-Limit:
+    $ref: '../headers/XRateLimitLimit.yaml'
+  X-Ratelimit-Remaining:
+    $ref: '../headers/XRateLimitRemaining.yaml'
+  X-Ratelimit-Reset:
+    $ref: '../headers/XRateLimitReset.yaml'
+  X-Request-Id:
+    $ref: '../headers/XRequestId.yaml'
+  X-Tyk-Api-Expires:
+    schema:
+      type: string
+content:
+  application/json:
+    schema:
+      $ref: '../schemas/ErrorBody.yaml'
+    example:
+      status: 500
+      code: OA-009
+      message: Lỗi hệ thống

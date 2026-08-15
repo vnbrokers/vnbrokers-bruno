@@ -1,0 +1,202 @@
+get:
+  operationId: getPriceSymbolSecdef
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Thông tin giao dịch chứng khoán
+  parameters:
+    - name: symbol
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: boardId
+      in: query
+      required: false
+      description: |-
+        Mã bảng giao dịch
+        - G1: Lô chẵn
+        - G4: Lô lẻ
+        - T1: Thỏa thuận trong giờ (9h - 14h45)
+        - T3: Thỏa thuận sau giờ (14h45 - 15h)
+        - T4: Thỏa thuận lô lẻ trong giờ (9h - 14h45)
+        - T6: Thỏa thuận lô lẻ sau giờ  (14h45 - 15h)
+      deprecated: false
+      schema:
+        $ref: '../../components/schemas/_common/enums/BoardId.yaml'
+      example: G1
+  responses:
+    '200':
+      description: OK
+      headers:
+        Content-Length:
+          $ref: '../../components/headers/ContentLength.yaml'
+        Date:
+          $ref: '../../components/headers/Date.yaml'
+        Vary:
+          $ref: '../../components/headers/Vary.yaml'
+        X-Ratelimit-Limit:
+          $ref: '../../components/headers/XRateLimitLimit.yaml'
+        X-Ratelimit-Remaining:
+          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+        X-Ratelimit-Reset:
+          $ref: '../../components/headers/XRateLimitReset.yaml'
+        X-Tyk-Api-Expires:
+          deprecated: false
+          schema: {}
+          example: Thu, 02 Jan 3000 15:04:00 UTC
+      content:
+        application/json:
+          schema:
+            type: array
+            example:
+              - marketId: STO
+                boardId: G1
+                isin: VN000000HPG4
+                symbol: HPG
+                productGrpId: STO
+                securityGroupId: ST
+                basicPrice: 26.8
+                ceilingPrice: 28.65
+                floorPrice: 24.95
+                securityStatus: UNSPECIFIED
+                symbolAdminStatusCode: NRM
+                symbolTradingMethodStatusCode: NRM
+                symbolTradingSanctionStatusCode: NRM
+            items:
+              type: object
+              properties:
+                marketId:
+                  type: string
+                  example: STO
+                  description: |-
+                    Mã thị trường niêm yết mã chứng khoán
+                    - DVX: Phái sinh sàn HNX
+                    - HCX: Trái phiếu doanh nghiệp HNX
+                    - STO: Cổ phiếu sàn HOSE
+                    - STX: Cổ phiếu sàn HNX
+                    - UPX: Cổ phiếu sàn Upcom
+                boardId:
+                  type: string
+                  example: G1
+                  description: |-
+                    Mã bảng giao dịch
+                    - G1: Lô chẵn
+                    - G4: Lô lẻ
+                    - T1: Thỏa thuận trong giờ (9h - 14h45)
+                    - T3: Thỏa thuận sau giờ (14h45 - 15h)
+                    - T4: Thỏa thuận lô lẻ trong giờ (9h - 14h45)
+                    - T6: Thỏa thuận lô lẻ sau giờ (14h45 - 15h)
+                isin:
+                  type: string
+                  example: VN000000HPG4
+                  description: Mã định danh quốc tế
+                symbol:
+                  type: string
+                  example: HPG
+                  description: Mã chứng khoán
+                productGrpId:
+                  type: string
+                  example: STO
+                  description: |-
+                    Nhóm sản phẩm theo thị trường
+                    -FBX: Hợp đồng tương lai Trái phiếu
+                    -FIO: Hợp đồng tương lai Chỉ số
+                    -HCX: Trái phiếu Doanh nghiệp HNX
+                    -STO: Cổ phiếu sàn HOSE
+                    -STX: Cổ phiếu sàn HNX
+                    -UPX: Cổ phiếu sàn Upcom
+                securityGroupId:
+                  type: string
+                  example: ST
+                  description: |-
+                    Nhóm chứng khoán
+                    - BS: Trái phiếu doanh nghiệp
+                    - EF: Quỹ ETF
+                    - EW: Chứng quyền
+                    - FU: Hợp đồng tương lai
+                    - ST: Cổ phiếu
+                basicPrice:
+                  type: number
+                  format: double
+                  example: 26.8
+                  description: Giá tham chiếu ngày giao dịch
+                ceilingPrice:
+                  type: number
+                  format: double
+                  example: 28.65
+                  description: Giá trần ngày giao dịch
+                floorPrice:
+                  type: number
+                  format: double
+                  example: 24.95
+                  description: Giá sàn ngày giao dịch
+                securityStatus:
+                  type: string
+                  example: UNSPECIFIED
+                  description: |-
+                    Trạng thái giao dịch của mã chứng khoán
+                    - HALT: Ngừng giao dịch
+                    - NO_HALT: Không ngừng giao dịch
+                symbolAdminStatusCode:
+                  type: string
+                  example: NRM
+                  description: |-
+                    Trạng thái quản lý hành chính mã chứng khoán
+                    - CR: Kiểm soát và hạn chế giao dịch
+                    - CTR: Kiểm soát
+                    - NRM: Bình thường
+                    - RES: Hạn chế giao dịch
+                    - WFR: Cảnh báo vi phạm BCTC
+                    - WID: Cảnh báo vi phạm CBTT
+                    - WOV: Cảnh báo vi phạm khác
+                symbolTradingMethodStatusCode:
+                  type: string
+                  example: NRM
+                  description: |-
+                    Trạng thái cơ chế giao dịch mã chứng khoán
+                    - NRM: Bình thường
+                    - NWE: Niêm yết mới (biên độ đặc biệt)
+                    - NWN: Niêm yết mới (biên độ thường)
+                    - SLS: Giao dịch đặc biệt sau tạm ngưng
+                    - SNE: Giao dịch đặc biệt không có giao dịch dài hạn
+                symbolTradingSanctionStatusCode:
+                  type: string
+                  example: NRM
+                  description: |-
+                    Tình trạng giao dịch của mã chứng khoán
+                    - NRM: Bình thường
+                    - SUS: Tạm ngừng giao dịch
+                    - DTL: Hủy niêm yết để chuyển sàn
+                    - TFR: Ngưng giao dịch do hạn chế
+            description: ''
+          example:
+            - marketId: STO
+              boardId: G1
+              isin: VN000000HPG4
+              symbol: HPG
+              productGrpId: STO
+              securityGroupId: ST
+              basicPrice: 26.8
+              ceilingPrice: 28.65
+              floorPrice: 24.95
+              securityStatus: UNSPECIFIED
+              symbolAdminStatusCode: NRM
+              symbolTradingMethodStatusCode: NRM
+              symbolTradingSanctionStatusCode: NRM
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  tags:
+    - market-data
+parameters:
+  - name: symbol
+    in: path
+    required: true
+    description: Mã chứng khoán
+    deprecated: false
+    schema:
+      type: string
+    example: HPG

@@ -1,0 +1,97 @@
+type: object
+description: |
+  Kết quả thao tác đặt / sửa / huỷ lệnh — phản ánh trạng thái của 1 lệnh
+  trên sàn sau khi server xử lý.
+  > **Semantic cảnh báo**: HTTP 200 **không** đồng nghĩa với lệnh đã được
+  > sàn chấp nhận. Nếu `code` non-null thì sàn từ chối lệnh (`order_status`
+  > thường là `REJECTED` hoặc `FAILED`), `rejected_reason` chứa lý do dịch
+  > sang ngôn ngữ end-user. Xem bảng `Order-level error codes` trong trang
+  > Errors.
+required:
+  - order_id
+  - account_id
+  - transaction_date
+  - symbol
+  - order_side
+  - order_quantity
+  - order_status
+  - order_type
+  - lot
+properties:
+  order_id:
+    type: string
+    description: ID lệnh do sàn cấp.
+    example: ORD123456
+  account_id:
+    type: string
+    description: Sub-account ID dạng extended.
+    example: 120C000008.1
+  transaction_date:
+    type: string
+    description: Ngày giao dịch, định dạng `YYYY-MM-DD`.
+    example: '2026-05-28'
+  symbol:
+    type: string
+    example: HPG
+  order_side:
+    $ref: 'OrderSide.yaml'
+  order_quantity:
+    type: integer
+    format: int64
+    description: Tổng số lượng đã đặt.
+    example: 100
+  limit_price:
+    type:
+      - integer
+      - 'null'
+    format: int64
+    description: Giá limit (VND), `null` nếu là MARKET order.
+    example: 25500
+  market_price:
+    description: Loại giá thị trường, `null` nếu là LIMIT order.
+    oneOf:
+      - $ref: 'MarketPriceCode.yaml'
+      - type: 'null'
+  execute_quantity:
+    type: integer
+    format: int64
+    description: Số lượng đã khớp tới hiện tại.
+    example: 0
+  execute_price:
+    type: integer
+    format: int64
+    description: Giá khớp trung bình (VND), `0` nếu chưa khớp.
+    example: 0
+  order_status:
+    $ref: 'OrderStatus.yaml'
+  fee_amount:
+    type: number
+    description: Phí giao dịch (VND).
+    example: 0
+  tax_amount:
+    type: number
+    description: Thuế (VND).
+    example: 0
+  execute_amount:
+    type: integer
+    format: int64
+    description: Giá trị đã khớp = `execute_quantity * execute_price` (VND).
+    example: 0
+  order_type:
+    $ref: 'OrderType.yaml'
+  code:
+    type:
+      - string
+      - 'null'
+    description: |
+      Mã lỗi cấp lệnh do sàn / ORS trả về. `null` khi lệnh hợp lệ. Khi
+      non-null, đi kèm `rejected_reason` mô tả lý do — xem trang Errors.
+    example: null
+  rejected_reason:
+    type:
+      - string
+      - 'null'
+    description: Lý do lệnh bị từ chối (đã dịch tiếng Việt), `null` khi `code = null`.
+    example: null
+  lot:
+    $ref: 'LotType.yaml'

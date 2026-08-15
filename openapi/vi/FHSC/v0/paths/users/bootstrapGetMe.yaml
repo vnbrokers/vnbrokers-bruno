@@ -1,0 +1,51 @@
+get:
+  operationId: bootstrapGetMe
+  tags:
+    - Khởi tạo
+  security:
+    - FinhayApiKey: []
+      FinhayTimestamp: []
+      FinhayNonce: []
+      FinhaySignature: []
+  summary: Lấy thông tin user hiện tại
+  description: |
+    Trả về thông tin user hiện tại — đặc biệt là `data.user_id`, giá trị bắt
+    buộc cần truyền vào path variable `{userId}` ở mọi endpoint user-scoped
+    (assets summary, pnl-today, …).
+
+    Đây là **bước 1 của bootstrap flow** — gọi đúng 1 lần khi khởi tạo client,
+    cache `user_id` lại để dùng cho toàn bộ vòng đời client. Re-fetch khi
+    nhận `401` từ endpoint user-scoped (account có thể bị disable / rotate).
+
+    Là endpoint Tier 2 → cần đủ 4 header HMAC (`X-FH-APIKEY`,
+    `X-FH-TIMESTAMP`, `X-FH-NONCE`, `X-FH-SIGNATURE`).
+  responses:
+    '200':
+      description: Trả về `data.user_id` — số nguyên 64-bit dùng làm path variable cho mọi endpoint user-scoped.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/users/UserProfileResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              user_id: 123456
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl \
+          -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          -H "X-FH-TIMESTAMP: $TIMESTAMP_MS" \
+          -H "X-FH-NONCE: $NONCE_UUID" \
+          -H "X-FH-SIGNATURE: $SIGNATURE_HEX" \
+          "https://open-api.fhsc.com.vn/users/v1/users/me"

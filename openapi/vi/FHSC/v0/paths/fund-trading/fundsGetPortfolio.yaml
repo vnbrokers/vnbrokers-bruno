@@ -1,0 +1,44 @@
+get:
+  operationId: fundsGetPortfolio
+  tags:
+    - Quỹ mở
+  summary: Danh mục nắm giữ của quỹ
+  description: |
+    Danh mục nắm giữ hiện tại của 1 quỹ. Cấu trúc mỗi item **phụ thuộc loại
+    quỹ** — quỹ cổ phiếu / quỹ trái phiếu / quỹ cân bằng đều có bộ field
+    khác nhau.
+  parameters:
+    - $ref: '../../components/parameters/FundName.yaml'
+  responses:
+    '200':
+      description: Trả về `data` mảng các khoản nắm giữ (cấu trúc động theo loại quỹ).
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/fund-trading/FundPortfolioResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - fund_code: VESAF
+                symbol: FPT
+                sector: Technology
+                per_nav: 8.5
+              - fund_code: VESAF
+                symbol: VNM
+                sector: Food & Beverage
+                per_nav: 6.2
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/fund-trading/public/fund-certificates/VESAF/portfolio"

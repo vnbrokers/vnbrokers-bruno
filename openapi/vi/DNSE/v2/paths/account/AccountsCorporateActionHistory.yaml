@@ -1,0 +1,60 @@
+get:
+  operationId: getAccountsCorporateActionHistory
+  tags:
+    - account
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Lịch sử sự kiện quyền
+  parameters:
+    - name: accountNo
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: symbol
+      in: query
+      schema:
+        type: string
+    - name: caType
+      in: query
+      schema:
+        type: string
+      example: cashDividend
+    - name: caStatus
+      in: query
+      schema:
+        type: string
+      example: pending
+    - name: pageIndex
+      in: query
+      schema:
+        type: integer
+        format: int32
+    - name: pageSize
+      in: query
+      schema:
+        type: integer
+        format: int32
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              accountNo:
+                type: string
+              data:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    type: object
+                    additionalProperties: true
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

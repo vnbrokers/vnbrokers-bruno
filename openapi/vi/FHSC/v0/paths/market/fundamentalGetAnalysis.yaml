@@ -1,0 +1,81 @@
+get:
+  operationId: fundamentalGetAnalysis
+  tags:
+    - Phân tích cơ bản
+  summary: Phân tích tài chính doanh nghiệp theo kỳ
+  description: |
+    Các chỉ số tài chính theo kỳ. Mỗi row luôn có `year`; `quarter` chỉ có
+    khi `period=quarterly`.
+
+    **Kích thước payload**: API trả về **~200 metric code** mỗi row
+    (tên romanized tiếng Việt như `pe`, `pb`, `roa`, `bienlaigop`, `ebitda`,
+    `thanhtoan_hienhanh`, `novay_vonchu`, `lnst_yoy`, `vonhoa`, …). Bộ key
+    phụ thuộc vào loại doanh nghiệp (ngân hàng có `nim`; công ty chứng khoán
+    có `margin_loan_to_equity_ratio`, …). Nhiều code có thể `null` khi dữ
+    liệu nguồn thiếu. Example bên dưới chỉ là **subset đại diện** — tham
+    chiếu `additionalProperties` trong schema là nguồn chuẩn.
+  parameters:
+    - name: symbol
+      in: query
+      required: true
+      description: Mã stock (chữ hoa, chữ số).
+      schema:
+        type: string
+        example: VNM
+    - name: period
+      in: query
+      required: false
+      description: Kỳ báo cáo. Mặc định `annual`.
+      schema:
+        $ref: '../../components/schemas/market/FinancialPeriod.yaml'
+  responses:
+    '200':
+      description: Trả về `data` mảng các kỳ báo cáo, mỗi item là 1 record `year` (+ `quarter` khi `period=quarterly`) cộng ~200 metric code.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/market/FinancialAnalysisResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - year: 2025
+                quarter: 4
+                pe: null
+                pb: 4.31317
+                roa: null
+                roe: null
+                eps: null
+                ebit: 3566980066852
+                ebitda: 4108719059869
+                bienlaigop: 0.404497
+                bienlaiebitda: 0.241213
+                bienlaisauthue: 0.165978
+                lnst_yoy: 0.316942
+                lnst_qoq: 0.126135
+                dtt_qoq: 0.004738
+                tt_dtt_yoy: 0.100567
+                nophaitra_vcsh: 0.546047
+                novay_vonchu: 0.274241
+                thanhtoan_hienhanh: 1.957917
+                thanhtoan_nhanh: 1.575433
+                thanhtoan_tienmat: 0.096914
+                bvps: 14189.099355
+                lnwpershare: 4529.851333
+                bookvalue: 29654585456641
+                ev: 113837320151135
+                vonhoa: 127905273234000
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/market/company-financial/analysis?symbol=VNM&period=quarterly"

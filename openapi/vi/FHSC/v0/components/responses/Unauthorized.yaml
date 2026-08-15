@@ -1,0 +1,8 @@
+description: Không xác thực — thiếu, sai hoặc không hợp lệ chữ ký / API key.
+content:
+  application/json:
+    schema:
+      $ref: '../schemas/common/ErrorBody.yaml'
+    example:
+      error_code: '401'
+      message: Invalid signature

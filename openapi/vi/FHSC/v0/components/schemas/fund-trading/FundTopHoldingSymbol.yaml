@@ -1,0 +1,11 @@
+type: object
+description: 1 mã stock phổ biến nhất trong danh mục nắm giữ của các quỹ.
+properties:
+  symbol:
+    type: string
+    description: Mã stock.
+    example: VNM
+  number_of_funds:
+    type: integer
+    description: Số lượng quỹ đang giữ stock này.
+    example: 17

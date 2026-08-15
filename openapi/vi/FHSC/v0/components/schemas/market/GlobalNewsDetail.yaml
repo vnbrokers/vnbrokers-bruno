@@ -1,0 +1,13 @@
+type: object
+description: |
+  Chi tiết bài báo tin tức tài chính toàn cầu — kế thừa toàn bộ field của
+  `GlobalNewsListItem`, bổ sung `content` (nội dung đầy đủ bài báo).
+allOf:
+  - $ref: 'GlobalNewsListItem.yaml'
+  - type: object
+    properties:
+      content:
+        type:
+          - string
+          - 'null'
+        description: Nội dung đầy đủ bài báo (nullable).

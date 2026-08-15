@@ -1,0 +1,9 @@
+type: object
+description: Số tiền PnL và tỷ lệ PnL cho 1 loại tài sản.
+properties:
+  pnl:
+    type: number
+    description: Profit/loss amount.
+  pnl_rate:
+    type: number
+    description: Profit/loss rate (percentage).
