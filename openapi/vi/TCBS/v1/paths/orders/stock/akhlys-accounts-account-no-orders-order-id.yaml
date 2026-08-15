@@ -1,0 +1,49 @@
+patch:
+  summary: Sửa lệnh cổ phiếu
+  description: Cập nhật giá hoặc khối lượng của lệnh.
+  parameters:
+    - name: accountNo
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: orderId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            price:
+              type: integer
+              format: int64
+              description: "Giá giao dịch mới."
+            quantity:
+              type: integer
+              format: int64
+              description: "Khối lượng giao dịch mới."
+          required:
+            - price
+            - quantity
+  responses:
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: "Mã lỗi, 0 = thành công."
+              message:
+                type: string
+                description: "Mô tả mã lỗi nếu có."
+              orderId:
+                type: string
+                description: "Mã lệnh đã sửa."

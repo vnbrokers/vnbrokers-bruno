@@ -1,0 +1,7 @@
+type: string
+description: "Bộ lọc trạng thái lệnh phái sinh: 0 = tất cả, 1 = chờ khớp/chờ kích hoạt, 2 = đã khớp/đã kích hoạt, 3 = từ chối."
+enum:
+  - "0"
+  - "1"
+  - "2"
+  - "3"

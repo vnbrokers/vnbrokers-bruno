@@ -1,0 +1,52 @@
+"post":
+  "summary": "Nộp ký quỹ"
+  "description": "Nộp tiền ký quỹ vào tài khoản phái sinh."
+  responses:
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              cmd:
+                type: string
+                description: "Loại bút toán."
+              rc:
+                type: string
+                description: "Mã kết quả. 1: thành công, < 0: lỗi."
+              rs:
+                type: string
+                description: "Chi tiết lỗi."
+              oID:
+                type: string
+                description: "ID giao dịch."
+              data:
+                type: array
+                items:
+                  type: object
+                description: "Dữ liệu trả về (chứa transactionId)."
+  "requestBody":
+    "required": true
+    "content":
+      "application/json":
+        "schema":
+          "type": "object"
+          "properties":
+            "accountId":
+              "type": "string"
+              "description": "Số tài khoản lưu ký."
+            "subAccountId":
+              "type": "string"
+              "description": "Phái sinh Số tiểu khoản."
+            "amount":
+              "type": "number"
+              "format": "double"
+              "description": "Deposit margin Số tiền."
+            "paymentContent":
+              "type": "string"
+              "description": "Deposit Giao dịch Mô tả."
+          "required":
+            - "accountId"
+            - "subAccountId"
+            - "amount"

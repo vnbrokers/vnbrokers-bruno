@@ -1,0 +1,10 @@
+type: string
+description: "Trạng thái tiểu khoản: A = được phép đặt lệnh, P = không được phép, C = đã đóng, B = phong tỏa, N = chờ đóng, R = từ chối, T = chờ cập nhật."
+enum:
+  - "A"
+  - "P"
+  - "C"
+  - "B"
+  - "N"
+  - "R"
+  - "T"

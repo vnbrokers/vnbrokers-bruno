@@ -1,0 +1,42 @@
+"post":
+  "summary": "Chuyển tiền nội bộ"
+  "description": "Chuyển tiền giữa các tiểu khoản."
+  responses:
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: "Code trả về, 200 là thành công, khác 200 là lỗi."
+              message:
+                type: string
+                description: "Mô tả mã lỗi nếu có."
+  "requestBody":
+    "required": true
+    "content":
+      "application/json":
+        "schema":
+          "type": "object"
+          "properties":
+            "sourceAccountNumber":
+              "type": "string"
+              "description": "Source Số tiểu khoản."
+            "destinationAccountNumber":
+              "type": "string"
+              "description": "Destination Số tiểu khoản."
+            "amount":
+              "type": "number"
+              "format": "double"
+              "description": "Transfer Số tiền."
+            "description":
+              "type": "string"
+              "description": "Transfer Mô tả."
+          "required":
+            - "sourceAccountNumber"
+            - "destinationAccountNumber"
+            - "amount"
+            - "description"

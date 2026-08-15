@@ -1,0 +1,85 @@
+post:
+  summary: Đặt lệnh điều kiện phái sinh
+  description: Đặt lệnh điều kiện trên thị trường phái sinh.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            accountId:
+              type: string
+              description: "Mã tài khoản lưu ký."
+            subAccountId:
+              type: string
+              description: "Số tiểu khoản phái sinh."
+            side:
+              allOf:
+                - $ref: ../../../components/schemas/enums/DerivativeSide.yaml
+              description: "B = Mua, S = Bán."
+            symbol:
+              type: string
+              description: "Mã phái sinh, ví dụ VN30F2101."
+            price:
+              type: number
+              format: double
+              description: "Giá đặt lệnh."
+            volume:
+              type: number
+              format: double
+              description: "Số lượng, lớn hơn 0."
+            orderType:
+              allOf:
+                - $ref: ../../../components/schemas/enums/DerivativeConditionalOrderType.yaml
+              description: "SOL = giá TT >= soPrice, SOU = giá TT <= soPrice, TSO = Trailing Stop."
+            soPrice:
+              type: number
+              format: double
+              description: "Giá kích hoạt."
+            callbackPoint:
+              type: number
+              format: double
+              description: "Biên trượt (chỉ dùng khi orderType = TSO)."
+            activationPrice:
+              type: number
+              format: double
+              description: "Giá kích hoạt (chỉ dùng khi orderType = TSO)."
+            refId:
+              type: string
+              description: "Số chống trùng theo từng lệnh."
+          required:
+            - accountId
+            - subAccountId
+            - side
+            - symbol
+            - price
+            - volume
+            - orderType
+            - soPrice
+            - callbackPoint
+            - activationPrice
+  responses:
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              rc:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    symbol:
+                      type: string
+                    status:
+                      type: string
+                    orderNo:
+                      type: integer
+                      format: int64
+                    pk_orderNo:
+                      type: string

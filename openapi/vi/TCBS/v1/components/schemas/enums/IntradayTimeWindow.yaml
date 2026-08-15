@@ -1,0 +1,5 @@
+type: string
+description: "Khung thời gian cung cầu trong phiên, tính bằng phút: 15 hoặc 60."
+enum:
+  - "15"
+  - "60"

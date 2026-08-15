@@ -4,12 +4,14 @@
   "private": true,
   "description": "OpenAPI specifications and bundled build artifacts for vnbrokers.",
   "scripts": {
-    "lint:fhsc": "npx --yes @redocly/cli@1.34.3 lint openapi/vi/FHSC/v0/openapi.yaml",
     "lint:dnse": "npx --yes @redocly/cli@1.34.3 lint openapi/vi/DNSE/v2/openapi.yaml",
-    "lint": "npm run lint:fhsc && npm run lint:dnse",
-    "bundle:fhsc": "mkdir -p dist && npx --yes @redocly/cli@1.34.3 bundle openapi/vi/FHSC/v0/openapi.yaml -o dist/fhsc-v0.yaml && npx --yes @redocly/cli@1.34.3 bundle openapi/vi/FHSC/v0/openapi.yaml -o dist/fhsc-v0.json",
+    "lint:fhsc": "npx --yes @redocly/cli@1.34.3 lint openapi/vi/FHSC/v0/openapi.yaml",
+    "lint:tcbs": "npx --yes @redocly/cli@1.34.3 lint openapi/vi/TCBS/v1/openapi.yaml",
+    "lint": "npm run lint:fhsc && npm run lint:dnse && npm run lint:tcbs",
     "bundle:dnse": "mkdir -p dist && npx --yes @redocly/cli@1.34.3 bundle openapi/vi/DNSE/v2/openapi.yaml -o dist/dnse-v2.yaml && npx --yes @redocly/cli@1.34.3 bundle openapi/vi/DNSE/v2/openapi.yaml -o dist/dnse-v2.json",
-    "bundle": "npm run bundle:fhsc && npm run bundle:dnse",
+    "bundle:fhsc": "mkdir -p dist && npx --yes @redocly/cli@1.34.3 bundle openapi/vi/FHSC/v0/openapi.yaml -o dist/fhsc-v0.yaml && npx --yes @redocly/cli@1.34.3 bundle openapi/vi/FHSC/v0/openapi.yaml -o dist/fhsc-v0.json",
+    "bundle:tcbs": "mkdir -p dist && npx --yes @redocly/cli@1.34.3 bundle openapi/vi/TCBS/v1/openapi.yaml -o dist/tcbs-v1.yaml && npx --yes @redocly/cli@1.34.3 bundle openapi/vi/TCBS/v1/openapi.yaml -o dist/tcbs-v1.json",
+    "bundle": "npm run bundle:fhsc && npm run bundle:dnse && npm run bundle:tcbs",
     "build": "npm run lint && npm run bundle"
   }
 }

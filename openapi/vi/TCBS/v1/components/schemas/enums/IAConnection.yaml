@@ -1,0 +1,5 @@
+type: string
+description: "Trạng thái kết nối IA: Y = có, N = không."
+enum:
+  - "Y"
+  - "N"

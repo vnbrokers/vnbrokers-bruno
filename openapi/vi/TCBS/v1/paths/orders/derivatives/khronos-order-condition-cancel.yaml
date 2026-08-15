@@ -1,0 +1,41 @@
+"post":
+  "summary": "Hủy lệnh điều kiện phái sinh"
+  "description": "Hủy lệnh điều kiện phái sinh."
+  responses:
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              rc:
+                type: string
+                description: "Mã kết quả, 1 = thành công."
+              rs:
+                type: string
+                description: "Chi tiết lỗi (nếu có)."
+              data:
+                type: array
+                items:
+                  type: object
+                description: "Mảng rỗng nếu thành công."
+  "requestBody":
+    "required": true
+    "content":
+      "application/json":
+        "schema":
+          "type": "object"
+          "properties":
+            "accountId":
+              "type": "string"
+              "description": "Số tài khoản lưu ký."
+            "subAccountId":
+              "type": "string"
+              "description": "Phái sinh sub-Số tiểu khoản."
+            "orderNo":
+              "type": "string"
+              "description": "pk_orderNo từ API sổ lệnh điều kiện."
+          "required":
+            - "accountId"
+            - "orderNo"

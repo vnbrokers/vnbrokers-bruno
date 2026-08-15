@@ -1,0 +1,101 @@
+"get":
+  "summary": "Tài sản, vị thế đóng"
+  "description": "Tra cứu danh sách vị thế đã đóng của tài khoản phái sinh."
+  "parameters":
+    -
+      "name": "accountId"
+      "in": "query"
+      "required": true
+      "description": "Số tài khoản lưu ký."
+      "schema":
+        "type": "string"
+    -
+      "name": "subAccountId"
+      "in": "query"
+      "required": true
+      "description": "Tiểu khoản phái sinh."
+      "schema":
+        "type": "string"
+    -
+      "name": "symbol"
+      "in": "query"
+      "required": false
+      "description": "Mã cổ phiếu (empty = all)."
+      "schema":
+        "type": "string"
+    -
+      "name": "pageNo"
+      "in": "query"
+      "required": true
+      "description": "Số trang."
+      "schema":
+        "type": "number"
+        "format": "double"
+    -
+      "name": "pageSize"
+      "in": "query"
+      "required": true
+      "description": "Kích thước trang."
+      "schema":
+        "type": "number"
+        "format": "double"
+  responses:
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              cmd:
+                type: string
+                description: "Tên lệnh phản hồi."
+              rc:
+                type: string
+                description: "Mã kết quả, 1 = thành công."
+              data:
+                type: array
+                description: "Danh sách vị thế đóng."
+                items:
+                  type: object
+                  properties:
+                    symbol:
+                      type: string
+                      description: "Mã hợp đồng."
+                    side:
+                      type: string
+                      description: "Loại giao dịch (B/S)."
+                    openPrice:
+                      type: number
+                      format: double
+                      description: "Giá mở TB."
+                    closePrice:
+                      type: number
+                      format: double
+                      description: "Giá đóng TB."
+                    closePosition:
+                      type: string
+                      description: "Số vị thế đóng / tổng."
+                    fee:
+                      type: number
+                      format: double
+                      description: "Phí giao dịch."
+                    tax:
+                      type: number
+                      format: double
+                      description: "Thuế."
+                    closeVM:
+                      type: number
+                      format: double
+                      description: "Lãi lỗ đã đóng."
+                    unrealize:
+                      type: number
+                      format: double
+                      description: "Lãi lỗ chưa đóng."
+                    closePC:
+                      type: number
+                      format: double
+                      description: "% lãi/lỗ đã đóng."
+                    time:
+                      type: string
+                      description: "Thời gian đóng cuối."

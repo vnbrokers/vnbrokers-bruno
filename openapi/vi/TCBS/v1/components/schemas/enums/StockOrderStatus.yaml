@@ -1,0 +1,15 @@
+type: string
+description: "Trạng thái lệnh cơ sở: 0 = từ chối, 2 = đã gửi, 3 = đã hủy, 4 = đã khớp, 5 = hết hiệu lực, 8 = chờ gửi, 10 = đã sửa, 11 = đang gửi, 12 = khớp hết, A = đang sửa, C = đang hủy, S = hoàn tất."
+enum:
+  - "0"
+  - "2"
+  - "3"
+  - "4"
+  - "5"
+  - "8"
+  - "10"
+  - "11"
+  - "12"
+  - "A"
+  - "C"
+  - "S"

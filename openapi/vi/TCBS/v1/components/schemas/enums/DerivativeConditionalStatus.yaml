@@ -1,0 +1,7 @@
+type: string
+description: "Trạng thái lệnh điều kiện phái sinh: 0 = chờ kích hoạt, 1 = đã kích hoạt, 2 = đã hủy, 3 = từ chối."
+enum:
+  - "0"
+  - "1"
+  - "2"
+  - "3"

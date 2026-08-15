@@ -1,0 +1,62 @@
+"post":
+  "summary": "Đặt lệnh thường"
+  "description": "Đặt lệnh thường trên thị trường cơ sở."
+  "parameters":
+    -
+      "name": "accountNo"
+      "in": "path"
+      "required": true
+      "description": "Số tiểu khoản, ví dụ 0001170730."
+      "schema":
+        "type": "string"
+  responses:
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: "Mã lỗi, 0 = thành công."
+              message:
+                type: string
+                description: "Thông báo kết quả."
+              orderId:
+                type: string
+                description: "Mã lệnh được tạo."
+  "requestBody":
+    "required": true
+    "content":
+      "application/json":
+        "schema":
+          "type": "object"
+          "properties":
+            "execType":
+              "allOf":
+                -
+                  "$ref": "../../../components/schemas/enums/StockOrderDirection.yaml"
+              "description": "Chiều giao dịch: NS = bán, NB = mua."
+            "symbol":
+              "type": "string"
+              "description": "Mã chứng khoán, ví dụ VNM."
+            "priceType":
+              "allOf":
+                -
+                  "$ref": "../../../components/schemas/enums/StockPriceType.yaml"
+              "description": "Loại giá: LO, ATO, ATC, PLO, MP, MTL, MOK, MAK."
+            "price":
+              "type": "integer"
+              "format": "int64"
+              "description": "Giá giao dịch."
+            "quantity":
+              "type": "integer"
+              "format": "int64"
+              "description": "Khối lượng giao dịch."
+          "required":
+            - "execType"
+            - "symbol"
+            - "priceType"
+            - "price"
+            - "quantity"

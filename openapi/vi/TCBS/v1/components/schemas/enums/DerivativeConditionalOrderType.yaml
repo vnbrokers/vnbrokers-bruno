@@ -1,0 +1,6 @@
+type: string
+description: "SOL = giá TT >= soPrice, SOU = giá TT <= soPrice, TSO = Trailing Stop."
+enum:
+  - "SOL"
+  - "SOU"
+  - "TSO"

@@ -1,0 +1,5 @@
+type: string
+description: "Chiều giao dịch lệnh cơ sở: NS = bán, NB = mua."
+enum:
+  - "NS"
+  - "NB"

@@ -1,0 +1,63 @@
+"get":
+  "summary": "Danh sách khoản vay"
+  "description": "Lấy danh sách khoản vay của tài khoản margin."
+  "parameters":
+    -
+      "name": "accountNo"
+      "in": "path"
+      "required": true
+      "description": "Số tiểu khoản margin."
+      "schema":
+        "type": "string"
+  responses:
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              size:
+                type: number
+                format: double
+                description: "Số bản ghi."
+              content:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    openingDate:
+                      type: string
+                      description: "Ngày mở khoản vay."
+                    dueDate:
+                      type: string
+                      description: "Ngày đáo hạn."
+                    renewTime:
+                      type: number
+                      format: double
+                      description: "Số lần đã gia hạn nợ."
+                    maxRenewTime:
+                      type: number
+                      format: double
+                      description: "Giới hạn số lần gia hạn."
+                    isRenewable:
+                      type: boolean
+                      description: "Có được gia hạn: true/false."
+                    reasonList:
+                      type: array
+                      items:
+                        type: object
+                      description: "Lý do không được gia hạn."
+                    insurance:
+                      type: object
+                      properties:
+                        insuranceName:
+                          type: string
+                          description: "Tên gói marginsure."
+                        insuranceCode:
+                          type: string
+                          description: "Mã gói marginsure."
+                        insuranceFee:
+                          type: number
+                          format: double
+                          description: "Phí marginsure."

@@ -1,0 +1,41 @@
+"get":
+  "summary": "Lấy sức mua"
+  "description": "Lấy sức mua của tiểu khoản."
+  "parameters":
+    -
+      "name": "accountNo"
+      "in": "path"
+      "required": true
+      "description": "Số tiểu khoản."
+      "schema":
+        "type": "string"
+    -
+      "name": "symbol"
+      "in": "path"
+      "required": true
+      "description": "Mã cổ phiếu (mã variant)."
+      "schema":
+        "type": "string"
+    -
+      "name": "price"
+      "in": "path"
+      "required": true
+      "description": "Giá tính sức mua (biến thể theo giá)."
+      "schema":
+        "type": "string"
+  responses:
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              purchasingPower:
+                type: number
+                format: double
+                description: "Sức mua khả dụng."
+              maxQuantity:
+                type: integer
+                format: int64
+                description: "Số lượng tối đa có thể mua."

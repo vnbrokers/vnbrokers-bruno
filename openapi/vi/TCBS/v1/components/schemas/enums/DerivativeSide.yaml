@@ -1,0 +1,5 @@
+type: string
+description: "Chiều lệnh phái sinh: B = mua, S = bán."
+enum:
+  - "B"
+  - "S"

@@ -1,0 +1,100 @@
+"get":
+  "summary": "Lịch sử giá khớp"
+  "description": "Lấy lịch sử giá khớp trong phiên của mã cổ phiếu."
+  "parameters":
+    -
+      "name": "ticker"
+      "in": "path"
+      "required": true
+      "description": "Mã cổ phiếu, ví dụ TCB."
+      "schema":
+        "type": "string"
+    -
+      "name": "page"
+      "in": "query"
+      "required": false
+      "description": "Số trang (bắt đầu từ 0)."
+      "schema":
+        "type": "number"
+        "format": "double"
+    -
+      "name": "size"
+      "in": "query"
+      "required": false
+      "description": "Kích thước trang (max 100)."
+      "schema":
+        "type": "number"
+        "format": "double"
+    -
+      "name": "headIndex"
+      "in": "query"
+      "required": false
+      "description": "Chỉ số đầu cho phân trang ngược (mặc định -1)."
+      "schema":
+        "type": "number"
+        "format": "double"
+  responses:
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              page:
+                type: number
+                format: double
+                description: "Trang hiện tại."
+              size:
+                type: number
+                format: double
+                description: "Kích thước trang."
+              headIndex:
+                type: number
+                format: double
+                description: "Chỉ số đầu."
+              numberOfItems:
+                type: number
+                format: double
+                description: "Số bản ghi trả về."
+              total:
+                type: number
+                format: double
+                description: "Tổng số lệnh khớp."
+              ticker:
+                type: string
+                description: "Mã cổ phiếu."
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    p:
+                      type: number
+                      format: double
+                      description: "Giá khớp lệnh."
+                    v:
+                      type: number
+                      format: double
+                      description: "Khối lượng."
+                    cp:
+                      type: number
+                      format: double
+                      description: "Thay đổi giá (giá - giá tham chiếu)."
+                    a:
+                      type: string
+                      description: "Hành động (Buy up/Sell down)."
+                    ba:
+                      type: number
+                      format: double
+                      description: "Tích lũy KL mua lên."
+                    sa:
+                      type: number
+                      format: double
+                      description: "Tích lũy KL bán xuống."
+                    hl:
+                      type: boolean
+                      description: "Highlight nếu giá trị > 200M."
+                    t:
+                      type: string
+                      description: "Thời gian nhận lệnh từ sở."

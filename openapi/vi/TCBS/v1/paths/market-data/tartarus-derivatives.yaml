@@ -1,0 +1,75 @@
+"get":
+  "summary": "Thông tin mã, giá phái sinh"
+  "description": "Lấy thông tin mã và giá của thị trường phái sinh."
+  responses:
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                description: "Danh sách hợp đồng phái sinh."
+                items:
+                  type: object
+                  properties:
+                    symbol:
+                      type: string
+                      description: "Mã hợp đồng."
+                    ceilPrice:
+                      type: number
+                      format: double
+                      description: "Giá trần."
+                    floorPrice:
+                      type: number
+                      format: double
+                      description: "Giá sàn."
+                    refPrice:
+                      type: number
+                      format: double
+                      description: "Giá tham chiếu."
+                    bidPrice01:
+                      type: number
+                      format: double
+                      description: "Giá mua 1."
+                    bidQtty01:
+                      type: number
+                      format: double
+                      description: "Khối lượng mua 1."
+                    offerPrice01:
+                      type: number
+                      format: double
+                      description: "Giá bán 1."
+                    offerQtty01:
+                      type: number
+                      format: double
+                      description: "Khối lượng bán 1."
+                    matchPrice:
+                      type: number
+                      format: double
+                      description: "Giá khớp."
+                    matchQtty:
+                      type: number
+                      format: double
+                      description: "Khối lượng khớp."
+                    change:
+                      type: number
+                      format: double
+                      description: "Thay đổi giá."
+                    changePercent:
+                      type: number
+                      format: double
+                      description: "% thay đổi."
+                    totalVol:
+                      type: number
+                      format: double
+                      description: "Tổng khối lượng."
+                    openVol:
+                      type: number
+                      format: double
+                      description: "Khối lượng mở."
+                    expiryDate:
+                      type: string
+                      description: "Ngày đáo hạn."

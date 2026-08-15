@@ -1,0 +1,34 @@
+"get":
+  "summary": "Lấy sức mua theo mã"
+  "description": "Lấy sức mua theo mã cổ phiếu cụ thể."
+  "parameters":
+    -
+      "name": "accountNo"
+      "in": "path"
+      "required": true
+      "description": "Số tiểu khoản."
+      "schema":
+        "type": "string"
+    -
+      "name": "symbol"
+      "in": "path"
+      "required": true
+      "description": "Mã chứng khoán, ví dụ FPT."
+      "schema":
+        "type": "string"
+  responses:
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              pp0:
+                type: number
+                format: double
+                description: "Sức mua cơ bản."
+              maxQtty:
+                type: number
+                format: double
+                description: "Số lượng tối đa có thể mua."

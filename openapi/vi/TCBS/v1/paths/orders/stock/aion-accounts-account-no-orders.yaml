@@ -1,0 +1,45 @@
+"get":
+  "summary": "Lấy sổ lệnh"
+  "description": "Lấy sổ lệnh của tiểu khoản."
+  "parameters":
+    -
+      "name": "accountNo"
+      "in": "path"
+      "required": true
+      "description": "Số tiểu khoản, ví dụ: 0001170730."
+      "schema":
+        "type": "string"
+  responses:
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              orders:
+                type: array
+                description: "Danh sách lệnh trong sổ lệnh."
+                items:
+                  type: object
+                  properties:
+                    orderId:
+                      type: string
+                      description: "Mã lệnh."
+                    symbol:
+                      type: string
+                      description: "Mã chứng khoán."
+                    execType:
+                      type: string
+                      description: "Chiều giao dịch (NB/NS)."
+                    price:
+                      type: integer
+                      format: int64
+                      description: "Giá đặt."
+                    quantity:
+                      type: integer
+                      format: int64
+                      description: "Khối lượng đặt."
+                    status:
+                      type: string
+                      description: "Trạng thái lệnh."

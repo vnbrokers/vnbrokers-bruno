@@ -1,0 +1,108 @@
+"get":
+  "summary": "Thông tin sao kê tiền"
+  "description": "Lấy sao kê tiền (lịch sử giao dịch) của tiểu khoản."
+  "parameters":
+    -
+      "name": "accountNo"
+      "in": "query"
+      "required": true
+      "description": "Số tiểu khoản."
+      "schema":
+        "type": "string"
+    -
+      "name": "fromDate"
+      "in": "query"
+      "required": true
+      "description": "Từ ngày giao dịch (YYYY-MM-DD)."
+      "schema":
+        "type": "string"
+    -
+      "name": "toDate"
+      "in": "query"
+      "required": true
+      "description": "Đến ngày giao dịch (YYYY-MM-DD)."
+      "schema":
+        "type": "string"
+    -
+      "name": "pageSize"
+      "in": "query"
+      "required": true
+      "description": "Kích thước trang."
+      "schema":
+        "type": "string"
+    -
+      "name": "pageIndex"
+      "in": "query"
+      "required": true
+      "description": "Số trang."
+      "schema":
+        "type": "string"
+    -
+      "name": "transactionCode"
+      "in": "query"
+      "required": true
+      "description": "Loại giao dịch."
+      "schema":
+        "type": "string"
+  responses:
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  pageIndex:
+                    type: integer
+                    format: int64
+                    description: "Page index."
+                  pageSize:
+                    type: integer
+                    format: int64
+                    description: "Page size."
+                  totalCreditAmount:
+                    type: integer
+                    format: int64
+                    description: "Tổng tiền ghi có."
+                  totalDebitAmount:
+                    type: integer
+                    format: int64
+                    description: "Tổng phát sinh tăng."
+                  totalCount:
+                    type: integer
+                    format: int64
+                    description: "Tổng số bản ghi."
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        custodyID:
+                          type: string
+                          description: "Số tài khoản."
+                        transactionCode:
+                          type: string
+                          description: "Loại giao dịch."
+                        transactionName:
+                          type: string
+                          description: "Tên loại giao dịch."
+                        debitAmount:
+                          type: number
+                          format: double
+                          description: "Số tiền phát sinh tăng."
+                        creditAmount:
+                          type: number
+                          format: double
+                          description: "Số tiền phát sinh giảm."
+                        businessDate:
+                          type: string
+                          description: "Ngày làm việc."
+                        transactionDate:
+                          type: string
+                          description: "Ngày giao dịch."
+                        descriptions:
+                          type: string
+                          description: "Mô tả."
