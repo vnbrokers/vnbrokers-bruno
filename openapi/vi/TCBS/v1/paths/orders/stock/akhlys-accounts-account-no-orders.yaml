@@ -1,5 +1,7 @@
 "post":
   operationId: postAkhlysAccountsAccountNoOrders
+  tags:
+    - Lệnh cổ phiếu
   "summary": "Đặt lệnh thường"
   "description": "Đặt lệnh thường trên thị trường cơ sở."
   "parameters":

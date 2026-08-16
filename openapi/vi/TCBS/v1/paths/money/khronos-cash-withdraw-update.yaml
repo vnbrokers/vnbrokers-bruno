@@ -1,5 +1,7 @@
 "post":
   operationId: postKhronosCashWithdrawUpdate
+  tags:
+    - Tiền
   "summary": "Rút ký quỹ"
   "description": "Rút tiền ký quỹ khỏi tài khoản phái sinh."
   responses:

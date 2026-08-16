@@ -1,5 +1,7 @@
 post:
   operationId: postKhronosOrderPlace
+  tags:
+    - Lệnh phái sinh
   summary: Đặt lệnh thường phái sinh
   description: Đặt lệnh thường trên thị trường phái sinh.
   requestBody:

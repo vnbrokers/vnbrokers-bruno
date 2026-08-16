@@ -1,5 +1,7 @@
 "get":
   operationId: getCampaignManagementMarginSubscriptionAccountNoAddonsDetail
+  tags:
+    - Tài khoản
   "summary": "Gói vay bổ trợ"
   "description": "Lấy chi tiết gói vay bổ trợ của tài khoản margin."
   "parameters":

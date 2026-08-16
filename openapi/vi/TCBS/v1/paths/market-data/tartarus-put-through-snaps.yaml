@@ -1,5 +1,7 @@
 "get":
   operationId: getTartarusPutThroughSnaps
+  tags:
+    - Dữ liệu thị trường
   "summary": "Thông tin thỏa thuận"
   "description": "Lấy thông tin giao dịch thỏa thuận."
   "parameters":

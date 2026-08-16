@@ -1,5 +1,7 @@
 "post":
   operationId: postKhronosOrderCancel
+  tags:
+    - Lệnh phái sinh
   "summary": "Hủy lệnh thường phái sinh"
   "description": "Hủy lệnh thường phái sinh."
   responses:

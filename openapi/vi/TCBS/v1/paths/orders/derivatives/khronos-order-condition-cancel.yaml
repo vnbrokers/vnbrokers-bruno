@@ -1,5 +1,7 @@
 "post":
   operationId: postKhronosOrderConditionCancel
+  tags:
+    - Lệnh phái sinh
   "summary": "Hủy lệnh điều kiện phái sinh"
   "description": "Hủy lệnh điều kiện phái sinh."
   responses:

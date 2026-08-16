@@ -1,5 +1,7 @@
 "post":
   operationId: postKhronosCashDepositUpdate
+  tags:
+    - Tiền
   "summary": "Nộp ký quỹ"
   "description": "Nộp tiền ký quỹ vào tài khoản phái sinh."
   responses:

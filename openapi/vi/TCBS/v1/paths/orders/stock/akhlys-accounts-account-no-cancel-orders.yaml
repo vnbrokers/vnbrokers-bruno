@@ -1,5 +1,7 @@
 "put":
   operationId: putAkhlysAccountsAccountNoCancelOrders
+  tags:
+    - Lệnh cổ phiếu
   "summary": "Hủy lệnh thường"
   "description": "Huỷ một hoặc nhiều lệnh chưa khớp hết bằng danh sách order ID."
   "parameters":

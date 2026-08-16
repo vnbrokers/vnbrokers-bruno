@@ -10,6 +10,19 @@ servers:
     description: Production
 security:
   - bearerAuth: []
+tags:
+  - name: Xác thực
+    description: Xác thực và cấp token truy cập.
+  - name: Tài khoản
+    description: Thông tin tài khoản, tài sản và hạn mức.
+  - name: Dữ liệu thị trường
+    description: Dữ liệu chứng khoán và phái sinh.
+  - name: Tiền
+    description: Giao dịch và thông tin tiền.
+  - name: Lệnh cổ phiếu
+    description: Đặt, sửa, hủy và tra cứu lệnh cổ phiếu.
+  - name: Lệnh phái sinh
+    description: Đặt, sửa, hủy và tra cứu lệnh phái sinh.
 paths:
   /aion/v1/accounts/{accountNo}/cashInvestments:
     $ref: './paths/accounts/aion-accounts-account-no-cash-investments.yaml'

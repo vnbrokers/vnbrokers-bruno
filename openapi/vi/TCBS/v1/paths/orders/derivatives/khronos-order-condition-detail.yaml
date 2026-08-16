@@ -1,5 +1,7 @@
 "get":
   operationId: getKhronosOrderConditionDetail
+  tags:
+    - Lệnh phái sinh
   "summary": "Tra cứu sổ lệnh điều kiện phái sinh"
   "description": "Tra cứu sổ lệnh điều kiện phái sinh."
   "parameters":

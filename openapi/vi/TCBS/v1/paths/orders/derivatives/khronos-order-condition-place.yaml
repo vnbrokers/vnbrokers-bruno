@@ -1,5 +1,7 @@
 post:
   operationId: postKhronosOrderConditionPlace
+  tags:
+    - Lệnh phái sinh
   summary: Đặt lệnh điều kiện phái sinh
   description: Đặt lệnh điều kiện trên thị trường phái sinh.
   requestBody:

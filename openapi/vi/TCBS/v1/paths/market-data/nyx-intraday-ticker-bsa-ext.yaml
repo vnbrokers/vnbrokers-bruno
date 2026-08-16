@@ -1,5 +1,7 @@
 "get":
   operationId: getNyxIntradayTickerBsaExt
+  tags:
+    - Dữ liệu thị trường
   "summary": "Cung cầu trong phiên (15 phút)"
   "description": "Lấy dữ liệu cung cầu trong phiên theo khoảng thời gian 15 phút."
   "parameters":

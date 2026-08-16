@@ -1,5 +1,7 @@
 "get":
   operationId: getErosGetProfileByUsernameCustodyCode
+  tags:
+    - Tài khoản
   "summary": "Thông tin tiểu khoản"
   "description": "Lấy thông tin hồ sơ của một tài khoản lưu ký theo danh sách trường yêu cầu."
   "parameters":

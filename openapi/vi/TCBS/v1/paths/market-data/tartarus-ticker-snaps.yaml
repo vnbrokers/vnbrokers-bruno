@@ -1,5 +1,7 @@
 "get":
   operationId: getTartarusTickerSnaps
+  tags:
+    - Dữ liệu thị trường
   "summary": "Thông tin room nước ngoài"
   "description": "Lấy thông tin room nước ngoài và snapshot thị trường."
   "parameters":

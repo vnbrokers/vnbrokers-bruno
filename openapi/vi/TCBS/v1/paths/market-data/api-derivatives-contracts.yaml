@@ -1,5 +1,7 @@
 "get":
   operationId: getApiDerivativesContracts
+  tags:
+    - Dữ liệu thị trường
   "summary": "Bảng giá phái sinh (WebSocket)"
   "description": "Bảng giá phái sinh theo thời gian thực qua WebSocket."
   responses:

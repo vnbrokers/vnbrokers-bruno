@@ -1,5 +1,7 @@
 "get":
   operationId: getHydrosAccountAccountNoRisk
+  tags:
+    - Tài khoản
   "summary": "Tỷ lệ margin và rủi ro"
   "description": "Lấy dư nợ gốc, dư nợ lãi, Rtt và các tỷ lệ margin của tài khoản margin."
   "parameters":

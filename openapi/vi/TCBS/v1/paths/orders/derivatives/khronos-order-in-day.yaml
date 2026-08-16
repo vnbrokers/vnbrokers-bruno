@@ -1,5 +1,7 @@
 "get":
   operationId: getKhronosOrderInDay
+  tags:
+    - Lệnh phái sinh
   "summary": "Tra cứu sổ lệnh thường phái sinh"
   "description": "Tra cứu sổ lệnh thường phái sinh."
   "parameters":

@@ -1,5 +1,7 @@
 "post":
   operationId: postKhronosV2OrderConditionChange
+  tags:
+    - Lệnh phái sinh
   "summary": "Sửa lệnh điều kiện phái sinh"
   "description": "Sửa lệnh điều kiện phái sinh."
   responses:

@@ -1,5 +1,7 @@
 "post":
   operationId: postKhronosOrderChange
+  tags:
+    - Lệnh phái sinh
   "summary": "Sửa lệnh thường phái sinh"
   "description": "Sửa lệnh thường phái sinh."
   responses:

@@ -1,5 +1,7 @@
 "get":
   operationId: getNyxIntradayTickerBsaMonth
+  tags:
+    - Dữ liệu thị trường
   "summary": "Cung cầu theo tháng"
   "description": "Lấy dữ liệu cung cầu theo tháng của mã cổ phiếu."
   "parameters":

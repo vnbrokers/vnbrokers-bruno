@@ -1,5 +1,7 @@
 "get":
   operationId: getAionAccountsAccountNoOrdersOrderId
+  tags:
+    - Lệnh cổ phiếu
   "summary": "Lấy sổ lệnh theo Order ID"
   "description": "Lấy một lệnh theo Order ID của tiểu khoản."
   "parameters":
