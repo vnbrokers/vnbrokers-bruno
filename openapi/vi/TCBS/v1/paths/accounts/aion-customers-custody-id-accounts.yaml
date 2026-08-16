@@ -1,4 +1,5 @@
 "get":
+  operationId: getAionCustomersCustodyIdAccounts
   "summary": "Hạn mức margin"
   "description": "Lấy thông tin hạn mức margin của khách hàng theo số tài khoản lưu ký."
   "parameters":

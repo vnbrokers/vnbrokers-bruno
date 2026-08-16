@@ -1,4 +1,5 @@
 "get":
+  operationId: getAionAccountsAccountNoPpse
   "summary": "Lấy sức mua"
   "description": "Lấy sức mua của tiểu khoản."
   "parameters":

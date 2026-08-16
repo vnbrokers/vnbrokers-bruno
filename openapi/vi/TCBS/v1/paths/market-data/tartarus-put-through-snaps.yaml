@@ -1,4 +1,5 @@
 "get":
+  operationId: getTartarusPutThroughSnaps
   "summary": "Thông tin thỏa thuận"
   "description": "Lấy thông tin giao dịch thỏa thuận."
   "parameters":

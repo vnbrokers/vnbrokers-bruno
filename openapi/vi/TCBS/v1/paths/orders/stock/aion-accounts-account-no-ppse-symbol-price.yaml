@@ -1,4 +1,5 @@
 "get":
+  operationId: getAionAccountsAccountNoPpseSymbolPrice
   "summary": "Lấy sức mua theo mã, giá"
   "description": "Lấy sức mua theo mã cổ phiếu và mức giá cụ thể."
   "parameters":

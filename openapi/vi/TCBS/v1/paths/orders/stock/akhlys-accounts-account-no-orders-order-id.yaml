@@ -1,4 +1,5 @@
 patch:
+  operationId: patchAkhlysAccountsAccountNoOrdersOrderId
   summary: Sửa lệnh cổ phiếu
   description: Cập nhật giá hoặc khối lượng của lệnh.
   parameters:

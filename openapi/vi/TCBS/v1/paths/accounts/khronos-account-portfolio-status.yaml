@@ -1,4 +1,5 @@
 "get":
+  operationId: getKhronosAccountPortfolioStatus
   "summary": "Tài sản, vị thế mở"
   "description": "Tra cứu vị thế mở phái sinh."
   "parameters":

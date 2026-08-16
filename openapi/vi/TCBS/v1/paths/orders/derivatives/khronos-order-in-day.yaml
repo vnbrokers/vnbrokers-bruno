@@ -1,4 +1,5 @@
 "get":
+  operationId: getKhronosOrderInDay
   "summary": "Tra cứu sổ lệnh thường phái sinh"
   "description": "Tra cứu sổ lệnh thường phái sinh."
   "parameters":

@@ -1,4 +1,5 @@
 "get":
+  operationId: getAnankeSecurities
   "summary": "Tra cứu thông tin chứng khoán"
   "description": "Tra cứu thông tin chi tiết của mã chứng khoán: thông tin niêm yết, giá trần/sàn, sàn giao dịch, loại chứng khoán, hạn mức giao dịch, v.v."
   "parameters":

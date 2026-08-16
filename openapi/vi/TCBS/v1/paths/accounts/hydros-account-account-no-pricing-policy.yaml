@@ -1,4 +1,5 @@
 "get":
+  operationId: getHydrosAccountAccountNoPricingPolicy
   "summary": "Gói lãi suất margin"
   "description": "Lấy các gói lãi suất margin khả dụng của tài khoản."
   "parameters":

@@ -1,4 +1,5 @@
 "get":
+  operationId: getErebosDigitalTransHistCashStatements
   "summary": "Thông tin sao kê tiền"
   "description": "Lấy sao kê tiền (lịch sử giao dịch) của tiểu khoản."
   "parameters":

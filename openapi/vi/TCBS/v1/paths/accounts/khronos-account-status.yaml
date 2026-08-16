@@ -1,4 +1,5 @@
 "get":
+  operationId: getKhronosAccountStatus
   "summary": "Tổng quan tiền, ký quỹ"
   "description": "Tổng quan tiền và ký quỹ phái sinh."
   "parameters":

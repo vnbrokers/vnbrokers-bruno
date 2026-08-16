@@ -1,4 +1,5 @@
 "post":
+  operationId: postPhysisStockTransfer
   "summary": "Chuyển tiền nội bộ"
   "description": "Chuyển tiền giữa các tiểu khoản."
   responses:

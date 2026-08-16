@@ -1,4 +1,5 @@
 "get":
+  operationId: getKhronosAccountPortfolioPositionClose
   "summary": "Tài sản, vị thế đóng"
   "description": "Tra cứu danh sách vị thế đã đóng của tài khoản phái sinh."
   "parameters":

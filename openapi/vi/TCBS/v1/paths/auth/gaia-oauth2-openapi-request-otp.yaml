@@ -1,4 +1,5 @@
 "post":
+  operationId: postGaiaOauth2OpenapiRequestOtp
   "summary": "Yêu cầu OTP để lấy JWT Token"
   "description": "Trao đổi API Key để lấy JWT Token."
   responses:

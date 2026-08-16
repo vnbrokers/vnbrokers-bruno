@@ -1,4 +1,5 @@
 "get":
+  operationId: getAionAccountsAccountNoMatchingDetails
   "summary": "Thông tin khớp lệnh"
   "description": "Lấy thông tin khớp lệnh của tiểu khoản."
   "parameters":

@@ -1,4 +1,5 @@
 "get":
+  operationId: getKhaosLoanAccountNo
   "summary": "Danh sách khoản vay"
   "description": "Lấy danh sách khoản vay của tài khoản margin."
   "parameters":

@@ -1,4 +1,5 @@
 "get":
+  operationId: getErebosDigitalMarginInfo
   "summary": "Tra cứu nợ"
   "description": "Lấy thông tin dư nợ margin (lịch sử khoản vay) của tiểu khoản."
   "parameters":

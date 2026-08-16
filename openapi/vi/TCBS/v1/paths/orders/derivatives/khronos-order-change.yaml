@@ -1,4 +1,5 @@
 "post":
+  operationId: postKhronosOrderChange
   "summary": "Sửa lệnh thường phái sinh"
   "description": "Sửa lệnh thường phái sinh."
   responses:

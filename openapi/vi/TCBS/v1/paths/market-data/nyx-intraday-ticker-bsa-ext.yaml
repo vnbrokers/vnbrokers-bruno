@@ -1,4 +1,5 @@
 "get":
+  operationId: getNyxIntradayTickerBsaExt
   "summary": "Cung cầu trong phiên (15 phút)"
   "description": "Lấy dữ liệu cung cầu trong phiên theo khoảng thời gian 15 phút."
   "parameters":
