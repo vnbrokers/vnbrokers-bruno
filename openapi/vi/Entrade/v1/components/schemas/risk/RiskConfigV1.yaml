@@ -2,19 +2,26 @@ type: object
 properties:
   investorId:
     type: string
+    description: Mã khách hàng
   investorAccountId:
     type: number
+    description: Mã tài khoản
   cutLossRate:
     type: number
+    description: Mức cắt lỗ hiện tại
   trailingEnabled:
     type: boolean
+    description: Có đang bật lệnh cắt lỗ hay không
   createdDate:
     type: string
   modifiedDate:
     type: string
   maxCutLossRate:
     type: number
+    description: Mức cắt lỗ tối đa
   status:
     type: string
+    description: “ACTIVE” nghĩa là deal đang mở
   takeProfitRate:
     type: number
+    description: Tỷ lệ lãi

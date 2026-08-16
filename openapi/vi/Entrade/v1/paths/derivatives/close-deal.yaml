@@ -8,6 +8,7 @@ post:
     - name: dealId
       in: path
       required: true
+      description: Số hiệu deal
       schema:
         type: number
   requestBody:
@@ -19,8 +20,10 @@ post:
           properties:
             orderType:
               type: string
+              description: Truyền vào "LO"
             triggeredBy:
               type: string
+              description: Truyền vào "close-deal"
   responses:
     "200":
       description: Thành công

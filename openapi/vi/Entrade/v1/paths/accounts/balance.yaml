@@ -8,6 +8,7 @@ get:
     - name: investorId
       in: path
       required: true
+      description: Mã khách hàng
       schema:
         type: number
   responses:

@@ -18,8 +18,10 @@ post:
           properties:
             username:
               type: string
+              description: Email hoặc số điện thoại
             password:
               type: string
+              description: Mật khẩu
   responses:
     "200":
       description: Đăng nhập thành công

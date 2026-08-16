@@ -8,6 +8,7 @@ get:
     - name: orderId
       in: path
       required: true
+      description: Số hiệu lệnh
       schema:
         type: number
   responses:
@@ -31,6 +32,7 @@ delete:
     - name: orderId
       in: path
       required: true
+      description: Số hiệu lệnh
       schema:
         type: number
   responses:

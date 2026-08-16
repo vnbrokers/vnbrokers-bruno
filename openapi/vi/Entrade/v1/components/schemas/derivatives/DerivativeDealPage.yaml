@@ -2,39 +2,50 @@ type: object
 properties:
   data:
     type: array
+    description: Danh sách Deal nắm giữ
     items:
       type: object
       properties:
         id:
           type: number
+          description: Id deal
         bankId:
           type: number
         bankAccountId:
           type: number
         investorId:
           type: number
+          description: Mã khách hàng
         investorAccountId:
           type: number
+          description: Số tiểu khoản
         bankMarginPortfolioId:
           type: number
+          description: Mã gói vay
         symbol:
           type: string
+          description: Mã chứng khoán
         side:
           type: string
+          description: "Bên mua/bán: NB: mua; NS: bán"
         positionCostPrice:
           type: number
+          description: Giá vốn toàn bộ open quantity
         stockClosePrice:
           type: number
         averageCostPrice:
           type: number
+          description: Giá mở trung bình
         averageClosedPrice:
           type: number
         adjustedCostPrice:
           type: number
         openQuantity:
           type: number
+          description: Khối lượng mở
         closedQuantity:
           type: number
+          description: Khối lượng đã đóng
         initialQuantity:
           type: number
         type:
@@ -51,6 +62,7 @@ properties:
           type: number
         secure:
           type: number
+          description: Cọc hiện tại của deal
         additionalSecure:
           type: number
         interest:
@@ -73,18 +85,22 @@ properties:
           type: number
         positionRealizedProfit:
           type: number
+          description: Lãi đã đóng (chưa bao gồm phí thuế)
         lastRealizedProfit:
           type: number
         positionUnrealizedProfit:
           type: number
+          description: Lãi mở (chưa bao gồm phí thuế)
         receivedQuantity:
           type: number
         positionType:
           type: number
         createdDate:
           type: string
+          description: Giờ tạo
         modifiedDate:
           type: string
+          description: Giờ cập nhật
         investorSettlementAmount:
           type: number
         bankSettlementAmount:
@@ -97,10 +113,13 @@ properties:
           type: number
         netProfit:
           type: number
+          description: Lãi phần đóng (đã trừ thuế phí nếu có)
         unrealizedTotalTaxAndFee:
           type: number
+          description: Phí thuế phần mở
         status:
           type: string
+          description: "Trạng thái của deal, thuộc các giá trị sau: ACTIVE: đang mở; CLOSED: đã đóng"
         assetManagementOvernightFeeAmount:
           type: number
         unrealizedTradingTaxFactor:
@@ -109,8 +128,10 @@ properties:
           type: number
         breakEvenPrice:
           type: number
+          description: Giá hoà vốn
         collectedInterestAndFee:
           type: number
+          description: Phí thuế phần đã đóng
         releasedSecureAndProfit:
           type: number
         dailyReleasedSecureAndProfit:
@@ -183,7 +204,10 @@ properties:
           type: string
   total:
     type: number
+    description: Tổng số các deal
   start:
     type: number
+    description: Số bắt đầu, nên để là 0
   end:
     type: number
+    description: Số kết thúc, để start = 0 thì đây là số lượng deal muốn trả về

@@ -2,3 +2,4 @@ type: object
 properties:
   token:
     type: string
+    description: JWT token (có hiệu lực trong 8 tiếng)

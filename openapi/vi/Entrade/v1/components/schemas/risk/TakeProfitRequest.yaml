@@ -2,8 +2,10 @@ type: object
 properties:
   id:
     type: number
+    description: Số hiệu deal
   takeProfitPrice:
     type: number
+    description: Giá chốt lời muốn đặt
 required:
   - id
   - takeProfitPrice

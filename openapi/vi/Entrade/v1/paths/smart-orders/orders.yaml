@@ -10,14 +10,17 @@ get:
   parameters:
     - name: investorId
       in: query
+      description: Mã khách hàng
       schema:
         type: number
     - name: _start
       in: query
+      description: Index bắt đầu duyệt, nên để là 0
       schema:
         type: number
     - name: _end
       in: query
+      description: Index kết thúc duyệt
       schema:
         type: number
   responses:
@@ -49,24 +52,34 @@ post:
           properties:
             investorId:
               type: number
+              description: Mã khách hàng
             investorAccountId:
               type: number
+              description: Mã tài khoản
             bankMarginPortfolioId:
               type: number
+              description: Mã gói vay
             symbol:
               type: string
+              description: Mã phái sinh (ví dụ "VN30F2504")
             condition:
               type: string
+              description: Điều kiện đặt lệnh (ví dụ ">= 1369", "<= 1396")
             targetPrice:
               type: number
+              description: Giá đặt
             targetSide:
               type: string
+              description: '"NB" (Mua) hoặc "NS" (Bán)'
             targetQuantity:
               type: number
+              description: Khối lượng đặt
             type:
               type: string
+              description: Chỉ nhận giá trị "STOP"
             expiredTime:
               type: string
+              description: Thời gian đóng lệnh
   responses:
     "200":
       description: Thành công – đặt lệnh điều kiện
@@ -90,10 +103,12 @@ delete:
   parameters:
     - name: investorAccountId
       in: query
+      description: Mã tài khoản
       schema:
         type: number
     - name: investorId
       in: query
+      description: Mã khách hàng
       schema:
         type: number
   responses:

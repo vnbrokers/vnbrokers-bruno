@@ -11,6 +11,7 @@ delete:
     - name: orderId
       in: path
       required: true
+      description: Số hiệu lệnh
       schema:
         type: string
   responses:

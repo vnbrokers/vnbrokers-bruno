@@ -2,32 +2,46 @@ type: object
 properties:
   id:
     type: string
+    description: Số hiệu lệnh
   status:
     type: string
+    description: “PendingTrigger”, “Canceled” hoặc “Triggered”
   investorId:
     type: string
+    description: Mã khách hàng
   investorAccountId:
     type: number
+    description: Mã tài khoản
   bankMarginPortfolioId:
     type: number
+    description: Mã gói vay
   symbol:
     type: string
+    description: Mã phái sinh (ví dụ "VN30F2504")
   condition:
     type: string
+    description: Điều kiện đặt lệnh (ví dụ ">= 1369", "<= 1396")
   targetPrice:
     type: number
+    description: Giá đặt
   targetSide:
     type: string
+    description: '"NB" (Mua) hoặc "NS" (Bán)'
   targetQuantity:
     type: number
+    description: Khối lượng đặt
   type:
     type: string
+    description: Chỉ nhận giá trị "STOP"
   expiredTime:
     type: string
+    description: Thời gian đóng lệnh
   createdDate:
     type: string
+    description: "Thời điểm (ngày giờ) đặt lệnh, theo định dạng ISO UTC 8601 format datetime. Ví dụ: 2022-07-15T10:00:00.111+07:00"
   modifiedDate:
     type: string
+    description: Thời điểm (ngày giờ) thay đổi cuối cùng của lệnh
   metadata:
     type: object
     properties: {}

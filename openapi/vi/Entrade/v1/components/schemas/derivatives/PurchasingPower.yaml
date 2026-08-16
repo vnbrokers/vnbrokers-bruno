@@ -4,19 +4,27 @@ properties:
     type: number
   investorId:
     type: number
+    description: Mã khách hàng
   investorAccountId:
     type: number
+    description: Mã tiểu khoản
   bankMarginPortfolioId:
     type: number
+    description: Mã gói vay
   symbol:
     type: string
+    description: Mã phái sinh
   price:
     type: number
+    description: Giá tính sức mua
   ppse:
     type: number
+    description: Sức mua
   qmax:
     type: number
+    description: Số lượng tối đa có thể đặt
   side:
     type: string
+    description: Long (NB), Short (NS)
   dealId:
     type: number

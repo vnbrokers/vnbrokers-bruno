@@ -8,8 +8,10 @@ properties:
     type: number
   investorId:
     type: number
+    description: Mã khách hàng
   investorAccountId:
     type: number
+    description: Mã tiểu khoản
   totalAsset:
     type: number
   investorCount:
@@ -22,8 +24,10 @@ properties:
     type: number
   totalSecure:
     type: number
+    description: Cọc đã sử dụng
   nav:
     type: number
+    description: NAV
   totalOpenQuantity:
     type: number
   totalOpenValue:
@@ -38,14 +42,18 @@ properties:
     type: number
   availableCash:
     type: number
+    description: Cọc còn lại
   initCash:
     type: number
+    description: Cọc còn lại đầu ngày
   taxCredit:
     type: number
   withdrawalCash:
     type: number
+    description: Số tiền có thể rút
   holdOvernightSecure:
     type: number
+    description: Cọc giữ qua đêm
   estimateHoldOvernightSecure:
     type: number
   withdrawFee:
@@ -56,6 +64,7 @@ properties:
     type: number
   navExcludeEstimatedProfit:
     type: number
+    description: NAV không bao gồm lãi/lỗ tạm tính
   depositionalCash:
     type: number
   vsdSecureDepositFee:
@@ -64,14 +73,17 @@ properties:
     type: number
   receivable:
     type: number
+    description: Lãi/lỗ đã chốt trong ngày
   cashOnHand:
     type: number
   totalDerivativeDealSecure:
     type: number
+    description: Tổng cọc trong deal
   holdCollateralFee:
     type: number
   maxWithdraw:
     type: number
+    description: Số tiền tối đa có thể rút
   maxWithdrawPoint:
     type: number
   createdDate:

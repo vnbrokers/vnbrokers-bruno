@@ -2,23 +2,31 @@ type: object
 properties:
   total:
     type: number
+    description: Tổng số mã phái sinh
   data:
     type: array
+    description: Danh sách các mã phái sinh
     items:
       type: object
       properties:
         symbol:
           type: string
+          description: Mã phái sinh (ví dụ "VN30F2504")
         type:
           type: string
+          description: Loại mã (ví dụ "VN30F1M")
         marketPrice:
           type: number
+          description: Giá thị trường
         ceilingPrice:
           type: number
+          description: Giá trần
         floorPrice:
           type: number
+          description: Giá sàn
         basicPrice:
           type: number
+          description: Giá tham chiếu
         modifiedDate:
           type: string
         expirationDate:

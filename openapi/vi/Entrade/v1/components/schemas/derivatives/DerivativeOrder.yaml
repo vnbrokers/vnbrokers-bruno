@@ -2,40 +2,56 @@ type: object
 properties:
   id:
     type: number
+    description: Số hiệu lệnh
   side:
     type: string
+    description: "Lệnh Mua/Bán thuộc các giá trị sau: NB: Mua; NS: Bán"
   investorId:
     type: number
+    description: Mã khách hàng
   investorAccountId:
     type: number
+    description: Số tiểu khoản
   bankId:
     type: number
   bankAccountId:
     type: number
   symbol:
     type: string
+    description: Mã
   price:
     type: number
+    description: Giá đặt
   quantity:
     type: number
+    description: Khối lượng đặt
   orderType:
     type: string
+    description: "Loại lệnh, thuộc các giá trị sau: LO: lệnh giới hạn; MTL: lệnh thị trường; ATC/ATO: lệnh khớp phiên định kỳ đóng cửa/mở cửa; PLO: lệnh khớp lệnh sau giờ"
   orderStatus:
     type: string
+    description: "Trạng thái lệnh, thuộc các giá trị sau: pending: chờ gửi; pendingNew: chờ gửi; new: chờ khớp; partiallyFilled: khớp một phần; filled: khớp toàn bộ; rejected: bị từ chối; expired: bị hết hạn trong phiên; doneForDay: lệnh hết hiệu lực khi hết phiên"
   fillQuantity:
     type: number
+    description: Khối lượng đã khớp
   lastQuantity:
     type: number
+    description: Khối lượng của lần khớp gần nhất của lệnh
   lastPrice:
     type: number
+    description: Giá khớp của lần khớp gần nhất của lệnh
   averagePrice:
     type: number
+    description: Giá khớp trung bình của lệnh
   createdDate:
     type: string
+    description: "Thời điểm (ngày giờ) đặt lệnh, theo định dạng ISO UTC 8601 format datetime. Ví dụ: 2022-07-15T10:00:00.111+07:00"
   modifiedDate:
     type: string
+    description: Thời điểm (ngày giờ) thay đổi cuối cùng của lệnh
   bankMarginPortfolioId:
     type: number
+    description: Id gói vay
   dealId:
     type: number
   tradingFee:
