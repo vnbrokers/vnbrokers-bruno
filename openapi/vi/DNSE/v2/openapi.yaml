@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: DNSE-OpenAPI-V2
+  title: DNSE LightSpeed API v2
   version: 1.0.0
   description: DNSE OpenAPI spec and tests
 servers:

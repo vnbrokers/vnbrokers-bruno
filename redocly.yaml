@@ -2,11 +2,16 @@ extends:
   - recommended
 
 apis:
+  dnse-v1:
+    root: openapi/vi/DNSE/v1/openapi.yaml
   dnse-v2:
     root: openapi/vi/DNSE/v2/openapi.yaml
   fhsc-v0:
     root: openapi/vi/FHSC/v0/openapi.yaml
-
+  tcbs-v3:
+    root: openapi/vi/TCBS/v3/openapi.yaml
+  tcbs-v1:
+    root: openapi/vi/TCBS/v1/openapi.yaml
 
 rules:
   operation-operationId: error

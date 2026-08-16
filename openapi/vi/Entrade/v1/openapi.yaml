@@ -3,28 +3,6 @@ info:
   title: Entrade Open API
   version: 1.0.0
   description: Đặc tả được trích xuất từ các request Bruno trong `collections/Entrade`.
-x-bruno-sources:
-  - collections/Entrade/1-Dang-nhap.yml
-  - collections/Entrade/2-Lay-tieu-khoan-Master.yml
-  - collections/Entrade/3-Lay-thong-tin-tai-san.yml
-  - collections/Entrade/4-Lay-danh-sach-goi-vay.yml
-  - collections/Entrade/5-Lay-suc-mua.yml
-  - collections/Entrade/6-Lay-danh-sach-ma-Phai-Sinh.yml
-  - collections/Entrade/7-Dat-lenh-Phai-Sinh.yml
-  - collections/Entrade/8-Lay-so-lenh.yml
-  - collections/Entrade/9-Lay-chi-tiet-lenh.yml
-  - collections/Entrade/10-Huy-lenh.yml
-  - collections/Entrade/11-Lay-danh-sach-deals.yml
-  - collections/Entrade/12-Lay-cau-hinh-cat-lo.yml
-  - collections/Entrade/13-Sua-cau-hinh-mac-dinh-cat-lo.yml
-  - collections/Entrade/14-Dong-deal.yml
-  - collections/Entrade/v1/4.9-Dat-lenh-dieu-kien-(Smart-Order).yml
-  - collections/Entrade/v1/4.10-Huy-lenh-dieu-kien.yml
-  - collections/Entrade/v1/4.11-Huy-tat-ca-lenh-dieu-kien-(Smart-Order).yml
-  - collections/Entrade/v1/4.12-Thong-tin-lenh-dieu-kien.yml
-  - collections/Entrade/v1/4.13-Thong-tin-lenh-cat-lo.yml
-  - collections/Entrade/v1/4.14-Dat-lenh-cat-lo.yml
-  - collections/Entrade/v1/4.15-Dat-lenh-chot-loi.yml
 servers:
   - url: https://services-staging.entrade.com.vn/papertrade-entrade-api
     description: Môi trường staging
