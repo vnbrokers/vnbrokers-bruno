@@ -1,0 +1,70 @@
+type: object
+properties:
+  pageIndex:
+    description: Chỉ số trang.
+    type: string
+  pageSize:
+    description: Số lượng bản ghi trên mỗi trang.
+    type: string
+  itemsCount:
+    description: Tổng số bản ghi.
+    type: string
+  pagesCount:
+    description: Tổng số trang.
+    type: string
+  fcoList:
+    description: Danh sách lệnh điều kiện.
+    type: array
+    items:
+      type: object
+      properties:
+        fcoId:
+          description: ID của lệnh điều kiện.
+          type: string
+        username:
+          description: Tên người dùng tại SSI.
+          type: string
+        accountNo:
+          description: Số tài khoản giao dịch.
+          type: string
+        quantity:
+          description: Khối lượng.
+          type: number
+        price:
+          description: Giá đặt hoặc giá thực hiện.
+          type: string
+        priceSlip:
+          description: Khoảng trượt giá.
+          type: string
+        symbol:
+          description: Mã chứng khoán hoặc mã hợp đồng phái sinh.
+          type: string
+        type:
+          description: Loại lệnh điều kiện.
+          type: string
+        orderType:
+          description: Loại lệnh giao dịch.
+          type: string
+        from:
+          description: Thời điểm bắt đầu hiệu lực hoặc khoảng thời gian lọc.
+          type: string
+        to:
+          description: Thời điểm kết thúc hiệu lực hoặc khoảng thời gian lọc.
+          type: string
+        matchedQuantity:
+          description: Khối lượng đã khớp.
+          type: number
+        isPlaceOrder:
+          description: Cho biết lệnh thực đã được phát sinh hay chưa.
+          type: boolean
+        status:
+          description: Trạng thái xử lý.
+          type: string
+        detail:
+          description: Chi tiết kết quả hoặc lỗi.
+          type: string
+        params:
+          description: Các tham số của lệnh điều kiện.
+          type: object
+          additionalProperties: true
+

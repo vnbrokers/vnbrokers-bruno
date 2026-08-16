@@ -1,0 +1,67 @@
+get:
+  operationId: getOrderBook
+  tags:
+    - trading
+  summary: Sổ lệnh
+  description: Lấy lịch sử sổ lệnh theo tài khoản và bộ lọc.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - name: accountNo
+      in: query
+      description: Tài khoản giao dịch cần lấy lịch sử sổ lệnh.
+      required: true
+      schema:
+        type: string
+    - name: from
+      in: query
+      description: Thời gian bắt đầu để lọc lịch sử sổ lệnh, định dạng ISO 8601 (ví dụ 2024-01-01T00:00:00Z).
+      required: true
+      schema:
+        type: string
+    - name: to
+      in: query
+      description: Thời gian kết thúc để lọc lịch sử sổ lệnh, định dạng ISO 8601 (ví dụ 2024-01-01T00:00:00Z).
+      required: true
+      schema:
+        type: string
+    - name: symbol
+      in: query
+      description: Mã chứng khoán cần lọc lịch sử sổ lệnh.
+      required: false
+      schema:
+        type: string
+    - name: orderStatus
+      in: query
+      description: Trạng thái lệnh cần lọc. Tham khảo danh sách trạng thái tại phụ lục Trạng thái lệnh & luồng trạng thái.
+      required: false
+      schema:
+        type: string
+    - name: pageSize
+      in: query
+      description: Số lượng bản ghi trên mỗi trang. Nếu không cung cấp thì hệ thống sẽ sử dụng giá trị mặc định là 10.
+      required: false
+      schema:
+        type: integer
+    - name: pageIndex
+      in: query
+      description: Chỉ số trang khi phân trang kết quả, bắt đầu từ 1. Nếu không cung cấp thì hệ thống sẽ sử dụng giá trị mặc định là 1.
+      required: false
+      schema:
+        type: integer
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/OrderBookResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

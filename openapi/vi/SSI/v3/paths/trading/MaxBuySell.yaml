@@ -1,0 +1,43 @@
+get:
+  operationId: getMaxBuySell
+  tags:
+    - trading
+  summary: Khối lượng mua bán tối đa
+  description: Lấy khối lượng mua/bán tối đa theo tài khoản, mã và giá.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - name: accountNo
+      in: query
+      description: Tài khoản giao dịch cần kiểm tra khối lượng mua/bán tối đa.
+      required: true
+      schema:
+        type: string
+    - name: symbol
+      in: query
+      description: Mã chứng khoán cần kiểm tra khối lượng mua/bán tối đa.
+      required: true
+      schema:
+        type: string
+    - name: price
+      in: query
+      description: Giá cần kiểm tra khối lượng mua/bán tối đa.
+      required: true
+      schema:
+        type: string
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/MaxBuySellResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

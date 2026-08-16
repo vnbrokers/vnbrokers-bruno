@@ -1,0 +1,54 @@
+type: object
+required:
+  - accountNo
+  - symbol
+  - side
+  - orderType
+  - quantity
+  - price
+  - deviceId
+properties:
+  clientRequestId:
+    description: Định danh lệnh do client tạo ra, dùng để đối chiếu trong các phản hồi sau này. Trường này không bắt buộc nhưng nếu có thì nên đảm bảo tính duy nhất để tránh nhầm lẫn khi xử lý phản hồi. Khi để trống thì hệ thống sẽ tự sinh định danh lệnh cho khách hàng và trả về response & streaming.
+    type:
+      - string
+      - 'null'
+  accountNo:
+    description: Số tài khoản giao dịch.
+    type: string
+  symbol:
+    description: Mã chứng khoán.
+    type: string
+  side:
+    description: Chiều mua hoặc bán của lệnh giao dịch. (B- Buy/Mua, S- Sell/Bán)
+    type: string
+    enum:
+      - B
+      - S
+  orderType:
+    description: Loại lệnh giao dịch. (LO - Limit Order/Lệnh giới hạn, ATO - At The Open/Lệnh mở cửa, ATC - At The Close/Lệnh đóng cửa, MP - Market Price/Giá thị trường)
+    type: string
+    enum:
+      - LO
+      - ATO
+      - ATC
+      - MP
+  quantity:
+    description: Khối lượng đặt lệnh.
+    type: number
+  price:
+    description: Giá đặt lệnh. Bắt buộc khi orderType là LO (Lệnh giới hạn); không bắt buộc với các loại lệnh khác (ATO, ATC, MP).
+    type: string
+  deviceId:
+    description: Định danh thiết bị thực hiện gửi yêu cầu đặt lệnh. Thông thường dùng MAC address hoặc IMEI của thiết bị.
+    type: string
+  userAgent:
+    description: Thông tin về trình duyệt hoặc ứng dụng gửi yêu cầu.
+    type:
+      - string
+      - 'null'
+  ipAddress:
+    description: Địa chỉ IP của thiết bị gửi yêu cầu.
+    type:
+      - string
+      - 'null'

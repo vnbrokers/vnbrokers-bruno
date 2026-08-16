@@ -1,0 +1,69 @@
+type: object
+properties:
+  equity:
+    description: Thông tin hoặc danh sách vị thế tài khoản cơ sở.
+    type: object
+    properties:
+      accountNo:
+        description: Số tài khoản giao dịch.
+        type: string
+      accountBalance:
+        description: Số dư tài khoản.
+        type: string
+      totalDebt:
+        description: Tổng dư nợ.
+        type: string
+      interestLoan:
+        description: Lãi vay.
+        type: string
+      overdueFeeLoan:
+        description: Phí vay quá hạn.
+        type: string
+      withdrawable:
+        description: Số tiền có thể rút.
+        type: string
+      onHoldCash:
+        description: Tiền mặt đang bị giữ.
+        type: string
+      sellUnmatched:
+        description: Giá trị bán chưa khớp.
+        type: string
+      sellT0:
+        description: Giá trị bán chờ về T+0.
+        type: string
+      sellT1:
+        description: Giá trị bán chờ về T+1.
+        type: string
+      sellT2:
+        description: Giá trị bán chờ về T+2.
+        type: string
+      buyUnmatched:
+        description: Giá trị mua chưa khớp.
+        type: string
+      buyT0:
+        description: Giá trị mua T+0.
+        type: string
+      buyT1:
+        description: Giá trị mua T+1.
+        type: string
+      buyT2:
+        description: Giá trị mua T+2.
+        type: string
+      advancedCashT0:
+        description: Tiền ứng trước T+0.
+        type: string
+      advancedCashT1:
+        description: Tiền ứng trước T+1.
+        type: string
+      holdSubscription:
+        description: Giá trị tiền đang giữ cho quyền mua.
+        type: string
+      dividend:
+        description: Cổ tức.
+        type: string
+  derivative:
+    description: Thông tin tài khoản hoặc vị thế phái sinh.
+    type: object
+    additionalProperties: true
+
+

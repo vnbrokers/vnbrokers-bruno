@@ -1,0 +1,32 @@
+post:
+  operationId: refreshToken
+  tags:
+    - authentication
+  summary: Làm mới access token
+  description: Làm mới access token bằng refresh token còn hiệu lực.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - refreshToken
+          properties:
+            refreshToken:
+              type: string
+              description: Refresh token còn hiệu lực.
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/TokenResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  security: []

@@ -1,0 +1,62 @@
+type: object
+properties:
+  symbol:
+    description: Mã chứng khoán hoặc mã hợp đồng phái sinh.
+    type: string
+  symbolNameVi:
+    description: Tên chứng khoán bằng tiếng Việt.
+    type: string
+  symbolNameEn:
+    description: Tên chứng khoán bằng tiếng Anh.
+    type: string
+  board:
+    description: Mã sàn giao dịch.
+    type: string
+    enum:
+      - HOSE
+      - HNX
+      - UPCOM
+  lotSize:
+    description: Đơn vị giao dịch lô chẵn.
+    type: string
+  maturityDate:
+    description: Ngày đáo hạn.
+    type: string
+  firstTradingDate:
+    description: Ngày giao dịch đầu tiên.
+    type: string
+  lastTradingDate:
+    description: Ngày giao dịch cuối cùng.
+    type: string
+  cwUnderlyingSymbol:
+    description: Mã chứng khoán cơ sở của chứng quyền.
+    type: string
+  cwExercisePrice:
+    description: Giá thực hiện của chứng quyền.
+    type: string
+  cwExecutionRatio:
+    description: Tỷ lệ thực hiện của chứng quyền.
+    type: string
+  listedShare:
+    description: Số lượng cổ phiếu niêm yết.
+    type: string
+  icbCode:
+    description: Mã ngành ICB.
+    type: string
+  icbName:
+    description: Tên ngành ICB.
+    type: string
+  iIndex:
+    description: Chỉ số IIndex.
+    type: string
+  iNav:
+    description: Giá trị iNAV.
+    type: string
+  openInterest:
+    description: Khối lượng mở.
+    type: string
+  settlementPrice:
+    description: Giá thanh toán.
+    type: string
+
+

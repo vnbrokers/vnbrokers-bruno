@@ -1,0 +1,64 @@
+post:
+  operationId: placeConditionalOrder
+  tags:
+    - conditional-orders
+  summary: Đặt lệnh điều kiện
+  description: Đặt lệnh điều kiện mới. Hỗ trợ các loại lệnh điều kiện bao gồm stop, stop_limit, gtd, bullbear, oco, trailing_stop, trailing_stop_limit.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+    - $ref: '../../components/parameters/XSignature.yaml'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/PlaceFcoOrderRequest.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/FcoOrderResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+delete:
+  operationId: cancelConditionalOrder
+  tags:
+    - conditional-orders
+  summary: Hủy lệnh điều kiện
+  description: Đặt lệnh điều kiện mới. Hỗ trợ các loại lệnh điều kiện bao gồm stop, stop_limit, gtd, bullbear, oco, trailing_stop, trailing_stop_limit.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+    - $ref: '../../components/parameters/XSignature.yaml'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/CancelFcoOrderRequest.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/FcoOrderResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

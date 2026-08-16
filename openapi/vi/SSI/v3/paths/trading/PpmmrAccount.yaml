@@ -1,0 +1,38 @@
+get:
+  operationId: getPpmmrAccount
+  tags:
+    - trading
+  summary: PP/MMR tài khoản
+  description: Lấy thông tin PP/MMR của tài khoản.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - name: clientId
+      in: query
+      description: Tài khoản 6 số định danh khách hàng tại SSI. Nếu số tài khoản là 003C123888 thì clientId = 123888
+      required: false
+      schema:
+        type: string
+    - name: accountNo
+      in: query
+      description: Tài khoản giao dịch cần lấy thông tin PP/MMR.
+      required: true
+      schema:
+        type: string
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

@@ -1,0 +1,7 @@
+name: Content-Type
+in: header
+required: true
+description: Định dạng nội dung request body. Chủ yếu là application/json.
+schema:
+  type: string
+  default: application/json

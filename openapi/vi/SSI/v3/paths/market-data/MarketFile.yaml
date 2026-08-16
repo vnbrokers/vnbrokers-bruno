@@ -1,0 +1,53 @@
+get:
+  operationId: getMarketFile
+  tags:
+    - market-data
+  summary: File dữ liệu thị trường
+  description: Lấy đường dẫn file CSV dữ liệu thị trường theo ngày giao dịch và khung thời gian. File dữ liệu sẽ được hệ thống chuẩn bị sẵn và cung cấp đường dẫn tải về trong vòng 30 phút kể từ khi nhận được yêu cầu.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - name: symbol
+      in: query
+      description: Mã chứng khoán.
+      required: true
+      schema:
+        type: string
+    - name: timeFrame
+      in: query
+      required: false
+      schema:
+        type: string
+    - name: index
+      in: query
+      required: false
+      schema:
+        type: string
+    - name: fromDate
+      in: query
+      description: Ngày bắt đầu theo định dạng `YYYY/MM/DD`.
+      required: true
+      schema:
+        type: string
+    - name: toDate
+      in: query
+      description: Ngày kết thúc theo định dạng `YYYY/MM/DD`. Bắt buộc phải lớn hơn hoặc bằng `fromDate`.
+      required: true
+      schema:
+        type: string
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/MarketFileResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

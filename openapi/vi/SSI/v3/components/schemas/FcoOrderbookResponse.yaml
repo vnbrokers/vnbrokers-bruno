@@ -1,0 +1,76 @@
+type: object
+properties:
+  pageIndex:
+    description: Chỉ số trang.
+    type: string
+  pageSize:
+    description: Số lượng bản ghi trên mỗi trang.
+    type: string
+  itemsCount:
+    description: Tổng số bản ghi.
+    type: string
+  pagesCount:
+    description: Tổng số trang.
+    type: string
+  data:
+    description: Dữ liệu trả về.
+    type: array
+    items:
+      type: object
+      properties:
+        fcoId:
+          description: ID của lệnh điều kiện.
+          type: string
+        accountNo:
+          description: Số tài khoản giao dịch.
+          type: string
+        quantity:
+          description: Khối lượng.
+          type: number
+        price:
+          description: Giá đặt hoặc giá thực hiện.
+          type: string
+        symbol:
+          description: Mã chứng khoán hoặc mã hợp đồng phái sinh.
+          type: string
+        side:
+          description: Chiều mua hoặc bán của lệnh.
+          type: string
+        orderType:
+          description: Loại lệnh giao dịch.
+          type: string
+        isMainOrder:
+          description: Cho biết đây là lệnh chính hay không.
+          type: boolean
+        isAttachedOrder:
+          description: Cho biết đây là lệnh đính kèm hay không.
+          type: boolean
+        createdTime:
+          description: Thời điểm tạo.
+          type: string
+        updatedTime:
+          description: Thời điểm cập nhật.
+          type: string
+        uniqueId:
+          description: Định danh duy nhất của lệnh.
+          type: string
+        orderId:
+          description: Định danh lệnh do SSI tạo.
+          type: string
+        matchedQuantity:
+          description: Khối lượng đã khớp.
+          type: number
+        osQuantity:
+          description: Khối lượng còn lại.
+          type: number
+        avgPrice:
+          description: Giá khớp trung bình.
+          type: number
+        status:
+          description: Trạng thái xử lý.
+          type: string
+        detail:
+          description: Chi tiết kết quả hoặc lỗi.
+          type: string
+
+

@@ -1,0 +1,43 @@
+get:
+  operationId: getIndexSummary
+  tags:
+    - market-data
+  summary: Tổng hợp chỉ số
+  description: Lấy thông tin tổng hợp của một chỉ số theo ngày giao dịch.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - name: board
+      in: query
+      description: Mã sàn của chỉ số. Giá trị có thể là `HOSE`, `HNX`, hoặc `UPCOM`. Bắt buộc cung cấp chính xác một trong hai tham số `board` hoặc `index`.
+      required: false
+      schema:
+        type: string
+    - name: index
+      in: query
+      description: Mã chỉ số cần lấy thông tin tổng hợp (ví dụ VNINDEX, VN30, HNX30). Bắt buộc cung cấp chính xác một trong hai tham số `board` hoặc `index`.
+      required: false
+      schema:
+        type: string
+    - name: tradingDate
+      in: query
+      description: Ngày giao dịch theo định dạng `YYYY/MM/DD`.
+      required: false
+      schema:
+        type: string
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/IndexSummaryResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

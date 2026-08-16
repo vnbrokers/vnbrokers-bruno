@@ -1,0 +1,33 @@
+get:
+  operationId: getIndexList
+  tags:
+    - market-data
+  summary: Danh sách chỉ số
+  description: Lấy danh sách các chỉ số thị trường.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - name: board
+      in: query
+      description: Mã sàn cần lấy danh sách các chỉ số. Giá trị có thể là `HOSE`, `HNX`, hoặc `UPCOM`. Nếu không cung cấp thì hệ thống sẽ trả về danh sách các chỉ số của tất cả các sàn.
+      required: false
+      schema:
+        type: string
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../../components/schemas/IndexItem.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

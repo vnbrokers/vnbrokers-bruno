@@ -1,0 +1,7 @@
+name: X-Signature
+in: header
+required: true
+description: Chữ ký RSA + SHA256 để xác thực tính toàn vẹn của request. Input bao gồm SecretKey + JSON body.
+schema:
+  type: string
+  example: sha256=abc123...

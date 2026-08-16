@@ -1,0 +1,63 @@
+type: array
+items:
+  type: object
+  properties:
+    tradingDate:
+      description: Ngày giao dịch.
+      type: string
+    totalTrade:
+      description: Tổng số giao dịch.
+      type: string
+    totalTradeValue:
+      description: Tổng giá trị giao dịch.
+      type: string
+    totalMatch:
+      description: Tổng số lệnh khớp.
+      type: string
+    totalMatchValue:
+      description: Tổng giá trị khớp lệnh.
+      type: string
+    totalDeal:
+      description: Tổng số giao dịch thỏa thuận.
+      type: string
+    totalDealValue:
+      description: Tổng giá trị giao dịch thỏa thuận.
+      type: string
+    indexChange:
+      description: Mức thay đổi của chỉ số.
+      type: string
+    indexChangePercentage:
+      description: Tỷ lệ phần trăm thay đổi của chỉ số.
+      type: string
+    indexValue:
+      description: Giá trị chỉ số.
+      type: string
+    totalAdvanceStock:
+      description: Tổng số mã tăng giá.
+      type: string
+    totalCeilingStock:
+      description: Tổng số mã tăng trần.
+      type: string
+    totalDeclineStock:
+      description: Tổng số mã giảm giá.
+      type: string
+    totalFloorStock:
+      description: Tổng số mã giảm sàn.
+      type: string
+    totalNoChangeStock:
+      description: Tổng số mã không đổi giá.
+      type: string
+    totalPropBuy:
+      description: Tổng số lượng mua của nhà đầu tư nước ngoài.
+      type: string
+    totalPropBuyValue:
+      description: Tổng giá trị mua của nhà đầu tư nước ngoài.
+      type: string
+    totalPropSell:
+      description: Tổng số lượng bán của nhà đầu tư nước ngoài.
+      type: string
+    totalPropSellValue:
+      description: Tổng giá trị bán của nhà đầu tư nước ngoài.
+      type: string
+
+

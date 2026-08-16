@@ -1,0 +1,45 @@
+get:
+  operationId: getSecuritiesByBoard
+  tags:
+    - market-data
+  summary: Danh sách chứng khoán
+  description: Lấy danh sách chứng khoán theo điều kiện lọc. Khách chỉ được phép cung cấp một trong ba tham số symbol, board hoặc index để lọc danh sách chứng khoán.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - name: symbol
+      in: query
+      description: Mã chứng khoán cần truy vấn. Chỉ cung cấp một trong ba tham số symbol, board hoặc index.
+      required: false
+      schema:
+        type: string
+    - name: board
+      in: query
+      description: Mã sàn cần lấy danh sách chứng khoán. Giá trị có thể là `HOSE`, `HNX`, hoặc `UPCOM`.
+      required: false
+      schema:
+        type: string
+    - name: index
+      in: query
+      description: Mã chỉ số cần lấy danh sách chứng khoán.
+      required: false
+      schema:
+        type: string
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../../components/schemas/SecurityItem.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

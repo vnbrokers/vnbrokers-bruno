@@ -1,0 +1,97 @@
+type: object
+properties:
+  pageSize:
+    description: Số lượng bản ghi trên mỗi trang.
+    type: integer
+  pageIndex:
+    description: Chỉ số trang.
+    type: integer
+  pagesCount:
+    description: Tổng số trang.
+    type: integer
+  itemsCount:
+    description: Tổng số bản ghi.
+    type: integer
+  data:
+    description: Dữ liệu trả về.
+    type: array
+    items:
+      type: object
+      properties:
+        symbol:
+          description: Mã chứng khoán hoặc mã hợp đồng phái sinh.
+          type: string
+        tradingDate:
+          description: Ngày giao dịch.
+          type: string
+        priceChange:
+          description: Mức thay đổi giá.
+          type: string
+        priceChangePercentage:
+          description: Tỷ lệ phần trăm thay đổi giá.
+          type: string
+        open:
+          description: Giá mở cửa.
+          type: string
+        high:
+          description: Giá cao nhất.
+          type: string
+        low:
+          description: Giá thấp nhất.
+          type: string
+        close:
+          description: Giá đóng cửa.
+          type: string
+        average:
+          description: Giá giao dịch bình quân.
+          type: string
+        totalMatch:
+          description: Tổng số lệnh khớp.
+          type: string
+        totalMatchValue:
+          description: Tổng giá trị khớp lệnh.
+          type: string
+        totalBuy:
+          description: Tổng khối lượng mua.
+          type: string
+        totalTradeBuy:
+          description: Tổng giá trị mua khớp lệnh.
+          type: string
+        totalSell:
+          description: Tổng khối lượng bán.
+          type: string
+        totalTradeSell:
+          description: Tổng giá trị bán khớp lệnh.
+          type: string
+        totalForeignBuy:
+          description: Tổng khối lượng mua của nhà đầu tư nước ngoài.
+          type: string
+        totalForeignBuyValue:
+          description: Tổng giá trị mua của nhà đầu tư nước ngoài.
+          type: string
+        totalForeignSell:
+          description: Tổng khối lượng bán của nhà đầu tư nước ngoài.
+          type: string
+        totalForeignSellValue:
+          description: Tổng giá trị bán của nhà đầu tư nước ngoài.
+          type: string
+        remainForeignRoom:
+          description: Room còn lại của nhà đầu tư nước ngoài.
+          type: string
+        totalForeignRoom:
+          description: Tổng room của nhà đầu tư nước ngoài.
+          type: string
+        totalDeal:
+          description: Tổng số giao dịch thỏa thuận.
+          type: string
+        totalDealValue:
+          description: Tổng giá trị giao dịch thỏa thuận.
+          type: string
+        openInterest:
+          description: Khối lượng mở.
+          type: string
+        settlementPrice:
+          description: Giá thanh toán.
+          type: string
+
+

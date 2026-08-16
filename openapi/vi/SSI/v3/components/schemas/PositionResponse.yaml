@@ -1,0 +1,62 @@
+type: object
+properties:
+  data:
+    description: Dữ liệu trả về.
+    type: object
+    properties:
+      equity:
+        description: Thông tin hoặc danh sách vị thế tài khoản cơ sở.
+        type: array
+        items:
+          type: object
+          properties:
+            accountNo:
+              description: Số tài khoản giao dịch.
+              type: string
+            symbol:
+              description: Mã chứng khoán hoặc mã hợp đồng phái sinh.
+              type: string
+            quantity:
+              description: Khối lượng.
+              type: string
+            blockQuantity:
+              description: Khối lượng bị phong tỏa.
+              type: string
+            dividendQuantity:
+              description: Khối lượng cổ phiếu cổ tức.
+              type: string
+            buyingQuantity:
+              description: Khối lượng đang mua.
+              type: string
+            boughtQuantity:
+              description: Khối lượng đã mua.
+              type: string
+            sellingQuantity:
+              description: Khối lượng đang bán.
+              type: string
+            soldQuantity:
+              description: Khối lượng đã bán.
+              type: string
+            t1SellQuantity:
+              description: Khối lượng có thể bán theo chu kỳ T+1.
+              type: string
+            t2SellQuantity:
+              description: Khối lượng có thể bán theo chu kỳ T+2.
+              type: string
+            costPrice:
+              description: Giá vốn.
+              type: string
+            mortgageQuantity:
+              description: Khối lượng cầm cố.
+              type: string
+            sellableQuantity:
+              description: Khối lượng có thể bán.
+              type: string
+            restrictedQuantity:
+              description: Khối lượng bị hạn chế giao dịch.
+              type: string
+      derivative:
+        description: Thông tin tài khoản hoặc vị thế phái sinh.
+        type: object
+        additionalProperties: true
+

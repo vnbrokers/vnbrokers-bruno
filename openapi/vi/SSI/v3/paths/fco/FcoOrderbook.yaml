@@ -1,0 +1,43 @@
+get:
+  operationId: getConditionalOrderBook
+  tags:
+    - conditional-orders
+  summary: Sổ lệnh điều kiện
+  description: Lấy danh sách các lệnh thực được phát sinh (trigger) bởi một lệnh điều kiện.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - name: fcoId
+      in: query
+      description: ID của lệnh điều kiện cần truy vấn sổ lệnh phát sinh.
+      required: true
+      schema:
+        type: string
+    - name: pageIndex
+      in: query
+      description: Chỉ số trang khi phân trang kết quả, bắt đầu từ 1. Mặc định là 1.
+      required: false
+      schema:
+        type: integer
+    - name: pageSize
+      in: query
+      description: Số lượng bản ghi trên mỗi trang. Mặc định là 10.
+      required: false
+      schema:
+        type: integer
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/FcoOrderbookResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

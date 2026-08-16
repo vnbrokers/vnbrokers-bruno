@@ -1,0 +1,133 @@
+type: object
+required:
+  - accountNo
+  - symbol
+  - side
+  - type
+  - price
+  - quantity
+  - deviceId
+properties:
+  accountNo:
+    description: Tài khoản đặt lệnh (tài khoản cơ sở hoặc phái sinh).
+    type: string
+  deviceId:
+    description: Định danh thiết bị thực hiện gửi yêu cầu. Thông thường dùng MAC address hoặc IMEI của thiết bị.
+    type: string
+  userAgent:
+    description: Thông tin về trình duyệt hoặc ứng dụng gửi yêu cầu.
+    type:
+      - string
+      - 'null'
+  clientRequestId:
+    description: Định danh lệnh do client tạo ra, dùng để đối chiếu trong các phản hồi sau này. Trường này không bắt buộc nhưng nếu có thì nên đảm bảo tính duy nhất để tránh nhầm lẫn khi xử lý phản hồi. Khi để trống thì hệ thống sẽ tự sinh định danh lệnh cho khách hàng và trả về response & streaming.
+    type:
+      - string
+      - 'null'
+  ipAddress:
+    description: Địa chỉ IP của thiết bị gửi yêu cầu.
+    type:
+      - string
+      - 'null'
+  from:
+    description: Ngày bắt đầu hiệu lực của lệnh điều kiện, định dạng `YYYY/MM/DD hh:mm:ss`. Mặc định là thời điểm tạo lệnh.
+    type:
+      - string
+      - 'null'
+  to:
+    description: Ngày kết thúc hiệu lực của lệnh điều kiện, định dạng `YYYY/MM/DD hh:mm:ss`. Mặc định là 24h kể từ thời điểm tạo, tối đa 31 ngày kể từ ngày bắt đầu.
+    type:
+      - string
+      - 'null'
+  code:
+    description: Mã xác thực OTP hoặc mã PIN dùng để xác thực giao dịch (cần điền nếu token chưa được xác thực kèm với OTP)
+    type:
+      - string
+      - 'null'
+  symbol:
+    description: Mã chứng khoán hoặc mã hợp đồng phái sinh cần đặt lệnh điều kiện.
+    type:
+      - string
+      - 'null'
+  side:
+    description: Chiều mua hoặc bán của lệnh. B (Buy/Mua) hoặc S (Sell/Bán).
+    type:
+      - string
+      - 'null'
+    enum:
+      - B
+      - S
+  type:
+    description: Loại lệnh điều kiện.
+    type: string
+    enum:
+      - stop
+      - stop_limit
+      - gtd
+      - bullbear
+      - oco
+      - trailing_stop
+      - trailing_stop_limit
+  price:
+    description: Giá đặt lệnh. Hỗ trợ giá số hoặc loại lệnh đặc biệt (MP, MOK, MTL).
+    type:
+      - string
+      - 'null'
+  quantity:
+    description: Khối lượng muốn đặt lệnh.
+    type: integer
+  priceSlip:
+    description: Khoảng trượt giá (price slippage) cho phép khi thực hiện lệnh.
+    type:
+      - number
+      - 'null'
+  stopPrice:
+    description: Giá dừng lỗ. Khi giá thị trường đạt đến mức này, lệnh sẽ được kích hoạt.
+    type:
+      - number
+      - 'null'
+  activePrice:
+    description: Giá kích hoạt ban đầu của lệnh điều kiện.
+    type:
+      - number
+      - 'null'
+  trailingAmount:
+    description: Khoảng giá trailing. Dùng cho loại lệnh trailing_stop và trailing_stop_limit.
+    type:
+      - number
+      - 'null'
+  tpActivePrice:
+    description: Giá kích hoạt lệnh chốt lời (Take Profit). Khi giá thị trường đạt đến mức này, lệnh chốt lời sẽ được kích hoạt.
+    type:
+      - number
+      - 'null'
+  slActivePrice:
+    description: Giá kích hoạt lệnh dừng lỗ (Stop Loss). Khi giá thị trường đạt đến mức này, lệnh dừng lỗ sẽ được kích hoạt.
+    type:
+      - number
+      - 'null'
+  tpPrice:
+    description: Giá chốt lời. Hỗ trợ giá số hoặc loại lệnh đặc biệt (MP, MOK, MTL).
+    type:
+      - string
+      - 'null'
+  slPrice:
+    description: Giá dừng lỗ. Hỗ trợ giá số hoặc loại lệnh đặc biệt (MP, MOK, MTL).
+    type:
+      - string
+      - 'null'
+  tpSlip:
+    description: Biên trượt giá chốt lời.
+    type:
+      - number
+      - 'null'
+  slSlip:
+    description: Biên trượt giá dừng lỗ.
+    type:
+      - number
+      - 'null'
+  operator:
+    description: Toán tử so sánh giá để kích hoạt lệnh điều kiện.
+    type:
+      - string
+      - 'null'
