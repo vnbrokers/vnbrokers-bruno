@@ -1,0 +1,23 @@
+type: object
+description: |
+  1 quỹ mở trong danh sách trả về từ `/fund-trading/public/fund-certificates`.
+properties:
+  id:
+    type: integer
+    description: ID nội bộ của quỹ.
+    example: 21
+  name:
+    type: string
+    description: Tên ngắn của quỹ (dùng làm path variable `{fundName}`).
+    example: VESAF
+  type:
+    $ref: 'FundType.yaml'
+  aum:
+    type: integer
+    format: int64
+    description: Tổng tài sản đang quản lý (AUM, VND).
+    example: 1500000000000
+  rating:
+    type: number
+    description: Đánh giá quỹ (0 - 5).
+    example: 4.5

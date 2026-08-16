@@ -1,0 +1,45 @@
+type: object
+description: |
+  Row có 1 giá trị đơn — dùng cho crypto spot và US stock indices. Nhận
+  biết bằng `value_type: SINGLE`.
+properties:
+  index:
+    type: string
+    description: Stable identifier for the row (e.g. `BITCOIN`, `SP_500`).
+    example: BITCOIN
+  name:
+    type: string
+    description: Display name.
+    example: BTC
+  description:
+    type: string
+    description: Short descriptive text. May be empty.
+    example: ''
+  icon_url:
+    type: string
+    description: Icon URL.
+    example: https://cdn1.finhay.com.vn/vnsc-prod/1739758983132-btc.png
+  value_type:
+    type: string
+    description: Discriminator — always `SINGLE` for this shape.
+    enum:
+      - SINGLE
+    x-enum-varnames:
+      - SINGLE
+  value:
+    type: number
+    description: Current spot / index level.
+    example: 79283.83
+  change:
+    type: number
+    description: Absolute change vs previous close.
+    example: 3324.45
+  change_percent:
+    type: number
+    description: Percentage change vs previous close.
+    example: 4.377
+required:
+  - index
+  - name
+  - value_type
+  - value

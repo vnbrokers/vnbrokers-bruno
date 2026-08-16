@@ -1,0 +1,96 @@
+post:
+  operationId: placeOrder
+  tags:
+    - Giao dịch
+  summary: Đặt lệnh
+  description: Đặt lệnh mới.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+    - $ref: '../../components/parameters/XSignature.yaml'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/PlaceOrderRequest.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/OrderResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+put:
+  operationId: modifyOrder
+  tags:
+    - Giao dịch
+  summary: Sửa lệnh
+  description: Sửa lệnh hiện có.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+    - $ref: '../../components/parameters/XSignature.yaml'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/ModifyOrderRequest.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/OrderResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+delete:
+  operationId: cancelOrder
+  tags:
+    - Giao dịch
+  summary: Hủy lệnh
+  description: Hủy lệnh hiện có.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+    - $ref: '../../components/parameters/XSignature.yaml'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/CancelOrderRequest.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/OrderResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

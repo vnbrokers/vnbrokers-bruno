@@ -1,0 +1,61 @@
+"get":
+  operationId: getErosGetProfileByUsernameCustodyCode
+  tags:
+    - Tài khoản
+  "summary": "Thông tin tiểu khoản"
+  "description": "Lấy thông tin hồ sơ của một tài khoản lưu ký theo danh sách trường yêu cầu."
+  "parameters":
+    -
+      "name": "custodyCode"
+      "in": "path"
+      "required": true
+      "description": "Số tài khoản lưu ký, ví dụ: 105C334455."
+      "schema":
+        "type": "string"
+    -
+      "name": "fields"
+      "in": "query"
+      "required": true
+      "description": "Danh sách thông tin cần lấy, ví dụ: basicInfo, bankSubAccounts."
+      "schema":
+        "type": "string"
+  responses:
+    "401":
+      $ref: ../../components/responses/Unauthorized.yaml
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              basicInfo:
+                type: object
+                description: "Thông tin cơ bản tài khoản."
+              bankSubAccounts:
+                type: array
+                description: "Danh sách tiểu khoản."
+                items:
+                  type: object
+                  properties:
+                    accountNo:
+                      type: string
+                      description: "Số tiểu khoản."
+                    accountName:
+                      type: string
+                      description: "Tên chủ tài khoản."
+                    bankCode:
+                      type: string
+                      description: "Mã ngân hàng (có thể null)."
+                    accountType:
+                      type: string
+                      description: "Loại tiểu khoản: NORMAL, MARGIN, DERIVATIVE."
+                    accountTypeName:
+                      type: string
+                      description: "Tên loại tiểu khoản."
+                    status:
+                      type: string
+                      description: "Trạng thái tiểu khoản."
+                    isDefault:
+                      type: string
+                      description: "Là tiểu khoản mặc định (Y/N)."

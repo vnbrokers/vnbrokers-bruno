@@ -1,0 +1,14 @@
+allOf:
+  - $ref: '../common/EnvelopeBase.yaml'
+  - type: object
+    required:
+      - result
+    properties:
+      result:
+        type: array
+        description: |
+          Mảng snapshot chỉ số — **1 phần tử cho mỗi mã** truyền vào `index`.
+          Mã không hợp lệ / không có dữ liệu bị bỏ qua (không sinh lỗi), nên
+          mảng có thể ngắn hơn số mã yêu cầu, hoặc rỗng.
+        items:
+          $ref: 'IndexRealtime.yaml'

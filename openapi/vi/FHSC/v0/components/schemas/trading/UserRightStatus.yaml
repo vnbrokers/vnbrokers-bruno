@@ -1,0 +1,64 @@
+type: string
+description: |
+  Trạng thái xử lý quyền cổ đông (phía hệ thống).
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `WAIT_FOR_REVIEW` | Chờ review |
+  | `WAIT_EXECUTED` | Chờ thực hiện |
+  | `WAITING_FOR_APPROVE` | Chờ phê duyệt |
+  | `NAVIGATING` | Chuyển sang bước kế tiếp |
+  | `COMPLETED` | Đã hoàn tất |
+  | `ALLOCATION_COMPLETED` | Đã phân bổ xong |
+  | `CANCELED` | Đã huỷ |
+  | `EMPTY_STOCK` | Không còn stock để phân bổ |
+  | `APPROVED` | Đã phê duyệt |
+  | `REJECTED` | Từ chối |
+  | `READY_FOR_TRADE` | Sẵn sàng giao dịch |
+  | `READY_FOR_CLOSE` | Sẵn sàng đóng |
+  | `STOCK_ALLOTTED` | Đã chia stock |
+  | `MONEY_ALLOTTED` | Đã chia tiền |
+  | `PARTIALLY_DONE` | Hoàn tất 1 phần |
+  | `VERIFIED` | Đã xác nhận |
+  | `DELETED` | Đã xoá |
+  | `REGISTERED` | Đã đăng ký |
+  | `UNKNOWN` | Không xác định / fallback |
+enum:
+  - WAIT_FOR_REVIEW
+  - WAIT_EXECUTED
+  - WAITING_FOR_APPROVE
+  - NAVIGATING
+  - COMPLETED
+  - ALLOCATION_COMPLETED
+  - CANCELED
+  - EMPTY_STOCK
+  - APPROVED
+  - REJECTED
+  - READY_FOR_TRADE
+  - READY_FOR_CLOSE
+  - STOCK_ALLOTTED
+  - MONEY_ALLOTTED
+  - PARTIALLY_DONE
+  - VERIFIED
+  - DELETED
+  - REGISTERED
+  - UNKNOWN
+x-enum-varnames:
+  - WAIT_FOR_REVIEW
+  - WAIT_EXECUTED
+  - WAITING_FOR_APPROVE
+  - NAVIGATING
+  - COMPLETED
+  - ALLOCATION_COMPLETED
+  - CANCELED
+  - EMPTY_STOCK
+  - APPROVED
+  - REJECTED
+  - READY_FOR_TRADE
+  - READY_FOR_CLOSE
+  - STOCK_ALLOTTED
+  - MONEY_ALLOTTED
+  - PARTIALLY_DONE
+  - VERIFIED
+  - DELETED
+  - REGISTERED
+  - UNKNOWN

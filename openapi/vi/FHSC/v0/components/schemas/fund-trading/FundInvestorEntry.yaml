@@ -1,0 +1,14 @@
+type: object
+description: 1 dòng trong bảng xếp hạng quỹ theo số nhà đầu tư.
+properties:
+  fund_name:
+    type: string
+    example: VESAF
+  month:
+    type: string
+    description: Tháng, format `YYYY-MM`.
+    example: 2025-04
+  investors:
+    type: integer
+    description: Số lượng nhà đầu tư đang giữ quỹ.
+    example: 12450

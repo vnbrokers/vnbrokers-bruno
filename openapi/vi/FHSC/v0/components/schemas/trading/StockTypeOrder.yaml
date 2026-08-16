@@ -1,0 +1,26 @@
+type: string
+default: STOCK
+description: |
+  Phân loại công cụ tài chính chấp nhận trong request đặt lệnh
+  (`POST /trading/oa/sub-accounts/{subAccountId}/orders`). Hẹp hơn
+  `StockType` chung — không bao gồm `CW` (đã gộp vào `WARRANT`) và
+  `FUTURES` (phái sinh chưa hỗ trợ trên surface này).
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `STOCK`            | Cổ phiếu thường (mặc định nếu bỏ trống) |
+  | `BOND`             | Trái phiếu |
+  | `FUND_CERTIFICATE` | Chứng chỉ quỹ (mở / đóng) |
+  | `WARRANT`          | Chứng quyền có bảo đảm |
+  | `ETF`              | Quỹ ETF |
+enum:
+  - STOCK
+  - BOND
+  - FUND_CERTIFICATE
+  - WARRANT
+  - ETF
+x-enum-varnames:
+  - STOCK
+  - BOND
+  - FUND_CERTIFICATE
+  - WARRANT
+  - ETF

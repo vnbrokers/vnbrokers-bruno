@@ -1,0 +1,15 @@
+type: string
+description: "Rổ chứng khoán: 1 = HOSE, 2 = VN30, 3 = HNX, 4 = HNX30, 5 = Upcom, 10 = Midcap, 11 = VN100, 12 = VNAllshare, 13 = VNSmallcap, 14 = VNXAllshare, 15 = VN50, 16 = VNSI."
+enum:
+  - "1"
+  - "2"
+  - "3"
+  - "4"
+  - "5"
+  - "10"
+  - "11"
+  - "12"
+  - "13"
+  - "14"
+  - "15"
+  - "16"

@@ -1,0 +1,13 @@
+type: string
+description: |
+  Kỳ báo cáo cho truy vấn tài chính doanh nghiệp.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `annual` | Theo năm |
+  | `quarterly` | Theo quý |
+enum:
+  - annual
+  - quarterly
+x-enum-varnames:
+  - ANNUAL
+  - QUARTERLY

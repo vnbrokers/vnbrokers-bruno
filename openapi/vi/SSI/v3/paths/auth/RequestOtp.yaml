@@ -1,0 +1,36 @@
+post:
+  operationId: requestOtp
+  tags:
+    - Xác thực
+  summary: Yêu cầu OTP
+  description: Gửi yêu cầu lấy OTP (SMS/Email) phục vụ xác thực giao dịch. Chỉ sử dụng cho tài khoản có kiểu 2FA là SMS và Email.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - apiKey
+            - apiSecret
+          properties:
+            apiKey:
+              type: string
+              description: API key do SSI/FastConnect cấp.
+            apiSecret:
+              type: string
+              description: API secret tương ứng với apiKey.
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/OtpResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  security: []

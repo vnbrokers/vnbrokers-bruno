@@ -1,0 +1,78 @@
+post:
+  operationId: postKhronosOrderPlace
+  tags:
+    - Lệnh phái sinh
+  summary: Đặt lệnh thường phái sinh
+  description: Đặt lệnh thường trên thị trường phái sinh.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            accountId:
+              type: string
+              description: "Mã tài khoản lưu ký."
+            subAccountId:
+              type: string
+              description: "Số tiểu khoản phái sinh."
+            side:
+              allOf:
+                - $ref: ../../../components/schemas/enums/DerivativeSide.yaml
+              description: "B = Mua, S = Bán."
+            symbol:
+              type: string
+              description: "Mã phái sinh, ví dụ VN30F2103."
+            price:
+              type: number
+              format: double
+              description: "Giá đặt lệnh (trong khoảng giá sàn–trần)."
+            volume:
+              type: integer
+              format: int64
+              description: "Khối lượng."
+            orderType:
+              type: string
+              description: "0 = lệnh thường; SLP=1.0,0.8 = SL/TP; ABI=mã HĐTL = lệnh đối ứng."
+            refId:
+              type: string
+              description: "Số ngẫu nhiên duy nhất xác định kênh đặt lệnh (H.< số tự sinh>). Có thể dùng UUID cho trường hợp này."
+          required:
+            - accountId
+            - subAccountId
+            - side
+            - symbol
+            - price
+            - volume
+            - orderType
+            - refId
+  responses:
+    "401":
+      $ref: ../../../components/responses/Unauthorized.yaml
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              cmd:
+                type: string
+              rc:
+                type: string
+              rs:
+                type: string
+              oID:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    orderNo:
+                      type: string
+                    pk_orderNo:
+                      type: string
+                    showPrice:
+                      type: string

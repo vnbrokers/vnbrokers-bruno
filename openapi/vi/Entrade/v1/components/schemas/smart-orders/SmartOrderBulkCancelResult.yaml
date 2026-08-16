@@ -1,0 +1,5 @@
+type: object
+properties:
+  status:
+    type: string
+    description: “OK” nghĩa là hủy thành công

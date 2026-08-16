@@ -1,0 +1,46 @@
+type: string
+description: |
+  Trạng thái đăng ký quyền cổ đông (phía user).
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `UNREGISTER` | Chưa đăng ký |
+  | `REGISTERED` | Đã đăng ký |
+  | `EXPIRED` | Hết hạn đăng ký |
+  | `RECEIVED` | Đã nhận quyền |
+  | `PARTIAL_REGISTERED` | Đăng ký 1 phần |
+  | `PENDING` | Đang xử lý |
+  | `PARTIAL_RECEIVED` | Đã nhận 1 phần |
+  | `WAIT_REGISTER` | Đang chờ đăng ký |
+  | `REGISTERED_V2` | Đã đăng ký (schema v2) |
+  | `WAIT_RECEIVE` | Đang chờ nhận |
+  | `WAIT_STOCK` | Đang chờ phân bổ stock |
+  | `PARTIAL_RECEIVED_V2` | Đã nhận 1 phần (schema v2) |
+  | `UNKNOWN` | Không xác định / fallback |
+enum:
+  - UNREGISTER
+  - REGISTERED
+  - EXPIRED
+  - RECEIVED
+  - PARTIAL_REGISTERED
+  - PENDING
+  - PARTIAL_RECEIVED
+  - WAIT_REGISTER
+  - REGISTERED_V2
+  - WAIT_RECEIVE
+  - WAIT_STOCK
+  - PARTIAL_RECEIVED_V2
+  - UNKNOWN
+x-enum-varnames:
+  - UNREGISTER
+  - REGISTERED
+  - EXPIRED
+  - RECEIVED
+  - PARTIAL_REGISTERED
+  - PENDING
+  - PARTIAL_RECEIVED
+  - WAIT_REGISTER
+  - REGISTERED_V2
+  - WAIT_RECEIVE
+  - WAIT_STOCK
+  - PARTIAL_RECEIVED_V2
+  - UNKNOWN

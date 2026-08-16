@@ -16,15 +16,8 @@ collections:
     path: "collections/TCBS"
   - name: "FireAnt RESTFUL API"
     path: "collections/FireAnt"
-  - name: "FHSC OpenAPI (Finhay)"
+  - name: "FHSC OpenAPI"
     path: "collections/FHSC"
 
-specs:
-  - name: "TCBS iFlash Open API"
-    path: "openapi/TCBS iFlash Open API.yaml"
-  - name: "DNSE OpenAPI v2"
-    path: "openapi/DNSE OpenAPI v2.yaml"
-  - name: "FHSC OpenAPI"
-    path: "openapi/FHSC OpenAPI.yaml"
 
 docs: "VNBrokers - A Collection of OpenAPIs from Vietnamese Securities Companies"

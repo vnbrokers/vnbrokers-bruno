@@ -1,0 +1,39 @@
+get:
+  operationId: fundsGetSectorAllocation
+  tags:
+    - Quỹ mở
+  summary: Phân bổ theo ngành của quỹ
+  description: Tỷ trọng danh mục nắm giữ của quỹ theo từng nhóm ngành.
+  parameters:
+    - $ref: '../../components/parameters/FundName.yaml'
+  responses:
+    '200':
+      description: Trả về `data` mảng các nhóm ngành kèm tỷ trọng (%).
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/fund-trading/FundSectorAllocationResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - sector_name: Banking
+                percent: 18.4
+              - sector_name: Real Estate
+                percent: 14.2
+              - sector_name: Technology
+                percent: 12.7
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/fund-trading/public/fund-certificates/VESAF/sector-allocation"

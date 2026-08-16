@@ -1,0 +1,92 @@
+"get":
+  operationId: getTartarusPutThroughSnaps
+  tags:
+    - Dữ liệu thị trường
+  "summary": "Thông tin thỏa thuận"
+  "description": "Lấy thông tin giao dịch thỏa thuận."
+  "parameters":
+    -
+      "name": "floor"
+      "in": "query"
+      "required": false
+      "description": "Rổ chứng khoán: 1 = HOSE, 2 = HNX, 3 = Upcom."
+      "schema":
+        "$ref": "../../components/schemas/enums/MarketFloor.yaml"
+  responses:
+    "401":
+      $ref: ../../components/responses/Unauthorized.yaml
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              buyAdv:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    symbol:
+                      type: string
+                      description: "Mã cổ phiếu."
+                    price:
+                      type: number
+                      format: double
+                      description: "Giá."
+                    vol:
+                      type: number
+                      format: double
+                      description: "Khối lượng."
+                    time:
+                      type: string
+                      description: "Thời gian."
+                    side:
+                      type: string
+                      description: "Chiều (B = Mua)."
+              sellAdv:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    symbol:
+                      type: string
+                      description: "Mã cổ phiếu."
+                    price:
+                      type: number
+                      format: double
+                      description: "Giá."
+                    vol:
+                      type: number
+                      format: double
+                      description: "Khối lượng."
+                    side:
+                      type: string
+                      description: "Chiều (S = Bán)."
+              match:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    symbol:
+                      type: string
+                      description: "Mã cổ phiếu."
+                    price:
+                      type: number
+                      format: double
+                      description: "Giá khớp."
+                    vol:
+                      type: number
+                      format: double
+                      description: "Khối lượng khớp."
+                    val:
+                      type: number
+                      format: double
+                      description: "Giá trị."
+                    time:
+                      type: string
+                      description: "Thời gian khớp."
+                    accumulatedValue:
+                      type: number
+                      format: double
+                      description: "Giá trị tích lũy."

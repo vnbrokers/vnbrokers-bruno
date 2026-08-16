@@ -1,0 +1,11 @@
+type: apiKey
+in: header
+name: X-FH-NONCE
+description: |
+  UUIDv4 duy nhất per-request (ví dụ `crypto.randomUUID()`). Server cache
+  cặp `(apiKey, nonce)` trong 5 phút; nếu nonce được reuse với cùng apiKey
+  trong window này, request sẽ bị từ chối với `AUTH_NONCE_REUSED` (401).
+  Server chấp nhận chuỗi opaque bất kỳ về mặt kỹ thuật, nhưng nên dùng
+  UUIDv4 để đảm bảo tính unique.
+  Được tính per-request bởi signing middleware. **Không** set thủ công —
+  xem middleware mẫu trong tài liệu Authentication.

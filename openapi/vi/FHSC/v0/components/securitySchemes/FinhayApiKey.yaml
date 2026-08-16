@@ -1,0 +1,8 @@
+type: apiKey
+in: header
+name: X-FH-APIKEY
+description: |
+  API key dài hạn của client. Cấu hình 1 lần lúc khởi tạo; có thể wire thẳng
+  vào static setter của SDK tự-gen. Đi kèm với `FINHAY_API_SECRET` — secret
+  này chỉ dùng ở phía client để tính `X-FH-SIGNATURE`, **không** bao giờ
+  gửi qua mạng.

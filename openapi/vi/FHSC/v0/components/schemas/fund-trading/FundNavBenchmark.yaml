@@ -1,0 +1,11 @@
+type: object
+description: Chuỗi NAV theo thời gian của 1 quỹ trong response của `benchmark/nav`.
+properties:
+  fund_name:
+    type: string
+    example: VESAF
+  nav_records:
+    type: array
+    description: Mảng điểm NAV theo thời gian.
+    items:
+      $ref: 'FundNavBenchmarkPoint.yaml'

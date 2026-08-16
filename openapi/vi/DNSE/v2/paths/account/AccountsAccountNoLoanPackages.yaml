@@ -1,0 +1,284 @@
+get:
+  operationId: getAccountsAccountNoLoanPackages
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Danh sách gói vay
+  parameters:
+    - name: marketType
+      in: query
+      required: true
+      description: |-
+        Loại thị trường 
+        - STOCK: Gói vay giao dịch cơ sở
+        - DERIVATIVE: Gói vay giao dịch phái sinh
+        - BOND: Gói vay giao dịch trái phiếu
+      deprecated: false
+      schema:
+        type: string
+      example: DERIVATIVE
+    - name: symbol
+      in: query
+      required: true
+      description: Mã chứng khoán
+      deprecated: false
+      schema:
+        type: string
+      example: 41I1G4000
+  responses:
+    '200':
+      description: OK
+      headers:
+        Date:
+          $ref: '../../components/headers/Date.yaml'
+        Vary:
+          $ref: '../../components/headers/Vary.yaml'
+        X-Ratelimit-Limit:
+          $ref: '../../components/headers/XRateLimitLimit.yaml'
+        X-Ratelimit-Remaining:
+          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+        X-Ratelimit-Reset:
+          $ref: '../../components/headers/XRateLimitReset.yaml'
+        X-Tyk-Api-Expires:
+          schema:
+            type: string
+          example: Thu, 02 Jan 3000 15:04:00 UTC
+        Transfer-Encoding:
+          schema:
+            type: string
+          example: chunked
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              symbolType:
+                type: string
+                example: VN30F1M
+                description: >-
+                  Phân loại mã hợp đồng phái sinh theo thời gian đáo hạn (áp
+                  dụng cho DERIVATIVE)
+
+                  - VN30F1M: HĐTL chỉ số VN30 1 tháng
+
+                  - VN30F2M: HĐTL chỉ số VN30 2 tháng
+
+                  - VN30F1Q: HĐTL chỉ số VN30 1 quý
+
+                  - VN30F2Q: HĐTL chỉ số VN30 2 quý
+              marketType:
+                type: string
+                example: DERIVATIVE
+                description: |-
+                  Loại thị trường
+                  - STOCK: Gói vay giao dịch cơ sở
+                  - DERIVATIVE: Gói vay giao dịch phái sinh
+                  - BOND: Gói vay giao dịch trái phiếu
+              loanPackages:
+                type: array
+                description: Danh sách gói vay
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int32
+                      example: 2279
+                      description: Id gói vay
+                    name:
+                      type: string
+                      example: Gói giao dịch 02
+                      description: Tên gói vay
+                    initialRate:
+                      type: number
+                      format: double
+                      example: 0.1848
+                      description: Tỷ lệ ban đầu
+                    maintenanceRate:
+                      type: number
+                      format: double
+                      example: 0.1735
+                      description: Tỷ lệ duy trì (call margin)
+                    liquidRate:
+                      type: number
+                      format: double
+                      example: 0.1731
+                      description: Tỷ lệ xử lý (force sell)
+                    tradingFee:
+                      type: object
+                      description: >-
+                        Thông tin biểu phí phái sinh (áp dụng cho
+                        DERIVATIVE)
+                      properties:
+                        id:
+                          type: integer
+                          format: int32
+                          example: 2404
+                          description: Id chính sách phí phái sinh
+                        name:
+                          type: string
+                          example: 2000/HĐ
+                          description: Tên chính sách phí
+                        scope:
+                          type: string
+                          example: PRODUCT
+                          description: Phạm vi áp dụng
+                        channel:
+                          type: string
+                          example: ALL
+                          description: Kênh áp dụng
+                        schemaType:
+                          type: string
+                          example: FIXED
+                          description: |-
+                            Loại biểu phí
+                            FIXED: Phí cố định
+                            PROGRESSIVE: Phí lũy tiến
+                        createdDate:
+                          type: string
+                          format: date-time
+                          example: '2022-12-13T08:22:12.530837Z'
+                          description: Thời điểm áp dụng
+                        modifiedDate:
+                          type: string
+                          format: date-time
+                          example: '2022-12-13T08:22:12.530837Z'
+                          description: Thời điểm cập nhật
+                        fixedTradingFee:
+                          type: integer
+                          format: int32
+                          example: 2000
+                          description: Phí cố định trên 1 hợp đồng
+                        fixedDailyCloseTradingFee:
+                          type: integer
+                          format: int32
+                          example: 2000
+                          description: Phí đóng vị thế trong ngày
+                        progressTradingFee:
+                          type: array
+                          description: Phí giao dịch lũy tiến
+                          items:
+                            type: object
+                            properties:
+                              fromQuantity:
+                                type: number
+                                format: double
+                                example: 1
+                                description: Khối lượng bắt đầu
+                              toQuantity:
+                                type: number
+                                format: double
+                                example: 2000
+                                description: Khối lượng kết thúc
+                              fee:
+                                type: number
+                                format: double
+                                example: 1500
+                                description: Mức phí
+                        progressDailyCloseTradingFee:
+                          type: array
+                          description: Phí đóng vị thế trong ngày lũy tiến
+                          items:
+                            type: object
+                            properties:
+                              fromQuantity:
+                                type: number
+                                format: double
+                                example: 2001
+                                description: Khối lượng bắt đầu
+                              toQuantity:
+                                type: number
+                                format: double
+                                example: 3000
+                                description: Khối lượng kết thúc
+                              fee:
+                                type: number
+                                format: double
+                                example: 2196
+                                description: Mức phí
+          example:
+            symbolType: VN30F1M
+            marketType: DERIVATIVE
+            loanPackages:
+              - id: 2279
+                name: Gói giao dịch 02
+                initialRate: 0.1848
+                maintenanceRate: 0.1735
+                liquidRate: 0.1731
+                tradingFee:
+                  id: 2404
+                  name: 2000/HĐ
+                  scope: PRODUCT
+                  channel: ALL
+                  schemaType: FIXED
+                  createdDate: '2022-12-13T08:22:12.530837Z'
+                  modifiedDate: '2022-12-13T08:22:12.530837Z'
+                  fixedTradingFee: 2000
+                  fixedDailyCloseTradingFee: 2000
+              - id: 5058
+                name: Test Phái sinh 1212
+                initialRate: 0.1
+                maintenanceRate: 0.03
+                liquidRate: 0.02
+                tradingFee:
+                  id: 5057
+                  name: 1500/HĐ
+                  scope: PRODUCT
+                  channel: ALL
+                  schemaType: FIXED
+                  createdDate: '2023-12-12T03:55:37.22881Z'
+                  modifiedDate: '2023-12-12T03:55:37.22881Z'
+                  fixedTradingFee: 1500
+                  fixedDailyCloseTradingFee: 1500
+              - id: 2278
+                name: Gói giao dịch 01
+                initialRate: 0.2065
+                maintenanceRate: 0.1979
+                liquidRate: 0.1938
+                tradingFee:
+                  id: 2436
+                  name: Miễn phí
+                  scope: PRODUCT
+                  channel: ALL
+                  schemaType: FIXED
+                  createdDate: '2023-02-02T04:22:56.199278Z'
+                  modifiedDate: '2023-02-02T04:22:56.199278Z'
+                  fixedTradingFee: 2000
+                  fixedDailyCloseTradingFee: 2000
+              - id: 9990
+                name: Linhpham test
+                initialRate: 0.2065
+                maintenanceRate: 0.1979
+                liquidRate: 0.1938
+                tradingFee:
+                  id: 9989
+                  name: fdfhv
+                  scope: PRODUCT
+                  channel: ALL
+                  schemaType: PROGRESSIVE
+                  createdDate: '2026-01-16T09:09:15.556640382Z'
+                  modifiedDate: '2026-01-16T09:09:15.556640382Z'
+                  progressTradingFee:
+                    - fromQuantity: 1
+                      toQuantity: 2000
+                      fee: 1500
+                  progressDailyCloseTradingFee:
+                    - fromQuantity: 2001
+                      toQuantity: 3000
+                      fee: 2196
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  tags:
+    - Tài khoản
+parameters:
+  - name: accountNo
+    in: path
+    required: true
+    description: Số tiểu khoản
+    deprecated: false
+    schema:
+      type: string
+    example: '0001179019'

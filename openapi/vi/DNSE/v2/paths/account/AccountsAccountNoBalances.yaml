@@ -1,0 +1,197 @@
+get:
+  operationId: getAccountsAccountNoBalances
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Thông tin tiền
+  responses:
+    '200':
+      description: OK
+      headers:
+        Access-Control-Allow-Credentials:
+          $ref: '../../components/headers/AccessControlAllowCredentials.yaml'
+        Access-Control-Allow-Headers:
+          deprecated: false
+          schema: {}
+          example: >-
+            Content-Type, Authorization, X-Request-ID, Accept, Origin,
+            X-Requested-With
+        Access-Control-Allow-Methods:
+          deprecated: false
+          schema: {}
+          example: GET, POST, PUT, DELETE, OPTIONS, PATCH
+        Access-Control-Allow-Origin:
+          deprecated: false
+          schema: {}
+          example: '*'
+        Access-Control-Max-Age:
+          deprecated: false
+          schema: {}
+          example: '86400'
+        Content-Length:
+          $ref: '../../components/headers/ContentLength.yaml'
+        Date:
+          $ref: '../../components/headers/Date.yaml'
+        Vary:
+          $ref: '../../components/headers/Vary.yaml'
+        X-Ratelimit-Limit:
+          $ref: '../../components/headers/XRateLimitLimit.yaml'
+        X-Ratelimit-Remaining:
+          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+        X-Ratelimit-Reset:
+          $ref: '../../components/headers/XRateLimitReset.yaml'
+        X-Request-Id:
+          $ref: '../../components/headers/XRequestId.yaml'
+        X-Tyk-Api-Expires:
+          deprecated: false
+          schema: {}
+          example: Thu, 02 Jan 3000 15:04:00 UTC
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              stock:
+                type: object
+                properties:
+                  totalCash:
+                    type: integer
+                    format: int32
+                    example: 3720308
+                    description: >-
+                      Tổng tiền (Tiền mặt + Lãi tiền gửi + Tiền bán chờ về +
+                      Tiền cổ tức chờ về - Tiền mua trong ngày)
+                  availableCash:
+                    type: integer
+                    format: int32
+                    example: 3720022
+                    description: Tiền mặt hiện có
+                  depositInterest:
+                    type: integer
+                    format: int32
+                    example: 286
+                    description: Lãi tiền gửi không kỳ hạn
+                  totalDebt:
+                    type: integer
+                    format: int32
+                    example: 592355
+                    description: Tổng nợ (Nợ margin tạm thu + Nợ margin còn lại)
+                  depositFeeAmount:
+                    type: integer
+                    format: int32
+                    example: 405
+                    description: Phí lưu ký
+                  secureAmount:
+                    type: integer
+                    format: int32
+                    description: Tổng tiền ký quỹ
+                  orderSecured:
+                    type: integer
+                    format: int32
+                    description: Số tiền đang được phong tỏa cho các lệnh giao dịch
+                  withdrawableCash:
+                    type: integer
+                    format: int32
+                    example: 3719617
+                    description: Tiền có thể rút
+                  cashDividendReceiving:
+                    type: integer
+                    format: int32
+                    example: 0
+                    description: Tiền cổ tức chờ về
+                example:
+                  totalCash: 3720308
+                  availableCash: 3720022
+                  depositInterest: 286
+                  totalDebt: 592355
+                  depositFeeAmount: 405
+                  withdrawableCash: 3719617
+                  cashDividendReceiving: 0
+                description: ''
+              derivative:
+                type: object
+                properties:
+                  pendingDepositWithdraw:
+                    type: integer
+                    format: int32
+                    example: 826996062
+                    description: Tiền nộp/rút cọc chờ xử lý
+                  remainSecure:
+                    type: integer
+                    format: int64
+                    example: 122363429600
+                    description: Cọc còn lại
+                  usedSecure:
+                    type: integer
+                    format: int32
+                    example: 102098277
+                    description: Cọc đã sử dụng
+                  pendingSecure:
+                    type: integer
+                    format: int32
+                    example: 826996062
+                    description: Cọc chờ duyệt
+                  holdTaxAndFee:
+                    type: integer
+                    format: int32
+                    example: 0
+                    description: Thuế và phí tạm giữ
+                  totalLoanDebt:
+                    type: integer
+                    format: int32
+                    example: 0
+                    description: Khoản ứng chưa hoàn
+                example:
+                  pendingDepositWithdraw: 826996062
+                  remainSecure: 122363429600
+                  usedSecure: 102098277
+                  pendingSecure: 826996062
+                  holdTaxAndFee: 0
+                  totalLoanDebt: 0
+                description: ''
+              bond:
+                type: object
+                properties:
+                  totalValue:
+                    type: integer
+                    format: int64
+                    description: Tổng giá trị tài sản trái phiếu
+              egg:
+                type: object
+                properties:
+                  totalValue:
+                    type: integer
+                    format: int32
+                    description: Tổng giá trị tài sản trứng
+          example:
+            stock:
+              totalCash: 3720308
+              availableCash: 3720022
+              depositInterest: 286
+              totalDebt: 592355
+              depositFeeAmount: 405
+              withdrawableCash: 3719617
+              cashDividendReceiving: 0
+            derivative:
+              pendingDepositWithdraw: 826996062
+              remainSecure: 122363429600
+              usedSecure: 102098277
+              pendingSecure: 826996062
+              holdTaxAndFee: 0
+              totalLoanDebt: 0
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  tags:
+    - Tài khoản
+parameters:
+  - name: accountNo
+    in: path
+    required: true
+    description: Số tiểu khoản
+    deprecated: false
+    schema:
+      type: string
+    example: '0001179019'

@@ -1,0 +1,609 @@
+put:
+  operationId: putAccountsAccountNoOrdersOrderId
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+      DnseTradingToken: []
+  summary: Sửa lệnh
+  parameters:
+    - name: marketType
+      in: query
+      required: true
+      description: |-
+        Loại thị trường 
+        - STOCK: Gói vay giao dịch cơ sở
+        - DERIVATIVE: Gói vay giao dịch phái sinh
+      deprecated: false
+      schema:
+        type: string
+      example: DERIVATIVE
+    - name: orderCategory
+      in: query
+      required: true
+      description: Phân loại lệnh thường, lệnh điều kiện (mặc định NORMAL)
+      deprecated: false
+      schema:
+        type: string
+      example: NORMAL
+  responses:
+    '200':
+      description: OK
+      headers:
+        Content-Length:
+          $ref: '../../components/headers/ContentLength.yaml'
+        Date:
+          $ref: '../../components/headers/Date.yaml'
+        Vary:
+          $ref: '../../components/headers/Vary.yaml'
+        X-Ratelimit-Limit:
+          $ref: '../../components/headers/XRateLimitLimit.yaml'
+        X-Ratelimit-Remaining:
+          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+        X-Ratelimit-Reset:
+          $ref: '../../components/headers/XRateLimitReset.yaml'
+        X-Tyk-Api-Expires:
+          schema:
+            type: string
+          example: Thu, 02 Jan 3000 15:04:00 UTC
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int32
+                example: 1626
+                description: Id lệnh giao dịch
+              
+              accountNo:
+                type: string
+                example: '0001179019'
+                description: Số tiểu khoản
+              side:
+                type: string
+                example: NS
+                description: |-
+                  Chiều đặt lệnh
+                  - NB: Mua
+                  - NS: Bán
+              loanPackageId:
+                type: integer
+                format: int32
+                example: 2278
+                description: Mã gói vay
+              symbol:
+                type: string
+                example: 41I1G4000
+                description: Mã chứng khoán
+              orderType:
+                type: string
+                example: LO
+                description: |-
+                  Loại lệnh
+                  - LO: Lệnh giới hạn
+                  - MOK/MAK/MTL: Lệnh thị trường
+                  - ATO/ATC: Lệnh phiên định kỳ mở cửa/đóng cửa
+                  - PLO: Lệnh khớp lệnh sau giờ
+              orderCategory:
+                type: string
+                example: NORMAL
+                description: Phân loại lệnh thường (mặc định NORMAL)
+              price:
+                type: number
+                format: double
+                example: 1851
+                description: Giá đặt
+              quantity:
+                type: integer
+                format: int32
+                example: 3
+                description: Khối lượng đặt
+              fillQuantity:
+                type: integer
+                format: int32
+                example: 0
+                description: Khối lượng khớp
+              canceledQuantity:
+                type: integer
+                format: int32
+                example: 0
+                description: Khối lượng đã hủy
+              marketType:
+                type: string
+                example: DERIVATIVE
+                description: |-
+                  Loại thị trường
+                  - STOCK: Lệnh cơ sở
+                  - DERIVATIVE: Lệnh phái sinh
+              transDate:
+                type: string
+                example: '2026-03-16'
+                description: Ngày giao dịch
+              createdDate:
+                type: string
+                format: date-time
+                example: '2026-03-24T04:09:50.761146893Z'
+                description: Thời điểm tạo
+              modifiedDate:
+                type: string
+                format: date-time
+                example: '2026-03-24T04:14:21.004856492Z'
+                description: Thời điểm cập nhật
+          example:
+            id: 1626
+            accountNo: '0001179019'
+            side: NS
+            loanPackageId: 2278
+            symbol: 41I1G4000
+            orderType: LO
+            orderCategory: NORMAL
+            price: 1851
+            quantity: 3
+            fillQuantity: 0
+            canceledQuantity: 0
+            marketType: DERIVATIVE
+            transDate: '2026-03-16'
+            createdDate: '2026-03-24T04:09:50.761146893Z'
+            modifiedDate: '2026-03-24T04:14:21.004856492Z'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  tags:
+    - Giao dịch
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            price:
+              type: number
+              format: double
+              example: 1851
+              description: >-
+                Giá mới cho lệnh LO
+
+                - Đối với lệnh cơ sở, có thể sửa cả giá và khối lượng
+
+                - Đối với lệnh phái sinh, chỉ được sửa hoặc giá hoặc khối
+                lượng
+            quantity:
+              type: integer
+              format: int32
+              example: 3
+              description: >-
+                Khối lượng mới
+
+                - Đối với lệnh phái sinh, khối lượng mới phải lớn hơn khối
+                lượng đã khớp (nếu có) của lệnh đã đặt
+        example:
+          price: 1851
+          quantity: 3
+parameters:
+  - name: accountNo
+    in: path
+    required: true
+    description: Số tiểu khoản
+    deprecated: false
+    schema:
+      type: string
+    example: '0001179019'
+  - name: orderId
+    in: path
+    required: true
+    description: Mã lệnh giao dịch
+    deprecated: false
+    schema:
+      type: integer
+    example: 96
+delete:
+  operationId: deleteAccountsAccountNoOrdersOrderId
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+      DnseTradingToken: []
+  summary: Hủy lệnh
+  parameters:
+    - name: marketType
+      in: query
+      required: true
+      description: |-
+        Loại thị trường 
+        - STOCK: Đặt lệnh cơ sở
+        - DERIVATIVE: Đặt lệnh phái sinh
+      deprecated: false
+      schema:
+        type: string
+      example: DERIVATIVE
+    - name: orderCategory
+      in: query
+      required: true
+      description: Phân loại lệnh thường, lệnh điều kiện (mặc định NORMAL)
+      deprecated: false
+      schema:
+        type: string
+      example: NORMAL
+  responses:
+    '200':
+      description: OK
+      headers:
+        Content-Length:
+          $ref: '../../components/headers/ContentLength.yaml'
+        Date:
+          $ref: '../../components/headers/Date.yaml'
+        Vary:
+          $ref: '../../components/headers/Vary.yaml'
+        X-Ratelimit-Limit:
+          $ref: '../../components/headers/XRateLimitLimit.yaml'
+        X-Ratelimit-Remaining:
+          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+        X-Ratelimit-Reset:
+          $ref: '../../components/headers/XRateLimitReset.yaml'
+        X-Tyk-Api-Expires:
+          deprecated: false
+          schema: {}
+          example: Thu, 02 Jan 3000 15:04:00 UTC
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int32
+                example: 1626
+                description: Id lệnh giao dịch
+              
+              symbol:
+                type: string
+                example: 41I1G4000
+                description: Mã chứng khoán
+              side:
+                type: string
+                example: NS
+                description: |-
+                  Chiều đặt lệnh
+                  - NB: Mua
+                  - NS: Bán
+              orderType:
+                type: string
+                example: LO
+                description: |-
+                  Loại lệnh
+                  - LO: Lệnh giới hạn
+                  - MOK/MAK/MTL: Lệnh thị trường
+                  - ATO/ATC: Lệnh phiên định kỳ mở cửa/đóng cửa
+                  - PLO: Lệnh khớp lệnh sau giờ
+              orderStatus:
+                type: string
+                example: PendingCancel
+                description: |-
+                  Trạng thái lệnh
+                  - PendingNew: Chờ gửi
+                  - New: Chờ khớp
+                  - PendingReplace: Chờ sửa
+                  - PartiallyFilled: Khớp một phần
+                  - Filled: Khớp toàn bộ
+                  - Canceled: Đã hủy
+                  - Rejected: Bị từ chối
+                  - Expired: Hết hạn trong phiên
+                  - DoneForDay: Giải tỏa trong phiên
+              loanPackageId:
+                type: integer
+                format: int32
+                example: 2278
+                description: Mã gói vay
+              price:
+                type: number
+                format: double
+                example: 1851
+                description: Giá đặt
+              averagePrice:
+                type: number
+                format: float
+                example: 0
+                description: Giá khớp trung bình
+              quantity:
+                type: integer
+                format: int32
+                example: 3
+                description: Khối lượng đặt
+              fillQuantity:
+                type: integer
+                format: int32
+                example: 0
+                description: Khối lượng khớp
+              canceledQuantity:
+                type: integer
+                format: int32
+                example: 0
+                description: Khối lượng đã hủy
+              leaveQuantity:
+                type: integer
+                format: int32
+                example: 3
+                description: Khối lượng còn lại
+              accountNo:
+                type: string
+                example: '0001179019'
+                description: Số tiểu khoản
+              orderCategory:
+                type: string
+                example: NORMAL
+                description: Phân loại lệnh thường (mặc định NORMAL)
+              marketType:
+                type: string
+                example: DERIVATIVE
+                description: |-
+                  Loại thị trường
+                  - STOCK: Lệnh cơ sở
+                  - DERIVATIVE: Lệnh phái sinh
+              transDate:
+                type: string
+                example: '2026-03-16'
+                description: Ngày giao dịch
+              createdDate:
+                type: string
+                format: date-time
+                example: '2026-03-24T04:09:50.761146893Z'
+                description: Thời điểm tạo
+              modifiedDate:
+                type: string
+                format: date-time
+                example: '2026-03-24T04:16:12.469115348Z'
+                description: Thời điểm cập nhật
+          example:
+            id: 1626
+            symbol: 41I1G4000
+            side: NS
+            orderType: LO
+            orderStatus: PendingCancel
+            loanPackageId: 2278
+            price: 1851
+            averagePrice: 0
+            quantity: 3
+            fillQuantity: 0
+            canceledQuantity: 0
+            leaveQuantity: 3
+            accountNo: '0001179019'
+            orderCategory: NORMAL
+            marketType: DERIVATIVE
+            transDate: '2026-03-16'
+            createdDate: '2026-03-24T04:09:50.761146893Z'
+            modifiedDate: '2026-03-24T04:16:12.469115348Z'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  tags:
+    - Giao dịch
+get:
+  operationId: getAccountsAccountNoOrdersOrderId
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Chi tiết lệnh theo ID
+  parameters:
+    - name: marketType
+      in: query
+      required: true
+      description: |-
+        Loại thị trường 
+        - STOCK: Sổ lệnh cơ sở
+        - DERIVATIVE: Sổ lệnh phái sinh
+      deprecated: false
+      schema:
+        type: string
+      example: DERIVATIVE
+    - name: orderCategory
+      in: query
+      required: true
+      description: Phân loại lệnh thường, lệnh điều kiện (mặc định NORMAL)
+      deprecated: false
+      schema:
+        type: string
+      example: NORMAL
+  responses:
+    '200':
+      description: OK
+      headers:
+        Content-Length:
+          $ref: '../../components/headers/ContentLength.yaml'
+        Date:
+          $ref: '../../components/headers/Date.yaml'
+        Vary:
+          $ref: '../../components/headers/Vary.yaml'
+        X-Ratelimit-Limit:
+          $ref: '../../components/headers/XRateLimitLimit.yaml'
+        X-Ratelimit-Remaining:
+          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+        X-Ratelimit-Reset:
+          $ref: '../../components/headers/XRateLimitReset.yaml'
+        X-Tyk-Api-Expires:
+          deprecated: false
+          schema: {}
+          example: Thu, 02 Jan 3000 15:04:00 UTC
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int32
+                example: 966
+                description: ID lệnh
+              side:
+                type: string
+                example: NS
+                description: |-
+                  Chiều giao dịch
+                  - NB: Mua
+                  - NS: Bán
+              accountNo:
+                type: string
+                example: '0001179019'
+                description: Số tiểu khoản
+              symbol:
+                type: string
+                example: 41I1G4000
+                description: Mã hợp đồng phái sinh
+              price:
+                type: number
+                format: double
+                example: 1706.1
+                description: Giá đặt lệnh
+              quantity:
+                type: integer
+                format: int32
+                example: 5
+                description: Khối lượng đặt lệnh
+              orderType:
+                type: string
+                example: LO
+                description: |-
+                  Loại lệnh
+                  - LO: Lệnh giới hạn
+                  - MOK/MAK/MTL: Lệnh thị trường
+                  - ATO/ATC: Lệnh phiên định kỳ mở cửa/đóng cửa
+                  - PLO: Lệnh khớp lệnh sau giờ
+              loanPackageId:
+                type: integer
+                format: int32
+                example: 2278
+                description: Mã gói vay
+              orderCategory:
+                type: string
+                example: NORMAL
+                description: Phân loại lệnh (mặc định NORMAL)
+              orderStatus:
+                type: string
+                example: Filled
+                description: |-
+                  Trạng thái lệnh
+                  - Pending/PendingNew: Chờ gửi
+                  - New: Chờ khớp
+                  - PartiallyFilled: Khớp một phần
+                  - Filled: Khớp toàn bộ
+                  - Rejected: Bị từ chối
+                  - Expired: Hết hạn trong phiên
+                  - DoneForDay: Lệnh được giải tỏa do không khớp trong phiên
+              fillQuantity:
+                type: integer
+                format: int32
+                example: 5
+                description: Khối lượng đã khớp
+              lastQuantity:
+                type: integer
+                format: int32
+                example: 2
+                description: Khối lượng khớp gần nhất
+              lastPrice:
+                type: number
+                format: double
+                example: 1706.1
+                description: Giá khớp gần nhất
+              averagePrice:
+                type: number
+                format: double
+                example: 1750.96
+                description: Giá khớp trung bình
+              transDate:
+                type: string
+                example: '2026-03-16'
+                description: Ngày giao dịch
+              taxRate:
+                type: integer
+                format: int32
+                example: 0
+                description: Tỷ lệ thuế
+              exchangeFeeRate:
+                type: integer
+                format: int32
+                example: 0
+                description: Tỷ lệ phí trả Sở giao dịch
+              feeRate:
+                type: integer
+                format: int32
+                example: 0
+                description: Tổng tỷ lệ phí của lệnh
+              leaveQuantity:
+                type: integer
+                format: int32
+                example: 0
+                description: Khối lượng còn lại chưa khớp
+              canceledQuantity:
+                type: integer
+                format: int32
+                example: 0
+                description: Khối lượng đã hủy
+              error:
+                type: string
+                example: ''
+                description: Mã lỗi nếu lệnh bị từ chối
+              marketType:
+                type: string
+                example: DERIVATIVE
+                description: |-
+                  Loại thị trường
+                  - STOCK: Sổ lệnh cơ sở
+                  - DERIVATIVE: Sổ lệnh phái sinh
+              priceSecure:
+                type: number
+                format: double
+                example: 1706.1
+                description: Giá dùng để kiểm tra sức mua/đặt lệnh
+              createdDate:
+                type: string
+                format: date-time
+                example: '2026-03-23T03:10:06.556826794Z'
+                description: Thời điểm tạo lệnh
+              modifiedDate:
+                type: string
+                format: date-time
+                example: '2026-03-23T04:07:45.683977124Z'
+                description: Thời điểm cập nhật lệnh
+              metadata:
+                type: string
+                example: >-
+                  {"orderSession":"OPEN","dealId":"1.77410795472387E14","releaseSecureOnFilled":"false","originMaker":"1000005917-close_deal_177410795472387","dtaAccountNo":"D000113702","isForeigner":false,"probType":"CUSTOMER","eventNo":5}
+                description: Thông tin bổ sung của lệnh
+          example:
+            id: 966
+            side: NS
+            accountNo: '0001179019'
+            symbol: 41I1G4000
+            price: 1706.1
+            quantity: 5
+            orderType: LO
+            loanPackageId: 2278
+            orderCategory: NORMAL
+            orderStatus: Filled
+            fillQuantity: 5
+            lastQuantity: 2
+            lastPrice: 1706.1
+            averagePrice: 1750.96
+            transDate: '2026-03-16'
+            taxRate: 0
+            exchangeFeeRate: 0
+            feeRate: 0
+            leaveQuantity: 0
+            canceledQuantity: 0
+            error: ''
+            marketType: DERIVATIVE
+            priceSecure: 1706.1
+            createdDate: '2026-03-23T03:10:06.556826794Z'
+            modifiedDate: '2026-03-23T04:07:45.683977124Z'
+            metadata: >-
+              {"orderSession":"OPEN","dealId":"1.77410795472387E14","releaseSecureOnFilled":"false","originMaker":"1000005917-close_deal_177410795472387","dtaAccountNo":"D000113702","isForeigner":false,"probType":"CUSTOMER","eventNo":5}
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  tags:
+    - Giao dịch

@@ -1,0 +1,30 @@
+type: object
+description: |
+  1 điểm dữ liệu trên biểu đồ giá vàng (trả về từ
+  `/market/financial-data/gold-chart`). Giá tính theo nghìn VND / chỉ —
+  cùng đơn vị với endpoint snapshot.
+properties:
+  date:
+    type: string
+    description: Point date in `YYYY-MM-DD` format.
+    example: '2026-03-23'
+  gold_bar:
+    type:
+      - number
+      - 'null'
+    description: SJC gold-bar price.
+    example: 16600
+  gold_ring:
+    type:
+      - number
+      - 'null'
+    description: 9999 gold-ring price.
+    example: 16370
+  gold_global:
+    type:
+      - number
+      - 'null'
+    description: Global gold price (USD/oz, converted to thousand VND / chỉ).
+    example: 13944
+required:
+  - date

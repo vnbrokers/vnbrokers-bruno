@@ -1,0 +1,3 @@
+description: Header that prevents MIME type sniffing.
+schema:
+  type: string

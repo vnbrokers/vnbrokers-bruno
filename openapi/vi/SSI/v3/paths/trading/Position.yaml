@@ -1,0 +1,43 @@
+get:
+  operationId: getPosition
+  tags:
+    - Giao dịch
+  summary: Vị thế
+  description: Lấy thông tin vị thế của tài khoản.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - name: clientId
+      in: query
+      description: Tài khoản 6 số định danh khách hàng tại SSI. Nếu số tài khoản là 003C123888 thì clientId = 123888
+      required: false
+      schema:
+        type: string
+    - name: accountNo
+      in: query
+      description: Tài khoản giao dịch cần lấy thông tin vị thế, các tài khoản đuôi 1, 6, 8 tương ứng (CASH, MARGIN, DERIVATIVE) sẽ có thông tin vị thế khác nhau.
+      required: true
+      schema:
+        type: string
+    - name: querySummary
+      in: query
+      description: Nếu true, trả về tóm tắt vị thế phái sinh. Nếu false, trả về chi tiết từng vị thế. Chỉ áp dụng cho tài khoản phái sinh. Mặc định là true.
+      required: false
+      schema:
+        type: boolean
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/PositionResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

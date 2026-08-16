@@ -1,0 +1,12 @@
+type: object
+properties:
+  dataLink:
+    description: Đường dẫn tải file dữ liệu thị trường.
+    type: string
+    format: uri
+  code:
+    description: Mã kết quả.
+    type: integer
+  msg:
+    description: Thông báo kết quả.
+    type: string

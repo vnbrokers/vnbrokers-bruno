@@ -1,0 +1,7 @@
+type: string
+description: "Loại nhà đầu tư: sheep = cá nhân nhỏ lẻ, wolf = tổ chức vừa, shark = tổ chức lớn, all = tất cả."
+enum:
+  - "sheep"
+  - "wolf"
+  - "shark"
+  - "all"

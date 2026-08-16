@@ -1,0 +1,27 @@
+type: string
+description: |
+  Mã 2 ký tự ISO của quốc gia phát hành instrument toàn cầu trong response
+  của `/market/financial-data/market`. Khác với `EconomicCountry` (dùng
+  full-name) vì endpoint này trả `country` ở dạng mã 2 ký tự.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `US` | Mỹ |
+  | `KR` | Hàn Quốc |
+  | `HK` | Hong Kong |
+  | `CN` | Trung Quốc |
+  | `JP` | Nhật Bản |
+  | `UK` | Anh |
+enum:
+  - US
+  - KR
+  - HK
+  - CN
+  - JP
+  - UK
+x-enum-varnames:
+  - US
+  - KR
+  - HK
+  - CN
+  - JP
+  - UK

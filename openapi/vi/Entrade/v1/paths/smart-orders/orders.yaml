@@ -1,0 +1,124 @@
+get:
+  operationId: listSmartOrders
+  tags:
+    - Smart Order
+  summary: Lấy thông tin lệnh điều kiện
+  description: Lấy danh sách lệnh điều kiện (Smart Order).
+  servers:
+    - url: https://services-staging.entrade.com.vn/papertrade-smart-order
+      description: Môi trường staging Smart Order
+  parameters:
+    - name: investorId
+      in: query
+      description: Mã khách hàng
+      schema:
+        type: number
+    - name: _start
+      in: query
+      description: Index bắt đầu duyệt, nên để là 0
+      schema:
+        type: number
+    - name: _end
+      in: query
+      description: Index kết thúc duyệt
+      schema:
+        type: number
+  responses:
+    "200":
+      description: Thành công – trả về danh sách lệnh điều kiện
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/smart-orders/SmartOrderPage.yaml
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml
+post:
+  operationId: placeSmartOrder
+  tags:
+    - Smart Order
+  summary: Đặt lệnh điều kiện
+  description: Đặt lệnh điều kiện (Smart Order).
+  servers:
+    - url: https://services-staging.entrade.com.vn/papertrade-smart-order
+      description: Môi trường staging Smart Order
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            investorId:
+              type: number
+              description: Mã khách hàng
+            investorAccountId:
+              type: number
+              description: Mã tài khoản
+            bankMarginPortfolioId:
+              type: number
+              description: Mã gói vay
+            symbol:
+              type: string
+              description: Mã phái sinh (ví dụ "VN30F2504")
+            condition:
+              type: string
+              description: Điều kiện đặt lệnh (ví dụ ">= 1369", "<= 1396")
+            targetPrice:
+              type: number
+              description: Giá đặt
+            targetSide:
+              type: string
+              description: '"NB" (Mua) hoặc "NS" (Bán)'
+            targetQuantity:
+              type: number
+              description: Khối lượng đặt
+            type:
+              type: string
+              description: Chỉ nhận giá trị "STOP"
+            expiredTime:
+              type: string
+              description: Thời gian đóng lệnh
+  responses:
+    "200":
+      description: Thành công – đặt lệnh điều kiện
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/smart-orders/SmartOrder.yaml
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml
+delete:
+  operationId: cancelAllSmartOrders
+  tags:
+    - Smart Order
+  summary: Hủy tất cả lệnh điều kiện
+  description: Hủy tất cả lệnh điều kiện theo investorAccountId và investorId.
+  servers:
+    - url: https://services-staging.entrade.com.vn/papertrade-smart-order
+      description: Môi trường staging Smart Order
+  parameters:
+    - name: investorAccountId
+      in: query
+      description: Mã tài khoản
+      schema:
+        type: number
+    - name: investorId
+      in: query
+      description: Mã khách hàng
+      schema:
+        type: number
+  responses:
+    "200":
+      description: Thành công
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/smart-orders/SmartOrderBulkCancelResult.yaml
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml

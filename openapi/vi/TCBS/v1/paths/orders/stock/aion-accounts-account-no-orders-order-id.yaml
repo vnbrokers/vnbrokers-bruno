@@ -1,0 +1,91 @@
+"get":
+  operationId: getAionAccountsAccountNoOrdersOrderId
+  tags:
+    - Lệnh cổ phiếu
+  "summary": "Lấy sổ lệnh theo Order ID"
+  "description": "Lấy một lệnh theo Order ID của tiểu khoản."
+  "parameters":
+    -
+      "name": "accountNo"
+      "in": "path"
+      "required": true
+      "description": "Số tiểu khoản."
+      "schema":
+        "type": "string"
+    -
+      "name": "orderID"
+      "in": "path"
+      "required": true
+      "description": "Order ID."
+      "schema":
+        "type": "string"
+  responses:
+    "401":
+      $ref: ../../../components/responses/Unauthorized.yaml
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              object:
+                type: string
+                description: "Mặc định = 'List'."
+              pageSize:
+                type: integer
+                format: int64
+                description: "Kích thước trang."
+              pageIndex:
+                type: integer
+                format: int64
+                description: "Mục lục trang."
+              totalCount:
+                type: integer
+                format: int64
+                description: "Tổng số bản ghi."
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    orderID:
+                      type: string
+                      description: "Số hiệu lệnh."
+                    accountNo:
+                      type: string
+                      description: "Số tiểu khoản."
+                    symbol:
+                      type: string
+                      description: "Mã chứng khoán."
+                    execType:
+                      type: string
+                      description: "Loại lệnh (NB/NS)."
+                    orderQtty:
+                      type: number
+                      format: double
+                      description: "Khối lượng đặt."
+                    execQtty:
+                      type: number
+                      format: double
+                      description: "Khối lượng khớp."
+                    priceType:
+                      type: string
+                      description: "Loại giá."
+                    limitPrice:
+                      type: number
+                      format: double
+                      description: "Giá đặt lệnh."
+                    matchPrice:
+                      type: number
+                      format: double
+                      description: "Giá khớp trung bình."
+                    orStatus:
+                      type: string
+                      description: "Trạng thái lệnh: 0 = Từ chối, 2 = Đã gửi, 3 = Đã hủy, 4 = Đã khớp, 5 = Hết hiệu lực, 8 = Chờ gửi, 10 = Đã sửa, 11 = Đang gửi, 12 = Khớp hết, A = Đang sửa, C = Đang hủy, S = Hoàn tất."
+                    txdate:
+                      type: string
+                      description: "Ngày đặt lệnh (RFC 3339)."
+                    txtime:
+                      type: string
+                      description: "Giờ đặt lệnh."

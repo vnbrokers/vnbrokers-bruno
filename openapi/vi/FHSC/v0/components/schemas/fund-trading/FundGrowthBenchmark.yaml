@@ -1,0 +1,15 @@
+type: object
+description: Kết quả mô phỏng tăng trưởng cho 1 quỹ.
+properties:
+  fund_name:
+    type: string
+    example: VESAF
+  profit_percent:
+    type: number
+    description: Tỷ lệ sinh lời (%) sau khoảng thời gian `period`.
+    example: 18.4
+  current_amount:
+    type: integer
+    format: int64
+    description: Giá trị danh mục hiện tại sau khi mô phỏng (VND).
+    example: 11840000

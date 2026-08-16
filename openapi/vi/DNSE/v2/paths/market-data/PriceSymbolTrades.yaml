@@ -1,0 +1,194 @@
+get:
+  operationId: getPriceSymbolTrades
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Lịch sử khớp lệnh
+  parameters:
+    - name: symbol
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: boardId
+      in: query
+      required: true
+      description: |-
+        Mã bảng giao dịch
+        - G1: Lô chẵn
+        - G4: Lô lẻ
+        - T1: Thỏa thuận trong giờ (9h - 14h45)
+        - T3: Thỏa thuận sau giờ (14h45 - 15h)
+        - T4: Thỏa thuận lô lẻ trong giờ (9h - 14h45)
+        - T6: Thỏa thuận lô lẻ sau giờ  (14h45 - 15h)
+      deprecated: false
+      schema:
+        $ref: '../../components/schemas/_common/enums/BoardId.yaml'
+      example: G1
+    - name: from
+      in: query
+      required: true
+      description: Thời gian bắt đầu (timestamp)
+      deprecated: false
+      schema:
+        type: string
+      example: '1773282637'
+    - name: to
+      in: query
+      required: true
+      description: Thời gian kết thúc (timestamp)
+      deprecated: false
+      schema:
+        type: string
+      example: '1773289837'
+    - name: limit
+      in: query
+      schema:
+        type: number
+      example: 100
+  responses:
+    '200':
+      description: OK
+      headers:
+        Content-Length:
+          $ref: '../../components/headers/ContentLength.yaml'
+        Date:
+          $ref: '../../components/headers/Date.yaml'
+        Vary:
+          $ref: '../../components/headers/Vary.yaml'
+        X-Ratelimit-Limit:
+          $ref: '../../components/headers/XRateLimitLimit.yaml'
+        X-Ratelimit-Remaining:
+          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+        X-Ratelimit-Reset:
+          $ref: '../../components/headers/XRateLimitReset.yaml'
+        X-Tyk-Api-Expires:
+          schema:
+            type: string
+          example: Thu, 02 Jan 3000 15:04:00 UTC
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              trades:
+                type: array
+                example:
+                  - marketId: STO
+                    boardId: G1
+                    isin: VN000000ACB8
+                    symbol: ACB
+                    matchPrice: 22.85
+                    matchQtty: 10
+                    side: UNSPECIFIED
+                    avgPrice: 22.958
+                    totalVolumeTraded: 764430
+                    grossTradeAmount: 175.49849
+                    highestPrice: 23.25
+                    lowestPrice: 22.75
+                    openPrice: 23
+                    time: '2026-03-12 04:29:57'
+                items:
+                  type: object
+                  properties:
+                    marketId:
+                      type: string
+                      example: STO
+                      description: Mã thị trường
+                    boardId:
+                      type: string
+                      example: G1
+                      description: Mã bảng giao dịch
+                    isin:
+                      type: string
+                      example: VN000000ACB8
+                      description: Mã định danh quốc tế
+                    symbol:
+                      type: string
+                      example: ACB
+                      description: Mã chứng khoán
+                    matchPrice:
+                      type: number
+                      format: double
+                      example: 22.85
+                      description: Giá khớp gần nhất
+                    matchQtty:
+                      type: integer
+                      format: int32
+                      example: 10
+                      description: Khối lượng khớp gần nhất
+                    side:
+                      type: string
+                      example: UNSPECIFIED
+                      description: Chiều giao dịch
+                    avgPrice:
+                      type: number
+                      format: double
+                      example: 22.958
+                      description: Giá khớp trung bình
+                    totalVolumeTraded:
+                      type: integer
+                      format: int32
+                      example: 764430
+                      description: Tổng khối lượng giao dịch trong ngày
+                    grossTradeAmount:
+                      type: number
+                      format: double
+                      example: 175.49849
+                      description: Tổng giá trị giao dịch trong ngày
+                    highestPrice:
+                      type: number
+                      format: float
+                      example: 23.25
+                      description: Giá cao nhất trong ngày
+                    lowestPrice:
+                      type: number
+                      format: float
+                      example: 22.75
+                      description: Giá thấp nhất trong ngày
+                    openPrice:
+                      type: integer
+                      format: int32
+                      example: 23
+                      description: Giá mở cửa
+                    time:
+                      type: string
+                      example: '2026-03-12 04:29:57'
+                      description: Thời gian ghi nhận
+                description: Danh sách giao dịch
+              nextPageToken:
+                type: string
+                example: NDYwMTQ1XzIwMjYtMDMtMTJUMDQ6MjU6MDUuNTZa
+                description: Token dùng để lấy trang tiếp theo
+          example:
+            trades:
+              - marketId: STO
+                boardId: G1
+                isin: VN000000ACB8
+                symbol: ACB
+                matchPrice: 22.85
+                matchQtty: 10
+                side: UNSPECIFIED
+                avgPrice: 22.958
+                totalVolumeTraded: 764430
+                grossTradeAmount: 175.49849
+                highestPrice: 23.25
+                lowestPrice: 22.75
+                openPrice: 23
+                time: '2026-03-12 04:29:57'
+            nextPageToken: NDYwMTQ1XzIwMjYtMDMtMTJUMDQ6MjU6MDUuNTZa #gitleaks:allow
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  tags:
+    - Dữ liệu thị trường
+parameters:
+  - name: symbol
+    in: path
+    required: true
+    description: Mã chứng khoán
+    deprecated: false
+    schema: {}
+    example: ACB

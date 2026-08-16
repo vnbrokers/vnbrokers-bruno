@@ -1,0 +1,68 @@
+get:
+  operationId: commoditiesGetGoldChart
+  tags:
+    - Hàng hoá
+  summary: Biểu đồ giá vàng
+  description: |
+    Biểu đồ giá vàng `days` ngày gần nhất (mặc định 30). Mỗi row có 3 cột
+    snapshot — vàng miếng SJC, vàng nhẫn 9999, và giá vàng thế giới (đã
+    quy đổi), đơn vị nghìn VND / chỉ.
+  parameters:
+    - name: days
+      in: query
+      required: false
+      description: Số ngày lịch sử cần lấy. Mặc định `30`.
+      schema:
+        type: integer
+        default: 30
+        example: 30
+  responses:
+    '200':
+      description: Trả về `data` mảng điểm chart, mỗi item gồm `date` + `gold_bar` / `gold_ring` / `gold_global`. Có kèm `traceId`.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/market/GoldChartResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - date: '2026-03-23'
+                gold_bar: 16600
+                gold_ring: 16370
+                gold_global: 13944
+              - date: '2026-03-24'
+                gold_bar: 17020
+                gold_ring: 17020
+                gold_global: 14060
+              - date: '2026-03-25'
+                gold_bar: 17350
+                gold_ring: 17350
+                gold_global: 14486
+              - date: '2026-03-26'
+                gold_bar: 17150
+                gold_ring: 17150
+                gold_global: 13948
+              - date: '2026-03-27'
+                gold_bar: 17160
+                gold_ring: 17160
+                gold_global: 14343
+              - date: '2026-03-28'
+                gold_bar: 17280
+                gold_ring: 17280
+                gold_global: 14283
+            traceId: 29a6c22e-bf57-4c1d-8fcd-0cac7ff229cb
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/market/financial-data/gold-chart?days=30"

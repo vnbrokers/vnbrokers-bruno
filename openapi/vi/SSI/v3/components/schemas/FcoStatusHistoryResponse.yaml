@@ -1,0 +1,22 @@
+type: object
+properties:
+  data:
+    description: Dữ liệu trả về.
+    type: array
+    items:
+      type: object
+      properties:
+        state:
+          description: Trạng thái của lệnh điều kiện.
+          type: string
+        time:
+          description: Thời điểm ghi nhận.
+          type: string
+        code:
+          description: Mã kết quả hoặc mã xác thực giao dịch.
+          type: integer
+        detail:
+          description: Chi tiết kết quả hoặc lỗi.
+          type: string
+
+

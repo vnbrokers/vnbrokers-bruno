@@ -1,0 +1,32 @@
+"get":
+  operationId: getAionAccountsAccountNoPpse
+  tags:
+    - Lệnh cổ phiếu
+  "summary": "Lấy sức mua"
+  "description": "Lấy sức mua của tiểu khoản."
+  "parameters":
+    -
+      "name": "accountNo"
+      "in": "path"
+      "required": true
+      "description": "Số tiểu khoản."
+      "schema":
+        "type": "string"
+  responses:
+    "401":
+      $ref: ../../../components/responses/Unauthorized.yaml
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              purchasingPower:
+                type: number
+                format: double
+                description: "Sức mua khả dụng."
+              maxQuantity:
+                type: integer
+                format: int64
+                description: "Số lượng tối đa có thể mua."

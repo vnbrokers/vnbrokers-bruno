@@ -1,0 +1,7 @@
+type: string
+description: "\" = tất cả, 3 = Arbitrage, 4 = SL/TP, 5 = Stop order."
+enum:
+  - ""
+  - "3"
+  - "4"
+  - "5"

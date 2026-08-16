@@ -1,0 +1,52 @@
+type: string
+description: |
+  Loại quyền cổ đông.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `OTC_BOND_INTEREST` | Trả lãi trái phiếu OTC |
+  | `SHAREHOLDER_MEETING` | Họp đại hội cổ đông |
+  | `SOLICIT_SHAREHOLDER_OPINIONS` | Lấy ý kiến cổ đông bằng văn bản |
+  | `CASH_DIVIDEND` | Cổ tức tiền mặt |
+  | `STOCK_DIVIDEND` | Cổ tức bằng stock |
+  | `STOCK_RIGHT` | Phát hành quyền mua stock |
+  | `BOND_INTEREST` | Trả lãi trái phiếu |
+  | `BOND_PRINCIPAL_AND_INTEREST` | Trả gốc + lãi trái phiếu |
+  | `CONVERT_BONDS_TO_STOCKS` | Chuyển đổi trái phiếu sang stock |
+  | `CONVERT_STOCKS_TO_OTHER_STOCKS` | Chuyển đổi stock sang stock khác |
+  | `BONUS_SHARES` | Thưởng stock |
+  | `VOTING_RIGHTS` | Quyền biểu quyết |
+  | `CONVERTIBLE_BOND` | Sự kiện trái phiếu chuyển đổi |
+  | `TRANSFER_PENDING_STOCKS` | Chuyển stock đang chờ |
+  | `WARRANT_DIVIDENDS` | Cổ tức chứng quyền |
+enum:
+  - OTC_BOND_INTEREST
+  - SHAREHOLDER_MEETING
+  - SOLICIT_SHAREHOLDER_OPINIONS
+  - CASH_DIVIDEND
+  - STOCK_DIVIDEND
+  - STOCK_RIGHT
+  - BOND_INTEREST
+  - BOND_PRINCIPAL_AND_INTEREST
+  - CONVERT_BONDS_TO_STOCKS
+  - CONVERT_STOCKS_TO_OTHER_STOCKS
+  - BONUS_SHARES
+  - VOTING_RIGHTS
+  - CONVERTIBLE_BOND
+  - TRANSFER_PENDING_STOCKS
+  - WARRANT_DIVIDENDS
+x-enum-varnames:
+  - OTC_BOND_INTEREST
+  - SHAREHOLDER_MEETING
+  - SOLICIT_SHAREHOLDER_OPINIONS
+  - CASH_DIVIDEND
+  - STOCK_DIVIDEND
+  - STOCK_RIGHT
+  - BOND_INTEREST
+  - BOND_PRINCIPAL_AND_INTEREST
+  - CONVERT_BONDS_TO_STOCKS
+  - CONVERT_STOCKS_TO_OTHER_STOCKS
+  - BONUS_SHARES
+  - VOTING_RIGHTS
+  - CONVERTIBLE_BOND
+  - TRANSFER_PENDING_STOCKS
+  - WARRANT_DIVIDENDS

@@ -1,0 +1,28 @@
+type: object
+required:
+  - tokenType
+  - accessToken
+  - expiresAt
+  - refreshToken
+  - refreshExpiresAt
+properties:
+  tokenType:
+    description: Loại token.
+    type: string
+    example: Bearer
+  accessToken:
+    description: Access token dùng để gọi API.
+    type: string
+  expiresAt:
+    description: Thời điểm access token hết hạn.
+    type: integer
+    format: int64
+  refreshToken:
+    description: Refresh token dùng để làm mới access token.
+    type: string
+  refreshExpiresAt:
+    description: Thời điểm refresh token hết hạn.
+    type: integer
+    format: int64
+
+

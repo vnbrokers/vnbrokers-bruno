@@ -1,0 +1,43 @@
+get:
+  operationId: getAccountsAccountNoExecutionsOrderId
+  tags:
+    - Tài khoản
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Chi tiết trạng thái lệnh
+  parameters:
+    - name: accountNo
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: orderId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: marketType
+      in: query
+      required: true
+      schema:
+        type: string
+        enum: [STOCK, DERIVATIVE]
+    - name: orderCategory
+      in: query
+      schema:
+        type: string
+        enum: [NORMAL, CONDITIONAL]
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

@@ -1,0 +1,620 @@
+openapi: 3.1.0
+info:
+  title: Finhay Securities Open API
+  version: 0.2.0-preview.3
+  description: |
+    Đặc tả chính thức của Finhay Securities Open API, dùng chung cho SDK
+    codegen, Redoc docs, và (sau này) mock server / contract test.
+
+    ## Authentication — 2 tier
+
+    - **Tier 1 — chỉ cần API key**: các endpoint đọc dữ liệu thị trường
+      (`GET /market/**`, `GET /trading/market/**`). Gửi kèm header
+      `X-FH-APIKEY` là đủ.
+    - **Tier 2 — HMAC signing**: các endpoint liên quan đến account /
+      trading / user. Gửi kèm 4 header `X-FH-APIKEY` + `X-FH-TIMESTAMP` +
+      `X-FH-NONCE` + `X-FH-SIGNATURE`; thêm `X-FH-BODYHASH` khi request có
+      body. Chi tiết thuật toán xem extension `x-finhay-signing` ở root
+      spec hoặc phần README.
+
+    ## Bootstrap flow
+
+    Gọi 2 endpoint tag **Khởi tạo** (`GET /users/v1/users/me` và
+    `GET /users/v1/users/{userId}/sub-accounts`) **1 lần khi khởi tạo
+    client** để lấy thông tin `user_id` và `subAccountId`. Mọi endpoint thuộc
+    tag **Tổng tài sản / Tiểu khoản / Danh mục đầu tư / Sổ lệnh / Lãi-lỗ /
+    Quyền cổ đông** đều cần 2 giá trị này để truyền vào path parameter.
+  contact: {}
+servers:
+  - url: https://open-api.fhsc.com.vn
+    description: Production
+security:
+  - FinhayApiKey: []
+tags:
+  - name: Khởi tạo
+    description: Khởi tạo client — lấy `user_id` và `subAccountId`. Gọi 1 lần khi khởi tạo SDK rồi cache lại.
+  - name: Dữ liệu giao dịch
+    description: Giá stock realtime và lịch sử OHLCV (dạng columnar, phục vụ charting / time-series).
+  - name: Phân tích cơ bản
+    description: Chỉ số tài chính cơ bản của doanh nghiệp — chỉ số tổng quan, phân tích theo kỳ và báo cáo tài chính chuẩn (income statement / balance sheet / cash flow).
+  - name: Tin tức-sự kiện
+    description: Sự kiện doanh nghiệp (cổ tức, quyền mua, ĐHCĐ, …), tin tức stock, tin tức tài chính toàn cầu (forex / commodities / economic-indicators / stock-market / cryptocurrency) và báo cáo khuyến nghị từ analyst.
+  - name: Kinh tế vĩ mô
+    description: Chỉ số kinh tế vĩ mô (CPI, PMI, PCE, GDP, …) và lãi suất tiền gửi ngân hàng.
+  - name: Hàng hoá
+    description: Hàng hoá và tài sản thay thế — vàng, bạc (spot / chart / theo nhà cung cấp) và crypto trending.
+  - name: Tổng hợp đa loại
+    description: Endpoint composite tổng hợp cross-domain (vàng / bạc / crypto / FX / lãi suất / US index) trong 1 call. Nên dùng endpoint chuyên biệt nếu chỉ cần 1 loại.
+  - name: Quỹ mở
+    description: Quỹ mở (open-ended funds) — danh sách quỹ, công ty quản lý, NAV history, holdings, ranking và benchmark cross-fund.
+  - name: Tổng tài sản
+    description: Tổng quan tài sản cấp user — cross-product (stock, fund, bond, hay0) kèm cash, debt, PnL.
+  - name: Tiểu khoản
+    description: Thông tin tiểu khoản — số dư, margin, dư nợ và ngân hàng liên kết.
+  - name: Danh mục đầu tư
+    description: Danh mục stock đang nắm giữ kèm giá realtime và PnL theo vị thế.
+  - name: Sổ lệnh
+    description: Quản lý lệnh — sổ lệnh trong ngày, danh sách đầy đủ hoặc chi tiết theo `orderId`.
+  - name: Lãi-lỗ
+    description: PnL và analytics cá nhân — lãi / lỗ trong ngày tổng hợp theo user.
+  - name: Quyền cổ đông
+    description: Quyền cổ đông (cổ tức, quyền mua, bỏ phiếu, …) của tiểu khoản.
+  - name: Phiên giao dịch
+    description: Hạ tầng trading — trạng thái phiên giao dịch và order type khả dụng của mỗi exchange.
+  - name: Thực thi lệnh
+    description: |
+      ⚠️ Nhóm endpoint này đang ở giai đoạn **preview**.
+
+      Đặt / sửa / huỷ lệnh trên sàn — write operation nhạy cảm, yêu cầu
+      Tier 2 HMAC đầy đủ + `X-FH-BODYHASH` + `X-FH-2FA-TOKEN` (daily 2FA
+      session).
+paths:
+  /users/v1/users/me:
+    $ref: './paths/users/bootstrapGetMe.yaml'
+
+  /users/v1/users/{userId}/sub-accounts:
+    $ref: './paths/users/bootstrapGetSubAccounts.yaml'
+
+  /market/stock-realtime:
+    $ref: './paths/market/marketDataGetStockRealtime.yaml'
+
+  /market/index-realtime:
+    $ref: './paths/market/marketDataGetIndexRealtime.yaml'
+
+  /market/news:
+    $ref: './paths/market/corporateGetNews.yaml'
+
+  /market/financial-data:
+    $ref: './paths/market/aggregatedGetFinancialData.yaml'
+
+  /market/financial-data/gold:
+    $ref: './paths/market/commoditiesGetGold.yaml'
+
+  /market/financial-data/silver:
+    $ref: './paths/market/commoditiesGetSilver.yaml'
+
+  /market/financial-data/gold-chart:
+    $ref: './paths/market/commoditiesGetGoldChart.yaml'
+
+  /market/financial-data/silver-chart:
+    $ref: './paths/market/commoditiesGetSilverChart.yaml'
+
+  /market/financial-data/gold-providers:
+    $ref: './paths/market/commoditiesGetGoldProviders.yaml'
+
+  /market/financial-data/metal-providers:
+    $ref: './paths/market/commoditiesGetMetalProviders.yaml'
+
+  /market/financial-data/bank-interest-rates:
+    $ref: './paths/market/macroGetBankInterestRates.yaml'
+
+  /market/financial-data/cryptos/top-trending:
+    $ref: './paths/market/commoditiesGetTopTrendingCryptos.yaml'
+
+  /market/financial-data/macro:
+    $ref: './paths/market/macroGetMacroData.yaml'
+
+  /market/financial-data/trading-economics:
+    $ref: './paths/market/macroGetTradingEconomics.yaml'
+
+  /market/financial-data/economic-calendar-events:
+    $ref: './paths/market/macroGetEconomicCalendarEvents.yaml'
+
+  /market/financial-data/market:
+    $ref: './paths/market/aggregatedGetGlobalMarket.yaml'
+
+  /market/financial-data/global-news:
+    $ref: './paths/market/corporateGetGlobalNews.yaml'
+
+  /market/financial-data/global-news/{id}:
+    $ref: './paths/market/corporateGetGlobalNewsDetail.yaml'
+
+  /market/recommendation-reports/{symbol}:
+    $ref: './paths/market/corporateGetRecommendationReports.yaml'
+
+  /market/price-histories-chart:
+    $ref: './paths/market/marketDataGetPriceHistoriesChart.yaml'
+
+  /market/company-financial/overview:
+    $ref: './paths/market/fundamentalGetOverview.yaml'
+
+  /market/company-financial/analysis:
+    $ref: './paths/market/fundamentalGetAnalysis.yaml'
+
+  /market/v2/financial-statement/statement:
+    $ref: './paths/market/fundamentalGetStatement.yaml'
+
+  /trading/accounts/{subAccountId}/summary:
+    $ref: './paths/trading/accountGetSummary.yaml'
+
+  /trading/v1/accounts/{subAccountId}/order-book:
+    $ref: './paths/trading/ordersGetOrderBook.yaml'
+
+  /trading/v1/accounts/{subAccountId}/order-book/{orderId}:
+    $ref: './paths/trading/ordersGetOrderBookDetail.yaml'
+
+  /trading/v2/sub-accounts/{subAccountId}/portfolio:
+    $ref: './paths/trading/portfolioGetHoldings.yaml'
+
+  /trading/v5/account/{subAccountId}/user-rights:
+    $ref: './paths/trading/rightsGetUserRights.yaml'
+
+  /trading/pnl-today/{userId}:
+    $ref: './paths/trading/performanceGetPnlToday.yaml'
+
+  /trading/market/session:
+    $ref: './paths/trading/tradingSessionGet.yaml'
+
+  /trading/oa/sub-accounts/{subAccountId}/orders:
+    $ref: './paths/trading/ordersPlace.yaml'
+
+  /trading/oa/sub-accounts/{subAccountId}/orders/{orderId}:
+    $ref: './paths/trading/ordersModify.yaml'
+
+  /users/v3/users/{userId}/assets/summary:
+    $ref: './paths/users/assetGetSummary.yaml'
+
+  /fund-trading/public/fund-certificates:
+    $ref: './paths/fund-trading/fundsListCertificates.yaml'
+
+  /fund-trading/public/fund-companies:
+    $ref: './paths/fund-trading/fundsListCompanies.yaml'
+
+  /fund-trading/public/fund-certificates/{fundName}/nav-histories:
+    $ref: './paths/fund-trading/fundsGetNavHistories.yaml'
+
+  /fund-trading/public/fund-certificates/{fundName}/portfolio:
+    $ref: './paths/fund-trading/fundsGetPortfolio.yaml'
+
+  /fund-trading/public/fund-certificates/{fundName}/asset-allocation:
+    $ref: './paths/fund-trading/fundsGetAssetAllocation.yaml'
+
+  /fund-trading/public/fund-certificates/{fundName}/sector-allocation:
+    $ref: './paths/fund-trading/fundsGetSectorAllocation.yaml'
+
+  /fund-trading/public/fund-certificates/{fundName}/suggestions:
+    $ref: './paths/fund-trading/fundsGetSuggestions.yaml'
+
+  /fund-trading/public/fund-certificates/top-aum:
+    $ref: './paths/fund-trading/fundsTopAum.yaml'
+
+  /fund-trading/public/fund-certificates/top-investor:
+    $ref: './paths/fund-trading/fundsTopInvestor.yaml'
+
+  /fund-trading/public/fund-certificates/top-fund-flow:
+    $ref: './paths/fund-trading/fundsTopFundFlow.yaml'
+
+  /fund-trading/public/fund-certificates/top-holding-symbols:
+    $ref: './paths/fund-trading/fundsTopHoldingSymbols.yaml'
+
+  /fund-trading/public/fund-certificates/benchmark/growth:
+    $ref: './paths/fund-trading/fundsBenchmarkGrowth.yaml'
+
+  /fund-trading/public/fund-certificates/benchmark/nav:
+    $ref: './paths/fund-trading/fundsBenchmarkNav.yaml'
+
+  /fund-trading/public/fund-certificates/benchmark/operation:
+    $ref: './paths/fund-trading/fundsBenchmarkOperation.yaml'
+components:
+  securitySchemes:
+    FinhayApiKey:
+      $ref: './components/securitySchemes/FinhayApiKey.yaml'
+    FinhayTimestamp:
+      $ref: './components/securitySchemes/FinhayTimestamp.yaml'
+    FinhayNonce:
+      $ref: './components/securitySchemes/FinhayNonce.yaml'
+    FinhaySignature:
+      $ref: './components/securitySchemes/FinhaySignature.yaml'
+    FinhayBodyHash:
+      $ref: './components/securitySchemes/FinhayBodyHash.yaml'
+    FinhayTwoFactor:
+      $ref: './components/securitySchemes/FinhayTwoFactor.yaml'
+  schemas:
+    EnvelopeBase:
+      $ref: './components/schemas/common/EnvelopeBase.yaml'
+    UserProfile:
+      $ref: './components/schemas/users/UserProfile.yaml'
+    UserProfileResponse:
+      $ref: './components/schemas/users/UserProfileResponse.yaml'
+    ErrorBody:
+      $ref: './components/schemas/common/ErrorBody.yaml'
+    SubAccount:
+      $ref: './components/schemas/users/SubAccount.yaml'
+    SubAccountsResponse:
+      $ref: './components/schemas/users/SubAccountsResponse.yaml'
+    Exchange:
+      $ref: './components/schemas/market/Exchange.yaml'
+    StockType:
+      $ref: './components/schemas/market/StockType.yaml'
+    StockRealtime:
+      $ref: './components/schemas/market/StockRealtime.yaml'
+    StockRealtimeResponse:
+      $ref: './components/schemas/market/StockRealtimeResponse.yaml'
+    MarketIndex:
+      $ref: './components/schemas/market/MarketIndex.yaml'
+    IndexRealtime:
+      $ref: './components/schemas/market/IndexRealtime.yaml'
+    IndexRealtimeResponse:
+      $ref: './components/schemas/market/IndexRealtimeResponse.yaml'
+    StockEvent:
+      $ref: './components/schemas/market/StockEvent.yaml'
+    StockEventsResponse:
+      $ref: './components/schemas/market/StockEventsResponse.yaml'
+    FinancialDataBuySellValue:
+      $ref: './components/schemas/market/FinancialDataBuySellValue.yaml'
+    FinancialDataSingleValue:
+      $ref: './components/schemas/market/FinancialDataSingleValue.yaml'
+    FinancialData:
+      $ref: './components/schemas/market/FinancialData.yaml'
+    FinancialDataResponse:
+      $ref: './components/schemas/market/FinancialDataResponse.yaml'
+    CommodityIndexData:
+      $ref: './components/schemas/market/CommodityIndexData.yaml'
+    GoldResponse:
+      $ref: './components/schemas/market/GoldResponse.yaml'
+    SilverResponse:
+      $ref: './components/schemas/market/SilverResponse.yaml'
+    GoldChartPoint:
+      $ref: './components/schemas/market/GoldChartPoint.yaml'
+    GoldChartResponse:
+      $ref: './components/schemas/market/GoldChartResponse.yaml'
+    SilverChartPoint:
+      $ref: './components/schemas/market/SilverChartPoint.yaml'
+    SilverChartResponse:
+      $ref: './components/schemas/market/SilverChartResponse.yaml'
+    CommodityProviderGroup:
+      $ref: './components/schemas/market/CommodityProviderGroup.yaml'
+    GoldProvidersResponse:
+      $ref: './components/schemas/market/GoldProvidersResponse.yaml'
+    MetalProvidersResponse:
+      $ref: './components/schemas/market/MetalProvidersResponse.yaml'
+    BankInterestRates:
+      $ref: './components/schemas/market/BankInterestRates.yaml'
+    BankInterestRatesResponse:
+      $ref: './components/schemas/market/BankInterestRatesResponse.yaml'
+    CryptoCurrency:
+      $ref: './components/schemas/market/CryptoCurrency.yaml'
+    CryptosTopTrendingResponse:
+      $ref: './components/schemas/market/CryptosTopTrendingResponse.yaml'
+    MacroType:
+      $ref: './components/schemas/market/MacroType.yaml'
+    Country:
+      $ref: './components/schemas/market/Country.yaml'
+    Period:
+      $ref: './components/schemas/market/Period.yaml'
+    MacroData:
+      $ref: './components/schemas/market/MacroData.yaml'
+    MacroDataResponse:
+      $ref: './components/schemas/market/MacroDataResponse.yaml'
+    EconomicCountry:
+      $ref: './components/schemas/market/EconomicCountry.yaml'
+    TradingEconomicsCategory:
+      $ref: './components/schemas/market/TradingEconomicsCategory.yaml'
+    TradingEconomicsEntry:
+      $ref: './components/schemas/market/TradingEconomicsEntry.yaml'
+    TradingEconomicsResponse:
+      $ref: './components/schemas/market/TradingEconomicsResponse.yaml'
+    EconomicCalendarEvent:
+      $ref: './components/schemas/market/EconomicCalendarEvent.yaml'
+    EconomicCalendarEventsResponse:
+      $ref: './components/schemas/market/EconomicCalendarEventsResponse.yaml'
+    GlobalMarketDataType:
+      $ref: './components/schemas/market/GlobalMarketDataType.yaml'
+    GlobalMarketCountry:
+      $ref: './components/schemas/market/GlobalMarketCountry.yaml'
+    GlobalMarketDataEntry:
+      $ref: './components/schemas/market/GlobalMarketDataEntry.yaml'
+    GlobalMarketDataResponse:
+      $ref: './components/schemas/market/GlobalMarketDataResponse.yaml'
+    GlobalNewsCategory:
+      $ref: './components/schemas/market/GlobalNewsCategory.yaml'
+    GlobalNewsListItem:
+      $ref: './components/schemas/market/GlobalNewsListItem.yaml'
+    GlobalNewsPage:
+      $ref: './components/schemas/market/GlobalNewsPage.yaml'
+    GlobalNewsListResponse:
+      $ref: './components/schemas/market/GlobalNewsListResponse.yaml'
+    GlobalNewsDetail:
+      $ref: './components/schemas/market/GlobalNewsDetail.yaml'
+    GlobalNewsDetailResponse:
+      $ref: './components/schemas/market/GlobalNewsDetailResponse.yaml'
+    IndexRecommendationReport:
+      $ref: './components/schemas/market/IndexRecommendationReport.yaml'
+    RecommendationReport:
+      $ref: './components/schemas/market/RecommendationReport.yaml'
+    RecommendationReportsResponse:
+      $ref: './components/schemas/market/RecommendationReportsResponse.yaml'
+    Resolution:
+      $ref: './components/schemas/market/Resolution.yaml'
+    PriceHistoriesChart:
+      $ref: './components/schemas/market/PriceHistoriesChart.yaml'
+    PriceHistoriesChartResponse:
+      $ref: './components/schemas/market/PriceHistoriesChartResponse.yaml'
+    FinancialOverview:
+      $ref: './components/schemas/market/FinancialOverview.yaml'
+    FinancialOverviewResponse:
+      $ref: './components/schemas/market/FinancialOverviewResponse.yaml'
+    FinancialPeriod:
+      $ref: './components/schemas/market/FinancialPeriod.yaml'
+    FinancialAnalysisEntry:
+      $ref: './components/schemas/market/FinancialAnalysisEntry.yaml'
+    FinancialAnalysisResponse:
+      $ref: './components/schemas/market/FinancialAnalysisResponse.yaml'
+    FinancialStatementType:
+      $ref: './components/schemas/market/FinancialStatementType.yaml'
+    FinancialStatementEntry:
+      $ref: './components/schemas/market/FinancialStatementEntry.yaml'
+    FinancialStatementResponse:
+      $ref: './components/schemas/market/FinancialStatementResponse.yaml'
+    AccountSummary:
+      $ref: './components/schemas/trading/AccountSummary.yaml'
+    AccountSummaryResponse:
+      $ref: './components/schemas/trading/AccountSummaryResponse.yaml'
+    OrderBookEntry:
+      $ref: './components/schemas/trading/OrderBookEntry.yaml'
+    OrderBookResponse:
+      $ref: './components/schemas/trading/OrderBookResponse.yaml'
+    OrderBookDetailResponse:
+      $ref: './components/schemas/trading/OrderBookDetailResponse.yaml'
+    PortfolioEntry:
+      $ref: './components/schemas/trading/PortfolioEntry.yaml'
+    GetPortfolioResponse:
+      $ref: './components/schemas/trading/GetPortfolioResponse.yaml'
+    PortfolioResponse:
+      $ref: './components/schemas/trading/PortfolioResponse.yaml'
+    UserRightStatus:
+      $ref: './components/schemas/trading/UserRightStatus.yaml'
+    UserRightRegisterStatus:
+      $ref: './components/schemas/trading/UserRightRegisterStatus.yaml'
+    UserRightType:
+      $ref: './components/schemas/trading/UserRightType.yaml'
+    UserRight:
+      $ref: './components/schemas/trading/UserRight.yaml'
+    UserRightsResponse:
+      $ref: './components/schemas/trading/UserRightsResponse.yaml'
+    PnlToday:
+      $ref: './components/schemas/trading/PnlToday.yaml'
+    PnlTodayResponse:
+      $ref: './components/schemas/trading/PnlTodayResponse.yaml'
+    ExchangeSession:
+      $ref: './components/schemas/trading/ExchangeSession.yaml'
+    OrderType:
+      $ref: './components/schemas/trading/OrderType.yaml'
+    ExchangeSessionInfo:
+      $ref: './components/schemas/trading/ExchangeSessionInfo.yaml'
+    MarketSessionResponse:
+      $ref: './components/schemas/trading/MarketSessionResponse.yaml'
+    OrderSide:
+      $ref: './components/schemas/trading/OrderSide.yaml'
+    PlaceOrderKind:
+      $ref: './components/schemas/trading/PlaceOrderKind.yaml'
+    MarketPriceCode:
+      $ref: './components/schemas/trading/MarketPriceCode.yaml'
+    StockTypeOrder:
+      $ref: './components/schemas/trading/StockTypeOrder.yaml'
+    PlaceOrderRequest:
+      $ref: './components/schemas/trading/PlaceOrderRequest.yaml'
+    OrderStatus:
+      $ref: './components/schemas/trading/OrderStatus.yaml'
+    LotType:
+      $ref: './components/schemas/trading/LotType.yaml'
+    OrderExecutionResult:
+      $ref: './components/schemas/trading/OrderExecutionResult.yaml'
+    PlaceOrderResponse:
+      $ref: './components/schemas/trading/PlaceOrderResponse.yaml'
+    ModifyOrderRequest:
+      $ref: './components/schemas/trading/ModifyOrderRequest.yaml'
+    ModifyOrderResponse:
+      $ref: './components/schemas/trading/ModifyOrderResponse.yaml'
+    CancelOrderRequest:
+      $ref: './components/schemas/trading/CancelOrderRequest.yaml'
+    CancelOrderResponse:
+      $ref: './components/schemas/trading/CancelOrderResponse.yaml'
+    ProductsSummary:
+      $ref: './components/schemas/users/ProductsSummary.yaml'
+    MoneySummary:
+      $ref: './components/schemas/users/MoneySummary.yaml'
+    DebtSummary:
+      $ref: './components/schemas/users/DebtSummary.yaml'
+    PnlEntry:
+      $ref: './components/schemas/users/PnlEntry.yaml'
+    PnlSummary:
+      $ref: './components/schemas/users/PnlSummary.yaml'
+    UserAssetsSummary:
+      $ref: './components/schemas/users/UserAssetsSummary.yaml'
+    UserAssetsSummaryResponse:
+      $ref: './components/schemas/users/UserAssetsSummaryResponse.yaml'
+    FundType:
+      $ref: './components/schemas/fund-trading/FundType.yaml'
+    FundCertificate:
+      $ref: './components/schemas/fund-trading/FundCertificate.yaml'
+    FundCertificatesResponse:
+      $ref: './components/schemas/fund-trading/FundCertificatesResponse.yaml'
+    FundCompany:
+      $ref: './components/schemas/fund-trading/FundCompany.yaml'
+    FundCompaniesResponse:
+      $ref: './components/schemas/fund-trading/FundCompaniesResponse.yaml'
+    FundPeriod:
+      $ref: './components/schemas/fund-trading/FundPeriod.yaml'
+    FundNavHistoryPoint:
+      $ref: './components/schemas/fund-trading/FundNavHistoryPoint.yaml'
+    FundNavHistories:
+      $ref: './components/schemas/fund-trading/FundNavHistories.yaml'
+    FundNavHistoriesResponse:
+      $ref: './components/schemas/fund-trading/FundNavHistoriesResponse.yaml'
+    FundPortfolioItem:
+      $ref: './components/schemas/fund-trading/FundPortfolioItem.yaml'
+    FundPortfolioResponse:
+      $ref: './components/schemas/fund-trading/FundPortfolioResponse.yaml'
+    FundAssetAllocation:
+      $ref: './components/schemas/fund-trading/FundAssetAllocation.yaml'
+    FundAssetAllocationResponse:
+      $ref: './components/schemas/fund-trading/FundAssetAllocationResponse.yaml'
+    FundSectorAllocation:
+      $ref: './components/schemas/fund-trading/FundSectorAllocation.yaml'
+    FundSectorAllocationResponse:
+      $ref: './components/schemas/fund-trading/FundSectorAllocationResponse.yaml'
+    FundSuggestionCriteria:
+      $ref: './components/schemas/fund-trading/FundSuggestionCriteria.yaml'
+    FundSuggestion:
+      $ref: './components/schemas/fund-trading/FundSuggestion.yaml'
+    FundSuggestionsResponse:
+      $ref: './components/schemas/fund-trading/FundSuggestionsResponse.yaml'
+    FundAumEntry:
+      $ref: './components/schemas/fund-trading/FundAumEntry.yaml'
+    FundTopAumResponse:
+      $ref: './components/schemas/fund-trading/FundTopAumResponse.yaml'
+    FundInvestorEntry:
+      $ref: './components/schemas/fund-trading/FundInvestorEntry.yaml'
+    FundTopInvestorResponse:
+      $ref: './components/schemas/fund-trading/FundTopInvestorResponse.yaml'
+    FundFlowEntry:
+      $ref: './components/schemas/fund-trading/FundFlowEntry.yaml'
+    FundTopFundFlowResponse:
+      $ref: './components/schemas/fund-trading/FundTopFundFlowResponse.yaml'
+    FundTopHoldingSymbol:
+      $ref: './components/schemas/fund-trading/FundTopHoldingSymbol.yaml'
+    FundTopHoldingSymbolsResponse:
+      $ref: './components/schemas/fund-trading/FundTopHoldingSymbolsResponse.yaml'
+    FundGrowthBenchmark:
+      $ref: './components/schemas/fund-trading/FundGrowthBenchmark.yaml'
+    FundGrowthBenchmarkResponse:
+      $ref: './components/schemas/fund-trading/FundGrowthBenchmarkResponse.yaml'
+    FundNavBenchmarkPoint:
+      $ref: './components/schemas/fund-trading/FundNavBenchmarkPoint.yaml'
+    FundNavBenchmark:
+      $ref: './components/schemas/fund-trading/FundNavBenchmark.yaml'
+    FundNavBenchmarkResponse:
+      $ref: './components/schemas/fund-trading/FundNavBenchmarkResponse.yaml'
+    FundOperationBenchmark:
+      $ref: './components/schemas/fund-trading/FundOperationBenchmark.yaml'
+    FundOperationBenchmarkResponse:
+      $ref: './components/schemas/fund-trading/FundOperationBenchmarkResponse.yaml'
+  responses:
+    BadRequest:
+      $ref: './components/responses/BadRequest.yaml'
+    Unauthorized:
+      $ref: './components/responses/Unauthorized.yaml'
+    RateLimited:
+      $ref: './components/responses/RateLimited.yaml'
+    InternalError:
+      $ref: './components/responses/InternalError.yaml'
+    NotFound:
+      $ref: './components/responses/NotFound.yaml'
+    Forbidden:
+      $ref: './components/responses/Forbidden.yaml'
+  headers:
+    XRateLimitReset:
+      $ref: './components/headers/XRateLimitReset.yaml'
+  parameters:
+    UserId:
+      $ref: './components/parameters/UserId.yaml'
+    FromDateNews:
+      $ref: './components/parameters/FromDateNews.yaml'
+    ToDateNews:
+      $ref: './components/parameters/ToDateNews.yaml'
+    SubAccountId:
+      $ref: './components/parameters/SubAccountId.yaml'
+    DeviceId:
+      $ref: './components/parameters/DeviceId.yaml'
+    OrderId:
+      $ref: './components/parameters/OrderId.yaml'
+    FundTypeQuery:
+      $ref: './components/parameters/FundTypeQuery.yaml'
+    FundName:
+      $ref: './components/parameters/FundName.yaml'
+    FundPeriodQuery:
+      $ref: './components/parameters/FundPeriodQuery.yaml'
+    FundNamesCsv:
+      $ref: './components/parameters/FundNamesCsv.yaml'
+    FromMonth:
+      $ref: './components/parameters/FromMonth.yaml'
+    ToMonth:
+      $ref: './components/parameters/ToMonth.yaml'
+x-finhay-signing:
+  algorithm: HMAC-SHA256
+  encoding: hex-lowercase
+  payloadLayout: |-
+    {timestamp}
+    {method}
+    {path}[?{query}]
+    {bodyHash}
+  timestampToleranceSec: 30
+  nonce:
+    format: UUIDv4
+    ttlSec: 300
+    replayError: AUTH_NONCE_REUSED
+  bodyHash:
+    algorithm: SHA-256
+    encoding: hex-lowercase
+    header: X-FH-BODYHASH
+    required: whenBodyPresent
+  appliesTo:
+    apiKeyOnly:
+      - GET /market/**
+      - GET /trading/market/**
+      - GET /trading/securities/**
+      - GET /fund-trading/public/**
+    fullHmac:
+      description: All other routes — including every `/users/**` and `/trading/**` path not listed above — require the full HMAC signing block.
+    twoFactor:
+      description: |
+        Write operation đặt / sửa / huỷ lệnh dưới `/trading/oa/**` thêm
+        header `X-FH-2FA-TOKEN` (apiKey scheme `FinhayTwoFactor`) cùng
+        với 5 header HMAC. Token là daily session JWT do server cấp sau
+        khi user xác thực qua OTP.
+      routes:
+        - POST /trading/oa/sub-accounts/{subAccountId}/orders
+        - PUT /trading/oa/sub-accounts/{subAccountId}/orders/{orderId}
+        - DELETE /trading/oa/sub-accounts/{subAccountId}/orders/{orderId}
+  headers:
+    apiKey: X-FH-APIKEY
+    timestamp: X-FH-TIMESTAMP
+    nonce: X-FH-NONCE
+    signature: X-FH-SIGNATURE
+    bodyHash: X-FH-BODYHASH
+x-tagGroups:
+  - name: Khởi tạo
+    tags:
+      - Khởi tạo
+  - name: Dữ liệu thị trường
+    tags:
+      - Dữ liệu giao dịch
+      - Phân tích cơ bản
+      - Tin tức-sự kiện
+      - Kinh tế vĩ mô
+      - Hàng hoá
+      - Tổng hợp đa loại
+      - Quỹ mở
+  - name: Người dùng
+    tags:
+      - Tổng tài sản
+  - name: Giao dịch
+    tags:
+      - Tiểu khoản
+      - Danh mục đầu tư
+      - Sổ lệnh
+      - Lãi-lỗ
+      - Quyền cổ đông
+      - Phiên giao dịch
+      - Thực thi lệnh

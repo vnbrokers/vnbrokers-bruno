@@ -1,0 +1,10 @@
+type: object
+properties:
+  code:
+    description: Mã kết quả hoặc mã xác thực giao dịch.
+    type: string
+  msg:
+    description: Thông báo kết quả xử lý.
+    type: string
+
+

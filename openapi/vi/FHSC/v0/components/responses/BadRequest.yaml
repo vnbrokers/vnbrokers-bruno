@@ -1,0 +1,8 @@
+description: Request không hợp lệ — thiếu hoặc sai tham số.
+content:
+  application/json:
+    schema:
+      $ref: '../schemas/common/ErrorBody.yaml'
+    example:
+      error_code: '400'
+      message: Invalid parameter

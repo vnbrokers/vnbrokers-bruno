@@ -1,0 +1,78 @@
+get:
+  operationId: getPriceSymbolExpectedPrice
+  tags:
+    - Dữ liệu thị trường
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Giá dự khớp
+  parameters:
+    - name: symbol
+      in: path
+      required: true
+      description: Mã chứng khoán
+      schema:
+        type: string
+    - name: boardId
+      in: query
+      required: true
+      description: Mã bảng giao dịch
+      schema:
+        $ref: '../../components/schemas/_common/enums/BoardId.yaml'
+    - name: from
+      in: query
+      required: true
+      description: Thời gian bắt đầu theo Unix timestamp
+      schema:
+        type: string
+    - name: to
+      in: query
+      required: true
+      description: Thời gian kết thúc; khoảng truy vấn không vượt quá một ngày
+      schema:
+        type: string
+    - name: limit
+      in: query
+      schema:
+        type: integer
+    - name: nextPageToken
+      in: query
+      schema:
+        type: string
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              expectedPrices:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    marketId:
+                      $ref: '../../components/schemas/_common/enums/MarketId.yaml'
+                    boardId:
+                      $ref: '../../components/schemas/_common/enums/BoardId.yaml'
+                    isin:
+                      type: string
+                    symbol:
+                      type: string
+                    closePrice:
+                      type: number
+                    expectedTradePrice:
+                      type: number
+                    expectedTradeQuantity:
+                      type: integer
+                    time:
+                      type: string
+              nextPageToken:
+                type: string
+                nullable: true
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

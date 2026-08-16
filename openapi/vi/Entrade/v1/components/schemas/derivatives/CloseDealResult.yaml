@@ -1,0 +1,8 @@
+type: object
+properties:
+  orderType:
+    type: string
+    description: Truyền vào "LO"
+  triggeredBy:
+    type: string
+    description: Truyền vào "close-deal"

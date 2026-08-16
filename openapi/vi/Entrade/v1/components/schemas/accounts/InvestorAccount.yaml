@@ -1,0 +1,61 @@
+type: object
+properties:
+  id:
+    type: number
+  investorId:
+    type: number
+    description: Mã khách hàng
+  orderSecure:
+    type: number
+    description: Cọc trong lệnh
+  derivativeOrderSecure:
+    type: number
+  dealSecure:
+    type: number
+    description: Cọc trong deal
+  initDerivativeDealSecures:
+    type: array
+    items: {}
+  derivativeDealSecure:
+    type: number
+  tradingFeeSecure:
+    type: number
+  totalCash:
+    type: number
+    description: Cọc còn lại của tiểu khoản
+  sellingTaxSecure:
+    type: number
+  orderMoneyAdvanceFeeSecure:
+    type: number
+  receivable:
+    type: number
+  taxCredit:
+    type: number
+  initCash:
+    type: number
+  holdOvernightSecure:
+    type: number
+    description: Cọc giữ qua đêm
+  originalReferenceBonus:
+    type: number
+  referenceBonus:
+    type: number
+  netDerivativeOrderSecure:
+    type: number
+  createdDate:
+    type: string
+    description: Giờ tạo
+  modifiedDate:
+    type: string
+    description: Giờ cập nhật
+  status:
+    type: string
+    description: Trạng thái tiểu khoản
+  type:
+    type: string
+  availableCash:
+    type: number
+  withdrawalCash:
+    type: number
+  purchasingPower:
+    type: number

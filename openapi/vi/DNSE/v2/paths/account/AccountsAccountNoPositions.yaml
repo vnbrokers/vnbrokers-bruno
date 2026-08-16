@@ -1,0 +1,224 @@
+get:
+  operationId: getAccountsAccountNoPositions
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Vị thế nắm giữ
+  parameters:
+    - name: marketType
+      in: query
+      required: true
+      description: |-
+        Loại thị trường 
+        - STOCK: Danh sách vị thế cơ sở
+        - DERIVATIVE: Danh sách vị thế phái sinh
+      deprecated: false
+      schema:
+        type: string
+      example: DERIVATIVE
+    - name: pageSize
+      in: query
+      required: true
+      description: Kích thước trang dữ liệu (page size)
+      deprecated: false
+      schema:
+        type: string
+      example: '20'
+  responses:
+    '200':
+      description: OK
+      headers:
+        Content-Length:
+          $ref: '../../components/headers/ContentLength.yaml'
+        Date:
+          $ref: '../../components/headers/Date.yaml'
+        Vary:
+          $ref: '../../components/headers/Vary.yaml'
+        X-Ratelimit-Limit:
+          $ref: '../../components/headers/XRateLimitLimit.yaml'
+        X-Ratelimit-Remaining:
+          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+        X-Ratelimit-Reset:
+          $ref: '../../components/headers/XRateLimitReset.yaml'
+        X-Tyk-Api-Expires:
+          deprecated: false
+          schema: {}
+          example: Thu, 02 Jan 3000 15:04:00 UTC
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              positions:
+                type: array
+                example:
+                  - id: 177410795472387
+                    symbol: 41I1G4000
+                    accountNo: '0001179019'
+                    status: OPEN
+                    loanPackageId: 2278
+                    side: NB
+                    accumulateQuantity: 6
+                    tradeQuantity: 1
+                    closedQuantity: 5
+                    openQuantity: 1
+                    overNightQuantity: 0
+                    costPrice: 1834.5
+                    marketPrice: 1706.1
+                    breakEvenPrice: 1834.95691
+                    createdDate: '2026-03-23T03:08:32.773651Z'
+                    modifiedDate: '2026-03-23T04:07:45.692156Z'
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 177410795472387
+                      description: ID vị thế
+                    symbol:
+                      type: string
+                      example: 41I1G4000
+                      description: Mã chứng khoán
+                    marketType:
+                      type: string
+                      example: DERIVATIVE
+                      description: |-
+                        Loại thị trường
+                        STOCK: Gói vay giao dịch cơ sở
+                        DERIVATIVE: Gói vay giao dịch phái sinh
+                    accountNo:
+                      type: string
+                      example: '0001179019'
+                      description: Số tiểu khoản
+                    status:
+                      type: string
+                      example: OPEN
+                      description: |-
+                        Trạng thái của vị thế
+                        OPEN: Đang mở
+                        PENDING_CLOSE: Chờ đóng
+                        CLOSED: Đã đóng
+                        ODD_LOT: Lô lẻ (cơ sở)
+                    loanPackageId:
+                      type: integer
+                      format: int32
+                      example: 2278
+                      description: Gói vay cơ sở hoặc phái sinh
+                    side:
+                      type: string
+                      example: NB
+                      description: |-
+                        Loại vị thế
+                        NB: Mua
+                        NS: Bán
+                    accumulateQuantity:
+                      type: integer
+                      format: int32
+                      example: 6
+                      description: Khối lượng cộng dồn
+                    tradeQuantity:
+                      type: integer
+                      format: int32
+                      example: 1
+                      description: Khối lượng được giao dịch
+                    closedQuantity:
+                      type: integer
+                      format: int32
+                      example: 5
+                      description: Khối lượng đã đóng
+                    openQuantity:
+                      type: integer
+                      format: int32
+                      example: 1
+                      description: Khối lượng mở
+                    overNightQuantity:
+                      type: integer
+                      format: int32
+                      example: 0
+                      description: Khối lượng mở qua đêm (dành cho phái sinh)
+                    costPrice:
+                      type: number
+                      format: float
+                      example: 1834.5
+                      description: Giá vốn trung bình của khối lượng mở
+                    marketPrice:
+                      type: number
+                      format: double
+                      example: 1706.1
+                      description: Giá thị trường
+                    breakEvenPrice:
+                      type: number
+                      format: double
+                      example: 1834.95691
+                      description: Giá hòa vốn
+                    createdDate:
+                      type: string
+                      format: date-time
+                      example: '2026-03-23T03:08:32.773651Z'
+                      description: Thời điểm mở
+                    modifiedDate:
+                      type: string
+                      format: date-time
+                      example: '2026-03-23T04:07:45.692156Z'
+                      description: Thời điểm cập nhật
+                description: ''
+              pageIndex:
+                type: integer
+                format: int32
+                example: 0
+                description: Kích thước trang dữ liệu (dành cho phái sinh)
+              pageSize:
+                type: integer
+                format: int32
+                example: 20
+                description: Số bản ghi trên 1 trang (dành cho phái sinh)
+              pageNumber:
+                type: integer
+                format: int32
+                example: 1
+                description: Số trang (chỉ dành cho phái sinh)
+              total:
+                type: integer
+                format: int32
+                example: 1
+                description: Tổng số vị thế (chỉ dành cho phái sinh)
+          example:
+            positions:
+              - id: 177410795472387
+                symbol: 41I1G4000
+                accountNo: '0001179019'
+                marketType: DERIVATIVE
+                status: OPEN
+                loanPackageId: 2278
+                side: NB
+                accumulateQuantity: 6
+                tradeQuantity: 1
+                closedQuantity: 5
+                openQuantity: 1
+                overNightQuantity: 0
+                costPrice: 1834.5
+                marketPrice: 1706.1
+                breakEvenPrice: 1834.95691
+                createdDate: '2026-03-23T03:08:32.773651Z'
+                modifiedDate: '2026-03-23T04:07:45.692156Z'
+            pageIndex: 0
+            pageSize: 20
+            pageNumber: 1
+            total: 1
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  tags:
+    - Tài khoản
+parameters:
+  - name: accountNo
+    in: path
+    required: true
+    description: Số tiểu khoản
+    deprecated: false
+    schema:
+      type: string
+    example: '0001179019'

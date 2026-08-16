@@ -1,0 +1,53 @@
+get:
+  operationId: commoditiesGetSilverChart
+  tags:
+    - Hàng hoá
+  summary: Biểu đồ giá bạc
+  description: |
+    Biểu đồ giá bạc `days` ngày gần nhất (mặc định 30). Mỗi row có 2 cột
+    snapshot — bạc miếng trong nước và giá bạc thế giới (đã quy đổi), đơn
+    vị nghìn VND / chỉ. (Bạc không có split bar / ring như vàng.)
+  parameters:
+    - name: days
+      in: query
+      required: false
+      description: Số ngày lịch sử cần lấy. Mặc định `30`.
+      schema:
+        type: integer
+        default: 30
+        example: 30
+  responses:
+    '200':
+      description: Trả về `data` mảng điểm chart, mỗi item gồm `date` + `silver_bar` / `silver_global`. Có kèm `traceId`.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/market/SilverChartResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - date: '2026-03-23'
+                silver_bar: 266.3
+                silver_global: 220.2
+              - date: '2026-03-24'
+                silver_bar: 271.8
+                silver_global: 222.4
+              - date: '2026-04-22'
+                silver_bar: 301.9
+                silver_global: 247.9
+            traceId: 41f9a4bc-b624-46fe-97a1-800fc845b130
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/market/financial-data/silver-chart?days=30"

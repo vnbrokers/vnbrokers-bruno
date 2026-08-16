@@ -1,0 +1,39 @@
+type: object
+description: |
+  Wrapper trang cho danh sách tin tức tài chính toàn cầu. Chứa `results[]`
+  cộng các field phân trang.
+properties:
+  results:
+    type: array
+    description: Danh sách bài báo của trang hiện tại.
+    items:
+      $ref: 'GlobalNewsListItem.yaml'
+  page_total:
+    type: integer
+    description: Số item trên trang hiện tại.
+    example: 20
+  total:
+    type: integer
+    description: Tổng số bài báo khớp filter.
+    example: 1234
+  current_page:
+    type: integer
+    description: Số thứ tự trang hiện tại (1-indexed).
+    example: 1
+  next_page:
+    type:
+      - integer
+      - 'null'
+    description: Số trang kế tiếp; `null` nếu đã ở trang cuối.
+    example: 2
+  previous_page:
+    type:
+      - integer
+      - 'null'
+    description: Số trang trước; `null` nếu đang ở trang đầu.
+    example: null
+required:
+  - results
+  - page_total
+  - total
+  - current_page

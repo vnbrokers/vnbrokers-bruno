@@ -1,0 +1,16 @@
+type: object
+properties:
+  enabled:
+    type: boolean
+  strategy:
+    type: string
+  rate:
+    type: number
+  deltaPrice:
+    type: number
+  orderMethod:
+    type: string
+  orderDeltaPrice:
+    type: number
+  trailingEnabled:
+    type: boolean

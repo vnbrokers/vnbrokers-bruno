@@ -1,0 +1,16 @@
+type: object
+properties:
+  data:
+    type: array
+    description: Danh sách order
+    items:
+      $ref: ./DerivativeOrder.yaml
+  total:
+    type: number
+    description: Tổng số các lệnh
+  start:
+    type: number
+    description: Số bắt đầu, nên để là 0
+  end:
+    type: number
+    description: Số kết thúc, để start = 0 thì đây là số lượng lệnh muốn trả về

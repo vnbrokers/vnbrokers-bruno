@@ -1,0 +1,47 @@
+get:
+  operationId: fundsGetNavHistories
+  tags:
+    - Quỹ mở
+  summary: Lịch sử NAV của quỹ kèm benchmark
+  description: |
+    Lịch sử NAV theo thời gian của 1 quỹ, kèm chuỗi benchmark (cùng khoảng
+    thời gian) — dùng để vẽ chart trên cùng trục X.
+
+    `period` mặc định `ALL_TIME` (≈ 20 năm) — chỉ dùng khi thực sự cần
+    chuỗi lịch sử dài.
+  parameters:
+    - $ref: '../../components/parameters/FundName.yaml'
+    - $ref: '../../components/parameters/FundPeriodQuery.yaml'
+  responses:
+    '200':
+      description: Trả về `data` chứa `nav_histories[]` và `benchmark_name`.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/fund-trading/FundNavHistoriesResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              nav_histories:
+                - date: '2025-04-30'
+                  nav: 18234.56
+                  benchmark_value: 1284.91
+                - date: '2025-05-30'
+                  nav: 18450.1
+                  benchmark_value: 1298.45
+              benchmark_name: VN-INDEX
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/fund-trading/public/fund-certificates/VESAF/nav-histories?period=ONE_YEAR"

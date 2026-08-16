@@ -1,0 +1,10 @@
+name: subAccountId
+in: path
+required: true
+description: |
+  subAccountId được lấy từ bootstrap flow
+  (`GET /users/v1/users/{userId}/sub-accounts`), chọn NORMAL hoặc MARGIN
+  tuỳ mục đích.
+schema:
+  type: string
+  example: '0001234567'

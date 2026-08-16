@@ -1,0 +1,207 @@
+get:
+  operationId: getAccountsPositionsPositionId
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Chi tiết vị thế theo ID
+  parameters:
+    - name: marketType
+      in: query
+      required: true
+      description: |-
+        Loại thị trường 
+        - STOCK: Danh sách Deal cơ sở
+        - DERIVATIVE: Danh sách Deal phái sinh
+        - BOND: Danh sách Deal trái phiếu
+      deprecated: false
+      schema:
+        type: string
+      example: DERIVATIVE
+  responses:
+    '200':
+      description: OK
+      headers:
+        Content-Length:
+          $ref: '../../components/headers/ContentLength.yaml'
+        Date:
+          $ref: '../../components/headers/Date.yaml'
+        Vary:
+          $ref: '../../components/headers/Vary.yaml'
+        X-Ratelimit-Limit:
+          $ref: '../../components/headers/XRateLimitLimit.yaml'
+        X-Ratelimit-Remaining:
+          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+        X-Ratelimit-Reset:
+          $ref: '../../components/headers/XRateLimitReset.yaml'
+        X-Tyk-Api-Expires:
+          deprecated: false
+          schema: {}
+          example: Thu, 02 Jan 3000 15:04:00 UTC
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 177410795472387
+                    description: ID vị thế
+                  symbol:
+                    type: string
+                    example: 41I1G4000
+                    description: Mã chứng khoán
+                  marketType:
+                    type: string
+                    example: DERIVATIVE
+                    description: |-
+                      Loại thị trường
+                      - STOCK: Vị thế cơ sở
+                      - DERIVATIVE: Vị thế phái sinh
+                  accountNo:
+                    type: string
+                    example: '0001179019'
+                    description: Số tiểu khoản
+                  status:
+                    type: string
+                    example: OPEN
+                    description: |-
+                      Trạng thái của vị thế
+                      - OPEN: Đang mở
+                      - PENDING_CLOSE: Chờ đóng
+                      - CLOSED: Đã đóng
+                      - ODD_LOT: Lô lẻ (cơ sở)
+                  loanPackageId:
+                    type: integer
+                    format: int32
+                    example: 2278
+                    description: Gói vay cơ sở hoặc phái sinh
+                  side:
+                    type: string
+                    example: NB
+                    description: |-
+                      Loại vị thế
+                      - NB: Mua
+                      - NS: Bán
+                  accumulateQuantity:
+                    type: integer
+                    format: int32
+                    example: 6
+                    description: Khối lượng cộng dồn
+                  tradeQuantity:
+                    type: integer
+                    format: int32
+                    example: 1
+                    description: Khối lượng được giao dịch
+                  closedQuantity:
+                    type: integer
+                    format: int32
+                    example: 5
+                    description: Khối lượng đã đóng
+                  openQuantity:
+                    type: integer
+                    format: int32
+                    example: 1
+                    description: Khối lượng mở
+                  overNightQuantity:
+                    type: integer
+                    nullable: true
+                    format: int32
+                    example: 0
+                    description: Khối lượng mở qua đêm (dành cho phái sinh)
+                  costPrice:
+                    type: number
+                    format: float
+                    example: 1834.5
+                    description: Giá vốn trung bình của khối lượng mở
+                  averageCostPrice:
+                    type: number
+                    format: float
+                    example: 1834.5
+                    description: Giá vốn trung bình
+                  averageClosePrice:
+                    type: number
+                    format: double
+                    example: 1750.96
+                    description: Giá đóng trung bình
+                  marketPrice:
+                    type: number
+                    format: double
+                    example: 1706.1
+                    description: Giá thị trường
+                  breakEvenPrice:
+                    type: number
+                    format: double
+                    example: 1834.95691
+                    description: Giá hòa vốn
+                  createdDate:
+                    type: string
+                    format: date-time
+                    example: '2026-03-23T03:08:32.773651Z'
+                    description: Thời điểm mở
+                  modifiedDate:
+                    type: string
+                    format: date-time
+                    example: '2026-03-23T04:07:45.692156Z'
+                    description: Thời điểm cập nhật
+                example:
+                  id: 177410795472387
+                  symbol: 41I1G4000
+                  marketType: DERIVATIVE
+                  accountNo: '0001179019'
+                  status: OPEN
+                  loanPackageId: 2278
+                  side: NB
+                  accumulateQuantity: 6
+                  tradeQuantity: 1
+                  closedQuantity: 5
+                  openQuantity: 1
+                  overNightQuantity: 0
+                  costPrice: 1834.5
+                  averageCostPrice: 1834.5
+                  averageClosePrice: 1750.96
+                  marketPrice: 1706.1
+                  breakEvenPrice: 1834.95691
+                  createdDate: '2026-03-23T03:08:32.773651Z'
+                  modifiedDate: '2026-03-23T04:07:45.692156Z'
+                description: ''
+          example:
+            data:
+              id: 177410795472387
+              symbol: 41I1G4000
+              marketType: DERIVATIVE
+              accountNo: '0001179019'
+              status: OPEN
+              loanPackageId: 2278
+              side: NB
+              accumulateQuantity: 6
+              tradeQuantity: 1
+              closedQuantity: 5
+              openQuantity: 1
+              overNightQuantity: 0
+              costPrice: 1834.5
+              averageCostPrice: 1834.5
+              averageClosePrice: 1750.96
+              marketPrice: 1706.1
+              breakEvenPrice: 1834.95691
+              createdDate: '2026-03-23T03:08:32.773651Z'
+              modifiedDate: '2026-03-23T04:07:45.692156Z'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  tags:
+    - Tài khoản
+parameters:
+  - name: positionId
+    in: path
+    required: true
+    description: 'Id vị thế '
+    deprecated: false
+    schema:
+      type: string
+    example: '177410795472387'

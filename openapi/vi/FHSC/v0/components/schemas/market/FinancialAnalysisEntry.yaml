@@ -1,0 +1,21 @@
+type: object
+description: |
+  Các chỉ số tài chính cho 1 kỳ báo cáo. `year` luôn có; `quarter` chỉ có
+  khi `period=quarterly`. Các field còn lại là metric code động (ví dụ
+  `pe`, `roe`, `eps`, `pb`) nhận giá trị số hoặc null — bộ key thay đổi
+  theo loại doanh nghiệp (ngân hàng có `nim`, sản xuất có `gross_margin`,
+  …).
+properties:
+  year:
+    type: integer
+    example: 2023
+  quarter:
+    type:
+      - integer
+      - 'null'
+    description: Present only for quarterly period (1–4).
+    example: 2
+additionalProperties:
+  type:
+    - number
+    - 'null'

@@ -1,0 +1,62 @@
+patch:
+  operationId: updateRiskConfig
+  tags:
+    - Tài khoản
+  summary: Sửa cấu hình cắt lỗ
+  description: Sửa cấu hình mặc định cắt lỗ (cut loss config).
+  parameters:
+    - name: investorAccountId
+      in: path
+      required: true
+      description: Mã tài khoản của khách hàng
+      schema:
+        type: number
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - type: object
+              properties:
+                cutLossRate:
+                  type: number
+                  description: Mức cắt lỗ muốn đặt (0.14 = 14%)
+                investorAccountId:
+                  type: number
+                  description: Mã tài khoản
+                trailingEnabled:
+                  type: boolean
+                  description: Có bật lệnh ngay không (False sẽ không bật lệnh)
+                investorId:
+                  type: number
+                  description: Mã khách hàng
+                autoIncreaseDealRate:
+                  type: boolean
+                enableAutoDealDepositNoti:
+                  type: boolean
+                  description: Bật tắt tự động nộp cọc vào deal
+            - type: object
+              properties:
+                cutLossRate:
+                  type: number
+                  description: Mức cắt lỗ muốn đặt (0.14 = 14%)
+                investorId:
+                  type: string
+                investorAccountId:
+                  type: number
+                trailingEnabled:
+                  type: boolean
+  responses:
+    "200":
+      description: Thành công - sửa cấu hình cắt lỗ
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: ../../components/schemas/risk/RiskConfig.yaml
+              - $ref: ../../components/schemas/risk/RiskConfigV1.yaml
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml

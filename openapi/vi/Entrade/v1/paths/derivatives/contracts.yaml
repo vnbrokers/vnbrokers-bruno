@@ -1,0 +1,17 @@
+get:
+  operationId: listDerivativeContracts
+  tags:
+    - Phái sinh
+  summary: Lấy danh sách mã Phái Sinh
+  description: Lấy danh sách mã Phái Sinh.
+  responses:
+    "200":
+      description: Thành công
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/derivatives/DerivativeContractPage.yaml
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml

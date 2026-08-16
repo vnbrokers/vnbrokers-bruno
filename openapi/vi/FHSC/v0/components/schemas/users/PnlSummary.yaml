@@ -1,0 +1,7 @@
+type: object
+description: PnL chia theo loại tài sản.
+properties:
+  stock:
+    $ref: 'PnlEntry.yaml'
+  fund:
+    $ref: 'PnlEntry.yaml'

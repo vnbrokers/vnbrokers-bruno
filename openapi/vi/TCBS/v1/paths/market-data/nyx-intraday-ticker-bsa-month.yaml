@@ -1,0 +1,61 @@
+"get":
+  operationId: getNyxIntradayTickerBsaMonth
+  tags:
+    - Dữ liệu thị trường
+  "summary": "Cung cầu theo tháng"
+  "description": "Lấy dữ liệu cung cầu theo tháng của mã cổ phiếu."
+  "parameters":
+    -
+      "name": "ticker"
+      "in": "path"
+      "required": true
+      "description": "Mã cổ phiếu, ví dụ TCB."
+      "schema":
+        "type": "string"
+    -
+      "name": "timeWindow"
+      "in": "query"
+      "required": false
+      "description": "Khung thời gian: 1M."
+      "schema":
+        "type": "string"
+    -
+      "name": "type"
+      "in": "query"
+      "required": false
+      "description": "Loại nhà đầu tư: sheep (small retail), wolf (medium institutional), shark (large institutional), all (mặc định)."
+      "schema":
+        "$ref": "../../components/schemas/enums/InvestorType.yaml"
+  responses:
+    "401":
+      $ref: ../../components/responses/Unauthorized.yaml
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ticker:
+                type: string
+                description: "Mã cổ phiếu."
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    bup:
+                      type: number
+                      format: double
+                      description: "Tỷ lệ % mua tích cực."
+                    sdp:
+                      type: number
+                      format: double
+                      description: "Tỷ lệ % bán tiêu cực."
+                    bsr:
+                      type: number
+                      format: double
+                      description: "Tỷ lệ mua/bán."
+                    t:
+                      type: string
+                      description: "Thời gian (DD/MM)."

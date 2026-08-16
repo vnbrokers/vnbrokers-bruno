@@ -1,0 +1,59 @@
+type: object
+description: |
+  Biểu đồ lịch sử giá dạng columnar. Các array đều cùng độ dài — cùng
+  index `i` giữa `time`, `open`, `close`, `high`, `low`, `volume` biểu
+  diễn 1 cây nến.
+properties:
+  symbol:
+    type: string
+    example: VNM
+  resolution:
+    $ref: 'Resolution.yaml'
+  time:
+    type: array
+    description: Unix timestamps (seconds).
+    items:
+      type: number
+    example:
+      - 1704067200
+      - 1704153600
+  open:
+    type: array
+    description: Open prices.
+    items:
+      type: number
+    example:
+      - 72000
+      - 72500
+  close:
+    type: array
+    description: Close prices.
+    items:
+      type: number
+    example:
+      - 72500
+      - 73000
+  high:
+    type: array
+    description: High prices.
+    items:
+      type: number
+    example:
+      - 73000
+      - 73500
+  low:
+    type: array
+    description: Low prices.
+    items:
+      type: number
+    example:
+      - 71500
+      - 72000
+  volume:
+    type: array
+    description: Volumes per candle.
+    items:
+      type: number
+    example:
+      - 1500000
+      - 1800000

@@ -1,0 +1,22 @@
+type: string
+description: |
+  Phân loại tin tức tài chính toàn cầu (`/market/financial-data/global-news`).
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `forex` | Ngoại hối / tỷ giá |
+  | `commodities` | Hàng hoá (vàng, bạc, dầu, …) |
+  | `economic-indicators` | Chỉ số kinh tế (CPI, GDP, PMI, …) |
+  | `stock-market` | Thị trường chứng khoán toàn cầu |
+  | `cryptocurrency` | Tiền số |
+enum:
+  - forex
+  - commodities
+  - economic-indicators
+  - stock-market
+  - cryptocurrency
+x-enum-varnames:
+  - FOREX
+  - COMMODITIES
+  - ECONOMIC_INDICATORS
+  - STOCK_MARKET
+  - CRYPTOCURRENCY

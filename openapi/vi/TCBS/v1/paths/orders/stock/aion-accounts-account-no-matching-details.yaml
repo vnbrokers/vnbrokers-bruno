@@ -1,0 +1,72 @@
+"get":
+  operationId: getAionAccountsAccountNoMatchingDetails
+  tags:
+    - Lệnh cổ phiếu
+  "summary": "Thông tin khớp lệnh"
+  "description": "Lấy thông tin khớp lệnh của tiểu khoản."
+  "parameters":
+    -
+      "name": "accountNo"
+      "in": "path"
+      "required": true
+      "description": "Số tiểu khoản."
+      "schema":
+        "type": "string"
+  responses:
+    "401":
+      $ref: ../../../components/responses/Unauthorized.yaml
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              totalCount:
+                type: integer
+                format: int64
+                description: "Tổng số bản ghi trả ra."
+              pageSize:
+                type: integer
+                format: int64
+                description: "Số lượng phần tử 1 trang."
+              pageIndex:
+                type: integer
+                format: int64
+                description: "Mục lục trang."
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    orderId:
+                      type: string
+                      description: "Số hiệu lệnh."
+                    side:
+                      type: string
+                      description: "Chiều lệnh: S = Bán, B = Mua."
+                    symbol:
+                      type: string
+                      description: "Mã chứng khoán."
+                    quoteQtty:
+                      type: number
+                      format: double
+                      description: "Khối lượng đặt."
+                    quotePrice:
+                      type: number
+                      format: double
+                      description: "Giá đặt."
+                    tradeId:
+                      type: string
+                      description: "Id lệnh khớp."
+                    qtty:
+                      type: number
+                      format: double
+                      description: "Khối lượng khớp."
+                    price:
+                      type: number
+                      format: double
+                      description: "Giá khớp."
+                    timeExec:
+                      type: string
+                      description: "Thời điểm khớp."

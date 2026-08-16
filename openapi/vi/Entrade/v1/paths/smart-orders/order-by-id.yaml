@@ -1,0 +1,27 @@
+delete:
+  operationId: cancelSmartOrder
+  tags:
+    - Smart Order
+  summary: Hủy lệnh điều kiện
+  description: Hủy lệnh điều kiện (Smart Order) theo order_id.
+  servers:
+    - url: https://services-staging.entrade.com.vn/papertrade-smart-order
+      description: Môi trường staging Smart Order
+  parameters:
+    - name: orderId
+      in: path
+      required: true
+      description: Số hiệu lệnh
+      schema:
+        type: string
+  responses:
+    "200":
+      description: Thành công
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/smart-orders/SmartOrder.yaml
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml

@@ -1,0 +1,103 @@
+get:
+  operationId: getAccounts
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Tài khoản giao dịch
+  responses:
+    '200':
+      description: OK
+      headers:
+        Content-Length:
+          $ref: '../../components/headers/ContentLength.yaml'
+        Date:
+          $ref: '../../components/headers/Date.yaml'
+        Vary:
+          $ref: '../../components/headers/Vary.yaml'
+        X-Ratelimit-Limit:
+          $ref: '../../components/headers/XRateLimitLimit.yaml'
+        X-Ratelimit-Remaining:
+          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+        X-Ratelimit-Reset:
+          $ref: '../../components/headers/XRateLimitReset.yaml'
+        X-Tyk-Api-Expires:
+          deprecated: false
+          schema: {}
+          example: Thu, 02 Jan 3000 15:04:00 UTC
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                example: Phạm Thị Thùy
+                description: Họ tên khách hàng
+              custodyCode:
+                type: string
+                example: 064CSUN032
+                description: Số tài khoản lưu ký tại VSD
+              investorId:
+                type: string
+                example: '1000005917'
+                description: Mã định danh khách hàng tại DNSE
+              accounts:
+                type: array
+                example:
+                  - id: '0001179019'
+                    dealAccount: true
+                    derivativeAccount: true
+                    derivative:
+                      status: ACTIVE
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: '0001179019'
+                      description: Số tiểu khoản
+                    dealAccount:
+                      type: boolean
+                      example: true
+                      description: Tiểu khoản theo DEAL hoặc không
+                    derivativeAccount:
+                      type: boolean
+                      example: true
+                      description: ''
+                    derivative:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                          example: ACTIVE
+                          description: >-
+                            Tiểu khoản được phép giao dịch phái sinh hoặc
+                            không
+                      example:
+                        status: ACTIVE
+                      description: |-
+                        Trạng thái tài khoản phái sinh
+                        ACTIVE: Đang hoạt động
+                        INACTIVE: Ngừng hoạt động
+          example:
+            name: Phạm Thị Thùy
+            custodyCode: 064CSUN032
+            investorId: '1000005917'
+            accounts:
+              - id: '0001179019'
+                dealAccount: true
+                derivativeAccount: true
+                derivative:
+                  status: ACTIVE
+              - id: '0331000126'
+                dealAccount: false
+                derivativeAccount: true
+                derivative:
+                  status: ACTIVE
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  tags:
+    - Tài khoản

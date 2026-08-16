@@ -1,0 +1,98 @@
+get:
+  operationId: ordersGetOrderBookDetail
+  tags:
+    - Sổ lệnh
+  security:
+    - FinhayApiKey: []
+      FinhayTimestamp: []
+      FinhayNonce: []
+      FinhaySignature: []
+  summary: Chi tiết 1 lệnh trong sổ lệnh
+  description: |
+    Chi tiết đầy đủ 1 lệnh — toàn bộ field giống item trong order-book list,
+    nhưng trả về single object thay vì array. Status code map (`status_code`):
+    `01` = SENT (đã gửi sàn), `02` = PARTIAL (khớp 1 phần), `03` = FILLED
+    (khớp đủ), `04` = CANCELLED, `05` = REJECTED.
+  parameters:
+    - $ref: '../../components/parameters/SubAccountId.yaml'
+    - name: orderId
+      in: path
+      required: true
+      description: Mã lệnh trả về từ `ordersGetOrderBook` (`orderid`). Định dạng `ORD\d+`.
+      schema:
+        type: string
+        example: ORD123456
+  responses:
+    '200':
+      description: Trả về `data` là object chứa toàn bộ field của lệnh — kích thước, giá, status, route, executed.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/trading/OrderBookDetailResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              custodycd: '0123456'
+              txdate: '2024-04-18'
+              custid: '123456'
+              afacctno: '0001234567'
+              orderid: ORD123456
+              odorderid: '0001'
+              txtime: '09:15:23'
+              symbol: VNM
+              allowcancel: 'Y'
+              allowamend: 'Y'
+              side_code: NB
+              side: BUY
+              price: 72000
+              pricetype: LO
+              via_code: WEB
+              via: Web
+              qtty: 100
+              execqtty: 0
+              execamt: 0
+              execprice: 0
+              remainqtty: 100
+              remainamt: 7200000
+              status_code: '01'
+              status: SENT
+              tlname: Finhay
+              username: cuong@finhay
+              hosesession: PROGRESS
+              cancelqtty: 0
+              adjustqtty: 0
+              isdisposal: 'N'
+              rootorderid: ORD123456
+              timetype: '0'
+              timetypevalue: ''
+              feedbackmsg: ''
+              quoteqtty: 0
+              limitprice: 72000
+              odtimestamp: '2024-04-18T09:15:23'
+              matchtype_code: ''
+              producttypename: STOCK
+              afacctno_ext: '0001234567.01'
+              side_: BUY
+              via_: Web
+              status_: SENT
+              matchtype_: ''
+              strategy_id: null
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl \
+          -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          -H "X-FH-TIMESTAMP: $TIMESTAMP_MS" \
+          -H "X-FH-NONCE: $NONCE_UUID" \
+          -H "X-FH-SIGNATURE: $SIGNATURE_HEX" \
+          "https://open-api.fhsc.com.vn/trading/v1/accounts/$SUB_ACCOUNT_NORMAL/order-book/ORD123456"

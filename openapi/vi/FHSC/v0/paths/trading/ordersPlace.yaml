@@ -1,0 +1,120 @@
+post:
+  operationId: ordersPlace
+  tags:
+    - Thực thi lệnh
+  security:
+    - FinhayApiKey: []
+      FinhayTimestamp: []
+      FinhayNonce: []
+      FinhaySignature: []
+      FinhayBodyHash: []
+      FinhayTwoFactor: []
+  summary: Đặt lệnh mới
+  description: |
+    > ⚠️ Endpoint đang ở giai đoạn **preview**.
+
+    Đặt 1 lệnh mua hoặc bán mới cho `subAccountId`. Yêu cầu **Tier 2 HMAC
+    đầy đủ** + `X-FH-BODYHASH` (do request có body) + `X-FH-2FA-TOKEN`
+    (daily 2FA session).
+
+    **Bắt buộc** truyền header `device-id` — định danh thiết bị đặt
+    lệnh do client cung cấp (phục vụ tuân thủ quy định giao dịch).
+
+    **Semantic quan trọng**: HTTP `200` không bảo đảm sàn đã chấp nhận
+    lệnh. Đọc field `result[].code` — nếu non-null thì sàn từ chối (xem
+    `result[].rejected_reason` và bảng `Order-level error codes` trong
+    trang Errors). Sau khi đặt thành công, poll
+    `GET /trading/v1/accounts/{subAccountId}/order-book/{orderId}` để
+    theo dõi trạng thái khớp.
+
+    **Quy tắc field giá**:
+    - `type = LIMIT` → `limit_price` là số VND, `market_price = null`.
+    - `type = MARKET` → `market_price` là enum (`ATC`, `MP`, …),
+      `limit_price = null`.
+
+    **Order type theo sàn**:
+    - HOSE: `LO`, `MP`, `ATO`, `ATC`, `MTL`
+    - HNX: `LO`, `MTL`, `MOK`, `MAK`, `PLO`, `ATC`
+    - UPCOM / HCX: chỉ `LO`
+
+    ORS auto-convert: HOSE `MP → MTL`; HNX `MAK → FAK`, `MOK → FOK`.
+  x-badges:
+    - name: Preview
+      color: orange
+  parameters:
+    - $ref: '../../components/parameters/SubAccountId.yaml'
+    - $ref: '../../components/parameters/DeviceId.yaml'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/trading/PlaceOrderRequest.yaml'
+        example:
+          sub_account: 120C000008.1
+          side: BUY
+          symbol: HPG
+          quantity: 100
+          type: LIMIT
+          limit_price: 25500
+          market_price: null
+          stock_type: STOCK
+  responses:
+    '200':
+      description: |
+        Server đã xử lý request. **Phải đọc `result[].code`** để biết sàn
+        chấp nhận hay từ chối lệnh.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/trading/PlaceOrderResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            result:
+              - order_id: ORD123456
+                account_id: 120C000008.1
+                transaction_date: '2026-05-28'
+                symbol: HPG
+                order_side: BUY
+                order_quantity: 100
+                limit_price: 25500
+                market_price: null
+                execute_quantity: 0
+                execute_price: 0
+                order_status: SENT
+                fee_amount: 0
+                tax_amount: 0
+                execute_amount: 0
+                order_type: LO
+                code: null
+                rejected_reason: null
+                lot: EVEN
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '403':
+      $ref: '../../components/responses/Forbidden.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        BODY='{"sub_account":"120C000008.1","side":"BUY","symbol":"HPG","quantity":100,"type":"LIMIT","limit_price":25500,"market_price":null,"stock_type":"STOCK"}'
+        BODY_HASH=$(printf '%s' "$BODY" | openssl dgst -sha256 -hex | awk '{print $2}')
+
+        curl -X POST \
+          -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          -H "X-FH-TIMESTAMP: $TIMESTAMP_MS" \
+          -H "X-FH-NONCE: $NONCE_UUID" \
+          -H "X-FH-SIGNATURE: $SIGNATURE_HEX" \
+          -H "X-FH-BODYHASH: $BODY_HASH" \
+          -H "X-FH-2FA-TOKEN: $FINHAY_2FA_TOKEN" \
+          -H "device-id: $DEVICE_ID" \
+          -H "Content-Type: application/json" \
+          -d "$BODY" \
+          "https://open-api.fhsc.com.vn/trading/oa/sub-accounts/$SUB_ACCOUNT_NORMAL/orders"

@@ -1,0 +1,44 @@
+"put":
+  operationId: putAkhlysAccountsAccountNoCancelOrders
+  tags:
+    - Lệnh cổ phiếu
+  "summary": "Hủy lệnh thường"
+  "description": "Huỷ một hoặc nhiều lệnh chưa khớp hết bằng danh sách order ID."
+  "parameters":
+    -
+      "name": "accountNo"
+      "in": "path"
+      "required": true
+      "description": "Số tiểu khoản."
+      "schema":
+        "type": "string"
+  responses:
+    "401":
+      $ref: ../../../components/responses/Unauthorized.yaml
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: "Mã lỗi, 0 = thành công."
+              message:
+                type: string
+                description: "Mô tả mã lỗi nếu có."
+  "requestBody":
+    "required": true
+    "content":
+      "application/json":
+        "schema":
+          "type": "object"
+          "properties":
+            "ordersList":
+              "type": "array"
+              "items":
+                "type": "object"
+              "description": "Danh sách lệnh cần hủy."
+          "required":
+            - "ordersList"

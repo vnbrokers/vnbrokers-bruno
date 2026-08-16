@@ -1,0 +1,13 @@
+type: string
+description: |
+  Phân loại lô của lệnh — chỉ xuất hiện ở response `OrderExecutionResult`.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `EVEN` | Lô chẵn — quantity bội số của lot size (HOSE/HNX: 100). |
+  | `ODD`  | Lô lẻ — 1..99 cổ phiếu; chỉ chấp nhận order type `LO`. |
+enum:
+  - EVEN
+  - ODD
+x-enum-varnames:
+  - EVEN
+  - ODD

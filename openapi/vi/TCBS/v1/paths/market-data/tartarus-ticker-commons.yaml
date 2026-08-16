@@ -1,0 +1,159 @@
+"get":
+  operationId: getTartarusTickerCommons
+  tags:
+    - Dữ liệu thị trường
+  "summary": "Thông tin mã, giá"
+  "description": "Lấy thông tin mã và giá của thị trường cơ sở."
+  "parameters":
+    -
+      "name": "tickers"
+      "in": "query"
+      "required": false
+      "description": "Danh sách mã cổ phiếu phân tách bằng dấu phẩy. Không dùng kết hợp với tham số index."
+      "schema":
+        "type": "string"
+    -
+      "name": "index"
+      "in": "query"
+      "required": false
+      "description": "Rổ chứng khoán: 1 = HOSE, 2 = VN30, 3 = HNX, 4 = HNX30, 5 = UPCOM, 10 = Midcap, 11 = VN100, 12 = VNAllShare, 13 = VNSmallCap, 14 = VNXAllShare, 15 = VN50, 16 = VNSI. Không dùng kết hợp với tham số tickers."
+      "schema":
+        "type": "number"
+        "format": "double"
+  responses:
+    "401":
+      $ref: ../../components/responses/Unauthorized.yaml
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                description: "Danh sách thông tin mã."
+                items:
+                  type: object
+                  properties:
+                    symbol:
+                      type: string
+                      description: "Mã cổ phiếu."
+                    ceilPrice:
+                      type: number
+                      format: double
+                      description: "Giá trần."
+                    floorPrice:
+                      type: number
+                      format: double
+                      description: "Giá sàn."
+                    refPrice:
+                      type: number
+                      format: double
+                      description: "Giá tham chiếu."
+                    bidPrice01:
+                      type: number
+                      format: double
+                      description: "Dư mua giá 1."
+                    bidPrice02:
+                      type: number
+                      format: double
+                      description: "Dư mua giá 2."
+                    bidPrice03:
+                      type: number
+                      format: double
+                      description: "Dư mua giá 3."
+                    bidQtty01:
+                      type: number
+                      format: double
+                      description: "Dư mua KL 1."
+                    bidQtty02:
+                      type: number
+                      format: double
+                      description: "Dư mua KL 2."
+                    bidQtty03:
+                      type: number
+                      format: double
+                      description: "Dư mua KL 3."
+                    offerPrice01:
+                      type: number
+                      format: double
+                      description: "Dư bán giá 1."
+                    offerPrice02:
+                      type: number
+                      format: double
+                      description: "Dư bán giá 2."
+                    offerPrice03:
+                      type: number
+                      format: double
+                      description: "Dư bán giá 3."
+                    offerQtty01:
+                      type: number
+                      format: double
+                      description: "Dư bán KL 1."
+                    offerQtty02:
+                      type: number
+                      format: double
+                      description: "Dư bán KL 2."
+                    offerQtty03:
+                      type: number
+                      format: double
+                      description: "Dư bán KL 3."
+                    matchPrice:
+                      type: number
+                      format: double
+                      description: "Giá khớp."
+                    matchQtty:
+                      type: number
+                      format: double
+                      description: "Khối lượng khớp."
+                    change:
+                      type: number
+                      format: double
+                      description: "Thay đổi giá."
+                    changePercent:
+                      type: number
+                      format: double
+                      description: "Phần trăm thay đổi."
+                    open:
+                      type: number
+                      format: double
+                      description: "Giá mở cửa."
+                    high:
+                      type: number
+                      format: double
+                      description: "Giá cao nhất."
+                    low:
+                      type: number
+                      format: double
+                      description: "Giá thấp nhất."
+                    avg:
+                      type: number
+                      format: double
+                      description: "Giá trung bình."
+                    totalVol:
+                      type: number
+                      format: double
+                      description: "Tổng khối lượng giao dịch."
+                    totalVal:
+                      type: number
+                      format: double
+                      description: "Tổng giá trị giao dịch."
+                    buyForeignQtty:
+                      type: number
+                      format: double
+                      description: "KL mua nước ngoài."
+                    sellForeignQtty:
+                      type: number
+                      format: double
+                      description: "KL bán nước ngoài."
+                    room:
+                      type: string
+                      description: "Room nước ngoài."
+                    indexNumber:
+                      type: number
+                      format: double
+                      description: "Mã rổ chứng khoán."
+              tradingDate:
+                type: string
+                description: "Ngày giao dịch (dd/MM/yyyy)."

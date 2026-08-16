@@ -1,0 +1,159 @@
+openapi: 3.0.3
+info:
+  title: TCBS iFlash Open API
+  description: REST APIs for trading stocks and derivatives on TCBS.
+  version: 1.0.0
+  contact:
+    email: openapi@tcbs.com.vn
+servers:
+  - url: https://openapi.tcbs.com.vn
+    description: Production
+security:
+  - bearerAuth: []
+tags:
+  - name: Xác thực
+    description: Xác thực và cấp token truy cập.
+  - name: Tài khoản
+    description: Thông tin tài khoản, tài sản và hạn mức.
+  - name: Dữ liệu thị trường
+    description: Dữ liệu chứng khoán và phái sinh.
+  - name: Tiền
+    description: Giao dịch và thông tin tiền.
+  - name: Lệnh cổ phiếu
+    description: Đặt, sửa, hủy và tra cứu lệnh cổ phiếu.
+  - name: Lệnh phái sinh
+    description: Đặt, sửa, hủy và tra cứu lệnh phái sinh.
+paths:
+  /aion/v1/accounts/{accountNo}/cashInvestments:
+    $ref: './paths/accounts/aion-accounts-account-no-cash-investments.yaml'
+  /aion/v1/accounts/{accountNo}/matching-details:
+    $ref: './paths/orders/stock/aion-accounts-account-no-matching-details.yaml'
+  /aion/v1/accounts/{accountNo}/orders:
+    $ref: './paths/orders/stock/aion-accounts-account-no-orders.yaml'
+  /aion/v1/accounts/{accountNo}/orders/{orderID}:
+    $ref: './paths/orders/stock/aion-accounts-account-no-orders-order-id.yaml'
+  /aion/v1/accounts/{accountNo}/ppse:
+    $ref: './paths/orders/stock/aion-accounts-account-no-ppse.yaml'
+  /aion/v1/accounts/{accountNo}/ppse/{symbol}:
+    $ref: './paths/orders/stock/aion-accounts-account-no-ppse-symbol.yaml'
+  /aion/v1/accounts/{accountNo}/ppse/{symbol}/{price}:
+    $ref: './paths/orders/stock/aion-accounts-account-no-ppse-symbol-price.yaml'
+  /aion/v1/accounts/{accountNo}/se:
+    $ref: './paths/orders/stock/aion-accounts-account-no-se.yaml'
+  /aion/v1/customers/{custodyId}/accounts:
+    $ref: './paths/accounts/aion-customers-custody-id-accounts.yaml'
+  /akhlys/v1/accounts/{accountNo}/cancel-orders:
+    $ref: './paths/orders/stock/akhlys-accounts-account-no-cancel-orders.yaml'
+  /akhlys/v1/accounts/{accountNo}/orders:
+    $ref: './paths/orders/stock/akhlys-accounts-account-no-orders.yaml'
+  /akhlys/v1/accounts/{accountNo}/orders/{orderId}:
+    $ref: './paths/orders/stock/akhlys-accounts-account-no-orders-order-id.yaml'
+  /ananke/v1/securities:
+    $ref: './paths/market-data/ananke-securities.yaml'
+  /api/v1/derivatives/contracts:
+    $ref: './paths/market-data/api-derivatives-contracts.yaml'
+  /campaign-management/v1/margin/subscription/{accountNo}/addons/detail:
+    $ref: './paths/accounts/campaign-management-margin-subscription-account-no-addons-detail.yaml'
+  /erebos/v2/digital/margin-info:
+    $ref: './paths/money/erebos-digital-margin-info.yaml'
+  /erebos/v2/digital/trans-hist-cashStatements:
+    $ref: './paths/money/erebos-digital-trans-hist-cash-statements.yaml'
+  /eros/v2/get-profile/by-username/{custodyCode}:
+    $ref: './paths/accounts/eros-get-profile-by-username-custody-code.yaml'
+  /gaia/v1/oauth2/openapi/request-otp:
+    $ref: './paths/auth/gaia-oauth2-openapi-request-otp.yaml'
+  /gaia/v1/oauth2/openapi/token:
+    $ref: './paths/auth/gaia-oauth2-openapi-token.yaml'
+  /hydros/v1/account/{accountNo}/pricing-policy:
+    $ref: './paths/accounts/hydros-account-account-no-pricing-policy.yaml'
+  /hydros/v1/account/{accountNo}/risk:
+    $ref: './paths/accounts/hydros-account-account-no-risk.yaml'
+  /khaos/v1/loan/{accountNo}:
+    $ref: './paths/accounts/khaos-loan-account-no.yaml'
+  /khronos/v1/account/portfolio/position/close:
+    $ref: './paths/accounts/khronos-account-portfolio-position-close.yaml'
+  /khronos/v1/account/portfolio/status:
+    $ref: './paths/accounts/khronos-account-portfolio-status.yaml'
+  /khronos/v1/account/status:
+    $ref: './paths/accounts/khronos-account-status.yaml'
+  /khronos/v1/cash/deposit/update:
+    $ref: './paths/money/khronos-cash-deposit-update.yaml'
+  /khronos/v1/cash/withdraw/update:
+    $ref: './paths/money/khronos-cash-withdraw-update.yaml'
+  /khronos/v1/order/cancel:
+    $ref: './paths/orders/derivatives/khronos-order-cancel.yaml'
+  /khronos/v1/order/change:
+    $ref: './paths/orders/derivatives/khronos-order-change.yaml'
+  /khronos/v1/order/condition/cancel:
+    $ref: './paths/orders/derivatives/khronos-order-condition-cancel.yaml'
+  /khronos/v1/order/condition/detail:
+    $ref: './paths/orders/derivatives/khronos-order-condition-detail.yaml'
+  /khronos/v1/order/condition/place:
+    $ref: './paths/orders/derivatives/khronos-order-condition-place.yaml'
+  /khronos/v1/order/in-day:
+    $ref: './paths/orders/derivatives/khronos-order-in-day.yaml'
+  /khronos/v1/order/place:
+    $ref: './paths/orders/derivatives/khronos-order-place.yaml'
+  /khronos/v2/order/condition/change:
+    $ref: './paths/orders/derivatives/khronos-v2-order-condition-change.yaml'
+  /nyx/v1/intraday/{ticker}/bsa:
+    $ref: './paths/market-data/nyx-intraday-ticker-bsa.yaml'
+  /nyx/v1/intraday/{ticker}/bsa-ext:
+    $ref: './paths/market-data/nyx-intraday-ticker-bsa-ext.yaml'
+  /nyx/v1/intraday/{ticker}/bsa-month:
+    $ref: './paths/market-data/nyx-intraday-ticker-bsa-month.yaml'
+  /nyx/v1/intraday/{ticker}/his/paging:
+    $ref: './paths/market-data/nyx-intraday-ticker-his-paging.yaml'
+  /physis/v1/stock/transfer:
+    $ref: './paths/money/physis-stock-transfer.yaml'
+  /tartarus/v1/derivatives:
+    $ref: './paths/market-data/tartarus-derivatives.yaml'
+  /tartarus/v1/putThroughSnaps:
+    $ref: './paths/market-data/tartarus-put-through-snaps.yaml'
+  /tartarus/v1/tickerCommons:
+    $ref: './paths/market-data/tartarus-ticker-commons.yaml'
+  /tartarus/v1/tickerSnaps:
+    $ref: './paths/market-data/tartarus-ticker-snaps.yaml'
+components:
+  schemas:
+    StockOrderDirection:
+      $ref: './components/schemas/enums/StockOrderDirection.yaml'
+    StockPriceType:
+      $ref: './components/schemas/enums/StockPriceType.yaml'
+    StockOrderStatus:
+      $ref: './components/schemas/enums/StockOrderStatus.yaml'
+    StockOrderSide:
+      $ref: './components/schemas/enums/StockOrderSide.yaml'
+    SubAccountStatus:
+      $ref: './components/schemas/enums/SubAccountStatus.yaml'
+    SubAccountType:
+      $ref: './components/schemas/enums/SubAccountType.yaml'
+    IAConnection:
+      $ref: './components/schemas/enums/IAConnection.yaml'
+    MarketBasket:
+      $ref: './components/schemas/enums/MarketBasket.yaml'
+    MarketFloor:
+      $ref: './components/schemas/enums/MarketFloor.yaml'
+    InvestorType:
+      $ref: './components/schemas/enums/InvestorType.yaml'
+    IntradayTimeWindow:
+      $ref: './components/schemas/enums/IntradayTimeWindow.yaml'
+    IntradayTWindow:
+      $ref: './components/schemas/enums/IntradayTWindow.yaml'
+    DerivativeGetType:
+      $ref: './components/schemas/enums/DerivativeGetType.yaml'
+    DerivativeSide:
+      $ref: './components/schemas/enums/DerivativeSide.yaml'
+    DerivativeConditionalOrderType:
+      $ref: './components/schemas/enums/DerivativeConditionalOrderType.yaml'
+    DerivativeOrderTypeFilter:
+      $ref: './components/schemas/enums/DerivativeOrderTypeFilter.yaml'
+    DerivativeOrderStatusFilter:
+      $ref: './components/schemas/enums/DerivativeOrderStatusFilter.yaml'
+    DerivativeConditionalStatus:
+      $ref: './components/schemas/enums/DerivativeConditionalStatus.yaml'
+    DerivativeConditionalOrderTypeFilter:
+      $ref: './components/schemas/enums/DerivativeConditionalOrderTypeFilter.yaml'
+  securitySchemes:
+    bearerAuth:
+      $ref: './components/securitySchemes/BearerAuth.yaml'

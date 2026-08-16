@@ -1,0 +1,42 @@
+type: object
+description: |
+  Row có cặp giá mua / giá bán — dùng cho vàng, bạc và tỷ giá USD tiền
+  mặt. Nhận biết bằng `value_type: BUY_SELL`.
+properties:
+  index:
+    type: string
+    description: Stable identifier for the row (e.g. `SJC_GOLD_BAR`, `USD_VND_EXCHANGE_RATE`).
+    example: SJC_GOLD_BAR
+  name:
+    type: string
+    description: Display name.
+    example: Vàng miếng SJC
+  description:
+    type: string
+    description: Short descriptive text. May be empty.
+    example: 'Đơn vị: 1.000đ/chỉ'
+  icon_url:
+    type: string
+    description: Icon URL.
+    example: https://cdn1.finhay.com.vn/vnsc-prod/1739437064948-gold.png
+  value_type:
+    type: string
+    description: Discriminator — always `BUY_SELL` for this shape.
+    enum:
+      - BUY_SELL
+    x-enum-varnames:
+      - BUY_SELL
+  buy_value:
+    type: number
+    description: Buy price.
+    example: 16750
+  sell_value:
+    type: number
+    description: Sell price.
+    example: 17000
+required:
+  - index
+  - name
+  - value_type
+  - buy_value
+  - sell_value

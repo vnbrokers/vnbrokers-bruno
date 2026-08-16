@@ -1,0 +1,82 @@
+"get":
+  operationId: getTartarusTickerSnaps
+  tags:
+    - Dữ liệu thị trường
+  "summary": "Thông tin room nước ngoài"
+  "description": "Lấy thông tin room nước ngoài và snapshot thị trường."
+  "parameters":
+    -
+      "name": "index"
+      "in": "query"
+      "required": false
+      "description": "Rổ chứng khoán: 1 = HOSE, 2 = VN30, 3 = HNX, 4 = HNX30, 5 = Upcom, 10 = Midcap, 11 = VN100, 12 = VNAllshare, 13 = VNSmallcap, 14 = VNXAllshare, 15 = VN50, 16 = VNSI."
+      "schema":
+        "$ref": "../../components/schemas/enums/MarketBasket.yaml"
+  responses:
+    "401":
+      $ref: ../../components/responses/Unauthorized.yaml
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              tradingDate:
+                type: string
+                description: "Ngày giao dịch."
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    symbol:
+                      type: string
+                      description: "Mã cổ phiếu."
+                    refPrice:
+                      type: number
+                      format: double
+                      description: "Giá tham chiếu."
+                    ceilPrice:
+                      type: number
+                      format: double
+                      description: "Giá trần."
+                    floorPrice:
+                      type: number
+                      format: double
+                      description: "Giá sàn."
+                    matchPrice:
+                      type: number
+                      format: double
+                      description: "Giá khớp."
+                    matchQtty:
+                      type: number
+                      format: double
+                      description: "Khối lượng khớp."
+                    change:
+                      type: number
+                      format: double
+                      description: "Thay đổi giá."
+                    changePercent:
+                      type: number
+                      format: double
+                      description: "% thay đổi."
+                    totalVolume:
+                      type: number
+                      format: double
+                      description: "Tổng khối lượng."
+                    totalValue:
+                      type: number
+                      format: double
+                      description: "Tổng giá trị."
+                    buyForeignQtty:
+                      type: number
+                      format: double
+                      description: "KL nước ngoài mua."
+                    sellForeignQtty:
+                      type: number
+                      format: double
+                      description: "KL nước ngoài bán."
+                    room:
+                      type: string
+                      description: "Room nước ngoài."

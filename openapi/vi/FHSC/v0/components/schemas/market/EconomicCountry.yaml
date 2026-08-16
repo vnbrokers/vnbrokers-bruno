@@ -1,0 +1,27 @@
+type: string
+description: |
+  Tên quốc gia hiển thị (full name) cho dữ liệu kinh tế lịch sử và lịch sự
+  kiện kinh tế. Dùng chung cho `/market/financial-data/trading-economics`
+  và `/market/financial-data/economic-calendar-events`.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `China` | Trung Quốc |
+  | `Euro Area` | Khu vực đồng Euro |
+  | `Japan` | Nhật Bản |
+  | `United States` | Mỹ |
+  | `United Kingdom` | Anh |
+  | `Vietnam` | Việt Nam |
+enum:
+  - China
+  - Euro Area
+  - Japan
+  - United States
+  - United Kingdom
+  - Vietnam
+x-enum-varnames:
+  - CHINA
+  - EURO_AREA
+  - JAPAN
+  - UNITED_STATES
+  - UNITED_KINGDOM
+  - VIETNAM

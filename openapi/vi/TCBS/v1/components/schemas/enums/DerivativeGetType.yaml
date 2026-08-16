@@ -1,0 +1,5 @@
+type: string
+description: "Phạm vi dữ liệu tổng quan phái sinh: 0 = lấy toàn bộ, 1 = chỉ lấy tiền."
+enum:
+  - "0"
+  - "1"

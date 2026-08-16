@@ -1,0 +1,7 @@
+name: Accept-Language
+in: header
+required: false
+description: Ngôn ngữ phản hồi mong muốn. Nếu không có header này, hệ thống sẽ mặc định là en
+schema:
+  type: string
+  default: en

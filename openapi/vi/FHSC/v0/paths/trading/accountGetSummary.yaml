@@ -1,0 +1,83 @@
+get:
+  operationId: accountGetSummary
+  tags:
+    - Tiểu khoản
+  security:
+    - FinhayApiKey: []
+      FinhayTimestamp: []
+      FinhayNonce: []
+      FinhaySignature: []
+  summary: Chi tiết số dư, margin, dư nợ của tiểu khoản
+  description: |
+    Thông tin chi tiết của tiểu khoản — số dư, dư nợ, margin, tài sản ròng
+    và thông tin ngân hàng liên kết.
+  parameters:
+    - $ref: '../../components/parameters/SubAccountId.yaml'
+  responses:
+    '200':
+      description: Trả về `result` chứa toàn bộ field tài chính của tiểu khoản — số dư, dư nợ, margin, tài sản ròng, ngân hàng liên kết.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/trading/AccountSummaryResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            result:
+              balance: 12500000
+              ci_balance: 10000000
+              td_balance: 2500000
+              interest_balance: 0
+              ca_receiving: 0
+              receiving_t1: 0
+              receiving_t2: 0
+              receiving_t3: 0
+              securities_amt: 150000000
+              total_debt_amt: 0
+              secure_amt: 0
+              trf_buy_amt: 0
+              margin_amt: 0
+              t0_debt_amt: 0
+              advanced_amt: 0
+              df_debt_amt: 0
+              td_debt_amt: 0
+              cidepo_fee_acr: 0
+              net_asset_value: 162500000
+              mrcr_limit: 0
+              debt_amt: 0
+              advance_max_amt_fee: 0
+              receiving_amt: 0
+              margin_rate: 0
+              sms_fee_amt: 0
+              ibroker_fee_amt: 0
+              hold_balance: 0
+              mri_rate: 0
+              mrm_rate: 0
+              cidepo_fee: 0
+              td_int_amt: 0
+              add_vnd: 0
+              add_vnd_1: 0
+              core_bank: VCB
+              bankacct_no: '0123456789'
+              bank_name: Vietcombank
+              emk_amt: 0
+              baldefovd: '0'
+              mrcr_limit_max: 0
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl \
+          -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          -H "X-FH-TIMESTAMP: $TIMESTAMP_MS" \
+          -H "X-FH-NONCE: $NONCE_UUID" \
+          -H "X-FH-SIGNATURE: $SIGNATURE_HEX" \
+          "https://open-api.fhsc.com.vn/trading/accounts/$SUB_ACCOUNT_NORMAL/summary"

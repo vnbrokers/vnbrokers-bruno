@@ -1,0 +1,21 @@
+type: object
+description: Chi tiết dư nợ.
+properties:
+  total:
+    type: number
+    description: Total debt.
+  secure_amount:
+    type: number
+    description: Secured loan amount.
+  advance_amt:
+    type: number
+    description: Advanced amount.
+  sms_fee_amt:
+    type: number
+    description: SMS fee amount.
+  cidepo_fee_acr:
+    type: number
+    description: CIDEPO fee accrual.
+  owe_deposit:
+    type: number
+    description: Deposit owed.

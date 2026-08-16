@@ -1,0 +1,61 @@
+get:
+  operationId: getSecuritiesSummary
+  tags:
+    - Dữ liệu thị trường
+  summary: Tổng hợp giao dịch chứng khoán
+  description: Lấy thông tin tổng hợp giao dịch của một mã chứng khoán hoặc chỉ số theo từng ngày giao dịch. Chỉ truyền một trong hai tham số là Symbol hoặc Index.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - name: symbol
+      in: query
+      description: Mã chứng khoán. Chỉ truyền một trong hai tham số symbol hoặc index.
+      required: false
+      schema:
+        type: string
+    - name: index
+      in: query
+      description: Mã chỉ số cần lấy thông tin tổng hợp giao dịch (ví dụ VNINDEX, VN30, VN100 etc...)
+      required: false
+      schema:
+        type: string
+    - name: from
+      in: query
+      description: Ngày bắt đầu theo định dạng `YYYY/MM/DD`.
+      required: true
+      schema:
+        type: string
+    - name: to
+      in: query
+      description: Ngày kết thúc theo định dạng `YYYY/MM/DD`. Bắt buộc phải lớn hơn hoặc bằng `from`.
+      required: true
+      schema:
+        type: string
+    - name: pageIndex
+      in: query
+      description: Chỉ số trang khi phân trang kết quả, bắt đầu từ 1. Nếu không cung cấp thì hệ thống sẽ sử dụng giá trị mặc định là 1.
+      required: false
+      schema:
+        type: integer
+    - name: pageSize
+      in: query
+      description: Số lượng bản ghi trên mỗi trang. Nếu không cung cấp thì hệ thống sẽ sử dụng giá trị mặc định là 10.
+      required: false
+      schema:
+        type: integer
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/SecuritiesSummaryResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

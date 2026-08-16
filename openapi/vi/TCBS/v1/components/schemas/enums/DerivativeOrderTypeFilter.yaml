@@ -1,0 +1,8 @@
+type: string
+description: "Loc loại lệnh: \" = tất cả, 3 = Arbitrage, 4 = SL/TP, 5 = ForceClose, 6 = Thường."
+enum:
+  - ""
+  - "3"
+  - "4"
+  - "5"
+  - "6"

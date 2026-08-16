@@ -1,0 +1,25 @@
+post:
+  operationId: setDealTakeProfit
+  tags:
+    - Tài khoản
+  summary: Đặt lệnh chốt lời
+  description: Đặt lệnh chốt lời cho deal.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/risk/TakeProfitRequest.yaml
+  responses:
+    "200":
+      description: Thành công – đặt lệnh chốt lời
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: ../../components/schemas/risk/TakeProfitRequest.yaml
+              - $ref: ../../components/schemas/risk/RiskConfigV1.yaml
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml

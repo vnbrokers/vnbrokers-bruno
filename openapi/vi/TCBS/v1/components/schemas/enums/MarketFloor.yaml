@@ -1,0 +1,6 @@
+type: string
+description: "Rổ chứng khoán: 1 = HOSE, 2 = HNX, 3 = Upcom."
+enum:
+  - "1"
+  - "2"
+  - "3"

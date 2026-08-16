@@ -1,0 +1,11 @@
+type: string
+description: "Loại giá lệnh cơ sở: LO, ATO, ATC, PLO, MP, MTL, MOK hoặc MAK."
+enum:
+  - "LO"
+  - "ATO"
+  - "ATC"
+  - "PLO"
+  - "MP"
+  - "MTL"
+  - "MOK"
+  - "MAK"

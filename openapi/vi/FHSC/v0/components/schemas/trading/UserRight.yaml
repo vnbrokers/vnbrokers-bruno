@@ -1,0 +1,107 @@
+type: object
+description: 1 quyền cổ đông của tiểu khoản.
+properties:
+  accountId:
+    type: string
+  depositoryNumber:
+    type: string
+  fullName:
+    type: string
+  ownNumberOfShare:
+    type: integer
+    format: int64
+    description: Number of shares owned at record date.
+  ratio:
+    type: string
+    description: Right ratio (e.g. `1:5`).
+  status:
+    $ref: 'UserRightStatus.yaml'
+  userRightRegisterStatus:
+    $ref: 'UserRightRegisterStatus.yaml'
+  caMastId:
+    type: string
+    description: Corporate action master ID.
+  amount:
+    type: integer
+    format: int64
+  symbol:
+    type: string
+    example: VNM
+  toSymbol:
+    type:
+      - string
+      - 'null'
+    description: Target symbol (for stock-conversion events).
+  numberOfWaitingStock:
+    type: integer
+    format: int64
+  waitingAmountForReturn:
+    type: integer
+    format: int64
+  rightOffRate:
+    type: string
+    description: Right offering rate.
+  buyPrice:
+    type: integer
+    format: int64
+    description: Subscription price (for stock rights).
+  allowRegister:
+    type: boolean
+    description: Whether registration is allowed.
+  totalStocksCanBuy:
+    type: integer
+    format: int64
+  totalPayAmount:
+    type: integer
+    format: int64
+  startDate:
+    type: string
+    format: date
+  finishDate:
+    type: string
+    format: date
+  startDateTransfer:
+    type: string
+    format: date
+  actionDate:
+    type: string
+    format: date
+    description: Record date / ex-date.
+  finishDateTransfer:
+    type: string
+    format: date
+  reportDate:
+    type: string
+    format: date
+    description: Used for sorting (descending).
+  type:
+    $ref: 'UserRightType.yaml'
+  stockName:
+    type: string
+  totalVolume:
+    type: integer
+    format: int64
+  totalValue:
+    type: integer
+    format: int64
+  referencePrice:
+    type: integer
+    format: int64
+  closePrice:
+    type: integer
+    format: int64
+  ceilingPrice:
+    type: integer
+    format: int64
+  floorPrice:
+    type: integer
+    format: int64
+  predictPrice:
+    type: integer
+    format: int64
+  changePrice:
+    type: integer
+    format: int64
+  hasRead:
+    type: boolean
+    description: Whether the user has read this right notification.

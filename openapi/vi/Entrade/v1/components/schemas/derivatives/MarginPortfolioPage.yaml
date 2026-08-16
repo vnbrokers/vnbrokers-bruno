@@ -1,0 +1,87 @@
+type: object
+properties:
+  total:
+    type: number
+    description: Tổng số các gói vay
+  data:
+    type: array
+    description: Danh sách các gói vay
+    items:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Mã gói vay
+        bankId:
+          type: number
+        bankAccountId:
+          type: number
+        name:
+          type: string
+          description: Tên gói vay
+        interestRate:
+          type: number
+          description: Phí đóng vị thế
+        tradingFeeRate:
+          type: number
+          description: Phí giao dịch lệnh
+        overdueInterestRate:
+          type: number
+        loanTerm:
+          type: number
+        maxLoanPool:
+          type: number
+        coInvestTaxRate:
+          type: number
+          description: Phần trăm thuế
+        createdDate:
+          type: string
+        modifiedDate:
+          type: string
+        closedPositionFee:
+          type: number
+          description: Phí giữ vị thế qua đêm
+        tradingTaxRate:
+          type: number
+        portfolio:
+          type: array
+          description: Các mã áp dụng gói vay
+          items:
+            type: object
+            properties:
+              symbol:
+                type: string
+                description: Mã
+              initialRate:
+                type: number
+                description: Tỷ lệ cọc ban đầu
+              maintenanceRate:
+                type: number
+                description: Tỷ lệ cọc duy trì
+              liquidateRate:
+                type: number
+                description: Tỷ lệ cọc xử lý
+              overnightRate:
+                type: number
+                description: Tỷ lệ cọc giữ qua đêm
+              dailyStockBorrowFee:
+                type: number
+              withdrawalRate:
+                type: number
+              additionalRate:
+                type: number
+              companySecureRate:
+                type: number
+              vsdSecureRate:
+                type: number
+              bankSecureRate:
+                type: number
+        assetManagementOvernightFee:
+          type: number
+        autoAdvanceRealizedProfit:
+          type: boolean
+          description: Có tự động tính lãi đã chốt vào sức mua hay không
+        displaySymbols:
+          type: array
+          items:
+            type: string

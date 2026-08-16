@@ -1,0 +1,31 @@
+get:
+  operationId: getConditionalOrderStatusHistory
+  tags:
+    - Lệnh điều kiện
+  summary: Lịch sử trạng thái lệnh điều kiện
+  description: Lấy lịch sử thay đổi trạng thái của một lệnh điều kiện.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - name: fcoId
+      in: query
+      description: ID của lệnh điều kiện cần truy vấn lịch sử trạng thái.
+      required: true
+      schema:
+        type: string
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/FcoStatusHistoryResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

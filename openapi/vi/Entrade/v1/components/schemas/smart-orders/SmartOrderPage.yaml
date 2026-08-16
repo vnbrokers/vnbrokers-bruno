@@ -1,0 +1,10 @@
+type: object
+properties:
+  total:
+    type: number
+    description: Tổng số các lệnh điều kiện
+  data:
+    type: array
+    description: Danh sách các lệnh điều kiện
+    items:
+      $ref: ./SmartOrder.yaml

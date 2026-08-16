@@ -1,0 +1,40 @@
+type: object
+properties:
+  pageSize:
+    description: Số lượng bản ghi trên mỗi trang.
+    type: integer
+  pageIndex:
+    description: Chỉ số trang.
+    type: integer
+  pagesCount:
+    description: Tổng số trang.
+    type: integer
+  itemsCount:
+    description: Tổng số bản ghi.
+    type: integer
+  data:
+    description: Dữ liệu trả về.
+    type: array
+    items:
+      type: object
+      properties:
+        symbol:
+          description: Mã chứng khoán hoặc mã hợp đồng phái sinh.
+          type: string
+        exchange:
+          description: Sàn giao dịch.
+          type: string
+        tradingDate:
+          description: Ngày giao dịch.
+          type: string
+        ceiling:
+          description: Giá trần.
+          type: string
+        floor:
+          description: Giá sàn.
+          type: string
+        refPrice:
+          description: Giá tham chiếu.
+          type: string
+
+

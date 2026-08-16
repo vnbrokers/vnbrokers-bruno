@@ -1,0 +1,18 @@
+type: object
+properties:
+  clientRequestId:
+    description: Định danh yêu cầu do client tạo.
+    type: string
+  orderId:
+    description: Định danh lệnh do SSI tạo.
+    type: string
+  orderStatus:
+    description: Trạng thái lệnh.
+    type: string
+  clientModifyId:
+    description: Định danh yêu cầu sửa lệnh do client tạo.
+    type: string
+  clientCancelId:
+    description: Định danh yêu cầu hủy lệnh do client tạo.
+    type: string
+

@@ -1,0 +1,26 @@
+get:
+  operationId: getWorkingDates
+  tags:
+    - Dữ liệu thị trường
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Ngày làm việc
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              workingDates:
+                type: array
+                items:
+                  type: string
+                  format: date
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

@@ -1,0 +1,73 @@
+"post":
+  operationId: postKhronosOrderChange
+  tags:
+    - Lệnh phái sinh
+  "summary": "Sửa lệnh thường phái sinh"
+  "description": "Sửa lệnh thường phái sinh."
+  responses:
+    "401":
+      $ref: ../../../components/responses/Unauthorized.yaml
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              rc:
+                type: string
+                description: "Mã kết quả, 1 = thành công."
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    orderNo:
+                      type: string
+                      description: "Số hiệu lệnh."
+                    status:
+                      type: string
+                      description: "Trạng thái (PC = pending change)."
+                    showPrice:
+                      type: string
+                      description: "Giá mới."
+                    volume:
+                      type: string
+                      description: "Khối lượng mới."
+                    pk_orderNo:
+                      type: string
+                      description: "Key lệnh."
+  "requestBody":
+    "required": true
+    "content":
+      "application/json":
+        "schema":
+          "type": "object"
+          "properties":
+            "accountId":
+              "type": "string"
+              "description": "Mã tài khoản lưu ký."
+            "subAccountId":
+              "type": "string"
+              "description": "Phái sinh sub-Số tiểu khoản."
+            "orderNo":
+              "type": "string"
+              "description": "orderNo từ API đặt lệnh."
+            "refId":
+              "type": "string"
+              "description": "Unique reference ID."
+            "nvol":
+              "type": "number"
+              "format": "double"
+              "description": "New Khối lượng (> 0)."
+            "nprice":
+              "type": "number"
+              "format": "double"
+              "description": "New Giá."
+          "required":
+            - "accountId"
+            - "subAccountId"
+            - "orderNo"
+            - "refId"
+            - "nvol"
+            - "nprice"

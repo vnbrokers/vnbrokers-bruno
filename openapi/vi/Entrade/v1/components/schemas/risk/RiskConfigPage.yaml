@@ -1,0 +1,8 @@
+type: object
+properties:
+  total:
+    type: number
+  data:
+    type: array
+    items:
+      $ref: ./RiskConfig.yaml

@@ -1,0 +1,6 @@
+type: object
+description: |
+  Alias của `CommodityIndexData`. `/gold-providers` và `/metal-providers`
+  trả về array có cùng shape với row của `/gold` và `/silver`.
+allOf:
+  - $ref: 'CommodityIndexData.yaml'

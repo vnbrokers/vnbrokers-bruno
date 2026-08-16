@@ -1,0 +1,16 @@
+type: object
+description: 1 điểm dữ liệu NAV (kèm giá trị benchmark cùng ngày).
+properties:
+  date:
+    type: string
+    format: date
+    description: Ngày NAV, format `YYYY-MM-DD`.
+    example: '2025-04-30'
+  nav:
+    type: number
+    description: NAV của quỹ.
+    example: 18234.56
+  benchmark_value:
+    type: number
+    description: Giá trị benchmark cùng ngày.
+    example: 1284.91

@@ -1,0 +1,78 @@
+get:
+  operationId: macroGetEconomicCalendarEvents
+  tags:
+    - Kinh tế vĩ mô
+  summary: Lịch sự kiện kinh tế sắp tới
+  description: |
+    Lịch các sự kiện kinh tế sắp diễn ra trên toàn cầu (CPI release, Fed
+    meeting, PMI announcement, GDP data, …) trong N tuần tới. Cover 6 nền
+    kinh tế lớn — Trung Quốc, Khu vực đồng Euro, Nhật Bản, Mỹ, Anh, Việt
+    Nam.
+
+    Mặc định `weeks=1` trả về sự kiện trong 7 ngày tới. Sort theo `date`
+    tăng dần (gần nhất → xa nhất). `actual` là chuỗi rỗng `""` khi sự kiện
+    chưa diễn ra. Dữ liệu cache với TTL 1 giờ.
+
+    `impact` cho biết mức ảnh hưởng dự kiến tới thị trường: `1` = thấp,
+    `2` = trung bình, `3` = cao — UI thường lọc/highlight theo level này.
+  parameters:
+    - name: weeks
+      in: query
+      required: false
+      description: Số tuần kế tiếp cần lấy sự kiện (mặc định 1 = 7 ngày tới).
+      schema:
+        type: integer
+        default: 1
+        minimum: 1
+        example: 2
+    - name: country
+      in: query
+      required: false
+      description: Lọc theo quốc gia. Bỏ qua để lấy sự kiện của mọi quốc gia hỗ trợ.
+      schema:
+        $ref: '../../components/schemas/market/EconomicCountry.yaml'
+  responses:
+    '200':
+      description: Trả về `data` mảng các sự kiện kinh tế sắp diễn ra, sort `date` tăng dần.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/market/EconomicCalendarEventsResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - id: 1
+                date: '2026-04-25'
+                country: United States
+                event: Fed Interest Rate Decision
+                actual: ''
+                previous: 5.25%
+                consensus: 5.50%
+                forecast: 5.50%
+                impact: 3
+                category: Interest Rate
+              - id: 2
+                date: '2026-04-26'
+                country: Vietnam
+                event: CPI MoM
+                actual: ''
+                previous: 0.2%
+                consensus: 0.3%
+                forecast: 0.3%
+                impact: 2
+                category: Inflation
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/market/financial-data/economic-calendar-events?weeks=2&country=United%20States"

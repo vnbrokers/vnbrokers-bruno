@@ -1,0 +1,85 @@
+get:
+  operationId: listConditionalOrders
+  tags:
+    - Lệnh điều kiện
+  summary: Danh sách lệnh điều kiện
+  description: Lấy danh sách các lệnh điều kiện đã tạo theo bộ lọc.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - name: fcoId
+      in: query
+      description: ID của lệnh điều kiện cần truy vấn.
+      required: false
+      schema:
+        type: string
+    - name: accountNo
+      in: query
+      description: Tài khoản đặt lệnh.
+      required: true
+      schema:
+        type: string
+    - name: type
+      in: query
+      description: Loại lệnh điều kiện cần lọc.
+      required: false
+      schema:
+        type: string
+    - name: processStatus
+      in: query
+      description: Trạng thái lệnh điều kiện cần lọc. Hỗ trợ lọc nhiều trạng thái cùng lúc, phân cách bằng dấu phẩy.
+      required: false
+      schema:
+        type: string
+    - name: symbol
+      in: query
+      description: Mã chứng khoán hoặc mã hợp đồng phái sinh cần lọc.
+      required: false
+      schema:
+        type: string
+    - name: side
+      in: query
+      description: Chiều mua hoặc bán của lệnh.
+      required: false
+      schema:
+        type: string
+    - name: from
+      in: query
+      description: Ngày bắt đầu lọc, định dạng `YYYY/MM/DD`.
+      required: false
+      schema:
+        type: string
+    - name: to
+      in: query
+      description: Ngày kết thúc lọc, định dạng `YYYY/MM/DD`.
+      required: false
+      schema:
+        type: string
+    - name: pageIndex
+      in: query
+      description: Chỉ số trang khi phân trang kết quả, bắt đầu từ 1. Mặc định là 1.
+      required: false
+      schema:
+        type: integer
+    - name: pageSize
+      in: query
+      description: Số lượng bản ghi trên mỗi trang. Mặc định là 10.
+      required: false
+      schema:
+        type: integer
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/FcoListResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

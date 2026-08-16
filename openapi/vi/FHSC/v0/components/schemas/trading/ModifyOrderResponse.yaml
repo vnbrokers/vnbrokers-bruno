@@ -1,0 +1,14 @@
+allOf:
+  - $ref: '../common/EnvelopeBase.yaml'
+  - type: object
+    required:
+      - result
+    properties:
+      result:
+        type: array
+        description: |
+          Mảng kết quả — thông thường chứa **đúng 1** entry phản ánh trạng
+          thái lệnh sau khi sửa. Khi lệnh đã khớp một phần, server có thể
+          trả `code = -701111` nghĩa là chỉ sửa được phần unmatched.
+        items:
+          $ref: 'OrderExecutionResult.yaml'

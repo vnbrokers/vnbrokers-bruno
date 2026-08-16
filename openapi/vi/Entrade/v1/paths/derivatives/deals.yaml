@@ -1,0 +1,43 @@
+get:
+  operationId: listDerivativeDeals
+  tags:
+    - Phái sinh
+  summary: Lấy danh sách deals
+  description: Lấy danh sách deals Phái Sinh.
+  parameters:
+    - name: investorAccountId
+      in: query
+      description: Mã tiểu khoản
+      schema:
+        type: number
+    - name: _start
+      in: query
+      description: Index lấy deal đầu tiên
+      schema:
+        type: number
+    - name: _end
+      in: query
+      description: Index lấy deal cuối cùng
+      schema:
+        type: number
+    - name: _sort
+      in: query
+      description: Field dùng để sort
+      schema:
+        type: string
+    - name: _order
+      in: query
+      description: Thứ tự
+      schema:
+        type: string
+  responses:
+    "200":
+      description: Thành công - trả về danh sách deals
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/derivatives/DerivativeDealPage.yaml
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml

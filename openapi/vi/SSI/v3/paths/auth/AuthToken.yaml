@@ -1,0 +1,46 @@
+post:
+  operationId: issueToken
+  tags:
+    - Xác thực
+  summary: Cấp access token và refresh token
+  description: Xác thực apiKey/apiSecret để lấy access token và refresh token (kèm thông tin hết hạn).
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - apiKey
+            - apiSecret
+          properties:
+            apiKey:
+              type: string
+              description: API key do SSI/FastConnect cấp cho ứng dụng.
+            apiSecret:
+              type: string
+              description: API secret tương ứng với apiKey.
+            otp:
+              type:
+                - string
+                - 'null'
+              description: Mã OTP (SMS OTP hoặc SmartOTP) cần phải có nếu bạn muốn token cấp ra có quyền thực hiện giao dịch. Trường hợp chỉ sử dụng để truy vấn dữ liệu (data, query trading) thì không cần truyền OTP.
+            transactionId:
+              type:
+                - string
+                - 'null'
+              description: Mã transaction trả về từ API `auth/requestOtp` khi tài khoản dùng 2FA loại SmartOTP và đã kích hoạt luồng phê duyệt qua ứng dụng iBoard.
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/TokenResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  security: []

@@ -1,0 +1,15 @@
+allOf:
+  - $ref: '../common/EnvelopeBase.yaml'
+  - type: object
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        items:
+          $ref: 'GoldChartPoint.yaml'
+      traceId:
+        type: string
+        format: uuid
+        description: Request trace ID do server sinh, dùng để debug và đối chiếu log.
+        example: 29a6c22e-bf57-4c1d-8fcd-0cac7ff229cb

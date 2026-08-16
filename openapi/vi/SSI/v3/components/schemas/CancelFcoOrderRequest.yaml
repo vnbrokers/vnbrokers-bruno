@@ -1,0 +1,22 @@
+type: object
+required:
+  - fcoId
+properties:
+  fcoId:
+    description: ID của lệnh điều kiện cần hủy.
+    type:
+      - string
+      - 'null'
+  code:
+    description: Mã xác thực OTP hoặc mã PIN dùng để xác thực giao dịch.
+    type:
+      - string
+      - 'null'
+  deviceId:
+    description: Định danh thiết bị thực hiện gửi yêu cầu. Thông thường dùng MAC address hoặc IMEI của thiết bị.
+    type: string
+  userAgent:
+    description: Thông tin về trình duyệt hoặc ứng dụng gửi yêu cầu.
+    type:
+      - string
+      - 'null'

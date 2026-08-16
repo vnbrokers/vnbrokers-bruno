@@ -1,0 +1,16 @@
+type: string
+description: |
+  Phân loại quỹ mở.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `STOCK_FUND` | Quỹ cổ phiếu |
+  | `BOND_FUND` | Quỹ trái phiếu |
+  | `BALANCE_FUND` | Quỹ cân bằng (mix cổ phiếu / trái phiếu) |
+enum:
+  - STOCK_FUND
+  - BOND_FUND
+  - BALANCE_FUND
+x-enum-varnames:
+  - STOCK_FUND
+  - BOND_FUND
+  - BALANCE_FUND

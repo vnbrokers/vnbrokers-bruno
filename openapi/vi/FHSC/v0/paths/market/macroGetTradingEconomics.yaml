@@ -1,0 +1,79 @@
+get:
+  operationId: macroGetTradingEconomics
+  tags:
+    - Kinh tế vĩ mô
+  summary: Chỉ số kinh tế lịch sử (Trading Economics)
+  description: |
+    Dữ liệu chỉ số kinh tế lịch sử lấy từ Trading Economics, lọc theo quốc
+    gia (bắt buộc), nhóm chỉ số (optional), và năm (optional).
+
+    Bộ dữ liệu cover 6 nền kinh tế lớn — Trung Quốc, Khu vực đồng Euro,
+    Nhật Bản, Mỹ, Anh, Việt Nam — chia theo 9 nhóm (GDP, Labour, Prices,
+    Money, Trade, Government, Business, Consumer, Housing).
+
+    Kết quả sort theo `year DESC, month DESC` (mới nhất ở đầu mảng).
+    `lastValue` và `previousValue` có thể là `null` khi nguồn chưa có dữ
+    liệu.
+  parameters:
+    - name: country
+      in: query
+      required: true
+      description: Tên quốc gia (full name). Bắt buộc.
+      schema:
+        $ref: '../../components/schemas/market/EconomicCountry.yaml'
+    - name: category
+      in: query
+      required: false
+      description: Lọc theo nhóm chỉ số (optional).
+      schema:
+        $ref: '../../components/schemas/market/TradingEconomicsCategory.yaml'
+    - name: year
+      in: query
+      required: false
+      description: Lọc theo năm cụ thể, trong khoảng 2000–2100.
+      schema:
+        type: integer
+        minimum: 2000
+        maximum: 2100
+        example: 2024
+  responses:
+    '200':
+      description: Trả về `data` mảng các điểm dữ liệu chỉ số kinh tế, sort `year DESC, month DESC`.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/market/TradingEconomicsResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - indicator: Inflation Rate
+                country: United States
+                category: Prices
+                lastValue: 3.4
+                previousValue: 3.2
+                year: 2024
+                month: 3
+                unit: '%'
+              - indicator: Inflation Rate
+                country: United States
+                category: Prices
+                lastValue: 3.2
+                previousValue: 3.1
+                year: 2024
+                month: 2
+                unit: '%'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/market/financial-data/trading-economics?country=United%20States&category=Prices&year=2024"

@@ -1,0 +1,19 @@
+type: string
+description: |
+  Mã sàn chứng khoán Việt Nam.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `HOSE` | Sở Giao dịch Chứng khoán TP. HCM |
+  | `HNX` | Sở Giao dịch Chứng khoán Hà Nội |
+  | `UPCOM` | Thị trường công ty đại chúng chưa niêm yết |
+  | `HCX` | Sàn hàng hoá TP. HCM (phái sinh) |
+enum:
+  - HOSE
+  - HNX
+  - UPCOM
+  - HCX
+x-enum-varnames:
+  - HOSE
+  - HNX
+  - UPCOM
+  - HCX

@@ -1,0 +1,28 @@
+get:
+  operationId: getBrokerAccountsCareBy
+  tags:
+    - Tài khoản
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Danh sách tiểu khoản quản lý
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              careBy:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+              total:
+                type: integer
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

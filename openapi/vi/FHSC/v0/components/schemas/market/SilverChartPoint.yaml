@@ -1,0 +1,25 @@
+type: object
+description: |
+  1 điểm dữ liệu trên biểu đồ giá bạc (trả về từ
+  `/market/financial-data/silver-chart`). Bạc không có split bar / ring
+  như vàng — chỉ có giá bạc trong nước và giá bạc thế giới (đã quy đổi),
+  đơn vị nghìn VND / chỉ.
+properties:
+  date:
+    type: string
+    description: Point date in `YYYY-MM-DD` format.
+    example: '2026-03-23'
+  silver_bar:
+    type:
+      - number
+      - 'null'
+    description: Domestic silver bar price.
+    example: 266.3
+  silver_global:
+    type:
+      - number
+      - 'null'
+    description: Global silver price (USD/oz, converted to thousand VND / chỉ).
+    example: 220.2
+required:
+  - date

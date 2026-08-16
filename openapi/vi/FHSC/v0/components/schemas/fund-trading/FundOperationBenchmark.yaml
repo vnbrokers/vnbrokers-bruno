@@ -1,0 +1,39 @@
+type: object
+description: Các chỉ số hoạt động (AUM / số nhà đầu tư / dòng tiền) của 1 quỹ trong response của `benchmark/operation`.
+properties:
+  fund_name:
+    type: string
+    example: VESAF
+  image_url:
+    type: string
+    format: uri
+    description: URL logo công ty quản lý.
+  aum:
+    type: integer
+    format: int64
+    description: AUM hiện tại (VND).
+  changed_aum:
+    type: integer
+    format: int64
+    description: Thay đổi AUM trong khoảng thời gian (VND).
+  changed_aum_percent:
+    type: number
+    description: '% thay đổi AUM trong khoảng thời gian.'
+  investors:
+    type: integer
+    description: Số nhà đầu tư hiện tại.
+  changed_investors:
+    type: integer
+    description: Thay đổi số nhà đầu tư trong khoảng thời gian.
+  changed_investors_percent:
+    type: number
+    description: '% thay đổi số nhà đầu tư.'
+  total_fund_flow:
+    type: integer
+    format: int64
+    description: Tổng dòng tiền ròng trong khoảng thời gian (VND).
+  fund_flows:
+    type: array
+    description: Chi tiết dòng tiền theo từng tháng.
+    items:
+      $ref: 'FundFlowEntry.yaml'

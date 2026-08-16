@@ -1,0 +1,58 @@
+get:
+  operationId: fundsBenchmarkGrowth
+  tags:
+    - Quỹ mở
+  summary: Mô phỏng tăng trưởng của số tiền đầu tư cố định qua nhiều quỹ
+  description: |
+    Mô phỏng giá trị danh mục cuối kỳ khi đầu tư cùng 1 số tiền VND vào
+    nhiều quỹ song song. Tất cả field tiền tệ đều là VND.
+
+    Endpoint này yêu cầu `period` (bắt buộc), KHÔNG nhận `from-month` /
+    `to-month`.
+  parameters:
+    - $ref: '../../components/parameters/FundNamesCsv.yaml'
+    - name: amount
+      in: query
+      required: true
+      description: Số tiền đầu tư (VND).
+      schema:
+        type: integer
+        format: int64
+        example: 10000000
+    - name: period
+      in: query
+      required: true
+      description: Khoảng thời gian mô phỏng (bắt buộc cho endpoint growth).
+      schema:
+        $ref: '../../components/schemas/fund-trading/FundPeriod.yaml'
+  responses:
+    '200':
+      description: Trả về `data` mảng kết quả mô phỏng cho mỗi quỹ.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/fund-trading/FundGrowthBenchmarkResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - fund_name: VESAF
+                profit_percent: 18.4
+                current_amount: 11840000
+              - fund_name: DCDS
+                profit_percent: 14.2
+                current_amount: 11420000
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/fund-trading/public/fund-certificates/benchmark/growth?fund-names=VESAF,DCDS&amount=10000000&period=ONE_YEAR"

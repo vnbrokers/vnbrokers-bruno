@@ -1,0 +1,10 @@
+allOf:
+  - $ref: '../common/EnvelopeBase.yaml'
+  - type: object
+    required:
+      - result
+    properties:
+      result:
+        type: array
+        items:
+          $ref: 'SubAccount.yaml'

@@ -1,0 +1,7 @@
+type: apiKey
+in: header
+name: X-FH-TIMESTAMP
+description: |
+  Unix time hiện tại tính bằng **milliseconds**, đưới dạng chuỗi số thập phân.
+  Được tính per-request bởi signing middleware. **Không** set thủ công — dùng
+  middleware mẫu trong README.

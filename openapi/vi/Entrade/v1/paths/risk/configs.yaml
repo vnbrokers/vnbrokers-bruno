@@ -1,0 +1,25 @@
+get:
+  operationId: listRiskConfigs
+  tags:
+    - Tài khoản
+  summary: Lấy cấu hình cắt lỗ
+  description: Lấy cấu hình mặc định cắt lỗ (cut loss config).
+  parameters:
+    - name: investorAccountId
+      in: query
+      description: Mã tài khoản của khách hàng
+      schema:
+        type: number
+  responses:
+    "200":
+      description: Thành công - trả về cấu hình cắt lỗ
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: ../../components/schemas/risk/RiskConfigPage.yaml
+              - $ref: ../../components/schemas/risk/RiskConfigV1Page.yaml
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml

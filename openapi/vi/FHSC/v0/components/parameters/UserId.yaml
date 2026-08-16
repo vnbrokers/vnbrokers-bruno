@@ -1,0 +1,9 @@
+name: userId
+in: path
+required: true
+description: |
+  User ID. Được lấy từ bootstrap flow (`GET /users/v1/users/me`).
+schema:
+  type: integer
+  format: int64
+  example: 123456

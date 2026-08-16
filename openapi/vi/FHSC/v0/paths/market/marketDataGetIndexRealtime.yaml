@@ -1,0 +1,100 @@
+get:
+  operationId: marketDataGetIndexRealtime
+  tags:
+    - Dữ liệu giao dịch
+  summary: Chỉ số thị trường realtime
+  description: |
+    Giá trị realtime của 1 hoặc nhiều chỉ số thị trường chứng khoán Việt
+    Nam (VNINDEX, HNXINDEX, UPCOMINDEX, VN30, HNX30) kèm thay đổi điểm,
+    % thay đổi, tham chiếu và tổng khối lượng khớp.
+
+    Truyền nhiều mã bằng cách phân tách dấu phẩy (`?index=VNINDEX,HNX30`).
+    `result` **luôn là array** — 1 phần tử cho mỗi mã có dữ liệu; truyền
+    mã đơn vẫn trả array 1 phần tử.
+  parameters:
+    - name: index
+      in: query
+      required: true
+      description: |
+        Mã chỉ số cần lấy. Truyền nhiều mã phân tách bằng dấu phẩy —
+        ví dụ `VNINDEX,HNX30`.
+      style: form
+      explode: false
+      schema:
+        type: array
+        minItems: 1
+        items:
+          $ref: '../../components/schemas/market/MarketIndex.yaml'
+      example:
+        - VNINDEX
+  responses:
+    '200':
+      description: Trả về mảng snapshot chỉ số trong `result` (1 phần tử / mã).
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/market/IndexRealtimeResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            result:
+              - index: VNINDEX
+                indexValue: 1792.6
+                allQuantity: 248009131
+                change: 2.07
+                changePercent: 0.12
+                reference: 1790.53
+                allValue: 6543210000000
+                advances: 245
+                declines: 168
+                nochanges: 52
+                ceiling: 9
+                floor: 5
+                values:
+                  - 1790.53
+                  - 1791.84
+                  - 1792.6
+                volumes:
+                  - 85230000
+                  - 167450000
+                  - 248009131
+                times:
+                  - 1780300800000
+                  - 1780304400000
+                  - 1780308000000
+                advancesArr:
+                  - 180
+                  - 220
+                  - 245
+                declinesArr:
+                  - 210
+                  - 185
+                  - 168
+                nochangesArr:
+                  - 60
+                  - 58
+                  - 52
+                ceilings:
+                  - 4
+                  - 7
+                  - 9
+                floors:
+                  - 9
+                  - 7
+                  - 5
+                sessionInExchange: PROGRESS
+                name: VNINDEX
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/market/index-realtime?index=VNINDEX"

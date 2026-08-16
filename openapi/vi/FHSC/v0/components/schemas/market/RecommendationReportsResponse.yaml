@@ -1,0 +1,15 @@
+allOf:
+  - $ref: '../common/EnvelopeBase.yaml'
+  - type: object
+    required:
+      - data
+    properties:
+      data:
+        description: |
+          Returns a `RecommendationReport` object when reports exist, or an
+          empty array `[]` when none are available for the symbol.
+        oneOf:
+          - $ref: 'RecommendationReport.yaml'
+          - type: array
+            maxItems: 0
+            items: {}

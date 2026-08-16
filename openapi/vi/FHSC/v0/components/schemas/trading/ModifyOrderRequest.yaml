@@ -1,0 +1,25 @@
+type: object
+description: |
+  Body của request sửa lệnh
+  (`PUT /trading/oa/sub-accounts/{subAccountId}/orders/{orderId}`). Cả 2
+  field đều optional nhưng phải có **ít nhất 1**.
+  Chỉ sửa được trên phần lệnh **chưa khớp** và khi trạng thái lệnh thuộc
+  `SENT` hoặc `WAITING_TO_SEND`. Với lệnh đã khớp một phần, server sẽ
+  return `code = -701111` và sửa chỉ áp dụng cho phần unmatched.
+minProperties: 1
+properties:
+  quantity:
+    type: integer
+    format: int64
+    minimum: 1
+    description: Số lượng mới (bội số lot size).
+    example: 200
+  price:
+    type: integer
+    format: int64
+    minimum: 1
+    description: Giá limit mới, đơn vị **VND** (không nhân 1000).
+    example: 26000
+example:
+  quantity: 200
+  price: 26000

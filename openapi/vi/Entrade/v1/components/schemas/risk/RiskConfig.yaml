@@ -1,0 +1,40 @@
+type: object
+properties:
+  investorId:
+    type: number
+    description: Mã khách hàng
+  investorAccountId:
+    type: number
+    description: Mã tài khoản
+  cutLossRate:
+    type: number
+    description: Mức cắt lỗ hiện tại
+  trailingEnabled:
+    type: boolean
+    description: Có đang bật lệnh cắt lỗ hay không
+  createdDate:
+    type: string
+    description: "Thời điểm (ngày giờ) đặt lệnh, theo định dạng ISO UTC 8601 format datetime. Ví dụ: 2022-07-15T10:00:00.111+07:00"
+  modifiedDate:
+    type: string
+    description: Thời điểm (ngày giờ) thay đổi cuối cùng của lệnh
+  maxCutLossRate:
+    type: number
+    description: Mức cắt lỗ tối đa
+  autoIncreaseDealRate:
+    type: boolean
+  enableAutoDealDepositNoti:
+    type: boolean
+    description: Bật tắt tự động nộp cọc vào deal
+  defaultTakeProfitRate:
+    type: number
+  defaultTakeProfitPriceDelta:
+    type: number
+  defaultTakeProfitEnabled:
+    type: boolean
+  defaultTakeProfitType:
+    type: string
+  defaultTakeProfitOrderDelta:
+    type: number
+  defaultTakeProfitOrderStrategy:
+    type: string

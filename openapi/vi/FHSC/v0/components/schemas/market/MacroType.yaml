@@ -1,0 +1,52 @@
+type: string
+description: |
+  Mã chỉ số kinh tế vĩ mô.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `IIP` | Chỉ số sản xuất công nghiệp |
+  | `CPI` | Chỉ số giá tiêu dùng |
+  | `PMI` | Chỉ số quản lý mua hàng |
+  | `PCE` | Chi tiêu tiêu dùng cá nhân (Mỹ) |
+  | `CORE_PCE` | PCE lõi (Mỹ) |
+  | `NFP` | Bảng lương phi nông nghiệp (Mỹ) |
+  | `GOODS_RETAIL` | Doanh thu bán lẻ — hàng hoá |
+  | `SERVICE_RETAIL` | Doanh thu bán lẻ — dịch vụ |
+  | `TOTAL_EXPORT` | Tổng xuất khẩu |
+  | `FDI_EXPORT` | Xuất khẩu FDI |
+  | `DOMESTIC_EXPORT` | Xuất khẩu nội địa |
+  | `FED_FUNDS_RATE` | Lãi suất Fed Funds (Mỹ) |
+  | `INTERBANK_RATE` | Lãi suất liên ngân hàng |
+  | `GOVERNMENT_10Y_BOND_YIELD` | Lợi suất trái phiếu chính phủ 10 năm |
+  | `UNEMPLOYMENT_RATE` | Tỷ lệ thất nghiệp |
+enum:
+  - IIP
+  - CPI
+  - PMI
+  - PCE
+  - CORE_PCE
+  - NFP
+  - GOODS_RETAIL
+  - SERVICE_RETAIL
+  - TOTAL_EXPORT
+  - FDI_EXPORT
+  - DOMESTIC_EXPORT
+  - FED_FUNDS_RATE
+  - INTERBANK_RATE
+  - GOVERNMENT_10Y_BOND_YIELD
+  - UNEMPLOYMENT_RATE
+x-enum-varnames:
+  - IIP
+  - CPI
+  - PMI
+  - PCE
+  - CORE_PCE
+  - NFP
+  - GOODS_RETAIL
+  - SERVICE_RETAIL
+  - TOTAL_EXPORT
+  - FDI_EXPORT
+  - DOMESTIC_EXPORT
+  - FED_FUNDS_RATE
+  - INTERBANK_RATE
+  - GOVERNMENT_10Y_BOND_YIELD
+  - UNEMPLOYMENT_RATE

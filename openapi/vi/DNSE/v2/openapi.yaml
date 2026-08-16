@@ -1,0 +1,147 @@
+openapi: 3.0.0
+info:
+  title: DNSE LightSpeed API v2
+  version: 1.0.0
+  description: DNSE OpenAPI spec and tests
+servers:
+  - url: https://openapi.dnse.com.vn
+    description: Production
+  - url: https://openapi-uat.dnse.com.vn
+    description: UAT
+tags:
+  - name: Giao dịch
+    description: Xác thực và các hoạt động đặt lệnh.
+  - name: Tài khoản
+    description: Tài khoản, số dư, khoản vay, lệnh và vị thế.
+  - name: Dữ liệu thị trường
+    description: Thông tin mã chứng khoán, báo giá, OHLC và giao dịch.
+paths:
+  /registration/send-email-otp:
+    $ref: './paths/trading/RegistrationSendEmailOtp.yaml'
+
+  /registration/trading-token:
+    $ref: './paths/trading/RegistrationTradingToken.yaml'
+
+  /accounts/{accountNo}/orders/{orderId}:
+    $ref: './paths/trading/AccountsAccountNoOrdersOrderId.yaml'
+
+  /positions/{positionId}/close:
+    $ref: './paths/trading/AccountsPositionsPositionIdClose.yaml'
+
+  /accounts/{accountNo}/balances:
+    $ref: './paths/account/AccountsAccountNoBalances.yaml'
+
+  /accounts:
+    $ref: './paths/account/Accounts.yaml'
+
+  /accounts/{accountNo}/loan-packages:
+    $ref: './paths/account/AccountsAccountNoLoanPackages.yaml'
+
+  /accounts/{accountNo}/ppse:
+    $ref: './paths/account/AccountsAccountNoPpse.yaml'
+
+  /accounts/{accountNo}/orders:
+    $ref: './paths/account/AccountsAccountNoOrders.yaml'
+
+  /accounts/{accountNo}/orders/history:
+    $ref: './paths/account/AccountsAccountNoOrdersHistory.yaml'
+
+  /accounts/{accountNo}/positions:
+    $ref: './paths/account/AccountsAccountNoPositions.yaml'
+
+  /accounts/{accountNo}/corporate-action-history:
+    $ref: './paths/account/AccountsCorporateActionHistory.yaml'
+
+  /accounts/{accountNo}/executions/{orderId}:
+    $ref: './paths/account/AccountsAccountNoExecutionsOrderId.yaml'
+
+  /positions/{positionId}/pnl-configs:
+    $ref: './paths/account/AccountsPositionsPositionIdPnlConfigs.yaml'
+
+  /positions/{positionId}:
+    $ref: './paths/account/AccountsPositionsPositionId.yaml'
+
+  /price/{symbol}/secdef:
+    $ref: './paths/market-data/PriceSymbolSecdef.yaml'
+
+  /instruments:
+    $ref: './paths/market-data/Instruments.yaml'
+
+  /price/ohlc:
+    $ref: './paths/market-data/PriceOhlc.yaml'
+
+  /price/{symbol}/trades:
+    $ref: './paths/market-data/PriceSymbolTrades.yaml'
+
+  /price/{symbol}/trades/latest:
+    $ref: './paths/market-data/PriceSymbolTradesLatest.yaml'
+
+  /price/{symbol}/foreign-trading:
+    $ref: './paths/market-data/PriceSymbolForeignTrading.yaml'
+
+  /price/{symbol}/quotes:
+    $ref: './paths/market-data/PriceSymbolQuotes.yaml'
+
+  /price/{symbol}/quotes/latest:
+    $ref: './paths/market-data/PriceSymbolQuotesLatest.yaml'
+
+  /price/{symbol}/close:
+    $ref: './paths/market-data/PriceSymbolClose.yaml'
+
+  /price/{symbol}/expected-price:
+    $ref: './paths/market-data/PriceSymbolExpectedPrice.yaml'
+
+  /market/trading-session:
+    $ref: './paths/market-data/TradingSession.yaml'
+
+  /market/working-dates:
+    $ref: './paths/market-data/WorkingDates.yaml'
+
+  /brokers/accounts/care-by:
+    $ref: './paths/account/BrokerAccountsCareBy.yaml'
+
+components:
+  schemas:
+    ErrorBody:
+      $ref: './components/schemas/ErrorBody.yaml'
+    PnlConfig:
+      $ref: './components/schemas/PnlConfig.yaml'
+    PnlConfigsPositionResponse:
+      $ref: './components/schemas/PnlConfigsPositionResponse.yaml'
+  responses:
+    BadRequest:
+      $ref: './components/responses/BadRequest.yaml'
+    InternalError:
+      $ref: './components/responses/InternalError.yaml'
+  headers:
+    Content-Length:
+      $ref: './components/headers/ContentLength.yaml'
+    Date:
+      $ref: './components/headers/Date.yaml'
+    Vary:
+      $ref: './components/headers/Vary.yaml'
+    X-Ratelimit-Limit:
+      $ref: './components/headers/XRateLimitLimit.yaml'
+    X-Ratelimit-Remaining:
+      $ref: './components/headers/XRateLimitRemaining.yaml'
+    X-Ratelimit-Reset:
+      $ref: './components/headers/XRateLimitReset.yaml'
+    X-Request-Id:
+      $ref: './components/headers/XRequestId.yaml'
+    X-Frame-Options:
+      $ref: './components/headers/XFrameOptions.yaml'
+    Access-Control-Allow-Credentials:
+      $ref: './components/headers/AccessControlAllowCredentials.yaml'
+    X-Content-Type-Options:
+      $ref: './components/headers/XContentTypeOptions.yaml'
+    X-Xss-Protection:
+      $ref: './components/headers/XXssProtection.yaml'
+  securitySchemes:
+    DnseApiKey:
+      $ref: './components/securitySchemes/DnseApiKey.yaml'
+    DnseAuxDate:
+      $ref: './components/securitySchemes/DnseAuxDate.yaml'
+    DnseSignature:
+      $ref: './components/securitySchemes/DnseSignature.yaml'
+    DnseTradingToken:
+      $ref: './components/securitySchemes/DnseTradingToken.yaml'

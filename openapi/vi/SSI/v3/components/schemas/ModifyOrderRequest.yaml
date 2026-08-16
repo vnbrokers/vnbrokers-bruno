@@ -1,0 +1,69 @@
+type: object
+required:
+  - accountNo
+  - deviceId
+properties:
+  clientModifyId:
+    description: Định danh sửa lệnh do client tạo ra, dùng để đối chiếu trong các phản hồi sau này. Trường này không bắt buộc nhưng nếu có thì nên đảm bảo tính duy nhất để tránh nhầm lẫn khi xử lý phản hồi. Khi để trống thì hệ thống sẽ tự sinh định danh sửa lệnh cho khách hàng và trả về response & streaming.
+    type:
+      - string
+      - 'null'
+  clientRequestId:
+    description: Định danh lệnh gốc do client tạo ra khi đặt lệnh. Khi để trống thì hệ thống sẽ không đối chiếu dựa trên định danh lệnh gốc mà sẽ dựa vào `orderId` để xác định lệnh cần sửa.
+    type:
+      - string
+      - 'null'
+  orderId:
+    description: Định danh lệnh gốc sinh ra bởi hệ thống SSI.
+    type:
+      - string
+      - 'null'
+  accountNo:
+    description: Số tài khoản giao dịch.
+    type: string
+  symbol:
+    description: Mã chứng khoán.
+    type:
+      - string
+      - 'null'
+  side:
+    description: Chiều mua hoặc bán của lệnh giao dịch. (B- Buy/Mua, S- Sell/Bán)
+    type:
+      - string
+      - 'null'
+    enum:
+      - B
+      - S
+  orderType:
+    description: Loại lệnh giao dịch. (LO - Limit Order/Lệnh giới hạn, ATO - At The Open/Lệnh mở cửa, ATC - At The Close/Lệnh đóng cửa, MP - Market Price/Giá thị trường)
+    type:
+      - string
+      - 'null'
+    enum:
+      - LO
+      - ATO
+      - ATC
+      - MP
+  price:
+    description: Giá thay đổi của lệnh. Trường này có thể không bắt buộc tùy theo loại lệnh và quy định sửa lệnh của sàn giao dịch. Ví dụ, đối với lệnh MP (Market Price), giá có thể không cần cung cấp khi sửa lệnh.
+    type:
+      - string
+      - 'null'
+  quantity:
+    description: Khối lượng thay đổi của lệnh. Trường này có thể không bắt buộc tùy theo quy định sửa lệnh của sàn giao dịch. Ví dụ, một số sàn có thể chỉ cho phép sửa giá mà không cho phép sửa khối lượng, hoặc ngược lại.
+    type:
+      - number
+      - 'null'
+  deviceId:
+    description: Định danh thiết bị thực hiện gửi yêu cầu sửa lệnh. Thông thường dùng MAC address hoặc IMEI của thiết bị.
+    type: string
+  userAgent:
+    description: Thông tin về trình duyệt hoặc ứng dụng gửi yêu cầu.
+    type:
+      - string
+      - 'null'
+  ipAddress:
+    description: Địa chỉ IP của thiết bị gửi yêu cầu.
+    type:
+      - string
+      - 'null'

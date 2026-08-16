@@ -1,0 +1,4 @@
+type: apiKey
+in: header
+name: X-API-Key
+description: API key được cấp khi đăng ký dịch vụ DNSE OpenAPI.

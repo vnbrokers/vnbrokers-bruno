@@ -1,0 +1,15 @@
+type: object
+description: |
+  Payload báo cáo khuyến nghị — chứa text khuyến nghị mới nhất và danh
+  sách các report cụ thể. Trả về `[]` (array rỗng) khi stock không có
+  báo cáo nào — xem `oneOf` trong response của endpoint.
+properties:
+  recommendation:
+    type:
+      - string
+      - 'null'
+    description: Latest recommendation description (from the most recent report).
+  recommendationReports:
+    type: array
+    items:
+      $ref: 'IndexRecommendationReport.yaml'

@@ -1,0 +1,34 @@
+type: string
+description: |
+  Nhóm chỉ số kinh tế từ Trading Economics.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `GDP` | Tổng sản phẩm quốc nội |
+  | `Labour` | Lao động (việc làm, thất nghiệp, …) |
+  | `Prices` | Giá cả (CPI, PPI, lạm phát, …) |
+  | `Money` | Tiền tệ (lãi suất, M2, dự trữ ngoại hối, …) |
+  | `Trade` | Thương mại (xuất nhập khẩu, cán cân, …) |
+  | `Government` | Tài khoá chính phủ |
+  | `Business` | Hoạt động doanh nghiệp |
+  | `Consumer` | Tiêu dùng |
+  | `Housing` | Bất động sản |
+enum:
+  - GDP
+  - Labour
+  - Prices
+  - Money
+  - Trade
+  - Government
+  - Business
+  - Consumer
+  - Housing
+x-enum-varnames:
+  - GDP
+  - LABOUR
+  - PRICES
+  - MONEY
+  - TRADE
+  - GOVERNMENT
+  - BUSINESS
+  - CONSUMER
+  - HOUSING

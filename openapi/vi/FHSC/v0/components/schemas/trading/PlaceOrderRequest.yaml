@@ -1,0 +1,67 @@
+type: object
+description: |
+  Body của request đặt lệnh mới
+  (`POST /trading/oa/sub-accounts/{subAccountId}/orders`).
+  Quy tắc field giá theo `type`:
+  - `type = LIMIT` → set `limit_price` (VND); `market_price` để `null`.
+  - `type = MARKET` → set `market_price` (enum `MarketPriceCode`); `limit_price` để `null`.
+required:
+  - sub_account
+  - side
+  - symbol
+  - quantity
+  - type
+properties:
+  sub_account:
+    type: string
+    description: |
+      Sub-account ID dạng extended (kèm hậu tố `.1` / `.6` …), khác với
+      `subAccountId` ở path param. Lấy từ field `sub_account_ext` của
+      response `GET /users/v1/users/{userId}/sub-accounts`.
+    example: 120C000008.1
+  side:
+    $ref: 'OrderSide.yaml'
+  symbol:
+    type: string
+    description: Mã chứng khoán cần đặt lệnh.
+    example: HPG
+  quantity:
+    type: integer
+    format: int64
+    minimum: 1
+    description: |
+      Số lượng cổ phiếu. Lô chẵn HOSE/HNX là bội số 100. Đặt 1..99 là lô
+      lẻ và chỉ chấp nhận `type = LIMIT`.
+    example: 100
+  type:
+    $ref: 'PlaceOrderKind.yaml'
+  limit_price:
+    type:
+      - integer
+      - 'null'
+    format: int64
+    description: |
+      Giá đặt khi `type = LIMIT`, đơn vị **VND** (không nhân 1000). Để
+      `null` khi `type = MARKET`.
+    example: 25500
+  market_price:
+    description: |
+      Mã loại lệnh thị trường khi `type = MARKET`. Để `null` khi
+      `type = LIMIT`.
+    oneOf:
+      - $ref: 'MarketPriceCode.yaml'
+      - type: 'null'
+  stock_type:
+    allOf:
+      - $ref: 'StockTypeOrder.yaml'
+    description: |
+      Phân loại công cụ tài chính. Mặc định `STOCK` nếu bỏ trống.
+example:
+  sub_account: 120C000008.1
+  side: BUY
+  symbol: HPG
+  quantity: 100
+  type: LIMIT
+  limit_price: 25500
+  market_price: null
+  stock_type: STOCK

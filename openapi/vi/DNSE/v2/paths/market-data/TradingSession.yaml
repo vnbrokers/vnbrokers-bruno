@@ -1,0 +1,48 @@
+get:
+  operationId: getTradingSession
+  tags:
+    - Dữ liệu thị trường
+  security:
+    - DnseApiKey: []
+      DnseAuxDate: []
+      DnseSignature: []
+  summary: Thông tin phiên giao dịch
+  parameters:
+    - name: boardId
+      in: query
+      schema:
+        $ref: '../../components/schemas/_common/enums/BoardId.yaml'
+    - name: tscProdGrpId
+      in: query
+      required: true
+      schema:
+        $ref: '../../components/schemas/_common/enums/ProductGrpId.yaml'
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              tradingSessions:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    marketId:
+                      $ref: '../../components/schemas/_common/enums/MarketId.yaml'
+                    boardId:
+                      $ref: '../../components/schemas/_common/enums/BoardId.yaml'
+                    tscProdGrpId:
+                      $ref: '../../components/schemas/_common/enums/ProductGrpId.yaml'
+                    tradingSessionId:
+                      $ref: '../../components/schemas/_common/enums/TradingSessionId.yaml'
+                    eventId:
+                      $ref: '../../components/schemas/_common/enums/EventId.yaml'
+                    time:
+                      type: string
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

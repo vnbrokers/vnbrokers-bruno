@@ -1,0 +1,4 @@
+type: http
+scheme: bearer
+bearerFormat: JWT
+description: Access token lấy từ endpoint /api/v3/auth/token hoặc /api/v3/auth/refresh.

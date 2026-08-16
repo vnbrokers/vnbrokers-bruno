@@ -1,0 +1,85 @@
+get:
+  operationId: assetGetSummary
+  tags:
+    - Tổng tài sản
+  security:
+    - FinhayApiKey: []
+      FinhayTimestamp: []
+      FinhayNonce: []
+      FinhaySignature: []
+  summary: Tổng quan tài sản của user
+  description: |
+    Tổng quan số dư và tài sản của user: tài sản ròng, chi tiết từng loại
+    sản phẩm (stock / fund / bond / hay0), tiền mặt, dư nợ và PnL.
+
+    Với user Level 0 / 1, các field `products.stock`, `products.fund`,
+    `products.bond` và các entry trong `pnl` đều trả về `0`.
+    `products.saving` có thể `null`.
+
+    Để có giá trị NAV / tổng tài sản chính xác nhất, gọi endpoint này KÈM
+    `GET /trading/accounts/{subAccountId}/summary` rồi reconcile field
+    `net_asset_value` — endpoint này tổng hợp cross-product cấp user,
+    còn `accounts/summary` chi tiết theo từng tiểu khoản.
+  parameters:
+    - $ref: '../../components/parameters/UserId.yaml'
+  responses:
+    '200':
+      description: Trả về `data` chứa `net_asset_value`, breakdown theo `products` (stock/fund/bond/hay0), `money` (cash), `debt`, và `pnl` cho từng loại sản phẩm.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/users/UserAssetsSummaryResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              net_asset_value: 162500000
+              products:
+                total: 150000000
+                stock: 120000000
+                fund: 20000000
+                saving: null
+                bond: 10000000
+                hay0: 0
+                hay0_interest: 0
+                hay0_depositing: 0
+                hay0_withdrawing: 0
+              money:
+                total: 12500000
+                ci_balance: 10000000
+                ca_receiving: 0
+                emk_amt: 0
+                receiving_amt: 0
+                baldefovd: 12500000
+              debt:
+                total: 0
+                secure_amount: 0
+                advance_amt: 0
+                sms_fee_amt: 0
+                cidepo_fee_acr: 0
+                owe_deposit: 0
+              pnl:
+                stock:
+                  pnl: 4500000
+                  pnl_rate: 3.9
+                fund:
+                  pnl: 500000
+                  pnl_rate: 2.56
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl \
+          -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          -H "X-FH-TIMESTAMP: $TIMESTAMP_MS" \
+          -H "X-FH-NONCE: $NONCE_UUID" \
+          -H "X-FH-SIGNATURE: $SIGNATURE_HEX" \
+          "https://open-api.fhsc.com.vn/users/v3/users/$USER_ID/assets/summary"

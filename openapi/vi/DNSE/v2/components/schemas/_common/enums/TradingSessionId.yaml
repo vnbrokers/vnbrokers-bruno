@@ -1,0 +1,17 @@
+type: string
+description: |-
+  Mã phiên giao dịch theo từng mã.
+
+  - `UNSPECIFIED`: Không xác định
+  - `10`: ATO
+  - `30`: ATC
+  - `40`: Phiên liên tục
+  - `80`: PCA mã halt
+  - `99`: Đóng bảng
+enum:
+  - 'UNSPECIFIED'
+  - '10'
+  - '30'
+  - '40'
+  - '80'
+  - '99'

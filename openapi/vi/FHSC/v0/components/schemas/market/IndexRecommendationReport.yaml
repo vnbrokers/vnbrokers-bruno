@@ -1,0 +1,55 @@
+type: object
+description: 1 báo cáo khuyến nghị cụ thể.
+properties:
+  stock:
+    type: string
+    description: Mã stock.
+    example: VNM
+  title:
+    type:
+      - string
+      - 'null'
+    description: Tiêu đề báo cáo.
+  source:
+    type:
+      - string
+      - 'null'
+    description: Nguồn báo cáo (mặc định `VietStock`).
+    example: VietStock
+  recommendation_price:
+    type:
+      - number
+      - 'null'
+    description: Giá khuyến nghị mua vào. Hiện luôn là `null`.
+  target_price:
+    type:
+      - number
+      - 'null'
+    description: Giá mục tiêu (target price).
+    example: 85000
+  publish_date:
+    type:
+      - string
+      - 'null'
+    format: date-time
+    description: Ngày phát hành báo cáo.
+  description:
+    type:
+      - string
+      - 'null'
+    description: Mô tả ngắn / tóm tắt nội dung báo cáo.
+  download_url:
+    type:
+      - string
+      - 'null'
+    description: URL tải báo cáo bản đầy đủ (PDF).
+  created_at:
+    type:
+      - string
+      - 'null'
+    format: date-time
+  updated_at:
+    type:
+      - string
+      - 'null'
+    format: date-time

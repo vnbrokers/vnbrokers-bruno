@@ -1,0 +1,92 @@
+get:
+  operationId: fundamentalGetStatement
+  tags:
+    - Phân tích cơ bản
+  summary: Báo cáo tài chính
+  description: |
+    Báo cáo kết quả kinh doanh / bảng cân đối kế toán / lưu chuyển tiền tệ
+    của 1 mã stock, theo format wide — **mỗi row là 1 kỳ báo cáo**, các
+    metric code nằm theo cột. `year` luôn có; `quarter` chỉ có khi
+    `period=quarterly` (giá trị `1`–`4`).
+
+    Bộ metric code (tên romanized tiếng Việt như
+    `luuchuyentienthuantuhoatdongkinhdoanh`, `loinhuanlotruocthue`,
+    `tienvatuongduongtiendaunam`) phụ thuộc vào `type` — income-statement,
+    balance-sheet, cash-flow đều có bộ key khác nhau. Nhiều code có thể
+    `null` khi dữ liệu nguồn thiếu. Example bên dưới là subset đại diện của
+    cash-flow — tham chiếu `additionalProperties` trong schema là nguồn
+    chuẩn.
+  parameters:
+    - name: symbol
+      in: query
+      required: true
+      description: Mã stock (chữ hoa, chữ số).
+      schema:
+        type: string
+        example: VNM
+    - name: type
+      in: query
+      required: true
+      description: Loại báo cáo.
+      schema:
+        $ref: '../../components/schemas/market/FinancialStatementType.yaml'
+    - name: period
+      in: query
+      required: false
+      description: Kỳ báo cáo.
+      schema:
+        $ref: '../../components/schemas/market/FinancialPeriod.yaml'
+    - name: limit
+      in: query
+      required: false
+      description: Số kỳ cần lấy (1–5, mặc định 5).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 5
+        default: 5
+        example: 5
+  responses:
+    '200':
+      description: Trả về `data` mảng các kỳ báo cáo theo format wide — mỗi row là 1 kỳ; metric code khác nhau giữa income-statement / balance-sheet / cash-flow.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/market/FinancialStatementResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - year: 2025
+                quarter: 4
+                loinhuanlotruocthue: 3476999882086
+                khauhaotaisancodinh: 541738993017
+                chiphilaivay: 89980184766
+                loinhuanlotuhoatdongkinhdoanhtruocthaydoivonluudong: 3875782613126
+                tanggiamhangtonkho: -696279778126
+                thuethunhapdoanhnghiepdanop: -367025679910
+                luuchuyentienthuantuhoatdongkinhdoanh: 1738942804862
+                tienchidemuasamxaydungtaisancodinh: -345651260618
+                luuchuyentienthuantuhoatdongdautu: -273822901641
+                tienvaynganhandaihannhanduoc: 6403017072055
+                tienchitranogocvay: -5218255024631
+                cotucloinhuandatrachochusohuu: -6007520145910
+                luuchuyentienthuantusudungvaohoatdongtaichinh: -4822758098486
+                luuchuyentienthuantrongnam: -3357638195265
+                tienvatuongduongtiendaunam: 5154466367051
+                anhhuongcuathaydoitygiahoidoaiquydoingoaite: -1948452915
+                tienvatuongduongtiencuoinam: 1794879718871
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/market/v2/financial-statement/statement?symbol=VNM&type=cash-flow&period=quarterly&limit=5"

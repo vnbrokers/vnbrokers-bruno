@@ -1,0 +1,15 @@
+type: object
+required:
+  - code
+  - msg
+properties:
+  code:
+    description: Mã kết quả hoặc mã xác thực giao dịch.
+    type: integer
+    example: 0
+  msg:
+    description: Thông báo kết quả xử lý.
+    type: string
+    example: Request OTP success
+
+

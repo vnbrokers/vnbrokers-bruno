@@ -1,0 +1,60 @@
+"get":
+  operationId: getAionAccountsAccountNoCashInvestments
+  tags:
+    - Tài khoản
+  "summary": "Thông tin số dư tiền"
+  "description": "Lấy thông tin số dư tiền của tiểu khoản."
+  "parameters":
+    -
+      "name": "accountNo"
+      "in": "path"
+      "required": true
+      "description": "Số tiểu khoản."
+      "schema":
+        "type": "string"
+  responses:
+    "401":
+      $ref: ../../components/responses/Unauthorized.yaml
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              totalCount:
+                type: integer
+                format: int64
+                description: "Tổng số bản ghi trả ra."
+              pageSize:
+                type: integer
+                format: int64
+                description: "Kích thước trang (mặc định = 20)."
+              pageIndex:
+                type: integer
+                format: int64
+                description: "Index trang (mặc định = 1)."
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    bodBalance:
+                      type: number
+                      format: double
+                      description: "Tiền mặt tại TCBS."
+                    cashBalance:
+                      type: number
+                      format: double
+                      description: "Tiền mặt."
+                    pp0forBF:
+                      type: number
+                      format: double
+                      description: "Sức mua cơ bản cho sản phẩm BOND/FUND."
+                    bankAvlBalanceBF:
+                      type: number
+                      format: double
+                      description: "Tổng số dư khả dụng IA cho BOND/FUND."
+                    accountNo:
+                      type: string
+                      description: "Số tiểu khoản."

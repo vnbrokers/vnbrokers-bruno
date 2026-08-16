@@ -1,0 +1,48 @@
+get:
+  operationId: commoditiesGetGoldProviders
+  tags:
+    - Hàng hoá
+  summary: Giá vàng theo nhà cung cấp
+  description: |
+    Giá vàng chia theo nhà cung cấp (PNJ, DOJI, BTMC, SJC, MiHong, …). Row
+    shape giống `/gold` cộng thêm `provider_icon` URL. Đơn vị: `vnd_value`
+    **VND/lượng**, `usd_value` **USD/oz**.
+  responses:
+    '200':
+      description: Trả về `data` mảng giá vàng theo từng nhà cung cấp kèm logo URL.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/market/GoldProvidersResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - index: PNJ_GOLD
+                name: Vàng PNJ
+                short_name: PNJ
+                buy_value: 92600000
+                sell_value: 94700000
+                usd_value: 2352
+                vnd_value: 94700000
+                date: '2024-04-18'
+                provider: PNJ
+                provider_icon: https://cdn.finhay.com/providers/pnj.png
+                updated_at: '2024-04-18T10:00:00Z'
+                change_percent: 0.4
+                buy_value_change_percent: 0.33
+                sell_value_change_percent: 0.46
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/market/financial-data/gold-providers"

@@ -1,0 +1,86 @@
+get:
+  operationId: marketDataGetPriceHistoriesChart
+  tags:
+    - Dữ liệu giao dịch
+  summary: Lịch sử giá dạng biểu đồ
+  description: |
+    Lịch sử giá OHLCV dạng array columnar — `time[i]`, `open[i]`, `close[i]`,
+    `high[i]`, `low[i]`, `volume[i]` cùng index `i` biểu diễn 1 cây nến.
+
+    `from` và `to` là Unix timestamp tính bằng **giây**, không phải
+    mili-giây.
+  parameters:
+    - name: symbol
+      in: query
+      required: true
+      description: Mã stock.
+      schema:
+        type: string
+        example: VNM
+    - name: resolution
+      in: query
+      required: true
+      description: Độ phân giải biểu đồ. Mặc định `1D`.
+      schema:
+        $ref: '../../components/schemas/market/Resolution.yaml'
+    - name: from
+      in: query
+      required: true
+      description: Thời điểm bắt đầu, Unix timestamp tính bằng **giây** (không phải mili-giây).
+      schema:
+        type: integer
+        minimum: 0
+        example: 1704067200
+    - name: to
+      in: query
+      required: true
+      description: Thời điểm kết thúc, Unix timestamp tính bằng **giây** (không phải mili-giây).
+      schema:
+        type: integer
+        minimum: 0
+        example: 1711929600
+  responses:
+    '200':
+      description: Trả về `data` shape columnar — `time[i]`, `open[i]`, `close[i]`, `high[i]`, `low[i]`, `volume[i]` cùng index `i` biểu diễn 1 cây nến.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/market/PriceHistoriesChartResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              symbol: VNM
+              resolution: 1D
+              time:
+                - 1704067200
+                - 1704153600
+              open:
+                - 72000
+                - 72500
+              close:
+                - 72500
+                - 73000
+              high:
+                - 73000
+                - 73500
+              low:
+                - 71500
+                - 72000
+              volume:
+                - 1500000
+                - 1800000
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/market/price-histories-chart?symbol=VNM&resolution=1D&from=1704067200&to=1711929600"

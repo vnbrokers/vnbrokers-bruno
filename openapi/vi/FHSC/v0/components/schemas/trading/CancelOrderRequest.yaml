@@ -1,0 +1,20 @@
+type: object
+description: |
+  Body của request huỷ lệnh
+  (`DELETE /trading/oa/sub-accounts/{subAccountId}/orders/{orderId}`).
+  > ⚠️ Đây là DELETE request có body — không chuẩn HTTP nhưng là contract
+  > thật của upstream. Client phải tính `X-FH-BODYHASH` từ body này.
+  Chỉ huỷ được khi trạng thái lệnh thuộc `SENT`, `WAITING_TO_SEND`,
+  `SENDING`. Với lệnh đã khớp một phần, huỷ chỉ áp dụng cho phần
+  unmatched.
+required:
+  - sub_account
+properties:
+  sub_account:
+    type: string
+    description: |
+      Sub-account ID dạng extended (kèm hậu tố `.1` / `.6` …) — cùng giá
+      trị dùng cho `sub_account` trong place-order.
+    example: 120C000008.1
+example:
+  sub_account: 120C000008.1

@@ -1,0 +1,17 @@
+type: object
+properties:
+  index:
+    description: Mã chỉ số.
+    type: string
+  indexName:
+    description: Tên chỉ số.
+    type: string
+  board:
+    description: Mã sàn giao dịch.
+    type: string
+    enum:
+      - HOSE
+      - HNX
+      - UPCOM
+
+

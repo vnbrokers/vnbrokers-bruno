@@ -1,0 +1,11 @@
+name: orderId
+in: path
+required: true
+description: |
+  ID lệnh trên sàn — lấy từ field `order_id` trong response của
+  `POST /trading/oa/sub-accounts/{subAccountId}/orders` (Place Order)
+  hoặc từ `GET /trading/v1/accounts/{subAccountId}/order-book` (sổ lệnh
+  trong ngày). Bắt buộc khi sửa hoặc huỷ lệnh.
+schema:
+  type: string
+  example: ORD123456

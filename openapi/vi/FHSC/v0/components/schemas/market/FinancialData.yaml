@@ -1,0 +1,50 @@
+type: object
+description: |
+  Row dữ liệu tài chính tổng hợp — bao gồm vàng, bạc, crypto, lãi suất
+  ngân hàng, tỷ giá USD và US index.
+  `financial_type` là loại; mỗi row trong `values` được phân biệt qua
+  `value_type` (`BUY_SELL` → `FinancialDataBuySellValue`, `SINGLE` →
+  `FinancialDataSingleValue`).
+properties:
+  financial_type:
+    type: string
+    description: Category of financial data.
+    enum:
+      - GOLD
+      - SILVER
+      - CRYPTO
+      - BANK_INTEREST_RATE
+      - USD_EXCHANGE_RATE
+      - US_INDEX
+    x-enum-varnames:
+      - GOLD
+      - SILVER
+      - CRYPTO
+      - BANK_INTEREST_RATE
+      - USD_EXCHANGE_RATE
+      - US_INDEX
+  name:
+    type: string
+    description: Display name of the category.
+    example: Giá vàng
+  values:
+    type: array
+    description: |
+      Per-row data. Discriminated by `value_type`:
+      `BUY_SELL` rows carry `buy_value` / `sell_value`; `SINGLE` rows carry
+      `value` / `change` / `change_percent`.
+    items:
+      oneOf:
+        - $ref: 'FinancialDataBuySellValue.yaml'
+        - $ref: 'FinancialDataSingleValue.yaml'
+      discriminator:
+        propertyName: value_type
+  last_updated:
+    type: string
+    description: |
+      Last-update timestamp in `YYYY-MM-DD HH:MM:SS` format (local time,
+      **not ISO 8601**).
+    example: '2026-04-22 23:09:12'
+required:
+  - financial_type
+  - values

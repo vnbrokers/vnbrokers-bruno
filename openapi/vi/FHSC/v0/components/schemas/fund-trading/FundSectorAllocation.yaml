@@ -1,0 +1,11 @@
+type: object
+description: 1 nhóm ngành trong phân bổ theo ngành của quỹ.
+properties:
+  sector_name:
+    type: string
+    description: Tên ngành.
+    example: Banking
+  percent:
+    type: number
+    description: Tỷ trọng theo ngành (%).
+    example: 18.4

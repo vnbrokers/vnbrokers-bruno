@@ -1,0 +1,44 @@
+get:
+  operationId: getDerivativePurchasingPower
+  tags:
+    - Phái sinh
+  summary: Lấy sức mua
+  description: Lấy sức mua (ppse) và số lượng tối đa có thể đặt (qmax).
+  parameters:
+    - name: investorId
+      in: path
+      required: true
+      description: Mã khách hàng
+      schema:
+        type: number
+    - name: bankMarginPortfolioId
+      in: query
+      description: Mã gói vay
+      schema:
+        type: number
+    - name: price
+      in: query
+      description: Giá
+      schema:
+        type: number
+    - name: symbol
+      in: query
+      description: "Mã, ví dụ: VN30F2306"
+      schema:
+        type: string
+    - name: side
+      in: query
+      description: Long (NB), Short (NS)
+      schema:
+        type: string
+  responses:
+    "200":
+      description: Thành công
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/derivatives/PurchasingPower.yaml
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml

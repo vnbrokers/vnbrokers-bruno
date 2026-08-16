@@ -1,0 +1,41 @@
+type: object
+description: 1 điểm dữ liệu chỉ số kinh tế lịch sử từ Trading Economics.
+properties:
+  indicator:
+    type: string
+    description: Tên chỉ số kinh tế (ví dụ "Inflation Rate", "GDP Growth Rate").
+    example: Inflation Rate
+  country:
+    allOf:
+      - $ref: 'EconomicCountry.yaml'
+    description: Tên quốc gia (full name).
+  category:
+    allOf:
+      - $ref: 'TradingEconomicsCategory.yaml'
+    description: Nhóm chỉ số.
+  lastValue:
+    type:
+      - number
+      - 'null'
+    description: Giá trị kỳ gần nhất. `null` nếu nguồn chưa có dữ liệu.
+    example: 0.1
+  previousValue:
+    type:
+      - number
+      - 'null'
+    description: Giá trị kỳ trước đó. `null` nếu nguồn chưa có dữ liệu.
+    example: -0.1
+  year:
+    type: integer
+    description: Năm của điểm dữ liệu.
+    example: 2024
+  month:
+    type: integer
+    minimum: 1
+    maximum: 12
+    description: Tháng của điểm dữ liệu (1–12).
+    example: 3
+  unit:
+    type: string
+    description: Đơn vị đo lường (ví dụ `%`, `USD`, `points`).
+    example: '%'

@@ -1,0 +1,117 @@
+"get":
+  operationId: getErebosDigitalMarginInfo
+  tags:
+    - Tiền
+  "summary": "Tra cứu nợ"
+  "description": "Lấy thông tin dư nợ margin (lịch sử khoản vay) của tiểu khoản."
+  "parameters":
+    -
+      "name": "acctno"
+      "in": "query"
+      "required": true
+      "description": "Số tiểu khoản."
+      "schema":
+        "type": "string"
+    -
+      "name": "fromdate"
+      "in": "query"
+      "required": true
+      "description": "Từ ngày (YYYY-MM-DD)."
+      "schema":
+        "type": "string"
+    -
+      "name": "toDate"
+      "in": "query"
+      "required": true
+      "description": "Đến ngày (YYYY-MM-DD)."
+      "schema":
+        "type": "string"
+    -
+      "name": "page"
+      "in": "query"
+      "required": true
+      "description": "Số trang."
+      "schema":
+        "type": "string"
+    -
+      "name": "size"
+      "in": "query"
+      "required": true
+      "description": "Kích thước trang."
+      "schema":
+        "type": "string"
+    -
+      "name": "custodycd"
+      "in": "query"
+      "required": true
+      "description": "Mã tài khoản lưu ký."
+      "schema":
+        "type": "string"
+  responses:
+    "401":
+      $ref: ../../components/responses/Unauthorized.yaml
+    "200":
+      description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              response:
+                type: object
+                properties:
+                  totalRow:
+                    type: integer
+                    format: int64
+                    description: "Số bản ghi."
+                  totalPage:
+                    type: integer
+                    format: int64
+                    description: "Số trang."
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        releaseDate:
+                          type: string
+                          description: "Ngày giải ngân."
+                        overDueDate:
+                          type: string
+                          description: "Ngày đáo hạn."
+                        releasedAmount:
+                          type: number
+                          format: double
+                          description: "Gốc giải ngân."
+                        printAmount:
+                          type: number
+                          format: double
+                          description: "Nợ gốc hiện tại."
+                        intAmount:
+                          type: number
+                          format: double
+                          description: "Nợ lãi và phí hiện tại."
+                        remainingInterestFee:
+                          type: number
+                          format: double
+                          description: "Tổng nợ lãi và phí hiện tại."
+                        paidInterestFee:
+                          type: number
+                          format: double
+                          description: "Tổng lãi và phí đã trả."
+                        rate2:
+                          type: number
+                          format: double
+                          description: "Lãi suất."
+                        releasedDay:
+                          type: number
+                          format: double
+                          description: "Số ngày vay."
+                        paidFee:
+                          type: number
+                          format: double
+                          description: "Phí đã trả."
+                        remainingFee:
+                          type: number
+                          format: double
+                          description: "Phí còn lại."

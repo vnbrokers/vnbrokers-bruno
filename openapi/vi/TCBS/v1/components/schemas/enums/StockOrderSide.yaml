@@ -1,0 +1,5 @@
+type: string
+description: "Chiều lệnh cơ sở: S = bán, B = mua."
+enum:
+  - "S"
+  - "B"

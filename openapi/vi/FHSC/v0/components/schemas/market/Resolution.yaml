@@ -1,0 +1,25 @@
+type: string
+description: |
+  Độ phân giải của biểu đồ `/market/price-histories-chart`.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `1D` | Theo ngày |
+  | `5` | 5 phút |
+  | `15` | 15 phút |
+  | `30` | 30 phút |
+  | `1H` | Theo giờ |
+  | `4H` | 4 giờ |
+enum:
+  - 1D
+  - '5'
+  - '15'
+  - '30'
+  - 1H
+  - 4H
+x-enum-varnames:
+  - DAILY
+  - FIVE_MINUTE
+  - FIFTEEN_MINUTE
+  - THIRTY_MINUTE
+  - HOURLY
+  - FOUR_HOUR

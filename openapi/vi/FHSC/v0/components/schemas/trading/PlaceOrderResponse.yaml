@@ -1,0 +1,14 @@
+allOf:
+  - $ref: '../common/EnvelopeBase.yaml'
+  - type: object
+    required:
+      - result
+    properties:
+      result:
+        type: array
+        description: |
+          Mảng kết quả — thông thường chứa **đúng 1** entry phản ánh lệnh
+          vừa đặt. Server vẫn trả về dưới dạng array để đồng nhất với
+          modify / cancel.
+        items:
+          $ref: 'OrderExecutionResult.yaml'

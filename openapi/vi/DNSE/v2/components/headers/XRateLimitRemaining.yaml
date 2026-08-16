@@ -1,0 +1,3 @@
+description: Number of requests remaining in the current rate-limit window.
+schema:
+  type: integer

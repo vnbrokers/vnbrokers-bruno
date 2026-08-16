@@ -1,0 +1,14 @@
+type: object
+properties:
+  accountNo:
+    type: string
+  positionId:
+    type: integer
+  configs:
+    type: object
+    additionalProperties:
+      $ref: './PnlConfig.yaml'
+  createdDate:
+    type: string
+  modifiedDate:
+    type: string

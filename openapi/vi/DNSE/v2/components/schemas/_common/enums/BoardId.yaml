@@ -1,0 +1,23 @@
+type: string
+description: |-
+  Mã định danh bảng giao dịch.
+
+  - `UNSPECIFIED`: Không xác định
+  - `AL`: Tất cả bảng
+  - `G1`: Lô chẵn
+  - `G3`: Board phiên sau giờ (PLO)
+  - `G4`: Lô lẻ
+  - `T1`: Thỏa thuận lô chẵn 9h-14h45
+  - `T3`: Thỏa thuận lô chẵn 14h45-15h
+  - `T4`: Thỏa thuận lô lẻ 9h-14h45
+  - `T6`: Thỏa thuận lô lẻ 14h45-15h
+enum:
+  - 'UNSPECIFIED'
+  - 'AL'
+  - 'G1'
+  - 'G3'
+  - 'G4'
+  - 'T1'
+  - 'T3'
+  - 'T4'
+  - 'T6'

@@ -1,0 +1,39 @@
+post:
+  operationId: closeDerivativeDeal
+  tags:
+    - Phái sinh
+  summary: Đóng deal
+  description: Đóng deal Phái Sinh theo dealId.
+  parameters:
+    - name: dealId
+      in: path
+      required: true
+      description: Số hiệu deal
+      schema:
+        type: number
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            orderType:
+              type: string
+              description: Truyền vào "LO"
+            triggeredBy:
+              type: string
+              description: Truyền vào "close-deal"
+  responses:
+    "200":
+      description: Thành công
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: ../../components/schemas/derivatives/CloseDealResult.yaml
+              - $ref: ../../components/schemas/derivatives/DerivativeDealPage.yaml
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml

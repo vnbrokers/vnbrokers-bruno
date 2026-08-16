@@ -1,0 +1,61 @@
+get:
+  operationId: getOhlc
+  tags:
+    - Dữ liệu thị trường
+  summary: Dữ liệu OHLCV
+  description: Lấy dữ liệu nến OHLCV theo khoảng thời gian. Thời gian cung cấp 1 năm gần nhất cho dữ liệu intraday, dữ liệu daily cung cấp từ khi mã chứng khoán được giao dịch.
+  security:
+    - SsiBearerAuth: []
+  parameters:
+    - name: symbol
+      in: query
+      description: Mã chứng khoán cần lấy dữ liệu OHLCV.
+      required: true
+      schema:
+        type: string
+    - name: from
+      in: query
+      description: Mốc thời gian bắt đầu. Định dạng `YYYY/MM/DD` cho dữ liệu daily và `YYYY/MM/DD HH:mm:ss` cho dữ liệu intraday.
+      required: true
+      schema:
+        type: string
+    - name: to
+      in: query
+      description: Mốc thời gian kết thúc. Định dạng `YYYY/MM/DD` cho dữ liệu daily và `YYYY/MM/DD HH:mm:ss` cho dữ liệu intraday.
+      required: true
+      schema:
+        type: string
+    - name: timeFrame
+      in: query
+      description: Khung thời gian của dữ liệu OHLCV. Giá trị có thể là `1m`, `3m`, `5m`, `15m`, `30m`, `1h`, hoặc `1d`. Nếu không cung cấp thì hệ thống sẽ sử dụng giá trị mặc định là `1d`.
+      required: false
+      schema:
+        type: string
+    - name: pageIndex
+      in: query
+      description: Chỉ số trang khi phân trang kết quả, bắt đầu từ 1. Nếu không cung cấp thì hệ thống sẽ sử dụng giá trị mặc định là 1.
+      required: false
+      schema:
+        type: integer
+    - name: pageSize
+      in: query
+      description: Số lượng bản ghi trên mỗi trang. Nếu không cung cấp thì hệ thống sẽ sử dụng giá trị mặc định là 10.
+      required: false
+      schema:
+        type: integer
+    - $ref: '../../components/parameters/ContentType.yaml'
+    - $ref: '../../components/parameters/UserAgent.yaml'
+    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+  responses:
+    '200':
+      description: Thành công.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/OhlcResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'

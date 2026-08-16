@@ -1,0 +1,16 @@
+type: string
+description: |
+  Loại báo cáo dùng cho `/market/v2/financial-statement/statement`.
+  | Giá trị | Ý nghĩa |
+  |---------|---------|
+  | `income-statement` | Báo cáo kết quả kinh doanh |
+  | `balance-sheet` | Bảng cân đối kế toán |
+  | `cash-flow` | Báo cáo lưu chuyển tiền tệ |
+enum:
+  - income-statement
+  - balance-sheet
+  - cash-flow
+x-enum-varnames:
+  - INCOME_STATEMENT
+  - BALANCE_SHEET
+  - CASH_FLOW

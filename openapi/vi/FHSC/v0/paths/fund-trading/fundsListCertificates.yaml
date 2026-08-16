@@ -1,0 +1,54 @@
+get:
+  operationId: fundsListCertificates
+  tags:
+    - Quỹ mở
+  summary: Danh sách quỹ mở theo phân loại
+  description: |
+    Danh sách quỹ mở của 1 phân loại (`fund-type` bắt buộc), tuỳ chọn lọc
+    thêm theo công ty quản lý (`fund-company-id`). Kết quả sort theo lãi
+    suất bình quân 1 năm giảm dần.
+  parameters:
+    - $ref: '../../components/parameters/FundTypeQuery.yaml'
+    - name: fund-company-id
+      in: query
+      required: false
+      description: ID công ty quản lý quỹ — lấy từ endpoint `fundsListCompanies`.
+      schema:
+        type: integer
+        format: int64
+        example: 12
+  responses:
+    '200':
+      description: Trả về `data` mảng các quỹ khớp filter, sort theo lãi suất 1y giảm dần.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/fund-trading/FundCertificatesResponse.yaml'
+          example:
+            error_code: '0'
+            message: success
+            data:
+              - id: 21
+                name: VESAF
+                type: STOCK_FUND
+                aum: 1500000000000
+                rating: 4.5
+              - id: 22
+                name: DCDS
+                type: STOCK_FUND
+                aum: 980000000000
+                rating: 4.2
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimited.yaml'
+    '500':
+      $ref: '../../components/responses/InternalError.yaml'
+  x-codeSamples:
+    - lang: bash
+      label: cURL
+      source: |
+        curl -H "X-FH-APIKEY: $FINHAY_API_KEY" \
+          "https://open-api.fhsc.com.vn/fund-trading/public/fund-certificates?fund-type=STOCK_FUND"

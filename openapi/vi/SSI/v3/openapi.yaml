@@ -1,0 +1,196 @@
+openapi: 3.1.2
+info:
+  title: SSI FastConnect Open API
+  version: 3.0.0
+servers:
+  - url: https://api.ssi.com.vn
+    description: Production
+security:
+  - SsiBearerAuth: []
+tags:
+  - name: Xác thực
+    description: Xác thực và quản lý token.
+  - name: Tài khoản
+    description: Thông tin tài khoản giao dịch.
+  - name: Dữ liệu thị trường
+    description: Dữ liệu thị trường.
+  - name: Giao dịch
+    description: Giao dịch và quản lý lệnh.
+  - name: Lệnh điều kiện
+    description: Lệnh điều kiện.
+paths:
+  '/api/v3/auth/token':
+    $ref: './paths/auth/AuthToken.yaml'
+  '/api/v3/auth/requestOtp':
+    $ref: './paths/auth/RequestOtp.yaml'
+  '/api/v3/auth/refresh':
+    $ref: './paths/auth/RefreshToken.yaml'
+  '/api/v3/account/info':
+    $ref: './paths/account/AccountInfo.yaml'
+  '/api/v3/data/indexList':
+    $ref: './paths/market-data/IndexList.yaml'
+  '/api/v3/data/indexSummary':
+    $ref: './paths/market-data/IndexSummary.yaml'
+  '/api/v3/data/file':
+    $ref: './paths/market-data/MarketFile.yaml'
+  '/api/v3/data/masterdata':
+    $ref: './paths/market-data/MasterData.yaml'
+  '/api/v3/data/ohlc':
+    $ref: './paths/market-data/Ohlc.yaml'
+  '/api/v3/data/securitiesByBoard':
+    $ref: './paths/market-data/SecuritiesByBoard.yaml'
+  '/api/v3/data/securitiesSummary':
+    $ref: './paths/market-data/SecuritiesSummary.yaml'
+  '/api/v3/trading/accountBalance':
+    $ref: './paths/trading/AccountBalance.yaml'
+  '/api/v3/trading/maxBuySell':
+    $ref: './paths/trading/MaxBuySell.yaml'
+  '/api/v3/trading/orderBook':
+    $ref: './paths/trading/OrderBook.yaml'
+  '/api/v3/trading/position':
+    $ref: './paths/trading/Position.yaml'
+  '/api/v3/trading/ppmmrAccount':
+    $ref: './paths/trading/PpmmrAccount.yaml'
+  '/api/v3/trading/order':
+    $ref: './paths/trading/Order.yaml'
+  '/api/v3/trading/fco/list':
+    $ref: './paths/fco/FcoList.yaml'
+  '/api/v3/trading/fco/orderbook':
+    $ref: './paths/fco/FcoOrderbook.yaml'
+  '/api/v3/trading/fco/statusHistory':
+    $ref: './paths/fco/FcoStatusHistory.yaml'
+  '/api/v3/trading/fco/order':
+    $ref: './paths/fco/FcoOrder.yaml'
+components:
+  securitySchemes:
+    SsiBearerAuth:
+      $ref: './components/securitySchemes/SsiBearerAuth.yaml'
+  parameters:
+    ContentType:
+      $ref: './components/parameters/ContentType.yaml'
+    UserAgent:
+      $ref: './components/parameters/UserAgent.yaml'
+    AcceptLanguage:
+      $ref: './components/parameters/AcceptLanguage.yaml'
+    XSignature:
+      $ref: './components/parameters/XSignature.yaml'
+  schemas:
+    Account:
+      $ref: './components/schemas/Account.yaml'
+    TokenResponse:
+      $ref: './components/schemas/TokenResponse.yaml'
+    OtpResponse:
+      $ref: './components/schemas/OtpResponse.yaml'
+    PlaceOrderRequest:
+      $ref: './components/schemas/PlaceOrderRequest.yaml'
+    ModifyOrderRequest:
+      $ref: './components/schemas/ModifyOrderRequest.yaml'
+    CancelOrderRequest:
+      $ref: './components/schemas/CancelOrderRequest.yaml'
+    PlaceFcoOrderRequest:
+      $ref: './components/schemas/PlaceFcoOrderRequest.yaml'
+    CancelFcoOrderRequest:
+      $ref: './components/schemas/CancelFcoOrderRequest.yaml'
+    OrderResponse:
+      $ref: './components/schemas/OrderResponse.yaml'
+    MasterDataResponse:
+      $ref: './components/schemas/MasterDataResponse.yaml'
+    MarketFileResponse:
+      $ref: './components/schemas/MarketFileResponse.yaml'
+    SecurityItem:
+      $ref: './components/schemas/SecurityItem.yaml'
+    IndexItem:
+      $ref: './components/schemas/IndexItem.yaml'
+    OhlcResponse:
+      $ref: './components/schemas/OhlcResponse.yaml'
+    SecuritiesSummaryResponse:
+      $ref: './components/schemas/SecuritiesSummaryResponse.yaml'
+    IndexSummaryResponse:
+      $ref: './components/schemas/IndexSummaryResponse.yaml'
+    OrderBookResponse:
+      $ref: './components/schemas/OrderBookResponse.yaml'
+    MaxBuySellResponse:
+      $ref: './components/schemas/MaxBuySellResponse.yaml'
+    FcoStatusHistoryResponse:
+      $ref: './components/schemas/FcoStatusHistoryResponse.yaml'
+    FcoListResponse:
+      $ref: './components/schemas/FcoListResponse.yaml'
+    FcoOrderbookResponse:
+      $ref: './components/schemas/FcoOrderbookResponse.yaml'
+    FcoOrderResponse:
+      $ref: './components/schemas/FcoOrderResponse.yaml'
+    AccountBalanceResponse:
+      $ref: './components/schemas/AccountBalanceResponse.yaml'
+    PositionResponse:
+      $ref: './components/schemas/PositionResponse.yaml'
+    ErrorResponse:
+      $ref: './components/schemas/ErrorResponse.yaml'
+  responses:
+    BadRequest:
+      $ref: './components/responses/BadRequest.yaml'
+    Unauthorized:
+      $ref: './components/responses/Unauthorized.yaml'
+    InternalError:
+      $ref: './components/responses/InternalError.yaml'
+x-bruno-sources:
+  - local/v3
+x-ssi-official-docs:
+  overview: https://developers.ssi.com.vn/docs/api-reference
+  authentication:
+    token: https://developers.ssi.com.vn/docs/api-reference/auth-token
+    refresh: https://developers.ssi.com.vn/docs/api-reference/auth-refresh
+    requestOtp: https://developers.ssi.com.vn/docs/api-reference/auth-requestOtp
+  trading:
+    accountInfo: https://developers.ssi.com.vn/docs/api-reference/account-info
+    placeOrder: https://developers.ssi.com.vn/docs/api-reference/trade-order-place
+    modifyOrder: https://developers.ssi.com.vn/docs/api-reference/trade-order-modify
+    cancelOrder: https://developers.ssi.com.vn/docs/api-reference/trade-order-cancel
+    orderBook: https://developers.ssi.com.vn/docs/api-reference/trade-orderBook
+    position: https://developers.ssi.com.vn/docs/api-reference/trade-position
+    accountBalance: https://developers.ssi.com.vn/docs/api-reference/trade-accountBalance
+    maxBuySell: https://developers.ssi.com.vn/docs/api-reference/trade-maxbuysell
+    ppmmrAccount: https://developers.ssi.com.vn/docs/api-reference/trade-ppmmrAccount
+  marketData:
+    securitiesByBoard: https://developers.ssi.com.vn/docs/api-reference/data-securitiesByBoard
+    securitiesSummary: https://developers.ssi.com.vn/docs/api-reference/data-securitiesSummary
+    indexList: https://developers.ssi.com.vn/docs/api-reference/data-indexList
+    indexSummary: https://developers.ssi.com.vn/docs/api-reference/data-indexSummary
+    ohlc: https://developers.ssi.com.vn/docs/api-reference/data-ohlc
+    masterData: https://developers.ssi.com.vn/docs/api-reference/data-masterData
+  conditionalOrders:
+    place: https://developers.ssi.com.vn/docs/api-reference/fco-order-place
+    cancel: https://developers.ssi.com.vn/docs/api-reference/fco-order-cancel
+    list: https://developers.ssi.com.vn/docs/api-reference/fco-list
+    orderbook: https://developers.ssi.com.vn/docs/api-reference/fco-orderbook
+    statusHistory: https://developers.ssi.com.vn/docs/api-reference/fco-statusHistory
+  appendices:
+    orderStatusFlow: https://developers.ssi.com.vn/docs/api-reference/appendix/order-status-flow
+    fcoReference: https://developers.ssi.com.vn/docs/api-reference/appendix/fco-reference
+    errorCodes: https://developers.ssi.com.vn/docs/api-reference/appendix/error-codes
+x-websocket-channels:
+  url: wss://stream.ssi.com.vn
+  connection:
+    message:
+      client_id: string
+      api_key: string
+      api_secret: string
+      access_token: string
+  heartbeat:
+    method: PONG
+    channel: HEARTBEAT
+    time: string
+  subscriptions:
+    marketData:
+      method: SUBSCRIBE
+      channel: DATA
+      topics:
+        - trade.{symbol}
+        - quote.{symbol}
+        - room.{symbol}
+        - market.hose
+    tradingData:
+      method: SUBSCRIBE
+      channel: TRADING
+      topics:
+        - order.{accountNo}
+        - portfolio.{accountNo}

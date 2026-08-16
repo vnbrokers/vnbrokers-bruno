@@ -1,0 +1,6 @@
+name: User-Agent
+in: header
+required: false
+description: Thông tin client gửi request.
+schema:
+  type: string
