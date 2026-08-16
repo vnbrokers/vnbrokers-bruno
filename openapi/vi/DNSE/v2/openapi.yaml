@@ -4,7 +4,10 @@ info:
   version: 1.0.0
   description: DNSE OpenAPI spec and tests
 servers:
+  - url: https://openapi.dnse.com.vn
+    description: Production
   - url: https://openapi-uat.dnse.com.vn
+    description: UAT
 tags:
   - name: Giao dịch
     description: Xác thực và các hoạt động đặt lệnh.

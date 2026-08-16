@@ -4,10 +4,11 @@ info:
   version: 1.0.0
   description: Đặc tả được trích xuất từ các request Bruno trong `collections/Entrade`.
 servers:
-  - url: https://services-staging.entrade.com.vn/papertrade-entrade-api
-    description: Môi trường staging
   - url: https://services.entrade.com.vn/entrade-api
     description: Môi trường production
+  - url: https://services-staging.entrade.com.vn/papertrade-entrade-api
+    description: Môi trường staging
+
 security:
   - BearerAuth: []
 tags:

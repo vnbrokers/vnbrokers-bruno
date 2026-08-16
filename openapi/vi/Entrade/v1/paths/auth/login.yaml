@@ -6,9 +6,6 @@ post:
   description: API đăng nhập, trả về JWT token dùng cho tất cả các API khác (hiệu
     lực 8 giờ).
   security: []
-  servers:
-    - url: https://services.entrade.com.vn/entrade-api
-      description: Môi trường production
   requestBody:
     required: true
     content:
