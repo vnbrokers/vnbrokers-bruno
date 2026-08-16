@@ -12,20 +12,6 @@
       "description": "Số tiểu khoản."
       "schema":
         "type": "string"
-    -
-      "name": "symbol"
-      "in": "path"
-      "required": true
-      "description": "Mã cổ phiếu (mã variant)."
-      "schema":
-        "type": "string"
-    -
-      "name": "price"
-      "in": "path"
-      "required": true
-      "description": "Giá tính sức mua (biến thể theo giá)."
-      "schema":
-        "type": "string"
   responses:
     "401":
       $ref: ../../../components/responses/Unauthorized.yaml
