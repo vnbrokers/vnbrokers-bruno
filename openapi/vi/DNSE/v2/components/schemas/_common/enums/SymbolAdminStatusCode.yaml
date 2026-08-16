@@ -1,11 +1,21 @@
 type: string
-description: Trạng thái quản lý hành chính mã chứng khoán.
+description: |-
+  Trạng thái quản lý hành chính mã chứng khoán.
+
+  - `UNSPECIFIED`: Không xác định
+  - `CR`: Kiểm soát và hạn chế giao dịch
+  - `CTR`: Kiểm soát
+  - `NRM`: Bình thường
+  - `RES`: Hạn chế giao dịch
+  - `WFR`: Cảnh báo do vi phạm BCTC
+  - `WID`: Cảnh báo do vi phạm CBTT
+  - `WOV`: Cảnh báo vi phạm khác
 enum:
-  - 'UNSPECIFIED' # Không xác định
-  - 'CR' # Kiểm soát và hạn chế giao dịch
-  - 'CTR' # Kiểm soát
-  - 'NRM' # Bình thường
-  - 'RES' # Hạn chế giao dịch
-  - 'WFR' # Cảnh báo do vi phạm BCTC
-  - 'WID' # Cảnh báo do vi phạm CBTT
-  - 'WOV' # Cảnh báo vi phạm khác
+  - 'UNSPECIFIED'
+  - 'CR'
+  - 'CTR'
+  - 'NRM'
+  - 'RES'
+  - 'WFR'
+  - 'WID'
+  - 'WOV'

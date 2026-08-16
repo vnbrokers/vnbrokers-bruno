@@ -1,11 +1,21 @@
 type: string
-description: Khung thời gian nến.
+description: |-
+  Khung thời gian nến.
+
+  - `1`: 1 phút
+  - `3`: 3 phút
+  - `5`: 5 phút
+  - `15`: 15 phút
+  - `30`: 30 phút
+  - `1H`: 1 giờ
+  - `1D`: 1 ngày
+  - `1W`: 1 tuần
 enum:
-  - '1' # 1 phút
-  - '3' # 3 phút
-  - '5' # 5 phút
-  - '15' # 15 phút
-  - '30' # 30 phút
-  - '1H' # 1 giờ
-  - '1D' # 1 ngày
-  - '1W' # 1 tuần
+  - '1'
+  - '3'
+  - '5'
+  - '15'
+  - '30'
+  - '1H'
+  - '1D'
+  - '1W'

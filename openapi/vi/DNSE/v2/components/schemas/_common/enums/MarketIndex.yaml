@@ -1,13 +1,25 @@
 type: string
-description: Tên chỉ số thị trường.
+description: |-
+  Tên chỉ số thị trường.
+
+  - `VNINDEX`: Chỉ số sàn HOSE
+  - `HNX`: Chỉ số sàn HNX
+  - `HNX30`: Chỉ số Top 30 cổ phiếu sàn HNX
+  - `VN30`: Chỉ số Top 30 cổ phiếu sàn HOSE
+  - `VN100`: Chỉ số Top 100 cổ phiếu sàn HOSE
+  - `VNXALLSHARE`: Chỉ số các cổ phiếu chọn lọc sàn HOSE
+  - `UPCOM`: Chỉ số sàn UPCOM
+  - `VNMITECH`: Chỉ số nhóm cổ phiếu công nghệ
+  - `VN50GROWTH`: Chỉ số nhóm 50 cổ phiếu tăng trưởng sàn HOSE
+  - `VNDIVIDEND`: Chỉ số nhóm cổ phiếu có tỷ suất cổ tức tăng trưởng
 enum:
-  - 'VNINDEX' # Chỉ số sàn HOSE
-  - 'HNX' # Chỉ số sàn HNX
-  - 'HNX30' # Chỉ số Top 30 cổ phiếu sàn HNX
-  - 'VN30' # Chỉ số Top 30 cổ phiếu sàn HOSE
-  - 'VN100' # Chỉ số Top 100 cổ phiếu sàn HOSE
-  - 'VNXALLSHARE' # Chỉ số các cổ phiếu chọn lọc sàn HOSE
-  - 'UPCOM' # Chỉ số sàn UPCOM
-  - 'VNMITECH' # Chỉ số nhóm cổ phiếu công nghệ
-  - 'VN50GROWTH' # Chỉ số nhóm 50 cổ phiếu tăng trưởng sàn HOSE
-  - 'VNDIVIDEND' # Chỉ số nhóm cổ phiếu có tỷ suất cổ tức tăng trưởng
+  - 'VNINDEX'
+  - 'HNX'
+  - 'HNX30'
+  - 'VN30'
+  - 'VN100'
+  - 'VNXALLSHARE'
+  - 'UPCOM'
+  - 'VNMITECH'
+  - 'VN50GROWTH'
+  - 'VNDIVIDEND'

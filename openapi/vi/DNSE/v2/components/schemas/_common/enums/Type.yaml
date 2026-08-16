@@ -1,6 +1,11 @@
 type: string
-description: Loại nhóm thị trường.
+description: |-
+  Loại nhóm thị trường.
+
+  - `STOCK`: Cổ phiếu
+  - `DERIVATIVE`: Phái sinh
+  - `INDEX`: Chỉ số
 enum:
-  - 'STOCK' # Cổ phiếu
-  - 'DERIVATIVE' # Phái sinh
-  - 'INDEX' # Chỉ số
+  - 'STOCK'
+  - 'DERIVATIVE'
+  - 'INDEX'

@@ -1,17 +1,33 @@
 type: string
-description: Mã sự kiện chuyển trạng thái phiên giao dịch.
+description: |-
+  Mã sự kiện chuyển trạng thái phiên giao dịch.
+
+  - `AA1`: Bắt đầu phiên khớp lệnh định kỳ mở cửa
+  - `AB1`: Bắt đầu phiên khớp lệnh liên tục
+  - `AB2`: Kết thúc giao dịch của bảng
+  - `AC2`: Thực hiện khớp lệnh định kỳ đóng cửa
+  - `AD1`: Bắt đầu nhận lệnh
+  - `AD2`: Thực hiện khớp lệnh định kỳ
+  - `AW8`: Nghỉ trưa
+  - `AW9`: Tiếp tục giao dịch sau nghỉ trưa
+  - `AX1`: Bảng giao dịch bắt đầu hoạt động
+  - `BB1`: Bắt đầu phiên khớp lệnh liên tục cho chứng khoán thông thường
+  - `BC1`: Bắt đầu phiên khớp lệnh định kỳ đóng cửa
+  - `CC1`: Bắt đầu phiên PCA đóng cửa
+  - `CD1`: Bắt đầu phiên PCA
+  - `CD3`: Thực hiện khớp lệnh PCA
 enum:
-  - 'AA1' # Bắt đầu phiên khớp lệnh định kỳ mở cửa
-  - 'AB1' # Bắt đầu phiên khớp lệnh liên tục
-  - 'AB2' # Kết thúc giao dịch của bảng
-  - 'AC2' # Thực hiện khớp lệnh định kỳ đóng cửa
-  - 'AD1' # Bắt đầu nhận lệnh
-  - 'AD2' # Thực hiện khớp lệnh định kỳ
-  - 'AW8' # Nghỉ trưa
-  - 'AW9' # Tiếp tục giao dịch sau nghỉ trưa
-  - 'AX1' # Bảng giao dịch bắt đầu hoạt động
-  - 'BB1' # Bắt đầu phiên khớp lệnh liên tục cho chứng khoán thông thường
-  - 'BC1' # Bắt đầu phiên khớp lệnh định kỳ đóng cửa
-  - 'CC1' # Bắt đầu phiên PCA đóng cửa
-  - 'CD1' # Bắt đầu phiên PCA
-  - 'CD3' # Thực hiện khớp lệnh PCA
+  - 'AA1'
+  - 'AB1'
+  - 'AB2'
+  - 'AC2'
+  - 'AD1'
+  - 'AD2'
+  - 'AW8'
+  - 'AW9'
+  - 'AX1'
+  - 'BB1'
+  - 'BC1'
+  - 'CC1'
+  - 'CD1'
+  - 'CD3'

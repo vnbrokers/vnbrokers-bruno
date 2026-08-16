@@ -1,9 +1,17 @@
 type: string
-description: Trạng thái cơ chế giao dịch mã chứng khoán.
+description: |-
+  Trạng thái cơ chế giao dịch mã chứng khoán.
+
+  - `UNSPECIFIED`: Không xác định
+  - `NRM`: Bình thường
+  - `NWE`: Niêm yết mới biên độ đặc biệt
+  - `NWN`: Niêm yết mới biên độ thường
+  - `SLS`: Giao dịch đặc biệt sau halt
+  - `SNE`: Giao dịch đặc biệt
 enum:
-  - 'UNSPECIFIED' # Không xác định
-  - 'NRM' # Bình thường
-  - 'NWE' # Niêm yết mới biên độ đặc biệt
-  - 'NWN' # Niêm yết mới biên độ thường
-  - 'SLS' # Giao dịch đặc biệt sau halt
-  - 'SNE' # Giao dịch đặc biệt
+  - 'UNSPECIFIED'
+  - 'NRM'
+  - 'NWE'
+  - 'NWN'
+  - 'SLS'
+  - 'SNE'

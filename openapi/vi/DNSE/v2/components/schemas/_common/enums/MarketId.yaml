@@ -1,9 +1,17 @@
 type: string
-description: Mã thị trường.
+description: |-
+  Mã thị trường.
+
+  - `UNSPECIFIED`: Không xác định
+  - `DVX`: Phái sinh sàn HNX
+  - `HCX`: Trái phiếu doanh nghiệp sàn HNX
+  - `STO`: Cổ phiếu sàn HOSE
+  - `STX`: Cổ phiếu sàn HNX
+  - `UPX`: Cổ phiếu sàn Upcom
 enum:
-  - 'UNSPECIFIED' # Không xác định
-  - 'DVX' # Phái sinh sàn HNX
-  - 'HCX' # Trái phiếu doanh nghiệp sàn HNX
-  - 'STO' # Cổ phiếu sàn HOSE
-  - 'STX' # Cổ phiếu sàn HNX
-  - 'UPX' # Cổ phiếu sàn Upcom
+  - 'UNSPECIFIED'
+  - 'DVX'
+  - 'HCX'
+  - 'STO'
+  - 'STX'
+  - 'UPX'
