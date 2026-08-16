@@ -1,0 +1,27 @@
+type: object
+properties:
+  total:
+    type: number
+  data:
+    type: array
+    items:
+      type: object
+      properties:
+        symbol:
+          type: string
+        type:
+          type: string
+        marketPrice:
+          type: number
+        ceilingPrice:
+          type: number
+        floorPrice:
+          type: number
+        basicPrice:
+          type: number
+        modifiedDate:
+          type: string
+        expirationDate:
+          type: string
+        id:
+          type: string

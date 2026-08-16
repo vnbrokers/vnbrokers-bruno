@@ -1,0 +1,33 @@
+post:
+  operationId: login
+  tags:
+    - Xác thực
+  summary: Đăng nhập
+  description: API đăng nhập, trả về JWT token dùng cho tất cả các API khác (hiệu
+    lực 8 giờ).
+  security: []
+  servers:
+    - url: https://services.entrade.com.vn/entrade-api
+      description: Môi trường production
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            username:
+              type: string
+            password:
+              type: string
+  responses:
+    "200":
+      description: Đăng nhập thành công
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/auth/AuthToken.yaml
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml

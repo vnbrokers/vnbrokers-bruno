@@ -1,0 +1,46 @@
+get:
+  operationId: getDerivativeOrder
+  tags:
+    - Phái sinh
+  summary: Lấy chi tiết lệnh
+  description: Lấy chi tiết lệnh Phái Sinh theo orderId.
+  parameters:
+    - name: orderId
+      in: path
+      required: true
+      schema:
+        type: number
+  responses:
+    "200":
+      description: Thành công
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/derivatives/DerivativeOrder.yaml
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml
+delete:
+  operationId: cancelDerivativeOrder
+  tags:
+    - Phái sinh
+  summary: Hủy lệnh
+  description: Hủy lệnh Phái Sinh theo orderId.
+  parameters:
+    - name: orderId
+      in: path
+      required: true
+      schema:
+        type: number
+  responses:
+    "200":
+      description: Thành công - hủy lệnh thành công
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/derivatives/DerivativeOrder.yaml
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml

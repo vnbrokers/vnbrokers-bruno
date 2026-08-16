@@ -1,0 +1,22 @@
+type: object
+properties:
+  id:
+    type: number
+  investorId:
+    type: number
+  investorAccountId:
+    type: number
+  bankMarginPortfolioId:
+    type: number
+  symbol:
+    type: string
+  price:
+    type: number
+  ppse:
+    type: number
+  qmax:
+    type: number
+  side:
+    type: string
+  dealId:
+    type: number

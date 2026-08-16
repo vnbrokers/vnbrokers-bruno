@@ -1,0 +1,76 @@
+get:
+  operationId: listDerivativeOrders
+  tags:
+    - Phái sinh
+  summary: Lấy sổ lệnh
+  description: Lấy sổ lệnh (Order Book) của Phái Sinh.
+  parameters:
+    - name: investorAccountId
+      in: query
+      schema:
+        type: number
+    - name: _start
+      in: query
+      schema:
+        type: number
+    - name: _end
+      in: query
+      schema:
+        type: number
+    - name: _sort
+      in: query
+      schema:
+        type: string
+    - name: _order
+      in: query
+      schema:
+        type: string
+  responses:
+    "200":
+      description: Thành công
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/derivatives/DerivativeOrderPage.yaml
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml
+post:
+  operationId: placeDerivativeOrder
+  tags:
+    - Phái sinh
+  summary: Đặt lệnh Phái Sinh
+  description: Đặt lệnh Phái Sinh (Long/Short).
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            bankMarginPortfolioId:
+              type: number
+            investorId:
+              type: number
+            symbol:
+              type: string
+            price:
+              type: number
+            orderType:
+              type: string
+            side:
+              type: string
+            quantity:
+              type: number
+  responses:
+    "200":
+      description: Thành công
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/derivatives/DerivativeOrder.yaml
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml

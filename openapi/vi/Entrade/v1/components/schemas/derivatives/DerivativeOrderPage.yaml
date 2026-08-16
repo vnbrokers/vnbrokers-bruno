@@ -1,0 +1,12 @@
+type: object
+properties:
+  data:
+    type: array
+    items:
+      $ref: ./DerivativeOrder.yaml
+  total:
+    type: number
+  start:
+    type: number
+  end:
+    type: number

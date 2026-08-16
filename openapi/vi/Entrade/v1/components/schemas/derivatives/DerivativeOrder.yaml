@@ -1,0 +1,66 @@
+type: object
+properties:
+  id:
+    type: number
+  side:
+    type: string
+  investorId:
+    type: number
+  investorAccountId:
+    type: number
+  bankId:
+    type: number
+  bankAccountId:
+    type: number
+  symbol:
+    type: string
+  price:
+    type: number
+  quantity:
+    type: number
+  orderType:
+    type: string
+  orderStatus:
+    type: string
+  fillQuantity:
+    type: number
+  lastQuantity:
+    type: number
+  lastPrice:
+    type: number
+  averagePrice:
+    type: number
+  createdDate:
+    type: string
+  modifiedDate:
+    type: string
+  bankMarginPortfolioId:
+    type: number
+  dealId:
+    type: number
+  tradingFee:
+    type: number
+  tradingTax:
+    type: number
+  orderSecure:
+    type: number
+  priceSecure:
+    type: number
+  marginRate:
+    type: number
+  quantitySecure:
+    type: number
+  leavesQuantity:
+    type: number
+  externalId:
+    type: string
+  error:
+    type: string
+  maker:
+    type: string
+  version:
+    type: number
+  type:
+    type: string
+  fillValue:
+    type: number

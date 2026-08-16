@@ -1,0 +1,20 @@
+type: object
+properties:
+  investorId:
+    type: string
+  investorAccountId:
+    type: number
+  cutLossRate:
+    type: number
+  trailingEnabled:
+    type: boolean
+  createdDate:
+    type: string
+  modifiedDate:
+    type: string
+  maxCutLossRate:
+    type: number
+  status:
+    type: string
+  takeProfitRate:
+    type: number

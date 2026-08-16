@@ -1,0 +1,23 @@
+get:
+  operationId: getAccountBalance
+  tags:
+    - Tài khoản
+  summary: Lấy thông tin tài sản
+  description: Lấy thông tin tài sản của tiểu khoản master theo investorId.
+  parameters:
+    - name: investorId
+      in: path
+      required: true
+      schema:
+        type: number
+  responses:
+    "200":
+      description: Thành công
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/accounts/AccountBalance.yaml
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml

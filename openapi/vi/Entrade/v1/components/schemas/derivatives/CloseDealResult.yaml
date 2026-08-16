@@ -1,0 +1,6 @@
+type: object
+properties:
+  orderType:
+    type: string
+  triggeredBy:
+    type: string

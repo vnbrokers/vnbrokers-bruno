@@ -1,0 +1,72 @@
+type: object
+properties:
+  total:
+    type: number
+  data:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: number
+        bankId:
+          type: number
+        bankAccountId:
+          type: number
+        name:
+          type: string
+        interestRate:
+          type: number
+        tradingFeeRate:
+          type: number
+        overdueInterestRate:
+          type: number
+        loanTerm:
+          type: number
+        maxLoanPool:
+          type: number
+        coInvestTaxRate:
+          type: number
+        createdDate:
+          type: string
+        modifiedDate:
+          type: string
+        closedPositionFee:
+          type: number
+        tradingTaxRate:
+          type: number
+        portfolio:
+          type: array
+          items:
+            type: object
+            properties:
+              symbol:
+                type: string
+              initialRate:
+                type: number
+              maintenanceRate:
+                type: number
+              liquidateRate:
+                type: number
+              overnightRate:
+                type: number
+              dailyStockBorrowFee:
+                type: number
+              withdrawalRate:
+                type: number
+              additionalRate:
+                type: number
+              companySecureRate:
+                type: number
+              vsdSecureRate:
+                type: number
+              bankSecureRate:
+                type: number
+        assetManagementOvernightFee:
+          type: number
+        autoAdvanceRealizedProfit:
+          type: boolean
+        displaySymbols:
+          type: array
+          items:
+            type: string

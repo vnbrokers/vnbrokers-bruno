@@ -1,0 +1,33 @@
+type: object
+properties:
+  id:
+    type: string
+  status:
+    type: string
+  investorId:
+    type: string
+  investorAccountId:
+    type: number
+  bankMarginPortfolioId:
+    type: number
+  symbol:
+    type: string
+  condition:
+    type: string
+  targetPrice:
+    type: number
+  targetSide:
+    type: string
+  targetQuantity:
+    type: number
+  type:
+    type: string
+  expiredTime:
+    type: string
+  createdDate:
+    type: string
+  modifiedDate:
+    type: string
+  metadata:
+    type: object
+    properties: {}

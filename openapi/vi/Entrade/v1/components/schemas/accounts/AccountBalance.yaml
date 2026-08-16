@@ -1,0 +1,80 @@
+type: object
+properties:
+  name:
+    type: string
+  bankId:
+    type: number
+  bankAccountId:
+    type: number
+  investorId:
+    type: number
+  investorAccountId:
+    type: number
+  totalAsset:
+    type: number
+  investorCount:
+    type: number
+  dealCount:
+    type: number
+  totalDealValue:
+    type: number
+  totalDebt:
+    type: number
+  totalSecure:
+    type: number
+  nav:
+    type: number
+  totalOpenQuantity:
+    type: number
+  totalOpenValue:
+    type: number
+  totalLoanCash:
+    type: number
+  totalLoanStock:
+    type: number
+  collateralLong:
+    type: number
+  collateralShort:
+    type: number
+  availableCash:
+    type: number
+  initCash:
+    type: number
+  taxCredit:
+    type: number
+  withdrawalCash:
+    type: number
+  holdOvernightSecure:
+    type: number
+  estimateHoldOvernightSecure:
+    type: number
+  withdrawFee:
+    type: number
+  withdrawThreshold:
+    type: number
+  withdrawGuaranteeAmount:
+    type: number
+  navExcludeEstimatedProfit:
+    type: number
+  depositionalCash:
+    type: number
+  vsdSecureDepositFee:
+    type: number
+  pendingVsdSecure:
+    type: number
+  receivable:
+    type: number
+  cashOnHand:
+    type: number
+  totalDerivativeDealSecure:
+    type: number
+  holdCollateralFee:
+    type: number
+  maxWithdraw:
+    type: number
+  maxWithdrawPoint:
+    type: number
+  createdDate:
+    type: string
+  id:
+    type: number

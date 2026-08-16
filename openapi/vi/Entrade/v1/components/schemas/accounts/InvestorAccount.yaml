@@ -1,0 +1,53 @@
+type: object
+properties:
+  id:
+    type: number
+  investorId:
+    type: number
+  orderSecure:
+    type: number
+  derivativeOrderSecure:
+    type: number
+  dealSecure:
+    type: number
+  initDerivativeDealSecures:
+    type: array
+    items: {}
+  derivativeDealSecure:
+    type: number
+  tradingFeeSecure:
+    type: number
+  totalCash:
+    type: number
+  sellingTaxSecure:
+    type: number
+  orderMoneyAdvanceFeeSecure:
+    type: number
+  receivable:
+    type: number
+  taxCredit:
+    type: number
+  initCash:
+    type: number
+  holdOvernightSecure:
+    type: number
+  originalReferenceBonus:
+    type: number
+  referenceBonus:
+    type: number
+  netDerivativeOrderSecure:
+    type: number
+  createdDate:
+    type: string
+  modifiedDate:
+    type: string
+  status:
+    type: string
+  type:
+    type: string
+  availableCash:
+    type: number
+  withdrawalCash:
+    type: number
+  purchasingPower:
+    type: number

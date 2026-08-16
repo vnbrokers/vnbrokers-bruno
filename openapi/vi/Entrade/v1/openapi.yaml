@@ -1,0 +1,122 @@
+openapi: 3.1.0
+info:
+  title: Entrade Open API
+  version: 1.0.0
+  description: Đặc tả được trích xuất từ các request Bruno trong `collections/Entrade`.
+x-bruno-sources:
+  - collections/Entrade/1-Dang-nhap.yml
+  - collections/Entrade/2-Lay-tieu-khoan-Master.yml
+  - collections/Entrade/3-Lay-thong-tin-tai-san.yml
+  - collections/Entrade/4-Lay-danh-sach-goi-vay.yml
+  - collections/Entrade/5-Lay-suc-mua.yml
+  - collections/Entrade/6-Lay-danh-sach-ma-Phai-Sinh.yml
+  - collections/Entrade/7-Dat-lenh-Phai-Sinh.yml
+  - collections/Entrade/8-Lay-so-lenh.yml
+  - collections/Entrade/9-Lay-chi-tiet-lenh.yml
+  - collections/Entrade/10-Huy-lenh.yml
+  - collections/Entrade/11-Lay-danh-sach-deals.yml
+  - collections/Entrade/12-Lay-cau-hinh-cat-lo.yml
+  - collections/Entrade/13-Sua-cau-hinh-mac-dinh-cat-lo.yml
+  - collections/Entrade/14-Dong-deal.yml
+  - collections/Entrade/v1/4.9-Dat-lenh-dieu-kien-(Smart-Order).yml
+  - collections/Entrade/v1/4.10-Huy-lenh-dieu-kien.yml
+  - collections/Entrade/v1/4.11-Huy-tat-ca-lenh-dieu-kien-(Smart-Order).yml
+  - collections/Entrade/v1/4.12-Thong-tin-lenh-dieu-kien.yml
+  - collections/Entrade/v1/4.13-Thong-tin-lenh-cat-lo.yml
+  - collections/Entrade/v1/4.14-Dat-lenh-cat-lo.yml
+  - collections/Entrade/v1/4.15-Dat-lenh-chot-loi.yml
+servers:
+  - url: https://services-staging.entrade.com.vn/papertrade-entrade-api
+    description: Môi trường staging
+  - url: https://services.entrade.com.vn/entrade-api
+    description: Môi trường production
+security:
+  - BearerAuth: []
+tags:
+  - name: Xác thực
+    description: API đăng nhập và cấp JWT token.
+  - name: Tài khoản
+    description: Thông tin tài khoản, tài sản và cấu hình rủi ro.
+  - name: Phái sinh
+    description: Giao dịch, sức mua, gói vay và vị thế phái sinh.
+  - name: Smart Order
+    description: Lệnh điều kiện trên dịch vụ Smart Order.
+paths:
+  /v2/auth:
+    $ref: ./paths/auth/login.yaml
+  "/investors/{investorId}/investor_account":
+    $ref: ./paths/accounts/investor-account.yaml
+  "/account_balances/{investorId}":
+    $ref: ./paths/accounts/balance.yaml
+  "/investors/{investorId}/derivative_margin_portfolios":
+    $ref: ./paths/derivatives/margin-portfolios.yaml
+  "/derivative/investors/{investorId}/ppse":
+    $ref: ./paths/derivatives/purchasing-power.yaml
+  /derivatives:
+    $ref: ./paths/derivatives/contracts.yaml
+  /derivative/orders:
+    $ref: ./paths/derivatives/orders.yaml
+  "/derivative/orders/{orderId}":
+    $ref: ./paths/derivatives/order-by-id.yaml
+  /derivative/deals:
+    $ref: ./paths/derivatives/deals.yaml
+  "/derivative/deals/{dealId}/_close_deal":
+    $ref: ./paths/derivatives/close-deal.yaml
+  /risk_configs:
+    $ref: ./paths/risk/configs.yaml
+  "/risk_configs/{investorAccountId}":
+    $ref: ./paths/risk/config-by-account.yaml
+  /orders:
+    $ref: ./paths/smart-orders/orders.yaml
+  "/orders/{orderId}":
+    $ref: ./paths/smart-orders/order-by-id.yaml
+  /deal_risks:
+    $ref: ./paths/risk/deal-risks.yaml
+components:
+  securitySchemes:
+    BearerAuth:
+      $ref: ./components/securitySchemes/BearerAuth.yaml
+  schemas:
+    Error:
+      $ref: ./components/schemas/common/Error.yaml
+    AuthToken:
+      $ref: ./components/schemas/auth/AuthToken.yaml
+    InvestorAccount:
+      $ref: ./components/schemas/accounts/InvestorAccount.yaml
+    AccountBalance:
+      $ref: ./components/schemas/accounts/AccountBalance.yaml
+    MarginPortfolioPage:
+      $ref: ./components/schemas/derivatives/MarginPortfolioPage.yaml
+    PurchasingPower:
+      $ref: ./components/schemas/derivatives/PurchasingPower.yaml
+    DerivativeContractPage:
+      $ref: ./components/schemas/derivatives/DerivativeContractPage.yaml
+    DerivativeOrder:
+      $ref: ./components/schemas/derivatives/DerivativeOrder.yaml
+    DerivativeOrderPage:
+      $ref: ./components/schemas/derivatives/DerivativeOrderPage.yaml
+    DerivativeDealPage:
+      $ref: ./components/schemas/derivatives/DerivativeDealPage.yaml
+    CloseDealResult:
+      $ref: ./components/schemas/derivatives/CloseDealResult.yaml
+    RiskConfigPage:
+      $ref: ./components/schemas/risk/RiskConfigPage.yaml
+    RiskConfig:
+      $ref: ./components/schemas/risk/RiskConfig.yaml
+    RiskConfigV1:
+      $ref: ./components/schemas/risk/RiskConfigV1.yaml
+    RiskConfigV1Page:
+      $ref: ./components/schemas/risk/RiskConfigV1Page.yaml
+    SmartOrder:
+      $ref: ./components/schemas/smart-orders/SmartOrder.yaml
+    SmartOrderPage:
+      $ref: ./components/schemas/smart-orders/SmartOrderPage.yaml
+    SmartOrderBulkCancelResult:
+      $ref: ./components/schemas/smart-orders/SmartOrderBulkCancelResult.yaml
+    TakeProfitRequest:
+      $ref: ./components/schemas/risk/TakeProfitRequest.yaml
+  responses:
+    BadRequest:
+      $ref: ./components/responses/BadRequest.yaml
+    InternalError:
+      $ref: ./components/responses/InternalError.yaml

@@ -1,0 +1,32 @@
+type: object
+properties:
+  investorId:
+    type: number
+  investorAccountId:
+    type: number
+  cutLossRate:
+    type: number
+  trailingEnabled:
+    type: boolean
+  createdDate:
+    type: string
+  modifiedDate:
+    type: string
+  maxCutLossRate:
+    type: number
+  autoIncreaseDealRate:
+    type: boolean
+  enableAutoDealDepositNoti:
+    type: boolean
+  defaultTakeProfitRate:
+    type: number
+  defaultTakeProfitPriceDelta:
+    type: number
+  defaultTakeProfitEnabled:
+    type: boolean
+  defaultTakeProfitType:
+    type: string
+  defaultTakeProfitOrderDelta:
+    type: number
+  defaultTakeProfitOrderStrategy:
+    type: string

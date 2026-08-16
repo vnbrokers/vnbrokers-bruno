@@ -1,0 +1,9 @@
+type: object
+properties:
+  id:
+    type: number
+  takeProfitPrice:
+    type: number
+required:
+  - id
+  - takeProfitPrice
