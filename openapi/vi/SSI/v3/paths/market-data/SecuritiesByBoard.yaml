@@ -1,7 +1,7 @@
 get:
   operationId: getSecuritiesByBoard
   tags:
-    - market-data
+    - Dữ liệu thị trường
   summary: Danh sách chứng khoán
   description: Lấy danh sách chứng khoán theo điều kiện lọc. Khách chỉ được phép cung cấp một trong ba tham số symbol, board hoặc index để lọc danh sách chứng khoán.
   security:

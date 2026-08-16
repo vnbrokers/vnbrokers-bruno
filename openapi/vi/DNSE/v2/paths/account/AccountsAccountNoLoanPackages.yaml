@@ -272,7 +272,7 @@ get:
     '500':
       $ref: '../../components/responses/InternalError.yaml'
   tags:
-    - account
+    - Tài khoản
 parameters:
   - name: accountNo
     in: path

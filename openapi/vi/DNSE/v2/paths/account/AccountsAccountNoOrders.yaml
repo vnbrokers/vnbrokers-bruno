@@ -6,7 +6,7 @@ get:
       DnseSignature: []
   summary: Sổ lệnh
   tags:
-    - account
+    - Tài khoản
   parameters:
     - name: marketType
       in: query
@@ -95,8 +95,9 @@ get:
                   type: object
                   properties:
                     id:
-                      type: string
-                      example: '141'
+                      type: integer
+                      format: int32
+                      example: 141
                       description: Id lệnh giao dịch
                     side:
                       type: string
@@ -227,7 +228,7 @@ get:
                 type: integer
           example:
             orders:
-              - id: '141'
+              - id: 141
                 side: NB
                 accountNo: '0001179019'
                 symbol: BCM
@@ -341,7 +342,7 @@ post:
     '500':
       $ref: '../../components/responses/InternalError.yaml'
   tags:
-    - account
+    - Tài khoản
 parameters:
   - name: accountNo
     in: path

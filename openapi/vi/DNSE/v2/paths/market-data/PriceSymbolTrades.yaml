@@ -46,7 +46,7 @@ get:
       in: query
       schema:
         type: number
-      example: '100'
+      example: 100
   responses:
     '200':
       description: OK
@@ -159,7 +159,7 @@ get:
                 description: Danh sách giao dịch
               nextPageToken:
                 type: string
-                example: # NDYwMTQ1XzIwMjYtMDMtMTJUMDQ6MjU6MDUuNTZa
+                example: NDYwMTQ1XzIwMjYtMDMtMTJUMDQ6MjU6MDUuNTZa
                 description: Token dùng để lấy trang tiếp theo
           example:
             trades:
@@ -183,7 +183,7 @@ get:
     '500':
       $ref: '../../components/responses/InternalError.yaml'
   tags:
-    - market-data
+    - Dữ liệu thị trường
 parameters:
   - name: symbol
     in: path

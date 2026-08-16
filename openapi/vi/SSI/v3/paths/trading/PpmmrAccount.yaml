@@ -1,7 +1,7 @@
 get:
   operationId: getPpmmrAccount
   tags:
-    - trading
+    - Giao dịch
   summary: PP/MMR tài khoản
   description: Lấy thông tin PP/MMR của tài khoản.
   security:

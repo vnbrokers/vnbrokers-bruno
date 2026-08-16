@@ -1,7 +1,7 @@
 get:
   operationId: getAccountsCorporateActionHistory
   tags:
-    - account
+    - Tài khoản
   security:
     - DnseApiKey: []
       DnseAuxDate: []

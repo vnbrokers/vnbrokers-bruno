@@ -1,7 +1,7 @@
 post:
   operationId: placeOrder
   tags:
-    - trading
+    - Giao dịch
   summary: Đặt lệnh
   description: Đặt lệnh mới.
   security:
@@ -33,7 +33,7 @@ post:
 put:
   operationId: modifyOrder
   tags:
-    - trading
+    - Giao dịch
   summary: Sửa lệnh
   description: Sửa lệnh hiện có.
   security:
@@ -65,7 +65,7 @@ put:
 delete:
   operationId: cancelOrder
   tags:
-    - trading
+    - Giao dịch
   summary: Hủy lệnh
   description: Hủy lệnh hiện có.
   security:

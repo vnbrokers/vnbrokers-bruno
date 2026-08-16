@@ -1,7 +1,7 @@
 get:
   operationId: getBrokerAccountsCareBy
   tags:
-    - account
+    - Tài khoản
   security:
     - DnseApiKey: []
       DnseAuxDate: []

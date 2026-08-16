@@ -1,7 +1,7 @@
 get:
   operationId: getMasterData
   tags:
-    - market-data
+    - Dữ liệu thị trường
   summary: Dữ liệu tham chiếu thị trường
   description: Truy vấn thông tin giá trần, giá sàn, giá tham chiếu của chứng khoán theo ngày giao dịch.
   security:

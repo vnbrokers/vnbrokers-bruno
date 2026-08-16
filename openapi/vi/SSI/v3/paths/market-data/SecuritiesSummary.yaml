@@ -1,7 +1,7 @@
 get:
   operationId: getSecuritiesSummary
   tags:
-    - market-data
+    - Dữ liệu thị trường
   summary: Tổng hợp giao dịch chứng khoán
   description: Lấy thông tin tổng hợp giao dịch của một mã chứng khoán hoặc chỉ số theo từng ngày giao dịch. Chỉ truyền một trong hai tham số là Symbol hoặc Index.
   security:

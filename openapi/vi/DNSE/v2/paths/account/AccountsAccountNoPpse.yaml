@@ -96,12 +96,12 @@ get:
     '500':
       $ref: '../../components/responses/InternalError.yaml'
   tags:
-    - account
+    - Tài khoản
 parameters:
   - name: accountNo
     in: path
     required: true
     description: Số tiểu khoản
     schema:
-      type: integer
+      type: string
     example: '0001179019'

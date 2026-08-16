@@ -1,7 +1,7 @@
 get:
   operationId: getConditionalOrderStatusHistory
   tags:
-    - conditional-orders
+    - Lệnh điều kiện
   summary: Lịch sử trạng thái lệnh điều kiện
   description: Lấy lịch sử thay đổi trạng thái của một lệnh điều kiện.
   security:

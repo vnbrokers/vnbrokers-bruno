@@ -100,4 +100,4 @@ get:
     '500':
       $ref: '../../components/responses/InternalError.yaml'
   tags:
-    - account
+    - Tài khoản

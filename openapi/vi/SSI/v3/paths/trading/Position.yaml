@@ -1,7 +1,7 @@
 get:
   operationId: getPosition
   tags:
-    - trading
+    - Giao dịch
   summary: Vị thế
   description: Lấy thông tin vị thế của tài khoản.
   security:

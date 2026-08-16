@@ -1,7 +1,7 @@
 get:
   operationId: listConditionalOrders
   tags:
-    - conditional-orders
+    - Lệnh điều kiện
   summary: Danh sách lệnh điều kiện
   description: Lấy danh sách các lệnh điều kiện đã tạo theo bộ lọc.
   security:

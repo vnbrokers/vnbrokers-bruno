@@ -1,7 +1,7 @@
 get:
   operationId: getConditionalOrderBook
   tags:
-    - conditional-orders
+    - Lệnh điều kiện
   summary: Sổ lệnh điều kiện
   description: Lấy danh sách các lệnh thực được phát sinh (trigger) bởi một lệnh điều kiện.
   security:

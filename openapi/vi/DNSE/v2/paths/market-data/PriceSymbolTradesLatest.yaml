@@ -175,7 +175,7 @@ get:
     '500':
       $ref: '../../components/responses/InternalError.yaml'
   tags:
-    - market-data
+    - Dữ liệu thị trường
 parameters:
   - name: symbol
     in: path

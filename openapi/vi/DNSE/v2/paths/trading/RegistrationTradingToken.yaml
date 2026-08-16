@@ -36,7 +36,7 @@ post:
             properties:
               tradingToken:
                 type: string
-                example: # 9ab81e9c-8a81-45aa-8190-b69a1c179d52
+                example: 9ab81e9c-8a81-45aa-8190-b69a1c179d52
                 description: Token đặt lệnh
           example:
             tradingToken: 9ab81e9c-8a81-45aa-8190-b69a1c179d52 #gitleaks:allow
@@ -45,7 +45,7 @@ post:
     '500':
       $ref: '../../components/responses/InternalError.yaml'
   tags:
-    - trading
+    - Giao dịch
   requestBody:
     content:
       application/json:

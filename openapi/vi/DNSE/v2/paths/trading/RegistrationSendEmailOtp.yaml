@@ -34,4 +34,4 @@ post:
     '500':
       $ref: '../../components/responses/InternalError.yaml'
   tags:
-    - trading
+    - Giao dịch

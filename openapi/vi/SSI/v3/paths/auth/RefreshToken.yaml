@@ -1,7 +1,7 @@
 post:
   operationId: refreshToken
   tags:
-    - authentication
+    - Xác thực
   summary: Làm mới access token
   description: Làm mới access token bằng refresh token còn hiệu lực.
   requestBody:

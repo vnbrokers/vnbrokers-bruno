@@ -1,7 +1,7 @@
 get:
   operationId: getOhlc
   tags:
-    - market-data
+    - Dữ liệu thị trường
   summary: Dữ liệu OHLCV
   description: Lấy dữ liệu nến OHLCV theo khoảng thời gian. Thời gian cung cấp 1 năm gần nhất cho dữ liệu intraday, dữ liệu daily cung cấp từ khi mã chứng khoán được giao dịch.
   security:

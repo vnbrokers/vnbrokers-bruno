@@ -6,12 +6,12 @@ info:
 servers:
   - url: https://openapi-uat.dnse.com.vn
 tags:
-  - name: trading
-    description: Authentication and order execution operations.
-  - name: account
-    description: Account, balance, loan, order and position operations.
-  - name: market-data
-    description: Market instruments, quotes, OHLC and trade data.
+  - name: Giao dịch
+    description: Xác thực và các hoạt động đặt lệnh.
+  - name: Tài khoản
+    description: Tài khoản, số dư, khoản vay, lệnh và vị thế.
+  - name: Dữ liệu thị trường
+    description: Thông tin mã chứng khoán, báo giá, OHLC và giao dịch.
 paths:
   /registration/send-email-otp:
     $ref: './paths/trading/RegistrationSendEmailOtp.yaml'

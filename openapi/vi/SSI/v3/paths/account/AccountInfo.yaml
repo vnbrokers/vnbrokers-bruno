@@ -1,7 +1,7 @@
 get:
   operationId: getAccountInfo
   tags:
-    - account
+    - Tài khoản
   summary: Thông tin tài khoản
   description: Lấy danh sách tài khoản giao dịch của khách hàng. Tài khoản có thể một trong ba loại CASH (thường); MARGIN (ký quỹ); DERIVATIVE (phái sinh). * DERIVATIVE (phái sinh)
   security:

@@ -53,13 +53,13 @@ get:
       description: Số bản ghi trên mỗi trang
       schema:
         type: integer
-      example: '100'
+      example: 100
     - name: page
       in: query
       description: Phân trang hiện tại
       schema:
         type: integer
-      example: '1'
+      example: 1
   responses:
     '200':
       description: OK
@@ -243,4 +243,4 @@ get:
     '500':
       $ref: '../../components/responses/InternalError.yaml'
   tags:
-    - market-data
+    - Dữ liệu thị trường

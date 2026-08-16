@@ -1,7 +1,7 @@
 get:
   operationId: getMarketFile
   tags:
-    - market-data
+    - Dữ liệu thị trường
   summary: File dữ liệu thị trường
   description: Lấy đường dẫn file CSV dữ liệu thị trường theo ngày giao dịch và khung thời gian. File dữ liệu sẽ được hệ thống chuẩn bị sẵn và cung cấp đường dẫn tải về trong vòng 30 phút kể từ khi nhận được yêu cầu.
   security:

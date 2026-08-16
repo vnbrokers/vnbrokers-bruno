@@ -111,12 +111,12 @@ post:
               createdDate:
                 type: string
                 format: date-time
-                example: '2026-03-24T04:20:55.63'
+                example: '2026-03-24T04:20:55.63Z'
                 description: Thời điểm tạo
               modifiedDate:
                 type: string
                 format: date-time
-                example: '2026-03-24T04:20:55.63'
+                example: '2026-03-24T04:20:55.63Z'
                 description: Thời điểm cập nhật
           example:
             id: '1636'
@@ -130,14 +130,14 @@ post:
             leaveQuantity: 0
             canceledQuantity: 0
             loanPackageId: 2278
-            createdDate: '2026-03-24T04:20:55.63'
-            modifiedDate: '2026-03-24T04:20:55.63'
+            createdDate: '2026-03-24T04:20:55.63Z'
+            modifiedDate: '2026-03-24T04:20:55.63Z'
     '400':
       $ref: '../../components/responses/BadRequest.yaml'
     '500':
       $ref: '../../components/responses/InternalError.yaml'
   tags:
-    - trading
+    - Giao dịch
 parameters:
   - name: positionId
     in: path

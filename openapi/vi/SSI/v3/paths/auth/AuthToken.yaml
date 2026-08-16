@@ -1,7 +1,7 @@
 post:
   operationId: issueToken
   tags:
-    - authentication
+    - Xác thực
   summary: Cấp access token và refresh token
   description: Xác thực apiKey/apiSecret để lấy access token và refresh token (kèm thông tin hết hạn).
   requestBody:

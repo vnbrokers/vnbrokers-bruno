@@ -1,7 +1,7 @@
 get:
   operationId: getIndexList
   tags:
-    - market-data
+    - Dữ liệu thị trường
   summary: Danh sách chỉ số
   description: Lấy danh sách các chỉ số thị trường.
   security:

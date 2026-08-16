@@ -1,7 +1,7 @@
 get:
   operationId: getMaxBuySell
   tags:
-    - trading
+    - Giao dịch
   summary: Khối lượng mua bán tối đa
   description: Lấy khối lượng mua/bán tối đa theo tài khoản, mã và giá.
   security:

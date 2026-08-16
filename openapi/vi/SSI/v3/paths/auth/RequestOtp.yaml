@@ -1,7 +1,7 @@
 post:
   operationId: requestOtp
   tags:
-    - authentication
+    - Xác thực
   summary: Yêu cầu OTP
   description: Gửi yêu cầu lấy OTP (SMS/Email) phục vụ xác thực giao dịch. Chỉ sử dụng cho tài khoản có kiểu 2FA là SMS và Email.
   requestBody:

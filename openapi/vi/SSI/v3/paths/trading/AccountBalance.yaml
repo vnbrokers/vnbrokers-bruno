@@ -1,7 +1,7 @@
 get:
   operationId: getAccountBalance
   tags:
-    - trading
+    - Giao dịch
   summary: Số dư tài khoản
   description: Lấy thông tin số dư tài khoản.
   security:

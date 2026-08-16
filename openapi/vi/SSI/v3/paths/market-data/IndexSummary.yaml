@@ -1,7 +1,7 @@
 get:
   operationId: getIndexSummary
   tags:
-    - market-data
+    - Dữ liệu thị trường
   summary: Tổng hợp chỉ số
   description: Lấy thông tin tổng hợp của một chỉ số theo ngày giao dịch.
   security:

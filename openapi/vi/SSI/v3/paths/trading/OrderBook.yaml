@@ -1,7 +1,7 @@
 get:
   operationId: getOrderBook
   tags:
-    - trading
+    - Giao dịch
   summary: Sổ lệnh
   description: Lấy lịch sử sổ lệnh theo tài khoản và bộ lọc.
   security:

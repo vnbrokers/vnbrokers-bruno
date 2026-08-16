@@ -1,7 +1,7 @@
 get:
   operationId: getPriceSymbolQuotesLatest
   tags:
-    - market-data
+    - Dữ liệu thị trường
   security:
     - DnseApiKey: []
       DnseAuxDate: []
