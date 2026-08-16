@@ -5,6 +5,8 @@ get:
       DnseAuxDate: []
       DnseSignature: []
   summary: Sổ lệnh
+  tags:
+    - account
   parameters:
     - name: marketType
       in: query
@@ -225,7 +227,7 @@ get:
                 type: integer
           example:
             orders:
-              - id: 141
+              - id: '141'
                 side: NB
                 accountNo: '0001179019'
                 symbol: BCM
@@ -260,13 +262,13 @@ post:
     - name: marketType
       in: query
       required: true
-      description: Loại thị trường: STOCK, DERIVATIVE hoặc BOND.
+      description: 'Loại thị trường: STOCK, DERIVATIVE hoặc BOND.'
       schema:
         type: string
         enum: [STOCK, DERIVATIVE, BOND]
     - name: orderCategory
       in: query
-      description: Phân loại lệnh: NORMAL, STOP hoặc OCO.
+      description: 'Phân loại lệnh: NORMAL, STOP hoặc OCO.'
       schema:
         type: string
         enum: [NORMAL, STOP, OCO]

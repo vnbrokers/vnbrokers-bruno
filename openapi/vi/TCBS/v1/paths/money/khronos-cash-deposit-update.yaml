@@ -2,6 +2,8 @@
   "summary": "Nộp ký quỹ"
   "description": "Nộp tiền ký quỹ vào tài khoản phái sinh."
   responses:
+    "401":
+      $ref: ../../components/responses/Unauthorized.yaml
     "200":
       description: Phản hồi thành công
       content:

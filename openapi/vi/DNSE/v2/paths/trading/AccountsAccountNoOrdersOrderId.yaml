@@ -132,7 +132,7 @@ put:
                 example: '2026-03-24T04:14:21.004856492Z'
                 description: Thời điểm cập nhật
           example:
-            id: 1626
+            id: '1626'
             accountNo: '0001179019'
             side: NS
             loanPackageId: 2278
@@ -356,7 +356,7 @@ delete:
                 example: '2026-03-24T04:16:12.469115348Z'
                 description: Thời điểm cập nhật
           example:
-            id: 1626
+            id: '1626'
             symbol: 41I1G4000
             side: NS
             orderType: LO
@@ -573,7 +573,7 @@ get:
                   {"orderSession":"OPEN","dealId":"1.77410795472387E14","releaseSecureOnFilled":"false","originMaker":"1000005917-close_deal_177410795472387","dtaAccountNo":"D000113702","isForeigner":false,"probType":"CUSTOMER","eventNo":5}
                 description: Thông tin bổ sung của lệnh
           example:
-            id: 966
+            id: '966'
             side: NS
             accountNo: '0001179019'
             symbol: 41I1G4000

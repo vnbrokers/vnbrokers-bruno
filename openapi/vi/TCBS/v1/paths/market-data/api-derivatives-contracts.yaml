@@ -2,5 +2,7 @@
   "summary": "Bảng giá phái sinh (WebSocket)"
   "description": "Bảng giá phái sinh theo thời gian thực qua WebSocket."
   responses:
+    "401":
+      $ref: ../../components/responses/Unauthorized.yaml
     "200":
       description: Phản hồi thành công

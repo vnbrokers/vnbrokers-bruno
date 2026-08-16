@@ -18,6 +18,8 @@
         "type": "number"
         "format": "double"
   responses:
+    "401":
+      $ref: ../../components/responses/Unauthorized.yaml
     "200":
       description: Phản hồi thành công
       content:

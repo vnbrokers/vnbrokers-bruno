@@ -119,7 +119,7 @@ post:
                 example: '2026-03-24T04:20:55.63'
                 description: Thời điểm cập nhật
           example:
-            id: 1636
+            id: '1636'
             side: NS
             accountNo: '0001179019'
             symbol: 41I1G4000

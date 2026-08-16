@@ -2,6 +2,8 @@
   "summary": "Thông tin mã, giá phái sinh"
   "description": "Lấy thông tin mã và giá của thị trường phái sinh."
   responses:
+    "401":
+      $ref: ../../components/responses/Unauthorized.yaml
     "200":
       description: Phản hồi thành công
       content:
