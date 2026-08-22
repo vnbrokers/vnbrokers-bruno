@@ -16,7 +16,18 @@ get:
     - name: boardId
       in: query
       schema:
-        $ref: "../../components/schemas/_common/enums/BoardId.yaml"
+        $ref: ../../components/schemas/_common/enums/BoardId.yaml
+      required: false
+      description: |-
+        Mã bảng giao dịch
+        - G1: Lô chẵn
+        - G4: Lô lẻ
+        - T1: Thỏa thuận trong giờ (9h - 14h45)
+        - T3: Thỏa thuận sau giờ (14h45 - 15h)
+        - T4: Thỏa thuận lô lẻ trong giờ (9h - 14h45)
+        - T6: Thỏa thuận lô lẻ sau giờ  (14h45 - 15h)
+      deprecated: false
+      example: G1
   responses:
     "200":
       description: OK
@@ -25,7 +36,141 @@ get:
           schema:
             type: object
             additionalProperties: true
+            description: Dữ liệu sổ lệnh (Market Depth) gần nhất
+            properties:
+              quotes:
+                type: array
+                description: Dữ liệu sổ lệnh của mã chứng khoán
+                example:
+                  - marketId: STO
+                    boardId: G1
+                    isin: VN000000ACB8
+                    symbol: ACB
+                    bid:
+                      - price: 24.55
+                        quantity: 60590
+                      - price: 24.5
+                        quantity: 30250
+                      - price: 24.45
+                        quantity: 19600
+                    offer:
+                      - price: 24.6
+                        quantity: 10450
+                      - price: 24.65
+                        quantity: 8450
+                      - price: 24.7
+                        quantity: 23080
+                    totalOfferQtty: 0
+                    totalBidQtty: 0
+                    time: "2026-05-27 09:49:01.001"
+                items:
+                  type: object
+                  properties:
+                    marketId:
+                      type: string
+                      example: STO
+                      description: |-
+                        Mã thị trường niêm yết mã chứng khoán
+                        - DVX: Phái sinh sàn HNX
+                        - HCX: Trái phiếu doanh nghiệp HNX
+                        - STO: Cổ phiếu sàn HOSE
+                        - STX: Cổ phiếu sàn HNX
+                        - UPX: Cổ phiếu sàn Upcom
+                    boardId:
+                      type: string
+                      example: G1
+                      description: |-
+                        Mã bảng giao dịch
+                        - G1: Lô chẵn
+                        - G4: Lô lẻ
+                        - T1: Thỏa thuận trong giờ (9h - 14h45)
+                        - T3: Thỏa thuận sau giờ (14h45 - 15h)
+                        - T4: Thỏa thuận lô lẻ trong giờ (9h - 14h45)
+                        - T6: Thỏa thuận lô lẻ sau giờ (14h45 - 15h)
+                    isin:
+                      type: string
+                      example: VN000000ACB8
+                      description: Mã định danh quốc tế (ISIN) của chứng khoán.
+                    symbol:
+                      type: string
+                      example: ACB
+                      description: Mã chứng khoán
+                    bid:
+                      type: array
+                      description: Danh sách các mức giá chào mua
+                      example:
+                        - price: 24.55
+                          quantity: 60590
+                      items:
+                        type: object
+                        properties:
+                          price:
+                            type: number
+                            format: double
+                            example: 24.55
+                            description: Giá đặt mua
+                          quantity:
+                            type: integer
+                            format: int32
+                            example: 60590
+                            description: Khối lượng đặt mua tại mức giá tương ứng
+                    offer:
+                      type: array
+                      description: Danh sách các mức giá chào bán
+                      example:
+                        - price: 24.6
+                          quantity: 10450
+                      items:
+                        type: object
+                        properties:
+                          price:
+                            type: number
+                            format: double
+                            example: 24.6
+                            description: Giá đặt bán
+                          quantity:
+                            type: integer
+                            format: int32
+                            example: 10450
+                            description: Khối lượng đặt bán tại mức giá tương ứng
+                    totalOfferQtty:
+                      type: integer
+                      format: int32
+                      example: 0
+                      description: Tổng khối lượng dư bán
+                    totalBidQtty:
+                      type: integer
+                      format: int32
+                      example: 0
+                      description: Tổng khối lượng dư mua
+                    time:
+                      type: string
+                      example: "2026-05-27 09:49:01.001"
+                      description: "Thời gian ghi nhận. Định dạng: YYYY-MM-DD HH:mm:ss.SSS (GMT+7)"
+          example:
+            quotes:
+              - marketId: STO
+                boardId: G1
+                isin: VN000000ACB8
+                symbol: ACB
+                bid:
+                  - price: 24.55
+                    quantity: 60590
+                  - price: 24.5
+                    quantity: 30250
+                  - price: 24.45
+                    quantity: 19600
+                offer:
+                  - price: 24.6
+                    quantity: 10450
+                  - price: 24.65
+                    quantity: 8450
+                  - price: 24.7
+                    quantity: 23080
+                totalOfferQtty: 0
+                totalBidQtty: 0
+                time: "2026-05-27 09:49:01.001"
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
+      $ref: ../../components/responses/InternalError.yaml

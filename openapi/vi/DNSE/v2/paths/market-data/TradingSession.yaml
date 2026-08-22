@@ -11,12 +11,30 @@ get:
     - name: boardId
       in: query
       schema:
-        $ref: "../../components/schemas/_common/enums/BoardId.yaml"
+        $ref: ../../components/schemas/_common/enums/BoardId.yaml
+      description: |-
+        Mã bảng giao dịch
+        - G1: Lô chẵn
+        - G4: Lô lẻ
+        - T1: Thỏa thuận trong giờ (9h - 14h45)
+        - T3: Thỏa thuận sau giờ (14h45 - 15h)
+        - T4: Thỏa thuận lô lẻ trong giờ (9h - 14h45)
+        - T6: Thỏa thuận lô lẻ sau giờ  (14h45 - 15h)
+      example: G1
     - name: tscProdGrpId
       in: query
       required: true
       schema:
-        $ref: "../../components/schemas/_common/enums/ProductGrpId.yaml"
+        $ref: ../../components/schemas/_common/enums/ProductGrpId.yaml
+      description: |-
+        Nhóm sản phẩm theo thị trường
+        - FBX: Hợp đồng tương lai Trái phiếu
+        - FIO: Hợp đồng tương lai Chỉ số
+        - HCX: Trái phiếu Doanh nghiệp HNX
+        - STO: Cổ phiếu sàn HOSE
+        - STX: Cổ phiếu sàn HNX
+        - UPX: Cổ phiếu sàn Upcom
+      example: STO
   responses:
     "200":
       description: OK
@@ -31,18 +49,36 @@ get:
                   type: object
                   properties:
                     marketId:
-                      $ref: "../../components/schemas/_common/enums/MarketId.yaml"
+                      $ref: ../../components/schemas/_common/enums/MarketId.yaml
                     boardId:
-                      $ref: "../../components/schemas/_common/enums/BoardId.yaml"
+                      $ref: ../../components/schemas/_common/enums/BoardId.yaml
                     tscProdGrpId:
-                      $ref: "../../components/schemas/_common/enums/ProductGrpId.yaml"
+                      $ref: ../../components/schemas/_common/enums/ProductGrpId.yaml
                     tradingSessionId:
-                      $ref: "../../components/schemas/_common/enums/TradingSessionId.yaml"
+                      $ref: ../../components/schemas/_common/enums/TradingSessionId.yaml
                     eventId:
-                      $ref: "../../components/schemas/_common/enums/EventId.yaml"
+                      $ref: ../../components/schemas/_common/enums/EventId.yaml
                     time:
                       type: string
+                      example: "2026-06-26 14:45:00.960"
+                      description: Thời gian ghi nhận định dạng (YYYY-MM-DD HH:mm:ss.SSS (GMT+7))
+                example:
+                  - marketId: STO
+                    boardId: G1
+                    tscProdGrpId: STO
+                    tradingSessionId: "99"
+                    eventId: AC2
+                    time: "2026-06-26 14:45:00.960"
+                description: ""
+          example:
+            tradingSessions:
+              - marketId: STO
+                boardId: G1
+                tscProdGrpId: STO
+                tradingSessionId: "99"
+                eventId: AC2
+                time: "2026-06-26 14:45:00.960"
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
+      $ref: ../../components/responses/InternalError.yaml

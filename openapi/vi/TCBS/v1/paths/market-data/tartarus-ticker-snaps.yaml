@@ -32,50 +32,146 @@
                     symbol:
                       type: string
                       description: "Mã cổ phiếu."
-                    refPrice:
-                      type: number
-                      format: double
-                      description: "Giá tham chiếu."
                     ceilPrice:
-                      type: number
+                      type: string
                       format: double
                       description: "Giá trần."
                     floorPrice:
-                      type: number
+                      type: string
                       format: double
                       description: "Giá sàn."
+                    refPrice:
+                      type: string
+                      format: double
+                      description: "Giá tham chiếu."
+                    bidPrice01:
+                      type: string
+                      format: int64
+                      description: "Giá mua 1."
+                    bidPrice02:
+                      type: string
+                      format: int64
+                      description: "Giá mua 2."
+                    bidPrice03:
+                      type: string
+                      format: int64
+                      description: "Giá mua 3."
+                    bidQtty01:
+                      type: string
+                      format: int64
+                      description: "KL mua 1."
+                    bidQtty02:
+                      type: string
+                      format: int64
+                      description: "KL mua 2."
+                    bidQtty03:
+                      type: string
+                      format: int64
+                      description: "KL mua 3."
+                    offerPrice01:
+                      type: string
+                      format: int64
+                      description: "Giá bán 1."
+                    offerPrice02:
+                      type: string
+                      format: int64
+                      description: "Giá bán 2."
+                    offerPrice03:
+                      type: string
+                      format: int64
+                      description: "Giá bán 3."
+                    offerQtty01:
+                      type: string
+                      format: int64
+                      description: "KL bán 1."
+                    offerQtty02:
+                      type: string
+                      format: int64
+                      description: "KL bán 2."
+                    offerQtty03:
+                      type: string
+                      format: int64
+                      description: "KL bán 3."
                     matchPrice:
-                      type: number
+                      type: string
                       format: double
                       description: "Giá khớp."
                     matchQtty:
-                      type: number
+                      type: string
                       format: double
                       description: "Khối lượng khớp."
                     change:
-                      type: number
-                      format: double
+                      type: integer
+                      format: int64
                       description: "Thay đổi giá."
                     changePercent:
                       type: number
                       format: double
                       description: "% thay đổi."
-                    totalVolume:
+                    avg:
                       type: number
                       format: double
-                      description: "Tổng khối lượng."
+                      description: "Giá bình quân."
+                    high:
+                      type: string
+                      format: int64
+                      description: "Giá cao nhất."
+                    low:
+                      type: string
+                      format: int64
+                      description: "Giá thấp nhất."
                     totalValue:
-                      type: number
-                      format: double
+                      type: string
+                      format: int64
                       description: "Tổng giá trị."
+                    totalVolume:
+                      type: string
+                      format: int64
+                      description: "Tổng khối lượng."
                     buyForeignQtty:
-                      type: number
-                      format: double
+                      type: string
+                      format: int64
                       description: "KL nước ngoài mua."
                     sellForeignQtty:
-                      type: number
-                      format: double
+                      type: string
+                      format: int64
                       description: "KL nước ngoài bán."
                     room:
                       type: string
+                      format: int64
                       description: "Room nước ngoài."
+                    open:
+                      type: string
+                      format: int64
+                      description: "Giá mở cửa."
+          example:
+            tradingDate: 07/08/2025
+            data:
+              - symbol: PLP
+                ceilPrice: "4550"
+                floorPrice: "3970"
+                refPrice: "4260"
+                bidPrice01: "4270"
+                bidPrice02: "4260"
+                bidPrice03: "4250"
+                bidQtty01: "200"
+                bidQtty02: "800"
+                bidQtty03: "900"
+                offerPrice01: "4350"
+                offerPrice02: "4380"
+                offerPrice03: "4390"
+                offerQtty01: "400"
+                offerQtty02: "400"
+                offerQtty03: "2900"
+                matchPrice: "4350"
+                matchQtty: "100"
+                change: 90
+                changePercent: 2.112676056338028
+                avg: 4300
+                high: "4390"
+                low: "4140"
+                totalValue: "128278000"
+                totalVolume: "29800"
+                sellForeignQtty: "14000"
+                room: "44759594"
+                open: "4350"

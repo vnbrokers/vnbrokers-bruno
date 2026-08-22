@@ -52,3 +52,7 @@ patch:
               orderId:
                 type: string
                 description: "Mã lệnh đã sửa."
+          example:
+            error: "0"
+            message: Sửa lệnh thành công!
+            orderId: "9202205230000324355"

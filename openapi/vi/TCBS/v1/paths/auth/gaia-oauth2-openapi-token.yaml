@@ -17,6 +17,8 @@
               token:
                 type: string
                 description: "JWT token dùng cho các request tiếp theo."
+          example:
+            token: eyJ4NX...
   "requestBody":
     "required": true
     "content":

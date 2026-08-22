@@ -19,7 +19,7 @@ get:
       required: true
       description: Mã bảng giao dịch
       schema:
-        $ref: "../../components/schemas/_common/enums/BoardId.yaml"
+        $ref: ../../components/schemas/_common/enums/BoardId.yaml
     - name: from
       in: query
       required: true
@@ -54,25 +54,44 @@ get:
                   type: object
                   properties:
                     marketId:
-                      $ref: "../../components/schemas/_common/enums/MarketId.yaml"
+                      $ref: ../../components/schemas/_common/enums/MarketId.yaml
                     boardId:
-                      $ref: "../../components/schemas/_common/enums/BoardId.yaml"
+                      $ref: ../../components/schemas/_common/enums/BoardId.yaml
                     isin:
                       type: string
+                      example: VN000000HPG4
+                      description: Mã định danh quốc tế (ISIN) của chứng khoán.
                     symbol:
                       type: string
+                      example: HPG
+                      description: Mã chứng khoán
                     closePrice:
                       type: number
+                      format: double
+                      example: 0
+                      description: Giá đóng cửa
                     expectedTradePrice:
                       type: number
+                      format: double
+                      example: 94.1
+                      description: Giá khớp dự kiến
                     expectedTradeQuantity:
                       type: integer
+                      format: int32
+                      example: 2000
+                      description: Khối lượng khớp dự kiến
                     time:
                       type: string
+                      example: "2026-08-03 14:40:05.148"
+                      description: "Thời gian ghi nhận. Định dạng: YYYY-MM-DD HH:mm:ss.SSS (GMT+7)."
+                description: Danh sách dữ liệu giá khớp dự kiến của mã chứng khoán.
               nextPageToken:
                 type: string
                 nullable: true
+                example: null
+                description: Token dùng để lấy trang dữ liệu tiếp theo. Giá trị null nếu không còn dữ liệu.
+            description: Danh sách dữ liệu giá khớp dự kiến cùng thông tin phân trang.
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
+      $ref: ../../components/responses/InternalError.yaml

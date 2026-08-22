@@ -9,3 +9,4 @@ enum:
   - "STOCK"
   - "DERIVATIVE"
   - "INDEX"
+example: STOCK

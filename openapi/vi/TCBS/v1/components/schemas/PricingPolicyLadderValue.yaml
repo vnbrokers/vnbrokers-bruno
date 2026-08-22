@@ -1,0 +1,19 @@
+type: object
+description: Mức lãi suất trong một bậc của gói lãi suất.
+properties:
+  id:
+    type: integer
+    format: int64
+    description: Mã mức lãi suất.
+  rate:
+    type: number
+    format: double
+    description: Mức lãi suất.
+  startDate:
+    type: integer
+    format: int64
+    description: Ngày bắt đầu của khoảng áp dụng.
+  dueDate:
+    type: integer
+    format: int64
+    description: Ngày kết thúc của khoảng áp dụng.

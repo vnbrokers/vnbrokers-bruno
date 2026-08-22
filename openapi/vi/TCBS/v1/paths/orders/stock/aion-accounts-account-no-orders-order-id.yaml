@@ -87,3 +87,21 @@
                     txtime:
                       type: string
                       description: "Giờ đặt lệnh."
+          example:
+            object: List
+            pageSize: 10
+            pageIndex: 1
+            totalCount: 1
+            data:
+              - orderID: "9202110200000060280"
+                accountNo: "0001170730"
+                symbol: HPG
+                execType: NB
+                orderQtty: 2500
+                execQtty: 0
+                priceType: LO
+                limitPrice: 25000
+                matchPrice: 0
+                orStatus: "11"
+                txdate: 2021-08-19T00:00:00.000+07:00
+                txtime: 14:15:34

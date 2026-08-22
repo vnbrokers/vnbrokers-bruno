@@ -42,3 +42,9 @@
                       type: number
                       format: double
                       description: "Giá trị thị trường."
+          example:
+            assets:
+              - symbol: VNM
+                quantity: 500
+                avgPrice: 78500
+                marketValue: 40250000

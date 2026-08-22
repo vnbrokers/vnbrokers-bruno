@@ -3,3 +3,6 @@ properties:
   fcoId:
     description: ID của lệnh điều kiện.
     type: string
+  username:
+    description: Tên người dùng tại SSI.
+    type: string

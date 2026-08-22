@@ -82,3 +82,15 @@
                       type: number
                       format: double
                       description: "Thời gian (timestamp)."
+            example:
+              ticker: TCB
+              data:
+                - bu: 1000000
+                  bms: 5000000
+                  bup: 0.65
+                  sd: 800000
+                  sms: 3000000
+                  sdp: 0.35
+                  bsr: 1.25
+                  t: 09:15:00
+                  s: 1640995200000

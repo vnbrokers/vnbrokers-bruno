@@ -39,18 +39,50 @@
                       type: number
                       format: double
                       description: "Giá mua 1."
+                    bidPrice02:
+                      type: number
+                      format: double
+                      description: "Giá mua 2."
+                    bidPrice03:
+                      type: number
+                      format: double
+                      description: "Giá mua 3."
                     bidQtty01:
                       type: number
                       format: double
                       description: "Khối lượng mua 1."
+                    bidQtty02:
+                      type: number
+                      format: double
+                      description: "Khối lượng mua 2."
+                    bidQtty03:
+                      type: number
+                      format: double
+                      description: "Khối lượng mua 3."
                     offerPrice01:
                       type: number
                       format: double
                       description: "Giá bán 1."
+                    offerPrice02:
+                      type: number
+                      format: double
+                      description: "Giá bán 2."
+                    offerPrice03:
+                      type: number
+                      format: double
+                      description: "Giá bán 3."
                     offerQtty01:
                       type: number
                       format: double
                       description: "Khối lượng bán 1."
+                    offerQtty02:
+                      type: number
+                      format: double
+                      description: "Khối lượng bán 2."
+                    offerQtty03:
+                      type: number
+                      format: double
+                      description: "Khối lượng bán 3."
                     matchPrice:
                       type: number
                       format: double
@@ -67,6 +99,18 @@
                       type: number
                       format: double
                       description: "% thay đổi."
+                    open:
+                      type: number
+                      format: double
+                      description: "Giá mở cửa."
+                    high:
+                      type: number
+                      format: double
+                      description: "Giá cao nhất."
+                    low:
+                      type: number
+                      format: double
+                      description: "Giá thấp nhất."
                     totalVol:
                       type: number
                       format: double
@@ -75,6 +119,49 @@
                       type: number
                       format: double
                       description: "Khối lượng mở."
+                    buyForeignQtty:
+                      type: number
+                      format: double
+                      description: "Khối lượng mua của nhà đầu tư nước ngoài."
+                    sellForeignQtty:
+                      type: number
+                      format: double
+                      description: "Khối lượng bán của nhà đầu tư nước ngoài."
                     expiryDate:
                       type: string
                       description: "Ngày đáo hạn."
+                    avg:
+                      type: number
+                      format: double
+                      description: "Giá trị giao dịch trung bình."
+          example:
+            data:
+              - symbol: VN30F2412
+                ceilPrice: 1614.6
+                floorPrice: 1403.4
+                refPrice: 1509
+                bidPrice01: 1499.5
+                bidPrice02: 1499.3
+                bidPrice03: 1499.2
+                bidQtty01: 1
+                bidQtty02: 3
+                bidQtty03: 1
+                offerPrice01: 1500.5
+                offerPrice02: 1500.7
+                offerPrice03: 1500.8
+                offerQtty01: 1
+                offerQtty02: 1
+                offerQtty03: 1
+                matchPrice: 1500.6
+                matchQtty: 1
+                change: -8.4
+                changePercent: -0.56
+                open: 1508
+                high: 1509.4
+                low: 1497
+                totalVol: 370
+                openVol: 897
+                buyForeignQtty: 30
+                sellForeignQtty: 58
+                expiryDate: 18/11/2021
+                avg: 150417189.19

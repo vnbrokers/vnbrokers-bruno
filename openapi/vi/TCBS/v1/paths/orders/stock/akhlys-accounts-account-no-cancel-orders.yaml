@@ -27,6 +27,10 @@
               message:
                 type: string
                 description: "Mô tả mã lỗi nếu có."
+          example:
+            error: "0"
+            message: Huỷ lệnh thành công!
+
   "requestBody":
     "required": true
     "content":
@@ -41,3 +45,6 @@
               "description": "Danh sách lệnh cần hủy."
           "required":
             - "ordersList"
+        example:
+          ordersList:
+            - orderID: "9202205230000324355"

@@ -24,7 +24,7 @@ get:
         - T6: Thỏa thuận lô lẻ sau giờ  (14h45 - 15h)
       deprecated: false
       schema:
-        $ref: "../../components/schemas/_common/enums/BoardId.yaml"
+        $ref: ../../components/schemas/_common/enums/BoardId.yaml
       example: G1
     - name: from
       in: query
@@ -52,17 +52,17 @@ get:
       description: OK
       headers:
         Content-Length:
-          $ref: "../../components/headers/ContentLength.yaml"
+          $ref: ../../components/headers/ContentLength.yaml
         Date:
-          $ref: "../../components/headers/Date.yaml"
+          $ref: ../../components/headers/Date.yaml
         Vary:
-          $ref: "../../components/headers/Vary.yaml"
+          $ref: ../../components/headers/Vary.yaml
         X-Ratelimit-Limit:
-          $ref: "../../components/headers/XRateLimitLimit.yaml"
+          $ref: ../../components/headers/XRateLimitLimit.yaml
         X-Ratelimit-Remaining:
-          $ref: "../../components/headers/XRateLimitRemaining.yaml"
+          $ref: ../../components/headers/XRateLimitRemaining.yaml
         X-Ratelimit-Reset:
-          $ref: "../../components/headers/XRateLimitReset.yaml"
+          $ref: ../../components/headers/XRateLimitReset.yaml
         X-Tyk-Api-Expires:
           schema:
             type: string
@@ -177,11 +177,11 @@ get:
                 lowestPrice: 22.75
                 openPrice: 23
                 time: "2026-03-12 04:29:57"
-            nextPageToken: NDYwMTQ1XzIwMjYtMDMtMTJUMDQ6MjU6MDUuNTZa #gitleaks:allow
+            nextPageToken: NDYwMTQ1XzIwMjYtMDMtMTJUMDQ6MjU6MDUuNTZa
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
+      $ref: ../../components/responses/InternalError.yaml
   tags:
     - Dữ liệu thị trường
 parameters:

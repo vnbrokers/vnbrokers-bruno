@@ -1,3 +1,4 @@
 description: Response date from the DNSE gateway.
 schema:
   type: string
+example: Wed, 18 Mar 2026 16:17:35 GMT

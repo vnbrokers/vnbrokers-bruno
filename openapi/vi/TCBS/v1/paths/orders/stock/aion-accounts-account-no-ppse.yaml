@@ -29,3 +29,6 @@
                 type: integer
                 format: int64
                 description: "Số lượng tối đa có thể mua."
+          example:
+            purchasingPower: 150000000
+            maxQuantity: 2884

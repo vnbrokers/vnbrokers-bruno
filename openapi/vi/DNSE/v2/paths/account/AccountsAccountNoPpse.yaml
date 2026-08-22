@@ -9,10 +9,7 @@ get:
     - name: marketType
       in: query
       required: true
-      description: |-
-        Loại thị trường 
-        - STOCK: Gói vay giao dịch cơ sở
-        - DERIVATIVE: Gói vay giao dịch phái sinh
+      description: "Loại thị trường \n- STOCK: Gói vay giao dịch cơ sở\n- DERIVATIVE: Gói vay giao dịch phái sinh"
       deprecated: false
       schema:
         type: string
@@ -46,17 +43,17 @@ get:
       description: OK
       headers:
         Content-Length:
-          $ref: "../../components/headers/ContentLength.yaml"
+          $ref: ../../components/headers/ContentLength.yaml
         Date:
-          $ref: "../../components/headers/Date.yaml"
+          $ref: ../../components/headers/Date.yaml
         Vary:
-          $ref: "../../components/headers/Vary.yaml"
+          $ref: ../../components/headers/Vary.yaml
         X-Ratelimit-Limit:
-          $ref: "../../components/headers/XRateLimitLimit.yaml"
+          $ref: ../../components/headers/XRateLimitLimit.yaml
         X-Ratelimit-Remaining:
-          $ref: "../../components/headers/XRateLimitRemaining.yaml"
+          $ref: ../../components/headers/XRateLimitRemaining.yaml
         X-Ratelimit-Reset:
-          $ref: "../../components/headers/XRateLimitReset.yaml"
+          $ref: ../../components/headers/XRateLimitReset.yaml
         X-Tyk-Api-Expires:
           schema:
             type: string
@@ -79,6 +76,7 @@ get:
               pp0Buy:
                 type: number
                 description: Sức mua tối đa
+                format: int32
               pp0Short:
                 type: number
                 description: Sức bán khống tối đa
@@ -92,9 +90,9 @@ get:
             qmaxSell: 700
             price: 23000
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
+      $ref: ../../components/responses/InternalError.yaml
   tags:
     - Tài khoản
 parameters:

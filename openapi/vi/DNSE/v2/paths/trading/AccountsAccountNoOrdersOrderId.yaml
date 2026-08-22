@@ -10,10 +10,7 @@ put:
     - name: marketType
       in: query
       required: true
-      description: |-
-        Loại thị trường 
-        - STOCK: Gói vay giao dịch cơ sở
-        - DERIVATIVE: Gói vay giao dịch phái sinh
+      description: "Loại thị trường \n- STOCK: Gói vay giao dịch cơ sở\n- DERIVATIVE: Gói vay giao dịch phái sinh"
       deprecated: false
       schema:
         type: string
@@ -31,17 +28,17 @@ put:
       description: OK
       headers:
         Content-Length:
-          $ref: "../../components/headers/ContentLength.yaml"
+          $ref: ../../components/headers/ContentLength.yaml
         Date:
-          $ref: "../../components/headers/Date.yaml"
+          $ref: ../../components/headers/Date.yaml
         Vary:
-          $ref: "../../components/headers/Vary.yaml"
+          $ref: ../../components/headers/Vary.yaml
         X-Ratelimit-Limit:
-          $ref: "../../components/headers/XRateLimitLimit.yaml"
+          $ref: ../../components/headers/XRateLimitLimit.yaml
         X-Ratelimit-Remaining:
-          $ref: "../../components/headers/XRateLimitRemaining.yaml"
+          $ref: ../../components/headers/XRateLimitRemaining.yaml
         X-Ratelimit-Reset:
-          $ref: "../../components/headers/XRateLimitReset.yaml"
+          $ref: ../../components/headers/XRateLimitReset.yaml
         X-Tyk-Api-Expires:
           schema:
             type: string
@@ -56,7 +53,6 @@ put:
                 format: int32
                 example: 1626
                 description: Id lệnh giao dịch
-
               accountNo:
                 type: string
                 example: "0001179019"
@@ -148,9 +144,9 @@ put:
             createdDate: "2026-03-24T04:09:50.761146893Z"
             modifiedDate: "2026-03-24T04:14:21.004856492Z"
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
+      $ref: ../../components/responses/InternalError.yaml
   tags:
     - Giao dịch
   requestBody:
@@ -163,22 +159,17 @@ put:
               type: number
               format: double
               example: 1851
-              description: >-
+              description: |-
                 Giá mới cho lệnh LO
-
                 - Đối với lệnh cơ sở, có thể sửa cả giá và khối lượng
-
-                - Đối với lệnh phái sinh, chỉ được sửa hoặc giá hoặc khối
-                lượng
+                - Đối với lệnh phái sinh, chỉ được sửa hoặc giá hoặc khối lượng
             quantity:
               type: integer
               format: int32
               example: 3
-              description: >-
+              description: |-
                 Khối lượng mới
-
-                - Đối với lệnh phái sinh, khối lượng mới phải lớn hơn khối
-                lượng đã khớp (nếu có) của lệnh đã đặt
+                - Đối với lệnh phái sinh, khối lượng mới phải lớn hơn khối lượng đã khớp (nếu có) của lệnh đã đặt
         example:
           price: 1851
           quantity: 3
@@ -211,10 +202,7 @@ delete:
     - name: marketType
       in: query
       required: true
-      description: |-
-        Loại thị trường 
-        - STOCK: Đặt lệnh cơ sở
-        - DERIVATIVE: Đặt lệnh phái sinh
+      description: "Loại thị trường \n- STOCK: Đặt lệnh cơ sở\n- DERIVATIVE: Đặt lệnh phái sinh"
       deprecated: false
       schema:
         type: string
@@ -232,17 +220,17 @@ delete:
       description: OK
       headers:
         Content-Length:
-          $ref: "../../components/headers/ContentLength.yaml"
+          $ref: ../../components/headers/ContentLength.yaml
         Date:
-          $ref: "../../components/headers/Date.yaml"
+          $ref: ../../components/headers/Date.yaml
         Vary:
-          $ref: "../../components/headers/Vary.yaml"
+          $ref: ../../components/headers/Vary.yaml
         X-Ratelimit-Limit:
-          $ref: "../../components/headers/XRateLimitLimit.yaml"
+          $ref: ../../components/headers/XRateLimitLimit.yaml
         X-Ratelimit-Remaining:
-          $ref: "../../components/headers/XRateLimitRemaining.yaml"
+          $ref: ../../components/headers/XRateLimitRemaining.yaml
         X-Ratelimit-Reset:
-          $ref: "../../components/headers/XRateLimitReset.yaml"
+          $ref: ../../components/headers/XRateLimitReset.yaml
         X-Tyk-Api-Expires:
           deprecated: false
           schema: {}
@@ -257,7 +245,6 @@ delete:
                 format: int32
                 example: 1626
                 description: Id lệnh giao dịch
-
               symbol:
                 type: string
                 example: 41I1G4000
@@ -356,6 +343,11 @@ delete:
                 format: date-time
                 example: "2026-03-24T04:16:12.469115348Z"
                 description: Thời điểm cập nhật
+              priceSecure:
+                type: integer
+                format: int32
+                example: 15600
+                description: Giá bảo đảm
           example:
             id: 1626
             symbol: 41I1G4000
@@ -376,9 +368,9 @@ delete:
             createdDate: "2026-03-24T04:09:50.761146893Z"
             modifiedDate: "2026-03-24T04:16:12.469115348Z"
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
+      $ref: ../../components/responses/InternalError.yaml
   tags:
     - Giao dịch
 get:
@@ -392,10 +384,7 @@ get:
     - name: marketType
       in: query
       required: true
-      description: |-
-        Loại thị trường 
-        - STOCK: Sổ lệnh cơ sở
-        - DERIVATIVE: Sổ lệnh phái sinh
+      description: "Loại thị trường \n- STOCK: Sổ lệnh cơ sở\n- DERIVATIVE: Sổ lệnh phái sinh"
       deprecated: false
       schema:
         type: string
@@ -413,17 +402,17 @@ get:
       description: OK
       headers:
         Content-Length:
-          $ref: "../../components/headers/ContentLength.yaml"
+          $ref: ../../components/headers/ContentLength.yaml
         Date:
-          $ref: "../../components/headers/Date.yaml"
+          $ref: ../../components/headers/Date.yaml
         Vary:
-          $ref: "../../components/headers/Vary.yaml"
+          $ref: ../../components/headers/Vary.yaml
         X-Ratelimit-Limit:
-          $ref: "../../components/headers/XRateLimitLimit.yaml"
+          $ref: ../../components/headers/XRateLimitLimit.yaml
         X-Ratelimit-Remaining:
-          $ref: "../../components/headers/XRateLimitRemaining.yaml"
+          $ref: ../../components/headers/XRateLimitRemaining.yaml
         X-Ratelimit-Reset:
-          $ref: "../../components/headers/XRateLimitReset.yaml"
+          $ref: ../../components/headers/XRateLimitReset.yaml
         X-Tyk-Api-Expires:
           deprecated: false
           schema: {}
@@ -570,8 +559,7 @@ get:
                 description: Thời điểm cập nhật lệnh
               metadata:
                 type: string
-                example: >-
-                  {"orderSession":"OPEN","dealId":"1.77410795472387E14","releaseSecureOnFilled":"false","originMaker":"1000005917-close_deal_177410795472387","dtaAccountNo":"D000113702","isForeigner":false,"probType":"CUSTOMER","eventNo":5}
+                example: '{"orderSession":"OPEN","dealId":"1.77410795472387E14","releaseSecureOnFilled":"false","originMaker":"1000005917-close_deal_177410795472387","dtaAccountNo":"D000113702","isForeigner":false,"probType":"CUSTOMER","eventNo":5}'
                 description: Thông tin bổ sung của lệnh
           example:
             id: 966
@@ -599,11 +587,10 @@ get:
             priceSecure: 1706.1
             createdDate: "2026-03-23T03:10:06.556826794Z"
             modifiedDate: "2026-03-23T04:07:45.683977124Z"
-            metadata: >-
-              {"orderSession":"OPEN","dealId":"1.77410795472387E14","releaseSecureOnFilled":"false","originMaker":"1000005917-close_deal_177410795472387","dtaAccountNo":"D000113702","isForeigner":false,"probType":"CUSTOMER","eventNo":5}
+            metadata: '{"orderSession":"OPEN","dealId":"1.77410795472387E14","releaseSecureOnFilled":"false","originMaker":"1000005917-close_deal_177410795472387","dtaAccountNo":"D000113702","isForeigner":false,"probType":"CUSTOMER","eventNo":5}'
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
+      $ref: ../../components/responses/InternalError.yaml
   tags:
     - Giao dịch

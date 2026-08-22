@@ -45,6 +45,26 @@ get:
         application/json:
           schema:
             $ref: "../../components/schemas/MasterDataResponse.yaml"
+          example:
+            code: 200
+            msg: ""
+            data:
+              - board: UPCOM
+                symbol: BBM
+                tradingDate: 2026/06/20
+                ceiling: 8600
+                floor: 6400
+                refPrice: 7500
+              - board: HOSE
+                symbol: CCI
+                tradingDate: 2026/06/20
+                ceiling: 17900
+                floor: 15600
+                refPrice: 16750
+            pageSize: 2
+            pageIndex: 10
+            pagesCount: 993
+            itemsCount: 1985
     "400":
       $ref: "../../components/responses/BadRequest.yaml"
     "401":

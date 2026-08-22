@@ -23,12 +23,21 @@ get:
       required: true
       schema:
         type: string
-        enum: [STOCK, DERIVATIVE]
+        enum:
+          - STOCK
+          - DERIVATIVE
+      description: "Loại thị trường \n- STOCK: Lệnh cơ sở\n- DERIVATIVE: Lệnh phái sinh\n- BOND: Lệnh trái phiếu"
+      example: DERIVATIVE
     - name: orderCategory
       in: query
       schema:
         type: string
-        enum: [NORMAL, CONDITIONAL]
+        enum:
+          - NORMAL
+          - CONDITIONAL
+      required: true
+      description: Phân loại lệnh thường (mặc định NORMAL)
+      example: NORMAL
   responses:
     "200":
       description: OK
@@ -37,7 +46,557 @@ get:
           schema:
             type: object
             additionalProperties: true
+            properties:
+              id:
+                type: integer
+                format: int32
+                example: 1651
+                description: ID lệnh
+              side:
+                type: string
+                example: NB
+                description: |-
+                  Chiều giao dịch
+                  - NB: Mua
+                  - NS: Bán
+              accountNo:
+                type: string
+                example: "0001179019"
+                description: Số tiểu khoản
+              symbol:
+                type: string
+                example: HPG
+                description: Mã chứng khoán
+              price:
+                type: integer
+                format: int32
+                example: 24250
+                description: Giá đặt lệnh
+              quantity:
+                type: integer
+                format: int32
+                example: 500
+                description: Khối lượng đặt lệnh
+              orderType:
+                type: string
+                example: LO
+                description: |-
+                  Loại lệnh
+                  - LO: Lệnh giới hạn
+                  - MOK/MAK/MTL: Lệnh thị trường
+                  - ATO/ATC: Lệnh phiên định kỳ mở cửa/đóng cửa
+                  - PLO: Lệnh khớp lệnh sau giờ
+              loanPackageId:
+                type: integer
+                format: int32
+                example: 5757
+                description: Mã gói vay
+              orderCategory:
+                type: string
+                example: NORMAL
+                description: Phân loại lệnh (mặc định NORMAL)
+              orderStatus:
+                type: string
+                example: PartiallyFilled
+                description: |-
+                  Trạng thái lệnh
+                  - Pending/PendingNew: Chờ gửi
+                  - New: Chờ khớp
+                  - PartiallyFilled: Khớp một phần
+                  - Filled: Khớp toàn bộ
+                  - Rejected: Bị từ chối
+                  - Expired: Hết hạn trong phiên
+                  - DoneForDay: Lệnh được giải tỏa do không khớp trong phiên
+              fillQuantity:
+                type: integer
+                format: int32
+                example: 200
+                description: Khối lượng đã khớp
+              lastQuantity:
+                type: integer
+                format: int32
+                example: 100
+                description: Khối lượng khớp gần nhất
+              lastPrice:
+                type: integer
+                format: int32
+                example: 24250
+                description: Giá khớp gần nhất
+              averagePrice:
+                type: integer
+                format: int32
+                example: 24250
+                description: Giá khớp trung bình
+              transDate:
+                type: string
+                example: "2026-07-13"
+                description: Ngày giao dịch
+              taxRate:
+                type: integer
+                format: int32
+                example: 0
+                description: Tỷ lệ thuế
+              exchangeFeeRate:
+                type: number
+                format: double
+                example: 0.00027
+                description: Tỷ lệ phí trả Sở giao dịch
+              feeRate:
+                type: number
+                format: double
+                example: 0.00027
+                description: Tổng tỷ lệ phí của lệnh
+              leaveQuantity:
+                type: integer
+                format: int32
+                example: 300
+                description: Khối lượng còn lại chưa khớp
+              canceledQuantity:
+                type: integer
+                format: int32
+                example: 0
+                description: Khối lượng đã hủy
+              error:
+                type: string
+                example: ""
+                description: Mã lỗi nếu lệnh bị từ chối
+              marketType:
+                type: string
+                example: STOCK
+                description: |-
+                  Loại thị trường
+                  - STOCK: Lệnh cơ sở
+                  - DERIVATIVE: Lệnh phái sinh
+              priceSecure:
+                type: integer
+                format: int32
+                example: 24250
+                description: Giá dùng để kiểm tra sức mua/đặt lệnh
+              createdDate:
+                type: string
+                format: date-time
+                example: "2026-07-13T06:50:36.532741Z"
+                description: Thời điểm tạo lệnh
+              modifiedDate:
+                type: string
+                format: date-time
+                example: "2026-07-13T06:50:59.052768Z"
+                description: Thời điểm cập nhật lệnh
+              metadata:
+                type: string
+                example: '{"orderSession":"OPEN","ip":"202.60.110.58","maker":"1000005917","isForeigner":false,"reqId":"24534","probType":"CUSTOMER_8000","eventNo":4.0}'
+                description: Thông tin bổ sung của lệnh
+              reports:
+                type: array
+                description: Danh sách trạng thái lệnh theo từng lần cập nhật
+                example:
+                  - id: 1651
+                    side: NB
+                    accountNo: "0001179019"
+                    symbol: HPG
+                    price: 24250
+                    quantity: 500
+                    orderType: LO
+                    orderStatus: PartiallyFilled
+                    fillQuantity: 100
+                    lastQuantity: 100
+                    lastPrice: 24250
+                    averagePrice: 24250
+                    transDate: "2026-07-13"
+                    createdDate: "2026-07-13T06:50:36.532741Z"
+                    modifiedDate: "2026-07-13T06:50:51.613222Z"
+                    taxRate: 0
+                    exchangeFeeRate: 0
+                    feeRate: 0.00027
+                    leaveQuantity: 400
+                    canceledQuantity: 0
+                    error: ""
+                    priceSecure: 24250
+                    metadata: '{"orderSession":"OPEN","ip":"202.60.110.58","maker":"1000005917","isForeigner":false,"reqId":"24534","probType":"CUSTOMER_8000","eventNo":3}'
+                    loanPackageId: 5757
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int32
+                      example: 1651
+                      description: ID lệnh
+                    side:
+                      type: string
+                      example: NB
+                      description: |-
+                        Chiều giao dịch
+                        - NB: Mua
+                        - NS: Bán
+                    accountNo:
+                      type: string
+                      example: "0001179019"
+                      description: Số tiểu khoản
+                    symbol:
+                      type: string
+                      example: HPG
+                      description: Mã chứng khoán
+                    price:
+                      type: integer
+                      format: int32
+                      example: 24250
+                      description: Giá đặt lệnh
+                    quantity:
+                      type: integer
+                      format: int32
+                      example: 500
+                      description: Khối lượng đặt lệnh
+                    orderType:
+                      type: string
+                      example: LO
+                      description: |-
+                        Loại lệnh
+                        - LO: Lệnh giới hạn
+                        - MOK/MAK/MTL: Lệnh thị trường
+                        - ATO/ATC: Lệnh phiên định kỳ mở cửa/đóng cửa
+                        - PLO: Lệnh khớp lệnh sau giờ
+                    orderStatus:
+                      type: string
+                      example: PartiallyFilled
+                      description: |-
+                        Trạng thái lệnh
+                        - Pending/PendingNew: Chờ gửi
+                        - New: Chờ khớp
+                        - PartiallyFilled: Khớp một phần
+                        - Filled: Khớp toàn bộ
+                        - Rejected: Bị từ chối
+                        - Expired: Hết hạn trong phiên
+                        - DoneForDay: Lệnh được giải tỏa do không khớp trong phiên
+                    fillQuantity:
+                      type: integer
+                      format: int32
+                      example: 100
+                      description: Khối lượng đã khớp
+                    lastQuantity:
+                      type: integer
+                      format: int32
+                      example: 100
+                      description: Khối lượng khớp gần nhất
+                    lastPrice:
+                      type: integer
+                      format: int32
+                      example: 24250
+                      description: Giá khớp gần nhất
+                    averagePrice:
+                      type: integer
+                      format: int32
+                      example: 24250
+                      description: Giá khớp trung bình
+                    transDate:
+                      type: string
+                      example: "2026-07-13"
+                      description: Ngày giao dịch
+                    createdDate:
+                      type: string
+                      format: date-time
+                      example: "2026-07-13T06:50:36.532741Z"
+                      description: Thời điểm tạo lệnh
+                    modifiedDate:
+                      type: string
+                      format: date-time
+                      example: "2026-07-13T06:50:51.613222Z"
+                      description: Thời điểm cập nhật lệnh
+                    taxRate:
+                      type: integer
+                      format: int32
+                      example: 0
+                      description: Tỷ lệ thuế
+                    exchangeFeeRate:
+                      type: integer
+                      format: int32
+                      example: 0
+                      description: Tỷ lệ phí trả Sở giao dịch
+                    feeRate:
+                      type: number
+                      format: double
+                      example: 0.00027
+                      description: Tổng tỷ lệ phí của lệnh
+                    leaveQuantity:
+                      type: integer
+                      format: int32
+                      example: 400
+                      description: Khối lượng còn lại chưa khớp
+                    canceledQuantity:
+                      type: integer
+                      format: int32
+                      example: 0
+                      description: Khối lượng đã hủy
+                    error:
+                      type: string
+                      example: ""
+                      description: Mã lỗi nếu lệnh bị từ chối
+                    priceSecure:
+                      type: integer
+                      format: int32
+                      example: 24250
+                      description: Giá dùng để kiểm tra sức mua/đặt lệnh
+                    metadata:
+                      type: string
+                      example: '{"orderSession":"OPEN","ip":"202.60.110.58","maker":"1000005917","isForeigner":false,"reqId":"24534","probType":"CUSTOMER_8000","eventNo":3}'
+                      description: Thông tin bổ sung của lệnh
+                    loanPackageId:
+                      type: integer
+                      format: int32
+                      example: 5757
+                      description: ID gói vay
+          examples:
+            STOCK:
+              value:
+                id: 1651
+                side: NB
+                accountNo: "0001179019"
+                symbol: HPG
+                price: 24250
+                quantity: 500
+                orderType: LO
+                loanPackageId: 5757
+                orderCategory: NORMAL
+                orderStatus: PartiallyFilled
+                fillQuantity: 200
+                lastQuantity: 100
+                lastPrice: 24250
+                averagePrice: 24250
+                transDate: "2026-07-13"
+                taxRate: 0
+                exchangeFeeRate: 0.00027
+                feeRate: 0.00027
+                leaveQuantity: 300
+                canceledQuantity: 0
+                error: ""
+                marketType: STOCK
+                priceSecure: 24250
+                createdDate: "2026-07-13T06:50:36.532741Z"
+                modifiedDate: "2026-07-13T06:50:59.052768Z"
+                metadata: '{"orderSession":"OPEN","ip":"202.60.110.58","maker":"1000005917","isForeigner":false,"reqId":"24534","probType":"CUSTOMER_8000","eventNo":4.0}'
+                reports:
+                  - id: 1651
+                    side: NB
+                    accountNo: "0001179019"
+                    symbol: HPG
+                    price: 24250
+                    quantity: 500
+                    orderType: LO
+                    orderStatus: PartiallyFilled
+                    fillQuantity: 100
+                    lastQuantity: 100
+                    lastPrice: 24250
+                    averagePrice: 24250
+                    transDate: "2026-07-13"
+                    createdDate: "2026-07-13T06:50:36.532741Z"
+                    modifiedDate: "2026-07-13T06:50:51.613222Z"
+                    taxRate: 0
+                    exchangeFeeRate: 0
+                    feeRate: 0.00027
+                    leaveQuantity: 400
+                    canceledQuantity: 0
+                    error: ""
+                    priceSecure: 24250
+                    metadata: '{"orderSession":"OPEN","ip":"202.60.110.58","maker":"1000005917","isForeigner":false,"reqId":"24534","probType":"CUSTOMER_8000","eventNo":3}'
+                    loanPackageId: 5757
+                  - id: 1651
+                    side: NB
+                    accountNo: "0001179019"
+                    symbol: HPG
+                    price: 24250
+                    quantity: 500
+                    orderType: LO
+                    orderStatus: PartiallyFilled
+                    fillQuantity: 100
+                    lastQuantity: 100
+                    lastPrice: 24250
+                    averagePrice: 24250
+                    transDate: "2026-07-13"
+                    createdDate: "2026-07-13T06:50:36.532741Z"
+                    modifiedDate: "2026-07-13T06:50:51.613222Z"
+                    taxRate: 0
+                    exchangeFeeRate: 0
+                    feeRate: 0.00027
+                    leaveQuantity: 400
+                    canceledQuantity: 0
+                    error: ""
+                    priceSecure: 24250
+                    metadata: '{"orderSession":"OPEN","ip":"202.60.110.58","maker":"1000005917","isForeigner":false,"reqId":"24534","probType":"CUSTOMER_8000","eventNo":3}'
+                    loanPackageId: 5757
+                  - id: 1651
+                    side: NB
+                    accountNo: "0001179019"
+                    symbol: HPG
+                    price: 24250
+                    quantity: 500
+                    orderType: LO
+                    orderStatus: PendingNew
+                    fillQuantity: 0
+                    lastQuantity: 0
+                    lastPrice: 0
+                    averagePrice: 0
+                    transDate: "2026-07-13"
+                    createdDate: "2026-07-13T06:50:36.532741Z"
+                    modifiedDate: "2026-07-13T06:50:36.532743Z"
+                    taxRate: 0
+                    exchangeFeeRate: 0
+                    feeRate: 0.00027
+                    leaveQuantity: 500
+                    canceledQuantity: 0
+                    error: <no value>
+                    priceSecure: 24250
+                    metadata: '{"orderSession":"OPEN","ip":"202.60.110.58","maker":"1000005917","isForeigner":false,"reqId":"24534","probType":"CUSTOMER_8000","eventNo":1}'
+                    loanPackageId: 5757
+                  - id: 1651
+                    side: NB
+                    accountNo: "0001179019"
+                    symbol: HPG
+                    price: 24250
+                    quantity: 500
+                    orderType: LO
+                    orderStatus: New
+                    fillQuantity: 0
+                    lastQuantity: 0
+                    lastPrice: 0
+                    averagePrice: 0
+                    transDate: "2026-07-13"
+                    createdDate: "2026-07-13T06:50:36.532741Z"
+                    modifiedDate: "2026-07-13T06:50:36.545128Z"
+                    taxRate: 0
+                    exchangeFeeRate: 0
+                    feeRate: 0.00027
+                    leaveQuantity: 500
+                    canceledQuantity: 0
+                    error: ""
+                    priceSecure: 24250
+                    metadata: '{"orderSession":"OPEN","ip":"202.60.110.58","maker":"1000005917","isForeigner":false,"reqId":"24534","probType":"CUSTOMER_8000","eventNo":2}'
+                    loanPackageId: 5757
+                  - id: 1651
+                    side: NB
+                    accountNo: "0001179019"
+                    symbol: HPG
+                    price: 24250
+                    quantity: 500
+                    orderType: LO
+                    orderStatus: PartiallyFilled
+                    fillQuantity: 200
+                    lastQuantity: 100
+                    lastPrice: 24250
+                    averagePrice: 24250
+                    transDate: "2026-07-13"
+                    createdDate: "2026-07-13T06:50:36.532741Z"
+                    modifiedDate: "2026-07-13T06:50:59.052768Z"
+                    taxRate: 0
+                    exchangeFeeRate: 0
+                    feeRate: 0.00027
+                    leaveQuantity: 300
+                    canceledQuantity: 0
+                    error: ""
+                    priceSecure: 24250
+                    metadata: '{"orderSession":"OPEN","ip":"202.60.110.58","maker":"1000005917","isForeigner":false,"reqId":"24534","probType":"CUSTOMER_8000","eventNo":4}'
+                    loanPackageId: 5757
+            DERIVATIVE:
+              value:
+                id: 26
+                side: NB
+                accountNo: "0001179019"
+                symbol: 41I1G9000
+                price: 2003
+                quantity: 2
+                orderType: LO
+                loanPackageId: 2279
+                orderCategory: NORMAL
+                orderStatus: Filled
+                fillQuantity: 2
+                lastQuantity: 2
+                lastPrice: 2003
+                averagePrice: 2003
+                transDate: "2026-07-31"
+                taxRate: 0
+                exchangeFeeRate: 0
+                feeRate: 0
+                leaveQuantity: 0
+                canceledQuantity: 0
+                error: ""
+                marketType: DERIVATIVE
+                priceSecure: 2003
+                createdDate: "2026-08-04T02:00:02.855824889Z"
+                modifiedDate: "2026-08-04T02:50:30.56129326Z"
+                metadata: '{"orderSession":"ATO","dealId":178488852178882,"releaseSecureOnFilled":false,"originMaker":"risk-management","dtaAccountNo":"D000113702","maker":"risk-management","isForeigner":false,"probType":"CUSTOMER_8000","eventNo":3}'
+                reports:
+                  - id: 26
+                    side: NB
+                    accountNo: "0001179019"
+                    symbol: 41I1G9000
+                    price: 2003
+                    quantity: 2
+                    orderType: LO
+                    orderStatus: PendingNew
+                    fillQuantity: 0
+                    lastQuantity: 0
+                    lastPrice: 0
+                    averagePrice: 0
+                    transDate: "2026-07-31"
+                    createdDate: "2026-08-04T02:00:02.855824889Z"
+                    modifiedDate: "2026-08-04T02:00:02.855825105Z"
+                    taxRate: 0
+                    exchangeFeeRate: 0
+                    feeRate: 0
+                    leaveQuantity: 2
+                    canceledQuantity: 0
+                    error: <no value>
+                    priceSecure: 2003
+                    metadata: '{"orderSession":"ATO","dealId":178488852178882,"releaseSecureOnFilled":false,"originMaker":"risk-management","dtaAccountNo":"D000113702","maker":"risk-management","isForeigner":false,"probType":"CUSTOMER_8000","eventNo":1}'
+                    loanPackageId: 2279
+                  - id: 26
+                    side: NB
+                    accountNo: "0001179019"
+                    symbol: 41I1G9000
+                    price: 2003
+                    quantity: 2
+                    orderType: LO
+                    orderStatus: New
+                    fillQuantity: 0
+                    lastQuantity: 0
+                    lastPrice: 0
+                    averagePrice: 0
+                    transDate: "2026-07-31"
+                    createdDate: "2026-08-04T02:00:02.855824889Z"
+                    modifiedDate: "2026-08-04T02:00:02.938935544Z"
+                    taxRate: 0
+                    exchangeFeeRate: 0
+                    feeRate: 0
+                    leaveQuantity: 2
+                    canceledQuantity: 0
+                    error: ""
+                    priceSecure: 2003
+                    metadata: '{"orderSession":"ATO","dealId":178488852178882,"releaseSecureOnFilled":false,"originMaker":"risk-management","dtaAccountNo":"D000113702","maker":"risk-management","isForeigner":false,"probType":"CUSTOMER_8000","eventNo":2}'
+                    loanPackageId: 2279
+                  - id: 26
+                    side: NB
+                    accountNo: "0001179019"
+                    symbol: 41I1G9000
+                    price: 2003
+                    quantity: 2
+                    orderType: LO
+                    orderStatus: Filled
+                    fillQuantity: 2
+                    lastQuantity: 2
+                    lastPrice: 2003
+                    averagePrice: 2003
+                    transDate: "2026-07-31"
+                    createdDate: "2026-08-04T02:00:02.855824889Z"
+                    modifiedDate: "2026-08-04T02:50:30.56129326Z"
+                    taxRate: 0
+                    exchangeFeeRate: 0
+                    feeRate: 0
+                    leaveQuantity: 0
+                    canceledQuantity: 0
+                    error: ""
+                    priceSecure: 2003
+                    metadata: '{"orderSession":"ATO","dealId":178488852178882,"releaseSecureOnFilled":false,"originMaker":"risk-management","dtaAccountNo":"D000113702","maker":"risk-management","isForeigner":false,"probType":"CUSTOMER_8000","eventNo":3}'
+                    loanPackageId: 2279
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
+      $ref: ../../components/responses/InternalError.yaml

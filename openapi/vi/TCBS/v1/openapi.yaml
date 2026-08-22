@@ -116,6 +116,20 @@ paths:
     $ref: "./paths/market-data/tartarus-ticker-snaps.yaml"
 components:
   schemas:
+    Security:
+      $ref: "./components/schemas/Security.yaml"
+    SecuritiesInfo:
+      $ref: "./components/schemas/SecuritiesInfo.yaml"
+    SecuritiesResponse:
+      $ref: "./components/schemas/SecuritiesResponse.yaml"
+    PricingPolicy:
+      $ref: "./components/schemas/PricingPolicy.yaml"
+    PricingPolicyLadderValue:
+      $ref: "./components/schemas/PricingPolicyLadderValue.yaml"
+    PricingPolicyState:
+      $ref: "./components/schemas/PricingPolicyState.yaml"
+    PricingPolicyResponse:
+      $ref: "./components/schemas/PricingPolicyResponse.yaml"
     StockOrderDirection:
       $ref: "./components/schemas/enums/StockOrderDirection.yaml"
     StockPriceType:

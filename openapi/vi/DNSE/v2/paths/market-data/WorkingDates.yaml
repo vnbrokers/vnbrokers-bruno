@@ -20,7 +20,12 @@ get:
                 items:
                   type: string
                   format: date
+          example:
+            workingDates:
+              - "2026-08-03"
+              - "2026-08-04"
+              - "2026-08-05"
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
+      $ref: ../../components/responses/InternalError.yaml

@@ -10,17 +10,17 @@ get:
       description: OK
       headers:
         Content-Length:
-          $ref: "../../components/headers/ContentLength.yaml"
+          $ref: ../../components/headers/ContentLength.yaml
         Date:
-          $ref: "../../components/headers/Date.yaml"
+          $ref: ../../components/headers/Date.yaml
         Vary:
-          $ref: "../../components/headers/Vary.yaml"
+          $ref: ../../components/headers/Vary.yaml
         X-Ratelimit-Limit:
-          $ref: "../../components/headers/XRateLimitLimit.yaml"
+          $ref: ../../components/headers/XRateLimitLimit.yaml
         X-Ratelimit-Remaining:
-          $ref: "../../components/headers/XRateLimitRemaining.yaml"
+          $ref: ../../components/headers/XRateLimitRemaining.yaml
         X-Ratelimit-Reset:
-          $ref: "../../components/headers/XRateLimitReset.yaml"
+          $ref: ../../components/headers/XRateLimitReset.yaml
         X-Tyk-Api-Expires:
           deprecated: false
           schema: {}
@@ -71,9 +71,7 @@ get:
                         status:
                           type: string
                           example: ACTIVE
-                          description: >-
-                            Tiểu khoản được phép giao dịch phái sinh hoặc
-                            không
+                          description: Tiểu khoản được phép giao dịch phái sinh hoặc không
                       example:
                         status: ACTIVE
                       description: |-
@@ -96,8 +94,8 @@ get:
                 derivative:
                   status: ACTIVE
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
+      $ref: ../../components/responses/InternalError.yaml
   tags:
     - Tài khoản

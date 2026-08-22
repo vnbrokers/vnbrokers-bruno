@@ -9,3 +9,4 @@ enum:
   - "UNSPECIFIED"
   - "BUY"
   - "SELL"
+example: BUY

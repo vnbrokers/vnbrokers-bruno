@@ -41,3 +41,6 @@
                 type: number
                 format: double
                 description: "Số lượng tối đa có thể mua tại mức giá này."
+          example:
+            pp0: 2057323960
+            maxQtty: 39564

@@ -9,10 +9,7 @@ get:
     - name: marketType
       in: query
       required: true
-      description: |-
-        Loại thị trường 
-        - STOCK: Danh sách vị thế cơ sở
-        - DERIVATIVE: Danh sách vị thế phái sinh
+      description: "Loại thị trường \n- STOCK: Danh sách vị thế cơ sở\n- DERIVATIVE: Danh sách vị thế phái sinh"
       deprecated: false
       schema:
         type: string
@@ -30,17 +27,17 @@ get:
       description: OK
       headers:
         Content-Length:
-          $ref: "../../components/headers/ContentLength.yaml"
+          $ref: ../../components/headers/ContentLength.yaml
         Date:
-          $ref: "../../components/headers/Date.yaml"
+          $ref: ../../components/headers/Date.yaml
         Vary:
-          $ref: "../../components/headers/Vary.yaml"
+          $ref: ../../components/headers/Vary.yaml
         X-Ratelimit-Limit:
-          $ref: "../../components/headers/XRateLimitLimit.yaml"
+          $ref: ../../components/headers/XRateLimitLimit.yaml
         X-Ratelimit-Remaining:
-          $ref: "../../components/headers/XRateLimitRemaining.yaml"
+          $ref: ../../components/headers/XRateLimitRemaining.yaml
         X-Ratelimit-Reset:
-          $ref: "../../components/headers/XRateLimitReset.yaml"
+          $ref: ../../components/headers/XRateLimitReset.yaml
         X-Tyk-Api-Expires:
           deprecated: false
           schema: {}
@@ -208,9 +205,9 @@ get:
             pageNumber: 1
             total: 1
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
+      $ref: ../../components/responses/InternalError.yaml
   tags:
     - Tài khoản
 parameters:

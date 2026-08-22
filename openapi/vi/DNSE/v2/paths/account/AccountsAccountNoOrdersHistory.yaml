@@ -9,11 +9,7 @@ get:
     - name: marketType
       in: query
       required: true
-      description: |-
-        Loại thị trường 
-        - STOCK: Gói vay giao dịch cơ sở
-        - DERIVATIVE: Gói vay giao dịch phái sinh
-        - BOND: Giao dịch trái phiếu
+      description: "Loại thị trường \n- STOCK: Gói vay giao dịch cơ sở\n- DERIVATIVE: Gói vay giao dịch phái sinh\n- BOND: Giao dịch trái phiếu"
       deprecated: false
       schema:
         type: string
@@ -21,9 +17,7 @@ get:
     - name: from
       in: query
       required: true
-      description: |-
-        Ngày bắt đầu (yyyy-mm-dd) 
-        - Thời gian tra cứu tối đa trong 1 năm tính từ ngày hiện tại
+      description: "Ngày bắt đầu (yyyy-mm-dd) \n- Thời gian tra cứu tối đa trong 1 năm tính từ ngày hiện tại"
       deprecated: false
       schema:
         type: string
@@ -31,9 +25,7 @@ get:
     - name: to
       in: query
       required: true
-      description: |-
-        Ngày kết thúc (yyyy-mm-dd) 
-        - Lớn hơn hoặc bằng ngày bắt đầu và không vượt quá ngày hiện tại
+      description: "Ngày kết thúc (yyyy-mm-dd) \n- Lớn hơn hoặc bằng ngày bắt đầu và không vượt quá ngày hiện tại"
       deprecated: false
       schema:
         type: string
@@ -43,17 +35,17 @@ get:
       description: OK
       headers:
         Content-Length:
-          $ref: "../../components/headers/ContentLength.yaml"
+          $ref: ../../components/headers/ContentLength.yaml
         Date:
-          $ref: "../../components/headers/Date.yaml"
+          $ref: ../../components/headers/Date.yaml
         Vary:
-          $ref: "../../components/headers/Vary.yaml"
+          $ref: ../../components/headers/Vary.yaml
         X-Ratelimit-Limit:
-          $ref: "../../components/headers/XRateLimitLimit.yaml"
+          $ref: ../../components/headers/XRateLimitLimit.yaml
         X-Ratelimit-Remaining:
-          $ref: "../../components/headers/XRateLimitRemaining.yaml"
+          $ref: ../../components/headers/XRateLimitRemaining.yaml
         X-Ratelimit-Reset:
-          $ref: "../../components/headers/XRateLimitReset.yaml"
+          $ref: ../../components/headers/XRateLimitReset.yaml
         X-Tyk-Api-Expires:
           deprecated: false
           schema: {}
@@ -142,23 +134,15 @@ get:
                     orderStatus:
                       type: string
                       example: Expired
-                      description: >-
+                      description: |-
                         Trạng thái lệnh
-
                         - Pending/PendingNew: Chờ gửi
-
                         - New: Chờ khớp
-
                         - PartiallyFilled: Khớp một phần
-
                         - Filled: Khớp toàn bộ
-
                         - Rejected: Bị từ chối
-
                         - Expired: Hết hạn trong phiên
-
-                        - DoneForDay: Lệnh được giải tỏa do không khớp trong
-                        phiên
+                        - DoneForDay: Lệnh được giải tỏa do không khớp trong phiên
                     price:
                       type: integer
                       format: int32
@@ -338,9 +322,9 @@ get:
                 createdDate: "2026-02-26T08:25:18.060101Z"
                 modifiedDate: "2026-02-26T14:41:52.221586Z"
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
+      $ref: ../../components/responses/InternalError.yaml
   tags:
     - Tài khoản
 parameters:

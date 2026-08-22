@@ -1,13 +1,19 @@
 type: object
 required:
-  - code
-  - msg
+  - message
+  - transactionId
 properties:
-  code:
-    description: Mã kết quả hoặc mã xác thực giao dịch.
-    type: integer
-    example: 0
-  msg:
-    description: Thông báo kết quả xử lý.
+  message:
     type: string
-    example: Request OTP success
+    description: Thông báo kết quả xử lý yêu cầu OTP.
+    example: Thành công
+  transactionId:
+    type: string
+    description: |-
+      Mã transaction trả về khi tài khoản dùng 2FA loại SmartOTP. 
+      Dùng mã này để gọi `auth/token` sau khi đã phê duyệt trên ứng dụng iBoard. 
+      **⚠️ Lưu ý: `transactionId` chỉ có hiệu lực trong vòng 30 giây — bạn cần thực hiện
+      phê duyệt giao dịch này trên ứng dụng iBoard App Mobile trong thời gian đó. 
+      Sau khi đã phê duyệt trên mobile, cần sử dụng `transactionId` 
+      để gọi API `auth/token` để lấy token có quyền đặt lệnh.**
+    example: f306c510-0647-417b-9210-bb5b7e155e77

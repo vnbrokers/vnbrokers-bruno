@@ -35,6 +35,24 @@ get:
         application/json:
           schema:
             $ref: "../../components/schemas/PositionResponse.yaml"
+          example:
+            equity:
+              - accountNo: Q123456
+                symbol: AAA
+                quantity: "1"
+                blockQuantity: "0"
+                dividendQuantity: "0"
+                buyingQuantity: "0"
+                boughtQuantity: "0"
+                sellingQuantity: "0"
+                soldQuantity: "0"
+                t1SellQuantity: "0"
+                t2SellQuantity: "0"
+                costPrice: "10000"
+                mortgageQuantity: "0"
+                sellableQuantity: "1"
+                restrictedQuantity: "0"
+            derivative: null
     "400":
       $ref: "../../components/responses/BadRequest.yaml"
     "401":

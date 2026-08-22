@@ -37,6 +37,62 @@ get:
             type: array
             items:
               $ref: "../../components/schemas/SecurityItem.yaml"
+          example:
+            - symbol: ACB
+              symbolNameVi: Ngân hàng Thương mại Cổ phần Á Châu
+              symbolNameEn: Asia Commercial Joint Stock Bank
+              board: HOSE
+              lotSize: "100"
+              maturityDate: ""
+              firstTradingDate: ""
+              lastTradingDate: ""
+              cwUnderlyingSymbol: null
+              cwExercisePrice: "0"
+              cwExecutionRatio: "0"
+              listedShare: "5804421957"
+              icbCode: "8355"
+              icbName: Ngân hàng
+              iIndex: null
+              iNav: null
+              openInterest: null
+              settlementPrice: null
+            - symbol: BID
+              symbolNameVi: Ngân hàng Thương mại Cổ phần Đầu tư và Phát triển Việt Nam
+              symbolNameEn: Joint Stock Commercial Bank for Investment and Development of Vietnam
+              board: HOSE
+              lotSize: "100"
+              maturityDate: ""
+              firstTradingDate: ""
+              lastTradingDate: ""
+              cwUnderlyingSymbol: null
+              cwExercisePrice: "0"
+              cwExecutionRatio: "0"
+              listedShare: "7280065210"
+              icbCode: "8355"
+              icbName: Ngân hàng
+              iIndex: null
+              iNav: null
+              openInterest: null
+              settlementPrice: null
+            - symbol: GAS
+              symbolNameVi: Tổng Công ty Khí Việt Nam - Công ty Cổ phần
+              symbolNameEn: PetroVietnam Gas Joint Stock Corporation
+              board: HOSE
+              lotSize: "100"
+              maturityDate: ""
+              firstTradingDate: ""
+              lastTradingDate: ""
+              cwUnderlyingSymbol: null
+              cwExercisePrice: "0"
+              cwExecutionRatio: "0"
+              listedShare: "2412949756"
+              icbCode: "7573"
+              icbName: Phân phối xăng dầu & khí đốt
+              iIndex: null
+              iNav: null
+              openInterest: null
+              settlementPrice: null
+
     "400":
       $ref: "../../components/responses/BadRequest.yaml"
     "401":

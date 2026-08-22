@@ -59,6 +59,9 @@
           schema:
             type: object
             properties:
+              cmd:
+                type: string
+                description: "Lệnh gọi (echo)."
               rc:
                 type: string
                 description: "Mã kết quả, 1 = thành công."
@@ -74,6 +77,15 @@
                     pk_orderNo:
                       type: string
                       description: "Key lệnh."
+                    refId:
+                      type: string
+                      description: "Reference ID của lệnh."
+                    orderTime:
+                      type: string
+                      description: "Thời gian đặt lệnh."
+                    accountCode:
+                      type: string
+                      description: "Mã tài khoản."
                     side:
                       type: string
                       description: "B = Long, S = Short."
@@ -94,9 +106,60 @@
                     status:
                       type: string
                       description: "Trạng thái lệnh."
+                    orderStatus:
+                      type: string
+                      description: "Mã trạng thái lệnh."
+                    channel:
+                      type: string
+                      description: "Kênh đặt lệnh."
+                    group:
+                      type: string
+                      description: "Nhóm sản phẩm."
                     isCancel:
                       type: string
                       description: "0 = không thể hủy, 1 = có thể hủy."
                     isAmend:
                       type: string
                       description: "0 = không thể sửa, 1 = có thể sửa."
+                    orderType:
+                      type: string
+                      description: "Loại lệnh."
+                    source:
+                      type: string
+                      description: "Nguồn đặt lệnh."
+                  required:
+                    - orderNo
+                    - pk_orderNo
+                    - side
+                    - symbol
+                    - volume
+                    - showPrice
+                    - matchVolume
+                    - status
+                    - isCancel
+                    - isAmend
+            required:
+              - rc
+              - data
+          example:
+            cmd: "Web.Order.IndayOrder"
+            rc: "1"
+            data:
+              - orderNo: "37"
+                pk_orderNo: "7625908"
+                refId: "H.7387641765855363489"
+                orderTime: "13:34:47"
+                accountCode: "000112A"
+                side: "S"
+                symbol: "VN30F2303"
+                volume: 1
+                showPrice: "MTL (1198)"
+                matchVolume: 1
+                status: "PM"
+                orderStatus: "4"
+                channel: "I"
+                group: "FU"
+                isCancel: "0"
+                isAmend: "0"
+                orderType: "N"
+                source: "SYS"

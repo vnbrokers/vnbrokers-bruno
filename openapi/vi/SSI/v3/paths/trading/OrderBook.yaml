@@ -59,6 +59,24 @@ get:
         application/json:
           schema:
             $ref: "../../components/schemas/OrderBookResponse.yaml"
+          example:
+            accountNo: Q123451
+            totalRecord: 5
+            orderList:
+              - clientRequestId: T260820  xkp48463635
+                orderId: "26082100131482"
+                symbol: AAA
+                side: S
+                orderType: LO
+                quantity: "1"
+                price: "7090"
+                filledQty: "1"
+                cancelQty: "0"
+                avgPrice: "7090"
+                inputTime: 2026/08/21 14:09:02
+                modifiedTime: 2026/08/21 14:15:28
+                orderStatus: FF
+                message: null
     "400":
       $ref: "../../components/responses/BadRequest.yaml"
     "401":

@@ -40,6 +40,15 @@
                     time:
                       type: string
                       description: "Thời gian."
+                    status:
+                      type: integer
+                      description: "Trạng thái."
+                    color:
+                      type: integer
+                      description: "Màu."
+                    orderId:
+                      type: string
+                      description: "Mã lệnh."
                     side:
                       type: string
                       description: "Chiều (B = Mua)."
@@ -59,6 +68,18 @@
                       type: number
                       format: double
                       description: "Khối lượng."
+                    time:
+                      type: string
+                      description: "Thời gian."
+                    status:
+                      type: integer
+                      description: "Trạng thái."
+                    color:
+                      type: integer
+                      description: "Màu."
+                    orderId:
+                      type: string
+                      description: "Mã lệnh."
                     side:
                       type: string
                       description: "Chiều (S = Bán)."
@@ -85,7 +106,37 @@
                     time:
                       type: string
                       description: "Thời gian khớp."
+                    color:
+                      type: integer
+                      description: "Màu."
                     accumulatedValue:
                       type: number
                       format: double
                       description: "Giá trị tích lũy."
+          example:
+            buyAdv:
+              - symbol: DHT
+                price: 24300
+                vol: 50
+                time: 20231220-02:16:13.588
+                status: 1
+                color: 3
+                orderId: DHT00000000000036
+                side: B
+            sellAdv:
+              - symbol: TCB
+                price: 24300
+                vol: 50
+                time: 20231220-02:16:13.588
+                status: 1
+                color: 3
+                orderId: TCB00000000000036
+                side: S
+            match:
+              - symbol: TCB
+                price: 23455.5
+                vol: 5000
+                val: 117275000
+                time: 20:00:03
+                color: 5
+                accumulatedValue: 254440000

@@ -99,3 +99,29 @@
                     time:
                       type: string
                       description: "Thời gian đóng cuối."
+          example:
+            cmd: Web.Portfolio.PositionClose
+            rc: "1"
+            data:
+              - symbol: TOTAL
+                side: ""
+                openPrice: 0
+                closePrice: 0
+                closePosition: "0"
+                fee: 11400
+                tax: 15275
+                closeVM: 500000
+                unrealize: 500000
+                closePC: 0
+                time: ""
+              - symbol: VN30F2103
+                side: S
+                openPrice: 1180
+                closePrice: 1175
+                closePosition: 1/1
+                fee: 5700
+                tax: 7637.5
+                closeVM: 500000
+                unrealize: 0
+                closePC: 3.26
+                time: 11:56:24

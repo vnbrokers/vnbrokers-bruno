@@ -1,60 +1,57 @@
+description: Dữ liệu trả về.
 type: object
 properties:
-  data:
-    description: Dữ liệu trả về.
-    type: object
-    properties:
-      accountNo:
-        description: Số tài khoản giao dịch.
-        type: string
-      totalRecord:
-        description: Tổng số bản ghi.
-        type: integer
-      orderList:
-        description: Danh sách lệnh.
-        type: array
-        items:
-          type: object
-          properties:
-            clientRequestId:
-              description: Định danh yêu cầu do client tạo.
-              type: string
-            orderId:
-              description: Định danh lệnh do SSI tạo.
-              type: string
-            symbol:
-              description: Mã chứng khoán hoặc mã hợp đồng phái sinh.
-              type: string
-            side:
-              description: Chiều mua hoặc bán của lệnh.
-              type: string
-            orderType:
-              description: Loại lệnh giao dịch.
-              type: string
-            quantity:
-              description: Khối lượng.
-              type: string
-            price:
-              description: Giá đặt hoặc giá thực hiện.
-              type: string
-            filledQty:
-              description: Khối lượng đã khớp.
-              type: string
-            cancelQty:
-              description: Khối lượng đã hủy.
-              type: string
-            avgPrice:
-              description: Giá khớp trung bình.
-              type: string
-            inputTime:
-              description: Thời điểm nhập lệnh.
-              type: string
-            modifiedTime:
-              description: Thời điểm sửa lệnh.
-              type: string
-            orderStatus:
-              description: Trạng thái lệnh.
-              type: string
-            message:
-              description: Thông báo xử lý lệnh.
-              type: string
+  accountNo:
+    description: Số tài khoản giao dịch.
+    type: string
+  totalRecord:
+    description: Tổng số bản ghi.
+    type: integer
+  orderList:
+    description: Danh sách lệnh.
+    type: array
+    items:
+      type: object
+      properties:
+        clientRequestId:
+          description: Định danh yêu cầu do client tạo.
+          type: string
+        orderId:
+          description: Định danh lệnh do SSI tạo.
+          type: string
+        symbol:
+          description: Mã chứng khoán hoặc mã hợp đồng phái sinh.
+          type: string
+        side:
+          description: Chiều mua hoặc bán của lệnh.
+          type: string
+        orderType:
+          description: Loại lệnh giao dịch.
+          type: string
+        quantity:
+          description: Khối lượng.
+          type: string
+        price:
+          description: Giá đặt hoặc giá thực hiện.
+          type: string
+        filledQty:
+          description: Khối lượng đã khớp.
+          type: string
+        cancelQty:
+          description: Khối lượng đã hủy.
+          type: string
+        avgPrice:
+          description: Giá khớp trung bình.
+          type: string
+        inputTime:
+          description: Thời điểm nhập lệnh.
+          type: string
+        modifiedTime:
+          description: Thời điểm sửa lệnh.
+          type: string
+        orderStatus:
+          description: Trạng thái lệnh.
+          type: string
+        message:
+          description: Thông báo xử lý lệnh.
+          type: [string, "null"]

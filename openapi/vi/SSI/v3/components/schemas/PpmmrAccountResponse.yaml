@@ -1,0 +1,364 @@
+type: object
+required:
+  - equity
+  - derivative
+properties:
+  equity:
+    description: Thông tin PP/MMR của tài khoản cơ sở.
+    type: [object, "null"]
+    properties:
+      accountNo:
+        description: Số tài khoản giao dịch.
+        type: string
+      dividend:
+        description: Cổ tức.
+        type: string
+      loanValue:
+        description: Giá trị khoản vay.
+        type: string
+      totalDebt:
+        description: Tổng dư nợ.
+        type: string
+      debt:
+        description: Dư nợ.
+        type: string
+      liability:
+        description: Dư nợ phải trả.
+        type: string
+      liabilitySSI:
+        description: Dư nợ phải trả tại SSI.
+        type: string
+      netLiability:
+        description: Tổng dư nợ ròng.
+        type: string
+      fees:
+        description: Phí giao dịch.
+        type: string
+      interestSSI:
+        description: Lãi suất vay tại SSI.
+        type: string
+      interestSPV:
+        description: Lãi suất vay tại SPV.
+        type: string
+      withdrawable:
+        description: Số tiền có thể rút.
+        type: string
+      ee:
+        description: Equity Excess.
+        type: string
+      ee50:
+        description: EE tại tỷ lệ 50%.
+        type: string
+      ee60:
+        description: EE tại tỷ lệ 60%.
+        type: string
+      ee70:
+        description: EE tại tỷ lệ 70%.
+        type: string
+      ee80:
+        description: EE tại tỷ lệ 80%.
+        type: string
+      ee90:
+        description: EE tại tỷ lệ 90%.
+        type: string
+      action:
+        description: Hành động hiện tại.
+        type: string
+      actionSSI:
+        description: Hành động hiện tại tại SSI.
+        type: string
+      equity:
+        description: Vốn chủ sở hữu.
+        type: string
+      equitySSI:
+        description: Vốn chủ sở hữu tại SSI.
+        type: string
+      eeCash:
+        description: EE mặt bằng tiền mặt.
+        type: string
+      holdSubscription:
+        description: Số tiền giữ lại cho đăng ký phát hành.
+        type: string
+      bankBalance:
+        description: Số dư ngân hàng.
+        type: string
+      onHoldCash:
+        description: Tiền mặt đang bị giữ.
+        type: string
+      doverdue:
+        description: Quá hạn.
+        type: string
+      doverdue_ssi:
+        description: Quá hạn tại SSI.
+        type: [string, "null"]
+      accountBalance:
+        description: Số dư tài khoản.
+        type: string
+      d:
+        description: Dư nợ chính.
+        type: string
+      dspv:
+        description: Dư nợ SPV.
+        type: string
+      dssi:
+        description: Dư nợ SSI.
+        type: string
+      cia:
+        description: CIA - Current Investment Account.
+        type: string
+      collateralAsset:
+        description: Tài sản thế chấp.
+        type: string
+      collateralAssetSSI:
+        description: Tài sản thế chấp tại SSI.
+        type: string
+      totalAssets:
+        description: Tổng tài sản.
+        type: string
+      totalEquity:
+        description: Tổng vốn chủ sở hữu.
+        type: string
+      totalEquitySSI:
+        description: Tổng vốn chủ sở hữu tại SSI.
+        type: string
+      callLMV:
+        description: LMV trong trạng thái Margin Call.
+        type: string
+      forceLMV:
+        description: LMV trong trạng thái bắt buộc bán.
+        type: string
+      callLMVSSI:
+        description: LMV Margin Call tại SSI.
+        type: string
+      forceLMVSSI:
+        description: LMV bắt buộc bán tại SSI.
+        type: string
+      lmv:
+        description: Long Market Value - Giá trị thị trường của vị thế dài.
+        type: string
+      lmvMargin:
+        description: LMV áp dụng ký quỹ.
+        type: string
+      lmvMarginSSI:
+        description: LMV ký quỹ tại SSI.
+        type: string
+      lmvNonMarginable:
+        description: LMV không áp dụng ký quỹ.
+        type: string
+      lmvNonMarginableSSI:
+        description: LMV không ký quỹ tại SSI.
+        type: string
+      preLoan:
+        description: Khoản vay trước.
+        type: string
+      marginRatio:
+        description: Tỷ lệ ký quỹ.
+        type: string
+      marginRatioSSI:
+        description: Tỷ lệ ký quỹ tại SSI.
+        type: string
+      purchasingPower:
+        description: Sức mua.
+        type: string
+      eeOrigin:
+        description: EE gốc.
+        type: string
+      buyUnmatched:
+        description: Khối lượng mua chưa khớp.
+        type: string
+      sellUnmatched:
+        description: Khối lượng bán chưa khớp.
+        type: string
+      buyT0:
+        description: Khối lượng mua T+0 chưa thanh toán.
+        type: string
+      sellT0:
+        description: Khối lượng bán T+0 chưa thanh toán.
+        type: string
+      sellT1:
+        description: Khối lượng bán T+1 chưa thanh toán.
+        type: string
+      sellT2:
+        description: Khối lượng bán T+2 chưa thanh toán.
+        type: string
+      buyT1:
+        description: Khối lượng mua T+1 chưa thanh toán.
+        type: string
+      buyT2:
+        description: Khối lượng mua T+2 chưa thanh toán.
+        type: string
+      creditLimit:
+        description: Hạn mức tín dụng.
+        type: string
+      marginCallLMVSold:
+        description: LMV bán trong Margin Call.
+        type: string
+      marginCallLMVSoldSSI:
+        description: LMV bán Margin Call tại SSI.
+        type: string
+      marginCall:
+        description: Margin Call.
+        type: string
+      marginCallSSI:
+        description: Margin Call tại SSI.
+        type: string
+      collateralA:
+        description: Tài sản thế chấp A (loại A).
+        type: string
+      collateralNon:
+        description: Tài sản thế chấp không phải A.
+        type: string
+      collateralASSI:
+        description: Tài sản thế chấp A tại SSI.
+        type: string
+      collateralNonSSI:
+        description: Tài sản thế chấp không A tại SSI.
+        type: string
+      callMargin:
+        description: Margin Call.
+        type: string
+      callForcesell:
+        description: Bắt buộc bán.
+        type: string
+      callMarginSSI:
+        description: Margin Call tại SSI.
+        type: string
+      callForcesellSSI:
+        description: Bắt buộc bán tại SSI.
+        type: string
+      ar:
+        description: Account Ratio.
+        type: string
+  derivative:
+    description: Thông tin PP/MMR của tài khoản phái sinh.
+    type: [object, "null"]
+    properties:
+      accountNo:
+        description: Số tài khoản giao dịch phái sinh.
+        type: string
+      accountBalance:
+        description: Số dư tài khoản phái sinh.
+        type: string
+      fee:
+        description: Phí giao dịch phái sinh.
+        type: string
+      commission:
+        description: Hoa hồng giao dịch phái sinh.
+        type: string
+      interest:
+        description: Lãi suất vay phái sinh.
+        type: string
+      loan:
+        description: Dư nợ vay phái sinh.
+        type: string
+      deliveryAmount:
+        description: Số tiền giao hàng phái sinh.
+        type: string
+      floatingPL:
+        description: Lãi/lỗ chưa thực hiện phái sinh.
+        type: string
+      tradingPL:
+        description: Lãi/lỗ đã thực hiện phái sinh.
+        type: string
+      totalPL:
+        description: Tổng lãi/lỗ phái sinh.
+        type: string
+      marginable:
+        description: Khối lượng áp dụng ký quỹ.
+        type: string
+      depositable:
+        description: Khối lượng có thể ký quỹ.
+        type: string
+      rcCall:
+        description: RC Call - Margin Call.
+        type: string
+      withdrawable:
+        description: Số tiền có thể rút từ tài khoản phái sinh.
+        type: string
+      nonCashDrawableRCCall:
+        description: Tiền không mặt có thể rút trong RC Call.
+        type: string
+      cashSSI:
+        description: Tiền mặt trong tài khoản phái sinh tại SSI.
+        type: string
+      validNonCashSSI:
+        description: Tiền không mặt hợp lệ tại SSI.
+        type: string
+      totalAssetSSI:
+        description: Tổng tài sản phái sinh tại SSI.
+        type: string
+      withdrawableSSI:
+        description: Số tiền có thể rút từ SSI.
+        type: string
+      eeSSI:
+        description: Equity Excess tại SSI.
+        type: string
+      cashVSDC:
+        description: Tiền mặt trong tài khoản phái sinh tại VSDC.
+        type: string
+      validNonCashVSDC:
+        description: Tiền không mặt hợp lệ tại VSDC.
+        type: string
+      totalAssetVSDC:
+        description: Tổng tài sản phái sinh tại VSDC.
+        type: string
+      withdrawableVSDC:
+        description: Số tiền có thể rút từ VSDC.
+        type: string
+      eeVSDC:
+        description: Equity Excess tại VSDC.
+        type: string
+      spreadMarginSSI:
+        description: Spread Margin tại SSI.
+        type: string
+      deliveryMarginSSI:
+        description: Delivery Margin tại SSI.
+        type: string
+      marginReqSSI:
+        description: Margin Requirement tại SSI.
+        type: string
+      accountRatioSSI:
+        description: Account Ratio tại SSI.
+        type: string
+      usedLimitWarningLevel1SSI:
+        description: Mức cảnh báo sử dụng hạn mức Level 1 tại SSI.
+        type: string
+      usedLimitWarningLevel2SSI:
+        description: Mức cảnh báo sử dụng hạn mức Level 2 tại SSI.
+        type: string
+      usedLimitWarningLevel3SSI:
+        description: Mức cảnh báo sử dụng hạn mức Level 3 tại SSI.
+        type: string
+      marginCallSSI:
+        description: Margin Call tại SSI.
+        type: string
+      spreadMarginVSDC:
+        description: Spread Margin tại VSDC.
+        type: string
+      deliveryMarginVSDC:
+        description: Delivery Margin tại VSDC.
+        type: string
+      marginReqVSDC:
+        description: Margin Requirement tại VSDC.
+        type: string
+      accountRatioVSDC:
+        description: Account Ratio tại VSDC.
+        type: string
+      usedLimitWarningLevel1VSDC:
+        description: Mức cảnh báo sử dụng hạn mức Level 1 tại VSDC.
+        type: string
+      usedLimitWarningLevel2VSDC:
+        description: Mức cảnh báo sử dụng hạn mức Level 2 tại VSDC.
+        type: string
+      usedLimitWarningLevel3VSDC:
+        description: Mức cảnh báo sử dụng hạn mức Level 3 tại VSDC.
+        type: string
+      marginCallVSDC:
+        description: Margin Call tại VSDC.
+        type: string
+      totalEquity:
+        description: Tổng vốn chủ sở hữu phái sinh.
+        type: string
+      extInterest:
+        description: Lãi suất vay ngoài phái sinh.
+        type: string

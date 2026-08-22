@@ -9,9 +9,10 @@ description: |-
   - `80`: PCA mã halt
   - `99`: Đóng bảng
 enum:
-  - "UNSPECIFIED"
+  - UNSPECIFIED
   - "10"
   - "30"
   - "40"
   - "80"
   - "99"
+example: "99"

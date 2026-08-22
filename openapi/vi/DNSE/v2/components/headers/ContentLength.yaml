@@ -1,3 +1,4 @@
 description: Response body size in bytes.
 schema:
   type: integer
+example: 430

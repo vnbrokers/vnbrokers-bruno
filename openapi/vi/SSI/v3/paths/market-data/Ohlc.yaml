@@ -53,6 +53,28 @@ get:
         application/json:
           schema:
             $ref: "../../components/schemas/OhlcResponse.yaml"
+          example:
+            pageSize: 2
+            pageIndex: 1
+            data:
+              - symbol: SSI
+                tradingDate: 2026/03/27
+                open: "21061.555"
+                high: "21740.96"
+                low: "21061.555"
+                close: "21621.065"
+                volume: "23305300"
+                value: "503885406144.5"
+              - symbol: SSI
+                tradingDate: 2026/03/26
+                open: "21461.205"
+                high: "21461.205"
+                low: "21061.555"
+                close: "21061.555"
+                volume: "23402600"
+                value: "492895147043"
+            code: 200
+            msg: ""
     "400":
       $ref: "../../components/responses/BadRequest.yaml"
     "401":

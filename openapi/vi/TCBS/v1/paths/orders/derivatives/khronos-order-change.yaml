@@ -14,6 +14,10 @@
           schema:
             type: object
             properties:
+              cmd:
+                type: string
+                default: "Web.changeOrder"
+                description: "Tên lệnh."
               rc:
                 type: string
                 description: "Mã kết quả, 1 = thành công."
@@ -25,6 +29,9 @@
                     orderNo:
                       type: string
                       description: "Số hiệu lệnh."
+                    msg_type:
+                      type: string
+                      description: "Loại lệnh (1P = sửa lệnh)."
                     status:
                       type: string
                       description: "Trạng thái (PC = pending change)."
@@ -37,6 +44,17 @@
                     pk_orderNo:
                       type: string
                       description: "Key lệnh."
+          example:
+            cmd: Web.changeOrder
+            rc: "1"
+            data:
+              - orderNo: "9"
+                msg_type: 1P
+                status: PC
+                showPrice: "1290.0"
+                volume: "4"
+                pk_orderNo: "20029858"
+
   "requestBody":
     "required": true
     "content":

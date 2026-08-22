@@ -1,5 +1,11 @@
 type: object
 properties:
+  code:
+    description: Mã kết quả.
+    type: integer
+  msg:
+    description: Thông báo kết quả.
+    type: string
   pageSize:
     description: Số lượng bản ghi trên mỗi trang.
     type: integer
@@ -80,7 +86,7 @@ properties:
           type: string
         totalForeignRoom:
           description: Tổng room của nhà đầu tư nước ngoài.
-          type: string
+          type: [string, "null"]
         totalDeal:
           description: Tổng số giao dịch thỏa thuận.
           type: string
@@ -89,7 +95,7 @@ properties:
           type: string
         openInterest:
           description: Khối lượng mở.
-          type: string
+          type: [string, "null"]
         settlementPrice:
           description: Giá thanh toán.
-          type: string
+          type: [string, "null"]

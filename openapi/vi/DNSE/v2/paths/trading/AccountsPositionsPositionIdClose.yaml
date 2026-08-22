@@ -10,11 +10,7 @@ post:
     - name: marketType
       in: query
       required: true
-      description: |-
-        Loại thị trường 
-        - STOCK: Danh sách Deal cơ sở
-        - DERIVATIVE: Danh sách Deal phái sinh
-        Hiện tại chỉ hỗ trợ phái sinh
+      description: "Loại thị trường \n- STOCK: Danh sách Deal cơ sở\n- DERIVATIVE: Danh sách Deal phái sinh\nHiện tại chỉ hỗ trợ phái sinh"
       deprecated: false
       schema:
         type: string
@@ -24,23 +20,23 @@ post:
       description: OK
       headers:
         Access-Control-Allow-Credentials:
-          $ref: "../../components/headers/AccessControlAllowCredentials.yaml"
+          $ref: ../../components/headers/AccessControlAllowCredentials.yaml
         Content-Encoding:
           deprecated: false
           schema: {}
           example: br
         Content-Length:
-          $ref: "../../components/headers/ContentLength.yaml"
+          $ref: ../../components/headers/ContentLength.yaml
         Date:
-          $ref: "../../components/headers/Date.yaml"
+          $ref: ../../components/headers/Date.yaml
         Vary:
-          $ref: "../../components/headers/Vary.yaml"
+          $ref: ../../components/headers/Vary.yaml
         X-Ratelimit-Limit:
-          $ref: "../../components/headers/XRateLimitLimit.yaml"
+          $ref: ../../components/headers/XRateLimitLimit.yaml
         X-Ratelimit-Remaining:
-          $ref: "../../components/headers/XRateLimitRemaining.yaml"
+          $ref: ../../components/headers/XRateLimitRemaining.yaml
         X-Ratelimit-Reset:
-          $ref: "../../components/headers/XRateLimitReset.yaml"
+          $ref: ../../components/headers/XRateLimitReset.yaml
         X-Tyk-Api-Expires:
           deprecated: false
           schema: {}
@@ -54,6 +50,7 @@ post:
                 type: string
                 example: "1636"
                 description: ID lệnh giao dịch dạng chuỗi
+                format: int32
               side:
                 type: string
                 example: NS
@@ -133,9 +130,9 @@ post:
             createdDate: "2026-03-24T04:20:55.63Z"
             modifiedDate: "2026-03-24T04:20:55.63Z"
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
+      $ref: ../../components/responses/InternalError.yaml
   tags:
     - Giao dịch
 parameters:

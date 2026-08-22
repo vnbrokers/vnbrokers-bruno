@@ -109,3 +109,19 @@
                           type: number
                           format: double
                           description: "Phí còn lại."
+          example:
+            response:
+              totalRow: 1
+              totalPage: 6
+              data:
+                - releaseDate: 2022-07-11
+                  overDueDate: 2022-10-10
+                  releasedAmount: 14444940
+                  printAmount: 0
+                  intAmount: 0
+                  remainingInterestFee: 0
+                  paidInterestFee: 18205
+                  rate2: 11.5
+                  releasedDay: 4
+                  paidFee: 0
+                  remainingFee: 0

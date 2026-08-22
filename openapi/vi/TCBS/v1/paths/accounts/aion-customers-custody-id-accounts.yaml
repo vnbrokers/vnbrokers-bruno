@@ -54,3 +54,14 @@
                 bankAccount:
                   type: string
                   description: "Số tài khoản kết nối IA."
+          example:
+            - custodyID: 105C738764
+              accountNo: "0001000075"
+              aftype: "0075"
+              vsdStatus: Y
+              accountStatus: A
+              marginLimit: 0
+              isIA: Y
+              bankName: TCB
+              bankAccount: "11520154590019"
+              accountType: normal

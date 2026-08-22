@@ -50,3 +50,10 @@
                     t:
                       type: string
                       description: "Thời gian giao dịch."
+          example:
+            ticker: TCB
+            data:
+              - bup: 0.65
+                sdp: 0.35
+                bsr: 1.25
+                t: 09:15

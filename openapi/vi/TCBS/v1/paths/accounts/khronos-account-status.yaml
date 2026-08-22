@@ -20,7 +20,7 @@
     - "name": "getType"
       "in": "query"
       "required": true
-      "description": "0 = Lấy all, 1 = money only."
+      "description": "0 = lấy toàn bộ, 1 = chỉ lấy tiền."
       "schema":
         "$ref": "../../components/schemas/enums/DerivativeGetType.yaml"
   responses:
@@ -42,3 +42,7 @@
               data:
                 type: object
                 description: "Dữ liệu tổng quan tiền và ký quỹ."
+          example:
+            cmd: Web.Portfolio.AccountStatus
+            rc: "1"
+            data: {}

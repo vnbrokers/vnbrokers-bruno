@@ -18,19 +18,42 @@ get:
       required: true
       schema:
         type: string
-        enum: [STOCK, DERIVATIVE]
+        enum:
+          - STOCK
+          - DERIVATIVE
+      description: "Loại thị trường \n- DERIVATIVE: Deal phái sinh\nHiện tại chỉ hỗ trợ phái sinh"
+      example: DERIVATIVE
   responses:
     "200":
       description: OK
       content:
         application/json:
           schema:
-            $ref: "../../components/schemas/PnlConfigsPositionResponse.yaml"
+            $ref: ../../components/schemas/PnlConfigsPositionResponse.yaml
+          example:
+            positionId: 177952229647243
+            configs:
+              takeProfit:
+                enabled: true
+                strategy: DELTA_PRICE
+                rate: 0.52
+                deltaPrice: 162.8
+                orderMethod: FASTEST
+                orderDeltaPrice: 2
+              stopLoss:
+                enabled: true
+                strategy: PNL_RATE
+                rate: -0.34
+                deltaPrice: 50.3
+                orderMethod: DELTA_PRICE
+                orderDeltaPrice: 10.5
+                trailingEnabled: true
+            createdDate: "2026-06-02T02:47:36.384761Z"
+            modifiedDate: "2026-06-03T07:44:44.235941815Z"
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
-
+      $ref: ../../components/responses/InternalError.yaml
 post:
   operationId: postAccountsPositionsPositionIdPnlConfigs
   tags:
@@ -55,17 +78,53 @@ post:
           type: object
           properties:
             takeProfit:
-              $ref: "../../components/schemas/PnlConfig.yaml"
+              $ref: ../../components/schemas/PnlConfig.yaml
             stopLoss:
-              $ref: "../../components/schemas/PnlConfig.yaml"
+              $ref: ../../components/schemas/PnlConfig.yaml
+        example:
+          takeProfit:
+            enabled: true
+            strategy: DELTA_PRICE
+            rate: 0.52
+            deltaPrice: 162.8
+            orderMethod: FASTEST
+            orderDeltaPrice: 2
+          stopLoss:
+            enabled: true
+            strategy: PNL_RATE
+            rate: -0.34
+            deltaPrice: 50.3
+            orderMethod: DELTA_PRICE
+            orderDeltaPrice: 10.5
+            trailingEnabled: true
   responses:
     "200":
       description: OK
       content:
         application/json:
           schema:
-            $ref: "../../components/schemas/PnlConfigsPositionResponse.yaml"
+            $ref: ../../components/schemas/PnlConfigsPositionResponse.yaml
+          example:
+            positionId: 177952229647243
+            configs:
+              takeProfit:
+                enabled: true
+                strategy: DELTA_PRICE
+                rate: 0.52
+                deltaPrice: 162.8
+                orderMethod: FASTEST
+                orderDeltaPrice: 2
+              stopLoss:
+                enabled: true
+                strategy: PNL_RATE
+                rate: -0.34
+                deltaPrice: 50.3
+                orderMethod: DELTA_PRICE
+                orderDeltaPrice: 10.5
+                trailingEnabled: true
+            createdDate: "2026-06-02T02:47:36.384761Z"
+            modifiedDate: "2026-06-03T07:44:44.235941815Z"
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
+      $ref: ../../components/responses/InternalError.yaml

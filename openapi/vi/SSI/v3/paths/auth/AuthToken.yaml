@@ -37,6 +37,12 @@ post:
         application/json:
           schema:
             $ref: "../../components/schemas/TokenResponse.yaml"
+          example:
+            tokenType: Bearer
+            accessToken: "eyJhb..."
+            expiresAt: 1787238584
+            refreshToken: "eyJhb..."
+            refreshExpiresAt: 1787266484
     "400":
       $ref: "../../components/responses/BadRequest.yaml"
     "401":

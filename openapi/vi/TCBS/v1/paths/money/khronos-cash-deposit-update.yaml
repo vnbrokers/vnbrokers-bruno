@@ -31,6 +31,14 @@
                 items:
                   type: object
                 description: "Dữ liệu trả về (chứa transactionId)."
+          example:
+            cmd: ""
+            rc: "1"
+            rs: ""
+            oID: ""
+            data:
+              - transactionId: CA330E033D3BD113E053EE02070AED89
+
   "requestBody":
     "required": true
     "content":

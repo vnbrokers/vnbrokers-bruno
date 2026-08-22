@@ -10,13 +10,11 @@ get:
       description: OK
       headers:
         Access-Control-Allow-Credentials:
-          $ref: "../../components/headers/AccessControlAllowCredentials.yaml"
+          $ref: ../../components/headers/AccessControlAllowCredentials.yaml
         Access-Control-Allow-Headers:
           deprecated: false
           schema: {}
-          example: >-
-            Content-Type, Authorization, X-Request-ID, Accept, Origin,
-            X-Requested-With
+          example: Content-Type, Authorization, X-Request-ID, Accept, Origin, X-Requested-With
         Access-Control-Allow-Methods:
           deprecated: false
           schema: {}
@@ -30,19 +28,19 @@ get:
           schema: {}
           example: "86400"
         Content-Length:
-          $ref: "../../components/headers/ContentLength.yaml"
+          $ref: ../../components/headers/ContentLength.yaml
         Date:
-          $ref: "../../components/headers/Date.yaml"
+          $ref: ../../components/headers/Date.yaml
         Vary:
-          $ref: "../../components/headers/Vary.yaml"
+          $ref: ../../components/headers/Vary.yaml
         X-Ratelimit-Limit:
-          $ref: "../../components/headers/XRateLimitLimit.yaml"
+          $ref: ../../components/headers/XRateLimitLimit.yaml
         X-Ratelimit-Remaining:
-          $ref: "../../components/headers/XRateLimitRemaining.yaml"
+          $ref: ../../components/headers/XRateLimitRemaining.yaml
         X-Ratelimit-Reset:
-          $ref: "../../components/headers/XRateLimitReset.yaml"
+          $ref: ../../components/headers/XRateLimitReset.yaml
         X-Request-Id:
-          $ref: "../../components/headers/XRequestId.yaml"
+          $ref: ../../components/headers/XRequestId.yaml
         X-Tyk-Api-Expires:
           deprecated: false
           schema: {}
@@ -59,9 +57,7 @@ get:
                     type: integer
                     format: int32
                     example: 3720308
-                    description: >-
-                      Tổng tiền (Tiền mặt + Lãi tiền gửi + Tiền bán chờ về +
-                      Tiền cổ tức chờ về - Tiền mua trong ngày)
+                    description: Tổng tiền (Tiền mặt + Lãi tiền gửi + Tiền bán chờ về + Tiền cổ tức chờ về - Tiền mua trong ngày)
                   availableCash:
                     type: integer
                     format: int32
@@ -86,10 +82,12 @@ get:
                     type: integer
                     format: int32
                     description: Tổng tiền ký quỹ
+                    example: 11174173
                   orderSecured:
                     type: integer
                     format: int32
                     description: Số tiền đang được phong tỏa cho các lệnh giao dịch
+                    example: 7903713
                   withdrawableCash:
                     type: integer
                     format: int32
@@ -157,6 +155,10 @@ get:
                     type: integer
                     format: int64
                     description: Tổng giá trị tài sản trái phiếu
+                    example: 40102762100
+                description: Thông tin tài sản trái phiếu
+                example:
+                  totalValue: 40102762100
               egg:
                 type: object
                 properties:
@@ -164,6 +166,10 @@ get:
                     type: integer
                     format: int32
                     description: Tổng giá trị tài sản trứng
+                    example: 6849005
+                description: Thông tin tài sản trứng vàng
+                example:
+                  totalValue: 6849005
           example:
             stock:
               totalCash: 3720308
@@ -181,9 +187,9 @@ get:
               holdTaxAndFee: 0
               totalLoanDebt: 0
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
+      $ref: ../../components/responses/InternalError.yaml
   tags:
     - Tài khoản
 parameters:

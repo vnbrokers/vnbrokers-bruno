@@ -20,6 +20,10 @@
               message:
                 type: string
                 description: "Mô tả mã lỗi nếu có."
+          example:
+            code: "200"
+            message: OK
+
   "requestBody":
     "required": true
     "content":

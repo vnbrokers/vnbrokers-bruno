@@ -76,3 +76,22 @@ post:
                       type: string
                     showPrice:
                       type: string
+                  required:
+                    - orderNo
+                    - pk_orderNo
+                    - showPrice
+            required:
+              - cmd
+              - rc
+              - rs
+              - oID
+              - data
+          example:
+            cmd: Web.placeOrder
+            rc: "1"
+            rs: ""
+            oID: H.OWsC4418qYN59HXcvGtD3z
+            data:
+              - orderNo: "1"
+                pk_orderNo: "7625400"
+                showPrice: "1198.7"

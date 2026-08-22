@@ -1,8 +1,11 @@
 type: object
+required:
+  - equity
+  - derivative
 properties:
   equity:
     description: Thông tin hoặc danh sách vị thế tài khoản cơ sở.
-    type: object
+    type: [object, "null"]
     properties:
       accountNo:
         description: Số tài khoản giao dịch.
@@ -63,5 +66,60 @@ properties:
         type: string
   derivative:
     description: Thông tin tài khoản hoặc vị thế phái sinh.
-    type: object
+    type: [object, "null"]
     additionalProperties: true
+    properties:
+      accountNo:
+        description: Số tài khoản giao dịch.
+        type: string
+      accountBalance:
+        description: Số dư tài khoản giao dịch (tiền mặt khả dụng).
+        type: string
+      fee:
+        description: Phí giao dịch.
+        type: string
+      commission:
+        description: Hoa hồng giao dịch.
+        type: string
+      interest:
+        description: Lãi suất vay.
+        type: string
+      extInterest:
+        description: Lãi suất vay ngoài.
+        type: string
+      loan:
+        description: Dư nợ vay gốc đã sử dụng trong tài khoản giao dịch phái sinh.
+        type: string
+      deliveryAmount:
+        description: Số tiền phải trả hoặc được nhận khi đến ngày giao hàng đối với các hợp đồng tương lai.
+        type: string
+      floatingPL:
+        description: Lãi/lỗ chưa thực hiện từ các vị thế mở.
+        type: string
+      tradingPL:
+        description: Lãi/lỗ đã thực hiện từ các vị thế đã đóng.
+        type: string
+      totalPL:
+        description: Tổng lãi/lỗ (floatingPL + tradingPL).
+        type: string
+      withdrawable:
+        description: Số tiền có thể rút từ tài khoản giao dịch phái sinh.
+        type: string
+      cashSSI:
+        description: Số tiền mặt trong tài khoản giao dịch phái sinh tại SSI.
+        type: string
+      validNonCashSSI:
+        description: Số tiền phi tiền mặt hợp lệ trong tài khoản phái sinh tại SSI.
+        type: string
+      withdrawableSSI:
+        description: Số tiền có thể rút từ tài khoản phái sinh tại SSI.
+        type: string
+      cashVSDC:
+        description: Số tiền mặt trong tài khoản giao dịch phái sinh tại VSDC.
+        type: string
+      validNonCashVSDC:
+        description: Số tiền phi tiền mặt hợp lệ trong tài khoản phái sinh tại VSDC.
+        type: string
+      withdrawableVSDC:
+        description: Số tiền có thể rút từ tài khoản phái sinh tại VSDC.
+        type: string

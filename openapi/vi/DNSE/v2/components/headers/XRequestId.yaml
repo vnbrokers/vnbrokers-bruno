@@ -1,3 +1,4 @@
 description: Unique identifier assigned to the request by the DNSE gateway.
 schema:
   type: string
+example: unknown

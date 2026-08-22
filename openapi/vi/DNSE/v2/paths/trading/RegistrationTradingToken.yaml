@@ -10,21 +10,21 @@ post:
       description: OK
       headers:
         Content-Length:
-          $ref: "../../components/headers/ContentLength.yaml"
+          $ref: ../../components/headers/ContentLength.yaml
         Date:
-          $ref: "../../components/headers/Date.yaml"
+          $ref: ../../components/headers/Date.yaml
         Vary:
-          $ref: "../../components/headers/Vary.yaml"
+          $ref: ../../components/headers/Vary.yaml
         X-Frame-Options:
-          $ref: "../../components/headers/XFrameOptions.yaml"
+          $ref: ../../components/headers/XFrameOptions.yaml
         X-Ratelimit-Limit:
-          $ref: "../../components/headers/XRateLimitLimit.yaml"
+          $ref: ../../components/headers/XRateLimitLimit.yaml
         X-Ratelimit-Remaining:
-          $ref: "../../components/headers/XRateLimitRemaining.yaml"
+          $ref: ../../components/headers/XRateLimitRemaining.yaml
         X-Ratelimit-Reset:
-          $ref: "../../components/headers/XRateLimitReset.yaml"
+          $ref: ../../components/headers/XRateLimitReset.yaml
         X-Request-Id:
-          $ref: "../../components/headers/XRequestId.yaml"
+          $ref: ../../components/headers/XRequestId.yaml
         X-Tyk-Api-Expires:
           deprecated: false
           schema: {}
@@ -39,11 +39,11 @@ post:
                 example: 9ab81e9c-8a81-45aa-8190-b69a1c179d52
                 description: Token đặt lệnh
           example:
-            tradingToken: 9ab81e9c-8a81-45aa-8190-b69a1c179d52 #gitleaks:allow
+            tradingToken: 9ab81e9c-8a81-45aa-8190-b69a1c179d52
     "400":
-      $ref: "../../components/responses/BadRequest.yaml"
+      $ref: ../../components/responses/BadRequest.yaml
     "500":
-      $ref: "../../components/responses/InternalError.yaml"
+      $ref: ../../components/responses/InternalError.yaml
   tags:
     - Giao dịch
   requestBody:
@@ -55,14 +55,10 @@ post:
             otpType:
               type: string
               example: email_otp
-              description: >-
+              description: |-
                 Phương thức xác thực OTP
-
-                - email_otp: Áp dụng cho tài khoản đăng ký phương thức xác
-                thực lớp thứ 2 là Email OTP
-
-                - smart_otp: Áp dụng cho tài khoản đăng ký phương thức xác
-                thực lớp thứ 2 là Smart OTP
+                - email_otp: Áp dụng cho tài khoản đăng ký phương thức xác thực lớp thứ 2 là Email OTP
+                - smart_otp: Áp dụng cho tài khoản đăng ký phương thức xác thực lớp thứ 2 là Smart OTP
             passcode:
               type: string
               example: "519752"

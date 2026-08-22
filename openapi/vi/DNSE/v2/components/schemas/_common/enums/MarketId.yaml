@@ -9,9 +9,10 @@ description: |-
   - `STX`: Cổ phiếu sàn HNX
   - `UPX`: Cổ phiếu sàn Upcom
 enum:
-  - "UNSPECIFIED"
-  - "DVX"
-  - "HCX"
-  - "STO"
-  - "STX"
-  - "UPX"
+  - UNSPECIFIED
+  - DVX
+  - HCX
+  - STO
+  - STX
+  - UPX
+example: STO

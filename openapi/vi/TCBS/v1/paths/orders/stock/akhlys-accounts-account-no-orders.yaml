@@ -30,6 +30,11 @@
               orderId:
                 type: string
                 description: "Mã lệnh được tạo."
+          example:
+            error: "0"
+            message: Đặt lệnh thành công!
+            orderId: "9202205230000324355"
+
   "requestBody":
     "required": true
     "content":
@@ -62,3 +67,9 @@
             - "priceType"
             - "price"
             - "quantity"
+        example:
+          execType: NB
+          symbol: VNM
+          priceType: LO
+          price: 10000
+          quantity: 100

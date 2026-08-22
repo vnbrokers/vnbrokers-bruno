@@ -69,3 +69,17 @@
                     timeExec:
                       type: string
                       description: "Thời điểm khớp."
+          example:
+            totalCount: 25
+            pageSize: 25
+            pageIndex: 0
+            data:
+              - orderId: "9202407170000280679"
+                side: B
+                symbol: FPT
+                quoteQtty: 800
+                quotePrice: 54000
+                tradeId: "202409160000220391"
+                qtty: 200
+                price: 53000
+                timeExec: 2024-09-16T17:05:20

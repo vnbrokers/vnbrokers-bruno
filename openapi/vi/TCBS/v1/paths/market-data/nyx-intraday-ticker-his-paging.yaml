@@ -99,3 +99,22 @@
                     t:
                       type: string
                       description: "Thời gian nhận lệnh từ sở."
+          example:
+            page: 0
+            size: 20
+            headIndex: 3974
+            numberOfItems: 10
+            total: 3975
+            ticker: TCB
+            # d: 05/08
+            data:
+              - p: 33850
+                v: 100
+                cp: -650
+                # rcp: 0
+                a: ""
+                ba: 6034800
+                sa: 10320100
+                hl: false
+                # pcp: 0
+                t: 14:45:00

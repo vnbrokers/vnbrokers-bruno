@@ -27,6 +27,9 @@ post:
         application/json:
           schema:
             $ref: "../../components/schemas/OtpResponse.yaml"
+          example:
+            message: Thành công
+            transactionId: f306c510-0647-417b-9210-bb5b7e155e77
     "400":
       $ref: "../../components/responses/BadRequest.yaml"
     "401":

@@ -35,6 +35,13 @@ get:
         application/json:
           schema:
             $ref: "../../components/schemas/MaxBuySellResponse.yaml"
+          example:
+            accountNo: Q123456
+            maxBuyQty: 100
+            marginRatio: 0%
+            purchasingPower: 100000
+            maxSellQty: 0
+
     "400":
       $ref: "../../components/responses/BadRequest.yaml"
     "401":

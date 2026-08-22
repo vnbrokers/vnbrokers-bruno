@@ -24,6 +24,8 @@ post:
         application/json:
           schema:
             $ref: "../../components/schemas/FcoOrderResponse.yaml"
+          example:
+            fcoId: 2e667ae3-934a-4548-be9a-de983a29fe5b
     "400":
       $ref: "../../components/responses/BadRequest.yaml"
     "401":
@@ -56,6 +58,9 @@ delete:
         application/json:
           schema:
             $ref: "../../components/schemas/FcoOrderResponse.yaml"
+          example:
+            fcoId: 2e667ae3-934a-4548-be9a-de983a29fe5b
+            username: Q12345
     "400":
       $ref: "../../components/responses/BadRequest.yaml"
     "401":

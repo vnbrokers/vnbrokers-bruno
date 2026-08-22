@@ -2,17 +2,17 @@ type: object
 properties:
   pageIndex:
     description: Chỉ số trang.
-    type: string
+    type: integer
   pageSize:
     description: Số lượng bản ghi trên mỗi trang.
-    type: string
+    type: integer
   itemsCount:
     description: Tổng số bản ghi.
-    type: string
+    type: integer
   pagesCount:
     description: Tổng số trang.
     type: string
-  fcoList:
+  data:
     description: Danh sách lệnh điều kiện.
     type: array
     items:
@@ -35,7 +35,7 @@ properties:
           type: string
         priceSlip:
           description: Khoảng trượt giá.
-          type: string
+          type: number
         symbol:
           description: Mã chứng khoán hoặc mã hợp đồng phái sinh.
           type: string
@@ -44,7 +44,7 @@ properties:
           type: string
         orderType:
           description: Loại lệnh giao dịch.
-          type: string
+          type: [string, "null"]
         from:
           description: Thời điểm bắt đầu hiệu lực hoặc khoảng thời gian lọc.
           type: string
@@ -63,7 +63,7 @@ properties:
         detail:
           description: Chi tiết kết quả hoặc lỗi.
           type: string
-        params:
+        fco_params:
           description: Các tham số của lệnh điều kiện.
           type: object
           additionalProperties: true

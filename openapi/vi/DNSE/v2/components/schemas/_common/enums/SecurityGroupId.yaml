@@ -17,3 +17,4 @@ enum:
   - "FU"
   - "SR"
   - "ST"
+example: ST

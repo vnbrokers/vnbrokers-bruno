@@ -42,43 +42,64 @@
                     symbol:
                       type: string
                       description: "Mã hợp đồng."
-                    im:
-                      type: string
-                      description: "Tỷ lệ ký quỹ."
-                    deliver:
-                      type: integer
-                      format: int64
-                      description: "Số đã SHORT."
-                    receive:
-                      type: integer
-                      format: int64
-                      description: "Số đã LONG."
-                    net:
-                      type: integer
-                      format: int64
-                      description: "Vị thế mở (>= 0 = LONG, <= SHORT)."
                     side:
                       type: string
-                      description: "L = Long, S = Short."
-                    lastPrice:
+                      description: "Loại giao dịch (B/S)."
+                    openPrice:
                       type: number
-                      format: double
-                      description: "Giá thị trường."
-                    imValue:
+                      description: "Giá mở TB."
+                    closePrice:
                       type: number
-                      format: double
-                      description: "Giá trị ký quỹ ban đầu."
-                    vmValue:
-                      type: number
-                      format: double
-                      description: "Lãi/lỗ."
-                    mrValue:
-                      type: number
-                      format: double
-                      description: "Ký quỹ yêu cầu."
-                    duedate:
+                      description: "Giá đóng TB."
+                    closePosition:
                       type: string
-                      description: "Ngày đáo hạn."
-                    pc_remain:
+                      description: "Số vị thế đóng / tổng."
+                    fee:
+                      type: number
+                      format: double
+                      description: "Phí giao dịch."
+                    tax:
+                      type: number
+                      format: double
+                      description: "Thuế."
+                    closeVM:
+                      type: number
+                      format: double
+                      description: "Lãi lỗ đã đóng."
+                    unrealize:
+                      type: number
+                      format: double
+                      description: "Lãi lỗ chưa đóng."
+                    closePC:
+                      type: number
+                      format: double
+                      description: "% lãi/lỗ đã đóng."
+                    time:
                       type: string
-                      description: "% lãi/lỗ vị thế mở."
+                      description: "Thời gian đóng cuối."
+          example:
+            cmd: Web.Portfolio.PositionClose
+            rc: "1"
+            data:
+              - symbol: TOTAL
+                side: ""
+                openPrice: 0
+                closePrice: 0
+                closePosition: "0"
+                fee: 11400
+                tax: 15275
+                closeVM: 500000
+                unrealize: 500000
+                closePC: 0
+                time: ""
+              - symbol: VN30F2103
+                side: S
+                openPrice: 1180
+                closePrice: 1175
+                closePosition: 1/1
+                fee: 5700
+                tax: 7637.5
+                closeVM: 500000
+                unrealize: 0
+                closePC: 3.26
+                time: 11:56:24

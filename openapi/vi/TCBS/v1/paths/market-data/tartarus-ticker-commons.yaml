@@ -117,6 +117,10 @@
                       type: number
                       format: double
                       description: "Giá mở cửa."
+                    avg:
+                      type: number
+                      format: double
+                      description: "Giá trung bình."
                     high:
                       type: number
                       format: double
@@ -125,10 +129,6 @@
                       type: number
                       format: double
                       description: "Giá thấp nhất."
-                    avg:
-                      type: number
-                      format: double
-                      description: "Giá trung bình."
                     totalVol:
                       type: number
                       format: double
@@ -155,3 +155,36 @@
               tradingDate:
                 type: string
                 description: "Ngày giao dịch (dd/MM/yyyy)."
+          example:
+            data:
+              - symbol: FPT
+                ceilPrice: 106100
+                floorPrice: 92300
+                refPrice: 99200
+                bidPrice01: 98700
+                bidPrice02: 98600
+                bidPrice03: 98500
+                bidQtty01: 11300
+                bidQtty02: 56800
+                bidQtty03: 45600
+                offerPrice01: 98800
+                offerPrice02: 98900
+                offerPrice03: 99000
+                offerQtty01: 100
+                offerQtty02: 23200
+                offerQtty03: 56100
+                matchPrice: 98800
+                matchQtty: 100
+                change: -400
+                changePercent: -0.4032
+                open: 99200
+                avg: 98800
+                high: 99200
+                low: 98500
+                totalVol: 833900
+                totalVal: 82409370000
+                buyForeignQtty: 647300
+                sellForeignQtty: 648500
+                room: "84"
+                indexNumber: 1
+            tradingDate: 29/10/2024
