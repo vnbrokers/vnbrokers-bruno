@@ -1,0 +1,60 @@
+info:
+  name: data-securitiesSummary
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v3/data/securitiesSummary?symbol={{symbol}}&index={{index}}&from={{from}}&to={{to}}&pageIndex={{pageIndex}}&pageSize={{pageSize}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: User-Agent
+      value: ""
+      disabled: true
+    - name: Accept-Language
+      value: en
+  params:
+    - name: symbol
+      value: "{{symbol}}"
+      type: query
+      description: |-
+        Mã chứng khoán; chỉ dùng một trong `symbol` hoặc `index`.
+    - name: index
+      value: "{{index}}"
+      type: query
+      description: |-
+        Mã chỉ số; chỉ dùng một trong `symbol` hoặc `index`.
+    - name: from
+      value: "{{from}}"
+      type: query
+      description: |-
+        Ngày bắt đầu theo định dạng `YYYY/MM/DD`.
+    - name: to
+      value: "{{to}}"
+      type: query
+      description: |-
+        Ngày kết thúc theo định dạng `YYYY/MM/DD`, phải lớn hơn hoặc bằng `from`.
+    - name: pageIndex
+      value: "{{pageIndex}}"
+      type: query
+      description: |-
+        Chỉ số trang, bắt đầu từ 1. Mặc định là 1.
+    - name: pageSize
+      value: "{{pageSize}}"
+      type: query
+      description: Số lượng bản ghi mỗi trang. Mặc định là 10.
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  ### GET /api/v3/data/securitiesSummary
+
+  Lấy thông tin tổng hợp giao dịch của một mã chứng khoán hoặc chỉ số theo từng ngày giao dịch. Chỉ truyền một trong hai tham số là Symbol hoặc Index.
+
+  Authentication: Bearer token.

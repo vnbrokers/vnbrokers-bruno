@@ -1,0 +1,59 @@
+info:
+  name: data-ohlc
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v3/data/ohlc?symbol={{symbol}}&from={{from}}&to={{to}}&timeFrame={{timeFrame}}&pageIndex={{pageIndex}}&pageSize={{pageSize}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: User-Agent
+      value: ""
+      disabled: true
+    - name: Accept-Language
+      value: en
+  params:
+    - name: symbol
+      value: "{{symbol}}"
+      type: query
+      description: Mã chứng khoán cần lấy dữ liệu OHLCV.
+    - name: from
+      value: "{{from}}"
+      type: query
+      description: |-
+        Thời điểm bắt đầu; daily dùng `YYYY/MM/DD`, intraday dùng `YYYY/MM/DD HH:mm:ss`.
+    - name: to
+      value: "{{to}}"
+      type: query
+      description: |-
+        Thời điểm kết thúc; daily dùng `YYYY/MM/DD`, intraday dùng `YYYY/MM/DD HH:mm:ss`.
+    - name: timeFrame
+      value: "{{timeFrame}}"
+      type: query
+      description: |-
+        Khung thời gian: `1m`, `3m`, `5m`, `15m`, `30m`, `1h` hoặc `1d`.
+    - name: pageIndex
+      value: "{{pageIndex}}"
+      type: query
+      description: |-
+        Chỉ số trang, bắt đầu từ 1. Mặc định là 1.
+    - name: pageSize
+      value: "{{pageSize}}"
+      type: query
+      description: Số lượng bản ghi mỗi trang. Mặc định là 10.
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |- 
+  ### GET /api/v3/data/ohlc
+
+  Lấy dữ liệu nến OHLCV theo khoảng thời gian. Thời gian cung cấp 1 năm gần nhất cho dữ liệu intraday, dữ liệu daily cung cấp từ khi mã chứng khoán được giao dịch.
+
+  Authentication: Bearer token.

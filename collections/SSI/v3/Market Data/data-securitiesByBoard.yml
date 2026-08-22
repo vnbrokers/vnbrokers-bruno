@@ -1,0 +1,45 @@
+info:
+  name: data-securitiesByBoard
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v3/data/securitiesByBoard?symbol={{symbol}}&board={{board}}&index={{index}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: User-Agent
+      value: ""
+      disabled: true
+    - name: Accept-Language
+      value: en
+  params:
+    - name: symbol
+      value: "{{symbol}}"
+      type: query
+      description: |-
+        Mã chứng khoán cần truy vấn; chỉ dùng một trong `symbol`, `board` hoặc `index`.
+    - name: board
+      value: "{{board}}"
+      type: query
+      description: |-
+        Mã sàn: `HOSE`, `HNX` hoặc `UPCOM`.
+    - name: index
+      value: "{{index}}"
+      type: query
+      description: Mã chỉ số cần lấy danh sách chứng khoán.
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |- 
+  ### GET /api/v3/data/securitiesByBoard
+
+  Lấy danh sách chứng khoán theo điều kiện lọc. Khách chỉ được phép cung cấp một trong ba tham số symbol, board hoặc index để lọc danh sách chứng khoán.
+
+  Authentication: Bearer token.

@@ -1,0 +1,20 @@
+info:
+  name: Trading
+  type: folder
+  seq: 1
+
+request:
+  auth:
+    type: bearer
+    token: "{{accessToken}}"
+  scripts:
+    - type: before-request
+      code: |-
+        if (["POST", "PUT", "DELETE"].includes(req.method)) {
+          const { signWithRSA } = require("../signer")
+          const privateKey = bru.getEnvVar("privateKey")
+          const newBody = JSON.stringify(bru.interpolate(req.body))
+          const signature = signWithRSA(privateKey, newBody)
+          req.setHeader("X-Signature", signature)
+          req.setBody(newBody)
+        }

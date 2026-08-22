@@ -1,0 +1,54 @@
+info:
+  name: trade-order-cancel
+  type: http
+  seq: 1
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/api/v3/trading/order"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: User-Agent
+      value: ""
+      disabled: true
+    - name: Accept-Language
+      value: en
+  body:
+    type: json
+    data: |-
+      {
+        "orderId": "{{orderId}}",
+        "accountNo": "0001234",
+        "deviceId": "{{deviceId}}",
+        "clientCancelId": null,
+        "clientRequestId": null,
+        "userAgent": null,
+        "ipAddress": null
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  ### DELETE /api/v3/trading/order
+
+  Hủy lệnh hiện có.
+
+  **Request body**
+
+  | Field | Type | Required | Description |
+  | --- | --- | --- | --- |
+  | clientCancelId | string \| null | No | Định danh yêu cầu hủy do client tạo. |
+  | clientRequestId | string \| null | No | Định danh lệnh gốc do client tạo. |
+  | orderId | string \| null | No | Định danh lệnh gốc do SSI tạo. |
+  | accountNo | string | Yes | Số tài khoản giao dịch. |
+  | deviceId | string | Yes | Định danh thiết bị gửi yêu cầu hủy. |
+  | userAgent | string \| null | No | Thông tin trình duyệt hoặc ứng dụng. |
+  | ipAddress | string \| null | No | Địa chỉ IP của thiết bị. |
+
+  Authentication: Bearer token.

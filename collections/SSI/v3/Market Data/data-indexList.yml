@@ -1,0 +1,36 @@
+info:
+  name: data-indexList
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v3/data/indexList?board={{board}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: User-Agent
+      value: ""
+      disabled: true
+    - name: Accept-Language
+      value: en
+  params:
+    - name: board
+      value: "{{board}}"
+      type: query
+      description: |-
+        Mã sàn cần lấy danh sách các chỉ số. Giá trị có thể là `HOSE`, `HNX`, hoặc `UPCOM`. Nếu không cung cấp thì trả về chỉ số của tất cả các sàn.
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  ### GET /api/v3/data/indexList
+
+  Lấy danh sách các chỉ số thị trường.
+
+  Authentication: Bearer token.

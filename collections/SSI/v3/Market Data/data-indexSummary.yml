@@ -1,0 +1,46 @@
+info:
+  name: data-indexSummary
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v3/data/indexSummary?board={{board}}&index={{index}}&tradingDate={{tradingDate}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: User-Agent
+      value: ""
+      disabled: true
+    - name: Accept-Language
+      value: en
+  params:
+    - name: board
+      value: "{{board}}"
+      type: query
+      description: |-
+        Mã sàn của chỉ số. Cung cấp chính xác một trong hai tham số `board` hoặc `index`.
+    - name: index
+      value: "{{index}}"
+      type: query
+      description: |-
+        Mã chỉ số cần lấy thông tin tổng hợp. Cung cấp chính xác một trong hai tham số `board` hoặc `index`.
+    - name: tradingDate
+      value: "{{tradingDate}}"
+      type: query
+      description: |-
+        Ngày giao dịch theo định dạng `YYYY/MM/DD`.
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  ### GET /api/v3/data/indexSummary
+
+  Lấy thông tin tổng hợp của một chỉ số theo ngày giao dịch.
+
+  Authentication: Bearer token.

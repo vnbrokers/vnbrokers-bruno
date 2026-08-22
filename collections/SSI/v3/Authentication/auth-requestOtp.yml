@@ -1,0 +1,36 @@
+info:
+  name: auth-requestOtp
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v3/auth/requestOtp"
+  body:
+    type: json
+    data: |-
+      {
+        "apiKey": "{{apiKey}}",
+        "apiSecret": "{{apiSecret}}"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  ### POST /api/v3/auth/requestOtp
+
+  Gửi yêu cầu lấy OTP (SMS/Email) phục vụ xác thực giao dịch. Chỉ sử dụng cho tài khoản có kiểu 2FA là SMS và Email.
+
+  **Request body**
+
+  | Field | Type | Required | Description |
+  | --- | --- | --- | --- |
+  | apiKey | string | Yes | API key do SSI/FastConnect cấp. |
+  | apiSecret | string | Yes | API secret tương ứng với apiKey. |
+
+  Authentication: Không yêu cầu Bearer token.

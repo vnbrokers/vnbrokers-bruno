@@ -1,0 +1,39 @@
+info:
+  name: trade-ppmmrAccount
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v3/trading/ppmmrAccount?clientId={{clientId}}&accountNo={{accountNo}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: User-Agent
+      value: ""
+      disabled: true
+    - name: Accept-Language
+      value: en
+  params:
+    - name: clientId
+      value: "{{clientId}}"
+      type: query
+      description: Mã client của ứng dụng.
+    - name: accountNo
+      value: "{{accountNo}}"
+      type: query
+      description: Số tài khoản giao dịch.
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  ### GET /api/v3/trading/ppmmrAccount
+
+  Lấy thông tin PP/MMR của tài khoản.
+
+  Authentication: Bearer token.
