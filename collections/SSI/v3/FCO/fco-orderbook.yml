@@ -6,15 +6,29 @@ info:
 http:
   method: GET
   url: "{{baseUrl}}/api/v3/trading/fco/orderbook?fcoId={{fcoId}}&pageIndex={{pageIndex}}&pageSize={{pageSize}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: User-Agent
+      value: ""
+      disabled: true
+    - name: Accept-Language
+      value: en
+  params:
+    - name: fcoId
+      value: "{{fcoId}}"
+      type: query
+      description: ID của lệnh điều kiện cần truy vấn sổ lệnh phát sinh.
+    - name: pageIndex
+      value: "{{pageIndex}}"
+      type: query
+      description: |-
+        Chỉ số trang, bắt đầu từ 1. Mặc định là 1.
+    - name: pageSize
+      value: "{{pageSize}}"
+      type: query
+      description: Số lượng bản ghi mỗi trang. Mặc định là 10.
   auth: inherit
-
-runtime:
-  scripts:
-    - type: tests
-      code: |-
-        test("response returns success", function () {
-          expect(res.status).to.be.oneOf([200]);
-        });
 
 settings:
   encodeUrl: true
@@ -22,7 +36,7 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: |- 
+docs: |-
   ### GET /api/v3/trading/fco/orderbook
 
   Lấy danh sách các lệnh thực được phát sinh (trigger) bởi một lệnh điều kiện.

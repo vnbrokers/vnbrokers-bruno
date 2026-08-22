@@ -11,8 +11,10 @@ request:
     - type: before-request
       code: |-
         if (["POST", "PUT", "DELETE"].includes(req.method)) {
-          const { signWithRSA } = require("../../v1/signer")
+          const { signWithRSA } = require("../signer")
           const privateKey = bru.getEnvVar("privateKey")
-          const signature = signWithRSA(privateKey, JSON.stringify(bru.interpolate(req.body)))
+          const newBody = JSON.stringify(bru.interpolate(req.body))
+          const signature = signWithRSA(privateKey, newBody)
           req.setHeader("X-Signature", signature)
+          req.setBody(newBody)
         }

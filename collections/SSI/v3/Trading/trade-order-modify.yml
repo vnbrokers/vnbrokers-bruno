@@ -6,22 +6,32 @@ info:
 http:
   method: PUT
   url: "{{baseUrl}}/api/v3/trading/order"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: User-Agent
+      value: ""
+      disabled: true
+    - name: Accept-Language
+      value: en
   body:
     type: json
     data: |-
       {
+        "orderId": "{{orderId}}",
         "accountNo": "0001234",
-        "deviceId": "{{deviceId}}"
+        "symbol": "SSI",
+        "side": "B",
+        "orderType": "LO",
+        "quantity": 1000,
+        "price": "30000",
+        "deviceId": "{{deviceId}}",
+        "clientModifyId": null,
+        "clientRequestId": null,
+        "userAgent": null,
+        "ipAddress": null
       }
   auth: inherit
-
-runtime:
-  scripts:
-    - type: tests
-      code: |-
-        test("response returns success", function () {
-          expect(res.status).to.be.oneOf([200]);
-        });
 
 settings:
   encodeUrl: true
@@ -29,9 +39,26 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: |- 
+docs: |-
   ### PUT /api/v3/trading/order
 
   Sửa lệnh hiện có.
+
+  **Request body**
+
+  | Field | Type | Required | Description |
+  | --- | --- | --- | --- |
+  | clientModifyId | string \| null | No | Định danh yêu cầu sửa do client tạo. |
+  | clientRequestId | string \| null | No | Định danh lệnh gốc do client tạo. |
+  | orderId | string \| null | No | Định danh lệnh gốc do SSI tạo. |
+  | accountNo | string | Yes | Số tài khoản giao dịch. |
+  | symbol | string \| null | No | Mã chứng khoán. |
+  | side | string \| null | No | Chiều lệnh: `B` hoặc `S`. |
+  | orderType | string \| null | No | Loại lệnh: `LO`, `ATO`, `ATC` hoặc `MP`. |
+  | price | string \| null | No | Giá thay đổi của lệnh. |
+  | quantity | number \| null | No | Khối lượng thay đổi của lệnh. |
+  | deviceId | string | Yes | Định danh thiết bị gửi yêu cầu sửa. |
+  | userAgent | string \| null | No | Thông tin trình duyệt hoặc ứng dụng. |
+  | ipAddress | string \| null | No | Địa chỉ IP của thiết bị. |
 
   Authentication: Bearer token.

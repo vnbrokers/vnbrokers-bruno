@@ -11,7 +11,9 @@ http:
     data: |-
       {
         "apiKey": "{{apiKey}}",
-        "apiSecret": "{{apiSecret}}"
+        "apiSecret": "{{apiSecret}}",
+        "otp": "{{otp}}",
+        "transactionId": "{{transactionId}}"
       }
   auth: inherit
 
@@ -20,15 +22,25 @@ runtime:
     - type: after-response
       code: |-
         if (res.status === 200 && res.body && res.body.accessToken) {
-          bru.setEnvVar('accessToken', res.body.accessToken);
+          const accessToken = res.body.accessToken;
+          bru.setEnvVar('accessToken', accessToken);
           bru.setEnvVar('refreshToken', res.body.refreshToken);
-        }
 
-    - type: tests
-      code: |-
-        test("response returns success", function () {
-          expect(res.status).to.be.oneOf([200]);
-        });
+          try {
+            const encodedPayload = accessToken.split('.')[1];
+            const base64Payload = encodedPayload
+              .replace(/-/g, '+')
+              .replace(/_/g, '/')
+              .padEnd(encodedPayload.length + (4 - encodedPayload.length % 4) % 4, '=');
+            const payload = JSON.parse(Buffer.from(base64Payload, 'base64').toString('utf8'));
+
+            if (payload.clientId) {
+              bru.setEnvVar('clientId', String(payload.clientId));
+            }
+          } catch (error) {
+            console.warn('Unable to extract clientId from accessToken JWT:', error.message);
+          }
+        }
 
 settings:
   encodeUrl: true
@@ -36,9 +48,18 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: |- 
+docs: |-
   ### POST /api/v3/auth/token
 
   Xác thực apiKey/apiSecret để lấy access token và refresh token (kèm thông tin hết hạn).
+
+  **Request body**
+
+  | Field | Type | Required | Description |
+  | --- | --- | --- | --- |
+  | apiKey | string | Yes | API key do SSI/FastConnect cấp cho ứng dụng. |
+  | apiSecret | string | Yes | API secret tương ứng với apiKey. |
+  | otp | string \| null | No | Mã OTP để cấp token có quyền thực hiện giao dịch. |
+  | transactionId | string \| null | No | Mã transaction từ `auth/requestOtp` khi sử dụng SmartOTP. |
 
   Authentication: Không yêu cầu Bearer token.

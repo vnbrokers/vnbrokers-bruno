@@ -17,11 +17,15 @@ variables:
   - secret: true
     name: otp
   - secret: true
+    name: transactionId
+  - secret: true
     name: accountNo
   - secret: true
     name: deviceId
-  - name: clientId
+  - name: orderId
     value: ""
+  - secret: true
+    name: clientId
   - name: symbol
     value: SSI
   - name: board

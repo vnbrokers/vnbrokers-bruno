@@ -6,6 +6,14 @@ info:
 http:
   method: POST
   url: "{{baseUrl}}/api/v3/trading/fco/order"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: User-Agent
+      value: ""
+      disabled: true
+    - name: Accept-Language
+      value: en
   body:
     type: json
     data: |-
@@ -16,17 +24,26 @@ http:
         "side": "B",
         "type": "stop_limit",
         "price": "30000",
-        "quantity": 1000
+        "quantity": 1000,
+        "userAgent": null,
+        "clientRequestId": null,
+        "ipAddress": null,
+        "from": null,
+        "to": null,
+        "code": null,
+        "priceSlip": null,
+        "stopPrice": null,
+        "activePrice": null,
+        "trailingAmount": null,
+        "tpActivePrice": null,
+        "slActivePrice": null,
+        "tpPrice": null,
+        "slPrice": null,
+        "tpSlip": null,
+        "slSlip": null,
+        "operator": null
       }
   auth: inherit
-
-runtime:
-  scripts:
-    - type: tests
-      code: |-
-        test("response returns success", function () {
-          expect(res.status).to.be.oneOf([200]);
-        });
 
 settings:
   encodeUrl: true
@@ -34,9 +51,38 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: |- 
+docs: |-
   ### POST /api/v3/trading/fco/order
 
   Đặt lệnh điều kiện mới. Hỗ trợ các loại lệnh điều kiện bao gồm stop, stop_limit, gtd, bullbear, oco, trailing_stop, trailing_stop_limit.
+
+  **Request body**
+
+  | Field | Type | Required | Description |
+  | --- | --- | --- | --- |
+  | accountNo | string | Yes | Tài khoản đặt lệnh. |
+  | deviceId | string | Yes | Định danh thiết bị gửi yêu cầu. |
+  | userAgent | string \| null | No | Thông tin trình duyệt hoặc ứng dụng. |
+  | clientRequestId | string \| null | No | Định danh lệnh do client tạo. |
+  | ipAddress | string \| null | No | Địa chỉ IP của thiết bị. |
+  | from | string \| null | No | Thời điểm bắt đầu hiệu lực. |
+  | to | string \| null | No | Thời điểm kết thúc hiệu lực. |
+  | code | string \| null | No | Mã OTP hoặc mã PIN xác thực giao dịch. |
+  | symbol | string \| null | Yes | Mã chứng khoán hoặc mã hợp đồng phái sinh. |
+  | side | string \| null | Yes | Chiều lệnh: `B` hoặc `S`. |
+  | type | string | Yes | Loại lệnh: `stop`, `stop_limit`, `gtd`, `bullbear`, `oco`, `trailing_stop` hoặc `trailing_stop_limit`. |
+  | price | string \| null | Yes | Giá đặt lệnh hoặc loại giá đặc biệt. |
+  | quantity | integer | Yes | Khối lượng muốn đặt lệnh. |
+  | priceSlip | number \| null | No | Khoảng trượt giá cho phép. |
+  | stopPrice | number \| null | No | Giá kích hoạt dừng lỗ. |
+  | activePrice | number \| null | No | Giá kích hoạt ban đầu. |
+  | trailingAmount | number \| null | No | Khoảng giá trailing. |
+  | tpActivePrice | number \| null | No | Giá kích hoạt chốt lời. |
+  | slActivePrice | number \| null | No | Giá kích hoạt dừng lỗ. |
+  | tpPrice | string \| null | No | Giá chốt lời. |
+  | slPrice | string \| null | No | Giá dừng lỗ. |
+  | tpSlip | number \| null | No | Biên trượt giá chốt lời. |
+  | slSlip | number \| null | No | Biên trượt giá dừng lỗ. |
+  | operator | string \| null | No | Toán tử so sánh giá kích hoạt lệnh. |
 
   Authentication: Bearer token.

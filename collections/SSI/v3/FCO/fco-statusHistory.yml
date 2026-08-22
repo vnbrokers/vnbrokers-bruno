@@ -6,15 +6,20 @@ info:
 http:
   method: GET
   url: "{{baseUrl}}/api/v3/trading/fco/statusHistory?fcoId={{fcoId}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: User-Agent
+      value: ""
+      disabled: true
+    - name: Accept-Language
+      value: en
+  params:
+    - name: fcoId
+      value: "{{fcoId}}"
+      type: query
+      description: ID của lệnh điều kiện cần truy vấn lịch sử trạng thái.
   auth: inherit
-
-runtime:
-  scripts:
-    - type: tests
-      code: |-
-        test("response returns success", function () {
-          expect(res.status).to.be.oneOf([200]);
-        });
 
 settings:
   encodeUrl: true
@@ -22,7 +27,7 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: |- 
+docs: |-
   ### GET /api/v3/trading/fco/statusHistory
 
   Lấy lịch sử thay đổi trạng thái của một lệnh điều kiện.

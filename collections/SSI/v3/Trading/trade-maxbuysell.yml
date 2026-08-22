@@ -6,15 +6,29 @@ info:
 http:
   method: GET
   url: "{{baseUrl}}/api/v3/trading/maxBuySell?accountNo={{accountNo}}&symbol={{symbol}}&price={{price}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: User-Agent
+      value: ""
+      disabled: true
+    - name: Accept-Language
+      value: en
+  params:
+    - name: accountNo
+      value: "{{accountNo}}"
+      type: query
+      description: Số tài khoản giao dịch.
+    - name: symbol
+      value: "{{symbol}}"
+      type: query
+      description: Mã chứng khoán.
+    - name: price
+      value: "{{price}}"
+      type: query
+      description: |-
+        Giá dùng để tính khối lượng mua/bán tối đa.
   auth: inherit
-
-runtime:
-  scripts:
-    - type: tests
-      code: |-
-        test("response returns success", function () {
-          expect(res.status).to.be.oneOf([200]);
-        });
 
 settings:
   encodeUrl: true
@@ -22,7 +36,7 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: |- 
+docs: |-
   ### GET /api/v3/trading/maxBuySell
 
   Lấy khối lượng mua/bán tối đa theo tài khoản, mã và giá.

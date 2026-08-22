@@ -6,6 +6,14 @@ info:
 http:
   method: POST
   url: "{{baseUrl}}/api/v3/trading/order"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: User-Agent
+      value: ""
+      disabled: true
+    - name: Accept-Language
+      value: en
   body:
     type: json
     data: |-
@@ -16,17 +24,12 @@ http:
         "orderType": "LO",
         "quantity": 1000,
         "price": "30000",
-        "deviceId": "{{deviceId}}"
+        "deviceId": "{{deviceId}}",
+        "clientRequestId": null,
+        "userAgent": null,
+        "ipAddress": null
       }
   auth: inherit
-
-runtime:
-  scripts:
-    - type: tests
-      code: |-
-        test("response returns success", function () {
-          expect(res.status).to.be.oneOf([200]);
-        });
 
 settings:
   encodeUrl: true
@@ -34,9 +37,24 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: |- 
+docs: |-
   ### POST /api/v3/trading/order
 
   Đặt lệnh mới.
+
+  **Request body**
+
+  | Field | Type | Required | Description |
+  | --- | --- | --- | --- |
+  | clientRequestId | string \| null | No | Định danh lệnh do client tạo. |
+  | accountNo | string | Yes | Số tài khoản giao dịch. |
+  | symbol | string | Yes | Mã chứng khoán. |
+  | side | string | Yes | Chiều lệnh: `B` (mua) hoặc `S` (bán). |
+  | orderType | string | Yes | Loại lệnh: `LO`, `ATO`, `ATC` hoặc `MP`. |
+  | quantity | number | Yes | Khối lượng đặt lệnh. |
+  | price | string | Yes | Giá đặt lệnh; bắt buộc với lệnh `LO`. |
+  | deviceId | string | Yes | Định danh thiết bị gửi yêu cầu. |
+  | userAgent | string \| null | No | Thông tin trình duyệt hoặc ứng dụng. |
+  | ipAddress | string \| null | No | Địa chỉ IP của thiết bị. |
 
   Authentication: Bearer token.

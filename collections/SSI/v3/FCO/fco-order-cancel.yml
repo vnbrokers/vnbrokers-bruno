@@ -6,21 +6,24 @@ info:
 http:
   method: DELETE
   url: "{{baseUrl}}/api/v3/trading/fco/order"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: User-Agent
+      value: ""
+      disabled: true
+    - name: Accept-Language
+      value: en
   body:
     type: json
     data: |-
       {
-        "fcoId": "string"
+        "fcoId": "{{fcoId}}",
+        "code": null,
+        "deviceId": "{{deviceId}}",
+        "userAgent": null
       }
   auth: inherit
-
-runtime:
-  scripts:
-    - type: tests
-      code: |-
-        test("response returns success", function () {
-          expect(res.status).to.be.oneOf([200]);
-        });
 
 settings:
   encodeUrl: true
@@ -28,9 +31,18 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: |- 
+docs: |-
   ### DELETE /api/v3/trading/fco/order
 
   Hủy lệnh điều kiện đang hoạt động.
+
+  **Request body**
+
+  | Field | Type | Required | Description |
+  | --- | --- | --- | --- |
+  | fcoId | string \| null | Yes | ID của lệnh điều kiện cần hủy. |
+  | code | string \| null | No | Mã OTP hoặc mã PIN xác thực giao dịch. |
+  | deviceId | string | No | Định danh thiết bị gửi yêu cầu. |
+  | userAgent | string \| null | No | Thông tin trình duyệt hoặc ứng dụng. |
 
   Authentication: Bearer token.

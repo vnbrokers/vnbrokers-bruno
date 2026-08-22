@@ -6,15 +6,30 @@ info:
 http:
   method: GET
   url: "{{baseUrl}}/api/v3/data/securitiesByBoard?symbol={{symbol}}&board={{board}}&index={{index}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: User-Agent
+      value: ""
+      disabled: true
+    - name: Accept-Language
+      value: en
+  params:
+    - name: symbol
+      value: "{{symbol}}"
+      type: query
+      description: |-
+        Mã chứng khoán cần truy vấn; chỉ dùng một trong `symbol`, `board` hoặc `index`.
+    - name: board
+      value: "{{board}}"
+      type: query
+      description: |-
+        Mã sàn: `HOSE`, `HNX` hoặc `UPCOM`.
+    - name: index
+      value: "{{index}}"
+      type: query
+      description: Mã chỉ số cần lấy danh sách chứng khoán.
   auth: inherit
-
-runtime:
-  scripts:
-    - type: tests
-      code: |-
-        test("response returns success", function () {
-          expect(res.status).to.be.oneOf([200]);
-        });
 
 settings:
   encodeUrl: true

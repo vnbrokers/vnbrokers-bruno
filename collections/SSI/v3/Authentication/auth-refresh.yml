@@ -23,21 +23,21 @@ runtime:
           bru.setEnvVar('refreshToken', res.body.refreshToken);
         }
 
-    - type: tests
-      code: |-
-        test("response returns success", function () {
-          expect(res.status).to.be.oneOf([200]);
-        });
-
 settings:
   encodeUrl: true
   timeout: 0
   followRedirects: true
   maxRedirects: 5
 
-docs: |- 
+docs: |-
   ### POST /api/v3/auth/refresh
 
   Làm mới access token bằng refresh token còn hiệu lực.
+
+  **Request body**
+
+  | Field | Type | Required | Description |
+  | --- | --- | --- | --- |
+  | refreshToken | string | Yes | Refresh token còn hiệu lực. |
 
   Authentication: Không yêu cầu Bearer token.

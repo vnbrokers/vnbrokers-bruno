@@ -6,15 +6,47 @@ info:
 http:
   method: GET
   url: "{{baseUrl}}/api/v3/trading/orderBook?accountNo={{accountNo}}&from={{from}}&to={{to}}&symbol={{symbol}}&orderStatus={{orderStatus}}&pageSize={{pageSize}}&pageIndex={{pageIndex}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: User-Agent
+      value: ""
+      disabled: true
+    - name: Accept-Language
+      value: en
+  params:
+    - name: accountNo
+      value: "{{accountNo}}"
+      type: query
+      description: Số tài khoản giao dịch.
+    - name: from
+      value: "{{from}}"
+      type: query
+      description: |-
+        Ngày bắt đầu theo định dạng `YYYY/MM/DD`.
+    - name: to
+      value: "{{to}}"
+      type: query
+      description: |-
+        Ngày kết thúc theo định dạng `YYYY/MM/DD`.
+    - name: symbol
+      value: "{{symbol}}"
+      type: query
+      description: Mã chứng khoán cần lọc.
+    - name: orderStatus
+      value: "{{orderStatus}}"
+      type: query
+      description: Trạng thái lệnh cần lọc.
+    - name: pageSize
+      value: "{{pageSize}}"
+      type: query
+      description: Số lượng bản ghi mỗi trang. Mặc định là 10.
+    - name: pageIndex
+      value: "{{pageIndex}}"
+      type: query
+      description: |-
+        Chỉ số trang, bắt đầu từ 1. Mặc định là 1.
   auth: inherit
-
-runtime:
-  scripts:
-    - type: tests
-      code: |-
-        test("response returns success", function () {
-          expect(res.status).to.be.oneOf([200]);
-        });
 
 settings:
   encodeUrl: true
@@ -22,7 +54,7 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: |- 
+docs: |-
   ### GET /api/v3/trading/orderBook
 
   Lấy lịch sử sổ lệnh theo tài khoản và bộ lọc.

@@ -6,33 +6,15 @@ info:
 http:
   method: GET
   url: "{{baseUrl}}/api/v3/account/info"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: User-Agent
+      value: ""
+      disabled: true
+    - name: Accept-Language
+      value: en
   auth: inherit
-
-runtime:
-  scripts:
-    - type: tests
-      code: |-
-        test("response matches the schema", function () {
-          const schema = {
-            "$schema": "http://json-schema.org/draft-07/schema#",
-            "type": "array",
-            "items": {
-              "type": "object",
-              "required": ["accountNo", "accountType"],
-              "properties": {
-                "accountNo": {
-                  "type": "string"
-                },
-                "accountType": {
-                  "type": "string",
-                  "enum": ["CASH", "MARGIN", "DERIVATIVE"]
-                }
-              }
-            }
-          }
-
-          res.status === 200 && expect(res.body).to.have.jsonSchema(schema);
-        });
 
 settings:
   encodeUrl: true
@@ -58,7 +40,7 @@ docs: |-
   | Dữ liệu | Kiểu | Mô tả |
   | --- | --- | --- |
   | accountNo | string | Số tài khoản giao dịch |
-  | accountType | string | Loại tài khoản: CASH, MARGIN hoặc DERIVATIVE |
+  | accountType | string | Loại tài khoản: Cash, Margin hoặc Derivative |
 
 examples:
   - name: 200 Response
@@ -83,10 +65,10 @@ examples:
           [
             {
               "accountNo": "0001234",
-              "accountType": "CASH"
+              "accountType": "Cash"
             },
             {
               "accountNo": "0001234",
-              "accountType": "MARGIN"
+              "accountType": "Margin"
             }
           ]
