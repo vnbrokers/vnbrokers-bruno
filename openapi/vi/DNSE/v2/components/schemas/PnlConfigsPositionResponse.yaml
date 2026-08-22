@@ -7,7 +7,7 @@ properties:
   configs:
     type: object
     additionalProperties:
-      $ref: './PnlConfig.yaml'
+      $ref: "./PnlConfig.yaml"
   createdDate:
     type: string
   modifiedDate:

@@ -1,5 +1,5 @@
 allOf:
-  - $ref: '../common/EnvelopeBase.yaml'
+  - $ref: "../common/EnvelopeBase.yaml"
   - type: object
     required:
       - result
@@ -7,4 +7,4 @@ allOf:
       result:
         type: array
         items:
-          $ref: 'UserRight.yaml'
+          $ref: "UserRight.yaml"

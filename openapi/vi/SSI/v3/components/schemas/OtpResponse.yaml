@@ -11,5 +11,3 @@ properties:
     description: Thông báo kết quả xử lý.
     type: string
     example: Request OTP success
-
-

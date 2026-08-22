@@ -1,13 +1,13 @@
 allOf:
-  - $ref: '../common/EnvelopeBase.yaml'
+  - $ref: "../common/EnvelopeBase.yaml"
   - type: object
     required:
       - data
     properties:
       data:
         oneOf:
-          - $ref: 'FundAssetAllocation.yaml'
-          - type: 'null'
+          - $ref: "FundAssetAllocation.yaml"
+          - type: "null"
         description: |
           `FundAssetAllocation` object khi quỹ có dữ liệu phân bổ tài sản;
           `null` khi quỹ chưa có record phân bổ.

@@ -1,5 +1,5 @@
 allOf:
-  - $ref: '../common/EnvelopeBase.yaml'
+  - $ref: "../common/EnvelopeBase.yaml"
   - type: object
     required:
       - result
@@ -11,4 +11,4 @@ allOf:
           vừa đặt. Server vẫn trả về dưới dạng array để đồng nhất với
           modify / cancel.
         items:
-          $ref: 'OrderExecutionResult.yaml'
+          $ref: "OrderExecutionResult.yaml"

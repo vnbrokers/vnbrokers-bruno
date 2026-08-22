@@ -8,4 +8,4 @@ properties:
     type: array
     description: Mảng điểm NAV theo thời gian.
     items:
-      $ref: 'FundNavBenchmarkPoint.yaml'
+      $ref: "FundNavBenchmarkPoint.yaml"

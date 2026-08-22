@@ -30,46 +30,46 @@ get:
       required: false
       description: Lọc theo quốc gia. Bỏ qua để lấy sự kiện của mọi quốc gia hỗ trợ.
       schema:
-        $ref: '../../components/schemas/market/EconomicCountry.yaml'
+        $ref: "../../components/schemas/market/EconomicCountry.yaml"
   responses:
-    '200':
+    "200":
       description: Trả về `data` mảng các sự kiện kinh tế sắp diễn ra, sort `date` tăng dần.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/market/EconomicCalendarEventsResponse.yaml'
+            $ref: "../../components/schemas/market/EconomicCalendarEventsResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             data:
               - id: 1
-                date: '2026-04-25'
+                date: "2026-04-25"
                 country: United States
                 event: Fed Interest Rate Decision
-                actual: ''
+                actual: ""
                 previous: 5.25%
                 consensus: 5.50%
                 forecast: 5.50%
                 impact: 3
                 category: Interest Rate
               - id: 2
-                date: '2026-04-26'
+                date: "2026-04-26"
                 country: Vietnam
                 event: CPI MoM
-                actual: ''
+                actual: ""
                 previous: 0.2%
                 consensus: 0.3%
                 forecast: 0.3%
                 impact: 2
                 category: Inflation
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

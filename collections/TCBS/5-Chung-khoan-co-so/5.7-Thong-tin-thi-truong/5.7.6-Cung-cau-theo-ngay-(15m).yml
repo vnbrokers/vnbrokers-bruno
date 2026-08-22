@@ -13,14 +13,14 @@ http:
       type: path
       description: Mã cổ phiếu
     - name: timeWindow
-      value: '15'
+      value: "15"
       type: query
       description: |
         Khung thời gian tính bằng phút:
         - 15
         - 60
     - name: tWindow
-      value: '15'
+      value: "15"
       type: query
       description: |
         Khung thời gian tính bằng phút:

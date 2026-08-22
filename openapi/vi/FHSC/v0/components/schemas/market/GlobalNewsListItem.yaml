@@ -14,19 +14,19 @@ properties:
   description:
     type:
       - string
-      - 'null'
+      - "null"
     description: Tóm tắt ngắn (nullable).
   provider:
     type:
       - string
-      - 'null'
+      - "null"
     description: Tên nguồn / nhà cung cấp (nullable).
   published_at:
     type: string
     format: date-time
     description: Thời điểm xuất bản (ISO 8601).
   category:
-    $ref: 'GlobalNewsCategory.yaml'
+    $ref: "GlobalNewsCategory.yaml"
 required:
   - id
   - title

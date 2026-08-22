@@ -36,7 +36,6 @@ runtime:
     - type: after-response
       code: res.status === 200 && bru.setEnvVar("orderId", res.body.id)
 
-
     - type: tests
       code: |-
         test("response matches the schema", function () {

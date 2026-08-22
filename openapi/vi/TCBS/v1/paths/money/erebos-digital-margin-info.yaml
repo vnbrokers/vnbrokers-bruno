@@ -5,43 +5,37 @@
   "summary": "Tra cứu nợ"
   "description": "Lấy thông tin dư nợ margin (lịch sử khoản vay) của tiểu khoản."
   "parameters":
-    -
-      "name": "acctno"
+    - "name": "acctno"
       "in": "query"
       "required": true
       "description": "Số tiểu khoản."
       "schema":
         "type": "string"
-    -
-      "name": "fromdate"
+    - "name": "fromdate"
       "in": "query"
       "required": true
       "description": "Từ ngày (YYYY-MM-DD)."
       "schema":
         "type": "string"
-    -
-      "name": "toDate"
+    - "name": "toDate"
       "in": "query"
       "required": true
       "description": "Đến ngày (YYYY-MM-DD)."
       "schema":
         "type": "string"
-    -
-      "name": "page"
+    - "name": "page"
       "in": "query"
       "required": true
       "description": "Số trang."
       "schema":
         "type": "string"
-    -
-      "name": "size"
+    - "name": "size"
       "in": "query"
       "required": true
       "description": "Kích thước trang."
       "schema":
         "type": "string"
-    -
-      "name": "custodycd"
+    - "name": "custodycd"
       "in": "query"
       "required": true
       "description": "Mã tài khoản lưu ký."

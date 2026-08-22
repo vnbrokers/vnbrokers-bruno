@@ -5,8 +5,7 @@
   "summary": "Thông tin số dư tiền"
   "description": "Lấy thông tin số dư tiền của tiểu khoản."
   "parameters":
-    -
-      "name": "accountNo"
+    - "name": "accountNo"
       "in": "path"
       "required": true
       "description": "Số tiểu khoản."

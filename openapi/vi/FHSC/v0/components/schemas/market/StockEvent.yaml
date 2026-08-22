@@ -4,17 +4,17 @@ properties:
   id:
     type:
       - integer
-      - 'null'
+      - "null"
     description: Event ID.
   path:
     type:
       - string
-      - 'null'
+      - "null"
     description: Internal path/slug of the event.
   title:
     type:
       - string
-      - 'null'
+      - "null"
     description: Event title.
   stock:
     type: string
@@ -23,7 +23,7 @@ properties:
   body:
     type:
       - string
-      - 'null'
+      - "null"
     description: Event body / content.
   createdDate:
     type: string
@@ -32,35 +32,35 @@ properties:
   actionDate:
     type:
       - string
-      - 'null'
+      - "null"
     description: Date the corporate action takes effect.
   gdkhqDate:
     type:
       - string
-      - 'null'
+      - "null"
     description: Ex-rights date (ngày GDKHQ).
   eventType:
     type:
       - string
-      - 'null'
+      - "null"
     description: Event type code.
   eventTypeName:
     type:
       - string
-      - 'null'
+      - "null"
     description: Human-readable event type name.
   createdAt:
     type:
       - string
-      - 'null'
+      - "null"
     format: date-time
   updatedAt:
     type:
       - string
-      - 'null'
+      - "null"
     format: date-time
   url:
     type:
       - string
-      - 'null'
+      - "null"
     description: Full URL to the event detail page.

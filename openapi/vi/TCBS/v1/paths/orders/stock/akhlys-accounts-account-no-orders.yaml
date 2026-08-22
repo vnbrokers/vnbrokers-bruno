@@ -5,8 +5,7 @@
   "summary": "Đặt lệnh thường"
   "description": "Đặt lệnh thường trên thị trường cơ sở."
   "parameters":
-    -
-      "name": "accountNo"
+    - "name": "accountNo"
       "in": "path"
       "required": true
       "description": "Số tiểu khoản, ví dụ 0001170730."
@@ -40,16 +39,14 @@
           "properties":
             "execType":
               "allOf":
-                -
-                  "$ref": "../../../components/schemas/enums/StockOrderDirection.yaml"
+                - "$ref": "../../../components/schemas/enums/StockOrderDirection.yaml"
               "description": "Chiều giao dịch: NS = bán, NB = mua."
             "symbol":
               "type": "string"
               "description": "Mã chứng khoán, ví dụ VNM."
             "priceType":
               "allOf":
-                -
-                  "$ref": "../../../components/schemas/enums/StockPriceType.yaml"
+                - "$ref": "../../../components/schemas/enums/StockPriceType.yaml"
               "description": "Loại giá: LO, ATO, ATC, PLO, MP, MTL, MOK, MAK."
             "price":
               "type": "integer"

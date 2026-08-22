@@ -9,10 +9,10 @@ properties:
     type: string
     format: date
     description: Ngày diễn ra sự kiện, format `YYYY-MM-DD`.
-    example: '2026-04-25'
+    example: "2026-04-25"
   country:
     allOf:
-      - $ref: 'EconomicCountry.yaml'
+      - $ref: "EconomicCountry.yaml"
     description: Quốc gia của sự kiện.
   event:
     type: string

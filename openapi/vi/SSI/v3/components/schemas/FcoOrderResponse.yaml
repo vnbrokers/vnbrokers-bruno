@@ -3,5 +3,3 @@ properties:
   fcoId:
     description: ID của lệnh điều kiện.
     type: string
-
-

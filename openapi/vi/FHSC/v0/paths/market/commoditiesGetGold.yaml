@@ -10,14 +10,14 @@ get:
     Field `change_percent`, `buy_value_change_percent`, `sell_value_change_percent`
     so với phiên gần nhất.
   responses:
-    '200':
+    "200":
       description: Trả về `data` mảng các record giá vàng — mỗi record là 1 loại / nguồn vàng kèm giá mua / bán và % thay đổi.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/market/GoldResponse.yaml'
+            $ref: "../../components/schemas/market/GoldResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             data:
               - index: SJC_GOLD
@@ -27,21 +27,21 @@ get:
                 sell_value: 94500000
                 usd_value: 2350
                 vnd_value: 94500000
-                date: '2024-04-18'
+                date: "2024-04-18"
                 provider: SJC
                 provider_icon: null
-                updated_at: '2024-04-18T10:00:00Z'
+                updated_at: "2024-04-18T10:00:00Z"
                 change_percent: 0.42
                 buy_value_change_percent: 0.35
                 sell_value_change_percent: 0.48
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

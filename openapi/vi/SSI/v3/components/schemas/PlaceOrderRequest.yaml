@@ -12,7 +12,7 @@ properties:
     description: Định danh lệnh do client tạo ra, dùng để đối chiếu trong các phản hồi sau này. Trường này không bắt buộc nhưng nếu có thì nên đảm bảo tính duy nhất để tránh nhầm lẫn khi xử lý phản hồi. Khi để trống thì hệ thống sẽ tự sinh định danh lệnh cho khách hàng và trả về response & streaming.
     type:
       - string
-      - 'null'
+      - "null"
   accountNo:
     description: Số tài khoản giao dịch.
     type: string
@@ -46,9 +46,9 @@ properties:
     description: Thông tin về trình duyệt hoặc ứng dụng gửi yêu cầu.
     type:
       - string
-      - 'null'
+      - "null"
   ipAddress:
     description: Địa chỉ IP của thiết bị gửi yêu cầu.
     type:
       - string
-      - 'null'
+      - "null"

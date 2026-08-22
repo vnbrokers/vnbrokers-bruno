@@ -5,8 +5,7 @@
   "summary": "Lấy sức mua"
   "description": "Lấy sức mua của tiểu khoản."
   "parameters":
-    -
-      "name": "accountNo"
+    - "name": "accountNo"
       "in": "path"
       "required": true
       "description": "Số tiểu khoản."

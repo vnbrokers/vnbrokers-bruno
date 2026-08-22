@@ -5,8 +5,7 @@
   "summary": "Hạn mức margin"
   "description": "Lấy thông tin hạn mức margin của khách hàng theo số tài khoản lưu ký."
   "parameters":
-    -
-      "name": "custodyId"
+    - "name": "custodyId"
       "in": "path"
       "required": true
       "description": "Mã tài khoản lưu ký."

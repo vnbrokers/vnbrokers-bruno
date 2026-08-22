@@ -67,4 +67,3 @@ properties:
           description: Các tham số của lệnh điều kiện.
           type: object
           additionalProperties: true
-

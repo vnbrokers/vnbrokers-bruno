@@ -5,15 +5,13 @@
   "summary": "Thông tin tiểu khoản"
   "description": "Lấy thông tin hồ sơ của một tài khoản lưu ký theo danh sách trường yêu cầu."
   "parameters":
-    -
-      "name": "custodyCode"
+    - "name": "custodyCode"
       "in": "path"
       "required": true
       "description": "Số tài khoản lưu ký, ví dụ: 105C334455."
       "schema":
         "type": "string"
-    -
-      "name": "fields"
+    - "name": "fields"
       "in": "query"
       "required": true
       "description": "Danh sách thông tin cần lấy, ví dụ: basicInfo, bankSubAccounts."

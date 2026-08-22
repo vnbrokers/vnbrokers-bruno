@@ -7,4 +7,4 @@ description: |
   tuỳ mục đích.
 schema:
   type: string
-  example: '0001234567'
+  example: "0001234567"

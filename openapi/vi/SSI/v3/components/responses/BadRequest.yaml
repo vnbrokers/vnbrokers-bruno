@@ -2,4 +2,4 @@ description: Yêu cầu không hợp lệ.
 content:
   application/json:
     schema:
-      $ref: '../schemas/ErrorResponse.yaml'
+      $ref: "../schemas/ErrorResponse.yaml"

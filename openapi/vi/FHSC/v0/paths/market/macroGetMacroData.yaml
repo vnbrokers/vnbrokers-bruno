@@ -12,48 +12,48 @@ get:
       required: true
       description: Loại chỉ số vĩ mô.
       schema:
-        $ref: '../../components/schemas/market/MacroType.yaml'
+        $ref: "../../components/schemas/market/MacroType.yaml"
     - name: country
       in: query
       required: true
       description: Mã quốc gia.
       schema:
-        $ref: '../../components/schemas/market/Country.yaml'
+        $ref: "../../components/schemas/market/Country.yaml"
     - name: period
       in: query
       required: false
       description: Khoảng thời gian lọc.
       schema:
-        $ref: '../../components/schemas/market/Period.yaml'
+        $ref: "../../components/schemas/market/Period.yaml"
   responses:
-    '200':
+    "200":
       description: Trả về `data` mảng các điểm dữ liệu vĩ mô theo tháng cho `type` + `country` đã chọn.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/market/MacroDataResponse.yaml'
+            $ref: "../../components/schemas/market/MacroDataResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             data:
               - type: CPI
                 country: VN
                 month: 2024-02
                 value: 3.45
-                date: '2024-02-29'
+                date: "2024-02-29"
               - type: CPI
                 country: VN
                 month: 2024-03
                 value: 3.97
-                date: '2024-03-31'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+                date: "2024-03-31"
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

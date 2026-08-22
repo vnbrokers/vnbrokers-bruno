@@ -7,17 +7,17 @@ properties:
     description: Định danh hủy lệnh do client tạo ra, dùng để đối chiếu trong các phản hồi sau này. Trường này không bắt buộc nhưng nếu có thì nên đảm bảo tính duy nhất để tránh nhầm lẫn khi xử lý phản hồi. Khi để trống thì hệ thống sẽ tự sinh định danh hủy lệnh cho khách hàng và trả về response & streaming.
     type:
       - string
-      - 'null'
+      - "null"
   clientRequestId:
     description: Định danh lệnh gốc do client tạo ra khi đặt lệnh. Khi để trống thì hệ thống sẽ không đối chiếu dựa trên định danh lệnh gốc mà sẽ dựa vào `orderId` để xác định lệnh cần hủy.
     type:
       - string
-      - 'null'
+      - "null"
   orderId:
     description: Định danh lệnh gốc sinh ra bởi hệ thống SSI. Đây là một trong hai trường (cùng với `clientRequestId`) được sử dụng để xác định lệnh cần hủy. Nếu cả hai trường đều có giá trị, hệ thống sẽ ưu tiên đối chiếu dựa trên `clientRequestId`. Nếu chỉ có `orderId` có giá trị thì hệ thống sẽ đối chiếu dựa trên `orderId`. Nếu cả hai trường đều không có giá trị thì yêu cầu hủy lệnh sẽ bị từ chối do thiếu thông tin xác định lệnh cần hủy.
     type:
       - string
-      - 'null'
+      - "null"
   accountNo:
     description: Số tài khoản giao dịch.
     type: string
@@ -28,9 +28,9 @@ properties:
     description: Thông tin về trình duyệt hoặc ứng dụng gửi yêu cầu hủy lệnh.
     type:
       - string
-      - 'null'
+      - "null"
   ipAddress:
     description: Địa chỉ IP của thiết bị gửi yêu cầu hủy lệnh.
     type:
       - string
-      - 'null'
+      - "null"

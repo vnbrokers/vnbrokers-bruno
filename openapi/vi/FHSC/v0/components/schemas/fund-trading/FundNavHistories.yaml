@@ -7,7 +7,7 @@ properties:
     type: array
     description: Mảng điểm NAV theo thời gian.
     items:
-      $ref: 'FundNavHistoryPoint.yaml'
+      $ref: "FundNavHistoryPoint.yaml"
   benchmark_name:
     type: string
     description: Tên benchmark (ví dụ `VN-INDEX` cho quỹ cổ phiếu).

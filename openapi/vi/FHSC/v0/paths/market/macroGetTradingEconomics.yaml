@@ -20,13 +20,13 @@ get:
       required: true
       description: Tên quốc gia (full name). Bắt buộc.
       schema:
-        $ref: '../../components/schemas/market/EconomicCountry.yaml'
+        $ref: "../../components/schemas/market/EconomicCountry.yaml"
     - name: category
       in: query
       required: false
       description: Lọc theo nhóm chỉ số (optional).
       schema:
-        $ref: '../../components/schemas/market/TradingEconomicsCategory.yaml'
+        $ref: "../../components/schemas/market/TradingEconomicsCategory.yaml"
     - name: year
       in: query
       required: false
@@ -37,14 +37,14 @@ get:
         maximum: 2100
         example: 2024
   responses:
-    '200':
+    "200":
       description: Trả về `data` mảng các điểm dữ liệu chỉ số kinh tế, sort `year DESC, month DESC`.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/market/TradingEconomicsResponse.yaml'
+            $ref: "../../components/schemas/market/TradingEconomicsResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             data:
               - indicator: Inflation Rate
@@ -54,7 +54,7 @@ get:
                 previousValue: 3.2
                 year: 2024
                 month: 3
-                unit: '%'
+                unit: "%"
               - indicator: Inflation Rate
                 country: United States
                 category: Prices
@@ -62,15 +62,15 @@ get:
                 previousValue: 3.1
                 year: 2024
                 month: 2
-                unit: '%'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+                unit: "%"
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

@@ -5,15 +5,13 @@
   "summary": "Gói lãi suất margin"
   "description": "Lấy các gói lãi suất margin khả dụng của tài khoản."
   "parameters":
-    -
-      "name": "accountNo"
+    - "name": "accountNo"
       "in": "path"
       "required": true
       "description": "Số tiểu khoản margin."
       "schema":
         "type": "string"
-    -
-      "name": "productId"
+    - "name": "productId"
       "in": "query"
       "required": false
       "description": "Product ID. Nếu bỏ qua, hệ thống tự xác định từ tài khoản."

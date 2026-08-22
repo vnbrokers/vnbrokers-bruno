@@ -12,10 +12,10 @@ properties:
   quarter:
     type:
       - integer
-      - 'null'
+      - "null"
     description: Present only for quarterly period (1–4).
     example: 2
 additionalProperties:
   type:
     - number
-    - 'null'
+    - "null"

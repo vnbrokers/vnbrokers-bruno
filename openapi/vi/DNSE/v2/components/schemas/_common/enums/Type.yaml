@@ -6,6 +6,6 @@ description: |-
   - `DERIVATIVE`: Phái sinh
   - `INDEX`: Chỉ số
 enum:
-  - 'STOCK'
-  - 'DERIVATIVE'
-  - 'INDEX'
+  - "STOCK"
+  - "DERIVATIVE"
+  - "INDEX"

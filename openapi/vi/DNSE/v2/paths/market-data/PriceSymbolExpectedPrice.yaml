@@ -19,7 +19,7 @@ get:
       required: true
       description: Mã bảng giao dịch
       schema:
-        $ref: '../../components/schemas/_common/enums/BoardId.yaml'
+        $ref: "../../components/schemas/_common/enums/BoardId.yaml"
     - name: from
       in: query
       required: true
@@ -41,7 +41,7 @@ get:
       schema:
         type: string
   responses:
-    '200':
+    "200":
       description: OK
       content:
         application/json:
@@ -54,9 +54,9 @@ get:
                   type: object
                   properties:
                     marketId:
-                      $ref: '../../components/schemas/_common/enums/MarketId.yaml'
+                      $ref: "../../components/schemas/_common/enums/MarketId.yaml"
                     boardId:
-                      $ref: '../../components/schemas/_common/enums/BoardId.yaml'
+                      $ref: "../../components/schemas/_common/enums/BoardId.yaml"
                     isin:
                       type: string
                     symbol:
@@ -72,7 +72,7 @@ get:
               nextPageToken:
                 type: string
                 nullable: true
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"

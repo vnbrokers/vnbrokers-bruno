@@ -45,21 +45,21 @@ get:
         format: int32
       example: 10
   responses:
-    '200':
+    "200":
       description: OK
       headers:
         Content-Length:
-          $ref: '../../components/headers/ContentLength.yaml'
+          $ref: "../../components/headers/ContentLength.yaml"
         Date:
-          $ref: '../../components/headers/Date.yaml'
+          $ref: "../../components/headers/Date.yaml"
         Vary:
-          $ref: '../../components/headers/Vary.yaml'
+          $ref: "../../components/headers/Vary.yaml"
         X-Ratelimit-Limit:
-          $ref: '../../components/headers/XRateLimitLimit.yaml'
+          $ref: "../../components/headers/XRateLimitLimit.yaml"
         X-Ratelimit-Remaining:
-          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+          $ref: "../../components/headers/XRateLimitRemaining.yaml"
         X-Ratelimit-Reset:
-          $ref: '../../components/headers/XRateLimitReset.yaml'
+          $ref: "../../components/headers/XRateLimitReset.yaml"
         X-Tyk-Api-Expires:
           schema:
             type: string
@@ -74,7 +74,7 @@ get:
                 example:
                   - id: 141
                     side: NB
-                    accountNo: '0001179019'
+                    accountNo: "0001179019"
                     symbol: BCM
                     price: 51200
                     priceSecure: 51200
@@ -88,9 +88,9 @@ get:
                     orderStatus: New
                     loanPackageId: 7937
                     marketType: STOCK
-                    transDate: '2026-03-16'
-                    createdDate: '2026-03-24T03:15:22.226297778Z'
-                    modifiedDate: '2026-03-24T03:15:22.358568266Z'
+                    transDate: "2026-03-16"
+                    createdDate: "2026-03-24T03:15:22.226297778Z"
+                    modifiedDate: "2026-03-24T03:15:22.358568266Z"
                 items:
                   type: object
                   properties:
@@ -108,7 +108,7 @@ get:
                         NS: Bán
                     accountNo:
                       type: string
-                      example: '0001179019'
+                      example: "0001179019"
                       description: Số tiểu khoản
                     symbol:
                       type: string
@@ -205,17 +205,17 @@ get:
                         BOND: Lệnh trái phiếu
                     transDate:
                       type: string
-                      example: '2026-03-16'
+                      example: "2026-03-16"
                       description: Ngày giao dịch
                     createdDate:
                       type: string
                       format: date-time
-                      example: '2026-03-24T03:15:22.226297778Z'
+                      example: "2026-03-24T03:15:22.226297778Z"
                       description: Thời điểm tạo
                     modifiedDate:
                       type: string
                       format: date-time
-                      example: '2026-03-24T03:15:22.358568266Z'
+                      example: "2026-03-24T03:15:22.358568266Z"
                       description: Thời điểm cập nhật
                 description: Danh sách lệnh giao dịch
               pageIndex:
@@ -230,7 +230,7 @@ get:
             orders:
               - id: 141
                 side: NB
-                accountNo: '0001179019'
+                accountNo: "0001179019"
                 symbol: BCM
                 price: 51200
                 priceSecure: 51200
@@ -244,13 +244,13 @@ get:
                 orderStatus: New
                 loanPackageId: 7937
                 marketType: STOCK
-                transDate: '2026-03-16'
-                createdDate: '2026-03-24T03:15:22.226297778Z'
-                modifiedDate: '2026-03-24T03:15:22.358568266Z'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+                transDate: "2026-03-16"
+                createdDate: "2026-03-24T03:15:22.226297778Z"
+                modifiedDate: "2026-03-24T03:15:22.358568266Z"
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
 post:
   operationId: postAccountsAccountNoOrders
   security:
@@ -263,13 +263,13 @@ post:
     - name: marketType
       in: query
       required: true
-      description: 'Loại thị trường: STOCK, DERIVATIVE hoặc BOND.'
+      description: "Loại thị trường: STOCK, DERIVATIVE hoặc BOND."
       schema:
         type: string
         enum: [STOCK, DERIVATIVE, BOND]
     - name: orderCategory
       in: query
-      description: 'Phân loại lệnh: NORMAL, STOP hoặc OCO.'
+      description: "Phân loại lệnh: NORMAL, STOP hoặc OCO."
       schema:
         type: string
         enum: [NORMAL, STOP, OCO]
@@ -294,7 +294,7 @@ post:
             symbol:
               type: string
   responses:
-    '200':
+    "200":
       description: OK
       content:
         application/json:
@@ -337,10 +337,10 @@ post:
               modifiedDate:
                 type: string
                 format: date-time
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   tags:
     - Tài khoản
 parameters:
@@ -351,4 +351,4 @@ parameters:
     deprecated: false
     schema:
       type: string
-    example: '0001179019'
+    example: "0001179019"

@@ -109,5 +109,3 @@ docs: |-
   |X-Aux-Date|header|string|true|Thời gian thực hiện yêu cầu|
   |X-Signature|header|string|true|Chữ ký xác thực yêu cầu|
   |version|header|string(date)|false|Phiên bản API |
-
-  

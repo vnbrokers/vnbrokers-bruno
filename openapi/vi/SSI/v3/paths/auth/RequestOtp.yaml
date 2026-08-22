@@ -21,16 +21,16 @@ post:
               type: string
               description: API secret tương ứng với apiKey.
   responses:
-    '200':
+    "200":
       description: Thành công.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/OtpResponse.yaml'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            $ref: "../../components/schemas/OtpResponse.yaml"
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   security: []

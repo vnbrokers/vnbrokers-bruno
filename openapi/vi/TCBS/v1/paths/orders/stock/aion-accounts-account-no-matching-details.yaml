@@ -5,8 +5,7 @@
   "summary": "Thông tin khớp lệnh"
   "description": "Lấy thông tin khớp lệnh của tiểu khoản."
   "parameters":
-    -
-      "name": "accountNo"
+    - "name": "accountNo"
       "in": "path"
       "required": true
       "description": "Số tiểu khoản."

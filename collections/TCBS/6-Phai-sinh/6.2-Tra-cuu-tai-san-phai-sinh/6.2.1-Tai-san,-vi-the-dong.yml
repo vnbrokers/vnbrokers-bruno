@@ -22,11 +22,11 @@ http:
       description: Mã chứng khoán
       disabled: true
     - name: pageNo
-      value: '1'
+      value: "1"
       type: query
       description: Số trang
     - name: pageSize
-      value: '20'
+      value: "20"
       type: query
       description: Số dòng
   auth: inherit

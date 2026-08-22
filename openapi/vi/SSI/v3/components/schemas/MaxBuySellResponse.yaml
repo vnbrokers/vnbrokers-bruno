@@ -19,5 +19,3 @@ properties:
       purchasingPower:
         description: Sức mua.
         type: number
-
-

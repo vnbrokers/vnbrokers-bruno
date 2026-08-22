@@ -7,22 +7,22 @@ properties:
     example: Inflation Rate
   country:
     allOf:
-      - $ref: 'EconomicCountry.yaml'
+      - $ref: "EconomicCountry.yaml"
     description: Tên quốc gia (full name).
   category:
     allOf:
-      - $ref: 'TradingEconomicsCategory.yaml'
+      - $ref: "TradingEconomicsCategory.yaml"
     description: Nhóm chỉ số.
   lastValue:
     type:
       - number
-      - 'null'
+      - "null"
     description: Giá trị kỳ gần nhất. `null` nếu nguồn chưa có dữ liệu.
     example: 0.1
   previousValue:
     type:
       - number
-      - 'null'
+      - "null"
     description: Giá trị kỳ trước đó. `null` nếu nguồn chưa có dữ liệu.
     example: -0.1
   year:
@@ -38,4 +38,4 @@ properties:
   unit:
     type: string
     description: Đơn vị đo lường (ví dụ `%`, `USD`, `points`).
-    example: '%'
+    example: "%"

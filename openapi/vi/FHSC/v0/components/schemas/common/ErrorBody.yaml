@@ -4,7 +4,7 @@ properties:
   error_code:
     type: string
     description: Mã lỗi khác `"0"` (ví dụ `AUTH_SIGNATURE_INVALID`, `RATE_LIMIT_EXCEEDED`, …).
-    example: '400'
+    example: "400"
   message:
     type: string
     description: Thông điệp lỗi (tiếng Anh, từ server).

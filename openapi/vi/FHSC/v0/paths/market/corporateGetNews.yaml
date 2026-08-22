@@ -23,22 +23,22 @@ get:
       schema:
         type: string
         example: VNM,VIC,HPG
-    - $ref: '../../components/parameters/FromDateNews.yaml'
-    - $ref: '../../components/parameters/ToDateNews.yaml'
+    - $ref: "../../components/parameters/FromDateNews.yaml"
+    - $ref: "../../components/parameters/ToDateNews.yaml"
   responses:
-    '200':
+    "200":
       description: Trả về `result` là mảng các sự kiện doanh nghiệp / tin tức stock matching filter; `[]` khi không có kết quả.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/market/StockEventsResponse.yaml'
+            $ref: "../../components/schemas/market/StockEventsResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             result:
               - id: 1001
                 path: vnm-co-tuc-2024
-                title: 'VNM: Chi tra co tuc bang tien'
+                title: "VNM: Chi tra co tuc bang tien"
                 stock: VNM
                 body: Thong bao chi tra co tuc...
                 createdDate: 15/07 - 08:30
@@ -46,17 +46,17 @@ get:
                 gdkhqDate: 20/07/2024
                 eventType: CASH_DIVIDEND
                 eventTypeName: Cash dividend
-                createdAt: '2024-07-15T08:30:00Z'
-                updatedAt: '2024-07-15T08:30:00Z'
+                createdAt: "2024-07-15T08:30:00Z"
+                updatedAt: "2024-07-15T08:30:00Z"
                 url: https://fhsc.com.vn/news/vnm-co-tuc-2024
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

@@ -20,16 +20,16 @@ get:
         type: string
         enum: [STOCK, DERIVATIVE]
   responses:
-    '200':
+    "200":
       description: OK
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/PnlConfigsPositionResponse.yaml'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            $ref: "../../components/schemas/PnlConfigsPositionResponse.yaml"
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
 
 post:
   operationId: postAccountsPositionsPositionIdPnlConfigs
@@ -55,17 +55,17 @@ post:
           type: object
           properties:
             takeProfit:
-              $ref: '../../components/schemas/PnlConfig.yaml'
+              $ref: "../../components/schemas/PnlConfig.yaml"
             stopLoss:
-              $ref: '../../components/schemas/PnlConfig.yaml'
+              $ref: "../../components/schemas/PnlConfig.yaml"
   responses:
-    '200':
+    "200":
       description: OK
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/PnlConfigsPositionResponse.yaml'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            $ref: "../../components/schemas/PnlConfigsPositionResponse.yaml"
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"

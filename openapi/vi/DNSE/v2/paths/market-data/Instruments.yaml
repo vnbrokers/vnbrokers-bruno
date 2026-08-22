@@ -24,7 +24,7 @@ get:
         - DVX: Phái sinh
         - HCX: Trái phiếu doanh nghiệp
       schema:
-        $ref: '../../components/schemas/_common/enums/MarketId.yaml'
+        $ref: "../../components/schemas/_common/enums/MarketId.yaml"
       example: STO
     - name: securityGroupId
       in: query
@@ -36,7 +36,7 @@ get:
         - FU: Hợp đồng tương lai
         - BS: Trái phiếu
       schema:
-        $ref: '../../components/schemas/_common/enums/SecurityGroupId.yaml'
+        $ref: "../../components/schemas/_common/enums/SecurityGroupId.yaml"
       example: ST
     - name: indexName
       in: query
@@ -46,7 +46,7 @@ get:
         - VN100: Top 100 cổ phiếu sàn HOSE
         - HNX30: Top 30 cổ phiếu sàn HNX
       schema:
-        $ref: '../../components/schemas/_common/enums/MarketIndex.yaml'
+        $ref: "../../components/schemas/_common/enums/MarketIndex.yaml"
       example: VN30
     - name: limit
       in: query
@@ -61,35 +61,35 @@ get:
         type: integer
       example: 1
   responses:
-    '200':
+    "200":
       description: OK
       headers:
         Access-Control-Allow-Credentials:
-          $ref: '../../components/headers/AccessControlAllowCredentials.yaml'
+          $ref: "../../components/headers/AccessControlAllowCredentials.yaml"
         Content-Length:
-          $ref: '../../components/headers/ContentLength.yaml'
+          $ref: "../../components/headers/ContentLength.yaml"
         Date:
-          $ref: '../../components/headers/Date.yaml'
+          $ref: "../../components/headers/Date.yaml"
         Vary:
-          $ref: '../../components/headers/Vary.yaml'
+          $ref: "../../components/headers/Vary.yaml"
         X-Content-Type-Options:
-          $ref: '../../components/headers/XContentTypeOptions.yaml'
+          $ref: "../../components/headers/XContentTypeOptions.yaml"
         X-Frame-Options:
-          $ref: '../../components/headers/XFrameOptions.yaml'
+          $ref: "../../components/headers/XFrameOptions.yaml"
         X-Ratelimit-Limit:
-          $ref: '../../components/headers/XRateLimitLimit.yaml'
+          $ref: "../../components/headers/XRateLimitLimit.yaml"
         X-Ratelimit-Remaining:
-          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+          $ref: "../../components/headers/XRateLimitRemaining.yaml"
         X-Ratelimit-Reset:
-          $ref: '../../components/headers/XRateLimitReset.yaml'
+          $ref: "../../components/headers/XRateLimitReset.yaml"
         X-Request-Id:
-          $ref: '../../components/headers/XRequestId.yaml'
+          $ref: "../../components/headers/XRequestId.yaml"
         X-Tyk-Api-Expires:
           schema:
             type: string
           example: Thu, 02 Jan 3000 15:04:00 UTC
         X-Xss-Protection:
-          $ref: '../../components/headers/XXssProtection.yaml'
+          $ref: "../../components/headers/XXssProtection.yaml"
       content:
         application/json:
           schema:
@@ -102,8 +102,8 @@ get:
                   - symbol: ACB
                     marketId: STO
                     securityGroupId: ST
-                    symbolType: ''
-                    listedDate: '2020-12-09'
+                    symbolType: ""
+                    listedDate: "2020-12-09"
                     shortName: Ngân hàng Á Châu
                     name: Ngân hàng TMCP Á Châu
                     indexName:
@@ -138,7 +138,7 @@ get:
                         - BS: Trái phiếu
                     symbolType:
                       type: string
-                      example: ''
+                      example: ""
                       description: >-
                         Phân loại mã hợp đồng phái sinh theo thời gian đáo
                         hạn (áp dụng cho DERIVATIVE)
@@ -152,7 +152,7 @@ get:
                         - VN30F2Q: HĐTL chỉ số VN30 2 quý
                     listedDate:
                       type: string
-                      example: '2020-12-09'
+                      example: "2020-12-09"
                       description: Ngày niêm yết
                     shortName:
                       type: string
@@ -191,8 +191,8 @@ get:
               - symbol: ACB
                 marketId: STO
                 securityGroupId: ST
-                symbolType: ''
-                listedDate: '2020-12-09'
+                symbolType: ""
+                listedDate: "2020-12-09"
                 shortName: Ngân hàng Á Châu
                 name: Ngân hàng TMCP Á Châu
                 indexName:
@@ -201,8 +201,8 @@ get:
               - symbol: DSE
                 marketId: STO
                 securityGroupId: ST
-                symbolType: ''
-                listedDate: '2024-07-01'
+                symbolType: ""
+                listedDate: "2024-07-01"
                 shortName: Chứng khoán DNSE
                 name: CTCP Chứng khoán DNSE
                 indexName:
@@ -210,8 +210,8 @@ get:
               - symbol: HUT
                 marketId: STX
                 securityGroupId: ST
-                symbolType: ''
-                listedDate: '2008-04-11'
+                symbolType: ""
+                listedDate: "2008-04-11"
                 shortName: CTCP TASCO
                 name: CTCP Tasco
                 indexName:
@@ -219,8 +219,8 @@ get:
               - symbol: SHS
                 marketId: STX
                 securityGroupId: ST
-                symbolType: ''
-                listedDate: '2009-06-25'
+                symbolType: ""
+                listedDate: "2009-06-25"
                 shortName: Chứng khoán SG HN
                 name: CTCP Chứng khoán Sài Gòn - Hà Nội
                 indexName:
@@ -228,8 +228,8 @@ get:
               - symbol: SSI
                 marketId: STO
                 securityGroupId: ST
-                symbolType: ''
-                listedDate: '2007-10-29'
+                symbolType: ""
+                listedDate: "2007-10-29"
                 shortName: Chứng khoán SSI
                 name: CTCP Chứng khoán SSI
                 indexName:
@@ -238,9 +238,9 @@ get:
             total: 5
             page: 1
             pageSize: 100
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   tags:
     - Dữ liệu thị trường

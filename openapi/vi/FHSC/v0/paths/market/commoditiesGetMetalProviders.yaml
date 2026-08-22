@@ -8,14 +8,14 @@ get:
     cung cấp trong 1 call duy nhất. Phân biệt vàng / bạc qua field `index`
     (`*_GOLD` vs `*_SILVER`).
   responses:
-    '200':
+    "200":
       description: Trả về `data` mảng các record vàng/bạc của mọi nhà cung cấp; phân loại qua field `index`.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/market/MetalProvidersResponse.yaml'
+            $ref: "../../components/schemas/market/MetalProvidersResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             data:
               - index: PNJ_GOLD
@@ -24,11 +24,11 @@ get:
                 buy_value: 92600000
                 sell_value: 94700000
                 provider: PNJ
-                date: '2024-04-18'
+                date: "2024-04-18"
                 usd_value: 2352
                 vnd_value: 94700000
                 provider_icon: https://cdn.finhay.com/providers/pnj.png
-                updated_at: '2024-04-18T10:00:00Z'
+                updated_at: "2024-04-18T10:00:00Z"
                 change_percent: 0.4
                 buy_value_change_percent: 0.33
                 sell_value_change_percent: 0.46
@@ -38,22 +38,22 @@ get:
                 buy_value: 980000
                 sell_value: 1050000
                 provider: PNJ
-                date: '2024-04-18'
+                date: "2024-04-18"
                 usd_value: 28
                 vnd_value: 1050000
                 provider_icon: https://cdn.finhay.com/providers/pnj.png
-                updated_at: '2024-04-18T10:00:00Z'
+                updated_at: "2024-04-18T10:00:00Z"
                 change_percent: 0.15
                 buy_value_change_percent: 0.12
                 sell_value_change_percent: 0.18
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

@@ -9,7 +9,7 @@ http:
   url: "{{baseUrl}}/tartarus/v1/tickerSnaps"
   params:
     - name: index
-      value: '1'
+      value: "1"
       type: query
       description: "Rổ chứng khoán: \n- `1`: Hose\n- `2`: VN30\n- `3`: HNX\n- `4`. HNX30\n- `5`: Upcom\n- `10`:Midcap\n- `11`:Vn100\n- `12`:Vnallshare\n- `13`:VNsmallcap\n- `14`:VNxallshare\n- `15`:Vn50\n- `16`:Vnsi\n"
       disabled: true

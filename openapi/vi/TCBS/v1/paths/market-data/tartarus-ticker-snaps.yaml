@@ -5,8 +5,7 @@
   "summary": "Thông tin room nước ngoài"
   "description": "Lấy thông tin room nước ngoài và snapshot thị trường."
   "parameters":
-    -
-      "name": "index"
+    - "name": "index"
       "in": "query"
       "required": false
       "description": "Rổ chứng khoán: 1 = HOSE, 2 = VN30, 3 = HNX, 4 = HNX30, 5 = Upcom, 10 = Midcap, 11 = VN100, 12 = VNAllshare, 13 = VNSmallcap, 14 = VNXAllshare, 15 = VN50, 16 = VNSI."

@@ -5,8 +5,7 @@
   "summary": "Thông tin thỏa thuận"
   "description": "Lấy thông tin giao dịch thỏa thuận."
   "parameters":
-    -
-      "name": "floor"
+    - "name": "floor"
       "in": "query"
       "required": false
       "description": "Rổ chứng khoán: 1 = HOSE, 2 = HNX, 3 = Upcom."

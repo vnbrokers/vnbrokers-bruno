@@ -21,16 +21,16 @@ get:
     `net_asset_value` — endpoint này tổng hợp cross-product cấp user,
     còn `accounts/summary` chi tiết theo từng tiểu khoản.
   parameters:
-    - $ref: '../../components/parameters/UserId.yaml'
+    - $ref: "../../components/parameters/UserId.yaml"
   responses:
-    '200':
+    "200":
       description: Trả về `data` chứa `net_asset_value`, breakdown theo `products` (stock/fund/bond/hay0), `money` (cash), `debt`, và `pnl` cho từng loại sản phẩm.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/users/UserAssetsSummaryResponse.yaml'
+            $ref: "../../components/schemas/users/UserAssetsSummaryResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             data:
               net_asset_value: 162500000
@@ -65,14 +65,14 @@ get:
                 fund:
                   pnl: 500000
                   pnl_rate: 2.56
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

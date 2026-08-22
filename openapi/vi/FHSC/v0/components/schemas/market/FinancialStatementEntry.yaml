@@ -17,12 +17,12 @@ properties:
   quarter:
     type:
       - integer
-      - 'null'
+      - "null"
     description: Quarter (`1`–`4`) for quarterly rows; null for annual.
     example: 4
 additionalProperties:
   type:
     - number
-    - 'null'
+    - "null"
 required:
   - year

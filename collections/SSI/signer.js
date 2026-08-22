@@ -100,13 +100,12 @@ function getRSAKey(privateKeyBase64Xml) {
     p: xmlBase64ToBase64UrlUInt(p),
     q: xmlBase64ToBase64UrlUInt(q),
 
-    dp: dp ? xmlBase64ToBase64UrlUInt(dp)
-      : bigIntToBase64UrlUInt(dInt % (pInt - 1n)),
+    dp: dp ? xmlBase64ToBase64UrlUInt(dp) : bigIntToBase64UrlUInt(dInt % (pInt - 1n)),
 
-    dq: dq ? xmlBase64ToBase64UrlUInt(dq)
-      : bigIntToBase64UrlUInt(dInt % (qInt - 1n)),
+    dq: dq ? xmlBase64ToBase64UrlUInt(dq) : bigIntToBase64UrlUInt(dInt % (qInt - 1n)),
 
-    qi: inverseQ ? xmlBase64ToBase64UrlUInt(inverseQ)
+    qi: inverseQ
+      ? xmlBase64ToBase64UrlUInt(inverseQ)
       : bigIntToBase64UrlUInt(modInverse(qInt, pInt)),
   };
 
@@ -118,15 +117,11 @@ function getRSAKey(privateKeyBase64Xml) {
 function signWithRSA(privateKeyBase64Xml, message) {
   const privateKey = getRSAKey(privateKeyBase64Xml);
 
-  const signature = crypto.sign(
-    "RSA-SHA256",
-    Buffer.from(message, "utf8"),
-    privateKey
-  );
+  const signature = crypto.sign("RSA-SHA256", Buffer.from(message, "utf8"), privateKey);
 
   return signature.toString("hex");
 }
 
 module.exports = {
-  signWithRSA
-}
+  signWithRSA,
+};

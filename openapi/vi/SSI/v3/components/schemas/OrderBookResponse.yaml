@@ -58,5 +58,3 @@ properties:
             message:
               description: Thông báo xử lý lệnh.
               type: string
-
-

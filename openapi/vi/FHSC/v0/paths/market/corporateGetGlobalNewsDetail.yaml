@@ -17,14 +17,14 @@ get:
         type: integer
         example: 12
   responses:
-    '200':
+    "200":
       description: Trả về `data` chứa toàn bộ field của item trong danh sách + `content` (nội dung đầy đủ).
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/market/GlobalNewsDetailResponse.yaml'
+            $ref: "../../components/schemas/market/GlobalNewsDetailResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             data:
               id: 12
@@ -32,22 +32,22 @@ get:
               url: https://example.com/news/fed-rate-hold
               description: Fed officials signaled the federal funds rate will likely remain unchanged…
               provider: Reuters
-              published_at: '2026-04-22T08:30:00Z'
+              published_at: "2026-04-22T08:30:00Z"
               category: economic-indicators
               content: |
                 Federal Reserve officials are leaning toward keeping the federal funds
                 rate unchanged at their upcoming meeting, several policymakers signaled
                 this week. The shift comes as inflation data continues to come in…
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '404':
-      $ref: '../../components/responses/NotFound.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "404":
+      $ref: "../../components/responses/NotFound.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

@@ -36,5 +36,3 @@ properties:
         refPrice:
           description: Giá tham chiếu.
           type: string
-
-

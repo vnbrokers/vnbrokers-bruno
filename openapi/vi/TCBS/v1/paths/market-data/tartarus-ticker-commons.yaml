@@ -5,15 +5,13 @@
   "summary": "Thông tin mã, giá"
   "description": "Lấy thông tin mã và giá của thị trường cơ sở."
   "parameters":
-    -
-      "name": "tickers"
+    - "name": "tickers"
       "in": "query"
       "required": false
       "description": "Danh sách mã cổ phiếu phân tách bằng dấu phẩy. Không dùng kết hợp với tham số index."
       "schema":
         "type": "string"
-    -
-      "name": "index"
+    - "name": "index"
       "in": "query"
       "required": false
       "description": "Rổ chứng khoán: 1 = HOSE, 2 = VN30, 3 = HNX, 4 = HNX30, 5 = UPCOM, 10 = Midcap, 11 = VN100, 12 = VNAllShare, 13 = VNSmallCap, 14 = VNXAllShare, 15 = VN50, 16 = VNSI. Không dùng kết hợp với tham số tickers."

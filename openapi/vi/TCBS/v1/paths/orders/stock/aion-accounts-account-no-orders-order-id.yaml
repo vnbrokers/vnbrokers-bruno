@@ -5,15 +5,13 @@
   "summary": "Lấy sổ lệnh theo Order ID"
   "description": "Lấy một lệnh theo Order ID của tiểu khoản."
   "parameters":
-    -
-      "name": "accountNo"
+    - "name": "accountNo"
       "in": "path"
       "required": true
       "description": "Số tiểu khoản."
       "schema":
         "type": "string"
-    -
-      "name": "orderID"
+    - "name": "orderID"
       "in": "path"
       "required": true
       "description": "Order ID."

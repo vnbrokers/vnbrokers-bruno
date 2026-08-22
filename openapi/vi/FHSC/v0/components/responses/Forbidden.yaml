@@ -6,7 +6,7 @@ description: |
 content:
   application/json:
     schema:
-      $ref: '../schemas/common/ErrorBody.yaml'
+      $ref: "../schemas/common/ErrorBody.yaml"
     example:
       error_code: OTP_SESSION_EXPIRED
       message: 2FA session has expired

@@ -19,5 +19,4 @@ collections:
   - name: "FHSC OpenAPI"
     path: "collections/FHSC"
 
-
 docs: "VNBrokers - A Collection of OpenAPIs from Vietnamese Securities Companies"

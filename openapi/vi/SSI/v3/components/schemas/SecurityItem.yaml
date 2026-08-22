@@ -58,5 +58,3 @@ properties:
   settlementPrice:
     description: Giá thanh toán.
     type: string
-
-

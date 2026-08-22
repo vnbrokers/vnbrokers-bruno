@@ -40,7 +40,7 @@ properties:
   provider_icon:
     type:
       - string
-      - 'null'
+      - "null"
     description: Provider icon URL.
   updated_at:
     type: string

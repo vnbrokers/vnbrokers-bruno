@@ -70,487 +70,487 @@ tags:
       session).
 paths:
   /users/v1/users/me:
-    $ref: './paths/users/bootstrapGetMe.yaml'
+    $ref: "./paths/users/bootstrapGetMe.yaml"
 
   /users/v1/users/{userId}/sub-accounts:
-    $ref: './paths/users/bootstrapGetSubAccounts.yaml'
+    $ref: "./paths/users/bootstrapGetSubAccounts.yaml"
 
   /market/stock-realtime:
-    $ref: './paths/market/marketDataGetStockRealtime.yaml'
+    $ref: "./paths/market/marketDataGetStockRealtime.yaml"
 
   /market/index-realtime:
-    $ref: './paths/market/marketDataGetIndexRealtime.yaml'
+    $ref: "./paths/market/marketDataGetIndexRealtime.yaml"
 
   /market/news:
-    $ref: './paths/market/corporateGetNews.yaml'
+    $ref: "./paths/market/corporateGetNews.yaml"
 
   /market/financial-data:
-    $ref: './paths/market/aggregatedGetFinancialData.yaml'
+    $ref: "./paths/market/aggregatedGetFinancialData.yaml"
 
   /market/financial-data/gold:
-    $ref: './paths/market/commoditiesGetGold.yaml'
+    $ref: "./paths/market/commoditiesGetGold.yaml"
 
   /market/financial-data/silver:
-    $ref: './paths/market/commoditiesGetSilver.yaml'
+    $ref: "./paths/market/commoditiesGetSilver.yaml"
 
   /market/financial-data/gold-chart:
-    $ref: './paths/market/commoditiesGetGoldChart.yaml'
+    $ref: "./paths/market/commoditiesGetGoldChart.yaml"
 
   /market/financial-data/silver-chart:
-    $ref: './paths/market/commoditiesGetSilverChart.yaml'
+    $ref: "./paths/market/commoditiesGetSilverChart.yaml"
 
   /market/financial-data/gold-providers:
-    $ref: './paths/market/commoditiesGetGoldProviders.yaml'
+    $ref: "./paths/market/commoditiesGetGoldProviders.yaml"
 
   /market/financial-data/metal-providers:
-    $ref: './paths/market/commoditiesGetMetalProviders.yaml'
+    $ref: "./paths/market/commoditiesGetMetalProviders.yaml"
 
   /market/financial-data/bank-interest-rates:
-    $ref: './paths/market/macroGetBankInterestRates.yaml'
+    $ref: "./paths/market/macroGetBankInterestRates.yaml"
 
   /market/financial-data/cryptos/top-trending:
-    $ref: './paths/market/commoditiesGetTopTrendingCryptos.yaml'
+    $ref: "./paths/market/commoditiesGetTopTrendingCryptos.yaml"
 
   /market/financial-data/macro:
-    $ref: './paths/market/macroGetMacroData.yaml'
+    $ref: "./paths/market/macroGetMacroData.yaml"
 
   /market/financial-data/trading-economics:
-    $ref: './paths/market/macroGetTradingEconomics.yaml'
+    $ref: "./paths/market/macroGetTradingEconomics.yaml"
 
   /market/financial-data/economic-calendar-events:
-    $ref: './paths/market/macroGetEconomicCalendarEvents.yaml'
+    $ref: "./paths/market/macroGetEconomicCalendarEvents.yaml"
 
   /market/financial-data/market:
-    $ref: './paths/market/aggregatedGetGlobalMarket.yaml'
+    $ref: "./paths/market/aggregatedGetGlobalMarket.yaml"
 
   /market/financial-data/global-news:
-    $ref: './paths/market/corporateGetGlobalNews.yaml'
+    $ref: "./paths/market/corporateGetGlobalNews.yaml"
 
   /market/financial-data/global-news/{id}:
-    $ref: './paths/market/corporateGetGlobalNewsDetail.yaml'
+    $ref: "./paths/market/corporateGetGlobalNewsDetail.yaml"
 
   /market/recommendation-reports/{symbol}:
-    $ref: './paths/market/corporateGetRecommendationReports.yaml'
+    $ref: "./paths/market/corporateGetRecommendationReports.yaml"
 
   /market/price-histories-chart:
-    $ref: './paths/market/marketDataGetPriceHistoriesChart.yaml'
+    $ref: "./paths/market/marketDataGetPriceHistoriesChart.yaml"
 
   /market/company-financial/overview:
-    $ref: './paths/market/fundamentalGetOverview.yaml'
+    $ref: "./paths/market/fundamentalGetOverview.yaml"
 
   /market/company-financial/analysis:
-    $ref: './paths/market/fundamentalGetAnalysis.yaml'
+    $ref: "./paths/market/fundamentalGetAnalysis.yaml"
 
   /market/v2/financial-statement/statement:
-    $ref: './paths/market/fundamentalGetStatement.yaml'
+    $ref: "./paths/market/fundamentalGetStatement.yaml"
 
   /trading/accounts/{subAccountId}/summary:
-    $ref: './paths/trading/accountGetSummary.yaml'
+    $ref: "./paths/trading/accountGetSummary.yaml"
 
   /trading/v1/accounts/{subAccountId}/order-book:
-    $ref: './paths/trading/ordersGetOrderBook.yaml'
+    $ref: "./paths/trading/ordersGetOrderBook.yaml"
 
   /trading/v1/accounts/{subAccountId}/order-book/{orderId}:
-    $ref: './paths/trading/ordersGetOrderBookDetail.yaml'
+    $ref: "./paths/trading/ordersGetOrderBookDetail.yaml"
 
   /trading/v2/sub-accounts/{subAccountId}/portfolio:
-    $ref: './paths/trading/portfolioGetHoldings.yaml'
+    $ref: "./paths/trading/portfolioGetHoldings.yaml"
 
   /trading/v5/account/{subAccountId}/user-rights:
-    $ref: './paths/trading/rightsGetUserRights.yaml'
+    $ref: "./paths/trading/rightsGetUserRights.yaml"
 
   /trading/pnl-today/{userId}:
-    $ref: './paths/trading/performanceGetPnlToday.yaml'
+    $ref: "./paths/trading/performanceGetPnlToday.yaml"
 
   /trading/market/session:
-    $ref: './paths/trading/tradingSessionGet.yaml'
+    $ref: "./paths/trading/tradingSessionGet.yaml"
 
   /trading/oa/sub-accounts/{subAccountId}/orders:
-    $ref: './paths/trading/ordersPlace.yaml'
+    $ref: "./paths/trading/ordersPlace.yaml"
 
   /trading/oa/sub-accounts/{subAccountId}/orders/{orderId}:
-    $ref: './paths/trading/ordersModify.yaml'
+    $ref: "./paths/trading/ordersModify.yaml"
 
   /users/v3/users/{userId}/assets/summary:
-    $ref: './paths/users/assetGetSummary.yaml'
+    $ref: "./paths/users/assetGetSummary.yaml"
 
   /fund-trading/public/fund-certificates:
-    $ref: './paths/fund-trading/fundsListCertificates.yaml'
+    $ref: "./paths/fund-trading/fundsListCertificates.yaml"
 
   /fund-trading/public/fund-companies:
-    $ref: './paths/fund-trading/fundsListCompanies.yaml'
+    $ref: "./paths/fund-trading/fundsListCompanies.yaml"
 
   /fund-trading/public/fund-certificates/{fundName}/nav-histories:
-    $ref: './paths/fund-trading/fundsGetNavHistories.yaml'
+    $ref: "./paths/fund-trading/fundsGetNavHistories.yaml"
 
   /fund-trading/public/fund-certificates/{fundName}/portfolio:
-    $ref: './paths/fund-trading/fundsGetPortfolio.yaml'
+    $ref: "./paths/fund-trading/fundsGetPortfolio.yaml"
 
   /fund-trading/public/fund-certificates/{fundName}/asset-allocation:
-    $ref: './paths/fund-trading/fundsGetAssetAllocation.yaml'
+    $ref: "./paths/fund-trading/fundsGetAssetAllocation.yaml"
 
   /fund-trading/public/fund-certificates/{fundName}/sector-allocation:
-    $ref: './paths/fund-trading/fundsGetSectorAllocation.yaml'
+    $ref: "./paths/fund-trading/fundsGetSectorAllocation.yaml"
 
   /fund-trading/public/fund-certificates/{fundName}/suggestions:
-    $ref: './paths/fund-trading/fundsGetSuggestions.yaml'
+    $ref: "./paths/fund-trading/fundsGetSuggestions.yaml"
 
   /fund-trading/public/fund-certificates/top-aum:
-    $ref: './paths/fund-trading/fundsTopAum.yaml'
+    $ref: "./paths/fund-trading/fundsTopAum.yaml"
 
   /fund-trading/public/fund-certificates/top-investor:
-    $ref: './paths/fund-trading/fundsTopInvestor.yaml'
+    $ref: "./paths/fund-trading/fundsTopInvestor.yaml"
 
   /fund-trading/public/fund-certificates/top-fund-flow:
-    $ref: './paths/fund-trading/fundsTopFundFlow.yaml'
+    $ref: "./paths/fund-trading/fundsTopFundFlow.yaml"
 
   /fund-trading/public/fund-certificates/top-holding-symbols:
-    $ref: './paths/fund-trading/fundsTopHoldingSymbols.yaml'
+    $ref: "./paths/fund-trading/fundsTopHoldingSymbols.yaml"
 
   /fund-trading/public/fund-certificates/benchmark/growth:
-    $ref: './paths/fund-trading/fundsBenchmarkGrowth.yaml'
+    $ref: "./paths/fund-trading/fundsBenchmarkGrowth.yaml"
 
   /fund-trading/public/fund-certificates/benchmark/nav:
-    $ref: './paths/fund-trading/fundsBenchmarkNav.yaml'
+    $ref: "./paths/fund-trading/fundsBenchmarkNav.yaml"
 
   /fund-trading/public/fund-certificates/benchmark/operation:
-    $ref: './paths/fund-trading/fundsBenchmarkOperation.yaml'
+    $ref: "./paths/fund-trading/fundsBenchmarkOperation.yaml"
 components:
   securitySchemes:
     FinhayApiKey:
-      $ref: './components/securitySchemes/FinhayApiKey.yaml'
+      $ref: "./components/securitySchemes/FinhayApiKey.yaml"
     FinhayTimestamp:
-      $ref: './components/securitySchemes/FinhayTimestamp.yaml'
+      $ref: "./components/securitySchemes/FinhayTimestamp.yaml"
     FinhayNonce:
-      $ref: './components/securitySchemes/FinhayNonce.yaml'
+      $ref: "./components/securitySchemes/FinhayNonce.yaml"
     FinhaySignature:
-      $ref: './components/securitySchemes/FinhaySignature.yaml'
+      $ref: "./components/securitySchemes/FinhaySignature.yaml"
     FinhayBodyHash:
-      $ref: './components/securitySchemes/FinhayBodyHash.yaml'
+      $ref: "./components/securitySchemes/FinhayBodyHash.yaml"
     FinhayTwoFactor:
-      $ref: './components/securitySchemes/FinhayTwoFactor.yaml'
+      $ref: "./components/securitySchemes/FinhayTwoFactor.yaml"
   schemas:
     EnvelopeBase:
-      $ref: './components/schemas/common/EnvelopeBase.yaml'
+      $ref: "./components/schemas/common/EnvelopeBase.yaml"
     UserProfile:
-      $ref: './components/schemas/users/UserProfile.yaml'
+      $ref: "./components/schemas/users/UserProfile.yaml"
     UserProfileResponse:
-      $ref: './components/schemas/users/UserProfileResponse.yaml'
+      $ref: "./components/schemas/users/UserProfileResponse.yaml"
     ErrorBody:
-      $ref: './components/schemas/common/ErrorBody.yaml'
+      $ref: "./components/schemas/common/ErrorBody.yaml"
     SubAccount:
-      $ref: './components/schemas/users/SubAccount.yaml'
+      $ref: "./components/schemas/users/SubAccount.yaml"
     SubAccountsResponse:
-      $ref: './components/schemas/users/SubAccountsResponse.yaml'
+      $ref: "./components/schemas/users/SubAccountsResponse.yaml"
     Exchange:
-      $ref: './components/schemas/market/Exchange.yaml'
+      $ref: "./components/schemas/market/Exchange.yaml"
     StockType:
-      $ref: './components/schemas/market/StockType.yaml'
+      $ref: "./components/schemas/market/StockType.yaml"
     StockRealtime:
-      $ref: './components/schemas/market/StockRealtime.yaml'
+      $ref: "./components/schemas/market/StockRealtime.yaml"
     StockRealtimeResponse:
-      $ref: './components/schemas/market/StockRealtimeResponse.yaml'
+      $ref: "./components/schemas/market/StockRealtimeResponse.yaml"
     MarketIndex:
-      $ref: './components/schemas/market/MarketIndex.yaml'
+      $ref: "./components/schemas/market/MarketIndex.yaml"
     IndexRealtime:
-      $ref: './components/schemas/market/IndexRealtime.yaml'
+      $ref: "./components/schemas/market/IndexRealtime.yaml"
     IndexRealtimeResponse:
-      $ref: './components/schemas/market/IndexRealtimeResponse.yaml'
+      $ref: "./components/schemas/market/IndexRealtimeResponse.yaml"
     StockEvent:
-      $ref: './components/schemas/market/StockEvent.yaml'
+      $ref: "./components/schemas/market/StockEvent.yaml"
     StockEventsResponse:
-      $ref: './components/schemas/market/StockEventsResponse.yaml'
+      $ref: "./components/schemas/market/StockEventsResponse.yaml"
     FinancialDataBuySellValue:
-      $ref: './components/schemas/market/FinancialDataBuySellValue.yaml'
+      $ref: "./components/schemas/market/FinancialDataBuySellValue.yaml"
     FinancialDataSingleValue:
-      $ref: './components/schemas/market/FinancialDataSingleValue.yaml'
+      $ref: "./components/schemas/market/FinancialDataSingleValue.yaml"
     FinancialData:
-      $ref: './components/schemas/market/FinancialData.yaml'
+      $ref: "./components/schemas/market/FinancialData.yaml"
     FinancialDataResponse:
-      $ref: './components/schemas/market/FinancialDataResponse.yaml'
+      $ref: "./components/schemas/market/FinancialDataResponse.yaml"
     CommodityIndexData:
-      $ref: './components/schemas/market/CommodityIndexData.yaml'
+      $ref: "./components/schemas/market/CommodityIndexData.yaml"
     GoldResponse:
-      $ref: './components/schemas/market/GoldResponse.yaml'
+      $ref: "./components/schemas/market/GoldResponse.yaml"
     SilverResponse:
-      $ref: './components/schemas/market/SilverResponse.yaml'
+      $ref: "./components/schemas/market/SilverResponse.yaml"
     GoldChartPoint:
-      $ref: './components/schemas/market/GoldChartPoint.yaml'
+      $ref: "./components/schemas/market/GoldChartPoint.yaml"
     GoldChartResponse:
-      $ref: './components/schemas/market/GoldChartResponse.yaml'
+      $ref: "./components/schemas/market/GoldChartResponse.yaml"
     SilverChartPoint:
-      $ref: './components/schemas/market/SilverChartPoint.yaml'
+      $ref: "./components/schemas/market/SilverChartPoint.yaml"
     SilverChartResponse:
-      $ref: './components/schemas/market/SilverChartResponse.yaml'
+      $ref: "./components/schemas/market/SilverChartResponse.yaml"
     CommodityProviderGroup:
-      $ref: './components/schemas/market/CommodityProviderGroup.yaml'
+      $ref: "./components/schemas/market/CommodityProviderGroup.yaml"
     GoldProvidersResponse:
-      $ref: './components/schemas/market/GoldProvidersResponse.yaml'
+      $ref: "./components/schemas/market/GoldProvidersResponse.yaml"
     MetalProvidersResponse:
-      $ref: './components/schemas/market/MetalProvidersResponse.yaml'
+      $ref: "./components/schemas/market/MetalProvidersResponse.yaml"
     BankInterestRates:
-      $ref: './components/schemas/market/BankInterestRates.yaml'
+      $ref: "./components/schemas/market/BankInterestRates.yaml"
     BankInterestRatesResponse:
-      $ref: './components/schemas/market/BankInterestRatesResponse.yaml'
+      $ref: "./components/schemas/market/BankInterestRatesResponse.yaml"
     CryptoCurrency:
-      $ref: './components/schemas/market/CryptoCurrency.yaml'
+      $ref: "./components/schemas/market/CryptoCurrency.yaml"
     CryptosTopTrendingResponse:
-      $ref: './components/schemas/market/CryptosTopTrendingResponse.yaml'
+      $ref: "./components/schemas/market/CryptosTopTrendingResponse.yaml"
     MacroType:
-      $ref: './components/schemas/market/MacroType.yaml'
+      $ref: "./components/schemas/market/MacroType.yaml"
     Country:
-      $ref: './components/schemas/market/Country.yaml'
+      $ref: "./components/schemas/market/Country.yaml"
     Period:
-      $ref: './components/schemas/market/Period.yaml'
+      $ref: "./components/schemas/market/Period.yaml"
     MacroData:
-      $ref: './components/schemas/market/MacroData.yaml'
+      $ref: "./components/schemas/market/MacroData.yaml"
     MacroDataResponse:
-      $ref: './components/schemas/market/MacroDataResponse.yaml'
+      $ref: "./components/schemas/market/MacroDataResponse.yaml"
     EconomicCountry:
-      $ref: './components/schemas/market/EconomicCountry.yaml'
+      $ref: "./components/schemas/market/EconomicCountry.yaml"
     TradingEconomicsCategory:
-      $ref: './components/schemas/market/TradingEconomicsCategory.yaml'
+      $ref: "./components/schemas/market/TradingEconomicsCategory.yaml"
     TradingEconomicsEntry:
-      $ref: './components/schemas/market/TradingEconomicsEntry.yaml'
+      $ref: "./components/schemas/market/TradingEconomicsEntry.yaml"
     TradingEconomicsResponse:
-      $ref: './components/schemas/market/TradingEconomicsResponse.yaml'
+      $ref: "./components/schemas/market/TradingEconomicsResponse.yaml"
     EconomicCalendarEvent:
-      $ref: './components/schemas/market/EconomicCalendarEvent.yaml'
+      $ref: "./components/schemas/market/EconomicCalendarEvent.yaml"
     EconomicCalendarEventsResponse:
-      $ref: './components/schemas/market/EconomicCalendarEventsResponse.yaml'
+      $ref: "./components/schemas/market/EconomicCalendarEventsResponse.yaml"
     GlobalMarketDataType:
-      $ref: './components/schemas/market/GlobalMarketDataType.yaml'
+      $ref: "./components/schemas/market/GlobalMarketDataType.yaml"
     GlobalMarketCountry:
-      $ref: './components/schemas/market/GlobalMarketCountry.yaml'
+      $ref: "./components/schemas/market/GlobalMarketCountry.yaml"
     GlobalMarketDataEntry:
-      $ref: './components/schemas/market/GlobalMarketDataEntry.yaml'
+      $ref: "./components/schemas/market/GlobalMarketDataEntry.yaml"
     GlobalMarketDataResponse:
-      $ref: './components/schemas/market/GlobalMarketDataResponse.yaml'
+      $ref: "./components/schemas/market/GlobalMarketDataResponse.yaml"
     GlobalNewsCategory:
-      $ref: './components/schemas/market/GlobalNewsCategory.yaml'
+      $ref: "./components/schemas/market/GlobalNewsCategory.yaml"
     GlobalNewsListItem:
-      $ref: './components/schemas/market/GlobalNewsListItem.yaml'
+      $ref: "./components/schemas/market/GlobalNewsListItem.yaml"
     GlobalNewsPage:
-      $ref: './components/schemas/market/GlobalNewsPage.yaml'
+      $ref: "./components/schemas/market/GlobalNewsPage.yaml"
     GlobalNewsListResponse:
-      $ref: './components/schemas/market/GlobalNewsListResponse.yaml'
+      $ref: "./components/schemas/market/GlobalNewsListResponse.yaml"
     GlobalNewsDetail:
-      $ref: './components/schemas/market/GlobalNewsDetail.yaml'
+      $ref: "./components/schemas/market/GlobalNewsDetail.yaml"
     GlobalNewsDetailResponse:
-      $ref: './components/schemas/market/GlobalNewsDetailResponse.yaml'
+      $ref: "./components/schemas/market/GlobalNewsDetailResponse.yaml"
     IndexRecommendationReport:
-      $ref: './components/schemas/market/IndexRecommendationReport.yaml'
+      $ref: "./components/schemas/market/IndexRecommendationReport.yaml"
     RecommendationReport:
-      $ref: './components/schemas/market/RecommendationReport.yaml'
+      $ref: "./components/schemas/market/RecommendationReport.yaml"
     RecommendationReportsResponse:
-      $ref: './components/schemas/market/RecommendationReportsResponse.yaml'
+      $ref: "./components/schemas/market/RecommendationReportsResponse.yaml"
     Resolution:
-      $ref: './components/schemas/market/Resolution.yaml'
+      $ref: "./components/schemas/market/Resolution.yaml"
     PriceHistoriesChart:
-      $ref: './components/schemas/market/PriceHistoriesChart.yaml'
+      $ref: "./components/schemas/market/PriceHistoriesChart.yaml"
     PriceHistoriesChartResponse:
-      $ref: './components/schemas/market/PriceHistoriesChartResponse.yaml'
+      $ref: "./components/schemas/market/PriceHistoriesChartResponse.yaml"
     FinancialOverview:
-      $ref: './components/schemas/market/FinancialOverview.yaml'
+      $ref: "./components/schemas/market/FinancialOverview.yaml"
     FinancialOverviewResponse:
-      $ref: './components/schemas/market/FinancialOverviewResponse.yaml'
+      $ref: "./components/schemas/market/FinancialOverviewResponse.yaml"
     FinancialPeriod:
-      $ref: './components/schemas/market/FinancialPeriod.yaml'
+      $ref: "./components/schemas/market/FinancialPeriod.yaml"
     FinancialAnalysisEntry:
-      $ref: './components/schemas/market/FinancialAnalysisEntry.yaml'
+      $ref: "./components/schemas/market/FinancialAnalysisEntry.yaml"
     FinancialAnalysisResponse:
-      $ref: './components/schemas/market/FinancialAnalysisResponse.yaml'
+      $ref: "./components/schemas/market/FinancialAnalysisResponse.yaml"
     FinancialStatementType:
-      $ref: './components/schemas/market/FinancialStatementType.yaml'
+      $ref: "./components/schemas/market/FinancialStatementType.yaml"
     FinancialStatementEntry:
-      $ref: './components/schemas/market/FinancialStatementEntry.yaml'
+      $ref: "./components/schemas/market/FinancialStatementEntry.yaml"
     FinancialStatementResponse:
-      $ref: './components/schemas/market/FinancialStatementResponse.yaml'
+      $ref: "./components/schemas/market/FinancialStatementResponse.yaml"
     AccountSummary:
-      $ref: './components/schemas/trading/AccountSummary.yaml'
+      $ref: "./components/schemas/trading/AccountSummary.yaml"
     AccountSummaryResponse:
-      $ref: './components/schemas/trading/AccountSummaryResponse.yaml'
+      $ref: "./components/schemas/trading/AccountSummaryResponse.yaml"
     OrderBookEntry:
-      $ref: './components/schemas/trading/OrderBookEntry.yaml'
+      $ref: "./components/schemas/trading/OrderBookEntry.yaml"
     OrderBookResponse:
-      $ref: './components/schemas/trading/OrderBookResponse.yaml'
+      $ref: "./components/schemas/trading/OrderBookResponse.yaml"
     OrderBookDetailResponse:
-      $ref: './components/schemas/trading/OrderBookDetailResponse.yaml'
+      $ref: "./components/schemas/trading/OrderBookDetailResponse.yaml"
     PortfolioEntry:
-      $ref: './components/schemas/trading/PortfolioEntry.yaml'
+      $ref: "./components/schemas/trading/PortfolioEntry.yaml"
     GetPortfolioResponse:
-      $ref: './components/schemas/trading/GetPortfolioResponse.yaml'
+      $ref: "./components/schemas/trading/GetPortfolioResponse.yaml"
     PortfolioResponse:
-      $ref: './components/schemas/trading/PortfolioResponse.yaml'
+      $ref: "./components/schemas/trading/PortfolioResponse.yaml"
     UserRightStatus:
-      $ref: './components/schemas/trading/UserRightStatus.yaml'
+      $ref: "./components/schemas/trading/UserRightStatus.yaml"
     UserRightRegisterStatus:
-      $ref: './components/schemas/trading/UserRightRegisterStatus.yaml'
+      $ref: "./components/schemas/trading/UserRightRegisterStatus.yaml"
     UserRightType:
-      $ref: './components/schemas/trading/UserRightType.yaml'
+      $ref: "./components/schemas/trading/UserRightType.yaml"
     UserRight:
-      $ref: './components/schemas/trading/UserRight.yaml'
+      $ref: "./components/schemas/trading/UserRight.yaml"
     UserRightsResponse:
-      $ref: './components/schemas/trading/UserRightsResponse.yaml'
+      $ref: "./components/schemas/trading/UserRightsResponse.yaml"
     PnlToday:
-      $ref: './components/schemas/trading/PnlToday.yaml'
+      $ref: "./components/schemas/trading/PnlToday.yaml"
     PnlTodayResponse:
-      $ref: './components/schemas/trading/PnlTodayResponse.yaml'
+      $ref: "./components/schemas/trading/PnlTodayResponse.yaml"
     ExchangeSession:
-      $ref: './components/schemas/trading/ExchangeSession.yaml'
+      $ref: "./components/schemas/trading/ExchangeSession.yaml"
     OrderType:
-      $ref: './components/schemas/trading/OrderType.yaml'
+      $ref: "./components/schemas/trading/OrderType.yaml"
     ExchangeSessionInfo:
-      $ref: './components/schemas/trading/ExchangeSessionInfo.yaml'
+      $ref: "./components/schemas/trading/ExchangeSessionInfo.yaml"
     MarketSessionResponse:
-      $ref: './components/schemas/trading/MarketSessionResponse.yaml'
+      $ref: "./components/schemas/trading/MarketSessionResponse.yaml"
     OrderSide:
-      $ref: './components/schemas/trading/OrderSide.yaml'
+      $ref: "./components/schemas/trading/OrderSide.yaml"
     PlaceOrderKind:
-      $ref: './components/schemas/trading/PlaceOrderKind.yaml'
+      $ref: "./components/schemas/trading/PlaceOrderKind.yaml"
     MarketPriceCode:
-      $ref: './components/schemas/trading/MarketPriceCode.yaml'
+      $ref: "./components/schemas/trading/MarketPriceCode.yaml"
     StockTypeOrder:
-      $ref: './components/schemas/trading/StockTypeOrder.yaml'
+      $ref: "./components/schemas/trading/StockTypeOrder.yaml"
     PlaceOrderRequest:
-      $ref: './components/schemas/trading/PlaceOrderRequest.yaml'
+      $ref: "./components/schemas/trading/PlaceOrderRequest.yaml"
     OrderStatus:
-      $ref: './components/schemas/trading/OrderStatus.yaml'
+      $ref: "./components/schemas/trading/OrderStatus.yaml"
     LotType:
-      $ref: './components/schemas/trading/LotType.yaml'
+      $ref: "./components/schemas/trading/LotType.yaml"
     OrderExecutionResult:
-      $ref: './components/schemas/trading/OrderExecutionResult.yaml'
+      $ref: "./components/schemas/trading/OrderExecutionResult.yaml"
     PlaceOrderResponse:
-      $ref: './components/schemas/trading/PlaceOrderResponse.yaml'
+      $ref: "./components/schemas/trading/PlaceOrderResponse.yaml"
     ModifyOrderRequest:
-      $ref: './components/schemas/trading/ModifyOrderRequest.yaml'
+      $ref: "./components/schemas/trading/ModifyOrderRequest.yaml"
     ModifyOrderResponse:
-      $ref: './components/schemas/trading/ModifyOrderResponse.yaml'
+      $ref: "./components/schemas/trading/ModifyOrderResponse.yaml"
     CancelOrderRequest:
-      $ref: './components/schemas/trading/CancelOrderRequest.yaml'
+      $ref: "./components/schemas/trading/CancelOrderRequest.yaml"
     CancelOrderResponse:
-      $ref: './components/schemas/trading/CancelOrderResponse.yaml'
+      $ref: "./components/schemas/trading/CancelOrderResponse.yaml"
     ProductsSummary:
-      $ref: './components/schemas/users/ProductsSummary.yaml'
+      $ref: "./components/schemas/users/ProductsSummary.yaml"
     MoneySummary:
-      $ref: './components/schemas/users/MoneySummary.yaml'
+      $ref: "./components/schemas/users/MoneySummary.yaml"
     DebtSummary:
-      $ref: './components/schemas/users/DebtSummary.yaml'
+      $ref: "./components/schemas/users/DebtSummary.yaml"
     PnlEntry:
-      $ref: './components/schemas/users/PnlEntry.yaml'
+      $ref: "./components/schemas/users/PnlEntry.yaml"
     PnlSummary:
-      $ref: './components/schemas/users/PnlSummary.yaml'
+      $ref: "./components/schemas/users/PnlSummary.yaml"
     UserAssetsSummary:
-      $ref: './components/schemas/users/UserAssetsSummary.yaml'
+      $ref: "./components/schemas/users/UserAssetsSummary.yaml"
     UserAssetsSummaryResponse:
-      $ref: './components/schemas/users/UserAssetsSummaryResponse.yaml'
+      $ref: "./components/schemas/users/UserAssetsSummaryResponse.yaml"
     FundType:
-      $ref: './components/schemas/fund-trading/FundType.yaml'
+      $ref: "./components/schemas/fund-trading/FundType.yaml"
     FundCertificate:
-      $ref: './components/schemas/fund-trading/FundCertificate.yaml'
+      $ref: "./components/schemas/fund-trading/FundCertificate.yaml"
     FundCertificatesResponse:
-      $ref: './components/schemas/fund-trading/FundCertificatesResponse.yaml'
+      $ref: "./components/schemas/fund-trading/FundCertificatesResponse.yaml"
     FundCompany:
-      $ref: './components/schemas/fund-trading/FundCompany.yaml'
+      $ref: "./components/schemas/fund-trading/FundCompany.yaml"
     FundCompaniesResponse:
-      $ref: './components/schemas/fund-trading/FundCompaniesResponse.yaml'
+      $ref: "./components/schemas/fund-trading/FundCompaniesResponse.yaml"
     FundPeriod:
-      $ref: './components/schemas/fund-trading/FundPeriod.yaml'
+      $ref: "./components/schemas/fund-trading/FundPeriod.yaml"
     FundNavHistoryPoint:
-      $ref: './components/schemas/fund-trading/FundNavHistoryPoint.yaml'
+      $ref: "./components/schemas/fund-trading/FundNavHistoryPoint.yaml"
     FundNavHistories:
-      $ref: './components/schemas/fund-trading/FundNavHistories.yaml'
+      $ref: "./components/schemas/fund-trading/FundNavHistories.yaml"
     FundNavHistoriesResponse:
-      $ref: './components/schemas/fund-trading/FundNavHistoriesResponse.yaml'
+      $ref: "./components/schemas/fund-trading/FundNavHistoriesResponse.yaml"
     FundPortfolioItem:
-      $ref: './components/schemas/fund-trading/FundPortfolioItem.yaml'
+      $ref: "./components/schemas/fund-trading/FundPortfolioItem.yaml"
     FundPortfolioResponse:
-      $ref: './components/schemas/fund-trading/FundPortfolioResponse.yaml'
+      $ref: "./components/schemas/fund-trading/FundPortfolioResponse.yaml"
     FundAssetAllocation:
-      $ref: './components/schemas/fund-trading/FundAssetAllocation.yaml'
+      $ref: "./components/schemas/fund-trading/FundAssetAllocation.yaml"
     FundAssetAllocationResponse:
-      $ref: './components/schemas/fund-trading/FundAssetAllocationResponse.yaml'
+      $ref: "./components/schemas/fund-trading/FundAssetAllocationResponse.yaml"
     FundSectorAllocation:
-      $ref: './components/schemas/fund-trading/FundSectorAllocation.yaml'
+      $ref: "./components/schemas/fund-trading/FundSectorAllocation.yaml"
     FundSectorAllocationResponse:
-      $ref: './components/schemas/fund-trading/FundSectorAllocationResponse.yaml'
+      $ref: "./components/schemas/fund-trading/FundSectorAllocationResponse.yaml"
     FundSuggestionCriteria:
-      $ref: './components/schemas/fund-trading/FundSuggestionCriteria.yaml'
+      $ref: "./components/schemas/fund-trading/FundSuggestionCriteria.yaml"
     FundSuggestion:
-      $ref: './components/schemas/fund-trading/FundSuggestion.yaml'
+      $ref: "./components/schemas/fund-trading/FundSuggestion.yaml"
     FundSuggestionsResponse:
-      $ref: './components/schemas/fund-trading/FundSuggestionsResponse.yaml'
+      $ref: "./components/schemas/fund-trading/FundSuggestionsResponse.yaml"
     FundAumEntry:
-      $ref: './components/schemas/fund-trading/FundAumEntry.yaml'
+      $ref: "./components/schemas/fund-trading/FundAumEntry.yaml"
     FundTopAumResponse:
-      $ref: './components/schemas/fund-trading/FundTopAumResponse.yaml'
+      $ref: "./components/schemas/fund-trading/FundTopAumResponse.yaml"
     FundInvestorEntry:
-      $ref: './components/schemas/fund-trading/FundInvestorEntry.yaml'
+      $ref: "./components/schemas/fund-trading/FundInvestorEntry.yaml"
     FundTopInvestorResponse:
-      $ref: './components/schemas/fund-trading/FundTopInvestorResponse.yaml'
+      $ref: "./components/schemas/fund-trading/FundTopInvestorResponse.yaml"
     FundFlowEntry:
-      $ref: './components/schemas/fund-trading/FundFlowEntry.yaml'
+      $ref: "./components/schemas/fund-trading/FundFlowEntry.yaml"
     FundTopFundFlowResponse:
-      $ref: './components/schemas/fund-trading/FundTopFundFlowResponse.yaml'
+      $ref: "./components/schemas/fund-trading/FundTopFundFlowResponse.yaml"
     FundTopHoldingSymbol:
-      $ref: './components/schemas/fund-trading/FundTopHoldingSymbol.yaml'
+      $ref: "./components/schemas/fund-trading/FundTopHoldingSymbol.yaml"
     FundTopHoldingSymbolsResponse:
-      $ref: './components/schemas/fund-trading/FundTopHoldingSymbolsResponse.yaml'
+      $ref: "./components/schemas/fund-trading/FundTopHoldingSymbolsResponse.yaml"
     FundGrowthBenchmark:
-      $ref: './components/schemas/fund-trading/FundGrowthBenchmark.yaml'
+      $ref: "./components/schemas/fund-trading/FundGrowthBenchmark.yaml"
     FundGrowthBenchmarkResponse:
-      $ref: './components/schemas/fund-trading/FundGrowthBenchmarkResponse.yaml'
+      $ref: "./components/schemas/fund-trading/FundGrowthBenchmarkResponse.yaml"
     FundNavBenchmarkPoint:
-      $ref: './components/schemas/fund-trading/FundNavBenchmarkPoint.yaml'
+      $ref: "./components/schemas/fund-trading/FundNavBenchmarkPoint.yaml"
     FundNavBenchmark:
-      $ref: './components/schemas/fund-trading/FundNavBenchmark.yaml'
+      $ref: "./components/schemas/fund-trading/FundNavBenchmark.yaml"
     FundNavBenchmarkResponse:
-      $ref: './components/schemas/fund-trading/FundNavBenchmarkResponse.yaml'
+      $ref: "./components/schemas/fund-trading/FundNavBenchmarkResponse.yaml"
     FundOperationBenchmark:
-      $ref: './components/schemas/fund-trading/FundOperationBenchmark.yaml'
+      $ref: "./components/schemas/fund-trading/FundOperationBenchmark.yaml"
     FundOperationBenchmarkResponse:
-      $ref: './components/schemas/fund-trading/FundOperationBenchmarkResponse.yaml'
+      $ref: "./components/schemas/fund-trading/FundOperationBenchmarkResponse.yaml"
   responses:
     BadRequest:
-      $ref: './components/responses/BadRequest.yaml'
+      $ref: "./components/responses/BadRequest.yaml"
     Unauthorized:
-      $ref: './components/responses/Unauthorized.yaml'
+      $ref: "./components/responses/Unauthorized.yaml"
     RateLimited:
-      $ref: './components/responses/RateLimited.yaml'
+      $ref: "./components/responses/RateLimited.yaml"
     InternalError:
-      $ref: './components/responses/InternalError.yaml'
+      $ref: "./components/responses/InternalError.yaml"
     NotFound:
-      $ref: './components/responses/NotFound.yaml'
+      $ref: "./components/responses/NotFound.yaml"
     Forbidden:
-      $ref: './components/responses/Forbidden.yaml'
+      $ref: "./components/responses/Forbidden.yaml"
   headers:
     XRateLimitReset:
-      $ref: './components/headers/XRateLimitReset.yaml'
+      $ref: "./components/headers/XRateLimitReset.yaml"
   parameters:
     UserId:
-      $ref: './components/parameters/UserId.yaml'
+      $ref: "./components/parameters/UserId.yaml"
     FromDateNews:
-      $ref: './components/parameters/FromDateNews.yaml'
+      $ref: "./components/parameters/FromDateNews.yaml"
     ToDateNews:
-      $ref: './components/parameters/ToDateNews.yaml'
+      $ref: "./components/parameters/ToDateNews.yaml"
     SubAccountId:
-      $ref: './components/parameters/SubAccountId.yaml'
+      $ref: "./components/parameters/SubAccountId.yaml"
     DeviceId:
-      $ref: './components/parameters/DeviceId.yaml'
+      $ref: "./components/parameters/DeviceId.yaml"
     OrderId:
-      $ref: './components/parameters/OrderId.yaml'
+      $ref: "./components/parameters/OrderId.yaml"
     FundTypeQuery:
-      $ref: './components/parameters/FundTypeQuery.yaml'
+      $ref: "./components/parameters/FundTypeQuery.yaml"
     FundName:
-      $ref: './components/parameters/FundName.yaml'
+      $ref: "./components/parameters/FundName.yaml"
     FundPeriodQuery:
-      $ref: './components/parameters/FundPeriodQuery.yaml'
+      $ref: "./components/parameters/FundPeriodQuery.yaml"
     FundNamesCsv:
-      $ref: './components/parameters/FundNamesCsv.yaml'
+      $ref: "./components/parameters/FundNamesCsv.yaml"
     FromMonth:
-      $ref: './components/parameters/FromMonth.yaml'
+      $ref: "./components/parameters/FromMonth.yaml"
     ToMonth:
-      $ref: './components/parameters/ToMonth.yaml'
+      $ref: "./components/parameters/ToMonth.yaml"
 x-finhay-signing:
   algorithm: HMAC-SHA256
   encoding: hex-lowercase

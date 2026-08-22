@@ -9,10 +9,10 @@ properties:
     type: number
     description: Total net asset value.
   products:
-    $ref: 'ProductsSummary.yaml'
+    $ref: "ProductsSummary.yaml"
   money:
-    $ref: 'MoneySummary.yaml'
+    $ref: "MoneySummary.yaml"
   debt:
-    $ref: 'DebtSummary.yaml'
+    $ref: "DebtSummary.yaml"
   pnl:
-    $ref: 'PnlSummary.yaml'
+    $ref: "PnlSummary.yaml"

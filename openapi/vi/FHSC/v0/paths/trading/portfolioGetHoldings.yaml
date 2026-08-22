@@ -16,21 +16,21 @@ get:
     Field `is_snapshot` = `true` khi response là snapshot cuối phiên (ngoài
     giờ giao dịch); `false` khi đang trong phiên (giá realtime).
   parameters:
-    - $ref: '../../components/parameters/SubAccountId.yaml'
+    - $ref: "../../components/parameters/SubAccountId.yaml"
   responses:
-    '200':
+    "200":
       description: Trả về `data` gồm `is_snapshot` (boolean) và `portfolio[]` — mỗi item là 1 vị thế stock kèm khối lượng, giá vốn, PnL.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/trading/PortfolioResponse.yaml'
+            $ref: "../../components/schemas/trading/PortfolioResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             data:
               is_snapshot: false
               portfolio:
-                - sub_account_id: '0001234567'
+                - sub_account_id: "0001234567"
                   symbol: VNM
                   securities_type: STOCK
                   total: 1000
@@ -48,7 +48,7 @@ get:
                   cost_price: 68000
                   basic_price: 72000
                   is_sellable: true
-                  custodycd: '0123456'
+                  custodycd: "0123456"
                   pnl_amount: 4500000
                   pnl_rate: 6.62
                   close_price: 72500
@@ -60,14 +60,14 @@ get:
                   sending_t2: 0
                   has_newest_news: false
                   trade: 0
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

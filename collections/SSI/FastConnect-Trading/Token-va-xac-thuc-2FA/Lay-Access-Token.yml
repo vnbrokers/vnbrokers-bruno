@@ -29,7 +29,6 @@ runtime:
     - type: after-response
       code: res.status === 200 && bru.setEnvVar('accessToken', res.body.data.accessToken)
 
-
     - type: tests
       code: |-
         test("response matches the schema", function () {

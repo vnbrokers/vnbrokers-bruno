@@ -27,21 +27,21 @@ put:
         type: string
       example: NORMAL
   responses:
-    '200':
+    "200":
       description: OK
       headers:
         Content-Length:
-          $ref: '../../components/headers/ContentLength.yaml'
+          $ref: "../../components/headers/ContentLength.yaml"
         Date:
-          $ref: '../../components/headers/Date.yaml'
+          $ref: "../../components/headers/Date.yaml"
         Vary:
-          $ref: '../../components/headers/Vary.yaml'
+          $ref: "../../components/headers/Vary.yaml"
         X-Ratelimit-Limit:
-          $ref: '../../components/headers/XRateLimitLimit.yaml'
+          $ref: "../../components/headers/XRateLimitLimit.yaml"
         X-Ratelimit-Remaining:
-          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+          $ref: "../../components/headers/XRateLimitRemaining.yaml"
         X-Ratelimit-Reset:
-          $ref: '../../components/headers/XRateLimitReset.yaml'
+          $ref: "../../components/headers/XRateLimitReset.yaml"
         X-Tyk-Api-Expires:
           schema:
             type: string
@@ -56,10 +56,10 @@ put:
                 format: int32
                 example: 1626
                 description: Id lệnh giao dịch
-              
+
               accountNo:
                 type: string
-                example: '0001179019'
+                example: "0001179019"
                 description: Số tiểu khoản
               side:
                 type: string
@@ -119,21 +119,21 @@ put:
                   - DERIVATIVE: Lệnh phái sinh
               transDate:
                 type: string
-                example: '2026-03-16'
+                example: "2026-03-16"
                 description: Ngày giao dịch
               createdDate:
                 type: string
                 format: date-time
-                example: '2026-03-24T04:09:50.761146893Z'
+                example: "2026-03-24T04:09:50.761146893Z"
                 description: Thời điểm tạo
               modifiedDate:
                 type: string
                 format: date-time
-                example: '2026-03-24T04:14:21.004856492Z'
+                example: "2026-03-24T04:14:21.004856492Z"
                 description: Thời điểm cập nhật
           example:
             id: 1626
-            accountNo: '0001179019'
+            accountNo: "0001179019"
             side: NS
             loanPackageId: 2278
             symbol: 41I1G4000
@@ -144,13 +144,13 @@ put:
             fillQuantity: 0
             canceledQuantity: 0
             marketType: DERIVATIVE
-            transDate: '2026-03-16'
-            createdDate: '2026-03-24T04:09:50.761146893Z'
-            modifiedDate: '2026-03-24T04:14:21.004856492Z'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            transDate: "2026-03-16"
+            createdDate: "2026-03-24T04:09:50.761146893Z"
+            modifiedDate: "2026-03-24T04:14:21.004856492Z"
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   tags:
     - Giao dịch
   requestBody:
@@ -190,7 +190,7 @@ parameters:
     deprecated: false
     schema:
       type: string
-    example: '0001179019'
+    example: "0001179019"
   - name: orderId
     in: path
     required: true
@@ -228,21 +228,21 @@ delete:
         type: string
       example: NORMAL
   responses:
-    '200':
+    "200":
       description: OK
       headers:
         Content-Length:
-          $ref: '../../components/headers/ContentLength.yaml'
+          $ref: "../../components/headers/ContentLength.yaml"
         Date:
-          $ref: '../../components/headers/Date.yaml'
+          $ref: "../../components/headers/Date.yaml"
         Vary:
-          $ref: '../../components/headers/Vary.yaml'
+          $ref: "../../components/headers/Vary.yaml"
         X-Ratelimit-Limit:
-          $ref: '../../components/headers/XRateLimitLimit.yaml'
+          $ref: "../../components/headers/XRateLimitLimit.yaml"
         X-Ratelimit-Remaining:
-          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+          $ref: "../../components/headers/XRateLimitRemaining.yaml"
         X-Ratelimit-Reset:
-          $ref: '../../components/headers/XRateLimitReset.yaml'
+          $ref: "../../components/headers/XRateLimitReset.yaml"
         X-Tyk-Api-Expires:
           deprecated: false
           schema: {}
@@ -257,7 +257,7 @@ delete:
                 format: int32
                 example: 1626
                 description: Id lệnh giao dịch
-              
+
               symbol:
                 type: string
                 example: 41I1G4000
@@ -329,7 +329,7 @@ delete:
                 description: Khối lượng còn lại
               accountNo:
                 type: string
-                example: '0001179019'
+                example: "0001179019"
                 description: Số tiểu khoản
               orderCategory:
                 type: string
@@ -344,17 +344,17 @@ delete:
                   - DERIVATIVE: Lệnh phái sinh
               transDate:
                 type: string
-                example: '2026-03-16'
+                example: "2026-03-16"
                 description: Ngày giao dịch
               createdDate:
                 type: string
                 format: date-time
-                example: '2026-03-24T04:09:50.761146893Z'
+                example: "2026-03-24T04:09:50.761146893Z"
                 description: Thời điểm tạo
               modifiedDate:
                 type: string
                 format: date-time
-                example: '2026-03-24T04:16:12.469115348Z'
+                example: "2026-03-24T04:16:12.469115348Z"
                 description: Thời điểm cập nhật
           example:
             id: 1626
@@ -369,16 +369,16 @@ delete:
             fillQuantity: 0
             canceledQuantity: 0
             leaveQuantity: 3
-            accountNo: '0001179019'
+            accountNo: "0001179019"
             orderCategory: NORMAL
             marketType: DERIVATIVE
-            transDate: '2026-03-16'
-            createdDate: '2026-03-24T04:09:50.761146893Z'
-            modifiedDate: '2026-03-24T04:16:12.469115348Z'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            transDate: "2026-03-16"
+            createdDate: "2026-03-24T04:09:50.761146893Z"
+            modifiedDate: "2026-03-24T04:16:12.469115348Z"
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   tags:
     - Giao dịch
 get:
@@ -409,21 +409,21 @@ get:
         type: string
       example: NORMAL
   responses:
-    '200':
+    "200":
       description: OK
       headers:
         Content-Length:
-          $ref: '../../components/headers/ContentLength.yaml'
+          $ref: "../../components/headers/ContentLength.yaml"
         Date:
-          $ref: '../../components/headers/Date.yaml'
+          $ref: "../../components/headers/Date.yaml"
         Vary:
-          $ref: '../../components/headers/Vary.yaml'
+          $ref: "../../components/headers/Vary.yaml"
         X-Ratelimit-Limit:
-          $ref: '../../components/headers/XRateLimitLimit.yaml'
+          $ref: "../../components/headers/XRateLimitLimit.yaml"
         X-Ratelimit-Remaining:
-          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+          $ref: "../../components/headers/XRateLimitRemaining.yaml"
         X-Ratelimit-Reset:
-          $ref: '../../components/headers/XRateLimitReset.yaml'
+          $ref: "../../components/headers/XRateLimitReset.yaml"
         X-Tyk-Api-Expires:
           deprecated: false
           schema: {}
@@ -447,7 +447,7 @@ get:
                   - NS: Bán
               accountNo:
                 type: string
-                example: '0001179019'
+                example: "0001179019"
                 description: Số tiểu khoản
               symbol:
                 type: string
@@ -515,7 +515,7 @@ get:
                 description: Giá khớp trung bình
               transDate:
                 type: string
-                example: '2026-03-16'
+                example: "2026-03-16"
                 description: Ngày giao dịch
               taxRate:
                 type: integer
@@ -544,7 +544,7 @@ get:
                 description: Khối lượng đã hủy
               error:
                 type: string
-                example: ''
+                example: ""
                 description: Mã lỗi nếu lệnh bị từ chối
               marketType:
                 type: string
@@ -561,12 +561,12 @@ get:
               createdDate:
                 type: string
                 format: date-time
-                example: '2026-03-23T03:10:06.556826794Z'
+                example: "2026-03-23T03:10:06.556826794Z"
                 description: Thời điểm tạo lệnh
               modifiedDate:
                 type: string
                 format: date-time
-                example: '2026-03-23T04:07:45.683977124Z'
+                example: "2026-03-23T04:07:45.683977124Z"
                 description: Thời điểm cập nhật lệnh
               metadata:
                 type: string
@@ -576,7 +576,7 @@ get:
           example:
             id: 966
             side: NS
-            accountNo: '0001179019'
+            accountNo: "0001179019"
             symbol: 41I1G4000
             price: 1706.1
             quantity: 5
@@ -588,22 +588,22 @@ get:
             lastQuantity: 2
             lastPrice: 1706.1
             averagePrice: 1750.96
-            transDate: '2026-03-16'
+            transDate: "2026-03-16"
             taxRate: 0
             exchangeFeeRate: 0
             feeRate: 0
             leaveQuantity: 0
             canceledQuantity: 0
-            error: ''
+            error: ""
             marketType: DERIVATIVE
             priceSecure: 1706.1
-            createdDate: '2026-03-23T03:10:06.556826794Z'
-            modifiedDate: '2026-03-23T04:07:45.683977124Z'
+            createdDate: "2026-03-23T03:10:06.556826794Z"
+            modifiedDate: "2026-03-23T04:07:45.683977124Z"
             metadata: >-
               {"orderSession":"OPEN","dealId":"1.77410795472387E14","releaseSecureOnFilled":"false","originMaker":"1000005917-close_deal_177410795472387","dtaAccountNo":"D000113702","isForeigner":false,"probType":"CUSTOMER","eventNo":5}
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   tags:
     - Giao dịch

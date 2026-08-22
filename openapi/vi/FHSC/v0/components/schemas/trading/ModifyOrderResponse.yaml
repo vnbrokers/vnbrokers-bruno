@@ -1,5 +1,5 @@
 allOf:
-  - $ref: '../common/EnvelopeBase.yaml'
+  - $ref: "../common/EnvelopeBase.yaml"
   - type: object
     required:
       - result
@@ -11,4 +11,4 @@ allOf:
           thái lệnh sau khi sửa. Khi lệnh đã khớp một phần, server có thể
           trả `code = -701111` nghĩa là chỉ sửa được phần unmatched.
         items:
-          $ref: 'OrderExecutionResult.yaml'
+          $ref: "OrderExecutionResult.yaml"

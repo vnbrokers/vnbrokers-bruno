@@ -11,9 +11,9 @@ description: |
   | `4H` | 4 giờ |
 enum:
   - 1D
-  - '5'
-  - '15'
-  - '30'
+  - "5"
+  - "15"
+  - "30"
   - 1H
   - 4H
 x-enum-varnames:

@@ -24,7 +24,6 @@ runtime:
         res.status === 200 && bru.setEnvVar("loanPackageId", res.body.data[0].id)
         res.status === 200 && bru.setEnvVar("bankMarginPortfolioId", String(res.body.data[0].id))
 
-
     - type: tests
       code: |-
         test("response matches the schema", function () {

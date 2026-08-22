@@ -21,40 +21,40 @@ get:
 
     Là endpoint Tier 2 → cần đủ 4 header HMAC.
   parameters:
-    - $ref: '../../components/parameters/UserId.yaml'
+    - $ref: "../../components/parameters/UserId.yaml"
   responses:
-    '200':
+    "200":
       description: Trả về mảng `result[]` các tiểu khoản đã mở của user.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/users/SubAccountsResponse.yaml'
+            $ref: "../../components/schemas/users/SubAccountsResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             result:
-              - id: '0001234567'
-                cust_id: '0001234500'
+              - id: "0001234567"
+                cust_id: "0001234500"
                 name: Nguyễn Văn A
                 depository_number: 120C001234
-                product_type_name: '.1'
+                product_type_name: ".1"
                 sub_account_ext: 120C001234.1
                 type: Normal
-              - id: '0001234568'
-                cust_id: '0001234500'
+              - id: "0001234568"
+                cust_id: "0001234500"
                 name: Nguyễn Văn A
                 depository_number: 120C001234
-                product_type_name: '.6'
+                product_type_name: ".6"
                 sub_account_ext: 120C001234.6
                 type: Margin
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

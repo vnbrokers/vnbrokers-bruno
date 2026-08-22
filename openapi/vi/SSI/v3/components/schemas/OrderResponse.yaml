@@ -15,4 +15,3 @@ properties:
   clientCancelId:
     description: Định danh yêu cầu hủy lệnh do client tạo.
     type: string
-

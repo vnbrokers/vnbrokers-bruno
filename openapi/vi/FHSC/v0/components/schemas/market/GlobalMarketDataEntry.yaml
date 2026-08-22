@@ -3,17 +3,17 @@ description: 1 điểm dữ liệu lịch sử của instrument toàn cầu (ind
 properties:
   type:
     allOf:
-      - $ref: 'GlobalMarketDataType.yaml'
+      - $ref: "GlobalMarketDataType.yaml"
     description: Mã instrument.
   country:
     allOf:
-      - $ref: 'GlobalMarketCountry.yaml'
+      - $ref: "GlobalMarketCountry.yaml"
     description: Mã 2 ký tự quốc gia phát hành instrument.
   date:
     type: string
     format: date
     description: Ngày dữ liệu, format `YYYY-MM-DD`.
-    example: '2026-04-22'
+    example: "2026-04-22"
   year:
     type: integer
     description: Năm tách rời từ `date`.

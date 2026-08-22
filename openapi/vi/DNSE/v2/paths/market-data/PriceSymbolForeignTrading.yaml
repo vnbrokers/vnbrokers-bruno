@@ -16,7 +16,7 @@ get:
     - name: boardId
       in: query
       schema:
-        $ref: '../../components/schemas/_common/enums/BoardId.yaml'
+        $ref: "../../components/schemas/_common/enums/BoardId.yaml"
     - name: from
       in: query
       required: true
@@ -36,14 +36,14 @@ get:
       schema:
         type: string
   responses:
-    '200':
+    "200":
       description: OK
       content:
         application/json:
           schema:
             type: object
             additionalProperties: true
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"

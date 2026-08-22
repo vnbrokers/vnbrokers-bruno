@@ -12,12 +12,12 @@ description: |-
   - `T4`: Thỏa thuận lô lẻ 9h-14h45
   - `T6`: Thỏa thuận lô lẻ 14h45-15h
 enum:
-  - 'UNSPECIFIED'
-  - 'AL'
-  - 'G1'
-  - 'G3'
-  - 'G4'
-  - 'T1'
-  - 'T3'
-  - 'T4'
-  - 'T6'
+  - "UNSPECIFIED"
+  - "AL"
+  - "G1"
+  - "G3"
+  - "G4"
+  - "T1"
+  - "T3"
+  - "T4"
+  - "T6"

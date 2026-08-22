@@ -1,5 +1,5 @@
 allOf:
-  - $ref: '../common/EnvelopeBase.yaml'
+  - $ref: "../common/EnvelopeBase.yaml"
   - type: object
     required:
       - result
@@ -12,4 +12,4 @@ allOf:
           (huỷ toàn bộ) hoặc giữ nguyên kèm phần `execute_quantity` cũ
           nếu lệnh đã khớp một phần (chỉ huỷ phần unmatched).
         items:
-          $ref: 'OrderExecutionResult.yaml'
+          $ref: "OrderExecutionResult.yaml"

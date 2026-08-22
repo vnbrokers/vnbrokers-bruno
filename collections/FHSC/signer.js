@@ -8,12 +8,8 @@ const hex = (bytes) =>
 const sign = {
   bodyHash: async (body) => {
     if (!body) return "";
-    const data =
-      typeof body === "string" ? body : JSON.stringify(body);
-    const hash = await crypto.subtle.digest(
-      "SHA-256",
-      new TextEncoder().encode(data)
-    );
+    const data = typeof body === "string" ? body : JSON.stringify(body);
+    const hash = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(data));
     return hex(hash);
   },
 
@@ -22,7 +18,8 @@ const sign = {
     let signPath = path;
     if (query) signPath += "?" + query;
 
-    const lines = bodyHash? `${ts}\n${method}\n${signPath}\n${bodyHash}`
+    const lines = bodyHash
+      ? `${ts}\n${method}\n${signPath}\n${bodyHash}`
       : `${ts}\n${method}\n${signPath}\n`;
 
     const key = await crypto.subtle.importKey(
@@ -30,13 +27,9 @@ const sign = {
       new TextEncoder().encode(secret),
       { name: "HMAC", hash: "SHA-256" },
       false,
-      ["sign"]
+      ["sign"],
     );
-    const sig = await crypto.subtle.sign(
-      "HMAC",
-      key,
-      new TextEncoder().encode(lines)
-    );
+    const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(lines));
     return { ts, sig: hex(sig) };
   },
 

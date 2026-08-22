@@ -13,16 +13,16 @@ get:
       required: true
       description: Mã sàn giao dịch (`HOSE`, `HNX`, `UPCOM`).
       schema:
-        $ref: '../../components/schemas/market/Exchange.yaml'
+        $ref: "../../components/schemas/market/Exchange.yaml"
   responses:
-    '200':
+    "200":
       description: Trả về `result` chứa `exchange_session` (trạng thái phiên) và `available_order_types` (mảng order type khả dụng).
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/trading/MarketSessionResponse.yaml'
+            $ref: "../../components/schemas/trading/MarketSessionResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             result:
               exchange: HOSE
@@ -30,14 +30,14 @@ get:
               available_order_types:
                 - LO
                 - MP
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

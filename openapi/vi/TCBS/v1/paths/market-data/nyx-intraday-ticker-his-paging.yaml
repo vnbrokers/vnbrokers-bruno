@@ -5,31 +5,27 @@
   "summary": "Lịch sử giá khớp"
   "description": "Lấy lịch sử giá khớp trong phiên của mã cổ phiếu."
   "parameters":
-    -
-      "name": "ticker"
+    - "name": "ticker"
       "in": "path"
       "required": true
       "description": "Mã cổ phiếu, ví dụ TCB."
       "schema":
         "type": "string"
-    -
-      "name": "page"
+    - "name": "page"
       "in": "query"
       "required": false
       "description": "Số trang (bắt đầu từ 0)."
       "schema":
         "type": "number"
         "format": "double"
-    -
-      "name": "size"
+    - "name": "size"
       "in": "query"
       "required": false
       "description": "Kích thước trang (max 100)."
       "schema":
         "type": "number"
         "format": "double"
-    -
-      "name": "headIndex"
+    - "name": "headIndex"
       "in": "query"
       "required": false
       "description": "Chỉ số đầu cho phân trang ngược (mặc định -1)."

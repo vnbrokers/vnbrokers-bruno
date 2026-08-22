@@ -24,18 +24,18 @@ get:
         type: array
         minItems: 1
         items:
-          $ref: '../../components/schemas/market/MarketIndex.yaml'
+          $ref: "../../components/schemas/market/MarketIndex.yaml"
       example:
         - VNINDEX
   responses:
-    '200':
+    "200":
       description: Trả về mảng snapshot chỉ số trong `result` (1 phần tử / mã).
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/market/IndexRealtimeResponse.yaml'
+            $ref: "../../components/schemas/market/IndexRealtimeResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             result:
               - index: VNINDEX
@@ -84,14 +84,14 @@ get:
                   - 5
                 sessionInExchange: PROGRESS
                 name: VNINDEX
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

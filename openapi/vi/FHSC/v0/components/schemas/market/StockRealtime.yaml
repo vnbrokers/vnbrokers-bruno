@@ -15,142 +15,142 @@ properties:
   price:
     type:
       - number
-      - 'null'
+      - "null"
     example: 72500
   volume:
     type:
       - number
-      - 'null'
+      - "null"
   change:
     type:
       - number
-      - 'null'
+      - "null"
     description: Price change from reference.
   changePercent:
     type:
       - number
-      - 'null'
+      - "null"
     description: Price change percentage from reference.
   ceiling:
     type:
       - number
-      - 'null'
+      - "null"
     description: Ceiling price.
   floor:
     type:
       - number
-      - 'null'
+      - "null"
     description: Floor price.
   reference:
     type:
       - number
-      - 'null'
+      - "null"
     description: Reference price.
   average:
     type:
       - number
-      - 'null'
+      - "null"
     description: Average (medium) price.
   high:
     type:
       - number
-      - 'null'
+      - "null"
   low:
     type:
       - number
-      - 'null'
+      - "null"
   open:
     type:
       - number
-      - 'null'
+      - "null"
   close:
     type:
       - number
-      - 'null'
+      - "null"
     description: Same as `price`.
   buyPrice1:
     type:
       - number
-      - 'null'
+      - "null"
   buyPrice2:
     type:
       - number
-      - 'null'
+      - "null"
   buyPrice3:
     type:
       - number
-      - 'null'
+      - "null"
   buyVol1:
     type:
       - number
-      - 'null'
+      - "null"
   buyVol2:
     type:
       - number
-      - 'null'
+      - "null"
   buyVol3:
     type:
       - number
-      - 'null'
+      - "null"
   sellPrice1:
     type:
       - number
-      - 'null'
+      - "null"
   sellPrice2:
     type:
       - number
-      - 'null'
+      - "null"
   sellPrice3:
     type:
       - number
-      - 'null'
+      - "null"
   sellVol1:
     type:
       - number
-      - 'null'
+      - "null"
   sellVol2:
     type:
       - number
-      - 'null'
+      - "null"
   sellVol3:
     type:
       - number
-      - 'null'
+      - "null"
   totalVolume:
     type:
       - number
-      - 'null'
+      - "null"
   totalValue:
     type:
       - number
-      - 'null'
+      - "null"
   foreignBought:
     type:
       - number
-      - 'null'
+      - "null"
   foreignSold:
     type:
       - number
-      - 'null'
+      - "null"
   foreignRemain:
     type:
       - number
-      - 'null'
+      - "null"
   remainBid:
     type:
       - number
-      - 'null'
+      - "null"
   remainAsk:
     type:
       - number
-      - 'null'
+      - "null"
   stockType:
     allOf:
-      - $ref: 'StockType.yaml'
+      - $ref: "StockType.yaml"
     description: Normalized instrument type.
   exchange:
     allOf:
-      - $ref: 'Exchange.yaml'
+      - $ref: "Exchange.yaml"
     description: Normalized exchange code.
   name:
     type: string
@@ -161,23 +161,23 @@ properties:
   pe:
     type:
       - number
-      - 'null'
+      - "null"
   pb:
     type:
       - number
-      - 'null'
+      - "null"
   roe:
     type:
       - number
-      - 'null'
+      - "null"
   marketCap:
     type:
       - number
-      - 'null'
+      - "null"
   marketCapCategory:
     type:
       - string
-      - 'null'
+      - "null"
     enum:
       - Micro Cap
       - Small Cap
@@ -188,34 +188,34 @@ properties:
   stockSummary:
     type:
       - string
-      - 'null'
+      - "null"
   additionalInfo:
     type:
       - object
-      - 'null'
+      - "null"
     description: |
       Object chứa các thông tin bổ sung không có cấu trúc cố định. Shape
       thay đổi theo symbol và nguồn dữ liệu.
   symbolStatus:
     type:
       - string
-      - 'null'
+      - "null"
     description: Chỉ áp dụng cho stock niêm yết tại KRX.
   symbolStatusCode:
     type:
       - string
-      - 'null'
+      - "null"
     description: Chỉ áp dụng cho stock niêm yết tại KRX.
   floorCode:
     type:
       - string
-      - 'null'
+      - "null"
     description: KRX stocks only.
   influenceScore:
     type:
       - number
-      - 'null'
+      - "null"
   outstandingShares:
     type:
       - number
-      - 'null'
+      - "null"

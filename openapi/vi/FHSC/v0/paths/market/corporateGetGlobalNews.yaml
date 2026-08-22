@@ -17,7 +17,7 @@ get:
       required: false
       description: Lọc theo phân loại tin tức. Bỏ qua để lấy mọi category.
       schema:
-        $ref: '../../components/schemas/market/GlobalNewsCategory.yaml'
+        $ref: "../../components/schemas/market/GlobalNewsCategory.yaml"
     - name: page
       in: query
       required: false
@@ -38,14 +38,14 @@ get:
         default: 20
         example: 20
   responses:
-    '200':
+    "200":
       description: Trả về `data` là wrapper trang chứa `results[]` cộng metadata phân trang.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/market/GlobalNewsListResponse.yaml'
+            $ref: "../../components/schemas/market/GlobalNewsListResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             data:
               results:
@@ -54,28 +54,28 @@ get:
                   url: https://example.com/news/fed-rate-hold
                   description: Fed officials signaled the federal funds rate will likely remain unchanged…
                   provider: Reuters
-                  published_at: '2026-04-22T08:30:00Z'
+                  published_at: "2026-04-22T08:30:00Z"
                   category: economic-indicators
                 - id: 13
                   title: Gold hits record high on safe-haven demand
                   url: https://example.com/news/gold-record
                   description: Spot gold surged past $2,400/oz overnight…
                   provider: Bloomberg
-                  published_at: '2026-04-22T07:15:00Z'
+                  published_at: "2026-04-22T07:15:00Z"
                   category: commodities
               page_total: 20
               total: 1234
               current_page: 1
               next_page: 2
               previous_page: null
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

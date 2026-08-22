@@ -5,43 +5,37 @@
   "summary": "Thông tin sao kê tiền"
   "description": "Lấy sao kê tiền (lịch sử giao dịch) của tiểu khoản."
   "parameters":
-    -
-      "name": "accountNo"
+    - "name": "accountNo"
       "in": "query"
       "required": true
       "description": "Số tiểu khoản."
       "schema":
         "type": "string"
-    -
-      "name": "fromDate"
+    - "name": "fromDate"
       "in": "query"
       "required": true
       "description": "Từ ngày giao dịch (YYYY-MM-DD)."
       "schema":
         "type": "string"
-    -
-      "name": "toDate"
+    - "name": "toDate"
       "in": "query"
       "required": true
       "description": "Đến ngày giao dịch (YYYY-MM-DD)."
       "schema":
         "type": "string"
-    -
-      "name": "pageSize"
+    - "name": "pageSize"
       "in": "query"
       "required": true
       "description": "Kích thước trang."
       "schema":
         "type": "string"
-    -
-      "name": "pageIndex"
+    - "name": "pageIndex"
       "in": "query"
       "required": true
       "description": "Số trang."
       "schema":
         "type": "string"
-    -
-      "name": "transactionCode"
+    - "name": "transactionCode"
       "in": "query"
       "required": true
       "description": "Loại giao dịch."

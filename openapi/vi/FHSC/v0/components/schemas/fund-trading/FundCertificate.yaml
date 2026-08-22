@@ -11,7 +11,7 @@ properties:
     description: Tên ngắn của quỹ (dùng làm path variable `{fundName}`).
     example: VESAF
   type:
-    $ref: 'FundType.yaml'
+    $ref: "FundType.yaml"
   aum:
     type: integer
     format: int64

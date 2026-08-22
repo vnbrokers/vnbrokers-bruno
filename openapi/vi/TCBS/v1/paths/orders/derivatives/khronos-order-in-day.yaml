@@ -5,52 +5,45 @@
   "summary": "Tra cứu sổ lệnh thường phái sinh"
   "description": "Tra cứu sổ lệnh thường phái sinh."
   "parameters":
-    -
-      "name": "accountId"
+    - "name": "accountId"
       "in": "query"
       "required": true
       "description": "Số tài khoản lưu ký."
       "schema":
         "type": "string"
-    -
-      "name": "pageNo"
+    - "name": "pageNo"
       "in": "query"
       "required": true
       "description": "Số trang."
       "schema":
         "type": "number"
         "format": "double"
-    -
-      "name": "pageSize"
+    - "name": "pageSize"
       "in": "query"
       "required": true
       "description": "Kích thước trang."
       "schema":
         "type": "number"
         "format": "double"
-    -
-      "name": "symbol"
+    - "name": "symbol"
       "in": "query"
       "required": true
       "description": "Bộ lọc: ALL,ALL = all; VN30F2303,B = by mã; ALL,B = by L/S."
       "schema":
         "type": "string"
-    -
-      "name": "orderType"
+    - "name": "orderType"
       "in": "query"
       "required": true
       "description": "Bộ lọc Loại lệnh: '' = all, 3 = Arbitrage, 4 = SL/TP, 5 = ForceClose, 6 = Thường."
       "schema":
         "$ref": "../../../components/schemas/enums/DerivativeOrderTypeFilter.yaml"
-    -
-      "name": "status"
+    - "name": "status"
       "in": "query"
       "required": true
       "description": "0 = all, 1 = waiting, 2 = matched."
       "schema":
         "$ref": "../../../components/schemas/enums/DerivativeOrderStatusFilter.yaml"
-    -
-      "name": "refId"
+    - "name": "refId"
       "in": "query"
       "required": false
       "description": "Ref ID của lệnh."

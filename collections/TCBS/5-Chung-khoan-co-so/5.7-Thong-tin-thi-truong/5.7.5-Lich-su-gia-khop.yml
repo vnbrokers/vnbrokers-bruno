@@ -13,12 +13,12 @@ http:
       type: path
       description: Mã cổ phiếu
     - name: page
-      value: '0'
+      value: "0"
       type: query
       description: Số trang
       disabled: true
     - name: size
-      value: '20'
+      value: "20"
       type: query
       description: Số dòng
       disabled: true

@@ -5,15 +5,13 @@
   "summary": "Tra cứu thông tin chứng khoán"
   "description": "Tra cứu thông tin chi tiết của mã chứng khoán: thông tin niêm yết, giá trần/sàn, sàn giao dịch, loại chứng khoán, hạn mức giao dịch, v.v."
   "parameters":
-    -
-      "name": "fields"
+    - "name": "fields"
       "in": "query"
       "required": false
       "description": "Các trường cần trả về. Mặc định: all."
       "schema":
         "type": "string"
-    -
-      "name": "filter"
+    - "name": "filter"
       "in": "query"
       "required": false
       "description": "Bộ lọc theo cú pháp trường=giá trị, ví dụ: symbol=TCB."

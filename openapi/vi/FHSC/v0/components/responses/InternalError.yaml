@@ -2,7 +2,7 @@ description: Lỗi server nội bộ.
 content:
   application/json:
     schema:
-      $ref: '../schemas/common/ErrorBody.yaml'
+      $ref: "../schemas/common/ErrorBody.yaml"
     example:
-      error_code: '500'
+      error_code: "500"
       message: Internal server error

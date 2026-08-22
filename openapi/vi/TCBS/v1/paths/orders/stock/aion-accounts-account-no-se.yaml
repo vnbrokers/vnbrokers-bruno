@@ -5,8 +5,7 @@
   "summary": "Tra cứu tài sản cổ phiếu"
   "description": "Tra cứu tài sản cổ phiếu theo tiểu khoản. Số dư tiền dùng /cashInvestments; sao kê tiền dùng /erebos/v2/digital/trans-hist-cashStatements."
   "parameters":
-    -
-      "name": "accountNo"
+    - "name": "accountNo"
       "in": "path"
       "required": true
       "description": "Số tiểu khoản."

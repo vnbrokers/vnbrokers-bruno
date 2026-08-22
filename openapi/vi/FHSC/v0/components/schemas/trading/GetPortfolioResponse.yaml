@@ -7,7 +7,7 @@ properties:
   portfolio:
     type: array
     items:
-      $ref: 'PortfolioEntry.yaml'
+      $ref: "PortfolioEntry.yaml"
   is_snapshot:
     type: boolean
     description: Whether the data is from a cached snapshot.

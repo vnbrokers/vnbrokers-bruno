@@ -22,7 +22,7 @@ get:
       required: true
       description: Độ phân giải biểu đồ. Mặc định `1D`.
       schema:
-        $ref: '../../components/schemas/market/Resolution.yaml'
+        $ref: "../../components/schemas/market/Resolution.yaml"
     - name: from
       in: query
       required: true
@@ -40,14 +40,14 @@ get:
         minimum: 0
         example: 1711929600
   responses:
-    '200':
+    "200":
       description: Trả về `data` shape columnar — `time[i]`, `open[i]`, `close[i]`, `high[i]`, `low[i]`, `volume[i]` cùng index `i` biểu diễn 1 cây nến.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/market/PriceHistoriesChartResponse.yaml'
+            $ref: "../../components/schemas/market/PriceHistoriesChartResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             data:
               symbol: VNM
@@ -70,14 +70,14 @@ get:
               volume:
                 - 1500000
                 - 1800000
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

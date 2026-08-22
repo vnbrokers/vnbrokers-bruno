@@ -29,7 +29,6 @@ runtime:
     - type: after-response
       code: res.status === 200 && bru.setEnvVar("qmax", res.body.qmax)
 
-
     - type: tests
       code: |-
         test("response matches the schema", function () {

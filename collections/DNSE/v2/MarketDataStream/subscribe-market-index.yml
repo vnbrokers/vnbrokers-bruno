@@ -141,7 +141,7 @@ docs: |-
   ```
 
   #### Raw stream message
-  
+
   ```json
   {
     "T": "mi",

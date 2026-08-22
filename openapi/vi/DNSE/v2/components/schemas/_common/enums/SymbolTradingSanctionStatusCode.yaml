@@ -8,8 +8,8 @@ description: |-
   - `DTL`: Hủy niêm yết chuyển sàn
   - `TFR`: Ngưng giao dịch do hạn chế
 enum:
-  - 'UNSPECIFIED'
-  - 'NRM'
-  - 'SUS'
-  - 'DTL'
-  - 'TFR'
+  - "UNSPECIFIED"
+  - "NRM"
+  - "SUS"
+  - "DTL"
+  - "TFR"

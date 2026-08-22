@@ -2,14 +2,14 @@ type: object
 description: Thông tin phiên giao dịch hiện tại của 1 sàn.
 properties:
   exchange:
-    $ref: '../market/Exchange.yaml'
+    $ref: "../market/Exchange.yaml"
   exchange_session:
-    $ref: 'ExchangeSession.yaml'
+    $ref: "ExchangeSession.yaml"
   available_order_types:
     type: array
     description: Order types available in the current session.
     items:
-      $ref: 'OrderType.yaml'
+      $ref: "OrderType.yaml"
     example:
       - LO
       - MP

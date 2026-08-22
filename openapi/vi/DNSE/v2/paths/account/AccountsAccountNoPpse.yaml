@@ -32,7 +32,7 @@ get:
       deprecated: false
       schema:
         type: string
-      example: '5757'
+      example: "5757"
     - name: price
       in: query
       required: true
@@ -40,23 +40,23 @@ get:
       deprecated: false
       schema:
         type: string
-      example: '23000'
+      example: "23000"
   responses:
-    '200':
+    "200":
       description: OK
       headers:
         Content-Length:
-          $ref: '../../components/headers/ContentLength.yaml'
+          $ref: "../../components/headers/ContentLength.yaml"
         Date:
-          $ref: '../../components/headers/Date.yaml'
+          $ref: "../../components/headers/Date.yaml"
         Vary:
-          $ref: '../../components/headers/Vary.yaml'
+          $ref: "../../components/headers/Vary.yaml"
         X-Ratelimit-Limit:
-          $ref: '../../components/headers/XRateLimitLimit.yaml'
+          $ref: "../../components/headers/XRateLimitLimit.yaml"
         X-Ratelimit-Remaining:
-          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+          $ref: "../../components/headers/XRateLimitRemaining.yaml"
         X-Ratelimit-Reset:
-          $ref: '../../components/headers/XRateLimitReset.yaml'
+          $ref: "../../components/headers/XRateLimitReset.yaml"
         X-Tyk-Api-Expires:
           schema:
             type: string
@@ -91,10 +91,10 @@ get:
             qmaxBuy: 1203
             qmaxSell: 700
             price: 23000
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   tags:
     - Tài khoản
 parameters:
@@ -104,4 +104,4 @@ parameters:
     description: Số tiểu khoản
     schema:
       type: string
-    example: '0001179019'
+    example: "0001179019"

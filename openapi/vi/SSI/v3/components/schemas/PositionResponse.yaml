@@ -59,4 +59,3 @@ properties:
         description: Thông tin tài khoản hoặc vị thế phái sinh.
         type: object
         additionalProperties: true
-

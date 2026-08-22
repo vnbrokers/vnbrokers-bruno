@@ -13,19 +13,19 @@ get:
       required: true
       schema:
         type: string
-    - $ref: '../../components/parameters/ContentType.yaml'
-    - $ref: '../../components/parameters/UserAgent.yaml'
-    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+    - $ref: "../../components/parameters/ContentType.yaml"
+    - $ref: "../../components/parameters/UserAgent.yaml"
+    - $ref: "../../components/parameters/AcceptLanguage.yaml"
   responses:
-    '200':
+    "200":
       description: Thành công.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/FcoStatusHistoryResponse.yaml'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            $ref: "../../components/schemas/FcoStatusHistoryResponse.yaml"
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"

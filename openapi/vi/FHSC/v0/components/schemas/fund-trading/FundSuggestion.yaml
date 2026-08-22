@@ -6,4 +6,4 @@ properties:
     description: Tên ngắn của quỹ được gợi ý.
     example: DCDS
   criteria:
-    $ref: 'FundSuggestionCriteria.yaml'
+    $ref: "FundSuggestionCriteria.yaml"

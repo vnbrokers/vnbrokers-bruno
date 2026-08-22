@@ -5,15 +5,13 @@
   "summary": "Lấy sức mua theo mã"
   "description": "Lấy sức mua theo mã cổ phiếu cụ thể."
   "parameters":
-    -
-      "name": "accountNo"
+    - "name": "accountNo"
       "in": "path"
       "required": true
       "description": "Số tiểu khoản."
       "schema":
         "type": "string"
-    -
-      "name": "symbol"
+    - "name": "symbol"
       "in": "path"
       "required": true
       "description": "Mã chứng khoán, ví dụ FPT."

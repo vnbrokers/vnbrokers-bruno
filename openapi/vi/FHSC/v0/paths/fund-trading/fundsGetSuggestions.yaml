@@ -8,30 +8,30 @@ get:
     (`NET_ASSET_EQUIVALENT`) và profile tăng trưởng tương đương
     (`GROWTH_EQUIVALENT`). 1 quỹ có thể xuất hiện bằng cả 2 tiêu chí.
   parameters:
-    - $ref: '../../components/parameters/FundName.yaml'
+    - $ref: "../../components/parameters/FundName.yaml"
   responses:
-    '200':
+    "200":
       description: Trả về `data` mảng các quỹ tương tự kèm tiêu chí khớp.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/fund-trading/FundSuggestionsResponse.yaml'
+            $ref: "../../components/schemas/fund-trading/FundSuggestionsResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             data:
               - fund_name: DCDS
                 criteria: NET_ASSET_EQUIVALENT
               - fund_name: SSI-SCA
                 criteria: GROWTH_EQUIVALENT
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

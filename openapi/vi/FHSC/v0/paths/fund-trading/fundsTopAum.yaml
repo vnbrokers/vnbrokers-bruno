@@ -5,16 +5,16 @@ get:
   summary: Danh sách quỹ theo AUM
   description: Danh sách quỹ theo tổng tài sản đang quản lý (AUM), phân theo `fund-type`.
   parameters:
-    - $ref: '../../components/parameters/FundTypeQuery.yaml'
+    - $ref: "../../components/parameters/FundTypeQuery.yaml"
   responses:
-    '200':
+    "200":
       description: Trả về `data` mảng các quỹ kèm AUM, sort giảm dần.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/fund-trading/FundTopAumResponse.yaml'
+            $ref: "../../components/schemas/fund-trading/FundTopAumResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             data:
               - fund_name: VESAF
@@ -23,14 +23,14 @@ get:
               - fund_name: DCDS
                 month: 2025-04
                 aum: 980000000000
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

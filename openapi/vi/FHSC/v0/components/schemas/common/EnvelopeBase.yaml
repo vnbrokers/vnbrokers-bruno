@@ -7,7 +7,7 @@ properties:
   error_code:
     type: string
     description: '`"0"` khi thành công, khác `"0"` khi lỗi.'
-    example: '0'
+    example: "0"
   message:
     type: string
     description: Thông điệp trạng thái dễ đọc.

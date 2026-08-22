@@ -2,7 +2,7 @@ description: Không xác thực — thiếu, sai hoặc không hợp lệ chữ 
 content:
   application/json:
     schema:
-      $ref: '../schemas/common/ErrorBody.yaml'
+      $ref: "../schemas/common/ErrorBody.yaml"
     example:
-      error_code: '401'
+      error_code: "401"
       message: Invalid signature

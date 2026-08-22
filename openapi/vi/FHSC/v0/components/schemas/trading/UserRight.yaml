@@ -15,9 +15,9 @@ properties:
     type: string
     description: Right ratio (e.g. `1:5`).
   status:
-    $ref: 'UserRightStatus.yaml'
+    $ref: "UserRightStatus.yaml"
   userRightRegisterStatus:
-    $ref: 'UserRightRegisterStatus.yaml'
+    $ref: "UserRightRegisterStatus.yaml"
   caMastId:
     type: string
     description: Corporate action master ID.
@@ -30,7 +30,7 @@ properties:
   toSymbol:
     type:
       - string
-      - 'null'
+      - "null"
     description: Target symbol (for stock-conversion events).
   numberOfWaitingStock:
     type: integer
@@ -75,7 +75,7 @@ properties:
     format: date
     description: Used for sorting (descending).
   type:
-    $ref: 'UserRightType.yaml'
+    $ref: "UserRightType.yaml"
   stockName:
     type: string
   totalVolume:

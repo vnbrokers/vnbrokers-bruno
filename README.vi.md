@@ -3,35 +3,38 @@
 [English](README.md)
 
 ## Giới thiệu
+
 **vnbrokers-bruno** là bộ sưu tập OpenAPI của các công ty chứng khoán Việt Nam.
 
 ## Cài đặt
+
 1. Clone repository
+
 ```bash
 git clone https://github.com/vnbrokers/vnbrokers-bruno.git
 ```
- Hoặc tải dự án về và giải nén vào thư mục tuỳ chọn
+
+Hoặc tải dự án về và giải nén vào thư mục tuỳ chọn
 
 2. **Open workspace** trong ứng dụng Bruno tại như mục có chứa tập tin `workspace.yml`
 
 3. Sao chép một environment cho từng bộ sưu tập Open API của mỗi công ty chứng khoán và thiết lập các biến/secret
 
- - **DNSEv2**: Thiết lập `apiKey` và `apiSecret` trong environment, và thiết lập `otp` trong request Get `trading-token`. `x-signature`, `date`
+- **DNSEv2**: Thiết lập `apiKey` và `apiSecret` trong environment, và thiết lập `otp` trong request Get `trading-token`. `x-signature`, `date`
 
-   Truy vấn `Lấy thông tin tài khoản giao dịch` đầu tiên để tự động lấy `accountNo` và Bruno Pre Request script sẽ tự cập nhật lại vào biến môi trường
+  Truy vấn `Lấy thông tin tài khoản giao dịch` đầu tiên để tự động lấy `accountNo` và Bruno Pre Request script sẽ tự cập nhật lại vào biến môi trường
 
- - **TCBS**: Thiết lập `apiKey` và `otp` trong environment.
+- **TCBS**: Thiết lập `apiKey` và `otp` trong environment.
 
-    Bruno Pre Request script ở cấp collection sẽ gán lại `accessToken` vào biến environment `accessToken` để tạo Authorization header cho các request tiếp theo khi gọi request `2.1.1. Trao đổi API Key để lấy JWT Token`
+  Bruno Pre Request script ở cấp collection sẽ gán lại `accessToken` vào biến environment `accessToken` để tạo Authorization header cho các request tiếp theo khi gọi request `2.1.1. Trao đổi API Key để lấy JWT Token`
 
- - **SSI**: Thiết lập `consumerID` và `consumerSecret` trong environment
+- **SSI**: Thiết lập `consumerID` và `consumerSecret` trong environment
 
-   * Đối với FastConnect Data, chọn *Environment* `environments/SSI.Data.yml`, chỉ cần nhập `consumerID` và `consumerSecret`.   
+  - Đối với FastConnect Data, chọn _Environment_ `environments/SSI.Data.yml`, chỉ cần nhập `consumerID` và `consumerSecret`.
 
+  - Đối với FastConnect Data, chọn _Environment_ `environments/SSI.Trading.yml`, cần nhập `consumerID`, `consumerSecret` và `privateKey` cho mục đích ký số.
 
-   * Đối với FastConnect Data, chọn *Environment* `environments/SSI.Trading.yml`, cần nhập `consumerID`, `consumerSecret` và `privateKey` cho mục đích ký số.
-
-   Truy vấn `Token/Lấy Access Token` để lấy `accessToken`, Bruno Pre Request script ở cấp collection sẽ gán lại `accessToken` vào biến environment `accessToken` để tạo Authorization header cho các request tiếp theo.
+  Truy vấn `Token/Lấy Access Token` để lấy `accessToken`, Bruno Pre Request script ở cấp collection sẽ gán lại `accessToken` vào biến environment `accessToken` để tạo Authorization header cho các request tiếp theo.
 
 ## Phát triển
 

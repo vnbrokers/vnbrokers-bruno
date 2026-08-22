@@ -5,8 +5,7 @@
   "summary": "Gói vay bổ trợ"
   "description": "Lấy chi tiết gói vay bổ trợ của tài khoản margin."
   "parameters":
-    -
-      "name": "accountNo"
+    - "name": "accountNo"
       "in": "path"
       "required": true
       "description": "Số tiểu khoản margin."
