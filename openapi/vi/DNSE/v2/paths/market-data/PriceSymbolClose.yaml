@@ -16,16 +16,85 @@ get:
     - name: boardId
       in: query
       schema:
-        $ref: '../../components/schemas/_common/enums/BoardId.yaml'
+        $ref: ../../components/schemas/_common/enums/BoardId.yaml
+      description: |-
+        Mã bảng giao dịch
+        - G1: Lô chẵn
+        - G4: Lô lẻ
+        - T1: Thỏa thuận trong giờ (9h - 14h45)
+        - T3: Thỏa thuận sau giờ (14h45 - 15h)
+        - T4: Thỏa thuận lô lẻ trong giờ (9h - 14h45)
+        - T6: Thỏa thuận lô lẻ sau giờ  (14h45 - 15h)
+      example: G1
   responses:
-    '200':
+    "200":
       description: OK
       content:
         application/json:
           schema:
             type: object
             additionalProperties: true
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            properties:
+              prices:
+                type: array
+                description: Danh sách thông tin giá đóng cửa của các mã chứng khoán.
+                example:
+                  - marketId: STO
+                    boardId: G1
+                    isin: VN000000HPG4
+                    symbol: HPG
+                    closePrice: 26.8
+                    time: "2026-04-08 02:14:59.775"
+                items:
+                  type: object
+                  properties:
+                    marketId:
+                      type: string
+                      example: STO
+                      description: |-
+                        Mã thị trường niêm yết mã chứng khoán
+                        - DVX: Phái sinh sàn HNX
+                        - HCX: Trái phiếu doanh nghiệp HNX
+                        - STO: Cổ phiếu sàn HOSE
+                        - STX: Cổ phiếu sàn HNX
+                        - UPX: Cổ phiếu sàn Upcom
+                    boardId:
+                      type: string
+                      example: G1
+                      description: |-
+                        Mã bảng giao dịch
+                        - G1: Lô chẵn
+                        - G4: Lô lẻ
+                        - T1: Thỏa thuận trong giờ (9h - 14h45)
+                        - T3: Thỏa thuận sau giờ (14h45 - 15h)
+                        - T4: Thỏa thuận lô lẻ trong giờ (9h - 14h45)
+                        - T6: Thỏa thuận lô lẻ sau giờ (14h45 - 15h)
+                    isin:
+                      type: string
+                      example: VN000000HPG4
+                      description: Mã định danh quốc tế
+                    symbol:
+                      type: string
+                      example: HPG
+                      description: Mã chứng khoán
+                    closePrice:
+                      type: number
+                      format: double
+                      example: 26.8
+                      description: Giá đóng cửa của mã chứng khoán
+                    time:
+                      type: string
+                      example: "2026-04-08 02:14:59.775"
+                      description: Thời gian ghi nhận (YYYY-MM-DD HH:mm:ss.SSS (GMT+7))
+          example:
+            prices:
+              - marketId: STO
+                boardId: G1
+                isin: VN000000HPG4
+                symbol: HPG
+                closePrice: 26.8
+                time: "2026-04-08 02:14:59.775"
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml

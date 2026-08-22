@@ -2,15 +2,33 @@ type: object
 properties:
   enabled:
     type: boolean
+    example: true
+    description: Bật/tắt chức năng chốt lời
   strategy:
     type: string
+    example: DELTA_PRICE
+    description: "Chiến lược kích hoạt chốt lời \n  - PNL_RATE: Kích hoạt theo tỷ lệ %\n  - DELTA_PRICE: Kích hoạt theo mức chênh lệch giá                       "
   rate:
     type: number
+    example: 0.52
+    format: double
+    description: Tỷ lệ % so với giá hòa vốn, dùng để kích hoạt chốt lời khi strategy = PNL_RATE. Giá trị phải lớn hơn 0
   deltaPrice:
     type: number
+    example: 162.8
+    format: double
+    description: Mức chênh lệch giá so với giá hòa vốn, dùng để kích hoạt chốt lời khi strategy = DELTA_PRICE. Giá trị phải lớn hơn 0
   orderMethod:
     type: string
+    example: FASTEST
+    description: "Phương thức đặt lệnh khi điều kiện chốt lời được kích hoạt.\n  - FASTEST: Lệnh khớp ngay với giá đặt là giá trần/sàn tùy theo chiều vị thế Bán/Mua\n  - DELTA_PRICE: Lệnh đặt theo biên độ giá so với giá kích hoạt "
   orderDeltaPrice:
     type: number
+    format: double
+    example: 2
+    description: Biên độ giá đặt lệnh so với giá kích hoạt khi orderMethod = DELTA_PRICE. Có thể là số âm, số dương hoặc bằng 0
   trailingEnabled:
     type: boolean
+    example: true
+    description: Bật/tắt cơ chế Trailing Stop. Lưu ý cơ chế này chỉ hoạt động khi chức năng cắt lỗ được bật
+description: Cấu hình chốt lời (Take Profit)

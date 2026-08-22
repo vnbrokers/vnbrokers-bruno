@@ -1,0 +1,12 @@
+name: subscribeQuoteRequest
+title: Đăng ký luồng độ sâu thị trường
+summary: Đăng ký topic `top_price.{market_group}.json`.
+payload:
+  $ref: ../../schemas/top_price/SubscribeRequest.yaml
+examples:
+  - name: subscribeQuote
+    payload:
+      action: subscribe
+      channels:
+        - name: top_price.G1.json
+          symbols: [HPG]

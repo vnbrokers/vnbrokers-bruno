@@ -1,3 +1,4 @@
 description: Response header indicating the request headers used for content negotiation.
 schema:
   type: string
+example: Origin

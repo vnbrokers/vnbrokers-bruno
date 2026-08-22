@@ -1,0 +1,14 @@
+name: unsubscribePortfolioRequest
+title: Yêu cầu hủy cập nhật danh mục
+summary: Hủy đăng ký các topic portfolio trên channel TRADING.
+payload:
+  $ref: ../../schemas/trading/UnsubscribePortfolioRequest.yaml
+examples:
+  - name: unsubscribePortfolio
+    summary: Hủy đăng ký cập nhật danh mục.
+    payload:
+      method: UNSUBSCRIBE
+      channel: TRADING
+      topics:
+        - portfolio.0901351
+        - portfolio.*

@@ -1,0 +1,9 @@
+name: subscribedMessage
+title: Đăng ký thành công
+summary: Server xác nhận client đã đăng ký channel dữ liệu.
+payload:
+  $ref: ../../schemas/control/SubscribedMessage.yaml
+examples:
+  - name: subscribed
+    payload:
+      action: subscribed

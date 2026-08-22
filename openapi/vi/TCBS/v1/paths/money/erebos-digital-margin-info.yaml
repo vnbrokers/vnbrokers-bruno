@@ -5,43 +5,37 @@
   "summary": "Tra cứu nợ"
   "description": "Lấy thông tin dư nợ margin (lịch sử khoản vay) của tiểu khoản."
   "parameters":
-    -
-      "name": "acctno"
+    - "name": "acctno"
       "in": "query"
       "required": true
       "description": "Số tiểu khoản."
       "schema":
         "type": "string"
-    -
-      "name": "fromdate"
+    - "name": "fromdate"
       "in": "query"
       "required": true
       "description": "Từ ngày (YYYY-MM-DD)."
       "schema":
         "type": "string"
-    -
-      "name": "toDate"
+    - "name": "toDate"
       "in": "query"
       "required": true
       "description": "Đến ngày (YYYY-MM-DD)."
       "schema":
         "type": "string"
-    -
-      "name": "page"
+    - "name": "page"
       "in": "query"
       "required": true
       "description": "Số trang."
       "schema":
         "type": "string"
-    -
-      "name": "size"
+    - "name": "size"
       "in": "query"
       "required": true
       "description": "Kích thước trang."
       "schema":
         "type": "string"
-    -
-      "name": "custodycd"
+    - "name": "custodycd"
       "in": "query"
       "required": true
       "description": "Mã tài khoản lưu ký."
@@ -115,3 +109,19 @@
                           type: number
                           format: double
                           description: "Phí còn lại."
+          example:
+            response:
+              totalRow: 1
+              totalPage: 6
+              data:
+                - releaseDate: 2022-07-11
+                  overDueDate: 2022-10-10
+                  releasedAmount: 14444940
+                  printAmount: 0
+                  intAmount: 0
+                  remainingInterestFee: 0
+                  paidInterestFee: 18205
+                  rate2: 11.5
+                  releasedDay: 4
+                  paidFee: 0
+                  remainingFee: 0

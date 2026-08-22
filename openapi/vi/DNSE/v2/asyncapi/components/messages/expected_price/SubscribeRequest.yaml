@@ -1,0 +1,12 @@
+name: subscribeExpectedPriceRequest
+title: Đăng ký luồng giá dự kiến
+summary: Đăng ký topic `expected_price.{market_group}.json`.
+payload:
+  $ref: ../../schemas/expected_price/SubscribeRequest.yaml
+examples:
+  - name: subscribeExpectedPrice
+    payload:
+      action: subscribe
+      channels:
+        - name: expected_price.G1.json
+          symbols: [HPG]

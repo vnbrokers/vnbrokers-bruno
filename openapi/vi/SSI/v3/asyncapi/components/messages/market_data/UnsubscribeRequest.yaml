@@ -1,0 +1,14 @@
+name: unsubscribeMarketDataRequest
+title: Yêu cầu hủy market data
+summary: Hủy đăng ký các topic trên channel DATA.
+payload:
+  $ref: ../../schemas/market_data/UnsubscribeRequest.yaml
+examples:
+  - name: unsubscribeMarketData
+    summary: Hủy đăng ký các topic market data.
+    payload:
+      method: UNSUBSCRIBE
+      channel: DATA
+      topics:
+        - trade.SSI
+        - quote.SSI

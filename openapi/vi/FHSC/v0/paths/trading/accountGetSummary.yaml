@@ -12,16 +12,16 @@ get:
     Thông tin chi tiết của tiểu khoản — số dư, dư nợ, margin, tài sản ròng
     và thông tin ngân hàng liên kết.
   parameters:
-    - $ref: '../../components/parameters/SubAccountId.yaml'
+    - $ref: "../../components/parameters/SubAccountId.yaml"
   responses:
-    '200':
+    "200":
       description: Trả về `result` chứa toàn bộ field tài chính của tiểu khoản — số dư, dư nợ, margin, tài sản ròng, ngân hàng liên kết.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/trading/AccountSummaryResponse.yaml'
+            $ref: "../../components/schemas/trading/AccountSummaryResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             result:
               balance: 12500000
@@ -58,19 +58,19 @@ get:
               add_vnd: 0
               add_vnd_1: 0
               core_bank: VCB
-              bankacct_no: '0123456789'
+              bankacct_no: "0123456789"
               bank_name: Vietcombank
               emk_amt: 0
-              baldefovd: '0'
+              baldefovd: "0"
               mrcr_limit_max: 0
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

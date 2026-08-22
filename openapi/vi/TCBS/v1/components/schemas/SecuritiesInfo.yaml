@@ -1,0 +1,72 @@
+type: object
+description: Thông tin chi tiết niêm yết của chứng khoán.
+properties:
+  symbol:
+    type: string
+    description: Mã niêm yết.
+  status:
+    type: string
+    description: "Trạng thái giao dịch: 001 = bình thường, 002 = tạm ngừng, 003 = dừng, 004 = giám sát, 005 = cảnh báo."
+    enum:
+      - "001"
+      - "002"
+      - "003"
+      - "004"
+      - "005"
+  listingQtty:
+    type: integer
+    format: int64
+    description: Tổng khối lượng niêm yết.
+  txDate:
+    type: string
+    format: date
+    description: Ngày giao dịch.
+  listingStatus:
+    type: string
+    description: "Trạng thái niêm yết: N = bình thường, L = niêm yết mới, U = hủy, I = tăng vốn, D = giảm vốn."
+    enum:
+      - N
+      - L
+      - U
+      - I
+      - D
+  tradeUnit:
+    type: integer
+    format: int64
+    description: Đơn vị giá giao dịch.
+  ceilingPrice:
+    type: integer
+    format: int64
+    description: Giá trần.
+  floorPrice:
+    type: integer
+    format: int64
+    description: Giá sàn.
+  basicPrice:
+    type: integer
+    format: int64
+    description: Giá tham chiếu.
+  tradeLot:
+    type: integer
+    format: int64
+    description: Đơn vị khối lượng giao dịch.
+  tradeBuySell:
+    type: string
+    description: Cho phép mua bán cùng ngày (Y/N).
+    enum:
+      - Y
+      - N
+  marginLimitMax:
+    type: integer
+    format: int64
+    description: Hạn mức giao dịch margin tối đa.
+  currentRoom:
+    type: integer
+    format: int64
+    description: Room còn lại của nhà đầu tư nước ngoài.
+  securedRatioMax:
+    type: number
+    description: Tỷ lệ ký quỹ tối đa.
+  mortageRatioMax:
+    type: number
+    description: Tỷ lệ cầm cố tối đa.

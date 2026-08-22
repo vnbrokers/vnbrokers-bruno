@@ -8,7 +8,7 @@ properties:
     type: string
     example: VNM
   resolution:
-    $ref: 'Resolution.yaml'
+    $ref: "Resolution.yaml"
   time:
     type: array
     description: Unix timestamps (seconds).

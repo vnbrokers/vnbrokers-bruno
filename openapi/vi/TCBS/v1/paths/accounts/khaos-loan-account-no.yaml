@@ -5,8 +5,7 @@
   "summary": "Danh sách khoản vay"
   "description": "Lấy danh sách khoản vay của tài khoản margin."
   "parameters":
-    -
-      "name": "accountNo"
+    - "name": "accountNo"
       "in": "path"
       "required": true
       "description": "Số tiểu khoản margin."
@@ -51,7 +50,7 @@
                     reasonList:
                       type: array
                       items:
-                        type: object
+                        type: string
                       description: "Lý do không được gia hạn."
                     insurance:
                       type: object
@@ -66,3 +65,17 @@
                           type: number
                           format: double
                           description: "Phí marginsure."
+          example:
+            size: 10
+            content:
+              - openingDate: 2024-09-06
+                dueDate: 2024-12-04
+                renewTime: 0
+                maxRenewTime: 1
+                isRenewable: false
+                reasonList:
+                  - Chưa đến ngày xin gia hạn
+                insurance:
+                  insuranceName: Phòng ngự
+                  insuranceCode: MRX_INSURANCE_PREMIUM_1
+                  insuranceFee: 0.15

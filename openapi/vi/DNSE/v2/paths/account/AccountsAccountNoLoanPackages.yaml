@@ -9,11 +9,7 @@ get:
     - name: marketType
       in: query
       required: true
-      description: |-
-        Loại thị trường 
-        - STOCK: Gói vay giao dịch cơ sở
-        - DERIVATIVE: Gói vay giao dịch phái sinh
-        - BOND: Gói vay giao dịch trái phiếu
+      description: "Loại thị trường \n- STOCK: Gói vay giao dịch cơ sở\n- DERIVATIVE: Gói vay giao dịch phái sinh\n- BOND: Gói vay giao dịch trái phiếu"
       deprecated: false
       schema:
         type: string
@@ -27,19 +23,19 @@ get:
         type: string
       example: 41I1G4000
   responses:
-    '200':
+    "200":
       description: OK
       headers:
         Date:
-          $ref: '../../components/headers/Date.yaml'
+          $ref: ../../components/headers/Date.yaml
         Vary:
-          $ref: '../../components/headers/Vary.yaml'
+          $ref: ../../components/headers/Vary.yaml
         X-Ratelimit-Limit:
-          $ref: '../../components/headers/XRateLimitLimit.yaml'
+          $ref: ../../components/headers/XRateLimitLimit.yaml
         X-Ratelimit-Remaining:
-          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+          $ref: ../../components/headers/XRateLimitRemaining.yaml
         X-Ratelimit-Reset:
-          $ref: '../../components/headers/XRateLimitReset.yaml'
+          $ref: ../../components/headers/XRateLimitReset.yaml
         X-Tyk-Api-Expires:
           schema:
             type: string
@@ -56,16 +52,11 @@ get:
               symbolType:
                 type: string
                 example: VN30F1M
-                description: >-
-                  Phân loại mã hợp đồng phái sinh theo thời gian đáo hạn (áp
-                  dụng cho DERIVATIVE)
-
+                description: |-
+                  Phân loại mã hợp đồng phái sinh theo thời gian đáo hạn (áp dụng cho DERIVATIVE)
                   - VN30F1M: HĐTL chỉ số VN30 1 tháng
-
                   - VN30F2M: HĐTL chỉ số VN30 2 tháng
-
                   - VN30F1Q: HĐTL chỉ số VN30 1 quý
-
                   - VN30F2Q: HĐTL chỉ số VN30 2 quý
               marketType:
                 type: string
@@ -107,9 +98,7 @@ get:
                       description: Tỷ lệ xử lý (force sell)
                     tradingFee:
                       type: object
-                      description: >-
-                        Thông tin biểu phí phái sinh (áp dụng cho
-                        DERIVATIVE)
+                      description: Thông tin biểu phí phái sinh (áp dụng cho DERIVATIVE)
                       properties:
                         id:
                           type: integer
@@ -138,12 +127,12 @@ get:
                         createdDate:
                           type: string
                           format: date-time
-                          example: '2022-12-13T08:22:12.530837Z'
+                          example: "2022-12-13T08:22:12.530837Z"
                           description: Thời điểm áp dụng
                         modifiedDate:
                           type: string
                           format: date-time
-                          example: '2022-12-13T08:22:12.530837Z'
+                          example: "2022-12-13T08:22:12.530837Z"
                           description: Thời điểm cập nhật
                         fixedTradingFee:
                           type: integer
@@ -197,6 +186,39 @@ get:
                                 format: double
                                 example: 2196
                                 description: Mức phí
+                    interestRate:
+                      type: number
+                      format: float
+                      example: 0.125
+                      description: Tỷ lệ lãi vay
+                    type:
+                      type: string
+                      example: M
+                      description: Loại gói vay
+                    brokerFirmBuyingFeeRate:
+                      type: number
+                      format: double
+                      example: 0
+                      description: Phí giao dịch chiều mua công ty chứng khoán thu
+                    brokerFirmSellingFeeRate:
+                      type: number
+                      format: double
+                      example: 0
+                      description: Phí giao dịch chiều bán công ty chứng khoán thu
+                example:
+                  - id: 1775
+                    name: GD Tiền mặt
+                    initialRate: 1
+                    interestRate: 0.125
+                    liquidRate: 0.3
+                    maintenanceRate: 0.4
+                    type: M
+                    brokerFirmBuyingFeeRate: 0
+                    brokerFirmSellingFeeRate: 0
+              symbol:
+                type: string
+                example: ACB
+                description: Mã chứng khoán
           example:
             symbolType: VN30F1M
             marketType: DERIVATIVE
@@ -212,8 +234,8 @@ get:
                   scope: PRODUCT
                   channel: ALL
                   schemaType: FIXED
-                  createdDate: '2022-12-13T08:22:12.530837Z'
-                  modifiedDate: '2022-12-13T08:22:12.530837Z'
+                  createdDate: "2022-12-13T08:22:12.530837Z"
+                  modifiedDate: "2022-12-13T08:22:12.530837Z"
                   fixedTradingFee: 2000
                   fixedDailyCloseTradingFee: 2000
               - id: 5058
@@ -227,8 +249,8 @@ get:
                   scope: PRODUCT
                   channel: ALL
                   schemaType: FIXED
-                  createdDate: '2023-12-12T03:55:37.22881Z'
-                  modifiedDate: '2023-12-12T03:55:37.22881Z'
+                  createdDate: "2023-12-12T03:55:37.22881Z"
+                  modifiedDate: "2023-12-12T03:55:37.22881Z"
                   fixedTradingFee: 1500
                   fixedDailyCloseTradingFee: 1500
               - id: 2278
@@ -242,8 +264,8 @@ get:
                   scope: PRODUCT
                   channel: ALL
                   schemaType: FIXED
-                  createdDate: '2023-02-02T04:22:56.199278Z'
-                  modifiedDate: '2023-02-02T04:22:56.199278Z'
+                  createdDate: "2023-02-02T04:22:56.199278Z"
+                  modifiedDate: "2023-02-02T04:22:56.199278Z"
                   fixedTradingFee: 2000
                   fixedDailyCloseTradingFee: 2000
               - id: 9990
@@ -257,8 +279,8 @@ get:
                   scope: PRODUCT
                   channel: ALL
                   schemaType: PROGRESSIVE
-                  createdDate: '2026-01-16T09:09:15.556640382Z'
-                  modifiedDate: '2026-01-16T09:09:15.556640382Z'
+                  createdDate: "2026-01-16T09:09:15.556640382Z"
+                  modifiedDate: "2026-01-16T09:09:15.556640382Z"
                   progressTradingFee:
                     - fromQuantity: 1
                       toQuantity: 2000
@@ -267,10 +289,10 @@ get:
                     - fromQuantity: 2001
                       toQuantity: 3000
                       fee: 2196
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml
   tags:
     - Tài khoản
 parameters:
@@ -281,4 +303,4 @@ parameters:
     deprecated: false
     schema:
       type: string
-    example: '0001179019'
+    example: "0001179019"

@@ -1,3 +1,4 @@
 description: Clickjacking protection header returned by the gateway.
 schema:
   type: string
+example: GOFORIT

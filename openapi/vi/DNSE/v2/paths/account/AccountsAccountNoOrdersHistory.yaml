@@ -9,11 +9,7 @@ get:
     - name: marketType
       in: query
       required: true
-      description: |-
-        Loại thị trường 
-        - STOCK: Gói vay giao dịch cơ sở
-        - DERIVATIVE: Gói vay giao dịch phái sinh
-        - BOND: Giao dịch trái phiếu
+      description: "Loại thị trường \n- STOCK: Gói vay giao dịch cơ sở\n- DERIVATIVE: Gói vay giao dịch phái sinh\n- BOND: Giao dịch trái phiếu"
       deprecated: false
       schema:
         type: string
@@ -21,39 +17,35 @@ get:
     - name: from
       in: query
       required: true
-      description: |-
-        Ngày bắt đầu (yyyy-mm-dd) 
-        - Thời gian tra cứu tối đa trong 1 năm tính từ ngày hiện tại
+      description: "Ngày bắt đầu (yyyy-mm-dd) \n- Thời gian tra cứu tối đa trong 1 năm tính từ ngày hiện tại"
       deprecated: false
       schema:
         type: string
-      example: '2026-02-15'
+      example: "2026-02-15"
     - name: to
       in: query
       required: true
-      description: |-
-        Ngày kết thúc (yyyy-mm-dd) 
-        - Lớn hơn hoặc bằng ngày bắt đầu và không vượt quá ngày hiện tại
+      description: "Ngày kết thúc (yyyy-mm-dd) \n- Lớn hơn hoặc bằng ngày bắt đầu và không vượt quá ngày hiện tại"
       deprecated: false
       schema:
         type: string
-      example: '2026-03-18'
+      example: "2026-03-18"
   responses:
-    '200':
+    "200":
       description: OK
       headers:
         Content-Length:
-          $ref: '../../components/headers/ContentLength.yaml'
+          $ref: ../../components/headers/ContentLength.yaml
         Date:
-          $ref: '../../components/headers/Date.yaml'
+          $ref: ../../components/headers/Date.yaml
         Vary:
-          $ref: '../../components/headers/Vary.yaml'
+          $ref: ../../components/headers/Vary.yaml
         X-Ratelimit-Limit:
-          $ref: '../../components/headers/XRateLimitLimit.yaml'
+          $ref: ../../components/headers/XRateLimitLimit.yaml
         X-Ratelimit-Remaining:
-          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+          $ref: ../../components/headers/XRateLimitRemaining.yaml
         X-Ratelimit-Reset:
-          $ref: '../../components/headers/XRateLimitReset.yaml'
+          $ref: ../../components/headers/XRateLimitReset.yaml
         X-Tyk-Api-Expires:
           deprecated: false
           schema: {}
@@ -65,7 +57,7 @@ get:
             properties:
               accountNo:
                 type: string
-                example: '0001179019'
+                example: "0001179019"
                 description: Số tiểu khoản
               fillQuantity:
                 type: integer
@@ -97,7 +89,7 @@ get:
               data:
                 type: array
                 example:
-                  - id: '20260312_241'
+                  - id: "20260312_241"
                     symbol: HPG
                     side: NB
                     orderType: LO
@@ -109,15 +101,15 @@ get:
                     canceledQuantity: 200
                     averagePrice: 0
                     loanPackageId: 5765
-                    transDate: '2026-03-12'
-                    createdDate: '2026-03-17T06:44:18.813804Z'
-                    modifiedDate: '2026-03-18T15:28:24.44026Z'
+                    transDate: "2026-03-12"
+                    createdDate: "2026-03-17T06:44:18.813804Z"
+                    modifiedDate: "2026-03-18T15:28:24.44026Z"
                 items:
                   type: object
                   properties:
                     id:
                       type: string
-                      example: '20260312_241'
+                      example: "20260312_241"
                       description: ID lệnh trên hệ thống
                     symbol:
                       type: string
@@ -142,23 +134,15 @@ get:
                     orderStatus:
                       type: string
                       example: Expired
-                      description: >-
+                      description: |-
                         Trạng thái lệnh
-
                         - Pending/PendingNew: Chờ gửi
-
                         - New: Chờ khớp
-
                         - PartiallyFilled: Khớp một phần
-
                         - Filled: Khớp toàn bộ
-
                         - Rejected: Bị từ chối
-
                         - Expired: Hết hạn trong phiên
-
-                        - DoneForDay: Lệnh được giải tỏa do không khớp trong
-                        phiên
+                        - DoneForDay: Lệnh được giải tỏa do không khớp trong phiên
                     price:
                       type: integer
                       format: int32
@@ -196,28 +180,28 @@ get:
                       description: ID gói vay
                     transDate:
                       type: string
-                      example: '2026-03-12'
+                      example: "2026-03-12"
                       description: Ngày giao dịch
                     createdDate:
                       type: string
                       format: date-time
-                      example: '2026-03-17T06:44:18.813804Z'
+                      example: "2026-03-17T06:44:18.813804Z"
                       description: Thời điểm tạo
                     modifiedDate:
                       type: string
                       format: date-time
-                      example: '2026-03-18T15:28:24.44026Z'
+                      example: "2026-03-18T15:28:24.44026Z"
                       description: Thời điểm cập nhật
                 description: Danh sách lệnh giao dịch
           example:
-            accountNo: '0001179019'
+            accountNo: "0001179019"
             fillQuantity: 0
             total: 8
             start: 0
             end: 8
             marketType: STOCK
             data:
-              - id: '20260312_241'
+              - id: "20260312_241"
                 symbol: HPG
                 side: NB
                 orderType: LO
@@ -229,10 +213,10 @@ get:
                 canceledQuantity: 200
                 averagePrice: 0
                 loanPackageId: 5765
-                transDate: '2026-03-12'
-                createdDate: '2026-03-17T06:44:18.813804Z'
-                modifiedDate: '2026-03-18T15:28:24.44026Z'
-              - id: '20260312_201'
+                transDate: "2026-03-12"
+                createdDate: "2026-03-17T06:44:18.813804Z"
+                modifiedDate: "2026-03-18T15:28:24.44026Z"
+              - id: "20260312_201"
                 symbol: HPG
                 side: NB
                 orderType: LO
@@ -244,10 +228,10 @@ get:
                 canceledQuantity: 100
                 averagePrice: 0
                 loanPackageId: 5765
-                transDate: '2026-03-12'
-                createdDate: '2026-03-17T04:38:39.589764Z'
-                modifiedDate: '2026-03-17T06:44:18.80718Z'
-              - id: '20260312_191'
+                transDate: "2026-03-12"
+                createdDate: "2026-03-17T04:38:39.589764Z"
+                modifiedDate: "2026-03-17T06:44:18.80718Z"
+              - id: "20260312_191"
                 symbol: HPG
                 side: NB
                 orderType: LO
@@ -259,10 +243,10 @@ get:
                 canceledQuantity: 100
                 averagePrice: 0
                 loanPackageId: 5765
-                transDate: '2026-03-12'
-                createdDate: '2026-03-17T04:37:55.076343Z'
-                modifiedDate: '2026-03-17T04:38:39.58558Z'
-              - id: '20260312_171'
+                transDate: "2026-03-12"
+                createdDate: "2026-03-17T04:37:55.076343Z"
+                modifiedDate: "2026-03-17T04:38:39.58558Z"
+              - id: "20260312_171"
                 symbol: HPG
                 side: NB
                 orderType: LO
@@ -274,10 +258,10 @@ get:
                 canceledQuantity: 300
                 averagePrice: 0
                 loanPackageId: 5765
-                transDate: '2026-03-12'
-                createdDate: '2026-03-17T04:27:07.160028Z'
-                modifiedDate: '2026-03-17T04:27:07.16518Z'
-              - id: '20260312_161'
+                transDate: "2026-03-12"
+                createdDate: "2026-03-17T04:27:07.160028Z"
+                modifiedDate: "2026-03-17T04:27:07.16518Z"
+              - id: "20260312_161"
                 symbol: HPG
                 side: NB
                 orderType: LO
@@ -289,10 +273,10 @@ get:
                 canceledQuantity: 200
                 averagePrice: 0
                 loanPackageId: 5765
-                transDate: '2026-03-12'
-                createdDate: '2026-03-17T04:26:29.007723Z'
-                modifiedDate: '2026-03-17T04:27:07.156301Z'
-              - id: '20260312_151'
+                transDate: "2026-03-12"
+                createdDate: "2026-03-17T04:26:29.007723Z"
+                modifiedDate: "2026-03-17T04:27:07.156301Z"
+              - id: "20260312_151"
                 symbol: HPG
                 side: NB
                 orderType: LO
@@ -304,10 +288,10 @@ get:
                 canceledQuantity: 100
                 averagePrice: 0
                 loanPackageId: 5765
-                transDate: '2026-03-12'
-                createdDate: '2026-03-17T04:22:19.045725Z'
-                modifiedDate: '2026-03-17T04:26:28.9999Z'
-              - id: '20260305_61'
+                transDate: "2026-03-12"
+                createdDate: "2026-03-17T04:22:19.045725Z"
+                modifiedDate: "2026-03-17T04:26:28.9999Z"
+              - id: "20260305_61"
                 symbol: ACB
                 side: NB
                 orderType: LO
@@ -319,10 +303,10 @@ get:
                 canceledQuantity: 100
                 averagePrice: 0
                 loanPackageId: 5757
-                transDate: '2026-03-05'
-                createdDate: '2026-03-11T08:32:01.401474Z'
-                modifiedDate: '2026-03-11T14:35:53.763802Z'
-              - id: '20260224_181'
+                transDate: "2026-03-05"
+                createdDate: "2026-03-11T08:32:01.401474Z"
+                modifiedDate: "2026-03-11T14:35:53.763802Z"
+              - id: "20260224_181"
                 symbol: FPT
                 side: NB
                 orderType: LO
@@ -334,13 +318,13 @@ get:
                 canceledQuantity: 100
                 averagePrice: 0
                 loanPackageId: 1372
-                transDate: '2026-02-24'
-                createdDate: '2026-02-26T08:25:18.060101Z'
-                modifiedDate: '2026-02-26T14:41:52.221586Z'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+                transDate: "2026-02-24"
+                createdDate: "2026-02-26T08:25:18.060101Z"
+                modifiedDate: "2026-02-26T14:41:52.221586Z"
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml
   tags:
     - Tài khoản
 parameters:
@@ -351,4 +335,4 @@ parameters:
     deprecated: false
     schema:
       type: string
-    example: '0001179019'
+    example: "0001179019"

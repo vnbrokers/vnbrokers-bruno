@@ -17,28 +17,36 @@ get:
       in: query
       schema:
         type: string
+      description: Mã chứng khoán
+      example: MSB
     - name: caType
       in: query
       schema:
         type: string
       example: cashDividend
+      description: "Phân loại sự kiện quyền \n- cashDividend: Sự kiện quyền trả cổ tức bằng tiền\n- stockDividend: Sự kiện quyền trả cổ tức cổ phiếu\n- stockBonus: Sự kiện quyền trả cổ phiếu thưởng \n- rightsOffering: Sự kiện quyền mua cổ phiếu phát hành thêm"
     - name: caStatus
       in: query
       schema:
         type: string
       example: pending
+      description: "Trạng thái xử lý sự kiện quyền \n- pending: Quyền đang chờ xử lý hoặc đang được thực hiện\n- completed: Quyền đã được xử lý hoàn tất\n- canceled: Quyền đã hủy thành công"
     - name: pageIndex
       in: query
       schema:
         type: integer
         format: int32
+      description: Trang hiện tại
+      example: 0
     - name: pageSize
       in: query
       schema:
         type: integer
         format: int32
+      description: Số lượng bản ghi trên mỗi trang
+      example: 30
   responses:
-    '200':
+    "200":
       description: OK
       content:
         application/json:
@@ -47,6 +55,8 @@ get:
             properties:
               accountNo:
                 type: string
+                example: "0001179019"
+                description: Số tiểu khoản
               data:
                 type: object
                 additionalProperties:
@@ -54,7 +64,296 @@ get:
                   items:
                     type: object
                     additionalProperties: true
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+                description: Danh sách quyền chứng khoán của tiểu khoản, được phân loại theo từng loại quyền
+                properties:
+                  cashDividend:
+                    type: array
+                    description: Danh sách quyền trả cổ tức bằng tiền
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 617210
+                          description: ID sự kiện quyền
+                          format: int32
+                        symbol:
+                          type: string
+                          example: MSB
+                          description: Mã chứng khoán
+                        caStatus:
+                          type: string
+                          example: pending
+                          description: |-
+                            Trạng thái xử lý sự kiện quyền
+                            - pending: Quyền đang chờ xử lý hoặc đang được thực hiện
+                            - completed: Quyền đã được xử lý hoàn tất
+                            - canceled: Quyền đã hủy thành công
+                        recordDate:
+                          type: string
+                          example: "2026-04-24"
+                          description: Ngày đăng ký cuối cùng sự kiện quyền
+                        processDate:
+                          type: string
+                          example: "2026-05-13"
+                          description: Ngày thanh toán dự kiến
+                        holdingQuantity:
+                          type: integer
+                          example: 600
+                          description: Số lượng chứng khoán sở hữu tại ngày chốt quyền
+                          format: int32
+                        dividendValue:
+                          type: integer
+                          example: 500
+                          description: Giá trị cổ tức trên mỗi cổ phiếu
+                          format: int32
+                        grossAmount:
+                          type: integer
+                          example: 300000
+                          description: Tổng giá trị tiền cổ tức trước thuế
+                          format: int32
+                        taxAmount:
+                          type: integer
+                          example: 15000
+                          description: Số tiền thuế bị khấu trừ
+                          format: int32
+                        netAmount:
+                          type: integer
+                          example: 285000
+                          description: Số tiền thực nhận sau thuế
+                          format: int32
+                  stockDividend:
+                    type: array
+                    description: Danh sách quyền trả cổ tức bằng cổ phiếu
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 618949
+                          description: ID sự kiện quyền
+                          format: int32
+                        symbol:
+                          type: string
+                          example: OIL
+                          description: Mã chứng khoán
+                        caStatus:
+                          type: string
+                          example: pending
+                          description: |-
+                            Trạng thái xử lý sự kiện quyền
+                            - pending: Quyền đang chờ xử lý hoặc đang được thực hiện
+                            - completed: Quyền đã được xử lý hoàn tất
+                            - canceled: Quyền đã hủy thành công
+                        recordDate:
+                          type: string
+                          example: "2026-04-29"
+                          description: Ngày đăng ký cuối cùng sự kiện quyền
+                        processDate:
+                          type: string
+                          example: "2026-05-14"
+                          description: Ngày phân phối cổ phiếu cổ tức dự kiến
+                        holdingQuantity:
+                          type: integer
+                          example: 3211
+                          description: Số lượng chứng khoán sở hữu tại ngày chốt quyền
+                          format: int32
+                        ratio:
+                          type: string
+                          example: 5/3
+                          description: Tỷ lệ thực hiện quyền nhận cổ tức bằng cổ phiếu
+                        receivedQuantity:
+                          type: integer
+                          example: 1926
+                          description: Số lượng cổ phiếu cổ tức được nhận
+                          format: int32
+                  stockBonus:
+                    type: array
+                    description: Danh sách quyền trả cổ phiếu thưởng
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 617276
+                          description: ID sự kiện quyền
+                          format: int32
+                        symbol:
+                          type: string
+                          example: MSB
+                          description: Mã chứng khoán
+                        caStatus:
+                          type: string
+                          example: completed
+                          description: |-
+                            Trạng thái xử lý sự kiện quyền
+                            - pending: Quyền đang chờ xử lý hoặc đang được thực hiện
+                            - completed: Quyền đã được xử lý hoàn tất
+                            - canceled: Quyền đã hủy thành công
+                        recordDate:
+                          type: string
+                          example: "2026-04-24"
+                          description: Ngày đăng ký cuối cùng sự kiện quyền
+                        processDate:
+                          type: string
+                          example: "2026-05-13"
+                          description: Ngày phân phối cổ phiếu thưởng dự kiến
+                        holdingQuantity:
+                          type: integer
+                          example: 600
+                          description: Số lượng chứng khoán sở hữu tại ngày chốt quyền
+                          format: int32
+                        ratio:
+                          type: string
+                          example: 15/6
+                          description: Tỷ lệ thực hiện quyền nhận cổ phiếu thưởng
+                        receivedQuantity:
+                          type: integer
+                          example: 240
+                          description: Số lượng cổ phiếu thưởng khách hàng được nhận
+                          format: int32
+                  rightsOffering:
+                    type: array
+                    description: Danh sách quyền mua cổ phiếu phát hành thêm
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 623428
+                          description: ID sự kiện quyền
+                          format: int32
+                        symbol:
+                          type: string
+                          example: OIL
+                          description: Mã chứng khoán
+                        caStatus:
+                          type: string
+                          example: pending
+                          description: |-
+                            Trạng thái xử lý sự kiện quyền
+                            - pending: Quyền đang chờ xử lý hoặc đang được thực hiện
+                            - completed: Quyền đã được xử lý hoàn tất
+                            - canceled: Quyền đã hủy thành công
+                        recordDate:
+                          type: string
+                          example: "2026-04-29"
+                          description: Ngày đăng ký cuối cùng sự kiện quyền để xác định quyền mua
+                        processDate:
+                          type: string
+                          example: "2026-05-14"
+                          description: Ngày phân phối cổ phiếu quyền mua dự kiến
+                        holdingQuantity:
+                          type: integer
+                          example: 5137
+                          description: Số lượng chứng khoán sở hữu tại ngày chốt quyền
+                          format: int32
+                        ratio:
+                          type: string
+                          example: 3/1
+                          description: Tỷ lệ thực hiện quyền mua cổ phiếu
+                        rightPrice:
+                          type: integer
+                          example: 11000
+                          description: Giá đăng ký mua cổ phiếu phát hành thêm
+                          format: int32
+                        rightsQuantity:
+                          type: integer
+                          example: 1712
+                          description: Số lượng quyền mua được phân bổ trên tài khoản
+                          format: int32
+                        registeredQuantity:
+                          type: integer
+                          example: 170
+                          description: Số lượng cổ phiếu phát hành thêm đã đăng ký mua
+                          format: int32
+                        startDateTransfer:
+                          type: string
+                          example: "2026-05-04"
+                          description: Ngày bắt đầu được phép chuyển nhượng quyền mua
+                        endDateTransfer:
+                          type: string
+                          example: "2026-05-13"
+                          description: Ngày kết thúc chuyển nhượng quyền mua
+                        startDateSubscription:
+                          type: string
+                          example: "2026-05-04"
+                          description: Ngày bắt đầu đăng ký thực hiện quyền mua
+                        endDateSubscription:
+                          type: string
+                          example: "2026-05-13"
+                          description: Ngày kết thúc đăng ký thực hiện quyền mua
+              pagination:
+                type: object
+                description: Thông tin phân trang dữ liệu
+                properties:
+                  pageIndex:
+                    type: integer
+                    example: 0
+                    description: Trang hiện tại
+                    format: int32
+                  pageSize:
+                    type: integer
+                    example: 100
+                    description: Số lượng bản ghi trên mỗi trang
+                    format: int32
+                  totalRecords:
+                    type: integer
+                    example: 100
+                    description: Tổng số bản ghi
+                    format: int32
+          example:
+            accountNo: "0001179019"
+            data:
+              cashDividend:
+                - id: 617210
+                  symbol: MSB
+                  caStatus: pending
+                  recordDate: "2026-04-24"
+                  processDate: "2026-05-13"
+                  holdingQuantity: 600
+                  dividendValue: 500
+                  grossAmount: 300000
+                  taxAmount: 15000
+                  netAmount: 285000
+              stockDividend:
+                - id: 618949
+                  symbol: OIL
+                  caStatus: pending
+                  recordDate: "2026-04-29"
+                  processDate: "2026-05-14"
+                  holdingQuantity: 3211
+                  ratio: 5/3
+                  receivedQuantity: 1926
+              stockBonus:
+                - id: 617276
+                  symbol: MSB
+                  caStatus: completed
+                  recordDate: "2026-04-24"
+                  processDate: "2026-05-13"
+                  holdingQuantity: 600
+                  ratio: 15/6
+                  receivedQuantity: 240
+              rightsOffering:
+                - id: 623428
+                  symbol: OIL
+                  caStatus: pending
+                  recordDate: "2026-04-29"
+                  processDate: "2026-05-14"
+                  holdingQuantity: 5137
+                  ratio: 3/1
+                  rightPrice: 11000
+                  rightsQuantity: 1712
+                  registeredQuantity: 170
+                  startDateTransfer: "2026-05-04"
+                  endDateTransfer: "2026-05-13"
+                  startDateSubscription: "2026-05-04"
+                  endDateSubscription: "2026-05-13"
+            pagination:
+              pageIndex: 0
+              pageSize: 100
+              totalRecords: 100
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml

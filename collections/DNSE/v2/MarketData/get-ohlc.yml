@@ -29,7 +29,6 @@ http:
       description: "Thời gian kết thúc"
   auth: inherit
 
-
 runtime:
   scripts:
     - type: tests

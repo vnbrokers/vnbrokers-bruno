@@ -5,8 +5,7 @@
   "summary": "Hủy lệnh thường"
   "description": "Huỷ một hoặc nhiều lệnh chưa khớp hết bằng danh sách order ID."
   "parameters":
-    -
-      "name": "accountNo"
+    - "name": "accountNo"
       "in": "path"
       "required": true
       "description": "Số tiểu khoản."
@@ -28,6 +27,10 @@
               message:
                 type: string
                 description: "Mô tả mã lỗi nếu có."
+          example:
+            error: "0"
+            message: Huỷ lệnh thành công!
+
   "requestBody":
     "required": true
     "content":
@@ -42,3 +45,6 @@
               "description": "Danh sách lệnh cần hủy."
           "required":
             - "ordersList"
+        example:
+          ordersList:
+            - orderID: "9202205230000324355"

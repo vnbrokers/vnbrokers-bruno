@@ -5,31 +5,27 @@
   "summary": "Lịch sử giá khớp"
   "description": "Lấy lịch sử giá khớp trong phiên của mã cổ phiếu."
   "parameters":
-    -
-      "name": "ticker"
+    - "name": "ticker"
       "in": "path"
       "required": true
       "description": "Mã cổ phiếu, ví dụ TCB."
       "schema":
         "type": "string"
-    -
-      "name": "page"
+    - "name": "page"
       "in": "query"
       "required": false
       "description": "Số trang (bắt đầu từ 0)."
       "schema":
         "type": "number"
         "format": "double"
-    -
-      "name": "size"
+    - "name": "size"
       "in": "query"
       "required": false
       "description": "Kích thước trang (max 100)."
       "schema":
         "type": "number"
         "format": "double"
-    -
-      "name": "headIndex"
+    - "name": "headIndex"
       "in": "query"
       "required": false
       "description": "Chỉ số đầu cho phân trang ngược (mặc định -1)."
@@ -103,3 +99,22 @@
                     t:
                       type: string
                       description: "Thời gian nhận lệnh từ sở."
+          example:
+            page: 0
+            size: 20
+            headIndex: 3974
+            numberOfItems: 10
+            total: 3975
+            ticker: TCB
+            # d: 05/08
+            data:
+              - p: 33850
+                v: 100
+                cp: -650
+                # rcp: 0
+                a: ""
+                ba: 6034800
+                sa: 10320100
+                hl: false
+                # pcp: 0
+                t: 14:45:00

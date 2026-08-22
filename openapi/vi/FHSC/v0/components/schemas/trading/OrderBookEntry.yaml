@@ -128,5 +128,5 @@ properties:
   strategy_id:
     type:
       - string
-      - 'null'
+      - "null"
     description: Strategy ID if the order is linked to a strategy (only populated for `/order-book/{orderId}` detail).

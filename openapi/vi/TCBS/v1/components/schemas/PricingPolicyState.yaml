@@ -1,0 +1,42 @@
+type: object
+description: Trạng thái áp dụng của gói lãi suất.
+properties:
+  stateId:
+    type: integer
+    format: int64
+    description: Mã trạng thái.
+  name:
+    type: string
+    description: Tên trạng thái.
+  status:
+    type: string
+    description: Trạng thái áp dụng.
+    example: WAIT_FOR_APPLY
+  isAppliedForExisting:
+    type: boolean
+    description: Có áp dụng cho tài khoản hiện hữu hay không.
+  undueInterestType:
+    type: string
+    description: Loại lãi suất trong hạn.
+    example: LADDER
+  undueLadderValue:
+    type: array
+    description: Các mức lãi suất theo bậc trong hạn.
+    items:
+      $ref: PricingPolicyLadderValue.yaml
+  overdueInterest:
+    type: number
+    format: double
+    description: Lãi suất quá hạn.
+  extensionInterest:
+    type: number
+    format: double
+    description: Lãi suất gia hạn.
+  validFrom:
+    type: string
+    format: date
+    description: Ngày bắt đầu hiệu lực.
+  validTo:
+    type: string
+    format: date
+    description: Ngày kết thúc hiệu lực.

@@ -1,0 +1,28 @@
+name: foreignUpdate
+title: Cập nhật giao dịch nước ngoài
+summary: Bản cập nhật khối lượng mua bán của nhà đầu tư nước ngoài.
+payload:
+  $ref: ../../schemas/foreign/Update.yaml
+examples:
+  - name: foreignUpdate
+    payload:
+      T: f
+      boardId: G1
+      buyTradedAmount: 17703665000
+      buyVolume: 842500
+      foreignInvestorTypeCode: "10"
+      foreignerBuyPossibleQuantity: 2453576846
+      foreignerOrderLimitQuantity: 2393988233
+      marketId: STO
+      multicastReceiveTime:
+        Nanos: 601985803
+        Seconds: 1787122808
+      sellTradedAmount: 47417210000
+      sellVolume: 2257300
+      symbol: HPG
+      totalBuyTradedAmount: 32616877100
+      totalBuyVolume: 1605324
+      totalSellTradedAmount: 62332478100
+      totalSellVolume: 3020222
+      tradingSessionId: "40"
+      transactTime: "070000049"

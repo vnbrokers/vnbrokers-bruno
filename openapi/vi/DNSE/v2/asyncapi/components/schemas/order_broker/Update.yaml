@@ -1,0 +1,107 @@
+type: object
+description: Dữ liệu cập nhật lệnh của nhà đầu tư do môi giới theo dõi.
+additionalProperties: false
+required:
+  - T
+  - action
+  - event
+  - order
+  - sequence
+  - timestamp
+properties:
+  T:
+    type: string
+    const: eo
+    description: Mã loại message cập nhật lệnh môi giới.
+  action:
+    type: string
+    const: order_update
+    description: Loại hành động của message.
+  event:
+    type: string
+    description: Sự kiện làm phát sinh cập nhật lệnh.
+  order:
+    type: object
+    description: Thông tin lệnh được cập nhật.
+    required:
+      - id
+      - accountNo
+      - symbol
+      - orderStatus
+      - marketType
+      - side
+      - orderType
+      - price
+      - quantity
+      - fillQuantity
+      - canceledQuantity
+      - leaveQuantity
+      - loanPackageId
+      - transDate
+      - createdDate
+      - modifiedDate
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Mã định danh lệnh giao dịch.
+      accountNo:
+        type: string
+        description: Số tiểu khoản giao dịch.
+      symbol:
+        type: string
+        description: Mã chứng khoán.
+      side:
+        type: string
+        description: Chiều đặt lệnh, NB là mua và NS là bán.
+      orderType:
+        type: string
+        description: Loại lệnh.
+      price:
+        type: number
+        description: Giá đặt.
+      quantity:
+        type: integer
+        description: Khối lượng đặt.
+      fillQuantity:
+        type: integer
+        description: Khối lượng đã khớp.
+      canceledQuantity:
+        type: integer
+        description: Khối lượng đã hủy.
+      leaveQuantity:
+        type: integer
+        description: Khối lượng còn lại chưa khớp.
+      orderStatus:
+        type: string
+        description: Trạng thái lệnh.
+      marketType:
+        type: string
+        description: Loại thị trường.
+        enum:
+          - STOCK
+          - DERIVATIVE
+      loanPackageId:
+        type: integer
+        format: int64
+        description: Mã gói vay.
+      transDate:
+        type: string
+        format: date-time
+        description: Ngày giao dịch.
+      createdDate:
+        type: string
+        format: date-time
+        description: Thời điểm tạo (UTC).
+      modifiedDate:
+        type: string
+        format: date-time
+        description: Thời điểm cập nhật (UTC).
+  sequence:
+    type: integer
+    format: int64
+    description: Số thứ tự của message trong luồng.
+  timestamp:
+    type: integer
+    format: int64
+    description: Thời điểm phát sinh message, Unix timestamp tính bằng mili-giây.

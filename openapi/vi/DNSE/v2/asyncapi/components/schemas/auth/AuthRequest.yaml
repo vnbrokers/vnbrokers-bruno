@@ -1,0 +1,27 @@
+type: object
+additionalProperties: false
+required:
+  - action
+  - api_key
+  - signature
+  - timestamp
+  - nonce
+properties:
+  action:
+    type: string
+    description: Loại message xác thực.
+    const: auth
+  api_key:
+    type: string
+    description: API key do DNSE cấp.
+  signature:
+    type: string
+    description: Chữ ký HMAC-SHA256 dạng hexadecimal của `api_key:timestamp:nonce`.
+    pattern: "^[0-9a-fA-F]{64}$"
+  timestamp:
+    type: integer
+    format: int64
+    description: Unix timestamp tính bằng giây dùng để tạo chữ ký.
+  nonce:
+    type: string
+    description: Giá trị duy nhất cho yêu cầu xác thực, được truyền dưới dạng chuỗi.

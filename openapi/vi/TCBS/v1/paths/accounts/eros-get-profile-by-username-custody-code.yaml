@@ -5,15 +5,13 @@
   "summary": "Thông tin tiểu khoản"
   "description": "Lấy thông tin hồ sơ của một tài khoản lưu ký theo danh sách trường yêu cầu."
   "parameters":
-    -
-      "name": "custodyCode"
+    - "name": "custodyCode"
       "in": "path"
       "required": true
       "description": "Số tài khoản lưu ký, ví dụ: 105C334455."
       "schema":
         "type": "string"
-    -
-      "name": "fields"
+    - "name": "fields"
       "in": "query"
       "required": true
       "description": "Danh sách thông tin cần lấy, ví dụ: basicInfo, bankSubAccounts."
@@ -46,6 +44,7 @@
                       description: "Tên chủ tài khoản."
                     bankCode:
                       type: string
+                      nullable: true
                       description: "Mã ngân hàng (có thể null)."
                     accountType:
                       type: string
@@ -59,3 +58,30 @@
                     isDefault:
                       type: string
                       description: "Là tiểu khoản mặc định (Y/N)."
+            example:
+              basicInfo:
+                custodyCode: 105C334455
+                fullName: NGUYEN VAN A
+                status: ACTIVE
+              bankSubAccounts:
+                - accountNo: 0001K36265
+                  accountName: Khuynh Thanh Chi Luyen
+                  bankCode: null
+                  accountType: NORMAL
+                  accountTypeName: Thường
+                  status: "1"
+                  isDefault: N
+                - accountNo: 0001G75216
+                  accountName: Khuynh Thanh Chi Luyen
+                  bankCode: null
+                  accountType: MARGIN
+                  accountTypeName: Ký quỹ
+                  status: "1"
+                  isDefault: N
+                - accountNo: 105C738764A
+                  accountName: Khuynh Thanh Chi Luyen
+                  bankCode: 105C738764A
+                  accountType: DERIVATIVE
+                  accountTypeName: Phái sinh
+                  status: "1"
+                  isDefault: N

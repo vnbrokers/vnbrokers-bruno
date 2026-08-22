@@ -1,0 +1,12 @@
+name: subscribeTradeExtraRequest
+title: Đăng ký luồng khớp lệnh nâng cao
+summary: Đăng ký topic `tick_extra.{market_group}.json`.
+payload:
+  $ref: ../../schemas/tick_extra/SubscribeRequest.yaml
+examples:
+  - name: subscribeTradeExtra
+    payload:
+      action: subscribe
+      channels:
+        - name: tick_extra.G1.json
+          symbols: [HPG]

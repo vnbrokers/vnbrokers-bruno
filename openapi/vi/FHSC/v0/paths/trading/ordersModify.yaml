@@ -34,34 +34,34 @@ put:
     - name: Preview
       color: orange
   parameters:
-    - $ref: '../../components/parameters/SubAccountId.yaml'
-    - $ref: '../../components/parameters/OrderId.yaml'
-    - $ref: '../../components/parameters/DeviceId.yaml'
+    - $ref: "../../components/parameters/SubAccountId.yaml"
+    - $ref: "../../components/parameters/OrderId.yaml"
+    - $ref: "../../components/parameters/DeviceId.yaml"
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/trading/ModifyOrderRequest.yaml'
+          $ref: "../../components/schemas/trading/ModifyOrderRequest.yaml"
         example:
           quantity: 200
           price: 26000
   responses:
-    '200':
+    "200":
       description: |
         Server đã xử lý request. **Phải đọc `result[].code`** — non-null
         nghĩa là sàn từ chối hoặc lệnh đã khớp một phần (`-701111`).
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/trading/ModifyOrderResponse.yaml'
+            $ref: "../../components/schemas/trading/ModifyOrderResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             result:
               - order_id: ORD123456
                 account_id: 120C000008.1
-                transaction_date: '2026-05-28'
+                transaction_date: "2026-05-28"
                 symbol: HPG
                 order_side: BUY
                 order_quantity: 200
@@ -77,18 +77,18 @@ put:
                 code: null
                 rejected_reason: null
                 lot: EVEN
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '403':
-      $ref: '../../components/responses/Forbidden.yaml'
-    '404':
-      $ref: '../../components/responses/NotFound.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "403":
+      $ref: "../../components/responses/Forbidden.yaml"
+    "404":
+      $ref: "../../components/responses/NotFound.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL
@@ -140,19 +140,19 @@ delete:
     - name: Preview
       color: orange
   parameters:
-    - $ref: '../../components/parameters/SubAccountId.yaml'
-    - $ref: '../../components/parameters/OrderId.yaml'
-    - $ref: '../../components/parameters/DeviceId.yaml'
+    - $ref: "../../components/parameters/SubAccountId.yaml"
+    - $ref: "../../components/parameters/OrderId.yaml"
+    - $ref: "../../components/parameters/DeviceId.yaml"
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/trading/CancelOrderRequest.yaml'
+          $ref: "../../components/schemas/trading/CancelOrderRequest.yaml"
         example:
           sub_account: 120C000008.1
   responses:
-    '200':
+    "200":
       description: |
         Server đã xử lý request. **Phải đọc `result[].order_status`** để
         xác nhận lệnh đã được huỷ (`CANCELLED`) hoặc `result[].code` để
@@ -160,14 +160,14 @@ delete:
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/trading/CancelOrderResponse.yaml'
+            $ref: "../../components/schemas/trading/CancelOrderResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             result:
               - order_id: ORD123456
                 account_id: 120C000008.1
-                transaction_date: '2026-05-28'
+                transaction_date: "2026-05-28"
                 symbol: HPG
                 order_side: BUY
                 order_quantity: 100
@@ -183,18 +183,18 @@ delete:
                 code: null
                 rejected_reason: null
                 lot: EVEN
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '403':
-      $ref: '../../components/responses/Forbidden.yaml'
-    '404':
-      $ref: '../../components/responses/NotFound.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "403":
+      $ref: "../../components/responses/Forbidden.yaml"
+    "404":
+      $ref: "../../components/responses/NotFound.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

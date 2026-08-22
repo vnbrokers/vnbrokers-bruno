@@ -1,0 +1,22 @@
+name: clientPortfolioEvent
+title: Sự kiện danh mục
+summary: Cập nhật vị thế và lãi/lỗ của tài khoản.
+payload:
+  $ref: ../../schemas/trading/PortfolioEvent.yaml
+examples:
+  - name: portfolio
+    payload:
+      eventType: clientPortfolioEvent
+      notifyId: 1023456
+      connectionId: CONN-8899-XYZZ
+      symbol: VND
+      accountNo: "0123456789"
+      longQty: 1500
+      shortQty: 500
+      net: 1000
+      bidAvgPrice: "12.35"
+      askAvgPrice: "12.40"
+      tradePrice: "12.38"
+      marketPrice: "12.45"
+      floatingPL: "1500.75"
+      tradingPL: "2500.50"

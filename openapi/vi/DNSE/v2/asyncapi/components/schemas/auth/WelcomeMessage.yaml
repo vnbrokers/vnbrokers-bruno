@@ -1,0 +1,23 @@
+type: object
+description: Welcome message server gửi sau khi kết nối WebSocket thành công.
+additionalProperties: false
+required:
+  - action
+  - session_id
+  - timestamp
+  - message
+properties:
+  action:
+    type: string
+    description: Loại message điều khiển.
+    const: welcome
+  session_id:
+    type: string
+    description: Mã phiên kết nối WebSocket.
+  timestamp:
+    type: integer
+    format: int64
+    description: Unix timestamp tính bằng giây tại thời điểm gửi message.
+  message:
+    type: string
+    description: Nội dung hướng dẫn xác thực.

@@ -1,0 +1,17 @@
+name: marketUpdate
+title: Cập nhật thông tin thị trường
+summary: Giá trần, giá sàn và giá tham chiếu đầu ngày.
+payload:
+  $ref: ../../schemas/market_data/MarketUpdate.yaml
+examples:
+  - name: market
+    payload:
+      channel: DATA
+      topic: market.SSI
+      data:
+        s: SSI
+        b: HOSE
+        t: "2026/07/29"
+        ce: "48.50"
+        fl: "42.10"
+        ref: "45.30"

@@ -17,7 +17,7 @@ http:
       type: path
       description: Mã chứng khoán
     - name: price
-      value: '52000'
+      value: "52000"
       type: path
       description: Giá tính sức mua
   auth: inherit

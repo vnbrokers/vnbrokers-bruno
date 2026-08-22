@@ -22,5 +22,3 @@ variables:
     value: "1776563296"
   - name: wsNonce
     value: "17765632968732440"
-
-

@@ -2,13 +2,135 @@ type: object
 properties:
   accountNo:
     type: string
+    example: "0001179019"
+    description: Số tiểu khoản chứng khoán
   positionId:
     type: integer
+    example: 177952229647243
+    description: ID vị thế
+    format: int64
   configs:
     type: object
     additionalProperties:
-      $ref: './PnlConfig.yaml'
+      $ref: ./PnlConfig.yaml
+    example:
+      takeProfit:
+        enabled: true
+        strategy: DELTA_PRICE
+        rate: 0.52
+        deltaPrice: 162.8
+        orderMethod: FASTEST
+        orderDeltaPrice: 2
+      stopLoss:
+        enabled: true
+        strategy: PNL_RATE
+        rate: -0.34
+        deltaPrice: 50.3
+        orderMethod: DELTA_PRICE
+        orderDeltaPrice: 10.5
+        trailingEnabled: true
+    description: Cấu hình chốt lời và cắt lỗ của vị thế
+    properties:
+      takeProfit:
+        type: object
+        example:
+          enabled: true
+          strategy: DELTA_PRICE
+          rate: 0.52
+          deltaPrice: 162.8
+          orderMethod: FASTEST
+          orderDeltaPrice: 2
+        description: Cấu hình chốt lời (Take Profit)
+        properties:
+          enabled:
+            type: boolean
+            example: true
+            description: Bật/tắt chức năng chốt lời
+          strategy:
+            type: string
+            example: DELTA_PRICE
+            description: |-
+              Chiến lược kích hoạt chốt lời
+              - PNL_RATE: Kích hoạt theo tỷ lệ %
+              - DELTA_PRICE: Kích hoạt theo mức chênh lệch giá
+          rate:
+            type: number
+            example: 0.52
+            description: Tỷ lệ % so với giá hòa vốn, dùng để kích hoạt chốt lời khi strategy = PNL_RATE. Giá trị phải lớn hơn 0
+            format: double
+          deltaPrice:
+            type: number
+            example: 162.8
+            description: Mức chênh lệch giá so với giá hòa vốn, dùng để kích hoạt chốt lời khi strategy = DELTA_PRICE. Giá trị phải lớn hơn 0
+            format: double
+          orderMethod:
+            type: string
+            example: FASTEST
+            description: |-
+              Phương thức đặt lệnh khi điều kiện chốt lời được kích hoạt.
+              - FASTEST: Lệnh khớp ngay với giá đặt là giá trần/sàn tùy theo chiều vị thế Bán/Mua
+              - DELTA_PRICE: Lệnh đặt theo biên độ giá so với giá kích hoạt
+          orderDeltaPrice:
+            type: integer
+            example: 2
+            description: Biên độ giá đặt lệnh khi orderMethod = DELTA_PRICE. Bằng 0 khi orderMethod = FASTEST
+            format: int32
+      stopLoss:
+        type: object
+        example:
+          enabled: true
+          strategy: PNL_RATE
+          rate: -0.34
+          deltaPrice: 50.3
+          orderMethod: DELTA_PRICE
+          orderDeltaPrice: 10.5
+          trailingEnabled: true
+        description: Cấu hình cắt lỗ (Stop Loss)
+        properties:
+          enabled:
+            type: boolean
+            example: true
+            description: Bật/tắt chức năng cắt lỗ
+          strategy:
+            type: string
+            example: PNL_RATE
+            description: |-
+              Chiến lược kích hoạt cắt lỗ
+              - PNL_RATE: Kích hoạt theo tỷ lệ %
+              - DELTA_PRICE: Kích hoạt theo mức chênh lệch giá.
+          rate:
+            type: number
+            example: -0.34
+            description: Tỷ lệ % so với giá hòa vốn, dùng để kích hoạt chốt lời khi strategy = PNL_RATE. Giá trị hợp lệ trong khoảng [-1.0, 0)
+            format: double
+          deltaPrice:
+            type: number
+            example: 50.3
+            description: Mức chênh lệch giá so với giá hòa vốn, dùng để kích hoạt chốt lời khi strategy = DELTA_PRICE. Giá trị phải lớn hơn 0
+            format: double
+          orderMethod:
+            type: string
+            example: DELTA_PRICE
+            description: |-
+              Phương thức đặt lệnh khi điều kiện chốt lời được kích hoạt.
+              - FASTEST: Lệnh khớp ngay với giá đặt là giá trần/sàn tùy theo chiều vị thế Bán/Mua
+              - DELTA_PRICE: Lệnh đặt theo biên độ giá so với giá kích hoạt
+          orderDeltaPrice:
+            type: number
+            example: 10.5
+            description: Biên độ giá đặt lệnh khi orderMethod = DELTA_PRICE. Bằng 0 khi orderMethod = FASTEST
+            format: float
+          trailingEnabled:
+            type: boolean
+            example: true
+            description: Bật/tắt cơ chế Trailing Stop. Lưu ý cơ chế này chỉ hoạt động khi chức năng cắt lỗ được bật
   createdDate:
     type: string
+    example: "2026-06-02T02:47:36.384761Z"
+    description: Thời điểm cấu hình được tạo
+    format: date-time
   modifiedDate:
     type: string
+    example: "2026-06-03T07:52:08.00923505Z"
+    description: Thời điểm cập nhật cấu hình gần nhất
+    format: date-time

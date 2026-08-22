@@ -24,7 +24,7 @@ get:
       required: true
       description: Mã instrument cần lấy lịch sử.
       schema:
-        $ref: '../../components/schemas/market/GlobalMarketDataType.yaml'
+        $ref: "../../components/schemas/market/GlobalMarketDataType.yaml"
     - name: limit
       in: query
       required: false
@@ -36,36 +36,36 @@ get:
         maximum: 500
         example: 50
   responses:
-    '200':
+    "200":
       description: Trả về `data` mảng các điểm dữ liệu lịch sử của instrument, sort theo `date` giảm dần.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/market/GlobalMarketDataResponse.yaml'
+            $ref: "../../components/schemas/market/GlobalMarketDataResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             data:
               - type: SP500
                 country: US
-                date: '2026-04-22'
+                date: "2026-04-22"
                 year: 2026
                 month: 4
                 value: 5234.18
               - type: SP500
                 country: US
-                date: '2026-04-21'
+                date: "2026-04-21"
                 year: 2026
                 month: 4
                 value: 5210.55
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

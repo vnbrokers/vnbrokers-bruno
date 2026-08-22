@@ -35,8 +35,8 @@ properties:
       `value` / `change` / `change_percent`.
     items:
       oneOf:
-        - $ref: 'FinancialDataBuySellValue.yaml'
-        - $ref: 'FinancialDataSingleValue.yaml'
+        - $ref: "FinancialDataBuySellValue.yaml"
+        - $ref: "FinancialDataSingleValue.yaml"
       discriminator:
         propertyName: value_type
   last_updated:
@@ -44,7 +44,7 @@ properties:
     description: |
       Last-update timestamp in `YYYY-MM-DD HH:MM:SS` format (local time,
       **not ISO 8601**).
-    example: '2026-04-22 23:09:12'
+    example: "2026-04-22 23:09:12"
 required:
   - financial_type
   - values

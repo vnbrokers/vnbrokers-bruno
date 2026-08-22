@@ -1,0 +1,9 @@
+name: listSubscriptionRequest
+title: Yêu cầu liệt kê subscription
+summary: Client yêu cầu scope topic đang đăng ký.
+payload:
+  $ref: ../../schemas/control/ListSubscriptionRequest.yaml
+examples:
+  - name: listSubscription
+    payload:
+      method: LIST_SUBSCRIPTION

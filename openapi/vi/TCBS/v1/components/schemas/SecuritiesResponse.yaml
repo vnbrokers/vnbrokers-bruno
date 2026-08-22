@@ -1,0 +1,30 @@
+type: object
+description: Danh sách chứng khoán có phân trang.
+properties:
+  content:
+    type: array
+    description: Danh sách chứng khoán.
+    items:
+      $ref: Security.yaml
+  totalElements:
+    type: integer
+    format: int64
+    description: Tổng số bản ghi.
+  totalPages:
+    type: integer
+    format: int64
+    description: Tổng số trang.
+  size:
+    type: integer
+    format: int64
+    description: Số bản ghi mỗi trang (mặc định 1000).
+  number:
+    type: integer
+    format: int64
+    description: Trang hiện tại (0-indexed).
+  first:
+    type: boolean
+    description: Có phải trang đầu.
+  last:
+    type: boolean
+    description: Có phải trang cuối.

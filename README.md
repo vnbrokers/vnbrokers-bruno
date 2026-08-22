@@ -3,10 +3,13 @@
 [Tiếng Việt](README.vi.md)
 
 ## Introduction
+
 **vnbrokers-bruno** is a collection of OpenAPIs from Vietnamese Securities Companies
 
 ## Setup
+
 1. Clone the repository
+
 ```bash
 git clone https://github.com/vnbrokers/vnbrokers-bruno.git
 ```
@@ -15,13 +18,12 @@ git clone https://github.com/vnbrokers/vnbrokers-bruno.git
 
 3. Copy a environment for each Broker Open API collection and set up the variables/secrets
 
- - **DNSEv2**: Setup `apiKey` and `apiSecret` in environment, and set `otp` in request Get `trading-token`. `x-signature`, `date`
- - **TCBS**: Setup `apiKey` and `otp` in environment.
+- **DNSEv2**: Setup `apiKey` and `apiSecret` in environment, and set `otp` in request Get `trading-token`. `x-signature`, `date`
+- **TCBS**: Setup `apiKey` and `otp` in environment.
 
-    Bruno Pre Request script in collection level will set `accessToken` back to environment variable `accessToken` to build a Authorization header for next requests.
+  Bruno Pre Request script in collection level will set `accessToken` back to environment variable `accessToken` to build a Authorization header for next requests.
 
- - **SSI**: Setup `consumerID` and `consumerSecret` in environment
-
+- **SSI**: Setup `consumerID` and `consumerSecret` in environment
 
 ## Development
 

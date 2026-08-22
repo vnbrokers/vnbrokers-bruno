@@ -13,19 +13,43 @@ get:
       required: true
       schema:
         type: string
-    - $ref: '../../components/parameters/ContentType.yaml'
-    - $ref: '../../components/parameters/UserAgent.yaml'
-    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+      example: ddb68115-5d03-4ee7-8f4e-ae816e138915
+    - $ref: "../../components/parameters/ContentType.yaml"
+    - $ref: "../../components/parameters/UserAgent.yaml"
+    - $ref: "../../components/parameters/AcceptLanguage.yaml"
   responses:
-    '200':
+    "200":
       description: Thành công.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/FcoStatusHistoryResponse.yaml'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            $ref: "../../components/schemas/FcoStatusHistoryResponse.yaml"
+          example:
+            data:
+              - state: INIT
+                time: 20/08/2026 16:00:22
+                code: 200
+                detail: Success
+              - state: WAIT
+                time: 20/08/2026 16:00:22
+                code: 200
+                detail: state is WAIT
+              - state: WC
+                time: 20/08/2026 16:13:17
+                code: 200
+                detail: Success
+              - state: WC
+                time: 20/08/2026 16:13:19
+                code: 200
+                detail: state is WC
+              - state: TER
+                time: 20/08/2026 16:13:22
+                code: 10001
+                detail: Deactivated conditional order as the order has been cancelled by customer
+
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"

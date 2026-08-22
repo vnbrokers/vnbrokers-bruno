@@ -5,15 +5,13 @@
   "summary": "Tra cứu thông tin chứng khoán"
   "description": "Tra cứu thông tin chi tiết của mã chứng khoán: thông tin niêm yết, giá trần/sàn, sàn giao dịch, loại chứng khoán, hạn mức giao dịch, v.v."
   "parameters":
-    -
-      "name": "fields"
+    - "name": "fields"
       "in": "query"
       "required": false
       "description": "Các trường cần trả về. Mặc định: all."
       "schema":
         "type": "string"
-    -
-      "name": "filter"
+    - "name": "filter"
       "in": "query"
       "required": false
       "description": "Bộ lọc theo cú pháp trường=giá trị, ví dụ: symbol=TCB."
@@ -24,3 +22,46 @@
       $ref: ../../components/responses/Unauthorized.yaml
     "200":
       description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/SecuritiesResponse.yaml
+          example:
+            content:
+              - codeId: "003415"
+                issuerId: "0000001736"
+                issuerName: Công ty cổ phần Kỹ thương
+                symbol: TCB
+                secType: "001"
+                investmentType: "002"
+                issueDate: "2016-12-14T00:00:00.000+07:00"
+                expDate: "2016-12-14T00:00:00.000+07:00"
+                underlyingSymbol: ""
+                coveredWarrantType: ""
+                exercisePrice: 0
+                parValue: 10000
+                tradePlace: "001"
+                status: Y
+                halt: N
+                securitiesInfo:
+                  symbol: TCB
+                  status: "001"
+                  listingQtty: 3517238514
+                  txDate: "2016-12-13"
+                  listingStatus: N
+                  tradeUnit: 1000
+                  ceilingPrice: 56700
+                  floorPrice: 49300
+                  basicPrice: 53000
+                  tradeLot: 100
+                  tradeBuySell: Y
+                  marginLimitMax: 0
+                  currentRoom: 0
+                  securedRatioMax: 102
+                  mortageRatioMax: 0
+            totalElements: 1
+            totalPages: 1
+            size: 1000
+            number: 0
+            first: true
+            last: true

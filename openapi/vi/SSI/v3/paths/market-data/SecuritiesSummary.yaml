@@ -43,19 +43,88 @@ get:
       required: false
       schema:
         type: integer
-    - $ref: '../../components/parameters/ContentType.yaml'
-    - $ref: '../../components/parameters/UserAgent.yaml'
-    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+    - $ref: "../../components/parameters/ContentType.yaml"
+    - $ref: "../../components/parameters/UserAgent.yaml"
+    - $ref: "../../components/parameters/AcceptLanguage.yaml"
   responses:
-    '200':
+    "200":
       description: Thành công.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/SecuritiesSummaryResponse.yaml'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            $ref: "../../components/schemas/SecuritiesSummaryResponse.yaml"
+          examples:
+            STOCK:
+              value:
+                code: 200
+                msg: ""
+                data:
+                  - symbol: SSI
+                    tradingDate: 2026/07/01
+                    priceChange: "-100"
+                    priceChangePercentage: "-0.51"
+                    open: "19500"
+                    high: "19600"
+                    low: "19200"
+                    close: "19400"
+                    average: "19351"
+                    totalMatch: "11085700"
+                    totalMatchValue: "214522755000"
+                    totalBuy: "0"
+                    totalTradeBuy: "0"
+                    totalSell: "0"
+                    totalTradeSell: "0"
+                    totalForeignBuy: "0"
+                    totalForeignBuyValue: "0"
+                    totalForeignSell: "0"
+                    totalForeignSellValue: "0"
+                    remainForeignRoom: "1742851660"
+                    totalForeignRoom: null
+                    totalDeal: "5856800"
+                    totalDealValue: "119012649600"
+                    openInterest: null
+                    settlementPrice: null
+                pageSize: 10
+                pageIndex: 1
+                pagesCount: 1
+                itemsCount: 1
+            DERIVATIVE:
+              value:
+                code: 200
+                msg: ""
+                data:
+                  - symbol: 41I1G8000
+                    tradingDate: 2026/07/01
+                    priceChange: "6.9"
+                    priceChangePercentage: "0.37"
+                    open: "1878"
+                    high: "1883"
+                    low: "1867.5"
+                    close: "1880.9"
+                    average: "187447444.573"
+                    totalMatch: "204459"
+                    totalMatchValue: "38325317070000"
+                    totalBuy: "0"
+                    totalTradeBuy: "0"
+                    totalSell: "0"
+                    totalTradeSell: "0"
+                    totalForeignBuy: "0"
+                    totalForeignBuyValue: "0"
+                    totalForeignSell: "0"
+                    totalForeignSellValue: "0"
+                    remainForeignRoom: "0"
+                    totalForeignRoom: null
+                    totalDeal: "100"
+                    totalDealValue: "17430000000"
+                    openInterest: "24412"
+                    settlementPrice: "1880.9"
+                pageSize: 10
+                pageIndex: 1
+                pagesCount: 1
+                itemsCount: 1
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"

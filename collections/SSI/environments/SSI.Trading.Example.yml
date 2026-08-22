@@ -26,4 +26,3 @@ variables:
     name: account_8
   - secret: true
     name: deviceId
-

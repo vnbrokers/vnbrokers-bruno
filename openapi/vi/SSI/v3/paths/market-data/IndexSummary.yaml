@@ -25,19 +25,39 @@ get:
       required: false
       schema:
         type: string
-    - $ref: '../../components/parameters/ContentType.yaml'
-    - $ref: '../../components/parameters/UserAgent.yaml'
-    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+    - $ref: "../../components/parameters/ContentType.yaml"
+    - $ref: "../../components/parameters/UserAgent.yaml"
+    - $ref: "../../components/parameters/AcceptLanguage.yaml"
   responses:
-    '200':
+    "200":
       description: Thành công.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/IndexSummaryResponse.yaml'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            $ref: "../../components/schemas/IndexSummaryResponse.yaml"
+          example:
+            - tradingDate: 2026/06/12
+              totalTrade: "5`70616712"
+              totalTradeValue: "13915275870880"
+              totalMatch: "452560911"
+              totalMatchValue: "11754696092800"
+              totalDeal: "118055801"
+              totalDealValue: "2160579778080"
+              indexChange: "19.77"
+              indexChangePercentage: "1.11"
+              indexValue: "1793.18"
+              totalAdvanceStock: "154"
+              totalCeilingStock: "6"
+              totalDeclineStock: "152"
+              totalFloorStock: "2"
+              totalNoChangeStock: "55"
+              totalPropBuy: "0"
+              totalPropBuyValue: "0"
+              totalPropSell: "0"
+              totalPropSellValue: "0"
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"

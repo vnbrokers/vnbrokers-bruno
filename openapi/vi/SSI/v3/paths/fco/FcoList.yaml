@@ -67,19 +67,79 @@ get:
       required: false
       schema:
         type: integer
-    - $ref: '../../components/parameters/ContentType.yaml'
-    - $ref: '../../components/parameters/UserAgent.yaml'
-    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+    - $ref: "../../components/parameters/ContentType.yaml"
+    - $ref: "../../components/parameters/UserAgent.yaml"
+    - $ref: "../../components/parameters/AcceptLanguage.yaml"
   responses:
-    '200':
+    "200":
       description: Thành công.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/FcoListResponse.yaml'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            $ref: "../../components/schemas/FcoListResponse.yaml"
+          example:
+            data:
+              - fcoId: c6b7362b-137f-46d5-9049-5785726d8690
+                username: Q12345
+                accountNo: Q123456
+                quantity: 100
+                price: "19600"
+                priceSlip: 0
+                symbol: SSI
+                orderType: null
+                matchedQuantity: 0
+                isPlaceOrder: false
+                status: WAIT
+                detail: ""
+                from: 2026/07/01 13:00:22
+                to: 2026/09/18 13:59:00
+                type: stop_limit
+                fco_params:
+                  stopPrice: 19700
+                  side: S
+                  activePrice: 0
+                  trailingAmount: 0
+                  tpActivePrice: 0
+                  slActivePrice: 0
+                  tpPrice: null
+                  slPrice: null
+                  tpSlip: 0
+                  slSlip: 0
+                  price_operator: 0
+              - fcoId: c6b7362b-137f-46d5-9049-5785726d8690
+                username: Q12345
+                accountNo: Q123456
+                quantity: 100
+                price: "19600"
+                priceSlip: 0
+                symbol: SSI
+                orderType: null
+                matchedQuantity: 0
+                isPlaceOrder: false
+                status: TER
+                detail: ""
+                from: 2026/07/01 12:59:08
+                to: 2026/09/18 13:59:00
+                type: stop_limit
+                fco_params:
+                  stopPrice: 19700
+                  side: S
+                  activePrice: 0
+                  trailingAmount: 0
+                  tpActivePrice: 0
+                  slActivePrice: 0
+                  tpPrice: null
+                  slPrice: null
+                  tpSlip: 0
+                  slSlip: 0
+                  price_operator: 4
+            pageSize: 10
+            pageIndex: 1
+            itemsCount: 2
+
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"

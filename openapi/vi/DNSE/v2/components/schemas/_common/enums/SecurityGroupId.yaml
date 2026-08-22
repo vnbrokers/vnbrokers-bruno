@@ -10,10 +10,11 @@ description: |-
   - `SR`: Quyền mua
   - `ST`: Cổ phiếu
 enum:
-  - 'UNSPECIFIED'
-  - 'BS'
-  - 'EF'
-  - 'EW'
-  - 'FU'
-  - 'SR'
-  - 'ST'
+  - "UNSPECIFIED"
+  - "BS"
+  - "EF"
+  - "EW"
+  - "FU"
+  - "SR"
+  - "ST"
+example: ST

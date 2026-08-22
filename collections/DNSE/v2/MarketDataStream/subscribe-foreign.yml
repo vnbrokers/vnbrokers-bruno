@@ -114,7 +114,7 @@ docs: |-
 
 
   #### Raw stream message
-  
+
   ```json
   {
     "T": "f",

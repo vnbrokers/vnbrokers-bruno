@@ -1,5 +1,5 @@
 allOf:
-  - $ref: '../common/EnvelopeBase.yaml'
+  - $ref: "../common/EnvelopeBase.yaml"
   - type: object
     required:
       - result
@@ -9,7 +9,7 @@ allOf:
           Single `StockRealtime` object when `symbol` is used; array of
           `StockRealtime` when `symbols` or `exchange` is used.
         oneOf:
-          - $ref: 'StockRealtime.yaml'
+          - $ref: "StockRealtime.yaml"
           - type: array
             items:
-              $ref: 'StockRealtime.yaml'
+              $ref: "StockRealtime.yaml"

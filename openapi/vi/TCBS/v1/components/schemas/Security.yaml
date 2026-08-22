@@ -1,0 +1,70 @@
+type: object
+description: Thông tin cơ bản của một chứng khoán.
+properties:
+  codeId:
+    type: string
+    description: Mã số quy ước của chứng khoán.
+  issuerId:
+    type: string
+    description: Mã tổ chức phát hành.
+  issuerName:
+    type: string
+    description: Tên tổ chức phát hành.
+  symbol:
+    type: string
+    description: Mã niêm yết giao dịch.
+  secType:
+    type: string
+    description: "Phân loại chứng khoán: 001 = cổ phiếu phổ thông, 002 = cổ phiếu ưu đãi, 003 = trái phiếu chuyển đổi, 006 = trái phiếu."
+    enum:
+      - "001"
+      - "002"
+      - "003"
+      - "006"
+  investmentType:
+    type: string
+    description: "Hình thức đầu tư: 001 = ngắn hạn, 002 = dài hạn."
+    enum:
+      - "001"
+      - "002"
+  issueDate:
+    type: string
+    format: date-time
+    description: Ngày phát hành.
+  expDate:
+    type: string
+    format: date-time
+    description: Ngày hết hạn.
+  underlyingSymbol:
+    type: string
+    description: Mã gốc, ví dụ mã chứng quyền.
+  coveredWarrantType:
+    type: string
+    description: Loại chứng quyền.
+  exercisePrice:
+    type: number
+    description: Giá quyền.
+  parValue:
+    type: number
+    description: Mệnh giá chứng khoán.
+  tradePlace:
+    type: string
+    description: "Nơi giao dịch: 001 = HOSE, 002 = HNX, 005 = UPCOM."
+    enum:
+      - "001"
+      - "002"
+      - "005"
+  status:
+    type: string
+    description: Có sử dụng hay không (Y/N).
+    enum:
+      - Y
+      - N
+  halt:
+    type: string
+    description: Tạm ngừng giao dịch (Y/N).
+    enum:
+      - Y
+      - N
+  securitiesInfo:
+    $ref: SecuritiesInfo.yaml

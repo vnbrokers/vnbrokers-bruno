@@ -24,7 +24,6 @@ runtime:
         res.status ===200 && bru.setEnvVar("token", res.body.token)
         res.status ===200 && bru.setEnvVar("investorId", JSON.parse(Buffer.from(res.body.token.split(".")[1], "base64").toString("utf8")).investorIdStr)
 
-
     - type: tests
       code: |-
         test("response matches the schema", function () {

@@ -28,9 +28,16 @@
                 description: "ID giao dịch."
               data:
                 type: array
+                nullable: true
                 items:
                   type: object
                 description: "Dữ liệu trả về."
+          example:
+            cmd: ""
+            rc: "1"
+            rs: ""
+            oID: ""
+            data: null
   "requestBody":
     "required": true
     "content":

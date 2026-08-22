@@ -20,25 +20,25 @@ get:
     Là endpoint Tier 2 → cần đủ 4 header HMAC (`X-FH-APIKEY`,
     `X-FH-TIMESTAMP`, `X-FH-NONCE`, `X-FH-SIGNATURE`).
   responses:
-    '200':
+    "200":
       description: Trả về `data.user_id` — số nguyên 64-bit dùng làm path variable cho mọi endpoint user-scoped.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/users/UserProfileResponse.yaml'
+            $ref: "../../components/schemas/users/UserProfileResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             data:
               user_id: 123456
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

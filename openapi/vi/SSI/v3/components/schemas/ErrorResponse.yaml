@@ -6,5 +6,3 @@ properties:
   msg:
     description: Thông báo kết quả xử lý.
     type: string
-
-

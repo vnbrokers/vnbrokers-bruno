@@ -25,21 +25,77 @@ get:
       required: false
       schema:
         type: string
-    - $ref: '../../components/parameters/ContentType.yaml'
-    - $ref: '../../components/parameters/UserAgent.yaml'
-    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+    - $ref: "../../components/parameters/ContentType.yaml"
+    - $ref: "../../components/parameters/UserAgent.yaml"
+    - $ref: "../../components/parameters/AcceptLanguage.yaml"
   responses:
-    '200':
+    "200":
       description: Thành công.
       content:
         application/json:
           schema:
             type: array
             items:
-              $ref: '../../components/schemas/SecurityItem.yaml'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+              $ref: "../../components/schemas/SecurityItem.yaml"
+          example:
+            - symbol: ACB
+              symbolNameVi: Ngân hàng Thương mại Cổ phần Á Châu
+              symbolNameEn: Asia Commercial Joint Stock Bank
+              board: HOSE
+              lotSize: "100"
+              maturityDate: ""
+              firstTradingDate: ""
+              lastTradingDate: ""
+              cwUnderlyingSymbol: null
+              cwExercisePrice: "0"
+              cwExecutionRatio: "0"
+              listedShare: "5804421957"
+              icbCode: "8355"
+              icbName: Ngân hàng
+              iIndex: null
+              iNav: null
+              openInterest: null
+              settlementPrice: null
+            - symbol: BID
+              symbolNameVi: Ngân hàng Thương mại Cổ phần Đầu tư và Phát triển Việt Nam
+              symbolNameEn: Joint Stock Commercial Bank for Investment and Development of Vietnam
+              board: HOSE
+              lotSize: "100"
+              maturityDate: ""
+              firstTradingDate: ""
+              lastTradingDate: ""
+              cwUnderlyingSymbol: null
+              cwExercisePrice: "0"
+              cwExecutionRatio: "0"
+              listedShare: "7280065210"
+              icbCode: "8355"
+              icbName: Ngân hàng
+              iIndex: null
+              iNav: null
+              openInterest: null
+              settlementPrice: null
+            - symbol: GAS
+              symbolNameVi: Tổng Công ty Khí Việt Nam - Công ty Cổ phần
+              symbolNameEn: PetroVietnam Gas Joint Stock Corporation
+              board: HOSE
+              lotSize: "100"
+              maturityDate: ""
+              firstTradingDate: ""
+              lastTradingDate: ""
+              cwUnderlyingSymbol: null
+              cwExercisePrice: "0"
+              cwExecutionRatio: "0"
+              listedShare: "2412949756"
+              icbCode: "7573"
+              icbName: Phân phối xăng dầu & khí đốt
+              iIndex: null
+              iNav: null
+              openInterest: null
+              settlementPrice: null
+
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"

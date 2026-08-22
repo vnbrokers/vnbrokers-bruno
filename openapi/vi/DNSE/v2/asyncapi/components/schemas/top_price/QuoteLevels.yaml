@@ -1,0 +1,11 @@
+type: array
+items:
+  type: object
+  required: [price, qtty]
+  properties:
+    price:
+      type: number
+      description: Giá chào mua hoặc chào bán tại mức giá này.
+    qtty:
+      type: number
+      description: Tổng khối lượng chào mua hoặc chào bán tại mức giá này.

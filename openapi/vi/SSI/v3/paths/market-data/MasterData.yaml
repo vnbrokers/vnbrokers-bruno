@@ -7,9 +7,9 @@ get:
   security:
     - SsiBearerAuth: []
   parameters:
-    - $ref: '../../components/parameters/ContentType.yaml'
-    - $ref: '../../components/parameters/UserAgent.yaml'
-    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+    - $ref: "../../components/parameters/ContentType.yaml"
+    - $ref: "../../components/parameters/UserAgent.yaml"
+    - $ref: "../../components/parameters/AcceptLanguage.yaml"
     - name: from
       in: query
       description: Ngày bắt đầu theo định dạng `YYYY/MM/DD`. Không truyền thì trả dữ liệu ngày mới nhất.
@@ -39,15 +39,35 @@ get:
         minimum: 1
         default: 10
   responses:
-    '200':
+    "200":
       description: Thành công.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/MasterDataResponse.yaml'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            $ref: "../../components/schemas/MasterDataResponse.yaml"
+          example:
+            code: 200
+            msg: ""
+            data:
+              - board: UPCOM
+                symbol: BBM
+                tradingDate: 2026/06/20
+                ceiling: 8600
+                floor: 6400
+                refPrice: 7500
+              - board: HOSE
+                symbol: CCI
+                tradingDate: 2026/06/20
+                ceiling: 17900
+                floor: 15600
+                refPrice: 16750
+            pageSize: 2
+            pageIndex: 10
+            pagesCount: 993
+            itemsCount: 1985
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"

@@ -1,0 +1,11 @@
+name: pingMessage
+title: Ping heartbeat
+summary: Message server gửi để kiểm tra kết nối WebSocket.
+payload:
+  $ref: ../../schemas/heartbeat/PingMessage.yaml
+examples:
+  - name: ping
+    summary: Ping từ server.
+    payload:
+      action: ping
+      timestamp: 1750000000123

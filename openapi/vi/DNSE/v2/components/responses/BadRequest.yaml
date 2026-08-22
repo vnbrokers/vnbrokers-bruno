@@ -1,26 +1,26 @@
 description: Yêu cầu không hợp lệ.
 headers:
   Content-Length:
-    $ref: '../headers/ContentLength.yaml'
+    $ref: "../headers/ContentLength.yaml"
   Date:
-    $ref: '../headers/Date.yaml'
+    $ref: "../headers/Date.yaml"
   Vary:
-    $ref: '../headers/Vary.yaml'
+    $ref: "../headers/Vary.yaml"
   X-Ratelimit-Limit:
-    $ref: '../headers/XRateLimitLimit.yaml'
+    $ref: "../headers/XRateLimitLimit.yaml"
   X-Ratelimit-Remaining:
-    $ref: '../headers/XRateLimitRemaining.yaml'
+    $ref: "../headers/XRateLimitRemaining.yaml"
   X-Ratelimit-Reset:
-    $ref: '../headers/XRateLimitReset.yaml'
+    $ref: "../headers/XRateLimitReset.yaml"
   X-Request-Id:
-    $ref: '../headers/XRequestId.yaml'
+    $ref: "../headers/XRequestId.yaml"
   X-Tyk-Api-Expires:
     schema:
       type: string
 content:
   application/json:
     schema:
-      $ref: '../schemas/ErrorBody.yaml'
+      $ref: "../schemas/ErrorBody.yaml"
     example:
       status: 400
       code: OA-003

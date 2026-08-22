@@ -5,15 +5,13 @@
   "summary": "Gói lãi suất margin"
   "description": "Lấy các gói lãi suất margin khả dụng của tài khoản."
   "parameters":
-    -
-      "name": "accountNo"
+    - "name": "accountNo"
       "in": "path"
       "required": true
       "description": "Số tiểu khoản margin."
       "schema":
         "type": "string"
-    -
-      "name": "productId"
+    - "name": "productId"
       "in": "query"
       "required": false
       "description": "Product ID. Nếu bỏ qua, hệ thống tự xác định từ tài khoản."
@@ -25,3 +23,42 @@
       $ref: ../../components/responses/Unauthorized.yaml
     "200":
       description: Phản hồi thành công
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/PricingPolicyResponse.yaml
+          example:
+            data:
+              - id: 1
+                name: Standard Policy
+                status: ACTIVE
+                pricingPolicyType: DEFAULT
+                undueInterestType: FIXED
+                undueFixedValue: 12.5
+                leastMassRate: 10
+                greatestMassRate: 15
+                overdueInterest: 18
+                extensionInterest: 14
+                interestCalculationBasis: 365
+                description: Gói lãi suất tiêu chuẩn
+                labels:
+                  - standard
+                  - default
+                validFrom: "2024-01-01"
+                validTo: "2025-12-31"
+                discountable: true
+                states:
+                  - stateId: 10
+                    name: State Jan 2025
+                    status: WAIT_FOR_APPLY
+                    isAppliedForExisting: true
+                    undueInterestType: LADDER
+                    undueLadderValue:
+                      - id: 5
+                        rate: 11
+                        startDate: 1
+                        dueDate: 15
+                    overdueInterest: 17
+                    extensionInterest: 13.5
+                    validFrom: "2025-02-01"
+                    validTo: "2025-12-31"

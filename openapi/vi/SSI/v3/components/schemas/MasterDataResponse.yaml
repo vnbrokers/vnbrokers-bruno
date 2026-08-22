@@ -1,5 +1,11 @@
 type: object
 properties:
+  code:
+    description: Mã kết quả.
+    type: integer
+  msg:
+    description: Thông báo kết quả.
+    type: string
   pageSize:
     description: Số lượng bản ghi trên mỗi trang.
     type: integer
@@ -18,6 +24,9 @@ properties:
     items:
       type: object
       properties:
+        board:
+          description: Mã sàn giao dịch.
+          type: string
         symbol:
           description: Mã chứng khoán hoặc mã hợp đồng phái sinh.
           type: string
@@ -29,12 +38,10 @@ properties:
           type: string
         ceiling:
           description: Giá trần.
-          type: string
+          type: number
         floor:
           description: Giá sàn.
-          type: string
+          type: number
         refPrice:
           description: Giá tham chiếu.
-          type: string
-
-
+          type: number

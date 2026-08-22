@@ -4,17 +4,17 @@ properties:
   pe:
     type:
       - number
-      - 'null'
+      - "null"
     description: Price-to-Earnings ratio.
   pb:
     type:
       - number
-      - 'null'
+      - "null"
     description: Price-to-Book ratio.
   ev_ebitda:
     type:
       - number
-      - 'null'
+      - "null"
     description: EV / EBITDA ratio.
   industry:
     type: object
@@ -23,46 +23,46 @@ properties:
       pe:
         type:
           - number
-          - 'null'
+          - "null"
       pb:
         type:
           - number
-          - 'null'
+          - "null"
       ev_ebitda:
         type:
           - number
-          - 'null'
+          - "null"
   gross_margin:
     type:
       - number
-      - 'null'
+      - "null"
     description: Gross profit margin.
   roe:
     type:
       - number
-      - 'null'
+      - "null"
     description: Return on Equity.
   eps:
     type:
       - number
-      - 'null'
+      - "null"
     description: Earnings per Share.
   dividend_yield:
     type:
       - number
-      - 'null'
+      - "null"
   nim:
     type:
       - number
-      - 'null'
+      - "null"
     description: Net Interest Margin (banks only).
   margin_loan_to_equity_ratio:
     type:
       - number
-      - 'null'
+      - "null"
     description: Margin loan to equity ratio (securities firms only).
   roa:
     type:
       - number
-      - 'null'
+      - "null"
     description: Return on Assets.

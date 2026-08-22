@@ -5,5 +5,6 @@ description: |-
   - `HALT`: Ngừng giao dịch
   - `NO_HALT`: Không ngừng giao dịch
 enum:
-  - 'HALT'
-  - 'NO_HALT'
+  - "HALT"
+  - "NO_HALT"
+example: NO_HALT

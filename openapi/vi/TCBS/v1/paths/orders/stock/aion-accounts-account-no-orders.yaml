@@ -5,8 +5,7 @@
   "summary": "Lấy sổ lệnh"
   "description": "Lấy sổ lệnh của tiểu khoản."
   "parameters":
-    -
-      "name": "accountNo"
+    - "name": "accountNo"
       "in": "path"
       "required": true
       "description": "Số tiểu khoản, ví dụ: 0001170730."
@@ -48,3 +47,11 @@
                     status:
                       type: string
                       description: "Trạng thái lệnh."
+          example:
+            orders:
+              - orderId: "9202205230000324355"
+                symbol: VNM
+                execType: NB
+                price: 10000
+                quantity: 100
+                status: FILLED

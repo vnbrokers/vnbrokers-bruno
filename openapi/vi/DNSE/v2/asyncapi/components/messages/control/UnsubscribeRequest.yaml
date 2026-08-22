@@ -1,0 +1,13 @@
+name: unsubscribeRequest
+title: Yêu cầu hủy đăng ký
+summary: Client yêu cầu hủy đăng ký một hoặc nhiều channel dữ liệu.
+payload:
+  $ref: ../../schemas/control/UnsubscribeRequest.yaml
+examples:
+  - name: unsubscribe
+    summary: Hủy đăng ký một channel dữ liệu.
+    payload:
+      action: unsubscribe
+      channels:
+        - name: tick.G1.json
+          symbols: [ACB]

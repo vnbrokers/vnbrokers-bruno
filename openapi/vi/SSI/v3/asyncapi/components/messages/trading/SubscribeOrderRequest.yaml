@@ -1,0 +1,15 @@
+name: subscribeOrderRequest
+title: Yêu cầu đăng ký sự kiện lệnh
+summary: Đăng ký các topic order trên channel TRADING.
+payload:
+  $ref: ../../schemas/trading/SubscribeOrderRequest.yaml
+examples:
+  - name: subscribeOrder
+    summary: Đăng ký sự kiện lệnh cho một, nhiều hoặc tất cả tài khoản.
+    payload:
+      method: SUBSCRIBE
+      channel: TRADING
+      topics:
+        - order.1231991
+        - order.1231996-1231998
+        - order.*

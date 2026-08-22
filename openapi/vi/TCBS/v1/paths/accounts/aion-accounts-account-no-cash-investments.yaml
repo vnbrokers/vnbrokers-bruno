@@ -5,8 +5,7 @@
   "summary": "Thông tin số dư tiền"
   "description": "Lấy thông tin số dư tiền của tiểu khoản."
   "parameters":
-    -
-      "name": "accountNo"
+    - "name": "accountNo"
       "in": "path"
       "required": true
       "description": "Số tiểu khoản."
@@ -58,3 +57,13 @@
                     accountNo:
                       type: string
                       description: "Số tiểu khoản."
+          example:
+            totalCount: 20
+            pageSize: 20
+            pageIndex: 1
+            data:
+              - bodBalance: 918000000
+                cashBalance: 918000000
+                pp0forBF: 2057323960
+                bankAvlBalanceBF: 6500000
+                accountNo: "0001170730"

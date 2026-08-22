@@ -1,0 +1,15 @@
+name: subscribePortfolioRequest
+title: Yêu cầu đăng ký cập nhật danh mục
+summary: Đăng ký các topic portfolio trên channel TRADING.
+payload:
+  $ref: ../../schemas/trading/SubscribePortfolioRequest.yaml
+examples:
+  - name: subscribePortfolio
+    summary: Đăng ký cập nhật danh mục cho một, nhiều hoặc tất cả tài khoản.
+    payload:
+      method: SUBSCRIBE
+      channel: TRADING
+      topics:
+        - portfolio.0901351
+        - portfolio.1231996-1231998
+        - portfolio.*

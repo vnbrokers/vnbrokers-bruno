@@ -1,0 +1,24 @@
+type: object
+description: Message cập nhật chỉ số VN30 dự tính khi dữ liệu thay đổi.
+additionalProperties: false
+required:
+  - T
+  - action
+  - marketIndex
+  - timestamp
+properties:
+  T:
+    type: string
+    description: Mã loại message của chỉ số dự tính.
+    const: emi
+  action:
+    type: string
+    description: Loại sự kiện cập nhật chỉ số dự tính.
+    const: estimated_market_index_update
+  marketIndex:
+    description: Dữ liệu chỉ số VN30 dự tính.
+    $ref: ./MarketIndex.yaml
+  timestamp:
+    type: integer
+    format: int64
+    description: Unix timestamp của message tính bằng mili giây.

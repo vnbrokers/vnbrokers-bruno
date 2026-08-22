@@ -26,7 +26,7 @@ runtime:
     - name: account
       value: "{{account_8}}"
     - name: orderID
-      value: 
+      value:
     - name: marketID
       value: VNFE
     - name: instrumentID

@@ -14,7 +14,7 @@ properties:
   description:
     type: string
     description: Short descriptive text. May be empty.
-    example: 'Đơn vị: 1.000đ/chỉ'
+    example: "Đơn vị: 1.000đ/chỉ"
   icon_url:
     type: string
     description: Icon URL.

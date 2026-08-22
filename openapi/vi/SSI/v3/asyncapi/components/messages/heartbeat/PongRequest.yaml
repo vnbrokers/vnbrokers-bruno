@@ -1,0 +1,11 @@
+name: pongRequest
+title: Pong heartbeat
+summary: Client phản hồi ping từ server.
+payload:
+  $ref: ../../schemas/heartbeat/PongRequest.yaml
+examples:
+  - name: pong
+    payload:
+      method: PONG
+      channel: HEARTBEAT
+      time: "29-07-2026 09-15-32"

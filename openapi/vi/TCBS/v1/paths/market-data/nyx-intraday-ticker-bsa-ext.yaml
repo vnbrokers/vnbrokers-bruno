@@ -5,29 +5,25 @@
   "summary": "Cung cầu trong phiên (15 phút)"
   "description": "Lấy dữ liệu cung cầu trong phiên theo khoảng thời gian 15 phút."
   "parameters":
-    -
-      "name": "ticker"
+    - "name": "ticker"
       "in": "path"
       "required": true
       "description": "Mã cổ phiếu, ví dụ TCB."
       "schema":
         "type": "string"
-    -
-      "name": "timeWindow"
+    - "name": "timeWindow"
       "in": "query"
       "required": true
       "description": "Khung thời gian tính bằng phút: 15 hoặc 60."
       "schema":
         "$ref": "../../components/schemas/enums/IntradayTimeWindow.yaml"
-    -
-      "name": "tWindow"
+    - "name": "tWindow"
       "in": "query"
       "required": true
       "description": "Khung thời gian: 15 phút."
       "schema":
         "$ref": "../../components/schemas/enums/IntradayTWindow.yaml"
-    -
-      "name": "type"
+    - "name": "type"
       "in": "query"
       "required": false
       "description": "Loại nhà đầu tư: sheep (small retail), wolf (medium institutional), shark (large institutional), all (mặc định)."
@@ -86,3 +82,15 @@
                       type: number
                       format: double
                       description: "Thời gian (timestamp)."
+            example:
+              ticker: TCB
+              data:
+                - bu: 1000000
+                  bms: 5000000
+                  bup: 0.65
+                  sd: 800000
+                  sms: 3000000
+                  sdp: 0.35
+                  bsr: 1.25
+                  t: 09:15:00
+                  s: 1640995200000

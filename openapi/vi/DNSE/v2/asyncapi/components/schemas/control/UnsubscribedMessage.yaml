@@ -1,0 +1,9 @@
+type: object
+description: Xác nhận server đã hủy đăng ký channel dữ liệu.
+additionalProperties: false
+required: [action]
+properties:
+  action:
+    type: string
+    description: Loại message xác nhận hủy đăng ký.
+    const: unsubscribed

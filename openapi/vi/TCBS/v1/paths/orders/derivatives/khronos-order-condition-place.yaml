@@ -72,10 +72,15 @@ post:
           schema:
             type: object
             properties:
+              cmd:
+                type: string
+                description: "Lệnh gọi (echo)."
               rc:
                 type: string
+                description: "Mã kết quả, 1 = thành công."
               data:
                 type: array
+                description: "Danh sách kết quả đặt lệnh."
                 items:
                   type: object
                   properties:
@@ -83,8 +88,47 @@ post:
                       type: string
                     status:
                       type: string
+                    msg_type:
+                      type: string
+                    showPrice:
+                      type: string
+                    orderTime:
+                      type: string
+                    accountCode:
+                      type: string
                     orderNo:
                       type: integer
                       format: int64
+                    matchVolume:
+                      type: number
+                      format: double
+                    side:
+                      type: string
+                    volume:
+                      type: string
                     pk_orderNo:
                       type: string
+                    channel:
+                      type: string
+                    group:
+                      type: string
+                    quote:
+                      type: string
+          example:
+            cmd: "Web.newOrder"
+            rc: "1"
+            data:
+              - symbol: "VN30F2110"
+                status: "P"
+                msg_type: "1I"
+                showPrice: "1504.4"
+                orderTime: "20:16:57"
+                accountCode: "100159A"
+                orderNo: 1
+                matchVolume: 0
+                side: "B"
+                volume: "1"
+                pk_orderNo: "7843961"
+                channel: "D"
+                group: "FU"
+                quote: "G"

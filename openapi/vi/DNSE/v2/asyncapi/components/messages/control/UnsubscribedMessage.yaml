@@ -1,0 +1,9 @@
+name: unsubscribedMessage
+title: Hủy đăng ký thành công
+summary: Server xác nhận client đã hủy đăng ký channel dữ liệu.
+payload:
+  $ref: ../../schemas/control/UnsubscribedMessage.yaml
+examples:
+  - name: unsubscribed
+    payload:
+      action: unsubscribed

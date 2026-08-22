@@ -1,5 +1,5 @@
 allOf:
-  - $ref: '../common/EnvelopeBase.yaml'
+  - $ref: "../common/EnvelopeBase.yaml"
   - type: object
     required:
       - result
@@ -11,4 +11,4 @@ allOf:
           Mã không hợp lệ / không có dữ liệu bị bỏ qua (không sinh lỗi), nên
           mảng có thể ngắn hơn số mã yêu cầu, hoặc rỗng.
         items:
-          $ref: 'IndexRealtime.yaml'
+          $ref: "IndexRealtime.yaml"

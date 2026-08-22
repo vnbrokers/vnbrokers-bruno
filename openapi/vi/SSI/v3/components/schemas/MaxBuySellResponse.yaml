@@ -1,23 +1,18 @@
+description: Dữ liệu trả về.
 type: object
 properties:
-  data:
-    description: Dữ liệu trả về.
-    type: object
-    properties:
-      accountNo:
-        description: Số tài khoản giao dịch.
-        type: string
-      maxBuyQty:
-        description: Khối lượng mua tối đa.
-        type: number
-      marginRatio:
-        description: Tỷ lệ ký quỹ.
-        type: string
-      maxSellQty:
-        description: Khối lượng bán tối đa.
-        type: number
-      purchasingPower:
-        description: Sức mua.
-        type: number
-
-
+  accountNo:
+    description: Số tài khoản giao dịch.
+    type: string
+  maxBuyQty:
+    description: Khối lượng mua tối đa.
+    type: number
+  marginRatio:
+    description: Tỷ lệ ký quỹ.
+    type: string
+  maxSellQty:
+    description: Khối lượng bán tối đa.
+    type: number
+  purchasingPower:
+    description: Sức mua.
+    type: number

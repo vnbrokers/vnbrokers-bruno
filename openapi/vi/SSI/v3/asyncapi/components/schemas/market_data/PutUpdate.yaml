@@ -1,0 +1,33 @@
+type: object
+additionalProperties: false
+required: [channel, topic, data]
+properties:
+  channel:
+    type: string
+    const: DATA
+  topic:
+    type: string
+    pattern: '^put\.(index|exchange|[A-Za-z0-9_-]+(?:-[A-Za-z0-9_-]+)*|\*)(?:@(tick|1m|5m))?$'
+  data:
+    type: object
+    additionalProperties: false
+    required: [s, t, p, q, tq, tv]
+    properties:
+      s:
+        type: string
+        description: Mã chứng khoán.
+      t:
+        type: string
+        description: "Thời gian giao dịch, định dạng `YYYY/MM/DD HH:mi:ss`."
+      p:
+        type: string
+        description: Giá khớp thỏa thuận.
+      q:
+        type: string
+        description: Khối lượng khớp thỏa thuận.
+      tq:
+        type: string
+        description: Tổng khối lượng thỏa thuận trong ngày.
+      tv:
+        type: string
+        description: Tổng giá trị thỏa thuận trong ngày.

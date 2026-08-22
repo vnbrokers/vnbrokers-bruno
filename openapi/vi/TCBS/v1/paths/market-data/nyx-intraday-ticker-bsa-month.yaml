@@ -5,22 +5,19 @@
   "summary": "Cung cầu theo tháng"
   "description": "Lấy dữ liệu cung cầu theo tháng của mã cổ phiếu."
   "parameters":
-    -
-      "name": "ticker"
+    - "name": "ticker"
       "in": "path"
       "required": true
       "description": "Mã cổ phiếu, ví dụ TCB."
       "schema":
         "type": "string"
-    -
-      "name": "timeWindow"
+    - "name": "timeWindow"
       "in": "query"
       "required": false
       "description": "Khung thời gian: 1M."
       "schema":
         "type": "string"
-    -
-      "name": "type"
+    - "name": "type"
       "in": "query"
       "required": false
       "description": "Loại nhà đầu tư: sheep (small retail), wolf (medium institutional), shark (large institutional), all (mặc định)."
@@ -59,3 +56,10 @@
                     t:
                       type: string
                       description: "Thời gian (DD/MM)."
+          example:
+            ticker: TCB
+            data:
+              - bup: 0.65
+                sdp: 0.35
+                bsr: 1.25
+                t: 07/05

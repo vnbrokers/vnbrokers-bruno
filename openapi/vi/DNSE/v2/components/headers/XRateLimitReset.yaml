@@ -1,3 +1,4 @@
 description: Unix timestamp at which the current rate-limit window resets.
 schema:
   type: integer
+example: 1773850655

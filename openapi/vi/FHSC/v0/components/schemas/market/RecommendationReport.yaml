@@ -7,9 +7,9 @@ properties:
   recommendation:
     type:
       - string
-      - 'null'
+      - "null"
     description: Latest recommendation description (from the most recent report).
   recommendationReports:
     type: array
     items:
-      $ref: 'IndexRecommendationReport.yaml'
+      $ref: "IndexRecommendationReport.yaml"

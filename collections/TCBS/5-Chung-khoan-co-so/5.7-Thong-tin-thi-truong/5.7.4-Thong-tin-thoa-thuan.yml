@@ -9,7 +9,7 @@ http:
   url: "{{baseUrl}}/tartarus/v1/putThroughSnaps"
   params:
     - name: floor
-      value: '1'
+      value: "1"
       type: query
       description: "Rổ chứng khoán: \n- `1`: Hose\n- `2`: HNX\n- `3`: Upcom\n"
       disabled: true

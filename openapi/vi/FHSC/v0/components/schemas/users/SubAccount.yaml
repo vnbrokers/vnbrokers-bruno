@@ -8,11 +8,11 @@ properties:
   id:
     type: string
     description: ID tiểu khoản. Dùng làm giá trị thay cho path variable `{subAccountId}`.
-    example: '0001234567'
+    example: "0001234567"
   cust_id:
     type: string
     description: ID khách hàng cha (chung cho mọi tiểu khoản của 1 user).
-    example: '0001234500'
+    example: "0001234500"
   name:
     type: string
     description: Họ tên đầy đủ của user.
@@ -26,7 +26,7 @@ properties:
     description: |
       Hậu tố loại sản phẩm trong `sub_account_ext`. `.1` cho tiểu khoản
       thường, `.6` cho tiểu khoản margin.
-    example: '.1'
+    example: ".1"
   sub_account_ext:
     type: string
     description: Định danh tiểu khoản dạng mở rộng (`{depository_number}{product_type_name}`).

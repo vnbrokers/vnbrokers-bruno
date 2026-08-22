@@ -1,0 +1,13 @@
+name: welcomeMessage
+title: Welcome message
+summary: Message server gửi sau khi kết nối WebSocket thành công.
+payload:
+  $ref: ../../schemas/auth/WelcomeMessage.yaml
+examples:
+  - name: welcome
+    summary: Welcome message sau khi kết nối.
+    payload:
+      action: welcome
+      session_id: conn_1782199800969809263
+      timestamp: 1750000000
+      message: Please authenticate within 30 seconds

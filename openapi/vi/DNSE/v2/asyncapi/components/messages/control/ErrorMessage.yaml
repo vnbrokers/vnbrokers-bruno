@@ -1,0 +1,12 @@
+name: errorMessage
+title: Lỗi điều khiển
+summary: Server gửi lỗi điều khiển trong quá trình kết nối hoặc đăng ký.
+payload:
+  $ref: ../../schemas/control/ErrorMessage.yaml
+examples:
+  - name: authFailed
+    summary: Xác thực thất bại.
+    payload:
+      action: error
+      code: AUTH_FAILED
+      message: "authentication failed: invalid signature"

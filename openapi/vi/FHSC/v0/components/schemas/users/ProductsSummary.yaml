@@ -13,7 +13,7 @@ properties:
   saving:
     type:
       - number
-      - 'null'
+      - "null"
     description: Saving amount (may be null).
   bond:
     type: number

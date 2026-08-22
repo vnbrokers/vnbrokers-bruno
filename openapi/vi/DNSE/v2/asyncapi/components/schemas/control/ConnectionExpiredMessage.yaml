@@ -1,0 +1,16 @@
+type: object
+description: Thông báo kết nối đã đạt giới hạn thời gian.
+additionalProperties: false
+required: [action, code, message]
+properties:
+  action:
+    type: string
+    description: Loại message thông báo hết hạn kết nối.
+    const: connection_expired
+  code:
+    type: string
+    description: Mã lý do kết nối hết hạn.
+    const: MAX_DURATION_EXCEEDED
+  message:
+    type: string
+    description: Nội dung hướng dẫn client kết nối lại.

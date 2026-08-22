@@ -8,9 +8,12 @@ properties:
     type: integer
     format: int32
     description: Mã HTTP.
+    example: 400
   code:
     type: string
     description: Mã lỗi DNSE.
+    example: OA-003
   message:
     type: string
     description: Thông điệp lỗi.
+    example: Thông tin nhập không hợp lệ

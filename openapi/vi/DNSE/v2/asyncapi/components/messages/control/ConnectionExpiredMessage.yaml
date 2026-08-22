@@ -1,0 +1,11 @@
+name: connectionExpiredMessage
+title: Kết nối hết hạn
+summary: Server thông báo kết nối đạt giới hạn thời gian và yêu cầu reconnect.
+payload:
+  $ref: ../../schemas/control/ConnectionExpiredMessage.yaml
+examples:
+  - name: connectionExpired
+    payload:
+      action: connection_expired
+      code: MAX_DURATION_EXCEEDED
+      message: Connection expired after 8 hours. Please reconnect.

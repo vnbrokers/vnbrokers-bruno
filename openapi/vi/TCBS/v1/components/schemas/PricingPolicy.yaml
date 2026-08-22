@@ -1,0 +1,70 @@
+type: object
+description: Thông tin gói lãi suất margin.
+properties:
+  id:
+    type: integer
+    format: int64
+    description: Mã gói lãi suất.
+  name:
+    type: string
+    description: Tên gói lãi suất.
+  status:
+    type: string
+    description: Trạng thái gói lãi suất.
+    example: ACTIVE
+  pricingPolicyType:
+    type: string
+    description: Loại chính sách lãi suất.
+    example: DEFAULT
+  undueInterestType:
+    type: string
+    description: Loại lãi suất trong hạn.
+    example: FIXED
+  undueFixedValue:
+    type: number
+    format: double
+    description: Mức lãi suất trong hạn cố định.
+  leastMassRate:
+    type: number
+    format: double
+    description: Tỷ lệ margin thấp nhất.
+  greatestMassRate:
+    type: number
+    format: double
+    description: Tỷ lệ margin cao nhất.
+  overdueInterest:
+    type: number
+    format: double
+    description: Lãi suất quá hạn.
+  extensionInterest:
+    type: number
+    format: double
+    description: Lãi suất gia hạn.
+  interestCalculationBasis:
+    type: integer
+    format: int64
+    description: Số ngày dùng làm cơ sở tính lãi.
+  description:
+    type: string
+    description: Mô tả gói lãi suất.
+  labels:
+    type: array
+    description: Các nhãn của gói lãi suất.
+    items:
+      type: string
+  validFrom:
+    type: string
+    format: date
+    description: Ngày bắt đầu hiệu lực.
+  validTo:
+    type: string
+    format: date
+    description: Ngày kết thúc hiệu lực.
+  discountable:
+    type: boolean
+    description: Có được áp dụng chiết khấu hay không.
+  states:
+    type: array
+    description: Danh sách trạng thái áp dụng của gói lãi suất.
+    items:
+      $ref: PricingPolicyState.yaml

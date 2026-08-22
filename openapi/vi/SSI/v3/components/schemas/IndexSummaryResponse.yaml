@@ -59,5 +59,3 @@ items:
     totalPropSellValue:
       description: Tổng giá trị bán của nhà đầu tư nước ngoài.
       type: string
-
-

@@ -27,21 +27,21 @@ post:
         type: string
       example: NORMAL
   responses:
-    '200':
+    "200":
       description: OK
       headers:
         Content-Length:
-          $ref: '../../components/headers/ContentLength.yaml'
+          $ref: "../../components/headers/ContentLength.yaml"
         Date:
-          $ref: '../../components/headers/Date.yaml'
+          $ref: "../../components/headers/Date.yaml"
         Vary:
-          $ref: '../../components/headers/Vary.yaml'
+          $ref: "../../components/headers/Vary.yaml"
         X-Ratelimit-Limit:
-          $ref: '../../components/headers/XRateLimitLimit.yaml'
+          $ref: "../../components/headers/XRateLimitLimit.yaml"
         X-Ratelimit-Remaining:
-          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+          $ref: "../../components/headers/XRateLimitRemaining.yaml"
         X-Ratelimit-Reset:
-          $ref: '../../components/headers/XRateLimitReset.yaml'
+          $ref: "../../components/headers/XRateLimitReset.yaml"
         X-Tyk-Api-Expires:
           schema:
             type: string
@@ -122,7 +122,7 @@ post:
                 description: Khối lượng còn lại
               accountNo:
                 type: string
-                example: '0001179019'
+                example: "0001179019"
                 description: Số tiểu khoản
               marketType:
                 type: string
@@ -137,17 +137,17 @@ post:
                 description: Phân loại lệnh thường (mặc định NORMAL)
               transDate:
                 type: string
-                example: '2026-03-16'
+                example: "2026-03-16"
                 description: Ngày giao dịch
               createdDate:
                 type: string
                 format: date-time
-                example: '2026-03-24T04:09:50.761146893Z'
+                example: "2026-03-24T04:09:50.761146893Z"
                 description: Thời điểm tạo
               modifiedDate:
                 type: string
                 format: date-time
-                example: '2026-03-24T04:09:50.761151529Z'
+                example: "2026-03-24T04:09:50.761151529Z"
                 description: Thời điểm cập nhật
           example:
             id: 1626
@@ -161,16 +161,16 @@ post:
             fillQuantity: 0
             canceledQuantity: 0
             leaveQuantity: 3
-            accountNo: '0001179019'
+            accountNo: "0001179019"
             marketType: DERIVATIVE
             orderCategory: NORMAL
-            transDate: '2026-03-16'
-            createdDate: '2026-03-24T04:09:50.761146893Z'
-            modifiedDate: '2026-03-24T04:09:50.761151529Z'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            transDate: "2026-03-16"
+            createdDate: "2026-03-24T04:09:50.761146893Z"
+            modifiedDate: "2026-03-24T04:09:50.761151529Z"
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   tags:
     - Giao dịch
   requestBody:
@@ -181,7 +181,7 @@ post:
           properties:
             accountNo:
               type: string
-              example: '0001179019'
+              example: "0001179019"
               description: Số tiểu khoản
             loanPackageId:
               type: integer
@@ -219,7 +219,7 @@ post:
               example: TCB
               description: Mã chứng khoán
         example:
-          accountNo: '0001179019'
+          accountNo: "0001179019"
           loanPackageId: 2278
           orderType: LO
           price: 1861.5

@@ -25,19 +25,37 @@ get:
       required: false
       schema:
         type: boolean
-    - $ref: '../../components/parameters/ContentType.yaml'
-    - $ref: '../../components/parameters/UserAgent.yaml'
-    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+    - $ref: "../../components/parameters/ContentType.yaml"
+    - $ref: "../../components/parameters/UserAgent.yaml"
+    - $ref: "../../components/parameters/AcceptLanguage.yaml"
   responses:
-    '200':
+    "200":
       description: Thành công.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/PositionResponse.yaml'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            $ref: "../../components/schemas/PositionResponse.yaml"
+          example:
+            equity:
+              - accountNo: Q123456
+                symbol: AAA
+                quantity: "1"
+                blockQuantity: "0"
+                dividendQuantity: "0"
+                buyingQuantity: "0"
+                boughtQuantity: "0"
+                sellingQuantity: "0"
+                soldQuantity: "0"
+                t1SellQuantity: "0"
+                t2SellQuantity: "0"
+                costPrice: "10000"
+                mortgageQuantity: "0"
+                sellableQuantity: "1"
+                restrictedQuantity: "0"
+            derivative: null
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"

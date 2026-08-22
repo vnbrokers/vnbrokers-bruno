@@ -1,22 +1,12 @@
 [tools]
-pre-commit = "4.6.1"
 gitleaks = "8.30.1"
-yamlfmt = "0.21.0"
+oxfmt = "0.62.0"
 
-[tasks.pre-commit]
-run = "pre-commit run --all-files"
-
-[tasks."gitleaks:dir"]
+[tasks."gitleaks"]
 run = "gitleaks dir -v"
 
 [tasks."gitleaks:git"]
 run = "gitleaks git -v -f SARIF"
 
-[tasks.check-leaks]
-depends = ["pre-commit", "gitleaks:dir"]
-
-[tasks.gen-githooks]
-run = "mise generate git-pre-commit --write --task=check-leaks"
-
 [tasks.format]
-run = "yamlfmt"
+run = "oxfmt"

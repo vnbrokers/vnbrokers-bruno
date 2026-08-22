@@ -1,0 +1,13 @@
+type: object
+additionalProperties: false
+required: [action, channels]
+properties:
+  action:
+    type: string
+    const: subscribe
+  channels:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items:
+      $ref: ./Channel.yaml

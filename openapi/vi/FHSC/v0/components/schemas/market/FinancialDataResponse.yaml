@@ -1,5 +1,5 @@
 allOf:
-  - $ref: '../common/EnvelopeBase.yaml'
+  - $ref: "../common/EnvelopeBase.yaml"
   - type: object
     required:
       - data
@@ -7,7 +7,7 @@ allOf:
       data:
         type: array
         items:
-          $ref: 'FinancialData.yaml'
+          $ref: "FinancialData.yaml"
       traceId:
         type: string
         format: uuid

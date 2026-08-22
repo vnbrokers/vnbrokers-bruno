@@ -9,31 +9,27 @@ get:
     - name: marketType
       in: query
       required: true
-      description: |-
-        Loại thị trường 
-        - STOCK: Danh sách Deal cơ sở
-        - DERIVATIVE: Danh sách Deal phái sinh
-        - BOND: Danh sách Deal trái phiếu
+      description: "Loại thị trường \n- STOCK: Danh sách Deal cơ sở\n- DERIVATIVE: Danh sách Deal phái sinh\n- BOND: Danh sách Deal trái phiếu"
       deprecated: false
       schema:
         type: string
       example: DERIVATIVE
   responses:
-    '200':
+    "200":
       description: OK
       headers:
         Content-Length:
-          $ref: '../../components/headers/ContentLength.yaml'
+          $ref: ../../components/headers/ContentLength.yaml
         Date:
-          $ref: '../../components/headers/Date.yaml'
+          $ref: ../../components/headers/Date.yaml
         Vary:
-          $ref: '../../components/headers/Vary.yaml'
+          $ref: ../../components/headers/Vary.yaml
         X-Ratelimit-Limit:
-          $ref: '../../components/headers/XRateLimitLimit.yaml'
+          $ref: ../../components/headers/XRateLimitLimit.yaml
         X-Ratelimit-Remaining:
-          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+          $ref: ../../components/headers/XRateLimitRemaining.yaml
         X-Ratelimit-Reset:
-          $ref: '../../components/headers/XRateLimitReset.yaml'
+          $ref: ../../components/headers/XRateLimitReset.yaml
         X-Tyk-Api-Expires:
           deprecated: false
           schema: {}
@@ -64,7 +60,7 @@ get:
                       - DERIVATIVE: Vị thế phái sinh
                   accountNo:
                     type: string
-                    example: '0001179019'
+                    example: "0001179019"
                     description: Số tiểu khoản
                   status:
                     type: string
@@ -141,18 +137,18 @@ get:
                   createdDate:
                     type: string
                     format: date-time
-                    example: '2026-03-23T03:08:32.773651Z'
+                    example: "2026-03-23T03:08:32.773651Z"
                     description: Thời điểm mở
                   modifiedDate:
                     type: string
                     format: date-time
-                    example: '2026-03-23T04:07:45.692156Z'
+                    example: "2026-03-23T04:07:45.692156Z"
                     description: Thời điểm cập nhật
                 example:
                   id: 177410795472387
                   symbol: 41I1G4000
                   marketType: DERIVATIVE
-                  accountNo: '0001179019'
+                  accountNo: "0001179019"
                   status: OPEN
                   loanPackageId: 2278
                   side: NB
@@ -166,15 +162,104 @@ get:
                   averageClosePrice: 1750.96
                   marketPrice: 1706.1
                   breakEvenPrice: 1834.95691
-                  createdDate: '2026-03-23T03:08:32.773651Z'
-                  modifiedDate: '2026-03-23T04:07:45.692156Z'
-                description: ''
+                  createdDate: "2026-03-23T03:08:32.773651Z"
+                  modifiedDate: "2026-03-23T04:07:45.692156Z"
+                description: ""
+              id:
+                type: integer
+                format: int32
+                example: 9589
+                description: ID vị thế
+              symbol:
+                type: string
+                example: BVS
+                description: Mã chứng khoán
+              accountNo:
+                type: string
+                example: "0001179019"
+                description: Số tiểu khoản
+              status:
+                type: string
+                example: OPEN
+                description: |-
+                  Trạng thái của vị thế
+                  - OPEN: Đang mở
+                  - PENDING_CLOSE: Chờ đóng
+                  - CLOSED: Đã đóng
+                  - ODD_LOT: Lô lẻ (cơ sở)
+              loanPackageId:
+                type: integer
+                format: int32
+                example: 5757
+                description: Gói vay cơ sở hoặc phái sinh
+              side:
+                type: string
+                example: NB
+                description: |-
+                  Loại vị thế
+                  - NB: Mua
+                  - NS: Bán
+              accumulateQuantity:
+                type: integer
+                format: int32
+                example: 3400
+                description: Khối lượng cộng dồn
+              tradeQuantity:
+                type: integer
+                format: int32
+                example: 3400
+                description: Khối lượng được giao dịch
+              closedQuantity:
+                type: integer
+                format: int32
+                example: 0
+                description: Khối lượng đã đóng
+              openQuantity:
+                type: integer
+                format: int32
+                example: 3400
+                description: Khối lượng mở
+              costPrice:
+                type: integer
+                format: int32
+                example: 28000
+                description: Giá vốn trung bình của khối lượng mở
+              averageCostPrice:
+                type: integer
+                format: int32
+                example: 28000
+                description: Giá vốn trung bình
+              averageClosePrice:
+                type: integer
+                format: int32
+                example: 0
+                description: Giá đóng trung bình
+              marketPrice:
+                type: integer
+                format: int32
+                example: 25200
+                description: Giá thị trường
+              breakEvenPrice:
+                type: number
+                format: double
+                example: 28043.4752
+                description: Giá hòa vốn
+              createdDate:
+                type: string
+                format: date-time
+                example: "2026-07-20T04:22:38.904283Z"
+                description: Thời điểm mở
+              modifiedDate:
+                type: string
+                format: date-time
+                example: "2026-07-30T11:20:44.65933Z"
+                description: Thời điểm cập nhật
           example:
             data:
               id: 177410795472387
               symbol: 41I1G4000
               marketType: DERIVATIVE
-              accountNo: '0001179019'
+              accountNo: "0001179019"
               status: OPEN
               loanPackageId: 2278
               side: NB
@@ -188,20 +273,20 @@ get:
               averageClosePrice: 1750.96
               marketPrice: 1706.1
               breakEvenPrice: 1834.95691
-              createdDate: '2026-03-23T03:08:32.773651Z'
-              modifiedDate: '2026-03-23T04:07:45.692156Z'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+              createdDate: "2026-03-23T03:08:32.773651Z"
+              modifiedDate: "2026-03-23T04:07:45.692156Z"
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml
   tags:
     - Tài khoản
 parameters:
   - name: positionId
     in: path
     required: true
-    description: 'Id vị thế '
+    description: "Id vị thế "
     deprecated: false
     schema:
       type: string
-    example: '177410795472387'
+    example: "177410795472387"

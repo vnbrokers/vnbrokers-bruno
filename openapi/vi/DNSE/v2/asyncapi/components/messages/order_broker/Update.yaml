@@ -1,0 +1,30 @@
+name: brokerOrderUpdate
+title: Cập nhật lệnh môi giới
+summary: Bản cập nhật trạng thái lệnh của nhà đầu tư do môi giới theo dõi.
+payload:
+  $ref: ../../schemas/order_broker/Update.yaml
+examples:
+  - name: brokerOrderUpdate
+    payload:
+      T: eo
+      action: order_update
+      event: canceled
+      order:
+        id: 596
+        side: NS
+        accountNo: "0001179019"
+        symbol: 41I1G5000
+        orderType: LO
+        price: 1920.0
+        quantity: 5
+        fillQuantity: 2
+        canceledQuantity: 0
+        leaveQuantity: 3
+        orderStatus: PartiallyFilled
+        loanPackageId: 2278
+        marketType: DERIVATIVE
+        transDate: "2026-04-06T00:00:00Z"
+        createdDate: "2026-04-13T04:24:05.274Z"
+        modifiedDate: "2026-04-13T04:28:27.749Z"
+      sequence: 4
+      timestamp: 1781234866949

@@ -17,6 +17,8 @@
               otpId:
                 type: string
                 description: "ID của OTP, dùng ở bước 2 để đổi token."
+          example:
+            otpId: f944da47-63fc-4095-b7d7-b80a90389d23
   "requestBody":
     "required": true
     "content":

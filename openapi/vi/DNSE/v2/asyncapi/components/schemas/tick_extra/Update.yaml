@@ -1,0 +1,97 @@
+type: object
+description: Dữ liệu khớp lệnh nâng cao theo thời gian thực.
+required:
+  - T
+  - symbol
+  - matchPrice
+  - matchQtty
+  - marketId
+  - boardId
+  - isin
+  - avgPrice
+  - side
+  - totalVolumeTraded
+  - grossTradeAmount
+  - highestPrice
+  - lowestPrice
+  - openPrice
+  - tradingSessionId
+  - multicastReceiveTime
+  - time
+properties:
+  T:
+    type: string
+    description: Mã loại message khớp lệnh nâng cao.
+    const: te
+  symbol:
+    type: string
+    description: Mã chứng khoán.
+  marketId:
+    type: string
+    description: Mã thị trường niêm yết mã chứng khoán.
+  boardId:
+    type: string
+    description: Mã bảng giao dịch.
+  isin:
+    type: string
+    description: Mã định danh quốc tế (ISIN) của chứng khoán.
+  matchPrice:
+    type: number
+    description: Giá khớp gần nhất.
+  matchQtty:
+    type: number
+    description: Khối lượng khớp gần nhất.
+  avgPrice:
+    type: number
+    description: Giá khớp trung bình.
+  side:
+    type: string
+    description: Chiều mua hoặc bán chủ động.
+  totalVolumeTraded:
+    type: integer
+    description: Tổng khối lượng khớp trong ngày.
+  grossTradeAmount:
+    type: number
+    description: Tổng giá trị giao dịch trong ngày.
+  highestPrice:
+    type: number
+    description: Giá khớp cao nhất trong ngày.
+  lowestPrice:
+    type: number
+    description: Giá khớp thấp nhất trong ngày.
+  openPrice:
+    type: number
+    description: Giá mở cửa.
+  tradingSessionId:
+    type: string
+    description: Mã phiên giao dịch hiện tại.
+  multicastReceiveTime:
+    type: object
+    description: Thời gian nhận message qua multicast.
+    required:
+      - Seconds
+      - Nanos
+    properties:
+      Seconds:
+        type: integer
+        format: int64
+        description: Unix timestamp tính bằng giây.
+      Nanos:
+        type: integer
+        format: int32
+        description: Phần nanosecond của timestamp.
+  time:
+    type: object
+    description: Thời gian trong các message giá của sàn trả về.
+    required:
+      - Seconds
+      - Nanos
+    properties:
+      Seconds:
+        type: integer
+        format: int64
+        description: Unix timestamp tính bằng giây.
+      Nanos:
+        type: integer
+        format: int32
+        description: Phần nanosecond của timestamp.

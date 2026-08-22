@@ -1,0 +1,10 @@
+name: subscriptionListMessage
+title: Danh sách subscription
+summary: Scope topic hiện tại theo nhóm trading và data.
+payload:
+  $ref: ../../schemas/control/SubscriptionListMessage.yaml
+examples:
+  - name: subscriptionList
+    payload:
+      trading: order.0901351;portfolio.0901351
+      data: trade.SSI;quote.vn30

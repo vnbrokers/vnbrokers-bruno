@@ -10,19 +10,19 @@ get:
     **Phải truyền** `period` HOẶC cả `from-month` + `to-month` (cùng lúc).
     Server trả `400` nếu vi phạm.
   parameters:
-    - $ref: '../../components/parameters/FundNamesCsv.yaml'
-    - $ref: '../../components/parameters/FundPeriodQuery.yaml'
-    - $ref: '../../components/parameters/FromMonth.yaml'
-    - $ref: '../../components/parameters/ToMonth.yaml'
+    - $ref: "../../components/parameters/FundNamesCsv.yaml"
+    - $ref: "../../components/parameters/FundPeriodQuery.yaml"
+    - $ref: "../../components/parameters/FromMonth.yaml"
+    - $ref: "../../components/parameters/ToMonth.yaml"
   responses:
-    '200':
+    "200":
       description: Trả về `data` mảng quỹ kèm AUM, biến động số nhà đầu tư, chi tiết dòng tiền.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/fund-trading/FundOperationBenchmarkResponse.yaml'
+            $ref: "../../components/schemas/fund-trading/FundOperationBenchmarkResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             data:
               - fund_name: VESAF
@@ -40,14 +40,14 @@ get:
                     fund_flow: 25000000000
                     fund_inflow: 80000000000
                     fund_outflow: 55000000000
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

@@ -5,8 +5,7 @@
   "summary": "Tỷ lệ margin và rủi ro"
   "description": "Lấy dư nợ gốc, dư nợ lãi, Rtt và các tỷ lệ margin của tài khoản margin."
   "parameters":
-    -
-      "name": "accountNo"
+    - "name": "accountNo"
       "in": "path"
       "required": true
       "description": "Số tiểu khoản margin."
@@ -75,3 +74,18 @@
                     description:
                       type: string
                       description: "Mô tả trạng thái RTT."
+          example:
+            - accountNo: 0001I97267
+              rtt: 99.95
+              outstanding: 8858766677
+              accruedInterest: 18638724
+              dueAmount: 34621881
+              overdueAmount: 34621881
+              totalFeeDebt: 8885876
+              riskPolicy:
+                initialMargin: 100
+                maintenanceMargin: 80
+                liquidationMargin: 30
+              riskStatus:
+                code: SAFE
+                description: An toàn

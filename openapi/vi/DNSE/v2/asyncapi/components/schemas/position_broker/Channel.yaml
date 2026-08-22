@@ -1,0 +1,12 @@
+type: object
+additionalProperties: false
+required: [name, symbols]
+properties:
+  name:
+    type: string
+    description: Topic vị thế môi giới theo loại thị trường và mã nhà đầu tư.
+    pattern: '^position\.broker\.(STOCK|DERIVATIVE)\.[0-9]+\.json$'
+  symbols:
+    type: array
+    description: DNSE yêu cầu mảng rỗng cho topic vị thế môi giới.
+    maxItems: 0

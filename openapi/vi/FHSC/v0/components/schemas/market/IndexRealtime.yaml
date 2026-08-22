@@ -31,7 +31,7 @@ properties:
     example: 2.07
   changePercent:
     type: number
-    description: '% thay đổi so với `reference` (đơn vị phần trăm).'
+    description: "% thay đổi so với `reference` (đơn vị phần trăm)."
     example: 0.12
   reference:
     type: number

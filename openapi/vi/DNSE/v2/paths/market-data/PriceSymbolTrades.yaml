@@ -24,7 +24,7 @@ get:
         - T6: Thỏa thuận lô lẻ sau giờ  (14h45 - 15h)
       deprecated: false
       schema:
-        $ref: '../../components/schemas/_common/enums/BoardId.yaml'
+        $ref: ../../components/schemas/_common/enums/BoardId.yaml
       example: G1
     - name: from
       in: query
@@ -33,7 +33,7 @@ get:
       deprecated: false
       schema:
         type: string
-      example: '1773282637'
+      example: "1773282637"
     - name: to
       in: query
       required: true
@@ -41,28 +41,28 @@ get:
       deprecated: false
       schema:
         type: string
-      example: '1773289837'
+      example: "1773289837"
     - name: limit
       in: query
       schema:
         type: number
       example: 100
   responses:
-    '200':
+    "200":
       description: OK
       headers:
         Content-Length:
-          $ref: '../../components/headers/ContentLength.yaml'
+          $ref: ../../components/headers/ContentLength.yaml
         Date:
-          $ref: '../../components/headers/Date.yaml'
+          $ref: ../../components/headers/Date.yaml
         Vary:
-          $ref: '../../components/headers/Vary.yaml'
+          $ref: ../../components/headers/Vary.yaml
         X-Ratelimit-Limit:
-          $ref: '../../components/headers/XRateLimitLimit.yaml'
+          $ref: ../../components/headers/XRateLimitLimit.yaml
         X-Ratelimit-Remaining:
-          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+          $ref: ../../components/headers/XRateLimitRemaining.yaml
         X-Ratelimit-Reset:
-          $ref: '../../components/headers/XRateLimitReset.yaml'
+          $ref: ../../components/headers/XRateLimitReset.yaml
         X-Tyk-Api-Expires:
           schema:
             type: string
@@ -88,7 +88,7 @@ get:
                     highestPrice: 23.25
                     lowestPrice: 22.75
                     openPrice: 23
-                    time: '2026-03-12 04:29:57'
+                    time: "2026-03-12 04:29:57"
                 items:
                   type: object
                   properties:
@@ -154,7 +154,7 @@ get:
                       description: Giá mở cửa
                     time:
                       type: string
-                      example: '2026-03-12 04:29:57'
+                      example: "2026-03-12 04:29:57"
                       description: Thời gian ghi nhận
                 description: Danh sách giao dịch
               nextPageToken:
@@ -176,12 +176,12 @@ get:
                 highestPrice: 23.25
                 lowestPrice: 22.75
                 openPrice: 23
-                time: '2026-03-12 04:29:57'
-            nextPageToken: NDYwMTQ1XzIwMjYtMDMtMTJUMDQ6MjU6MDUuNTZa #gitleaks:allow
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+                time: "2026-03-12 04:29:57"
+            nextPageToken: NDYwMTQ1XzIwMjYtMDMtMTJUMDQ6MjU6MDUuNTZa
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml
   tags:
     - Dữ liệu thị trường
 parameters:

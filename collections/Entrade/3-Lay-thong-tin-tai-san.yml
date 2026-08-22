@@ -23,7 +23,6 @@ runtime:
     - type: after-response
       code: bru.setEnvVar("assetId", res.getBody().id)
 
-
     - type: tests
       code: |-
         test("response matches the schema", function () {

@@ -18,5 +18,3 @@ properties:
         detail:
           description: Chi tiết kết quả hoặc lỗi.
           type: string
-
-

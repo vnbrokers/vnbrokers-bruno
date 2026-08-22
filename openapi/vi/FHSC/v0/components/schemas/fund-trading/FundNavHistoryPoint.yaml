@@ -5,7 +5,7 @@ properties:
     type: string
     format: date
     description: Ngày NAV, format `YYYY-MM-DD`.
-    example: '2025-04-30'
+    example: "2025-04-30"
   nav:
     type: number
     description: NAV của quỹ.

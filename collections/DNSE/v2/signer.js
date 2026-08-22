@@ -1,5 +1,4 @@
 const sign = (req) => {
-
   if (bru.isSafeMode()) {
     const cryptoJS = require("crypto-js");
     const { v4: uuidv4 } = require("uuid");
@@ -10,28 +9,22 @@ const sign = (req) => {
     const ALGORITHM = "hmac-sha256";
 
     // ===== HELPERS =====
-    const formatDate = (date = new Date()) =>
-      date.toUTCString().replace("GMT", "+0000");
+    const formatDate = (date = new Date()) => date.toUTCString().replace("GMT", "+0000");
     const generateNonce = () => uuidv4().replace(/-/g, "");
 
     const generateRequestPath = (req) => {
-      const preUrl =
-        "/" +
-        bru.interpolate(req.url).split("?")[0].split("/").slice(3).join("/");
-      const url = preUrl.replace(
-        /{{(.*?)}}|:([a-zA-Z0-9_]+)/g,
-        (_, curlyVar, colonVar) => {
-          const varName = curlyVar || colonVar;
-          const value = bru.getEnvVar(varName) || bru.getRequestVar(varName);
+      const preUrl = "/" + bru.interpolate(req.url).split("?")[0].split("/").slice(3).join("/");
+      const url = preUrl.replace(/{{(.*?)}}|:([a-zA-Z0-9_]+)/g, (_, curlyVar, colonVar) => {
+        const varName = curlyVar || colonVar;
+        const value = bru.getEnvVar(varName) || bru.getRequestVar(varName);
 
-          if (value === undefined || value === null) {
-            throw new Error(`Missing env var: ${varName}`);
-          }
-          return value;
-        },
-      );
+        if (value === undefined || value === null) {
+          throw new Error(`Missing env var: ${varName}`);
+        }
+        return value;
+      });
       return url;
-    }
+    };
 
     const buildSigningString = ({ method, path, date, nonce }) => {
       let signingString = `(request-target): ${method} ${path}\n`;
@@ -50,13 +43,7 @@ const sign = (req) => {
       return encodeURIComponent(base64);
     };
 
-    const buildSignatureHeader = ({
-      apiKey,
-      algorithm,
-      headers,
-      signature,
-      nonce,
-    }) => {
+    const buildSignatureHeader = ({ apiKey, algorithm, headers, signature, nonce }) => {
       return `Signature keyId="${apiKey}",algorithm="${algorithm}",headers="${headers}",signature="${signature}",nonce="${nonce}"`;
     };
 
@@ -84,10 +71,10 @@ const sign = (req) => {
     req.setHeader("X-Aux-Date", date);
     req.setHeader("X-Signature", signatureHeader);
 
-    bru.setEnvVar("X-Aux-Date", date)
-    bru.setEnvVar("X-Signature", signatureHeader)
+    bru.setEnvVar("X-Aux-Date", date);
+    bru.setEnvVar("X-Signature", signatureHeader);
   }
-}
+};
 module.exports = {
-  sign
-}
+  sign,
+};

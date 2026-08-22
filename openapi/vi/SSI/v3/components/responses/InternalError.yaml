@@ -2,4 +2,4 @@ description: Lỗi nội bộ máy chủ.
 content:
   application/json:
     schema:
-      $ref: '../schemas/ErrorResponse.yaml'
+      $ref: "../schemas/ErrorResponse.yaml"

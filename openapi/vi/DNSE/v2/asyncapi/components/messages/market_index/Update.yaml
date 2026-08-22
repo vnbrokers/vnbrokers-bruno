@@ -1,0 +1,39 @@
+name: marketIndexUpdate
+title: Cập nhật chỉ số thị trường
+summary: Bản cập nhật giá trị và biến động của chỉ số thị trường.
+payload:
+  $ref: ../../schemas/market_index/Update.yaml
+examples:
+  - name: marketIndexUpdate
+    payload:
+      T: mi
+      blkTrdAccTrdVal: 1633.46998985
+      blkTrdAccTrdVol: 62679813
+      changedRatio: -0.46
+      changedValue: -8.570000000000164
+      contauctAccTrdVal: 4001.6785832
+      contauctAccTrdVol: 119469304
+      currencyCode: VND
+      fluctuationDownIssueCount: 24
+      fluctuationDownIssueVolume: 151005844
+      fluctuationSteadinessIssueCount: 2
+      fluctuationSteadinessIssueVolume: 19131891
+      fluctuationUpIssueCount: 4
+      fluctuationUpIssueVolume: 12011382
+      grossTradeAmount: 5635.14857305
+      highestValueIndexes: 1879.66
+      indexName: VN30
+      indexTypeCode: "101"
+      lowestValueIndexes: 1864.16
+      marketId: STO
+      marketIndexClass: HSX
+      multicastReceiveTime:
+        Nanos: 771733668
+        Seconds: 1787122657
+      priorValueIndexes: 1876.14
+      totalVolumeTraded: 182149117
+      tradingSessionId: "40"
+      transactTime:
+        Nanos: 75000000
+        Seconds: 1787122660
+      valueIndexes: 1867.57

@@ -1,0 +1,35 @@
+type: object
+description: Kết quả xác thực kết nối WebSocket thành công.
+additionalProperties: false
+required:
+  - action
+  - user_id
+  - capabilities
+  - rate_limit
+properties:
+  action:
+    type: string
+    description: Loại message xác thực.
+    const: auth_success
+  user_id:
+    type: string
+    description: Mã người dùng hoặc API key đã xác thực.
+  capabilities:
+    type: object
+    additionalProperties: false
+    required: [batch_delivery]
+    properties:
+      batch_delivery:
+        type: boolean
+        description: Cho biết kết nối có hỗ trợ gửi message theo lô hay không.
+  rate_limit:
+    type: object
+    additionalProperties: false
+    required: [messages_per_second, subscriptions_max]
+    properties:
+      messages_per_second:
+        type: integer
+        description: Số message tối đa mỗi giây.
+      subscriptions_max:
+        type: integer
+        description: Số lượng subscription tối đa.

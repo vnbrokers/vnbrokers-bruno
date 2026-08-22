@@ -1,0 +1,22 @@
+name: estimatedMarketIndexUpdate
+title: Cập nhật chỉ số VN30 dự tính
+summary: Bản cập nhật chỉ số VN30 dự tính khi dữ liệu thay đổi.
+payload:
+  $ref: ../../schemas/estimated_market_index/Update.yaml
+examples:
+  - name: estimatedVN30Update
+    payload:
+      T: emi
+      action: estimated_market_index_update
+      marketIndex:
+        changedRatio: -0.53
+        changedValue: -9.87
+        fluctuationDownIssueCount: 25
+        fluctuationSteadinessIssueCount: 2
+        fluctuationUpIssueCount: 3
+        grossTradeAmount: 4088.34
+        indexName: VN30
+        time: "2026-08-19 14:00:55.145"
+        totalVolumeTraded: 121362100
+        valueIndexes: 1866.27
+      timestamp: 1787122855158

@@ -1,0 +1,21 @@
+type: object
+additionalProperties: false
+required: [method, channel, topics]
+properties:
+  method:
+    type: string
+    const: UNSUBSCRIBE
+    description: Phương thức hủy đăng ký topic.
+  channel:
+    type: string
+    enum: [DATA, TRADING]
+    description: Nhóm dữ liệu cần hủy đăng ký.
+  topics:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: string
+      minLength: 1
+      pattern: '^(trade|quote|room|put|oddlot)\.(index|exchange|[A-Za-z0-9_-]+(?:-[A-Za-z0-9_-]+)*|\*)(?:@(tick|1m|5m))?$|^market\.(index|exchange|[A-Za-z0-9_-]+(?:-[A-Za-z0-9_-]+)*|\*)$|^(order|portfolio)\..+$'
+    description: Danh sách topic cần hủy theo dõi.

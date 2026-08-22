@@ -1,0 +1,21 @@
+name: tradeUpdate
+title: Cập nhật khớp lệnh
+summary: Thông tin khớp lệnh theo thời gian thực.
+payload:
+  $ref: ../../schemas/market_data/TradeUpdate.yaml
+examples:
+  - name: trade
+    payload:
+      channel: DATA
+      topic: trade.SSI@tick
+      data:
+        s: SSI
+        t: "2026/07/29 09:15:32"
+        p: "45.50"
+        q: "1000"
+        a: "45.35"
+        si: B
+        o: "45.00"
+        h: "45.80"
+        l: "44.90"
+        v: "1250000"

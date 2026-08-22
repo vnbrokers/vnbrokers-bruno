@@ -5,12 +5,12 @@ properties:
     type: string
     format: date
     description: Ngày NAV, format `YYYY-MM-DD`.
-    example: '2024-12-31'
+    example: "2024-12-31"
   navpf:
     type: number
     description: NAV trên 1 đơn vị quỹ.
     example: 18234.56
   change_percent:
     type: number
-    description: '% thay đổi so với điểm trước đó.'
+    description: "% thay đổi so với điểm trước đó."
     example: 1.24

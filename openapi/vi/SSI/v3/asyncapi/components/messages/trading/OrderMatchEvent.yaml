@@ -1,0 +1,19 @@
+name: orderMatchEvent
+title: Sự kiện khớp lệnh
+summary: Sự kiện phát sinh khi lệnh được khớp một phần hoặc toàn bộ.
+payload:
+  $ref: ../../schemas/trading/OrderMatchEvent.yaml
+examples:
+  - name: orderMatch
+    payload:
+      eventType: orderMatchEvent
+      notifyId: 1061597
+      connectionId: connection_id_value
+      clientRequestId: "91530521"
+      orderId: "26022601219922"
+      symbol: MSR
+      side: S
+      accountNo: "Q276811"
+      matchPrice: "43100.0"
+      matchQty: 500
+      matchTime: "2026/03/01 14:20:55"

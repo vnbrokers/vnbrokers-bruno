@@ -1,0 +1,11 @@
+name: pingMessage
+title: Ping heartbeat
+summary: Server gửi ping định kỳ.
+payload:
+  $ref: ../../schemas/heartbeat/PingMessage.yaml
+examples:
+  - name: ping
+    payload:
+      method: PING
+      channel: HEARTBEAT
+      time: "29-07-2026 09-15-32"

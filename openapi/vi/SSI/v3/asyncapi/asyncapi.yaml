@@ -1,0 +1,363 @@
+# yaml-language-server: $schema=https://www.asyncapi.com/schema-store/3.0.0-without-$id.json
+asyncapi: 3.0.0
+id: urn:vnbrokers:ssi:v3:stream
+info:
+  title: SSI FastConnect WebSocket Stream API
+  version: 3.0.0
+  description: |-
+    API WebSocket thời gian thực của SSI FastConnect cho dữ liệu thị trường và dữ liệu giao dịch.
+    Client kết nối bằng access token, duy trì heartbeat và đăng ký lại các topic sau khi reconnect.
+defaultContentType: application/json
+servers:
+  production:
+    host: stream.ssi.com.vn
+    protocol: wss
+    description: FastConnect WebSocket production endpoint.
+channels:
+  controlStream:
+    address: /ws/v3
+    title: Luồng điều khiển
+    summary: Gửi yêu cầu subscribe, unsubscribe và kiểm tra subscription.
+    description: |-
+      Client sử dụng các message điều khiển để quản lý topic trên hai channel `DATA` và `TRADING`.
+      Token được lấy trước qua API `getAccessToken` và dùng khi thiết lập kết nối.
+    servers:
+      - $ref: "#/servers/production"
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeRequest"
+      unsubscribeRequest:
+        $ref: "#/components/messages/UnsubscribeRequest"
+      listSubscriptionRequest:
+        $ref: "#/components/messages/ListSubscriptionRequest"
+      subscriptionListMessage:
+        $ref: "#/components/messages/SubscriptionListMessage"
+  heartbeatStream:
+    address: /ws/v3
+    title: Heartbeat
+    summary: Duy trì phiên kết nối WebSocket.
+    description: Server gửi `PING`; client phải phản hồi `PONG` đúng cấu trúc.
+    servers:
+      - $ref: "#/servers/production"
+    messages:
+      pingMessage:
+        $ref: "#/components/messages/PingMessage"
+      pongRequest:
+        $ref: "#/components/messages/PongRequest"
+  tradeStream:
+    address: /ws/v3
+    title: Khớp lệnh
+    summary: Đăng ký topic `trade.{scope}` hoặc `trade.{scope}@{interval}`.
+    description: Cập nhật thông tin khớp lệnh và tổng quan giao dịch của mã chứng khoán.
+    servers:
+      - $ref: "#/servers/production"
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeMarketDataRequest"
+      unsubscribeRequest:
+        $ref: "#/components/messages/UnsubscribeMarketDataRequest"
+      update:
+        $ref: "#/components/messages/TradeUpdate"
+  quoteStream:
+    address: /ws/v3
+    title: Bid/ask
+    summary: Đăng ký topic `quote.{scope}` hoặc `quote.{scope}@{interval}`.
+    description: Cập nhật các mức giá và khối lượng bid/ask.
+    servers:
+      - $ref: "#/servers/production"
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeMarketDataRequest"
+      unsubscribeRequest:
+        $ref: "#/components/messages/UnsubscribeMarketDataRequest"
+      update:
+        $ref: "#/components/messages/QuoteUpdate"
+  roomStream:
+    address: /ws/v3
+    title: Room nước ngoài
+    summary: Đăng ký topic `room.{scope}` hoặc `room.{scope}@{interval}`.
+    description: Cập nhật room và giao dịch mua/bán của nhà đầu tư nước ngoài.
+    servers:
+      - $ref: "#/servers/production"
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeMarketDataRequest"
+      unsubscribeRequest:
+        $ref: "#/components/messages/UnsubscribeMarketDataRequest"
+      update:
+        $ref: "#/components/messages/RoomUpdate"
+  putStream:
+    address: /ws/v3
+    title: Khớp lệnh thỏa thuận
+    summary: Đăng ký topic `put.{scope}` hoặc `put.{scope}@{interval}`.
+    description: Cập nhật giao dịch thỏa thuận.
+    servers:
+      - $ref: "#/servers/production"
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeMarketDataRequest"
+      unsubscribeRequest:
+        $ref: "#/components/messages/UnsubscribeMarketDataRequest"
+      update:
+        $ref: "#/components/messages/PutUpdate"
+  oddlotStream:
+    address: /ws/v3
+    title: Giao dịch lô lẻ
+    summary: Đăng ký topic `oddlot.{scope}` hoặc `oddlot.{scope}@{interval}`.
+    description: Cập nhật giao dịch và bid/ask lô lẻ.
+    servers:
+      - $ref: "#/servers/production"
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeMarketDataRequest"
+      unsubscribeRequest:
+        $ref: "#/components/messages/UnsubscribeMarketDataRequest"
+      update:
+        $ref: "#/components/messages/OddlotUpdate"
+  marketStream:
+    address: /ws/v3
+    title: Thông tin đầu ngày và phiên
+    summary: Đăng ký topic `market.{scope}` không có interval.
+    description: Cập nhật thông tin giá tham chiếu và cờ phiên của thị trường.
+    servers:
+      - $ref: "#/servers/production"
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeMarketDataRequest"
+      unsubscribeRequest:
+        $ref: "#/components/messages/UnsubscribeMarketDataRequest"
+      update:
+        $ref: "#/components/messages/MarketUpdate"
+      sessionFlag:
+        $ref: "#/components/messages/MarketFlag"
+  orderStream:
+    address: /ws/v3
+    title: Sự kiện lệnh
+    summary: Đăng ký topic `order.{accountNo}` hoặc `order.*`.
+    description: |-
+      Cập nhật trạng thái lệnh, khớp lệnh và sự kiện lệnh điều kiện (FCO).
+      FCO được trả về trên cùng topic `order`.
+    servers:
+      - $ref: "#/servers/production"
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeOrderRequest"
+      unsubscribeRequest:
+        $ref: "#/components/messages/UnsubscribeOrderRequest"
+      orderEvent:
+        $ref: "#/components/messages/OrderEvent"
+      orderMatchEvent:
+        $ref: "#/components/messages/OrderMatchEvent"
+      fcoEvent:
+        $ref: "#/components/messages/FcoEvent"
+  portfolioStream:
+    address: /ws/v3
+    title: Danh mục
+    summary: Đăng ký topic `portfolio.{accountNo}` hoặc `portfolio.*`.
+    description: Cập nhật vị thế và lãi/lỗ của tài khoản. SSI hiện hỗ trợ tài khoản đuôi 8.
+    servers:
+      - $ref: "#/servers/production"
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribePortfolioRequest"
+      unsubscribeRequest:
+        $ref: "#/components/messages/UnsubscribePortfolioRequest"
+      update:
+        $ref: "#/components/messages/PortfolioEvent"
+operations:
+  onSubscribeRequest:
+    action: receive
+    channel: { $ref: "#/channels/controlStream" }
+    title: Gửi yêu cầu subscribe
+    summary: Client đăng ký một hoặc nhiều topic dữ liệu.
+    messages: [{ $ref: "#/channels/controlStream/messages/subscribeRequest" }]
+  onUnsubscribeRequest:
+    action: receive
+    channel: { $ref: "#/channels/controlStream" }
+    title: Gửi yêu cầu unsubscribe
+    summary: Client hủy đăng ký một hoặc nhiều topic dữ liệu.
+    messages: [{ $ref: "#/channels/controlStream/messages/unsubscribeRequest" }]
+  onListSubscriptionRequest:
+    action: receive
+    channel: { $ref: "#/channels/controlStream" }
+    title: Liệt kê subscription
+    summary: Client yêu cầu danh sách topic đang đăng ký.
+    messages: [{ $ref: "#/channels/controlStream/messages/listSubscriptionRequest" }]
+  onSubscriptionListMessage:
+    action: send
+    channel: { $ref: "#/channels/controlStream" }
+    title: Nhận danh sách subscription
+    summary: Server trả về scope subscription theo nhóm trading và data.
+    messages: [{ $ref: "#/channels/controlStream/messages/subscriptionListMessage" }]
+  onPingMessage:
+    action: send
+    channel: { $ref: "#/channels/heartbeatStream" }
+    title: Nhận ping
+    summary: Server gửi heartbeat để kiểm tra kết nối.
+    messages: [{ $ref: "#/channels/heartbeatStream/messages/pingMessage" }]
+  onPongRequest:
+    action: receive
+    channel: { $ref: "#/channels/heartbeatStream" }
+    title: Gửi pong
+    summary: Client phản hồi heartbeat.
+    messages: [{ $ref: "#/channels/heartbeatStream/messages/pongRequest" }]
+  onTradeSubscription:
+    action: receive
+    channel: { $ref: "#/channels/tradeStream" }
+    title: Đăng ký luồng khớp lệnh
+    messages: [{ $ref: "#/channels/tradeStream/messages/subscribeRequest" }]
+  onTradeUnsubscription:
+    action: receive
+    channel: { $ref: "#/channels/tradeStream" }
+    title: Hủy đăng ký luồng khớp lệnh
+    messages: [{ $ref: "#/channels/tradeStream/messages/unsubscribeRequest" }]
+  onTradeUpdates:
+    action: send
+    channel: { $ref: "#/channels/tradeStream" }
+    title: Nhận cập nhật khớp lệnh
+    messages: [{ $ref: "#/channels/tradeStream/messages/update" }]
+  onQuoteUpdates:
+    action: send
+    channel: { $ref: "#/channels/quoteStream" }
+    title: Nhận cập nhật bid/ask
+    messages: [{ $ref: "#/channels/quoteStream/messages/update" }]
+  onQuoteSubscription:
+    action: receive
+    channel: { $ref: "#/channels/quoteStream" }
+    title: Đăng ký luồng bid/ask
+    messages: [{ $ref: "#/channels/quoteStream/messages/subscribeRequest" }]
+  onRoomUpdates:
+    action: send
+    channel: { $ref: "#/channels/roomStream" }
+    title: Nhận cập nhật room nước ngoài
+    messages: [{ $ref: "#/channels/roomStream/messages/update" }]
+  onRoomSubscription:
+    action: receive
+    channel: { $ref: "#/channels/roomStream" }
+    title: Đăng ký luồng room nước ngoài
+    messages: [{ $ref: "#/channels/roomStream/messages/subscribeRequest" }]
+  onPutUpdates:
+    action: send
+    channel: { $ref: "#/channels/putStream" }
+    title: Nhận cập nhật khớp lệnh thỏa thuận
+    messages: [{ $ref: "#/channels/putStream/messages/update" }]
+  onPutSubscription:
+    action: receive
+    channel: { $ref: "#/channels/putStream" }
+    title: Đăng ký luồng khớp lệnh thỏa thuận
+    messages: [{ $ref: "#/channels/putStream/messages/subscribeRequest" }]
+  onOddlotUpdates:
+    action: send
+    channel: { $ref: "#/channels/oddlotStream" }
+    title: Nhận cập nhật giao dịch lô lẻ
+    messages: [{ $ref: "#/channels/oddlotStream/messages/update" }]
+  onOddlotSubscription:
+    action: receive
+    channel: { $ref: "#/channels/oddlotStream" }
+    title: Đăng ký luồng giao dịch lô lẻ
+    messages: [{ $ref: "#/channels/oddlotStream/messages/subscribeRequest" }]
+  onMarketUpdates:
+    action: send
+    channel: { $ref: "#/channels/marketStream" }
+    title: Nhận cập nhật thị trường
+    messages:
+      - $ref: "#/channels/marketStream/messages/update"
+      - $ref: "#/channels/marketStream/messages/sessionFlag"
+  onMarketSubscription:
+    action: receive
+    channel: { $ref: "#/channels/marketStream" }
+    title: Đăng ký luồng thị trường
+    messages: [{ $ref: "#/channels/marketStream/messages/subscribeRequest" }]
+  onOrderEvent:
+    action: send
+    channel: { $ref: "#/channels/orderStream" }
+    title: Nhận sự kiện lệnh
+    messages: [{ $ref: "#/channels/orderStream/messages/orderEvent" }]
+  onOrderSubscription:
+    action: receive
+    channel: { $ref: "#/channels/orderStream" }
+    title: Đăng ký luồng lệnh
+    messages: [{ $ref: "#/channels/orderStream/messages/subscribeRequest" }]
+  onOrderUnsubscription:
+    action: receive
+    channel: { $ref: "#/channels/orderStream" }
+    title: Hủy đăng ký luồng lệnh
+    messages: [{ $ref: "#/channels/orderStream/messages/unsubscribeRequest" }]
+  onOrderMatchEvent:
+    action: send
+    channel: { $ref: "#/channels/orderStream" }
+    title: Nhận sự kiện khớp lệnh
+    messages: [{ $ref: "#/channels/orderStream/messages/orderMatchEvent" }]
+  onFcoEvent:
+    action: send
+    channel: { $ref: "#/channels/orderStream" }
+    title: Nhận sự kiện lệnh điều kiện
+    summary: FCO được gửi trên cùng topic order.
+    messages: [{ $ref: "#/channels/orderStream/messages/fcoEvent" }]
+  onPortfolioEvent:
+    action: send
+    channel: { $ref: "#/channels/portfolioStream" }
+    title: Nhận sự kiện danh mục
+    messages: [{ $ref: "#/channels/portfolioStream/messages/update" }]
+  onPortfolioSubscription:
+    action: receive
+    channel: { $ref: "#/channels/portfolioStream" }
+    title: Đăng ký luồng danh mục
+    messages: [{ $ref: "#/channels/portfolioStream/messages/subscribeRequest" }]
+  onPortfolioUnsubscription:
+    action: receive
+    channel: { $ref: "#/channels/portfolioStream" }
+    title: Hủy đăng ký luồng danh mục
+    messages: [{ $ref: "#/channels/portfolioStream/messages/unsubscribeRequest" }]
+components:
+  messages:
+    SubscribeRequest:
+      $ref: ./components/messages/control/SubscribeRequest.yaml
+    UnsubscribeRequest:
+      $ref: ./components/messages/control/UnsubscribeRequest.yaml
+    ListSubscriptionRequest:
+      $ref: ./components/messages/control/ListSubscriptionRequest.yaml
+    SubscriptionListMessage:
+      $ref: ./components/messages/control/SubscriptionListMessage.yaml
+    PingMessage:
+      $ref: ./components/messages/heartbeat/PingMessage.yaml
+    PongRequest:
+      $ref: ./components/messages/heartbeat/PongRequest.yaml
+    SubscribeMarketDataRequest:
+      $ref: ./components/messages/market_data/SubscribeRequest.yaml
+    UnsubscribeMarketDataRequest:
+      $ref: ./components/messages/market_data/UnsubscribeRequest.yaml
+    SubscribeTradingDataRequest:
+      $ref: ./components/messages/trading/SubscribeRequest.yaml
+    UnsubscribeTradingDataRequest:
+      $ref: ./components/messages/trading/UnsubscribeRequest.yaml
+    SubscribeOrderRequest:
+      $ref: ./components/messages/trading/SubscribeOrderRequest.yaml
+    UnsubscribeOrderRequest:
+      $ref: ./components/messages/trading/UnsubscribeOrderRequest.yaml
+    SubscribePortfolioRequest:
+      $ref: ./components/messages/trading/SubscribePortfolioRequest.yaml
+    UnsubscribePortfolioRequest:
+      $ref: ./components/messages/trading/UnsubscribePortfolioRequest.yaml
+    TradeUpdate:
+      $ref: ./components/messages/market_data/TradeUpdate.yaml
+    QuoteUpdate:
+      $ref: ./components/messages/market_data/QuoteUpdate.yaml
+    RoomUpdate:
+      $ref: ./components/messages/market_data/RoomUpdate.yaml
+    PutUpdate:
+      $ref: ./components/messages/market_data/PutUpdate.yaml
+    OddlotUpdate:
+      $ref: ./components/messages/market_data/OddlotUpdate.yaml
+    MarketUpdate:
+      $ref: ./components/messages/market_data/MarketUpdate.yaml
+    MarketFlag:
+      $ref: ./components/messages/market_data/MarketFlag.yaml
+    OrderEvent:
+      $ref: ./components/messages/trading/OrderEvent.yaml
+    OrderMatchEvent:
+      $ref: ./components/messages/trading/OrderMatchEvent.yaml
+    PortfolioEvent:
+      $ref: ./components/messages/trading/PortfolioEvent.yaml
+    FcoEvent:
+      $ref: ./components/messages/trading/FcoEvent.yaml

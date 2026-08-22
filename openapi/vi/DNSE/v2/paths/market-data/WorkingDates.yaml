@@ -8,7 +8,7 @@ get:
       DnseSignature: []
   summary: Ngày làm việc
   responses:
-    '200':
+    "200":
       description: OK
       content:
         application/json:
@@ -20,7 +20,12 @@ get:
                 items:
                   type: string
                   format: date
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+          example:
+            workingDates:
+              - "2026-08-03"
+              - "2026-08-04"
+              - "2026-08-05"
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml

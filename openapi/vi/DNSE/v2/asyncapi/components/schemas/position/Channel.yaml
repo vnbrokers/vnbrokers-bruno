@@ -1,0 +1,12 @@
+type: object
+additionalProperties: false
+required: [name, symbols]
+properties:
+  name:
+    type: string
+    description: Topic vị thế của nhà đầu tư hiện tại theo loại thị trường.
+    pattern: '^position\.(STOCK|DERIVATIVE)\.json$'
+  symbols:
+    type: array
+    description: DNSE yêu cầu mảng rỗng cho topic vị thế.
+    maxItems: 0

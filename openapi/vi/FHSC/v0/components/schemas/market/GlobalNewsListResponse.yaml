@@ -1,8 +1,8 @@
 allOf:
-  - $ref: '../common/EnvelopeBase.yaml'
+  - $ref: "../common/EnvelopeBase.yaml"
   - type: object
     required:
       - data
     properties:
       data:
-        $ref: 'GlobalNewsPage.yaml'
+        $ref: "GlobalNewsPage.yaml"

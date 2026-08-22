@@ -1,0 +1,17 @@
+name: oddlotUpdate
+title: Cập nhật giao dịch lô lẻ
+summary: Giao dịch và bid/ask lô lẻ.
+payload:
+  $ref: ../../schemas/market_data/OddlotUpdate.yaml
+examples:
+  - name: oddlot
+    payload:
+      channel: DATA
+      topic: oddlot.SSI@tick
+      data:
+        s: SSI
+        t: "2026/07/29 09:16:05"
+        p: "45.50"
+        q: "80"
+        bids: [["45.45", "50"], ["45.40", "30"]]
+        asks: [["45.55", "40"], ["45.60", "20"]]

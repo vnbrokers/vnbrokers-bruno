@@ -20,7 +20,7 @@ properties:
       response `GET /users/v1/users/{userId}/sub-accounts`.
     example: 120C000008.1
   side:
-    $ref: 'OrderSide.yaml'
+    $ref: "OrderSide.yaml"
   symbol:
     type: string
     description: Mã chứng khoán cần đặt lệnh.
@@ -34,11 +34,11 @@ properties:
       lẻ và chỉ chấp nhận `type = LIMIT`.
     example: 100
   type:
-    $ref: 'PlaceOrderKind.yaml'
+    $ref: "PlaceOrderKind.yaml"
   limit_price:
     type:
       - integer
-      - 'null'
+      - "null"
     format: int64
     description: |
       Giá đặt khi `type = LIMIT`, đơn vị **VND** (không nhân 1000). Để
@@ -49,11 +49,11 @@ properties:
       Mã loại lệnh thị trường khi `type = MARKET`. Để `null` khi
       `type = LIMIT`.
     oneOf:
-      - $ref: 'MarketPriceCode.yaml'
-      - type: 'null'
+      - $ref: "MarketPriceCode.yaml"
+      - type: "null"
   stock_type:
     allOf:
-      - $ref: 'StockTypeOrder.yaml'
+      - $ref: "StockTypeOrder.yaml"
     description: |
       Phân loại công cụ tài chính. Mặc định `STOCK` nếu bỏ trống.
 example:

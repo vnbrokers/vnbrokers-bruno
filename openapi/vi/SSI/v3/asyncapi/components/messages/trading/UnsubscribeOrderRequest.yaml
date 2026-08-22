@@ -1,0 +1,14 @@
+name: unsubscribeOrderRequest
+title: Yêu cầu hủy sự kiện lệnh
+summary: Hủy đăng ký các topic order trên channel TRADING.
+payload:
+  $ref: ../../schemas/trading/UnsubscribeOrderRequest.yaml
+examples:
+  - name: unsubscribeOrder
+    summary: Hủy đăng ký sự kiện lệnh.
+    payload:
+      method: UNSUBSCRIBE
+      channel: TRADING
+      topics:
+        - order.1231991
+        - order.*

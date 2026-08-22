@@ -9,11 +9,11 @@ http:
   url: "{{baseUrl}}/khronos/v1/order/in-day"
   params:
     - name: pageNo
-      value: '1'
+      value: "1"
       type: query
       description: Trang số
     - name: pageSize
-      value: '20'
+      value: "20"
       type: query
       description: Số phần tử trong trang
     - name: accountId
@@ -43,7 +43,7 @@ http:
         - `5`: ForceClose
         - `6`: Thường
     - name: status
-      value: '0'
+      value: "0"
       type: query
       description: |-
         filter theo trạng thái:

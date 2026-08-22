@@ -10,14 +10,14 @@ get:
     Object `data` map từ mã ngân hàng (`VCB`, `BIDV`, `ACB`, …) sang object
     chứa `bank_name` và `terms` (kỳ hạn → lãi suất).
   responses:
-    '200':
+    "200":
       description: Trả về `data` map từ mã ngân hàng sang object `{ bank_name, terms }`; mỗi `terms` là map kỳ hạn → lãi suất % / năm.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/market/BankInterestRatesResponse.yaml'
+            $ref: "../../components/schemas/market/BankInterestRatesResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             data:
               VCB:
@@ -34,14 +34,14 @@ get:
                   3M: 2.6
                   6M: 3.5
                   12M: 4.5
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

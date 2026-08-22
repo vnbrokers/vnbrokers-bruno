@@ -1,0 +1,51 @@
+type: object
+description: Dữ liệu OHLC của nến đang hình thành.
+required:
+  - T
+  - symbol
+  - open
+  - high
+  - low
+  - close
+  - volume
+  - resolution
+  - time
+  - type
+  - lastUpdated
+properties:
+  T:
+    type: string
+    description: Mã loại message OHLC đang hình thành.
+    const: b
+  symbol:
+    type: string
+    description: Mã chứng khoán hoặc chỉ số.
+  type:
+    type: string
+    description: Loại nhóm thị trường, ví dụ STOCK, DERIVATIVE hoặc INDEX.
+  resolution:
+    type: string
+    description: Khung thời gian nến.
+  open:
+    type: number
+    description: Giá mở cửa.
+  high:
+    type: number
+    description: Giá cao nhất trong nến.
+  low:
+    type: number
+    description: Giá thấp nhất trong nến.
+  close:
+    type: number
+    description: Giá đóng cửa.
+  volume:
+    type: integer
+    description: Khối lượng giao dịch.
+  time:
+    type: integer
+    format: int64
+    description: Unix timestamp tính bằng giây của thời điểm bắt đầu nến.
+  lastUpdated:
+    type: integer
+    format: int64
+    description: Unix timestamp tính bằng giây của lần cập nhật gần nhất.

@@ -17,16 +17,22 @@ post:
               type: string
               description: Refresh token còn hiệu lực.
   responses:
-    '200':
+    "200":
       description: Thành công.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/TokenResponse.yaml'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            $ref: "../../components/schemas/TokenResponse.yaml"
+          example:
+            tokenType: Bearer
+            accessToken: "eyJhb..."
+            expiresAt: 1787238584
+            refreshToken: "eyJhb..."
+            refreshExpiresAt: 1787266484
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   security: []

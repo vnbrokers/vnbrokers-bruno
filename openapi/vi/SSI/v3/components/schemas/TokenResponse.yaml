@@ -24,5 +24,3 @@ properties:
     description: Thời điểm refresh token hết hạn.
     type: integer
     format: int64
-
-

@@ -9,11 +9,11 @@ http:
   url: "{{baseUrl}}/khronos/v1/order/condition/detail"
   params:
     - name: pageNo
-      value: '1'
+      value: "1"
       type: query
       description: Trang số
     - name: PageSize
-      value: '25'
+      value: "25"
       type: query
       description: Số phần tử trong trang
     - name: accountId
@@ -25,7 +25,7 @@ http:
       type: query
       description: Số tài khoản phái sinh
     - name: orderStatus
-      value: '0'
+      value: "0"
       type: query
       description: |-
         filter theo trạng thái:

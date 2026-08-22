@@ -8,29 +8,29 @@ get:
 
     `data` là `null` khi quỹ chưa có record phân bổ.
   parameters:
-    - $ref: '../../components/parameters/FundName.yaml'
+    - $ref: "../../components/parameters/FundName.yaml"
   responses:
-    '200':
+    "200":
       description: Trả về `data` là object 3 field (% bond/stock/others), hoặc `null` khi không có record.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/fund-trading/FundAssetAllocationResponse.yaml'
+            $ref: "../../components/schemas/fund-trading/FundAssetAllocationResponse.yaml"
           example:
-            error_code: '0'
+            error_code: "0"
             message: success
             data:
               bond: 65
               stock: 30
               others: 5
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '429':
-      $ref: '../../components/responses/RateLimited.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "429":
+      $ref: "../../components/responses/RateLimited.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
   x-codeSamples:
     - lang: bash
       label: cURL

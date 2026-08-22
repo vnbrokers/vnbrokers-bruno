@@ -14,6 +14,9 @@
           schema:
             type: object
             properties:
+              cmd:
+                type: string
+                description: "Lệnh gọi (echo)."
               rc:
                 type: string
                 description: "Mã kết quả, 1 = thành công."
@@ -37,6 +40,17 @@
                     notes:
                       type: string
                       description: "Loại lệnh điều kiện."
+
+          example:
+            cmd: "Web.Order.ChangeConditionOrder"
+            rc: "1"
+            data:
+              - showPrice: "1453.9"
+                price: "1362.2"
+                volume: "1"
+                pkOrderNo: "901943"
+                notes: Stop order
+
   "requestBody":
     "required": true
     "content":

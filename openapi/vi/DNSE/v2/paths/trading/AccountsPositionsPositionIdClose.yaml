@@ -10,37 +10,33 @@ post:
     - name: marketType
       in: query
       required: true
-      description: |-
-        Loại thị trường 
-        - STOCK: Danh sách Deal cơ sở
-        - DERIVATIVE: Danh sách Deal phái sinh
-        Hiện tại chỉ hỗ trợ phái sinh
+      description: "Loại thị trường \n- STOCK: Danh sách Deal cơ sở\n- DERIVATIVE: Danh sách Deal phái sinh\nHiện tại chỉ hỗ trợ phái sinh"
       deprecated: false
       schema:
         type: string
       example: DERIVATIVE
   responses:
-    '200':
+    "200":
       description: OK
       headers:
         Access-Control-Allow-Credentials:
-          $ref: '../../components/headers/AccessControlAllowCredentials.yaml'
+          $ref: ../../components/headers/AccessControlAllowCredentials.yaml
         Content-Encoding:
           deprecated: false
           schema: {}
           example: br
         Content-Length:
-          $ref: '../../components/headers/ContentLength.yaml'
+          $ref: ../../components/headers/ContentLength.yaml
         Date:
-          $ref: '../../components/headers/Date.yaml'
+          $ref: ../../components/headers/Date.yaml
         Vary:
-          $ref: '../../components/headers/Vary.yaml'
+          $ref: ../../components/headers/Vary.yaml
         X-Ratelimit-Limit:
-          $ref: '../../components/headers/XRateLimitLimit.yaml'
+          $ref: ../../components/headers/XRateLimitLimit.yaml
         X-Ratelimit-Remaining:
-          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+          $ref: ../../components/headers/XRateLimitRemaining.yaml
         X-Ratelimit-Reset:
-          $ref: '../../components/headers/XRateLimitReset.yaml'
+          $ref: ../../components/headers/XRateLimitReset.yaml
         X-Tyk-Api-Expires:
           deprecated: false
           schema: {}
@@ -52,8 +48,9 @@ post:
             properties:
               id:
                 type: string
-                example: '1636'
+                example: "1636"
                 description: ID lệnh giao dịch dạng chuỗi
+                format: int32
               side:
                 type: string
                 example: NS
@@ -63,7 +60,7 @@ post:
                   - NS: Bán
               accountNo:
                 type: string
-                example: '0001179019'
+                example: "0001179019"
                 description: Số tiểu khoản
               symbol:
                 type: string
@@ -111,17 +108,17 @@ post:
               createdDate:
                 type: string
                 format: date-time
-                example: '2026-03-24T04:20:55.63Z'
+                example: "2026-03-24T04:20:55.63Z"
                 description: Thời điểm tạo
               modifiedDate:
                 type: string
                 format: date-time
-                example: '2026-03-24T04:20:55.63Z'
+                example: "2026-03-24T04:20:55.63Z"
                 description: Thời điểm cập nhật
           example:
-            id: '1636'
+            id: "1636"
             side: NS
-            accountNo: '0001179019'
+            accountNo: "0001179019"
             symbol: 41I1G4000
             price: 1618.2
             quantity: 1
@@ -130,12 +127,12 @@ post:
             leaveQuantity: 0
             canceledQuantity: 0
             loanPackageId: 2278
-            createdDate: '2026-03-24T04:20:55.63Z'
-            modifiedDate: '2026-03-24T04:20:55.63Z'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            createdDate: "2026-03-24T04:20:55.63Z"
+            modifiedDate: "2026-03-24T04:20:55.63Z"
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml
   tags:
     - Giao dịch
 parameters:
@@ -146,4 +143,4 @@ parameters:
     deprecated: false
     schema:
       type: string
-    example: '177410795472387'
+    example: "177410795472387"

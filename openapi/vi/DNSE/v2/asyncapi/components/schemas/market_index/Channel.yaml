@@ -1,0 +1,8 @@
+type: object
+additionalProperties: false
+required: [name]
+properties:
+  name:
+    type: string
+    description: Topic chỉ số thị trường theo tên chỉ số.
+    pattern: '^market_index\.[A-Z0-9]+\.json$'

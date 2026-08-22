@@ -7,29 +7,31 @@ post:
   security:
     - SsiBearerAuth: []
   parameters:
-    - $ref: '../../components/parameters/ContentType.yaml'
-    - $ref: '../../components/parameters/UserAgent.yaml'
-    - $ref: '../../components/parameters/AcceptLanguage.yaml'
-    - $ref: '../../components/parameters/XSignature.yaml'
+    - $ref: "../../components/parameters/ContentType.yaml"
+    - $ref: "../../components/parameters/UserAgent.yaml"
+    - $ref: "../../components/parameters/AcceptLanguage.yaml"
+    - $ref: "../../components/parameters/XSignature.yaml"
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/PlaceFcoOrderRequest.yaml'
+          $ref: "../../components/schemas/PlaceFcoOrderRequest.yaml"
   responses:
-    '200':
+    "200":
       description: Thành công.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/FcoOrderResponse.yaml'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            $ref: "../../components/schemas/FcoOrderResponse.yaml"
+          example:
+            fcoId: 2e667ae3-934a-4548-be9a-de983a29fe5b
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"
 delete:
   operationId: cancelConditionalOrder
   tags:
@@ -39,26 +41,29 @@ delete:
   security:
     - SsiBearerAuth: []
   parameters:
-    - $ref: '../../components/parameters/ContentType.yaml'
-    - $ref: '../../components/parameters/UserAgent.yaml'
-    - $ref: '../../components/parameters/AcceptLanguage.yaml'
-    - $ref: '../../components/parameters/XSignature.yaml'
+    - $ref: "../../components/parameters/ContentType.yaml"
+    - $ref: "../../components/parameters/UserAgent.yaml"
+    - $ref: "../../components/parameters/AcceptLanguage.yaml"
+    - $ref: "../../components/parameters/XSignature.yaml"
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/CancelFcoOrderRequest.yaml'
+          $ref: "../../components/schemas/CancelFcoOrderRequest.yaml"
   responses:
-    '200':
+    "200":
       description: Thành công.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/FcoOrderResponse.yaml'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            $ref: "../../components/schemas/FcoOrderResponse.yaml"
+          example:
+            fcoId: 2e667ae3-934a-4548-be9a-de983a29fe5b
+            username: Q12345
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"

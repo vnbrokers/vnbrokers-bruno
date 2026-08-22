@@ -1,0 +1,27 @@
+name: tradeUpdate
+title: Cập nhật khớp lệnh
+summary: Bản cập nhật giao dịch khớp lệnh của một mã chứng khoán.
+payload:
+  $ref: ../../schemas/tick/Update.yaml
+examples:
+  - name: tradeUpdate
+    payload:
+      T: t
+      boardId: G1
+      grossTradeAmount: 205.111605
+      highestPrice: 21.2
+      isin: VN000000HPG4
+      lowestPrice: 20.9
+      marketId: STO
+      matchPrice: 21.05
+      matchQtty: 90
+      multicastReceiveTime:
+        Nanos: 687300758
+        Seconds: 1787120768
+      openPrice: 21.1
+      symbol: HPG
+      time:
+        Nanos: 35000000
+        Seconds: 1787120771
+      totalVolumeTraded: 976440
+      tradingSessionId: "40"

@@ -18,7 +18,7 @@ properties:
     description: Thay đổi AUM trong khoảng thời gian (VND).
   changed_aum_percent:
     type: number
-    description: '% thay đổi AUM trong khoảng thời gian.'
+    description: "% thay đổi AUM trong khoảng thời gian."
   investors:
     type: integer
     description: Số nhà đầu tư hiện tại.
@@ -27,7 +27,7 @@ properties:
     description: Thay đổi số nhà đầu tư trong khoảng thời gian.
   changed_investors_percent:
     type: number
-    description: '% thay đổi số nhà đầu tư.'
+    description: "% thay đổi số nhà đầu tư."
   total_fund_flow:
     type: integer
     format: int64
@@ -36,4 +36,4 @@ properties:
     type: array
     description: Chi tiết dòng tiền theo từng tháng.
     items:
-      $ref: 'FundFlowEntry.yaml'
+      $ref: "FundFlowEntry.yaml"

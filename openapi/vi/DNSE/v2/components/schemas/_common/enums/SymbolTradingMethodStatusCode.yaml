@@ -9,9 +9,10 @@ description: |-
   - `SLS`: Giao dịch đặc biệt sau halt
   - `SNE`: Giao dịch đặc biệt
 enum:
-  - 'UNSPECIFIED'
-  - 'NRM'
-  - 'NWE'
-  - 'NWN'
-  - 'SLS'
-  - 'SNE'
+  - "UNSPECIFIED"
+  - "NRM"
+  - "NWE"
+  - "NWN"
+  - "SLS"
+  - "SNE"
+example: NRM

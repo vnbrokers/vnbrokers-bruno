@@ -1,0 +1,29 @@
+name: tradeExtraUpdate
+title: Cập nhật khớp lệnh nâng cao
+summary: Bản cập nhật giao dịch kèm giá bình quân và chiều giao dịch.
+payload:
+  $ref: ../../schemas/tick_extra/Update.yaml
+examples:
+  - name: tradeExtraUpdate
+    payload:
+      T: te
+      avgPrice: 21.006
+      boardId: G1
+      grossTradeAmount: 218.2127
+      highestPrice: 21.2
+      isin: VN000000HPG4
+      lowestPrice: 20.9
+      marketId: STO
+      matchPrice: 21
+      matchQtty: 50
+      multicastReceiveTime:
+        Nanos: 518530993
+        Seconds: 1787121509
+      openPrice: 21.1
+      side: SELL
+      symbol: HPG
+      time:
+        Nanos: 879000000
+        Seconds: 1787121511
+      totalVolumeTraded: 1038820
+      tradingSessionId: "40"

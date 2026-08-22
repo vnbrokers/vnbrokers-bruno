@@ -17,17 +17,18 @@ description: |-
   - `CD1`: Bắt đầu phiên PCA
   - `CD3`: Thực hiện khớp lệnh PCA
 enum:
-  - 'AA1'
-  - 'AB1'
-  - 'AB2'
-  - 'AC2'
-  - 'AD1'
-  - 'AD2'
-  - 'AW8'
-  - 'AW9'
-  - 'AX1'
-  - 'BB1'
-  - 'BC1'
-  - 'CC1'
-  - 'CD1'
-  - 'CD3'
+  - AA1
+  - AB1
+  - AB2
+  - AC2
+  - AD1
+  - AD2
+  - AW8
+  - AW9
+  - AX1
+  - BB1
+  - BC1
+  - CC1
+  - CD1
+  - CD3
+example: AC2

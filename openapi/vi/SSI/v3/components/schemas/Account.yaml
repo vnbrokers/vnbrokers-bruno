@@ -7,9 +7,9 @@ properties:
     description: Số tài khoản giao dịch.
     type: string
   accountType:
-    description: 'Loại tài khoản giao dịch: CASH, MARGIN hoặc DERIVATIVE.'
+    description: "Loại tài khoản giao dịch: Cash, Margin hoặc Derivative."
     type: string
     enum:
-      - CASH
-      - MARGIN
-      - DERIVATIVE
+      - Cash
+      - Margin
+      - Derivative

@@ -24,24 +24,24 @@ get:
         - T6: Thỏa thuận lô lẻ sau giờ  (14h45 - 15h)
       deprecated: false
       schema:
-        $ref: '../../components/schemas/_common/enums/BoardId.yaml'
+        $ref: ../../components/schemas/_common/enums/BoardId.yaml
       example: G1
   responses:
-    '200':
+    "200":
       description: OK
       headers:
         Content-Length:
-          $ref: '../../components/headers/ContentLength.yaml'
+          $ref: ../../components/headers/ContentLength.yaml
         Date:
-          $ref: '../../components/headers/Date.yaml'
+          $ref: ../../components/headers/Date.yaml
         Vary:
-          $ref: '../../components/headers/Vary.yaml'
+          $ref: ../../components/headers/Vary.yaml
         X-Ratelimit-Limit:
-          $ref: '../../components/headers/XRateLimitLimit.yaml'
+          $ref: ../../components/headers/XRateLimitLimit.yaml
         X-Ratelimit-Remaining:
-          $ref: '../../components/headers/XRateLimitRemaining.yaml'
+          $ref: ../../components/headers/XRateLimitRemaining.yaml
         X-Ratelimit-Reset:
-          $ref: '../../components/headers/XRateLimitReset.yaml'
+          $ref: ../../components/headers/XRateLimitReset.yaml
         X-Tyk-Api-Expires:
           deprecated: false
           schema: {}
@@ -67,7 +67,7 @@ get:
                     highestPrice: 23.55
                     lowestPrice: 23.35
                     openPrice: 23.5
-                    time: '2026-03-19 04:08:29'
+                    time: "2026-03-19 04:08:29"
                 items:
                   type: object
                   properties:
@@ -149,11 +149,10 @@ get:
                       description: Giá mở cửa
                     time:
                       type: string
-                      example: '2026-03-19 04:08:29'
-                      description: >-
-                        Thời gian khớp lệnh (theo định dạng yyyy-MM-dd
-                        HH:mm:ss)
-                description: ''
+                      example: "2026-03-19 04:08:29"
+                      description: Thời gian khớp lệnh (theo định dạng yyyy-MM-dd HH:mm:ss)
+                description: ""
+            description: Thông tinh giao dịch khớp lệnh.
           example:
             trades:
               - marketId: STO
@@ -169,18 +168,18 @@ get:
                 highestPrice: 23.55
                 lowestPrice: 23.35
                 openPrice: 23.5
-                time: '2026-03-19 04:08:29'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+                time: "2026-03-19 04:08:29"
+    "400":
+      $ref: ../../components/responses/BadRequest.yaml
+    "500":
+      $ref: ../../components/responses/InternalError.yaml
   tags:
     - Dữ liệu thị trường
 parameters:
   - name: symbol
     in: path
     required: true
-    description: 'Mã chứng khoán '
+    description: "Mã chứng khoán "
     deprecated: false
     schema:
       type: string

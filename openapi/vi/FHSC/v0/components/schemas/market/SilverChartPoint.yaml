@@ -8,17 +8,17 @@ properties:
   date:
     type: string
     description: Point date in `YYYY-MM-DD` format.
-    example: '2026-03-23'
+    example: "2026-03-23"
   silver_bar:
     type:
       - number
-      - 'null'
+      - "null"
     description: Domestic silver bar price.
     example: 266.3
   silver_global:
     type:
       - number
-      - 'null'
+      - "null"
     description: Global silver price (USD/oz, converted to thousand VND / chỉ).
     example: 220.2
 required:

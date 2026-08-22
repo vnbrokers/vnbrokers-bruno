@@ -11,11 +11,12 @@ description: |-
   - `WID`: Cảnh báo do vi phạm CBTT
   - `WOV`: Cảnh báo vi phạm khác
 enum:
-  - 'UNSPECIFIED'
-  - 'CR'
-  - 'CTR'
-  - 'NRM'
-  - 'RES'
-  - 'WFR'
-  - 'WID'
-  - 'WOV'
+  - "UNSPECIFIED"
+  - "CR"
+  - "CTR"
+  - "NRM"
+  - "RES"
+  - "WFR"
+  - "WID"
+  - "WOV"
+example: NRM

@@ -1,0 +1,8 @@
+type: object
+description: Danh sách các gói lãi suất margin.
+properties:
+  data:
+    type: array
+    description: Các gói lãi suất margin khả dụng.
+    items:
+      $ref: PricingPolicy.yaml

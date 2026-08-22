@@ -1,0 +1,126 @@
+type: object
+description: Dữ liệu cập nhật vị thế của nhà đầu tư do môi giới theo dõi.
+additionalProperties: false
+required:
+  - T
+  - action
+  - event
+  - position
+  - sequence
+  - timestamp
+properties:
+  T:
+    type: string
+    const: dp
+    description: Mã loại message cập nhật vị thế môi giới.
+  action:
+    type: string
+    const: position_update
+    description: Loại hành động của message.
+  event:
+    type: string
+    description: Sự kiện làm phát sinh cập nhật vị thế.
+  position:
+    type: object
+    description: Thông tin vị thế được cập nhật.
+    required:
+      - id
+      - accountNo
+      - symbol
+      - status
+      - marketType
+      - side
+      - loanPackageId
+      - accumulateQuantity
+      - tradeQuantity
+      - openQuantity
+      - overNightQuantity
+      - closedQuantity
+      - costPrice
+      - marketPrice
+      - breakEvenPrice
+      - averageClosePrice
+      - createdDate
+      - modifiedDate
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Mã định danh vị thế.
+      accountNo:
+        type: string
+        description: Số tiểu khoản giao dịch.
+      symbol:
+        type: string
+        description: Mã chứng khoán.
+      status:
+        type: string
+        description: Trạng thái vị thế.
+        enum:
+          - OPEN
+          - PENDING_CLOSE
+          - CLOSED
+          - ODD_LOT
+      side:
+        type: string
+        description: Chiều vị thế, NB là mua và NS là bán.
+        enum:
+          - NB
+          - NS
+      loanPackageId:
+        type: integer
+        format: int64
+        description: Mã gói vay.
+      accumulateQuantity:
+        type: integer
+        description: Tổng khối lượng đã mở được cộng dồn trong vị thế.
+      tradeQuantity:
+        oneOf:
+          - type: integer
+          - type: "null"
+        description: Khối lượng có thể bán; chỉ áp dụng cho thị trường cơ sở.
+      marketType:
+        type: string
+        description: Loại thị trường.
+        enum:
+          - STOCK
+          - DERIVATIVE
+      openQuantity:
+        type: integer
+        description: Tổng khối lượng mở trong vị thế.
+      overNightQuantity:
+        oneOf:
+          - type: integer
+          - type: "null"
+        description: Khối lượng mở qua đêm; chỉ áp dụng cho thị trường phái sinh.
+      closedQuantity:
+        type: integer
+        description: Khối lượng đã đóng.
+      costPrice:
+        type: number
+        description: Giá vốn trung bình của vị thế.
+      marketPrice:
+        type: number
+        description: Giá thị trường hiện tại.
+      breakEvenPrice:
+        type: number
+        description: Giá hòa vốn.
+      averageClosePrice:
+        type: number
+        description: Giá đóng trung bình tính trên khối lượng đã đóng.
+      createdDate:
+        type: string
+        format: date-time
+        description: Thời điểm mở vị thế (UTC).
+      modifiedDate:
+        type: string
+        format: date-time
+        description: Thời điểm cập nhật gần nhất (UTC).
+  sequence:
+    type: integer
+    format: int64
+    description: Số thứ tự của message trong luồng.
+  timestamp:
+    type: integer
+    format: int64
+    description: Thời điểm phát sinh message, Unix timestamp tính bằng mili-giây.

@@ -1,0 +1,11 @@
+name: unsubscribeRequest
+title: Yêu cầu hủy đăng ký topic
+summary: Client hủy đăng ký một hoặc nhiều topic dữ liệu.
+payload:
+  $ref: ../../schemas/control/UnsubscribeRequest.yaml
+examples:
+  - name: unsubscribe
+    payload:
+      method: UNSUBSCRIBE
+      channel: DATA
+      topics: [trade.SSI, quote.SSI]

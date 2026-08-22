@@ -1,0 +1,12 @@
+name: subscribeOhlcRequest
+title: Đăng ký luồng nến đang hình thành
+summary: Đăng ký topic `ohlc.{resolution}.json`.
+payload:
+  $ref: ../../schemas/ohlc/SubscribeRequest.yaml
+examples:
+  - name: subscribeOhlc
+    payload:
+      action: subscribe
+      channels:
+        - name: ohlc.1.json
+          symbols: [HPG]

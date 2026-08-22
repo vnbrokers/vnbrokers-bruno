@@ -6,6 +6,7 @@ description: |-
   - `BUY`: Mua chủ động
   - `SELL`: Bán chủ động
 enum:
-  - 'UNSPECIFIED'
-  - 'BUY'
-  - 'SELL'
+  - "UNSPECIFIED"
+  - "BUY"
+  - "SELL"
+example: BUY

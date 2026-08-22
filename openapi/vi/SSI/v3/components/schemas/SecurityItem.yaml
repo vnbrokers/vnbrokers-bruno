@@ -30,7 +30,7 @@ properties:
     type: string
   cwUnderlyingSymbol:
     description: Mã chứng khoán cơ sở của chứng quyền.
-    type: string
+    type: [string, "null"]
   cwExercisePrice:
     description: Giá thực hiện của chứng quyền.
     type: string
@@ -48,15 +48,13 @@ properties:
     type: string
   iIndex:
     description: Chỉ số IIndex.
-    type: string
+    type: [string, "null"]
   iNav:
     description: Giá trị iNAV.
-    type: string
+    type: [string, "null"]
   openInterest:
     description: Khối lượng mở.
-    type: string
+    type: [string, "null"]
   settlementPrice:
     description: Giá thanh toán.
-    type: string
-
-
+    type: [string, "null"]

@@ -19,19 +19,66 @@ get:
       required: true
       schema:
         type: string
-    - $ref: '../../components/parameters/ContentType.yaml'
-    - $ref: '../../components/parameters/UserAgent.yaml'
-    - $ref: '../../components/parameters/AcceptLanguage.yaml'
+    - $ref: "../../components/parameters/ContentType.yaml"
+    - $ref: "../../components/parameters/UserAgent.yaml"
+    - $ref: "../../components/parameters/AcceptLanguage.yaml"
   responses:
-    '200':
+    "200":
       description: Thành công.
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/AccountBalanceResponse.yaml'
-    '400':
-      $ref: '../../components/responses/BadRequest.yaml'
-    '401':
-      $ref: '../../components/responses/Unauthorized.yaml'
-    '500':
-      $ref: '../../components/responses/InternalError.yaml'
+            $ref: "../../components/schemas/AccountBalanceResponse.yaml"
+          examples:
+            EQUITY:
+              value:
+                equity:
+                  accountNo: Q123451
+                  accountBalance: "22114"
+                  totalDebt: "0"
+                  interestLoan: "0"
+                  overdueFeeLoan: "0"
+                  withdrawable: "22114"
+                  onHoldCash: "0"
+                  sellUnmatched: "0"
+                  sellT0: "0"
+                  sellT1: "0"
+                  sellT2: "0"
+                  buyUnmatched: "0"
+                  buyT0: "0"
+                  buyT1: "0"
+                  buyT2: "0"
+                  advancedCashT0: "0"
+                  advancedCashT1: "0"
+                  holdSubscription: "0"
+                  dividend: "0"
+                derivative: null
+
+            DERIVATIVE:
+              value:
+                equity: null
+                derivative:
+                  accountNo: Q123458
+                  accountBalance: "1000020"
+                  fee: "0"
+                  commission: "0"
+                  interest: "20"
+                  extInterest: "0"
+                  loan: "0"
+                  deliveryAmount: "0"
+                  floatingPL: "0"
+                  tradingPL: "0"
+                  totalPL: "0"
+                  withdrawable: "1000020"
+                  cashSSI: "1000020"
+                  validNonCashSSI: "0"
+                  withdrawableSSI: "1000020"
+                  cashVSDC: "0"
+                  validNonCashVSDC: "0"
+                  withdrawableVSDC: "0"
+    "400":
+      $ref: "../../components/responses/BadRequest.yaml"
+    "401":
+      $ref: "../../components/responses/Unauthorized.yaml"
+    "500":
+      $ref: "../../components/responses/InternalError.yaml"

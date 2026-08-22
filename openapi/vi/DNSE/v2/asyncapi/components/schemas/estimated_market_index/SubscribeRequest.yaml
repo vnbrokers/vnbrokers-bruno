@@ -1,0 +1,15 @@
+type: object
+additionalProperties: false
+required: [action, channels]
+properties:
+  action:
+    type: string
+    description: Loại message đăng ký topic.
+    const: subscribe
+  channels:
+    type: array
+    description: Danh sách topic chỉ số VN30 dự tính cần đăng ký.
+    minItems: 1
+    uniqueItems: true
+    items:
+      $ref: ./Channel.yaml

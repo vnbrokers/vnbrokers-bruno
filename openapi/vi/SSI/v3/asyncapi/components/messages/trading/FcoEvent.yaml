@@ -1,0 +1,23 @@
+name: fcoEvent
+title: Sự kiện lệnh điều kiện
+summary: Cập nhật trạng thái lệnh điều kiện FastConnect Conditional Order.
+payload:
+  $ref: ../../schemas/trading/FcoEvent.yaml
+examples:
+  - name: fco
+    payload:
+      type: fcoEvent
+      data:
+        fcoId: 7528ac20-a340-4233-8bb7-a2379fc3c638
+        notifyID: 1249008
+        processStatus: INIT
+        matchedQuantity: 0
+        isPlaceOrder: false
+        instrumentID: ssi
+        quantity: 4000
+        price: MP
+        account: "1231496"
+        updatedTime: "1751966448000"
+        status: "200"
+        message: Success
+        username: "123149"

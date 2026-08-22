@@ -5,43 +5,37 @@
   "summary": "Thông tin sao kê tiền"
   "description": "Lấy sao kê tiền (lịch sử giao dịch) của tiểu khoản."
   "parameters":
-    -
-      "name": "accountNo"
+    - "name": "accountNo"
       "in": "query"
       "required": true
       "description": "Số tiểu khoản."
       "schema":
         "type": "string"
-    -
-      "name": "fromDate"
+    - "name": "fromDate"
       "in": "query"
       "required": true
       "description": "Từ ngày giao dịch (YYYY-MM-DD)."
       "schema":
         "type": "string"
-    -
-      "name": "toDate"
+    - "name": "toDate"
       "in": "query"
       "required": true
       "description": "Đến ngày giao dịch (YYYY-MM-DD)."
       "schema":
         "type": "string"
-    -
-      "name": "pageSize"
+    - "name": "pageSize"
       "in": "query"
       "required": true
       "description": "Kích thước trang."
       "schema":
         "type": "string"
-    -
-      "name": "pageIndex"
+    - "name": "pageIndex"
       "in": "query"
       "required": true
       "description": "Số trang."
       "schema":
         "type": "string"
-    -
-      "name": "transactionCode"
+    - "name": "transactionCode"
       "in": "query"
       "required": true
       "description": "Loại giao dịch."
@@ -108,6 +102,30 @@
                         transactionDate:
                           type: string
                           description: "Ngày giao dịch."
+                        transactionNum:
+                          type: string
+                          description: "Số giao dịch."
+                        accountNo:
+                          type: string
+                          description: "Số tiểu khoản."
                         descriptions:
                           type: string
                           description: "Mô tả."
+          example:
+            response:
+              pageIndex: 1
+              pageSize: 25
+              totalCreditAmount: 9545594
+              totalDebitAmount: 10715
+              totalCount: 8
+              data:
+                - custodyID: 105C209414
+                  transactionCode: "1153"
+                  transactionName: Ứng trước tiền bán
+                  debitAmount: 0
+                  creditAmount: 2814359
+                  businessDate: 2022-12-16
+                  transactionDate: 2022-12-16
+                  transactionNum: "6800124310"
+                  accountNo: "0001490922"
+                  descriptions: UTTB ngày GD 16-DEC-22, ngày TT 20/12/2022

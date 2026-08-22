@@ -4,7 +4,7 @@ properties:
   sub_account_id:
     type: string
     description: ID tiểu khoản hoặc `ALL`.
-    example: '0001234567'
+    example: "0001234567"
   pnl_amount:
     type: integer
     format: int64

@@ -1,0 +1,15 @@
+type: object
+description: Ping server gửi để kiểm tra kết nối WebSocket.
+additionalProperties: false
+required:
+  - action
+  - timestamp
+properties:
+  action:
+    type: string
+    description: Loại message heartbeat.
+    const: ping
+  timestamp:
+    type: integer
+    format: int64
+    description: Unix timestamp tính bằng mili giây tại thời điểm gửi ping.

@@ -13,13 +13,14 @@ description: |-
   - `VN50GROWTH`: Chỉ số nhóm 50 cổ phiếu tăng trưởng sàn HOSE
   - `VNDIVIDEND`: Chỉ số nhóm cổ phiếu có tỷ suất cổ tức tăng trưởng
 enum:
-  - 'VNINDEX'
-  - 'HNX'
-  - 'HNX30'
-  - 'VN30'
-  - 'VN100'
-  - 'VNXALLSHARE'
-  - 'UPCOM'
-  - 'VNMITECH'
-  - 'VN50GROWTH'
-  - 'VNDIVIDEND'
+  - "VNINDEX"
+  - "HNX"
+  - "HNX30"
+  - "VN30"
+  - "VN100"
+  - "VNXALLSHARE"
+  - "UPCOM"
+  - "VNMITECH"
+  - "VN50GROWTH"
+  - "VNDIVIDEND"
+example: VN30

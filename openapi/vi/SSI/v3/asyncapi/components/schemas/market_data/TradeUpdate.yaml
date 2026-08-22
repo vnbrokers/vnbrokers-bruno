@@ -1,0 +1,46 @@
+type: object
+additionalProperties: false
+required: [channel, topic, data]
+properties:
+  channel:
+    type: string
+    const: DATA
+  topic:
+    type: string
+    pattern: '^trade\.(index|exchange|[A-Za-z0-9_-]+(?:-[A-Za-z0-9_-]+)*|\*)(?:@(tick|1m|5m))?$'
+  data:
+    type: object
+    additionalProperties: false
+    required: [s, t, p, q, a, si, o, h, l, v]
+    properties:
+      s:
+        type: string
+        description: Mã chứng khoán.
+      t:
+        type: string
+        description: "Thời gian giao dịch, định dạng `YYYY/MM/DD HH:mi:ss`."
+      p:
+        type: string
+        description: Giá khớp.
+      q:
+        type: string
+        description: Khối lượng khớp.
+      a:
+        type: string
+        description: Giá khớp trung bình.
+      si:
+        type: string
+        enum: [B, S]
+        description: B là Buy Up, S là Sell Down.
+      o:
+        type: string
+        description: Giá mở cửa.
+      h:
+        type: string
+        description: Giá cao nhất.
+      l:
+        type: string
+        description: Giá thấp nhất.
+      v:
+        type: string
+        description: Tổng khối lượng khớp trong ngày.

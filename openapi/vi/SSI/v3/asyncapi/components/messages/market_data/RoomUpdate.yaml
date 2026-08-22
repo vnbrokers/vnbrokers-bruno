@@ -1,0 +1,19 @@
+name: roomUpdate
+title: Cập nhật room nước ngoài
+summary: Room và giao dịch mua/bán của nhà đầu tư nước ngoài.
+payload:
+  $ref: ../../schemas/market_data/RoomUpdate.yaml
+examples:
+  - name: room
+    payload:
+      channel: DATA
+      topic: room.SSI@tick
+      data:
+        s: SSI
+        t: "2026/07/29 09:15:32"
+        tr: "1500000"
+        cr: "980000"
+        bq: "5000"
+        bv: "227500000"
+        sq: "3000"
+        sv: "136500000"
