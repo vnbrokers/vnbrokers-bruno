@@ -1,0 +1,39 @@
+type: object
+additionalProperties: false
+required: [channel, topic, data]
+properties:
+  channel:
+    type: string
+    const: DATA
+  topic:
+    type: string
+    pattern: '^room\.(index|exchange|[A-Za-z0-9_-]+(?:-[A-Za-z0-9_-]+)*|\*)(?:@(tick|1m|5m))?$'
+  data:
+    type: object
+    additionalProperties: false
+    required: [s, t, tr, cr, bq, bv, sq, sv]
+    properties:
+      s:
+        type: string
+        description: Mã chứng khoán.
+      t:
+        type: string
+        description: "Thời gian giao dịch, định dạng `YYYY/MM/DD HH:mi:ss`."
+      tr:
+        type: string
+        description: Tổng room ngoại.
+      cr:
+        type: string
+        description: Room ngoại còn lại.
+      bq:
+        type: string
+        description: Khối lượng mua của khối ngoại.
+      bv:
+        type: string
+        description: Giá trị mua của khối ngoại.
+      sq:
+        type: string
+        description: Khối lượng bán của khối ngoại.
+      sv:
+        type: string
+        description: Giá trị bán của khối ngoại.

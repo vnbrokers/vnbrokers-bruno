@@ -1,0 +1,17 @@
+name: authRequest
+title: Yêu cầu xác thực WebSocket
+summary: Xác thực kết nối bằng API key và chữ ký HMAC-SHA256.
+description: |-
+  Chữ ký được tạo từ chuỗi `api_key:timestamp:nonce` bằng API secret. API secret
+  chỉ dùng để tạo chữ ký ở phía client và không được gửi trong message.
+payload:
+  $ref: ../../schemas/auth/AuthRequest.yaml
+examples:
+  - name: auth
+    summary: Xác thực kết nối WebSocket.
+    payload:
+      action: auth
+      api_key: your_api_key
+      signature: "a3f9c2d1e8b74c8d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d"
+      timestamp: 1750000000
+      nonce: "1750000000123456"

@@ -1,0 +1,12 @@
+name: subscribeTradeRequest
+title: Đăng ký luồng khớp lệnh
+summary: Đăng ký topic `tick.{market_group}.json`.
+payload:
+  $ref: ../../schemas/tick/SubscribeRequest.yaml
+examples:
+  - name: subscribeTrade
+    payload:
+      action: subscribe
+      channels:
+        - name: tick.G1.json
+          symbols: [HPG]

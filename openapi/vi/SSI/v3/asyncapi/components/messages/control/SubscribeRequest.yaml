@@ -1,0 +1,16 @@
+name: subscribeRequest
+title: Yêu cầu đăng ký topic
+summary: Client đăng ký một hoặc nhiều topic dữ liệu.
+payload:
+  $ref: ../../schemas/control/SubscribeRequest.yaml
+examples:
+  - name: subscribeMarketData
+    payload:
+      method: SUBSCRIBE
+      channel: DATA
+      topics: [trade.SSI, quote.vn30]
+  - name: subscribeTradingData
+    payload:
+      method: SUBSCRIBE
+      channel: TRADING
+      topics: [order.0901351, portfolio.0901351]

@@ -1,0 +1,14 @@
+name: marketFlag
+title: Cờ phiên giao dịch
+summary: Thông tin trạng thái phiên giao dịch.
+payload:
+  $ref: ../../schemas/market_data/MarketFlag.yaml
+examples:
+  - name: sessionFlag
+    payload:
+      channel: DATA
+      topic: market.SSI
+      data:
+        b: HOSE
+        t: "2026/07/29 09:00:00"
+        f: ATO

@@ -1,0 +1,8 @@
+type: object
+additionalProperties: false
+required: [name]
+properties:
+  name:
+    type: string
+    description: Topic phiên giao dịch theo thị trường và nhóm sản phẩm.
+    pattern: '^session\.[A-Z0-9]+\.[A-Z0-9]+\.json$'

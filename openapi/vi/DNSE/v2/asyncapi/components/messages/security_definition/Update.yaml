@@ -1,0 +1,28 @@
+name: securityDefinitionUpdate
+title: Cập nhật thông tin chứng khoán
+summary: Bản cập nhật giá tham chiếu, biên độ và trạng thái chứng khoán.
+payload:
+  $ref: ../../schemas/security_definition/Update.yaml
+examples:
+  - name: securityDefinitionUpdate
+    payload:
+      T: sd
+      marketId: DVX
+      boardId: G1
+      isin: VN41I1G20009
+      symbol: 41I1G2000
+      productGrpId: FIO
+      securityGroupId: FU
+      basicPrice: 2066.6
+      ceilingPrice: 2211.2
+      floorPrice: 1922.0
+      openInterestQuantity: 24473
+      securityStatus: NO_HALT
+      symbolAdminStatusCode: NRM
+      symbolTradingMethodStatusCode: NRM
+      symbolTradingSanctionStatusCode: NRM
+      listingDate: 20260223
+      finalTradeDate: 20260416
+      time:
+        Seconds: 1779757279
+        Nanos: 101000000

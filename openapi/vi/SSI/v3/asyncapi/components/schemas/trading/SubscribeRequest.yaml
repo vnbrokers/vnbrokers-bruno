@@ -1,0 +1,19 @@
+type: object
+additionalProperties: false
+required: [method, channel, topics]
+properties:
+  method:
+    type: string
+    const: SUBSCRIBE
+  channel:
+    type: string
+    const: TRADING
+  topics:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    description: Danh sách topic trading data; mỗi phần tử là một chuỗi topic.
+    items:
+      type: string
+      minLength: 1
+      pattern: '^(order|portfolio)\.(\*|[A-Za-z0-9_-]+(?:-[A-Za-z0-9_-]+)*)$'

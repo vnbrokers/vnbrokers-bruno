@@ -1,0 +1,38 @@
+type: object
+additionalProperties: false
+required: [type, data]
+properties:
+  type: { type: string, const: fcoEvent, description: Loại event. }
+  data:
+    type: object
+    additionalProperties: false
+    required:
+      [
+        fcoId,
+        notifyID,
+        processStatus,
+        matchedQuantity,
+        isPlaceOrder,
+        instrumentID,
+        quantity,
+        price,
+        account,
+        updatedTime,
+        status,
+        message,
+        username,
+      ]
+    properties:
+      fcoId: { type: string, format: uuid, description: ID lệnh điều kiện. }
+      notifyID: { type: integer, format: int64, description: ID thông báo. }
+      processStatus: { type: string, description: Trạng thái xử lý lệnh điều kiện. }
+      matchedQuantity: { type: number, description: Khối lượng đã khớp. }
+      isPlaceOrder: { type: boolean, description: Có lệnh thực phát sinh hay chưa. }
+      instrumentID: { type: string, description: Mã chứng khoán hoặc mã phái sinh. }
+      quantity: { type: number, description: Khối lượng muốn đặt lệnh. }
+      price: { type: string, description: "Giá đặt hoặc `MP`, `MOK`, `MTL`." }
+      account: { type: string, description: Tiểu khoản đặt lệnh. }
+      updatedTime: { type: string, description: Unix timestamp milliseconds. }
+      status: { type: string, description: Mã trạng thái. }
+      message: { type: string, description: Thông báo kết quả hoặc lỗi. }
+      username: { type: string, description: ID người dùng tại SSI. }

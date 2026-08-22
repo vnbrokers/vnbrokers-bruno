@@ -1,0 +1,12 @@
+name: subscribeForeignRequest
+title: Đăng ký luồng giao dịch nước ngoài
+summary: Đăng ký topic `foreign.{market_group}.json`.
+payload:
+  $ref: ../../schemas/foreign/SubscribeRequest.yaml
+examples:
+  - name: subscribeForeign
+    payload:
+      action: subscribe
+      channels:
+        - name: foreign.G1.json
+          symbols: [HPG]

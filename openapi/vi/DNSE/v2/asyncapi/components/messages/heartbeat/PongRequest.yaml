@@ -1,0 +1,14 @@
+name: pongRequest
+title: Phản hồi heartbeat
+summary: Client gửi pong để duy trì kết nối WebSocket.
+payload:
+  $ref: ../../schemas/heartbeat/PongRequest.yaml
+examples:
+  - name: pong
+    payload:
+      action: pong
+  - name: pongWithTimestamp
+    summary: Phản hồi pong echo lại timestamp của ping từ server.
+    payload:
+      action: pong
+      timestamp: 1750000000123

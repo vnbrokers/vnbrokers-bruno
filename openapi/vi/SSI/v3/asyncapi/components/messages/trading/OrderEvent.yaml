@@ -1,0 +1,32 @@
+name: orderEvent
+title: Sự kiện lệnh
+summary: Trạng thái lệnh khi đặt, sửa, hủy hoặc thay đổi trạng thái.
+payload:
+  $ref: ../../schemas/trading/OrderEvent.yaml
+examples:
+  - name: order
+    payload:
+      channel: TRADING
+      topic: order.0901351.ORD123456.
+      data:
+        eventType: orderEvent
+        notifyId: 123456789
+        connectionId: conn-001
+        clientRequestId: req-20240226-001
+        orderId: ORD123456
+        symbol: VNM
+        side: B
+        orderType: LO
+        accountNo: "0901351"
+        price: "72000"
+        avgPrice: "0"
+        quantity: 1000
+        cancelQty: 0
+        osQty: 1000
+        filledQty: 0
+        inputTime: "2026/03/01 14:20:55"
+        modifiedTime: "2026/03/01 14:20:55"
+        orderStatus: PD
+        rejectReason: ""
+        errorCode: ""
+        errorMessage: ""

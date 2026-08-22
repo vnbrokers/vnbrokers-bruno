@@ -1,0 +1,12 @@
+name: subscribeSecurityDefinitionRequest
+title: Đăng ký luồng thông tin chứng khoán
+summary: Đăng ký topic `security_definition.{market_group}.json`.
+payload:
+  $ref: ../../schemas/security_definition/SubscribeRequest.yaml
+examples:
+  - name: subscribeSecurityDefinition
+    payload:
+      action: subscribe
+      channels:
+        - name: security_definition.G1.json
+          symbols: [HPG]

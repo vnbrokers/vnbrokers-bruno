@@ -1,0 +1,8 @@
+type: object
+additionalProperties: false
+required: [method]
+properties:
+  method:
+    type: string
+    const: LIST_SUBSCRIPTION
+    description: Phương thức lấy danh sách topic đang đăng ký.

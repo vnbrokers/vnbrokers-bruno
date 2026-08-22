@@ -1,0 +1,33 @@
+name: quoteUpdate
+title: Cập nhật độ sâu thị trường
+summary: Bản cập nhật các mức giá mua và bán tốt nhất.
+payload:
+  $ref: ../../schemas/top_price/Update.yaml
+examples:
+  - name: quoteUpdate
+    payload:
+      T: q
+      bid:
+        - price: 21
+          qtty: 14590
+        - price: 20.95
+          qtty: 69990
+        - price: 20.9
+          qtty: 121890
+      boardId: G1
+      isin: VN000000HPG4
+      marketId: STO
+      multicastReceiveTime:
+        Nanos: 526432284
+        Seconds: 1787121724
+      offer:
+        - price: 21.05
+          qtty: 28710
+        - price: 21.1
+          qtty: 13160
+        - price: 21.15
+          qtty: 34890
+      symbol: HPG
+      time:
+        Nanos: 891000000
+        Seconds: 1787121726

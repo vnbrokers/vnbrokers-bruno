@@ -1,0 +1,29 @@
+type: object
+additionalProperties: false
+required: [channel, topic, data]
+properties:
+  channel:
+    type: string
+    const: DATA
+    description: Kênh dữ liệu thị trường.
+  topic:
+    type: string
+    pattern: '^quote\.(index|exchange|[A-Za-z0-9_-]+(?:-[A-Za-z0-9_-]+)*|\*)(?:@(tick|1m|5m))?$'
+    description: Topic quote theo index, exchange, mã hoặc wildcard và chu kỳ cập nhật.
+  data:
+    type: object
+    additionalProperties: false
+    required: [s, t, bids, asks]
+    properties:
+      s:
+        type: string
+        description: Mã chứng khoán.
+      t:
+        type: string
+        description: Thời gian giao dịch, định dạng `YYYY/MM/DD HH:mi:ss`.
+      bids:
+        $ref: ./QuoteLevels.yaml
+        description: Danh sách mức giá mua `[price, quantity]`.
+      asks:
+        $ref: ./QuoteLevels.yaml
+        description: Danh sách mức giá bán `[price, quantity]`.

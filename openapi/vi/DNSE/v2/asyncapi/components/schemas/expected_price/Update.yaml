@@ -1,0 +1,53 @@
+type: object
+description: Dữ liệu giá và khối lượng khớp dự kiến trong phiên giao dịch định kỳ.
+required:
+  - T
+  - marketId
+  - boardId
+  - symbol
+  - expectedTradePrice
+  - expectedTradeQuantity
+  - isin
+  - closePrice
+  - time
+properties:
+  T:
+    type: string
+    description: Mã loại message giá dự kiến.
+    const: e
+  marketId:
+    type: string
+    description: Mã thị trường niêm yết mã chứng khoán.
+  boardId:
+    type: string
+    description: Mã bảng giao dịch.
+  symbol:
+    type: string
+    description: Mã chứng khoán.
+  isin:
+    type: string
+    description: Mã định danh quốc tế của chứng khoán.
+  closePrice:
+    type: number
+    description: Giá đóng cửa.
+  expectedTradePrice:
+    type: number
+    description: Giá dự khớp tại thời điểm xác định.
+  expectedTradeQuantity:
+    type: integer
+    description: Khối lượng dự khớp tại thời điểm xác định.
+  time:
+    type: object
+    description: Thời gian trong các message giá của sàn trả về.
+    required:
+      - Seconds
+      - Nanos
+    properties:
+      Seconds:
+        type: integer
+        format: int64
+        description: Unix timestamp tính bằng giây.
+      Nanos:
+        type: integer
+        format: int32
+        description: Phần nanosecond của timestamp.

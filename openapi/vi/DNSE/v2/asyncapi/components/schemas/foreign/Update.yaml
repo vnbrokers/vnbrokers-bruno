@@ -1,0 +1,89 @@
+type: object
+description: Dữ liệu giao dịch mua bán của nhà đầu tư nước ngoài theo mã chứng khoán.
+required:
+  - T
+  - symbol
+  - buyVolume
+  - sellVolume
+  - totalBuyVolume
+  - totalSellVolume
+  - marketId
+  - boardId
+  - tradingSessionId
+  - transactTime
+  - foreignInvestorTypeCode
+  - buyTradedAmount
+  - sellTradedAmount
+  - totalBuyTradedAmount
+  - totalSellTradedAmount
+  - foreignerOrderLimitQuantity
+  - foreignerBuyPossibleQuantity
+  - multicastReceiveTime
+properties:
+  T:
+    type: string
+    description: Mã loại message giao dịch nước ngoài.
+    const: f
+  symbol:
+    type: string
+    description: Mã chứng khoán.
+  marketId:
+    type: string
+    description: Mã thị trường.
+  boardId:
+    type: string
+    description: Mã bảng giao dịch.
+  tradingSessionId:
+    type: string
+    description: Mã phiên giao dịch hiện tại.
+  transactTime:
+    type: string
+    description: Thời điểm cập nhật.
+  foreignInvestorTypeCode:
+    type: string
+    description: Loại nhà đầu tư nước ngoài.
+  buyVolume:
+    type: integer
+    description: Khối lượng mua trong ngày theo bảng giao dịch.
+  buyTradedAmount:
+    type: number
+    description: Giá trị mua trong ngày theo bảng giao dịch.
+  sellVolume:
+    type: integer
+    description: Khối lượng bán trong ngày theo bảng giao dịch.
+  sellTradedAmount:
+    type: number
+    description: Giá trị bán trong ngày theo bảng giao dịch.
+  totalBuyVolume:
+    type: integer
+    description: Tổng khối lượng mua trong ngày.
+  totalBuyTradedAmount:
+    type: number
+    description: Tổng giá trị mua trong ngày.
+  totalSellVolume:
+    type: integer
+    description: Tổng khối lượng bán trong ngày.
+  totalSellTradedAmount:
+    type: number
+    description: Tổng giá trị bán trong ngày.
+  foreignerOrderLimitQuantity:
+    type: integer
+    description: Tổng room sở hữu tối đa của nhà đầu tư nước ngoài.
+  foreignerBuyPossibleQuantity:
+    type: integer
+    description: Room còn lại nhà đầu tư nước ngoài có thể mua.
+  multicastReceiveTime:
+    type: object
+    description: Thời gian nhận message qua multicast.
+    required:
+      - Seconds
+      - Nanos
+    properties:
+      Seconds:
+        type: integer
+        format: int64
+        description: Unix timestamp tính bằng giây.
+      Nanos:
+        type: integer
+        format: int32
+        description: Phần nanosecond của timestamp.

@@ -1,0 +1,13 @@
+type: object
+additionalProperties: false
+required:
+  - action
+properties:
+  action:
+    type: string
+    description: Loại message phản hồi heartbeat.
+    const: pong
+  timestamp:
+    type: integer
+    format: int64
+    description: Timestamp ping được client echo lại để đo độ trễ.

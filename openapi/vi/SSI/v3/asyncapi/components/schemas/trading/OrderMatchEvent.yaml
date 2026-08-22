@@ -1,0 +1,31 @@
+type: object
+additionalProperties: false
+required:
+  [
+    eventType,
+    notifyId,
+    connectionId,
+    clientRequestId,
+    orderId,
+    symbol,
+    side,
+    accountNo,
+    matchPrice,
+    matchQty,
+    matchTime,
+  ]
+properties:
+  eventType: { type: string, const: orderMatchEvent, description: Loại event. }
+  notifyId: { type: integer, format: int64, description: Số serial của event message. }
+  connectionId: { type: string, description: Định danh phiên kết nối stream. }
+  clientRequestId: { type: string, description: Định danh lệnh trong ngày. }
+  orderId: { type: string, description: Số định danh lệnh trên hệ thống giao dịch. }
+  symbol: { type: string, description: Mã chứng khoán. }
+  side:
+    type: string
+    enum: [B, S]
+    description: B là BUY, S là SELL.
+  accountNo: { type: string, description: Số tài khoản đặt lệnh. }
+  matchPrice: { type: string, description: Giá khớp. }
+  matchQty: { type: number, description: Khối lượng khớp. }
+  matchTime: { type: string, description: Thời gian khớp. }

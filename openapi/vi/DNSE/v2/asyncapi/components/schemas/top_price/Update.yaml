@@ -1,0 +1,73 @@
+type: object
+description: Dữ liệu các mức giá mua và bán tốt nhất trên thị trường.
+required:
+  - T
+  - symbol
+  - bid
+  - offer
+  - marketId
+  - boardId
+  - isin
+  - totalOfferQtty
+  - totalBidQtty
+  - multicastReceiveTime
+  - time
+properties:
+  T:
+    type: string
+    description: Mã loại message độ sâu thị trường.
+    const: q
+  symbol:
+    type: string
+    description: Mã chứng khoán.
+  marketId:
+    type: string
+    description: Mã thị trường niêm yết mã chứng khoán.
+  boardId:
+    type: string
+    description: Mã bảng giao dịch.
+  isin:
+    type: string
+    description: Mã định danh quốc tế (ISIN) của chứng khoán.
+  bid:
+    description: Danh sách các mức giá chào mua tốt nhất.
+    $ref: ./QuoteLevels.yaml
+  offer:
+    description: Danh sách các mức giá chào bán tốt nhất.
+    $ref: ./QuoteLevels.yaml
+  totalOfferQtty:
+    type: number
+    description: Tổng khối lượng chào bán.
+  totalBidQtty:
+    type: number
+    description: Tổng khối lượng chào mua.
+  multicastReceiveTime:
+    type: object
+    description: Thời gian nhận message qua multicast.
+    required:
+      - Seconds
+      - Nanos
+    properties:
+      Seconds:
+        type: integer
+        format: int64
+        description: Unix timestamp tính bằng giây.
+      Nanos:
+        type: integer
+        format: int32
+        description: Phần nanosecond của timestamp.
+  time:
+    type: object
+    description: Thời gian trong các message giá của sàn trả về.
+    required:
+      - Seconds
+      - Nanos
+    properties:
+      Seconds:
+        type: integer
+        format: int64
+        description: Unix timestamp tính bằng giây.
+      Nanos:
+        type: integer
+        format: int32
+        description: Phần nanosecond của timestamp.

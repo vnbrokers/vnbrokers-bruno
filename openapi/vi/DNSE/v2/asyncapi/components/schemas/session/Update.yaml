@@ -1,0 +1,70 @@
+type: object
+description: Dữ liệu cập nhật trạng thái phiên giao dịch.
+required:
+  - T
+  - marketId
+  - boardId
+  - eventId
+  - tradingSessionId
+  - tscProdGrpId
+  - boardIdOriginal
+  - multicastReceiveTime
+  - sendingTime
+  - time
+properties:
+  T:
+    type: string
+    description: Mã loại message phiên giao dịch.
+    const: s
+  marketId:
+    type: string
+    description: Mã thị trường.
+  boardId:
+    type: string
+    description: Mã bảng giao dịch.
+  boardIdOriginal:
+    type: string
+    description: Mã bảng giao dịch gốc.
+  eventId:
+    type: string
+    description: Mã sự kiện chuyển trạng thái phiên giao dịch.
+  tradingSessionId:
+    type: string
+    description: Mã phiên giao dịch hiện tại.
+  tscProdGrpId:
+    type: string
+    description: Mã nhóm sản phẩm thị trường.
+  multicastReceiveTime:
+    type: object
+    description: Thời gian nhận message qua multicast.
+    required:
+      - Seconds
+      - Nanos
+    properties:
+      Seconds:
+        type: integer
+        format: int64
+        description: Unix timestamp tính bằng giây.
+      Nanos:
+        type: integer
+        format: int32
+        description: Phần nanosecond của timestamp.
+  sendingTime:
+    type: object
+    description: Thời gian gửi message.
+    required:
+      - Seconds
+      - Nanos
+    properties:
+      Seconds:
+        type: integer
+        format: int64
+        description: Unix timestamp tính bằng giây.
+      Nanos:
+        type: integer
+        format: int32
+        description: Phần nanosecond của timestamp.
+  time:
+    type: string
+    format: date-time
+    description: Thời điểm cập nhật dữ liệu.

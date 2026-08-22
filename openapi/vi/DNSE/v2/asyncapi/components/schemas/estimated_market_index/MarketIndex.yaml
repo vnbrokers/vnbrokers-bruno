@@ -1,0 +1,51 @@
+type: object
+additionalProperties: false
+required:
+  - indexName
+  - valueIndexes
+  - changedValue
+  - changedRatio
+  - fluctuationUpIssueCount
+  - fluctuationDownIssueCount
+  - fluctuationSteadinessIssueCount
+  - grossTradeAmount
+  - totalVolumeTraded
+  - time
+properties:
+  indexName:
+    type: string
+    description: Tên chỉ số.
+    const: VN30
+  valueIndexes:
+    type: number
+    format: float
+    description: Giá trị VN30 dự tính.
+  changedValue:
+    type: number
+    format: float
+    description: Mức tăng hoặc giảm của chỉ số so với giá tham chiếu.
+  changedRatio:
+    type: number
+    format: float
+    description: Tỷ lệ phần trăm tăng hoặc giảm của chỉ số so với giá tham chiếu.
+  fluctuationUpIssueCount:
+    type: integer
+    description: Số lượng mã có giá tăng.
+  fluctuationDownIssueCount:
+    type: integer
+    description: Số lượng mã có giá giảm.
+  fluctuationSteadinessIssueCount:
+    type: integer
+    description: Số lượng mã có giá không đổi.
+  grossTradeAmount:
+    type: number
+    format: float
+    description: Tổng giá trị giao dịch của các mã trong rổ VN30.
+  totalVolumeTraded:
+    type: integer
+    format: int64
+    description: Tổng khối lượng giao dịch của các mã trong rổ VN30.
+  time:
+    type: string
+    description: Thời điểm cập nhật dữ liệu theo định dạng DNSE `YYYY-MM-DD HH:mm:ss.SSS`.
+    pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}$'

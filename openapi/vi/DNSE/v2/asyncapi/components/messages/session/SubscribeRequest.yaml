@@ -1,0 +1,11 @@
+name: subscribeTradingSessionRequest
+title: Đăng ký luồng phiên giao dịch
+summary: Đăng ký topic `session.{market_id}.{market_group}.json`.
+payload:
+  $ref: ../../schemas/session/SubscribeRequest.yaml
+examples:
+  - name: subscribeTradingSession
+    payload:
+      action: subscribe
+      channels:
+        - name: session.STO.G1.json

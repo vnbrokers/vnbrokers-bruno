@@ -1,0 +1,12 @@
+name: subscribePositionRequest
+title: Đăng ký luồng vị thế của nhà đầu tư
+summary: Đăng ký topic `position.{market_type}.json`.
+payload:
+  $ref: ../../schemas/position/SubscribeRequest.yaml
+examples:
+  - name: subscribePosition
+    payload:
+      action: subscribe
+      channels:
+        - name: position.STOCK.json
+          symbols: []

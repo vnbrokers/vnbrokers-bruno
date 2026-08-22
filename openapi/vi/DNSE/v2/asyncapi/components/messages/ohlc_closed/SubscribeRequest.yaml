@@ -1,0 +1,12 @@
+name: subscribeOhlcClosedRequest
+title: Đăng ký luồng nến đã đóng
+summary: Đăng ký topic `ohlc_closed.{resolution}.json`.
+payload:
+  $ref: ../../schemas/ohlc_closed/SubscribeRequest.yaml
+examples:
+  - name: subscribeOhlcClosed
+    payload:
+      action: subscribe
+      channels:
+        - name: ohlc_closed.1.json
+          symbols: [HPG]

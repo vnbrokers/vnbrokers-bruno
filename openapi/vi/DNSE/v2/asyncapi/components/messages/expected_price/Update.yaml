@@ -1,0 +1,19 @@
+name: expectedPriceUpdate
+title: Cập nhật giá dự kiến
+summary: Bản cập nhật giá và khối lượng khớp dự kiến.
+payload:
+  $ref: ../../schemas/expected_price/Update.yaml
+examples:
+  - name: expectedPriceUpdate
+    payload:
+      T: e
+      marketId: DVX
+      boardId: G1
+      symbol: 41I1G1000
+      isin: VN41I1G10000
+      closePrice: 28.45
+      expectedTradePrice: 28.45
+      expectedTradeQuantity: 133780
+      time:
+        Seconds: 1779694639
+        Nanos: 736000000

@@ -1,0 +1,95 @@
+type: object
+description: Dữ liệu tham chiếu và trạng thái giao dịch của một mã chứng khoán.
+required:
+  - T
+  - symbol
+  - marketId
+  - boardId
+  - basicPrice
+  - ceilingPrice
+  - floorPrice
+  - isin
+  - productGrpId
+  - securityGroupId
+  - openInterestQuantity
+  - securityStatus
+  - symbolAdminStatusCode
+  - symbolTradingMethodStatusCode
+  - symbolTradingSanctionStatusCode
+  - listingDate
+  - finalTradeDate
+  - time
+properties:
+  T:
+    type: string
+    description: Mã loại message thông tin chứng khoán.
+    const: sd
+  symbol:
+    type: string
+    description: Mã chứng khoán.
+  isin:
+    type: string
+    description: Mã định danh quốc tế (ISIN) của chứng khoán.
+  marketId:
+    type: string
+    description: Mã thị trường niêm yết mã chứng khoán.
+  boardId:
+    type: string
+    description: Mã bảng giao dịch.
+  basicPrice:
+    type: number
+    description: Giá tham chiếu trong ngày giao dịch.
+  ceilingPrice:
+    type: number
+    description: Giá trần trong ngày giao dịch.
+  floorPrice:
+    type: number
+    description: Giá sàn trong ngày giao dịch.
+  productGrpId:
+    type: string
+    description: Nhóm sản phẩm theo thị trường.
+  securityGroupId:
+    type: string
+    description: Nhóm chứng khoán.
+  openInterestQuantity:
+    type: integer
+    format: int64
+    description: Khối lượng hợp đồng phái sinh mở qua đêm.
+  securityStatus:
+    type: string
+    description: Trạng thái giao dịch của mã chứng khoán.
+  symbolAdminStatusCode:
+    type: string
+    description: Trạng thái quản lý hành chính mã chứng khoán.
+  symbolTradingMethodStatusCode:
+    type: string
+    description: Trạng thái cơ chế giao dịch mã chứng khoán.
+  symbolTradingSanctionStatusCode:
+    type: string
+    description: Tình trạng giao dịch của mã chứng khoán.
+  listingDate:
+    oneOf:
+      - type: string
+      - type: integer
+    description: Ngày niêm yết.
+  finalTradeDate:
+    oneOf:
+      - type: string
+      - type: integer
+      - type: "null"
+    description: Ngày giao dịch cuối cùng đối với mã phái sinh hoặc chứng quyền.
+  time:
+    type: object
+    description: Thời gian trong các message giá của sàn trả về.
+    required:
+      - Seconds
+      - Nanos
+    properties:
+      Seconds:
+        type: integer
+        format: int64
+        description: Unix timestamp tính bằng giây.
+      Nanos:
+        type: integer
+        format: int32
+        description: Phần nanosecond của timestamp.

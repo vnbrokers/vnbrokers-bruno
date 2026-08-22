@@ -1,0 +1,13 @@
+name: subscribeRequest
+title: Yêu cầu đăng ký
+summary: Client yêu cầu đăng ký một hoặc nhiều channel dữ liệu.
+payload:
+  $ref: ../../schemas/control/SubscribeRequest.yaml
+examples:
+  - name: subscribe
+    summary: Đăng ký channel khớp lệnh.
+    payload:
+      action: subscribe
+      channels:
+        - name: tick.G1.json
+          symbols: [ACB, HPG]

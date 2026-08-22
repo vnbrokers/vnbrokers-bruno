@@ -1,0 +1,17 @@
+name: putUpdate
+title: Cập nhật khớp lệnh thỏa thuận
+summary: Giao dịch thỏa thuận theo thời gian thực.
+payload:
+  $ref: ../../schemas/market_data/PutUpdate.yaml
+examples:
+  - name: put
+    payload:
+      channel: DATA
+      topic: put.SSI@tick
+      data:
+        s: SSI
+        t: "2026/07/29 10:05:12"
+        p: "45.00"
+        q: "50000"
+        tq: "350000"
+        tv: "15750000000"

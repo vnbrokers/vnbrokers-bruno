@@ -1,0 +1,10 @@
+type: object
+additionalProperties: false
+required: [trading, data]
+properties:
+  trading:
+    type: string
+    description: Các topic trading, phân tách bằng dấu chấm phẩy.
+  data:
+    type: string
+    description: Các topic market data, phân tách bằng dấu chấm phẩy.

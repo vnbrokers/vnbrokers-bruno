@@ -1,0 +1,70 @@
+type: object
+additionalProperties: false
+required: [channel, topic, data]
+properties:
+  channel:
+    type: string
+    const: TRADING
+    description: Kênh dữ liệu giao dịch.
+  topic:
+    type: string
+    pattern: '^order\.[A-Za-z0-9_-]+(?:\.[A-Za-z0-9_-]+)?\.?$'
+    description: Topic sự kiện lệnh theo tài khoản và mã lệnh.
+  data:
+    type: object
+    additionalProperties: false
+    required:
+      [
+        eventType,
+        notifyId,
+        connectionId,
+        clientRequestId,
+        orderId,
+        symbol,
+        side,
+        orderType,
+        accountNo,
+        price,
+        avgPrice,
+        quantity,
+        cancelQty,
+        osQty,
+        filledQty,
+        inputTime,
+        modifiedTime,
+        orderStatus,
+        rejectReason,
+        errorCode,
+        errorMessage,
+      ]
+    properties:
+      eventType: { type: string, const: orderEvent, description: Loại event. }
+      notifyId: { type: integer, format: int64, description: Số serial của event message. }
+      connectionId:
+        type: [string, "null"]
+        description: Định danh phiên kết nối stream.
+      clientRequestId: { type: string, description: Định danh lệnh trong ngày. }
+      orderId: { type: string, description: Số định danh lệnh trên hệ thống giao dịch. }
+      symbol: { type: string, description: Mã chứng khoán. }
+      side:
+        type: string
+        enum: [B, S]
+        description: B là BUY, S là SELL.
+      orderType: { type: string, description: "Loại lệnh, ví dụ `LO`, `ATO`, `ATC`." }
+      accountNo: { type: string, description: Số tài khoản đặt lệnh. }
+      price: { type: string, description: Giá đặt lệnh. }
+      avgPrice: { type: string, description: Giá khớp trung bình. }
+      quantity: { type: number, description: Khối lượng đặt lệnh. }
+      cancelQty: { type: number, description: Khối lượng đã hủy. }
+      osQty: { type: number, description: Khối lượng chưa khớp. }
+      filledQty: { type: number, description: Khối lượng khớp. }
+      inputTime: { type: string, description: Thời gian tiếp nhận đặt lệnh. }
+      modifiedTime: { type: string, description: Thời gian sửa hoặc cập nhật trạng thái. }
+      orderStatus: { type: string, description: Trạng thái lệnh. }
+      rejectReason:
+        type: [string, "null"]
+        description: Lý do từ chối.
+      errorCode: { type: string, description: Mã lỗi lệnh. }
+      errorMessage:
+        type: [string, "null"]
+        description: Thông tin lệnh lỗi.

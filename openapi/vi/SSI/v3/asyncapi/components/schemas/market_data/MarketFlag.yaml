@@ -1,0 +1,25 @@
+type: object
+additionalProperties: false
+required: [channel, topic, data]
+properties:
+  channel:
+    type: string
+    const: DATA
+  topic:
+    type: string
+    pattern: '^market\.(index|exchange|[A-Za-z0-9_-]+(?:-[A-Za-z0-9_-]+)*|\*)$'
+  data:
+    type: object
+    additionalProperties: false
+    required: [b, t, f]
+    properties:
+      b:
+        type: string
+        enum: [HOSE, HNX, UPCOM, DERIVATIVES]
+        description: Sàn hoặc thị trường.
+      t:
+        type: string
+        description: "Thời gian giao dịch, định dạng `YYYY/MM/DD HH:mm:ss`."
+      f:
+        type: string
+        description: "Cờ phiên, ví dụ `ATO`, `LO`, `ATC`."

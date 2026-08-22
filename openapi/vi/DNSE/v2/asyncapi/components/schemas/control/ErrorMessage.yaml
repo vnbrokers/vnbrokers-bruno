@@ -1,0 +1,15 @@
+type: object
+description: Lỗi server gửi trong quá trình kết nối hoặc đăng ký.
+additionalProperties: false
+required: [action, code, message]
+properties:
+  action:
+    type: string
+    description: Loại message lỗi điều khiển.
+    const: error
+  code:
+    type: string
+    description: Mã lỗi.
+  message:
+    type: string
+    description: Nội dung lỗi.

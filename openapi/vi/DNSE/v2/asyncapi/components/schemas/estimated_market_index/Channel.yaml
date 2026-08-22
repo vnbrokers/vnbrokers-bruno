@@ -1,0 +1,8 @@
+type: object
+additionalProperties: false
+required: [name]
+properties:
+  name:
+    type: string
+    description: Topic dữ liệu chỉ số VN30 dự tính ở định dạng JSON.
+    const: estimated_market_index.VN30.json

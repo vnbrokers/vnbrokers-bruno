@@ -1,0 +1,12 @@
+name: subscribeOrderRequest
+title: Đăng ký luồng lệnh của nhà đầu tư
+summary: Đăng ký topic `order.{market_type}.json`.
+payload:
+  $ref: ../../schemas/order/SubscribeRequest.yaml
+examples:
+  - name: subscribeOrder
+    payload:
+      action: subscribe
+      channels:
+        - name: order.STOCK.json
+          symbols: []

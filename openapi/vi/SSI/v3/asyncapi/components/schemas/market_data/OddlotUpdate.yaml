@@ -1,0 +1,33 @@
+type: object
+additionalProperties: false
+required: [channel, topic, data]
+properties:
+  channel:
+    type: string
+    const: DATA
+  topic:
+    type: string
+    pattern: '^oddlot\.(index|exchange|[A-Za-z0-9_-]+(?:-[A-Za-z0-9_-]+)*|\*)(?:@(tick|1m|5m))?$'
+  data:
+    type: object
+    additionalProperties: false
+    required: [s, t, p, q, bids, asks]
+    properties:
+      s:
+        type: string
+        description: Mã chứng khoán.
+      t:
+        type: string
+        description: "Thời gian giao dịch, định dạng `YYYY/MM/DD HH:mi:ss`."
+      p:
+        type: string
+        description: Giá khớp lô lẻ.
+      q:
+        type: string
+        description: Khối lượng khớp lô lẻ.
+      bids:
+        $ref: ./QuoteLevels.yaml
+        description: Danh sách mức giá mua lô lẻ `[price, quantity]`.
+      asks:
+        $ref: ./QuoteLevels.yaml
+        description: Danh sách mức giá bán lô lẻ `[price, quantity]`.

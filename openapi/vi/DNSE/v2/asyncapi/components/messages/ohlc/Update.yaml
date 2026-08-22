@@ -1,0 +1,45 @@
+name: ohlcUpdate
+title: Cập nhật nến đang hình thành
+summary: Bản cập nhật OHLC của nến hiện tại.
+payload:
+  $ref: ../../schemas/ohlc/Update.yaml
+examples:
+  - name: stockOhlcUpdate
+    payload:
+      T: b
+      close: 21
+      high: 21
+      lastUpdated: 1787122044
+      low: 21
+      open: 21
+      resolution: "1"
+      symbol: HPG
+      time: 1787122020
+      type: STOCK
+      volume: 16700
+  - name: derivativeOhlcUpdate
+    payload:
+      T: b
+      time: 1757991840
+      open: 1881.2
+      high: 1881.2
+      low: 1881.0
+      close: 1881.2
+      volume: 12
+      symbol: VN30F1M
+      resolution: "1"
+      lastUpdated: 1757991844
+      type: DERIVATIVE
+  - name: indexOhlcUpdate
+    payload:
+      T: b
+      time: 1757988000
+      open: 1696.87
+      high: 1696.87
+      low: 1686.02
+      close: 1686.31
+      volume: 435873728
+      symbol: VNINDEX
+      resolution: 1D
+      lastUpdated: 1757993070
+      type: INDEX

@@ -1,0 +1,21 @@
+name: tradingSessionUpdate
+title: Cập nhật phiên giao dịch
+summary: Bản cập nhật trạng thái phiên giao dịch của một nhóm sản phẩm.
+payload:
+  $ref: ../../schemas/session/Update.yaml
+examples:
+  - name: tradingSessionUpdate
+    payload:
+      T: s
+      boardId: G1
+      boardIdOriginal: AL
+      eventId: AW8
+      marketId: STO
+      multicastReceiveTime:
+        Nanos: 660250421
+        Seconds: 1782966600
+      sendingTime:
+        Nanos: 662000000
+        Seconds: 1782966600
+      tradingSessionId: UNSPECIFIED
+      tscProdGrpId: STO

@@ -1,0 +1,15 @@
+name: quoteUpdate
+title: Cập nhật bid/ask
+summary: Các mức giá và khối lượng chào mua/chào bán.
+payload:
+  $ref: ../../schemas/market_data/QuoteUpdate.yaml
+examples:
+  - name: quote
+    payload:
+      channel: DATA
+      topic: quote.SSI@tick
+      data:
+        s: SSI
+        t: "2026/07/29 09:15:32"
+        bids: [["45.45", "3200"], ["45.40", "1500"]]
+        asks: [["45.50", "2800"], ["45.55", "1900"]]

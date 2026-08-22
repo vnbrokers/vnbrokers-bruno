@@ -1,0 +1,18 @@
+name: subscribeMarketDataRequest
+title: Yêu cầu đăng ký market data
+summary: Đăng ký các topic trên channel DATA.
+payload:
+  $ref: ../../schemas/market_data/SubscribeRequest.yaml
+examples:
+  - name: subscribeMarketData
+    summary: Đăng ký nhiều topic market data.
+    payload:
+      method: SUBSCRIBE
+      channel: DATA
+      topics:
+        - trade.SSI
+        - quote.ACB-SSI-GVR-KDH
+        - room.vn30
+        - put.hose
+        - oddlot.SSI
+        - market.hose

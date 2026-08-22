@@ -1,0 +1,8 @@
+type: array
+description: Danh sách mức giá, mỗi phần tử có dạng `[price, quantity]` và đều là chuỗi.
+items:
+  type: array
+  minItems: 2
+  maxItems: 2
+  items:
+    type: string

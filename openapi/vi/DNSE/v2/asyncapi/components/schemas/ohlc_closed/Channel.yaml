@@ -1,0 +1,13 @@
+type: object
+additionalProperties: false
+required: [name, symbols]
+properties:
+  name:
+    type: string
+    description: Topic nến đã đóng theo độ phân giải.
+    pattern: '^ohlc_closed\.[0-9]+\.json$'
+  symbols:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items: { type: string, minLength: 1 }

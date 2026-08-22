@@ -1,0 +1,16 @@
+name: authSuccessMessage
+title: Xác thực thành công
+summary: Message server gửi sau khi xác thực kết nối thành công.
+payload:
+  $ref: ../../schemas/auth/AuthSuccessMessage.yaml
+examples:
+  - name: authSuccess
+    summary: Kết quả xác thực thành công.
+    payload:
+      action: auth_success
+      user_id: your_api_key
+      capabilities:
+        batch_delivery: false
+      rate_limit:
+        messages_per_second: 100
+        subscriptions_max: 100

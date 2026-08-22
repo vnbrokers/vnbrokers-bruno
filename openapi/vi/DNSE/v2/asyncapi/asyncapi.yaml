@@ -1,0 +1,683 @@
+# yaml-language-server: $schema=https://www.asyncapi.com/schema-store/3.0.0-without-$id.json
+asyncapi: 3.0.0
+id: urn:vnbrokers:dnse:v2:stream
+info:
+  title: DNSE WebSocket Stream API
+  version: 2.0.0
+  description: |-
+    API WebSocket thời gian thực của DNSE cho dữ liệu thị trường, lệnh và vị thế.
+    Client xác thực, gửi `pong` để duy trì kết nối, rồi đăng ký các topic dữ liệu.
+defaultContentType: application/json
+servers:
+  production:
+    host: ws-openapi.dnse.com.vn
+    protocol: wss
+channels:
+  controlStream:
+    address: /v1/stream
+    title: Luồng điều khiển kết nối
+    summary: Xác thực và duy trì kết nối WebSocket.
+    description: |-
+      Client thực hiện flow điều khiển theo thứ tự:
+      1. Server gửi `welcome` sau khi kết nối.
+      2. Client gửi `auth` và chờ `auth_success`.
+      3. Client gửi `subscribe` hoặc `unsubscribe` để quản lý các channel dữ liệu.
+      4. Server có thể gửi `ping`; client phản hồi bằng `pong`.
+      5. Client xử lý các phản hồi `subscribed`, `unsubscribed`, `error` và `connection_expired`.
+    servers:
+      - $ref: "#/servers/production"
+    bindings:
+      ws:
+        method: GET
+        query: { $ref: "#/components/schemas/EncodingQuery" }
+        bindingVersion: 0.1.0
+    messages:
+      welcomeMessage:
+        $ref: "#/components/messages/WelcomeMessage"
+      authRequest:
+        $ref: "#/components/messages/AuthRequest"
+      authSuccessMessage:
+        $ref: "#/components/messages/AuthSuccessMessage"
+      pingMessage:
+        $ref: "#/components/messages/PingMessage"
+      pongRequest:
+        $ref: "#/components/messages/PongRequest"
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeRequest"
+      subscribedMessage:
+        $ref: "#/components/messages/SubscribedMessage"
+      unsubscribeRequest:
+        $ref: "#/components/messages/UnsubscribeRequest"
+      unsubscribedMessage:
+        $ref: "#/components/messages/UnsubscribedMessage"
+      errorMessage:
+        $ref: "#/components/messages/ErrorMessage"
+      connectionExpiredMessage:
+        $ref: "#/components/messages/ConnectionExpiredMessage"
+  tradeStream:
+    address: /v1/stream
+    title: Khớp lệnh
+    summary: Đăng ký topic `tick.{market_group}.{encoding}`.
+    description: Gửi cập nhật khớp lệnh theo danh sách mã chứng khoán trong một nhóm thị trường.
+    servers:
+      - $ref: "#/servers/production"
+    bindings:
+      ws:
+        method: GET
+        query: { $ref: "#/components/schemas/EncodingQuery" }
+        bindingVersion: 0.1.0
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeTradeRequest"
+      update:
+        $ref: "#/components/messages/TradeUpdate"
+  tradeExtraStream:
+    address: /v1/stream
+    title: Khớp lệnh nâng cao
+    summary: Đăng ký topic `tick_extra.{market_group}.{encoding}`.
+    description: Gửi cập nhật khớp lệnh nâng cao theo danh sách mã chứng khoán.
+    servers:
+      - $ref: "#/servers/production"
+    bindings:
+      ws:
+        method: GET
+        query: { $ref: "#/components/schemas/EncodingQuery" }
+        bindingVersion: 0.1.0
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeTradeExtraRequest"
+      update:
+        $ref: "#/components/messages/TradeExtraUpdate"
+  tradingSessionStream:
+    address: /v1/stream
+    title: Phiên giao dịch
+    summary: Đăng ký topic `session.{market_id}.{market_group}.{encoding}`.
+    description: |-
+      Cung cấp thông tin phiên giao dịch của các sàn theo bảng giao dịch và nhóm sản phẩm thị trường.
+    servers:
+      - $ref: "#/servers/production"
+    bindings:
+      ws:
+        method: GET
+        query: { $ref: "#/components/schemas/EncodingQuery" }
+        bindingVersion: 0.1.0
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeTradingSessionRequest"
+      update:
+        $ref: "#/components/messages/TradingSessionUpdate"
+  quoteStream:
+    address: /v1/stream
+    title: Độ sâu thị trường
+    summary: Đăng ký topic `top_price.{market_group}.{encoding}`.
+    description: |-
+      Cung cấp thông tin giá chào mua và chào bán tốt nhất của mã chứng khoán tại bảng giao dịch cụ thể,
+      cập nhật theo thời gian thực trong phiên giao dịch.
+
+      - Sàn HOSE hỗ trợ 3 mức giá.
+      - Sàn HNX, UPCOM hỗ trợ 10 mức giá.
+    servers:
+      - $ref: "#/servers/production"
+    bindings:
+      ws:
+        method: GET
+        query: { $ref: "#/components/schemas/EncodingQuery" }
+        bindingVersion: 0.1.0
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeQuoteRequest"
+      update:
+        $ref: "#/components/messages/QuoteUpdate"
+  expectedPriceStream:
+    address: /v1/stream
+    title: Giá khớp dự kiến
+    summary: Đăng ký topic `expected_price.{market_group}.{encoding}`.
+    description: |-
+      Cung cấp thông tin giá đóng cửa, giá khớp dự kiến và khối lượng khớp dự kiến của mã chứng khoán
+      trong các phiên giao dịch khớp lệnh định kỳ ATO và ATC.
+    servers:
+      - $ref: "#/servers/production"
+    bindings:
+      ws:
+        method: GET
+        query: { $ref: "#/components/schemas/EncodingQuery" }
+        bindingVersion: 0.1.0
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeExpectedPriceRequest"
+      update:
+        $ref: "#/components/messages/ExpectedPriceUpdate"
+  ohlcStream:
+    address: /v1/stream
+    title: Nến (OHLC) đang hình thành
+    summary: Đăng ký topic `ohlc.{resolution}.{encoding}`.
+    description: |-
+      OHLC cung cấp thông tin nến (open, high, low, close, volume) theo khung thời gian thực dưới dạng dữ liệu nến đang hình thành 
+      và được cập nhật liên tục theo các giao dịch phát sinh. Áp dụng cho Cổ phiếu (stock), 
+      Phái sinh (derivative) và Chỉ số thị trường (index) với nhiều khung thời gian (resolution).
+    servers:
+      - $ref: "#/servers/production"
+    bindings:
+      ws:
+        method: GET
+        query: { $ref: "#/components/schemas/EncodingQuery" }
+        bindingVersion: 0.1.0
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeOhlcRequest"
+      update:
+        $ref: "#/components/messages/OhlcUpdate"
+  ohlcClosedStream:
+    address: /v1/stream
+    title: Nến (OHLC) đã đóng
+    summary: Đăng ký topic `ohlc_closed.{resolution}.{encoding}`.
+    description: |-
+      Cung cấp dữ liệu nến đã đóng theo từng khung thời gian (resolution).
+      Dữ liệu chỉ gửi khi kết thúc mỗi khung thời gian và không thay đổi sau đó.
+    servers:
+      - $ref: "#/servers/production"
+    bindings:
+      ws:
+        method: GET
+        query: { $ref: "#/components/schemas/EncodingQuery" }
+        bindingVersion: 0.1.0
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeOhlcClosedRequest"
+      update:
+        $ref: "#/components/messages/OhlcClosedUpdate"
+  foreignStream:
+    address: /v1/stream
+    title: Giao dịch nhà đầu tư nước ngoài
+    summary: Đăng ký topic `foreign.{market_group}.{encoding}`.
+    description: |-
+      Cung cấp dữ liệu giao dịch của nhà đầu tư nước ngoài theo từng mã chứng khoán, 
+      bao gồm khối lượng và giá trị mua/bán,tổng lũy kế trong ngày và room còn lại. 
+      Dữ liệu được cập nhật trong phiên giao dịch khi có thay đổi.
+    servers:
+      - $ref: "#/servers/production"
+    bindings:
+      ws:
+        method: GET
+        query: { $ref: "#/components/schemas/EncodingQuery" }
+        bindingVersion: 0.1.0
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeForeignRequest"
+      update:
+        $ref: "#/components/messages/ForeignUpdate"
+  securityDefinitionStream:
+    address: /v1/stream
+    title: Thông tin chứng khoán
+    summary: Đăng ký topic `security_definition.{market_group}.{encoding}`.
+    description: |-
+      Cung cấp thông tin về giá trần sàn tham chiếu và trạng thái của mã chứng khoán trong ngày giao dịch. 
+      Dữ liệu được hệ thống gửi hai lần vào lúc hệ thống kết thúc chạy dữ liệu cuối ngày (khoảng 8 giờ tối)
+      và vào đầu ngày giao dịch hôm sau (khoảng 8 giờ sáng).
+    servers:
+      - $ref: "#/servers/production"
+    bindings:
+      ws:
+        method: GET
+        query: { $ref: "#/components/schemas/EncodingQuery" }
+        bindingVersion: 0.1.0
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeSecurityDefinitionRequest"
+      update:
+        $ref: "#/components/messages/SecurityDefinitionUpdate"
+  marketIndexStream:
+    address: /v1/stream
+    title: Chỉ số thị trường
+    summary: Đăng ký topic `market_index.{index_name}.{encoding}`.
+    description: |-
+      Cung cấp thông tin chỉ số thị trường bao gồm giá trị chỉ số, mức thay đổi, 
+      độ rộng thị trường (số mã tăng/giảm/đi ngang) và thanh khoản. 
+      Dữ liệu được cập nhật liên tục trong phiên giao dịch.
+    servers:
+      - $ref: "#/servers/production"
+    bindings:
+      ws:
+        method: GET
+        query: { $ref: "#/components/schemas/EncodingQuery" }
+        bindingVersion: 0.1.0
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeMarketIndexRequest"
+      update:
+        $ref: "#/components/messages/MarketIndexUpdate"
+  estimatedMarketIndexStream:
+    address: /v1/stream
+    title: Chỉ số VN30 dự tính
+    summary: Đăng ký topic `estimated_market_index.VN30.{encoding}`.
+    description: |-
+      Cung cấp thông tin chỉ số VN30 dự tính trong phiên giao dịch, 
+      bao gồm giá trị chỉ số dự tính, mức tăng/giảm so với giá tham chiếu và số lượng mã tăng, giảm, đứng giá. 
+      Dữ liệu được cập nhật theo thời gian thực khi có thay đổi.
+    servers:
+      - $ref: "#/servers/production"
+    bindings:
+      ws:
+        method: GET
+        query: { $ref: "#/components/schemas/EncodingQuery" }
+        bindingVersion: 0.1.0
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeEstimatedMarketIndexRequest"
+      update:
+        $ref: "#/components/messages/EstimatedMarketIndexUpdate"
+  orderStream:
+    address: /v1/stream
+    title: Lệnh giao dịch
+    summary: Đăng ký topic `order.{market_type}.{encoding}`.
+    description: |-
+      Cung cấp thông tin chi tiết về lệnh giao dịch trên tài khoản người dùng theo thời gian thực.
+      Hệ thống sẽ đẩy dữ liệu ngay khi có sự thay đổi liên quan đến:
+      lệnh mới, thay đổi trạng thái, hoặc thay đổi giá khớp, khối lượng khớp.
+    servers:
+      - $ref: "#/servers/production"
+    bindings:
+      ws:
+        method: GET
+        query: { $ref: "#/components/schemas/EncodingQuery" }
+        bindingVersion: 0.1.0
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeOrderRequest"
+      update:
+        $ref: "#/components/messages/OrderUpdate"
+  brokerOrderStream:
+    address: /v1/stream
+    title: Lệnh giao dịch (môi giới)
+    summary: Đăng ký topic `order.broker.{market_type}.{investor_id}.{encoding}`.
+    description: |-
+      Cung cấp thông tin chi tiết về lệnh giao dịch trên tài khoản khách hàng thuộc quản lý của Môi giới.
+      Hệ thống sẽ đẩy dữ liệu ngay khi có sự thay đổi liên quan đến:
+      lệnh mới, thay đổi trạng thái, hoặc thay đổi giá khớp, khối lượng khớp.
+    servers:
+      - $ref: "#/servers/production"
+    bindings:
+      ws:
+        method: GET
+        query: { $ref: "#/components/schemas/EncodingQuery" }
+        bindingVersion: 0.1.0
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeBrokerOrderRequest"
+      update:
+        $ref: "#/components/messages/BrokerOrderUpdate"
+  positionStream:
+    address: /v1/stream
+    title: Vị thế
+    summary: Đăng ký topic `position.{market_type}.{encoding}`.
+    description: |-
+      ## Dữ liệu vị thế thời gian thực (Position Event)
+      Cung cấp thông tin chi tiết về vị thế giao dịch trên tài khoản người dùng theo thời gian thực.
+      Hệ thống sẽ đẩy dữ liệu ngay khi có sự thay đổi liên quan đến:
+      mở vị thế, đóng vị thế, thay đổi khối lượng, giá vốn, giá đóng, giá thị trường hoặc trạng thái vị thế.
+    servers:
+      - $ref: "#/servers/production"
+    bindings:
+      ws:
+        method: GET
+        query: { $ref: "#/components/schemas/EncodingQuery" }
+        bindingVersion: 0.1.0
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribePositionRequest"
+      update:
+        $ref: "#/components/messages/PositionUpdate"
+  brokerPositionStream:
+    address: /v1/stream
+    title: Vị thế (môi giới)
+    summary: Đăng ký topic `position.broker.{market_type}.{investor_id}.{encoding}`.
+    description: |-
+      Cung cấp thông tin chi tiết về vị thế đang nắm giữ trên tài khoản khách hàng thuộc quản lý của Môi giới.
+      Hệ thống sẽ đẩy dữ liệu ngay khi có sự thay đổi liên quan đến:
+      mở vị thế, đóng vị thế, thay đổi khối lượng, giá vốn, giá đóng, giá thị trường hoặc trạng thái vị thế.
+    servers:
+      - $ref: "#/servers/production"
+    bindings:
+      ws:
+        method: GET
+        query: { $ref: "#/components/schemas/EncodingQuery" }
+        bindingVersion: 0.1.0
+    messages:
+      subscribeRequest:
+        $ref: "#/components/messages/SubscribeBrokerPositionRequest"
+      update:
+        $ref: "#/components/messages/BrokerPositionUpdate"
+operations:
+  onAuthRequest:
+    action: receive
+    channel:
+      $ref: "#/channels/controlStream"
+    title: Gửi yêu cầu xác thực
+    summary: Client gửi API key, chữ ký và nonce để xác thực kết nối.
+    messages:
+      - $ref: "#/channels/controlStream/messages/authRequest"
+  onWelcomeMessage:
+    action: send
+    channel:
+      $ref: "#/channels/controlStream"
+    title: Nhận welcome message
+    summary: Server gửi welcome message sau khi kết nối WebSocket thành công.
+    messages:
+      - $ref: "#/channels/controlStream/messages/welcomeMessage"
+  onAuthSuccessMessage:
+    action: send
+    channel:
+      $ref: "#/channels/controlStream"
+    title: Nhận kết quả xác thực
+    summary: Server thông báo xác thực thành công và các giới hạn kết nối.
+    messages:
+      - $ref: "#/channels/controlStream/messages/authSuccessMessage"
+  onPingMessage:
+    action: send
+    channel:
+      $ref: "#/channels/controlStream"
+    title: Nhận ping
+    summary: Server gửi ping để kiểm tra kết nối WebSocket.
+    messages:
+      - $ref: "#/channels/controlStream/messages/pingMessage"
+  onPongRequest:
+    action: receive
+    channel:
+      $ref: "#/channels/controlStream"
+    title: Gửi pong
+    summary: Client phản hồi pong để duy trì kết nối WebSocket.
+    messages:
+      - $ref: "#/channels/controlStream/messages/pongRequest"
+  onUnsubscribeRequest:
+    action: receive
+    channel:
+      $ref: "#/channels/controlStream"
+    title: Gửi yêu cầu hủy đăng ký
+    summary: Client hủy đăng ký một hoặc nhiều channel dữ liệu.
+    messages:
+      - $ref: "#/channels/controlStream/messages/unsubscribeRequest"
+  onSubscribeRequest:
+    action: receive
+    channel:
+      $ref: "#/channels/controlStream"
+    title: Gửi yêu cầu đăng ký
+    summary: Client đăng ký một hoặc nhiều channel dữ liệu.
+    messages:
+      - $ref: "#/channels/controlStream/messages/subscribeRequest"
+  onSubscribedMessage:
+    action: send
+    channel:
+      $ref: "#/channels/controlStream"
+    title: Nhận xác nhận đăng ký
+    summary: Server xác nhận đăng ký channel thành công.
+    messages:
+      - $ref: "#/channels/controlStream/messages/subscribedMessage"
+  onUnsubscribedMessage:
+    action: send
+    channel:
+      $ref: "#/channels/controlStream"
+    title: Nhận xác nhận hủy đăng ký
+    summary: Server xác nhận hủy đăng ký channel thành công.
+    messages:
+      - $ref: "#/channels/controlStream/messages/unsubscribedMessage"
+  onErrorMessage:
+    action: send
+    channel:
+      $ref: "#/channels/controlStream"
+    title: Nhận lỗi điều khiển
+    summary: Server gửi lỗi điều khiển kèm mã và nội dung lỗi.
+    messages:
+      - $ref: "#/channels/controlStream/messages/errorMessage"
+  onConnectionExpiredMessage:
+    action: send
+    channel:
+      $ref: "#/channels/controlStream"
+    title: Nhận thông báo hết hạn kết nối
+    summary: Server thông báo kết nối đạt giới hạn thời gian và yêu cầu reconnect.
+    messages:
+      - $ref: "#/channels/controlStream/messages/connectionExpiredMessage"
+  onTradeSubscription:
+    action: receive
+    channel: { $ref: "#/channels/tradeStream" }
+    title: Đăng ký luồng khớp lệnh
+    messages: [{ $ref: "#/channels/tradeStream/messages/subscribeRequest" }]
+  onTradeUpdates:
+    action: send
+    channel: { $ref: "#/channels/tradeStream" }
+    title: Nhận cập nhật khớp lệnh
+    messages: [{ $ref: "#/channels/tradeStream/messages/update" }]
+  onTradeExtraSubscription:
+    action: receive
+    channel: { $ref: "#/channels/tradeExtraStream" }
+    title: Đăng ký luồng khớp lệnh nâng cao
+    messages: [{ $ref: "#/channels/tradeExtraStream/messages/subscribeRequest" }]
+  onTradeExtraUpdates:
+    action: send
+    channel: { $ref: "#/channels/tradeExtraStream" }
+    title: Nhận cập nhật khớp lệnh nâng cao
+    messages: [{ $ref: "#/channels/tradeExtraStream/messages/update" }]
+  onTradingSessionSubscription:
+    action: receive
+    channel: { $ref: "#/channels/tradingSessionStream" }
+    title: Đăng ký luồng phiên giao dịch
+    messages: [{ $ref: "#/channels/tradingSessionStream/messages/subscribeRequest" }]
+  onTradingSessionUpdates:
+    action: send
+    channel: { $ref: "#/channels/tradingSessionStream" }
+    title: Nhận cập nhật phiên giao dịch
+    messages: [{ $ref: "#/channels/tradingSessionStream/messages/update" }]
+  onQuoteSubscription:
+    action: receive
+    channel: { $ref: "#/channels/quoteStream" }
+    title: Đăng ký luồng độ sâu thị trường
+    messages: [{ $ref: "#/channels/quoteStream/messages/subscribeRequest" }]
+  onQuoteUpdates:
+    action: send
+    channel: { $ref: "#/channels/quoteStream" }
+    title: Nhận cập nhật độ sâu thị trường
+    messages: [{ $ref: "#/channels/quoteStream/messages/update" }]
+  onExpectedPriceSubscription:
+    action: receive
+    channel: { $ref: "#/channels/expectedPriceStream" }
+    title: Đăng ký luồng giá dự kiến
+    messages: [{ $ref: "#/channels/expectedPriceStream/messages/subscribeRequest" }]
+  onExpectedPriceUpdates:
+    action: send
+    channel: { $ref: "#/channels/expectedPriceStream" }
+    title: Nhận cập nhật giá dự kiến
+    messages: [{ $ref: "#/channels/expectedPriceStream/messages/update" }]
+  onOhlcSubscription:
+    action: receive
+    channel: { $ref: "#/channels/ohlcStream" }
+    title: Đăng ký luồng nến đang hình thành
+    messages: [{ $ref: "#/channels/ohlcStream/messages/subscribeRequest" }]
+  onOhlcUpdates:
+    action: send
+    channel: { $ref: "#/channels/ohlcStream" }
+    title: Nhận cập nhật nến đang hình thành
+    messages: [{ $ref: "#/channels/ohlcStream/messages/update" }]
+  onOhlcClosedSubscription:
+    action: receive
+    channel: { $ref: "#/channels/ohlcClosedStream" }
+    title: Đăng ký luồng nến đã đóng
+    messages: [{ $ref: "#/channels/ohlcClosedStream/messages/subscribeRequest" }]
+  onOhlcClosedUpdates:
+    action: send
+    channel: { $ref: "#/channels/ohlcClosedStream" }
+    title: Nhận cập nhật nến đã đóng
+    messages: [{ $ref: "#/channels/ohlcClosedStream/messages/update" }]
+  onForeignSubscription:
+    action: receive
+    channel: { $ref: "#/channels/foreignStream" }
+    title: Đăng ký luồng giao dịch nước ngoài
+    messages: [{ $ref: "#/channels/foreignStream/messages/subscribeRequest" }]
+  onForeignUpdates:
+    action: send
+    channel: { $ref: "#/channels/foreignStream" }
+    title: Nhận cập nhật giao dịch nước ngoài
+    messages: [{ $ref: "#/channels/foreignStream/messages/update" }]
+  onSecurityDefinitionSubscription:
+    action: receive
+    channel: { $ref: "#/channels/securityDefinitionStream" }
+    title: Đăng ký luồng thông tin chứng khoán
+    messages: [{ $ref: "#/channels/securityDefinitionStream/messages/subscribeRequest" }]
+  onSecurityDefinitionUpdates:
+    action: send
+    channel: { $ref: "#/channels/securityDefinitionStream" }
+    title: Nhận cập nhật thông tin chứng khoán
+    messages: [{ $ref: "#/channels/securityDefinitionStream/messages/update" }]
+  onMarketIndexSubscription:
+    action: receive
+    channel: { $ref: "#/channels/marketIndexStream" }
+    title: Đăng ký luồng chỉ số thị trường
+    messages: [{ $ref: "#/channels/marketIndexStream/messages/subscribeRequest" }]
+  onMarketIndexUpdates:
+    action: send
+    channel: { $ref: "#/channels/marketIndexStream" }
+    title: Nhận cập nhật chỉ số thị trường
+    messages: [{ $ref: "#/channels/marketIndexStream/messages/update" }]
+  onEstimatedMarketIndexSubscription:
+    action: receive
+    channel: { $ref: "#/channels/estimatedMarketIndexStream" }
+    title: Đăng ký luồng chỉ số VN30 dự tính
+    messages: [{ $ref: "#/channels/estimatedMarketIndexStream/messages/subscribeRequest" }]
+  onEstimatedMarketIndexUpdates:
+    action: send
+    channel: { $ref: "#/channels/estimatedMarketIndexStream" }
+    title: Nhận cập nhật chỉ số VN30 dự tính
+    messages: [{ $ref: "#/channels/estimatedMarketIndexStream/messages/update" }]
+  onOrderSubscription:
+    action: receive
+    channel: { $ref: "#/channels/orderStream" }
+    title: Đăng ký luồng lệnh của nhà đầu tư
+    messages: [{ $ref: "#/channels/orderStream/messages/subscribeRequest" }]
+  onOrderUpdates:
+    action: send
+    channel: { $ref: "#/channels/orderStream" }
+    title: Nhận cập nhật lệnh của nhà đầu tư
+    messages: [{ $ref: "#/channels/orderStream/messages/update" }]
+  onBrokerOrderSubscription:
+    action: receive
+    channel: { $ref: "#/channels/brokerOrderStream" }
+    title: Đăng ký luồng lệnh môi giới
+    messages: [{ $ref: "#/channels/brokerOrderStream/messages/subscribeRequest" }]
+  onBrokerOrderUpdates:
+    action: send
+    channel: { $ref: "#/channels/brokerOrderStream" }
+    title: Nhận cập nhật lệnh môi giới
+    messages: [{ $ref: "#/channels/brokerOrderStream/messages/update" }]
+  onPositionSubscription:
+    action: receive
+    channel: { $ref: "#/channels/positionStream" }
+    title: Đăng ký luồng vị thế của nhà đầu tư
+    messages: [{ $ref: "#/channels/positionStream/messages/subscribeRequest" }]
+  onPositionUpdates:
+    action: send
+    channel: { $ref: "#/channels/positionStream" }
+    title: Nhận cập nhật vị thế của nhà đầu tư
+    messages: [{ $ref: "#/channels/positionStream/messages/update" }]
+  onBrokerPositionSubscription:
+    action: receive
+    channel: { $ref: "#/channels/brokerPositionStream" }
+    title: Đăng ký luồng vị thế môi giới
+    messages: [{ $ref: "#/channels/brokerPositionStream/messages/subscribeRequest" }]
+  onBrokerPositionUpdates:
+    action: send
+    channel: { $ref: "#/channels/brokerPositionStream" }
+    title: Nhận cập nhật vị thế môi giới
+    messages: [{ $ref: "#/channels/brokerPositionStream/messages/update" }]
+components:
+  schemas:
+    EncodingQuery:
+      type: object
+      additionalProperties: false
+      required: [encoding]
+      properties:
+        encoding:
+          type: string
+          const: json
+          default: json
+          description: Định dạng mã hóa dữ liệu WebSocket.
+  messages:
+    AuthRequest:
+      $ref: ./components/messages/auth/AuthRequest.yaml
+    PongRequest:
+      $ref: ./components/messages/heartbeat/PongRequest.yaml
+    WelcomeMessage:
+      $ref: ./components/messages/auth/WelcomeMessage.yaml
+    AuthSuccessMessage:
+      $ref: ./components/messages/auth/AuthSuccessMessage.yaml
+    PingMessage:
+      $ref: ./components/messages/heartbeat/PingMessage.yaml
+    UnsubscribeRequest:
+      $ref: ./components/messages/control/UnsubscribeRequest.yaml
+    SubscribedMessage:
+      $ref: ./components/messages/control/SubscribedMessage.yaml
+    UnsubscribedMessage:
+      $ref: ./components/messages/control/UnsubscribedMessage.yaml
+    ErrorMessage:
+      $ref: ./components/messages/control/ErrorMessage.yaml
+    ConnectionExpiredMessage:
+      $ref: ./components/messages/control/ConnectionExpiredMessage.yaml
+    SubscribeRequest:
+      $ref: ./components/messages/control/SubscribeRequest.yaml
+    SubscribeTradeRequest:
+      $ref: ./components/messages/tick/SubscribeRequest.yaml
+    TradeUpdate:
+      $ref: ./components/messages/tick/Update.yaml
+    SubscribeTradeExtraRequest:
+      $ref: ./components/messages/tick_extra/SubscribeRequest.yaml
+    TradeExtraUpdate:
+      $ref: ./components/messages/tick_extra/Update.yaml
+    SubscribeTradingSessionRequest:
+      $ref: ./components/messages/session/SubscribeRequest.yaml
+    TradingSessionUpdate:
+      $ref: ./components/messages/session/Update.yaml
+    SubscribeQuoteRequest:
+      $ref: ./components/messages/top_price/SubscribeRequest.yaml
+    QuoteUpdate:
+      $ref: ./components/messages/top_price/Update.yaml
+    SubscribeExpectedPriceRequest:
+      $ref: ./components/messages/expected_price/SubscribeRequest.yaml
+    ExpectedPriceUpdate:
+      $ref: ./components/messages/expected_price/Update.yaml
+    SubscribeOhlcRequest:
+      $ref: ./components/messages/ohlc/SubscribeRequest.yaml
+    OhlcUpdate:
+      $ref: ./components/messages/ohlc/Update.yaml
+    SubscribeOhlcClosedRequest:
+      $ref: ./components/messages/ohlc_closed/SubscribeRequest.yaml
+    OhlcClosedUpdate:
+      $ref: ./components/messages/ohlc_closed/Update.yaml
+    SubscribeForeignRequest:
+      $ref: ./components/messages/foreign/SubscribeRequest.yaml
+    ForeignUpdate:
+      $ref: ./components/messages/foreign/Update.yaml
+    SubscribeSecurityDefinitionRequest:
+      $ref: ./components/messages/security_definition/SubscribeRequest.yaml
+    SecurityDefinitionUpdate:
+      $ref: ./components/messages/security_definition/Update.yaml
+    SubscribeMarketIndexRequest:
+      $ref: ./components/messages/market_index/SubscribeRequest.yaml
+    MarketIndexUpdate:
+      $ref: ./components/messages/market_index/Update.yaml
+    SubscribeEstimatedMarketIndexRequest:
+      $ref: ./components/messages/estimated_market_index/SubscribeRequest.yaml
+    EstimatedMarketIndexUpdate:
+      $ref: ./components/messages/estimated_market_index/Update.yaml
+    SubscribeOrderRequest:
+      $ref: ./components/messages/order/SubscribeRequest.yaml
+    OrderUpdate:
+      $ref: ./components/messages/order/Update.yaml
+    SubscribeBrokerOrderRequest:
+      $ref: ./components/messages/order_broker/SubscribeRequest.yaml
+    BrokerOrderUpdate:
+      $ref: ./components/messages/order_broker/Update.yaml
+    SubscribePositionRequest:
+      $ref: ./components/messages/position/SubscribeRequest.yaml
+    PositionUpdate:
+      $ref: ./components/messages/position/Update.yaml
+    SubscribeBrokerPositionRequest:
+      $ref: ./components/messages/position_broker/SubscribeRequest.yaml
+    BrokerPositionUpdate:
+      $ref: ./components/messages/position_broker/Update.yaml

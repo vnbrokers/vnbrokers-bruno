@@ -1,0 +1,32 @@
+name: brokerPositionUpdate
+title: Cập nhật vị thế môi giới
+summary: Bản cập nhật vị thế của nhà đầu tư do môi giới theo dõi.
+payload:
+  $ref: ../../schemas/position_broker/Update.yaml
+examples:
+  - name: brokerPositionUpdate
+    payload:
+      T: dp
+      action: position_update
+      event: pendingcancel
+      position:
+        id: 177796763592657
+        accountNo: "0001179019"
+        symbol: 41I1G5000
+        status: OPEN
+        loanPackageId: 2278
+        side: NB
+        accumulateQuantity: 247
+        tradeQuantity: null
+        closedQuantity: 236
+        costPrice: 2057.72425
+        marketPrice: 2070.0
+        breakEvenPrice: 2058.21911
+        openQuantity: 11
+        overNightQuantity: 0
+        averageClosePrice: 2094.28941
+        marketType: DERIVATIVE
+        createdDate: "2026-05-05T09:17:50.457893Z"
+        modifiedDate: "2026-05-07T04:19:20.901188117Z"
+      sequence: 1
+      timestamp: 1776054245274
