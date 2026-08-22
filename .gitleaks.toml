@@ -1,0 +1,13 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Ignore known fixed non-secret values"
+
+
+stopwords = [
+  "Nl8yXzQwX0FDQl8yMDI2LTA2LTExVDA2OjU0OjAwLjM2OFo=",
+  "NDYwMTQ1XzIwMjYtMDMtMTJUMDQ6MjU6MDUuNTZa",
+  "MTM2NDYxOV8yMDI2LTA1LTI2VDA0OjI3OjQyLjQyNFo=",
+  "9ab81e9c-8a81-45aa-8190-b69a1c179d52",
+]
