@@ -13,7 +13,6 @@ http:
         "apiKey": "{{apiKey}}",
         "apiSecret": "{{apiSecret}}"
       }
-  auth: inherit
 
 settings:
   encodeUrl: true

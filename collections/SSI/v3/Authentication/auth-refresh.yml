@@ -12,7 +12,6 @@ http:
       {
         "refreshToken": "{{refreshToken}}"
       }
-  auth: inherit
 
 runtime:
   scripts:

@@ -15,7 +15,6 @@ http:
         "otp": "{{otp}}",
         "transactionId": "{{transactionId}}"
       }
-  auth: inherit
 
 runtime:
   scripts:

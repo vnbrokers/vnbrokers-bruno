@@ -19,7 +19,7 @@ http:
     data: |-
       {
         "orderId": "{{orderId}}",
-        "accountNo": "0001234",
+        "accountNo": "{{accountNo}}",
         "deviceId": "{{deviceId}}",
         "clientCancelId": null,
         "clientRequestId": null,

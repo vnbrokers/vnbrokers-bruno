@@ -18,7 +18,7 @@ http:
     type: json
     data: |-
       {
-        "accountNo": "0001234",
+        "accountNo": "{{accountNo}}",
         "deviceId": "{{deviceId}}",
         "symbol": "SSI",
         "side": "B",

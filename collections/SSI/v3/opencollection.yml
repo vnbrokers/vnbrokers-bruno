@@ -18,6 +18,8 @@ request:
   headers:
     - name: Content-Type
       value: application/json
+    - name: Accept-Language
+      value: en
 bundled: false
 extensions:
   bruno:

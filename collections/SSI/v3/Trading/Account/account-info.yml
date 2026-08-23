@@ -64,11 +64,11 @@ examples:
         data: |-
           [
             {
-              "accountNo": "0001234",
+              "accountNo": "{{accountNo}}",
               "accountType": "Cash"
             },
             {
-              "accountNo": "0001234",
+              "accountNo": "{{accountNo}}",
               "accountType": "Margin"
             }
           ]

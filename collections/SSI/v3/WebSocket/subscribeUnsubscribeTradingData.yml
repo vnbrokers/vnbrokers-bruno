@@ -6,21 +6,46 @@ info:
 websocket:
   url: "{{wsBaseUrl}}/ws/v3"
   message:
-    type: json
-    data: |-
-      {
-        "method": "SUBSCRIBE",
-        "channel": "TRADING",
-        "topics": [
-          "order.{{accountNo}}",
-          "portfolio.{{accountNo}}"
-        ]
-      }
+    - title: message 1
+      selected: true
+      message:
+        type: json
+        data: |-
+          {
+            "method": "SUBSCRIBE",
+            "channel": "TRADING",
+            "topics": [
+              "order.{{accountNo}}",
+              "portfolio.{{accountNo}}"
+            ]
+          }
+    - title: message 2
+      selected: false
+      message:
+        type: json
+        data: |-
+          {
+            "method": "PONG",
+            "channel": "HEARTBEAT",
+            "time": "{{heartbeatTime}}"
+          }
+    - title: message 3
+      selected: false
+      message:
+        type: json
+        data: |-
+          {
+            "method": "UNSUBSCRIBE",
+            "channel": "TRADING",
+            "topics": [
+              "order.{{accountNo}}",
+              "portfolio.{{accountNo}}"
+            ]
+          }
   auth: inherit
 
 settings:
   timeout: 0
   keepAliveInterval: 0
 
-docs: |-
-  Subscribe dữ liệu lệnh và danh mục theo tài khoản. Đổi `method` thành `UNSUBSCRIBE` để hủy.
+docs: Subscribe dữ liệu lệnh và danh mục theo tài khoản. Đổi `method` thành `UNSUBSCRIBE` để hủy.
