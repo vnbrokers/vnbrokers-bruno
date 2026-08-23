@@ -33,8 +33,8 @@ runtime:
               .padEnd(encodedPayload.length + (4 - encodedPayload.length % 4) % 4, '=');
             const payload = JSON.parse(Buffer.from(base64Payload, 'base64').toString('utf8'));
 
-            if (payload.clientId) {
-              bru.setEnvVar('clientId', String(payload.clientId));
+            if (payload.client_id) {
+              bru.setEnvVar('clientId', String(payload.client_id));
             }
           } catch (error) {
             console.warn('Unable to extract clientId from accessToken JWT:', error.message);
