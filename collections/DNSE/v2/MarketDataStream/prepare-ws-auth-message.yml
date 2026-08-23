@@ -10,8 +10,7 @@ http:
     - name: encoding
       value: json
       type: query
-      description: "Định dạng mã hóa dữ liệu WebSocket; hiện hỗ trợ json."
-  auth: inherit
+      description: "Định dạng mã hóa dữ liệu WebSocket; hiện hỗ trợ json/msgpack."
 
 runtime:
   scripts:
