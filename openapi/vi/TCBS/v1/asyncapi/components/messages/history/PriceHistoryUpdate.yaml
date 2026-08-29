@@ -1,0 +1,5 @@
+name: priceHistoryUpdate
+title: Lịch sử giá khớp một phút
+description: Trên wire server gửi `C001|<SYMBOL>|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../schemas/history/PriceHistory.yaml

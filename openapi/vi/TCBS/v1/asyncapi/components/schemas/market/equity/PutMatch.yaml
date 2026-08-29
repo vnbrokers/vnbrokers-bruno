@@ -1,0 +1,31 @@
+type: object
+required:
+  - symbol
+  - price
+  - vol
+  - val
+  - time
+  - color
+  - accumulatedValue
+properties:
+  symbol:
+    type: string
+    description: Mã chứng khoán.
+  price:
+    type: number
+    description: Giá.
+  vol:
+    type: number
+    description: Khối lượng.
+  val:
+    type: number
+    description: Giá trị.
+  time:
+    type: string
+    description: Thời gian.
+  color:
+    type: number
+    description: Mã màu.
+  accumulatedValue:
+    type: number
+    description: Giá trị tích lũy.

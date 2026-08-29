@@ -1,0 +1,22 @@
+name: derivativeOrderUpdate
+title: Thay đổi lệnh phái sinh
+description: Trên wire server gửi `message_proto|DE_ORDER|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/trading/derivative/DerivativeOrder.yaml
+examples:
+  - payload:
+      subAccount: 738764A
+      orderNo: "41"
+      pkOrderNo: "7861546"
+      orderTime: 14:34:10
+      accountCode: 738764A
+      side: B
+      symbol: VN30F2110
+      volume: 1
+      showPrice: MTL
+      status: P
+      orderStatus: "2"
+      channel: D
+      group: FU
+      isCancel: "1"
+      isAmend: "1"

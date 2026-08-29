@@ -1,0 +1,5 @@
+name: putMatch
+title: Khớp lệnh thỏa thuận
+description: Trên wire server gửi `s|17|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/market/equity/PutMatch.yaml

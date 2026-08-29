@@ -1,0 +1,6 @@
+name: orderCommand
+title: Lệnh điều khiển luồng lệnh
+summary: Xác thực, subscribe hoặc heartbeat.
+contentType: text/plain
+payload:
+  $ref: ../../schemas/control/OrderCommand.yaml

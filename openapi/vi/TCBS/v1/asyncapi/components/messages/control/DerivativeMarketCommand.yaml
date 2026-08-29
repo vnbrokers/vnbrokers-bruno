@@ -1,0 +1,5 @@
+name: derivativeMarketCommand
+title: Lệnh điều khiển bảng giá phái sinh
+contentType: text/plain
+payload:
+  $ref: ../../schemas/control/DerivativeMarketCommand.yaml

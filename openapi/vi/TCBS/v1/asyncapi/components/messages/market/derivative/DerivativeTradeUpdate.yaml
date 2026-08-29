@@ -1,0 +1,13 @@
+name: derivativeTradeUpdate
+title: Giao dịch khớp phái sinh
+description: Trên wire server gửi `s|21|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/market/derivative/DerivativeTrade.yaml
+examples:
+  - payload:
+      symbol: 41I1G8000
+      matchPrice: 1870.5
+      matchQtty: 2
+      change: -4.5
+      changePercent: -0.24
+      totalVolume: 15234

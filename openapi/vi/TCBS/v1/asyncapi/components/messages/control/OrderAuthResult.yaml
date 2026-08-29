@@ -1,0 +1,10 @@
+name: orderAuthResult
+title: Kết quả xác thực luồng lệnh
+description: Trên wire server gửi `authenticate|{JSON_PAYLOAD}`; payload dưới đây là phần JSON đã tách prefix.
+payload:
+  $ref: ../../schemas/control/AuthResult.yaml
+examples:
+  - name: success
+    payload:
+      success: true
+      error: null

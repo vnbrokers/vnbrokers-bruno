@@ -1,0 +1,5 @@
+name: derivativeBidUpdate
+title: Sổ lệnh mua phái sinh
+description: Trên wire server gửi `s|23|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/market/derivative/DerivativeBid.yaml

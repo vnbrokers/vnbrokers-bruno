@@ -1,0 +1,38 @@
+type: object
+required:
+  - symbol
+  - price
+  - vol
+  - time
+  - status
+  - color
+  - orderId
+  - side
+properties:
+  symbol:
+    type: string
+    description: Mã chứng khoán.
+  price:
+    type: number
+    description: Giá.
+  vol:
+    type: number
+    description: Khối lượng.
+  time:
+    type: string
+    description: Thời gian.
+  status:
+    type: number
+    description: Trạng thái.
+  color:
+    type: number
+    description: Mã màu.
+  orderId:
+    type: string
+    description: Mã lệnh.
+  side:
+    type: string
+    enum:
+      - B
+      - S
+    description: Chiều mua hoặc bán.

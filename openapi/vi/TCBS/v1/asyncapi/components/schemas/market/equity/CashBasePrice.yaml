@@ -1,0 +1,19 @@
+type: object
+required:
+  - symbol
+  - ceilPrice
+  - floorPrice
+  - refPrice
+properties:
+  symbol:
+    type: string
+    description: Mã chứng khoán.
+  ceilPrice:
+    type: number
+    description: Giá trần.
+  floorPrice:
+    type: number
+    description: Giá sàn.
+  refPrice:
+    type: number
+    description: Giá tham chiếu.

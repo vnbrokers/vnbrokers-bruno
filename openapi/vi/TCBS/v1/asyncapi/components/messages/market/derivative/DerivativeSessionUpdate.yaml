@@ -1,0 +1,5 @@
+name: derivativeSessionUpdate
+title: Thông tin phiên phái sinh
+description: Trên wire server gửi `s|27|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/market/common/SessionSummary.yaml

@@ -1,0 +1,7 @@
+name: cashSnapshot
+title: Snapshot mã chứng khoán
+description: |-
+  Trên wire server gửi `s|38|{JSON_PAYLOAD}`. Tài liệu nguồn chưa công bố danh sách
+  trường của channel 38, vì vậy schema giữ object mở nhưng vẫn biểu diễn payload JSON.
+payload:
+  $ref: ../../../schemas/market/equity/CashSnapshot.yaml

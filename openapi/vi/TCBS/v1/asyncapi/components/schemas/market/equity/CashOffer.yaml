@@ -1,0 +1,31 @@
+type: object
+required:
+  - symbol
+  - offerPrice01
+  - offerPrice02
+  - offerPrice03
+  - offerQtty01
+  - offerQtty02
+  - offerQtty03
+properties:
+  symbol:
+    type: string
+    description: Mã chứng khoán.
+  offerPrice01:
+    type: string
+    description: Giá đặt bán tốt nhất.
+  offerPrice02:
+    type: string
+    description: Giá đặt bán mức 2.
+  offerPrice03:
+    type: string
+    description: Giá đặt bán mức 3.
+  offerQtty01:
+    type: string
+    description: Khối lượng đặt bán mức 1.
+  offerQtty02:
+    type: string
+    description: Khối lượng đặt bán mức 2.
+  offerQtty03:
+    type: string
+    description: Khối lượng đặt bán mức 3.

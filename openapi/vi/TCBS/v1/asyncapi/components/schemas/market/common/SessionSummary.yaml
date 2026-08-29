@@ -1,0 +1,23 @@
+type: object
+required:
+  - symbol
+  - high
+  - low
+  - avg
+  - open
+properties:
+  symbol:
+    type: string
+    description: Mã chứng khoán hoặc hợp đồng.
+  high:
+    type: number
+    description: Giá cao nhất phiên.
+  low:
+    type: number
+    description: Giá thấp nhất phiên.
+  avg:
+    type: number
+    description: Giá trung bình phiên.
+  open:
+    type: number
+    description: Giá mở cửa.

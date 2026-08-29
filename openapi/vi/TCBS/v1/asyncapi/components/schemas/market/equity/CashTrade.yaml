@@ -1,0 +1,31 @@
+type: object
+required:
+  - symbol
+  - matchPrice
+  - matchQtty
+  - change
+  - changePercent
+  - totalVolume
+  - totalValue
+properties:
+  symbol:
+    type: string
+    description: Mã chứng khoán.
+  matchPrice:
+    type: string
+    description: Giá khớp.
+  matchQtty:
+    type: string
+    description: Khối lượng khớp.
+  change:
+    type: number
+    description: Thay đổi so với tham chiếu.
+  changePercent:
+    type: number
+    description: Phần trăm thay đổi.
+  totalVolume:
+    type: string
+    description: Tổng khối lượng khớp trong phiên.
+  totalValue:
+    type: string
+    description: Tổng giá trị giao dịch trong phiên.

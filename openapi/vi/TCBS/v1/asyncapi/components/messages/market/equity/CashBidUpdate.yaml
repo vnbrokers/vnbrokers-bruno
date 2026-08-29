@@ -1,0 +1,14 @@
+name: cashBidUpdate
+title: Sổ lệnh mua cơ sở
+description: Trên wire server gửi `s|1|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/market/equity/CashBid.yaml
+examples:
+  - payload:
+      symbol: TCB
+      bidPrice01: "24550"
+      bidPrice02: "24500"
+      bidPrice03: "24450"
+      bidQtty01: "137200"
+      bidQtty02: "354000"
+      bidQtty03: "292900"

@@ -1,0 +1,334 @@
+# yaml-language-server: $schema=https://www.asyncapi.com/schema-store/3.0.0-without-$id.json
+asyncapi: 3.0.0
+id: urn:vnbrokers:tcbs:v1:stream
+info:
+  title: TCBS iFlash WebSocket Stream API
+  version: 1.0.0
+  description: |-
+    API WebSocket thời gian thực của TCBS cho bảng giá, lịch sử giá, lệnh và vị thế.
+    TCBS sử dụng text frame phân tách bằng dấu `|`. Với các message dữ liệu, `payload`
+    trong tài liệu này mô tả phần JSON sau prefix để client có thể sinh kiểu dữ liệu và validate.
+defaultContentType: application/json
+servers:
+  production:
+    host: openapi.tcbs.com.vn
+    protocol: wss
+    description: TCBS iFlash production WebSocket host.
+channels:
+  cashMarketStream:
+    address: /ws/thesis/v1/stream/normal
+    title: Bảng giá cơ sở
+    description: |-
+      Client xác thực bằng `d|a|||<BASE64_JWT>`, quản lý subscription bằng các text frame
+      `d|s|...`, `d|u|...`, `d|r|...` và gửi heartbeat `d|p|||` mỗi 2 giây.
+    servers:
+      - $ref: "#/servers/production"
+    messages:
+      command:
+        $ref: "#/components/messages/MarketCommand"
+      authResult:
+        $ref: "#/components/messages/ThesisAuthResult"
+      bidUpdate:
+        $ref: "#/components/messages/CashBidUpdate"
+      offerUpdate:
+        $ref: "#/components/messages/CashOfferUpdate"
+      foreignUpdate:
+        $ref: "#/components/messages/CashForeignUpdate"
+      basePriceUpdate:
+        $ref: "#/components/messages/CashBasePriceUpdate"
+      sessionUpdate:
+        $ref: "#/components/messages/CashSessionUpdate"
+      tradeUpdate:
+        $ref: "#/components/messages/CashTradeUpdate"
+      indexUpdate:
+        $ref: "#/components/messages/IndexUpdate"
+      putAdvertisement:
+        $ref: "#/components/messages/PutAdvertisement"
+      putMatch:
+        $ref: "#/components/messages/PutMatch"
+      tradeHistoryUpdate:
+        $ref: "#/components/messages/TradeHistoryUpdate"
+      snapshot:
+        $ref: "#/components/messages/CashSnapshot"
+  derivativeMarketStream:
+    address: /ws/thesis/v1/stream/derivative
+    title: Bảng giá phái sinh
+    description: |-
+      Client xác thực bằng `d|a|||<BASE64_JWT>`, subscribe bằng `d|s|tk|...`,
+      unsubscribe bằng `d|u|tk|...` và gửi heartbeat `d|p|||` mỗi 2 giây.
+    servers:
+      - $ref: "#/servers/production"
+    messages:
+      command:
+        $ref: "#/components/messages/DerivativeMarketCommand"
+      authResult:
+        $ref: "#/components/messages/ThesisAuthResult"
+      tradeUpdate:
+        $ref: "#/components/messages/DerivativeTradeUpdate"
+      bidUpdate:
+        $ref: "#/components/messages/DerivativeBidUpdate"
+      offerUpdate:
+        $ref: "#/components/messages/DerivativeOfferUpdate"
+      sessionUpdate:
+        $ref: "#/components/messages/DerivativeSessionUpdate"
+  historyStream:
+    address: /ws/ouranos/v1/stream
+    title: Lịch sử giá khớp và cung cầu
+    description: |-
+      Client xác thực bằng `d|a|||<BASE64_JWT>`, subscribe bằng `d|st|...`,
+      unsubscribe bằng `d|ut|...` và gửi heartbeat `d|po` mỗi 2 giây.
+    servers:
+      - $ref: "#/servers/production"
+    messages:
+      command:
+        $ref: "#/components/messages/HistoryCommand"
+      authResult:
+        $ref: "#/components/messages/OuranosAuthResult"
+      priceHistory:
+        $ref: "#/components/messages/PriceHistoryUpdate"
+      supplyDemand:
+        $ref: "#/components/messages/SupplyDemandUpdate"
+      foreignFlow:
+        $ref: "#/components/messages/ForeignFlowUpdate"
+  cashOrderStream:
+    address: /ws/aither
+    title: Thay đổi thông tin lệnh cơ sở
+    description: |-
+      Client xác thực bằng `authenticate|<BASE64_JSON>`, subscribe topic `STOCK_ORDER`
+      và gửi heartbeat `ping|1` mỗi 2 giây.
+    servers:
+      - $ref: "#/servers/production"
+    messages:
+      command:
+        $ref: "#/components/messages/OrderCommand"
+      authResult:
+        $ref: "#/components/messages/OrderAuthResult"
+      orderUpdate:
+        $ref: "#/components/messages/StockOrderUpdate"
+  derivativeOrderStream:
+    address: /ws/nesoi
+    title: Thay đổi thông tin lệnh phái sinh
+    description: |-
+      Client xác thực bằng `authenticate|<BASE64_JSON>`, subscribe từng topic
+      `DE_ORDER`, `DE_CONDITIONAL_ORDER`, `DE_OPEN_POSITION` và gửi heartbeat `ping|1` mỗi 2 giây.
+    servers:
+      - $ref: "#/servers/production"
+    messages:
+      command:
+        $ref: "#/components/messages/OrderCommand"
+      authResult:
+        $ref: "#/components/messages/OrderAuthResult"
+      orderUpdate:
+        $ref: "#/components/messages/DerivativeOrderUpdate"
+      conditionalOrderUpdate:
+        $ref: "#/components/messages/ConditionalOrderUpdate"
+      openPositionUpdate:
+        $ref: "#/components/messages/OpenPositionUpdate"
+operations:
+  sendCashMarketCommand:
+    action: receive
+    channel:
+      $ref: "#/channels/cashMarketStream"
+    title: Gửi lệnh điều khiển bảng giá cơ sở
+    messages:
+      - $ref: "#/channels/cashMarketStream/messages/command"
+  receiveCashMarketData:
+    action: send
+    channel:
+      $ref: "#/channels/cashMarketStream"
+    title: Nhận dữ liệu bảng giá cơ sở
+    messages:
+      - $ref: "#/channels/cashMarketStream/messages/authResult"
+      - $ref: "#/channels/cashMarketStream/messages/bidUpdate"
+      - $ref: "#/channels/cashMarketStream/messages/offerUpdate"
+      - $ref: "#/channels/cashMarketStream/messages/foreignUpdate"
+      - $ref: "#/channels/cashMarketStream/messages/basePriceUpdate"
+      - $ref: "#/channels/cashMarketStream/messages/sessionUpdate"
+      - $ref: "#/channels/cashMarketStream/messages/tradeUpdate"
+      - $ref: "#/channels/cashMarketStream/messages/indexUpdate"
+      - $ref: "#/channels/cashMarketStream/messages/putAdvertisement"
+      - $ref: "#/channels/cashMarketStream/messages/putMatch"
+      - $ref: "#/channels/cashMarketStream/messages/tradeHistoryUpdate"
+      - $ref: "#/channels/cashMarketStream/messages/snapshot"
+  sendDerivativeMarketCommand:
+    action: receive
+    channel:
+      $ref: "#/channels/derivativeMarketStream"
+    title: Gửi lệnh điều khiển bảng giá phái sinh
+    messages:
+      - $ref: "#/channels/derivativeMarketStream/messages/command"
+  receiveDerivativeMarketData:
+    action: send
+    channel:
+      $ref: "#/channels/derivativeMarketStream"
+    title: Nhận dữ liệu bảng giá phái sinh
+    messages:
+      - $ref: "#/channels/derivativeMarketStream/messages/authResult"
+      - $ref: "#/channels/derivativeMarketStream/messages/tradeUpdate"
+      - $ref: "#/channels/derivativeMarketStream/messages/bidUpdate"
+      - $ref: "#/channels/derivativeMarketStream/messages/offerUpdate"
+      - $ref: "#/channels/derivativeMarketStream/messages/sessionUpdate"
+  sendHistoryCommand:
+    action: receive
+    channel:
+      $ref: "#/channels/historyStream"
+    title: Gửi lệnh điều khiển luồng lịch sử
+    messages:
+      - $ref: "#/channels/historyStream/messages/command"
+  receiveHistoryData:
+    action: send
+    channel:
+      $ref: "#/channels/historyStream"
+    title: Nhận lịch sử giá và cung cầu
+    messages:
+      - $ref: "#/channels/historyStream/messages/authResult"
+      - $ref: "#/channels/historyStream/messages/priceHistory"
+      - $ref: "#/channels/historyStream/messages/supplyDemand"
+      - $ref: "#/channels/historyStream/messages/foreignFlow"
+  sendCashOrderCommand:
+    action: receive
+    channel:
+      $ref: "#/channels/cashOrderStream"
+    title: Gửi lệnh điều khiển luồng lệnh cơ sở
+    messages:
+      - $ref: "#/channels/cashOrderStream/messages/command"
+  receiveCashOrderData:
+    action: send
+    channel:
+      $ref: "#/channels/cashOrderStream"
+    title: Nhận thay đổi lệnh cơ sở
+    messages:
+      - $ref: "#/channels/cashOrderStream/messages/authResult"
+      - $ref: "#/channels/cashOrderStream/messages/orderUpdate"
+  sendDerivativeOrderCommand:
+    action: receive
+    channel:
+      $ref: "#/channels/derivativeOrderStream"
+    title: Gửi lệnh điều khiển luồng lệnh phái sinh
+    messages:
+      - $ref: "#/channels/derivativeOrderStream/messages/command"
+  receiveDerivativeOrderData:
+    action: send
+    channel:
+      $ref: "#/channels/derivativeOrderStream"
+    title: Nhận thay đổi lệnh và vị thế phái sinh
+    messages:
+      - $ref: "#/channels/derivativeOrderStream/messages/authResult"
+      - $ref: "#/channels/derivativeOrderStream/messages/orderUpdate"
+      - $ref: "#/channels/derivativeOrderStream/messages/conditionalOrderUpdate"
+      - $ref: "#/channels/derivativeOrderStream/messages/openPositionUpdate"
+components:
+  messages:
+    MarketCommand:
+      $ref: ./components/messages/control/MarketCommand.yaml
+    DerivativeMarketCommand:
+      $ref: ./components/messages/control/DerivativeMarketCommand.yaml
+    HistoryCommand:
+      $ref: ./components/messages/control/HistoryCommand.yaml
+    OrderCommand:
+      $ref: ./components/messages/control/OrderCommand.yaml
+    ThesisAuthResult:
+      $ref: ./components/messages/control/ThesisAuthResult.yaml
+    OuranosAuthResult:
+      $ref: ./components/messages/control/OuranosAuthResult.yaml
+    OrderAuthResult:
+      $ref: ./components/messages/control/OrderAuthResult.yaml
+    CashBidUpdate:
+      $ref: ./components/messages/market/equity/CashBidUpdate.yaml
+    CashOfferUpdate:
+      $ref: ./components/messages/market/equity/CashOfferUpdate.yaml
+    CashForeignUpdate:
+      $ref: ./components/messages/market/equity/CashForeignUpdate.yaml
+    CashBasePriceUpdate:
+      $ref: ./components/messages/market/equity/CashBasePriceUpdate.yaml
+    CashSessionUpdate:
+      $ref: ./components/messages/market/equity/CashSessionUpdate.yaml
+    CashTradeUpdate:
+      $ref: ./components/messages/market/equity/CashTradeUpdate.yaml
+    IndexUpdate:
+      $ref: ./components/messages/market/equity/IndexUpdate.yaml
+    PutAdvertisement:
+      $ref: ./components/messages/market/equity/PutAdvertisement.yaml
+    PutMatch:
+      $ref: ./components/messages/market/equity/PutMatch.yaml
+    TradeHistoryUpdate:
+      $ref: ./components/messages/market/equity/TradeHistoryUpdate.yaml
+    CashSnapshot:
+      $ref: ./components/messages/market/equity/CashSnapshot.yaml
+    DerivativeTradeUpdate:
+      $ref: ./components/messages/market/derivative/DerivativeTradeUpdate.yaml
+    DerivativeBidUpdate:
+      $ref: ./components/messages/market/derivative/DerivativeBidUpdate.yaml
+    DerivativeOfferUpdate:
+      $ref: ./components/messages/market/derivative/DerivativeOfferUpdate.yaml
+    DerivativeSessionUpdate:
+      $ref: ./components/messages/market/derivative/DerivativeSessionUpdate.yaml
+    PriceHistoryUpdate:
+      $ref: ./components/messages/history/PriceHistoryUpdate.yaml
+    SupplyDemandUpdate:
+      $ref: ./components/messages/history/SupplyDemandUpdate.yaml
+    ForeignFlowUpdate:
+      $ref: ./components/messages/history/ForeignFlowUpdate.yaml
+    StockOrderUpdate:
+      $ref: ./components/messages/trading/equity/StockOrderUpdate.yaml
+    DerivativeOrderUpdate:
+      $ref: ./components/messages/trading/derivative/DerivativeOrderUpdate.yaml
+    ConditionalOrderUpdate:
+      $ref: ./components/messages/trading/derivative/ConditionalOrderUpdate.yaml
+    OpenPositionUpdate:
+      $ref: ./components/messages/trading/derivative/OpenPositionUpdate.yaml
+  schemas:
+    AuthResult:
+      $ref: ./components/schemas/control/AuthResult.yaml
+    AuthError:
+      $ref: ./components/schemas/control/AuthError.yaml
+    CashBid:
+      $ref: ./components/schemas/market/equity/CashBid.yaml
+    CashOffer:
+      $ref: ./components/schemas/market/equity/CashOffer.yaml
+    CashForeign:
+      $ref: ./components/schemas/market/equity/CashForeign.yaml
+    CashBasePrice:
+      $ref: ./components/schemas/market/equity/CashBasePrice.yaml
+    SessionSummary:
+      $ref: ./components/schemas/market/common/SessionSummary.yaml
+    CashTrade:
+      $ref: ./components/schemas/market/equity/CashTrade.yaml
+    MarketIndex:
+      $ref: ./components/schemas/market/equity/MarketIndex.yaml
+    PutAdvertisement:
+      $ref: ./components/schemas/market/equity/PutAdvertisement.yaml
+    PutMatch:
+      $ref: ./components/schemas/market/equity/PutMatch.yaml
+    TradeHistory:
+      $ref: ./components/schemas/market/equity/TradeHistory.yaml
+    DerivativeTrade:
+      $ref: ./components/schemas/market/derivative/DerivativeTrade.yaml
+    DerivativeBid:
+      $ref: ./components/schemas/market/derivative/DerivativeBid.yaml
+    DerivativeOffer:
+      $ref: ./components/schemas/market/derivative/DerivativeOffer.yaml
+    PriceHistory:
+      $ref: ./components/schemas/history/PriceHistory.yaml
+    SupplyDemand:
+      $ref: ./components/schemas/history/SupplyDemand.yaml
+    ForeignFlow:
+      $ref: ./components/schemas/history/ForeignFlow.yaml
+    StockOrder:
+      $ref: ./components/schemas/trading/equity/StockOrder.yaml
+    DerivativeOrder:
+      $ref: ./components/schemas/trading/derivative/DerivativeOrder.yaml
+    ConditionalOrder:
+      $ref: ./components/schemas/trading/derivative/ConditionalOrder.yaml
+    OpenPosition:
+      $ref: ./components/schemas/trading/derivative/OpenPosition.yaml
+    MarketCommand:
+      $ref: ./components/schemas/control/MarketCommand.yaml
+    DerivativeMarketCommand:
+      $ref: ./components/schemas/control/DerivativeMarketCommand.yaml
+    HistoryCommand:
+      $ref: ./components/schemas/control/HistoryCommand.yaml
+    OrderCommand:
+      $ref: ./components/schemas/control/OrderCommand.yaml
+    CashSnapshot:
+      $ref: ./components/schemas/market/equity/CashSnapshot.yaml

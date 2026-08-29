@@ -1,0 +1,5 @@
+name: openPositionUpdate
+title: Thay đổi vị thế mở phái sinh
+description: Trên wire server gửi `message_proto|DE_OPEN_POSITION|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/trading/derivative/OpenPosition.yaml
