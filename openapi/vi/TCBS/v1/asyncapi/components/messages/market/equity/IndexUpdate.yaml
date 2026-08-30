@@ -1,0 +1,5 @@
+name: indexUpdate
+title: Chỉ số thị trường
+description: Trên wire server gửi `s|8|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/market/equity/MarketIndex.yaml

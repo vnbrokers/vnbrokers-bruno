@@ -1,0 +1,5 @@
+name: tradeHistoryUpdate
+title: Lịch sử khớp trong ngày
+description: Trên wire server gửi `s|22|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/market/equity/TradeHistory.yaml

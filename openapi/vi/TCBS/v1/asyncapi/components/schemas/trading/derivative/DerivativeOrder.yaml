@@ -1,0 +1,110 @@
+type: object
+required:
+  - subAccount
+  - orderNo
+  - pkOrderNo
+  - orderTime
+  - accountCode
+  - side
+  - symbol
+  - volume
+  - showPrice
+  - status
+  - orderStatus
+  - channel
+  - group
+  - orderType
+properties:
+  subAccount:
+    type: string
+    description: Số tài khoản phái sinh.
+  orderNo:
+    type: string
+    description: Số hiệu lệnh.
+  pkOrderNo:
+    type: string
+    description: Primary key lệnh.
+  orderTime:
+    type: string
+    description: Thời gian đặt lệnh.
+  accountCode:
+    type: string
+    description: Mã tài khoản.
+  side:
+    type: string
+    enum:
+      - B
+      - S
+    description: Chiều lệnh mua hoặc bán.
+  symbol:
+    type: string
+    description: Mã hợp đồng.
+  volume:
+    type: integer
+    format: int64
+    description: Khối lượng đặt lệnh.
+  showPrice:
+    type: string
+    description: Giá đặt hoặc MTL.
+  matchVolume:
+    type: integer
+    format: int64
+    description: Khối lượng đã khớp.
+  matchPriceBQ:
+    type: number
+    description: Giá khớp bình quân.
+  status:
+    type: string
+    description: Trạng thái lệnh.
+  orderStatus:
+    type: string
+    description: Mã trạng thái lệnh.
+  channel:
+    type: string
+    description: Kênh đặt lệnh.
+  group:
+    type: string
+    description: Nhóm lệnh phái sinh.
+  cancelTime:
+    type: string
+    description: Thời gian hủy lệnh.
+  isCancel:
+    type: string
+    enum:
+      - "0"
+      - "1"
+    description: Có thể hủy.
+  isAmend:
+    type: string
+    enum:
+      - "0"
+      - "1"
+    description: Có thể sửa.
+  info:
+    type: string
+    description: Chi tiết từ chối.
+  maxPrice:
+    type: integer
+    format: int64
+    description: Không dùng
+  matchValue:
+    type: number
+    description: Giá trị khớp.
+  quote:
+    type: string
+    description: Trạng thái quote.
+  autoType:
+    type: string
+    description: Loại lệnh tự động.
+  product:
+    type: string
+    description: Sản phẩm hoặc chỉ số SL/TP.
+  orderType:
+    type: string
+    description: Loại lệnh.
+  source:
+    type: string
+    description: Nguồn hệ thống hoặc người dùng.
+  traderCode:
+    type: string
+    description: Mã kênh đặt lệnh.

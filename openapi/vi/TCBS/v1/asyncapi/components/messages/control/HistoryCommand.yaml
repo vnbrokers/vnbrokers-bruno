@@ -1,0 +1,5 @@
+name: historyCommand
+title: Lệnh điều khiển luồng lịch sử
+contentType: text/plain
+payload:
+  $ref: ../../schemas/control/HistoryCommand.yaml

@@ -1,0 +1,5 @@
+name: foreignFlowUpdate
+title: Dòng tiền khối ngoại 15 phút
+description: Trên wire server gửi `C002S900|<SYMBOL>|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../schemas/history/ForeignFlow.yaml

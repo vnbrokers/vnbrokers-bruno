@@ -1,0 +1,104 @@
+type: object
+required:
+  - sub_account
+  - order_no
+  - pk_order_no
+  - account_code
+  - side
+  - symbol
+  - volume
+  - show_price
+  - status
+properties:
+  sub_account:
+    type: string
+    description: Số tài khoản phái sinh.
+  order_no:
+    type: string
+    description: Số hiệu lệnh.
+  group_order:
+    type: string
+    description: Nhóm lệnh.
+  pk_order_no:
+    type: string
+    description: Primary key lệnh.
+  account_code:
+    type: string
+    description: Mã tài khoản.
+  side:
+    type: string
+    enum:
+      - B
+      - S
+    description: Chiều lệnh mua hoặc bán.
+  symbol:
+    type: string
+    description: Mã hợp đồng.
+  volume:
+    type: integer
+    format: int64
+    description: Khối lượng lệnh.
+  show_price:
+    type: string
+    description: Giá đặt.
+  condition:
+    type: string
+    description: Điều kiện kích hoạt.
+  result:
+    type: string
+    enum:
+      - "0"
+      - "1"
+    description: Hủy hoặc kích hoạt.
+  active_time:
+    type: string
+    description: Thời gian kích hoạt.
+  send_time:
+    type: string
+    description: Thời gian đặt lệnh.
+  cancel_time:
+    type: string
+    description: Thời gian hủy.
+  group:
+    type: string
+    description: Nhóm phái sinh.
+  channel:
+    type: string
+    description: Kênh đặt lệnh.
+  so_price:
+    type: number
+    description: Giá stop.
+  order_type:
+    type: string
+    description: Loại lệnh.
+  from_time:
+    type: string
+    description: Ngày bắt đầu hiệu lực.
+  exp_time:
+    type: string
+    description: Ngày hết hiệu lực.
+  status:
+    type: string
+    enum:
+      - "1"
+      - "2"
+      - "3"
+    description: Kích hoạt
+  details:
+    type: string
+    description: Số hiệu lệnh đã kích hoạt.
+  message:
+    type: string
+    description: Thông báo.
+  notes:
+    type: string
+    description: Loại chiến lược.
+  call_back_point:
+    type: string
+    description: Biên trượt trailing stop.
+  trailing_price:
+    type: string
+    description: Giá trailing.
+  trigger_condition:
+    type: string
+    description: Điều kiện kích hoạt trailing.

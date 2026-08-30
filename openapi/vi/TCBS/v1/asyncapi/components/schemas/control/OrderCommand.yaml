@@ -1,0 +1,4 @@
+type: string
+examples:
+  - subscribe|eyJ0b3BpYyI6IlNUT0NLX09SREVSIn0=
+  - ping|1

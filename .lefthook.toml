@@ -5,3 +5,6 @@ configs = ["lefthook.common.toml"]
 
 [pre-commit.commands.lint]
 run = "npm run lint"
+
+[pre-commit.commands.gitleaks]
+run = "gitleaks git --pre-commit --staged --redact --no-banner"

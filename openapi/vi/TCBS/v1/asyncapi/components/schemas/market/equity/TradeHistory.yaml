@@ -1,0 +1,23 @@
+type: object
+required:
+  - symbol
+  - time
+  - matchPrice
+  - matchQtty
+  - change
+properties:
+  symbol:
+    type: string
+    description: Mã chứng khoán.
+  time:
+    type: string
+    description: Thời gian khớp HH:mm:ss.
+  matchPrice:
+    type: string
+    description: Giá khớp.
+  matchQtty:
+    type: string
+    description: Khối lượng khớp.
+  change:
+    type: number
+    description: Thay đổi so với tham chiếu.

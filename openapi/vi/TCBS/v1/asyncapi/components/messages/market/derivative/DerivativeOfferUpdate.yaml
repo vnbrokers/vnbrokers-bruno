@@ -1,0 +1,5 @@
+name: derivativeOfferUpdate
+title: Sổ lệnh bán phái sinh
+description: Trên wire server gửi `s|24|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/market/derivative/DerivativeOffer.yaml

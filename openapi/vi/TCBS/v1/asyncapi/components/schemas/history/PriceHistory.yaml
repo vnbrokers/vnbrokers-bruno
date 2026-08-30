@@ -1,0 +1,78 @@
+type: object
+required:
+  - symbol
+  - closePrice
+  - closeVol
+  - change
+  - reference
+  - totalTrading
+  - totalTradingValue
+  - timeSec
+  - action
+  - unitTimeFrame
+  - tradingValue
+  - buyUpAcc
+  - sellDownAcc
+  - bidPrice
+  - bidVol
+  - askPrice
+  - askVol
+  - prevChange
+properties:
+  symbol:
+    type: string
+    description: Mã chứng khoán.
+  closePrice:
+    type: number
+    description: Giá khớp.
+  closeVol:
+    type: number
+    description: Khối lượng khớp một phút.
+  change:
+    type: number
+    description: Thay đổi so với tham chiếu.
+  reference:
+    type: number
+    description: Giá tham chiếu.
+  totalTrading:
+    type: number
+    description: Tổng khối lượng giao dịch trong ngày.
+  totalTradingValue:
+    type: number
+    description: Tổng giá trị giao dịch trong ngày.
+  timeSec:
+    type: string
+    description: Thời gian epoch seconds.
+  action:
+    type: string
+    enum:
+      - BU
+      - SD
+    description: Mua hoặc bán chủ động.
+  unitTimeFrame:
+    type: string
+    description: Khung thời gian tính bằng giây.
+  tradingValue:
+    type: number
+    description: Giá trị khớp trong một phút.
+  buyUpAcc:
+    type: number
+    description: Khối lượng mua chủ động tích lũy.
+  sellDownAcc:
+    type: number
+    description: Khối lượng bán chủ động tích lũy.
+  bidPrice:
+    type: number
+    description: Giá đặt mua tốt nhất.
+  bidVol:
+    type: number
+    description: Khối lượng đặt mua.
+  askPrice:
+    type: number
+    description: Giá đặt bán tốt nhất.
+  askVol:
+    type: number
+    description: Khối lượng đặt bán.
+  prevChange:
+    type: number
+    description: Thay đổi so với giá khớp gần nhất.

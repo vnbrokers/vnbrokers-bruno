@@ -1,0 +1,11 @@
+name: cashBasePriceUpdate
+title: Giá trần, sàn và tham chiếu
+description: Trên wire server gửi `s|4|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/market/equity/CashBasePrice.yaml
+examples:
+  - payload:
+      symbol: VPD
+      ceilPrice: 25000
+      floorPrice: 24100
+      refPrice: 24300

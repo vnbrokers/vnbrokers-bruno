@@ -1,0 +1,11 @@
+name: cashForeignUpdate
+title: Giao dịch khối ngoại
+description: Trên wire server gửi `s|3|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/market/equity/CashForeign.yaml
+examples:
+  - payload:
+      symbol: HPG
+      buyForeignQtty: "112400"
+      sellForeignQtty: "17380"
+      room: "1773708397"

@@ -1,0 +1,5 @@
+name: supplyDemandUpdate
+title: Cung cầu một phút
+description: Trên wire server gửi `C002S60|<SYMBOL>|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../schemas/history/SupplyDemand.yaml

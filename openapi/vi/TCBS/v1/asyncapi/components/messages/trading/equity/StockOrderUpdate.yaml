@@ -1,0 +1,19 @@
+name: stockOrderUpdate
+title: Thay đổi lệnh cơ sở
+description: Trên wire server gửi `message_proto|STOCK_ORDER|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/trading/equity/StockOrder.yaml
+examples:
+  - payload:
+      object: order
+      accountNo: "0001201435"
+      orderId: "9202412270000098858"
+      execType: NB
+      orderQtty: 100
+      symbol: LUT
+      priceType: LO
+      txTime: 12:04:39
+      orStatus: "8"
+      limitPrice: 500
+      remainQtty: 100
+      via: O

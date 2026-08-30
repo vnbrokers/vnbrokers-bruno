@@ -1,0 +1,51 @@
+type: object
+required:
+  - indexNumber
+  - index
+  - change
+  - changePercent
+  - volume
+  - value
+  - increase
+  - decrease
+  - notChange
+  - session
+  - ceilIncrease
+  - floorDecrease
+properties:
+  indexNumber:
+    type: number
+    description: Mã chỉ số.
+  index:
+    type: number
+    description: Giá trị chỉ số.
+  change:
+    type: number
+    description: Thay đổi.
+  changePercent:
+    type: number
+    description: Phần trăm thay đổi.
+  volume:
+    type: number
+    description: Khối lượng.
+  value:
+    type: number
+    description: Giá trị.
+  increase:
+    type: number
+    description: Số mã tăng.
+  decrease:
+    type: number
+    description: Số mã giảm.
+  notChange:
+    type: number
+    description: Số mã không đổi.
+  session:
+    type: string
+    description: Phiên.
+  ceilIncrease:
+    type: number
+    description: Số mã tăng trần.
+  floorDecrease:
+    type: number
+    description: Số mã giảm sàn.

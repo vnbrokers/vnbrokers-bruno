@@ -1,0 +1,35 @@
+type: object
+required:
+  - symbol
+  - timeSec
+  - totalBUVol
+  - totalBUVolAcc
+  - totalSDVol
+  - totalSDVolAcc
+  - bsAccRatio
+  - unitTimeFrame
+properties:
+  symbol:
+    type: string
+    description: Mã chứng khoán.
+  timeSec:
+    type: string
+    description: Thời gian epoch seconds.
+  totalBUVol:
+    type: number
+    description: Khối lượng mua chủ động trong một phút.
+  totalBUVolAcc:
+    type: number
+    description: Khối lượng mua chủ động tích lũy.
+  totalSDVol:
+    type: number
+    description: Khối lượng bán chủ động trong một phút.
+  totalSDVolAcc:
+    type: number
+    description: Khối lượng bán chủ động tích lũy.
+  bsAccRatio:
+    type: number
+    description: Tỷ lệ mua/bán chủ động tích lũy.
+  unitTimeFrame:
+    type: string
+    description: Khung thời gian 60 giây.

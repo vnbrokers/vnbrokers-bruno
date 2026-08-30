@@ -7,19 +7,21 @@
     "lint:dnse": "npx --yes @redocly/cli@2.46.1 lint openapi/vi/DNSE/v2/openapi.yaml",
     "lint:dnse:asyncapi": "npx --yes @asyncapi/cli@5.0.7 validate openapi/vi/DNSE/v2/asyncapi/asyncapi.yaml",
     "lint:ssi:asyncapi": "npx --yes @asyncapi/cli@5.0.7 validate openapi/vi/SSI/v3/asyncapi/asyncapi.yaml",
+    "lint:tcbs:asyncapi": "npx --yes @asyncapi/cli@5.0.7 validate openapi/vi/TCBS/v1/asyncapi/asyncapi.yaml",
     "lint:fhsc": "npx --yes @redocly/cli@2.46.1 lint openapi/vi/FHSC/v0/openapi.yaml",
     "lint:tcbs": "npx --yes @redocly/cli@2.46.1 lint openapi/vi/TCBS/v1/openapi.yaml",
     "lint:entrade": "npx --yes @redocly/cli@2.46.1 lint openapi/vi/Entrade/v1/openapi.yaml",
     "lint:ssi": "npx --yes @redocly/cli@2.46.1 lint openapi/vi/SSI/v3/openapi.yaml",
-    "lint": "npm run lint:fhsc && npm run lint:dnse && npm run lint:dnse:asyncapi && npm run lint:ssi:asyncapi && npm run lint:tcbs && npm run lint:entrade && npm run lint:ssi",
+    "lint": "npm run lint:fhsc && npm run lint:dnse && npm run lint:dnse:asyncapi && npm run lint:ssi:asyncapi && npm run lint:tcbs && npm run lint:tcbs:asyncapi && npm run lint:entrade && npm run lint:ssi",
     "bundle:dnse": "mkdir -p dist && npx --yes @redocly/cli@2.46.1 bundle openapi/vi/DNSE/v2/openapi.yaml -o dist/dnse-v2.yaml && npx --yes @redocly/cli@2.46.1 bundle openapi/vi/DNSE/v2/openapi.yaml -o dist/dnse-v2.json",
     "bundle:dnse:asyncapi": "mkdir -p dist && npx --yes @asyncapi/cli@5.0.7 bundle openapi/vi/DNSE/v2/asyncapi/asyncapi.yaml --output dist/dnse-v2-asyncapi.yaml",
     "bundle:ssi:asyncapi": "mkdir -p dist && npx --yes @asyncapi/cli@5.0.7 bundle openapi/vi/SSI/v3/asyncapi/asyncapi.yaml --output dist/ssi-v3-asyncapi.yaml",
+    "bundle:tcbs:asyncapi": "mkdir -p dist && npx --yes @asyncapi/cli@5.0.7 bundle openapi/vi/TCBS/v1/asyncapi/asyncapi.yaml --output dist/tcbs-v1-asyncapi.yaml",
     "bundle:fhsc": "mkdir -p dist && npx --yes @redocly/cli@2.46.1 bundle openapi/vi/FHSC/v0/openapi.yaml -o dist/fhsc-v0.yaml && npx --yes @redocly/cli@2.46.1 bundle openapi/vi/FHSC/v0/openapi.yaml -o dist/fhsc-v0.json",
     "bundle:tcbs": "mkdir -p dist && npx --yes @redocly/cli@2.46.1 bundle openapi/vi/TCBS/v1/openapi.yaml -o dist/tcbs-v1.yaml && npx --yes @redocly/cli@2.46.1 bundle openapi/vi/TCBS/v1/openapi.yaml -o dist/tcbs-v1.json",
     "bundle:entrade": "mkdir -p dist && npx --yes @redocly/cli@2.46.1 bundle openapi/vi/Entrade/v1/openapi.yaml -o dist/entrade-v1.yaml && npx --yes @redocly/cli@2.46.1 bundle openapi/vi/Entrade/v1/openapi.yaml -o dist/entrade-v1.json",
     "bundle:ssi": "mkdir -p dist && npx --yes @redocly/cli@2.46.1 bundle openapi/vi/SSI/v3/openapi.yaml -o dist/ssi-v3.yaml && npx --yes @redocly/cli@2.46.1 bundle openapi/vi/SSI/v3/openapi.yaml -o dist/ssi-v3.json",
-    "bundle": "npm run bundle:fhsc && npm run bundle:dnse && npm run bundle:dnse:asyncapi && npm run bundle:ssi:asyncapi && npm run bundle:tcbs && npm run bundle:entrade && npm run bundle:ssi",
+    "bundle": "npm run bundle:fhsc && npm run bundle:dnse && npm run bundle:dnse:asyncapi && npm run bundle:ssi:asyncapi && npm run bundle:tcbs && npm run bundle:tcbs:asyncapi && npm run bundle:entrade && npm run bundle:ssi",
     "build": "npm run lint && npm run bundle"
   }
 }

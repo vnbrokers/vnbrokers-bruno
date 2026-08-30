@@ -1,0 +1,5 @@
+name: conditionalOrderUpdate
+title: Thay đổi lệnh điều kiện phái sinh
+description: Trên wire server gửi `message_proto|DE_CONDITIONAL_ORDER|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/trading/derivative/ConditionalOrder.yaml

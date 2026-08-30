@@ -1,0 +1,34 @@
+type: object
+required:
+  - symbol
+  - offerPrice01
+  - offerPrice02
+  - offerPrice03
+  - offerQtty01
+  - offerQtty02
+  - offerQtty03
+properties:
+  symbol:
+    type: string
+    description: Mã hợp đồng phái sinh.
+  offerPrice01:
+    type: number
+    description: Giá offer tốt nhất.
+  offerPrice02:
+    type: number
+    description: Giá offer mức 2.
+  offerPrice03:
+    type: number
+    description: Giá offer mức 3.
+  offerQtty01:
+    type: integer
+    format: int64
+    description: Khối lượng offer mức 1.
+  offerQtty02:
+    type: integer
+    format: int64
+    description: Khối lượng offer mức 2.
+  offerQtty03:
+    type: integer
+    format: int64
+    description: Khối lượng offer mức 3.

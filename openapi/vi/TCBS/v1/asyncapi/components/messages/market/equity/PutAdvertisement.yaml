@@ -1,0 +1,5 @@
+name: putAdvertisement
+title: Chào mua/bán thỏa thuận
+description: Trên wire server gửi `s|16|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/market/equity/PutAdvertisement.yaml

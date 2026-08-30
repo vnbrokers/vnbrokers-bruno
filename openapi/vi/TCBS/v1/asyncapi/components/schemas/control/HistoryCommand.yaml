@@ -1,0 +1,4 @@
+type: string
+examples:
+  - d|st|C001+C002S60+C002S900|TCB
+  - d|po

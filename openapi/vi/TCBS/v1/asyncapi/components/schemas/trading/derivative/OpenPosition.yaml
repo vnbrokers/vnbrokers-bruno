@@ -1,0 +1,69 @@
+type: object
+required:
+  - sub_account
+  - symbol
+  - side
+  - account
+  - last_price
+  - avg_remain
+  - im_value
+  - net
+  - pc_remain
+  - vm_remain
+  - duedate
+properties:
+  sub_account:
+    type: string
+    description: Số tài khoản phái sinh.
+  symbol:
+    type: string
+    description: Mã hợp đồng.
+  side:
+    type: string
+    enum:
+      - L
+      - S
+    description: Vị thế Long hoặc Short.
+  account:
+    type: string
+    description: Số tài khoản.
+  last_price:
+    type: number
+    description: Giá hiện tại.
+  avg_remain:
+    type: number
+    description: Giá trung bình phần còn lại.
+  im_value:
+    type: number
+    description: Giá trị ký quỹ ban đầu.
+  net:
+    type: number
+    description: Số vị thế đang nắm giữ.
+  stoploss:
+    type: number
+    description: Giá stop loss.
+  takeprofit:
+    type: number
+    description: Giá take profit.
+  pc_remain:
+    type: number
+    description: Phần trăm lãi/lỗ vị thế mở.
+  vm_remain:
+    type: number
+    description: Giá trị VM chưa đóng.
+  duedate:
+    type: string
+    description: Ngày đáo hạn.
+  netoffvol:
+    type: integer
+    format: int64
+    description: Số cần net-off.
+  trigger_type:
+    type: string
+    description: Giá kích hoạt trailing.
+  call_back_point:
+    type: number
+    description: Biên trượt trailing.
+  trailing_price:
+    type: number
+    description: Giá lệnh trailing.

@@ -1,0 +1,6 @@
+name: marketCommand
+title: Lệnh điều khiển bảng giá cơ sở
+summary: Xác thực, subscribe, unsubscribe, request snapshot hoặc heartbeat.
+contentType: text/plain
+payload:
+  $ref: ../../schemas/control/MarketCommand.yaml

@@ -1,0 +1,12 @@
+name: cashSessionUpdate
+title: Thông tin phiên cơ sở
+description: Trên wire server gửi `s|5|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/market/common/SessionSummary.yaml
+examples:
+  - payload:
+      symbol: VPD
+      high: 25000
+      low: 24100
+      avg: 24300
+      open: 24600

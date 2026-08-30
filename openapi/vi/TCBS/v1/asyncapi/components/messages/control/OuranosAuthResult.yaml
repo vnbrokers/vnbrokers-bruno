@@ -1,0 +1,10 @@
+name: ouranosAuthResult
+title: Kết quả xác thực Ouranos
+description: Trên wire server gửi `d|0|{JSON_PAYLOAD}`; payload dưới đây là phần JSON đã tách prefix.
+payload:
+  $ref: ../../schemas/control/AuthResult.yaml
+examples:
+  - name: success
+    payload:
+      success: true
+      error: null

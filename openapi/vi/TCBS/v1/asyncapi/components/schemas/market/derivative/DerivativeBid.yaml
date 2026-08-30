@@ -1,0 +1,34 @@
+type: object
+required:
+  - symbol
+  - bidPrice01
+  - bidPrice02
+  - bidPrice03
+  - bidQtty01
+  - bidQtty02
+  - bidQtty03
+properties:
+  symbol:
+    type: string
+    description: Mã hợp đồng phái sinh.
+  bidPrice01:
+    type: number
+    description: Giá bid tốt nhất.
+  bidPrice02:
+    type: number
+    description: Giá bid mức 2.
+  bidPrice03:
+    type: number
+    description: Giá bid mức 3.
+  bidQtty01:
+    type: integer
+    format: int64
+    description: Khối lượng bid mức 1.
+  bidQtty02:
+    type: integer
+    format: int64
+    description: Khối lượng bid mức 2.
+  bidQtty03:
+    type: integer
+    format: int64
+    description: Khối lượng bid mức 3.

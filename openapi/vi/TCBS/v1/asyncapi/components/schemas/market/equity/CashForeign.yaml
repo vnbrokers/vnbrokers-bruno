@@ -1,0 +1,19 @@
+type: object
+required:
+  - symbol
+  - buyForeignQtty
+  - sellForeignQtty
+  - room
+properties:
+  symbol:
+    type: string
+    description: Mã chứng khoán.
+  buyForeignQtty:
+    type: string
+    description: Khối lượng khối ngoại mua.
+  sellForeignQtty:
+    type: string
+    description: Khối lượng khối ngoại bán.
+  room:
+    type: string
+    description: Room khối ngoại còn lại.

@@ -1,0 +1,31 @@
+type: object
+required:
+  - symbol
+  - bidPrice01
+  - bidPrice02
+  - bidPrice03
+  - bidQtty01
+  - bidQtty02
+  - bidQtty03
+properties:
+  symbol:
+    type: string
+    description: Mã chứng khoán.
+  bidPrice01:
+    type: string
+    description: Giá đặt mua tốt nhất.
+  bidPrice02:
+    type: string
+    description: Giá đặt mua mức 2.
+  bidPrice03:
+    type: string
+    description: Giá đặt mua mức 3.
+  bidQtty01:
+    type: string
+    description: Khối lượng đặt mua mức 1.
+  bidQtty02:
+    type: string
+    description: Khối lượng đặt mua mức 2.
+  bidQtty03:
+    type: string
+    description: Khối lượng đặt mua mức 3.

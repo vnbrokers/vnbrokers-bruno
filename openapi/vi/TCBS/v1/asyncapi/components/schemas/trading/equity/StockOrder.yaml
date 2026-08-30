@@ -1,0 +1,128 @@
+type: object
+required:
+  - object
+  - accountNo
+  - orderId
+  - execType
+  - orderQtty
+  - symbol
+  - priceType
+  - txTime
+  - txDate
+  - timeType
+  - orStatus
+  - limitPrice
+  - remainQtty
+  - via
+  - tradePlace
+properties:
+  object:
+    type: string
+    const: order
+    description: Loại object.
+  accountNo:
+    type: string
+    description: Số tiểu khoản.
+  orderId:
+    type: string
+    description: Số hiệu lệnh.
+  execType:
+    type: string
+    enum:
+      - NB
+      - NS
+    description: Lệnh mua hoặc bán.
+  orderQtty:
+    type: number
+    description: Khối lượng đặt.
+  symbol:
+    type: string
+    description: Mã chứng khoán.
+  priceType:
+    type: string
+    description: Loại giá.
+  txTime:
+    type: string
+    description: Giờ đặt lệnh HH:mm:ss.
+  txDate:
+    type: string
+    description: Ngày đặt lệnh ISO 8601.
+  expDate:
+    type: string
+    description: Ngày hết hạn.
+  timeType:
+    type: string
+    enum:
+      - T
+      - G
+    description: Hiệu lực trong ngày hoặc nhiều ngày.
+  orStatus:
+    type: string
+    enum:
+      - "0"
+      - "2"
+      - "3"
+      - "4"
+      - "5"
+      - "8"
+      - "10"
+      - "11"
+      - "12"
+      - A
+      - C
+      - S
+    description: Mã trạng thái lệnh.
+  limitPrice:
+    type: number
+    description: Giá đặt lệnh.
+  remainQtty:
+    type: number
+    description: Khối lượng còn lại.
+  via:
+    type: string
+    description: Kênh giao dịch.
+  quotePrice:
+    type: number
+    description: Giá quote.
+  tradePlace:
+    type: string
+    description: Mã sàn giao dịch.
+  matchType:
+    type: string
+    description: Loại khớp.
+  isDisposal:
+    type: string
+    enum:
+      - Y
+      - N
+    description: Lệnh bán xử lý.
+  isCancel:
+    type: string
+    enum:
+      - Y
+      - N
+    description: Cho phép hủy.
+  isAmend:
+    type: string
+    enum:
+      - Y
+      - N
+    description: Cho phép sửa.
+  userName:
+    type: string
+    description: User đặt lệnh.
+  orsOrderId:
+    type: string
+    description: Số hiệu lệnh ORS.
+  secType:
+    type: string
+    description: Loại chứng khoán.
+  isFOOrder:
+    type: string
+    enum:
+      - Y
+      - N
+    description: Lệnh từ FO hoặc BO.
+  odTimeStamp:
+    type: string
+    description: Thời gian sinh lệnh.

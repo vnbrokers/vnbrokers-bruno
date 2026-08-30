@@ -1,0 +1,14 @@
+name: cashTradeUpdate
+title: Giao dịch khớp cơ sở
+description: Trên wire server gửi `s|6|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/market/equity/CashTrade.yaml
+examples:
+  - payload:
+      symbol: TCB
+      matchPrice: "24550"
+      matchQtty: "5000"
+      change: 200
+      changePercent: 0.8213552361
+      totalVolume: "9745500"
+      totalValue: "240774655000"

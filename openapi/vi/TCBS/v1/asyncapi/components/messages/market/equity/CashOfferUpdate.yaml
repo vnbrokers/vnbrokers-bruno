@@ -1,0 +1,14 @@
+name: cashOfferUpdate
+title: Sổ lệnh bán cơ sở
+description: Trên wire server gửi `s|2|{JSON_PAYLOAD}`.
+payload:
+  $ref: ../../../schemas/market/equity/CashOffer.yaml
+examples:
+  - payload:
+      symbol: TCB
+      offerPrice01: "24600"
+      offerPrice02: "24650"
+      offerPrice03: "24700"
+      offerQtty01: "294000"
+      offerQtty02: "163400"
+      offerQtty03: "743600"

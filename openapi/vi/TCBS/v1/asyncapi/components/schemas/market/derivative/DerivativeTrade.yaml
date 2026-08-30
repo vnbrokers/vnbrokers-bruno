@@ -1,0 +1,29 @@
+type: object
+required:
+  - symbol
+  - matchPrice
+  - matchQtty
+  - change
+  - changePercent
+  - totalVolume
+properties:
+  symbol:
+    type: string
+    description: Mã hợp đồng phái sinh.
+  matchPrice:
+    type: number
+    description: Giá khớp.
+  matchQtty:
+    type: integer
+    format: int64
+    description: Khối lượng khớp.
+  change:
+    type: number
+    description: Thay đổi so với giá tham chiếu.
+  changePercent:
+    type: number
+    description: Phần trăm thay đổi.
+  totalVolume:
+    type: integer
+    format: int64
+    description: Tổng khối lượng trong phiên.
