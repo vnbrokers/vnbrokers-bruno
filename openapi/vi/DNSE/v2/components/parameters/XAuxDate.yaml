@@ -1,0 +1,8 @@
+name: X-Aux-Date
+in: header
+required: true
+description: |-
+  Thời gian thực hiện request, dùng trong cơ chế ký request của DNSE.
+  Ví dụ: `Sat, 01 May 2026 14:24:23 +0000`
+schema:
+  type: string

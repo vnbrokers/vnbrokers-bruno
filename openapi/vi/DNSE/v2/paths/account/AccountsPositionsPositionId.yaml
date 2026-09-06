@@ -1,11 +1,10 @@
 get:
   operationId: getAccountsPositionsPositionId
-  security:
-    - DnseApiKey: []
-      DnseAuxDate: []
-      DnseSignature: []
   summary: Chi tiết vị thế theo ID
   parameters:
+    - $ref: ../../components/parameters/XApiKey.yaml
+    - $ref: ../../components/parameters/XAuxDate.yaml
+    - $ref: ../../components/parameters/XSignature.yaml
     - name: marketType
       in: query
       required: true

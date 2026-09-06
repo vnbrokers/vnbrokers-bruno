@@ -37,7 +37,7 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: |- 
+docs: |-
   ### GET /api/v3/data/securitiesByBoard
 
   Lấy danh sách chứng khoán theo điều kiện lọc. Khách chỉ được phép cung cấp một trong ba tham số symbol, board hoặc index để lọc danh sách chứng khoán.

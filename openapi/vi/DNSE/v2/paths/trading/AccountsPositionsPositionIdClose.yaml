@@ -1,12 +1,11 @@
 post:
   operationId: postAccountsPositionsPositionIdClose
-  security:
-    - DnseApiKey: []
-      DnseAuxDate: []
-      DnseSignature: []
-      DnseTradingToken: []
   summary: Đóng vị thế
   parameters:
+    - $ref: ../../components/parameters/XApiKey.yaml
+    - $ref: ../../components/parameters/XAuxDate.yaml
+    - $ref: ../../components/parameters/XSignature.yaml
+    - $ref: ../../components/parameters/TradingToken.yaml
     - name: marketType
       in: query
       required: true

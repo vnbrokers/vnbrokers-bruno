@@ -1,4 +1,0 @@
-type: apiKey
-in: header
-name: trading-token
-description: Trading token dùng cho các operation đặt, sửa, hủy lệnh hoặc đóng vị thế.

@@ -1,11 +1,10 @@
 get:
   operationId: getAccountsAccountNoOrdersHistory
-  security:
-    - DnseApiKey: []
-      DnseAuxDate: []
-      DnseSignature: []
   summary: Lịch sử lệnh
   parameters:
+    - $ref: ../../components/parameters/XApiKey.yaml
+    - $ref: ../../components/parameters/XAuxDate.yaml
+    - $ref: ../../components/parameters/XSignature.yaml
     - name: marketType
       in: query
       required: true

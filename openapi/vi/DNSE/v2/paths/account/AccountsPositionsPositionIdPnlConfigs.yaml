@@ -2,12 +2,11 @@ get:
   operationId: getAccountsPositionsPositionIdPnlConfigs
   tags:
     - Tài khoản
-  security:
-    - DnseApiKey: []
-      DnseAuxDate: []
-      DnseSignature: []
   summary: Cấu hình chốt lời, cắt lỗ của vị thế
   parameters:
+    - $ref: ../../components/parameters/XApiKey.yaml
+    - $ref: ../../components/parameters/XAuxDate.yaml
+    - $ref: ../../components/parameters/XSignature.yaml
     - name: positionId
       in: path
       required: true
@@ -58,13 +57,12 @@ post:
   operationId: postAccountsPositionsPositionIdPnlConfigs
   tags:
     - Giao dịch
-  security:
-    - DnseApiKey: []
-      DnseAuxDate: []
-      DnseSignature: []
-      DnseTradingToken: []
   summary: Cài đặt chốt lời, cắt lỗ cho vị thế
   parameters:
+    - $ref: ../../components/parameters/XApiKey.yaml
+    - $ref: ../../components/parameters/XAuxDate.yaml
+    - $ref: ../../components/parameters/XSignature.yaml
+    - $ref: ../../components/parameters/TradingToken.yaml
     - name: positionId
       in: path
       required: true

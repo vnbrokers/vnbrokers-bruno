@@ -1,12 +1,11 @@
 put:
   operationId: putAccountsAccountNoOrdersOrderId
-  security:
-    - DnseApiKey: []
-      DnseAuxDate: []
-      DnseSignature: []
-      DnseTradingToken: []
   summary: Sửa lệnh
   parameters:
+    - $ref: ../../components/parameters/XApiKey.yaml
+    - $ref: ../../components/parameters/XAuxDate.yaml
+    - $ref: ../../components/parameters/XSignature.yaml
+    - $ref: ../../components/parameters/TradingToken.yaml
     - name: marketType
       in: query
       required: true
@@ -192,13 +191,12 @@ parameters:
     example: 96
 delete:
   operationId: deleteAccountsAccountNoOrdersOrderId
-  security:
-    - DnseApiKey: []
-      DnseAuxDate: []
-      DnseSignature: []
-      DnseTradingToken: []
   summary: Hủy lệnh
   parameters:
+    - $ref: ../../components/parameters/XApiKey.yaml
+    - $ref: ../../components/parameters/XAuxDate.yaml
+    - $ref: ../../components/parameters/XSignature.yaml
+    - $ref: ../../components/parameters/TradingToken.yaml
     - name: marketType
       in: query
       required: true
@@ -375,12 +373,11 @@ delete:
     - Giao dịch
 get:
   operationId: getAccountsAccountNoOrdersOrderId
-  security:
-    - DnseApiKey: []
-      DnseAuxDate: []
-      DnseSignature: []
   summary: Chi tiết lệnh theo ID
   parameters:
+    - $ref: ../../components/parameters/XApiKey.yaml
+    - $ref: ../../components/parameters/XAuxDate.yaml
+    - $ref: ../../components/parameters/XSignature.yaml
     - name: marketType
       in: query
       required: true

@@ -1,10 +1,10 @@
 post:
   operationId: postRegistrationSendEmailOtp
-  security:
-    - DnseApiKey: []
-      DnseAuxDate: []
-      DnseSignature: []
   summary: Gửi Email OTP
+  parameters:
+    - $ref: ../../components/parameters/XApiKey.yaml
+    - $ref: ../../components/parameters/XAuxDate.yaml
+    - $ref: ../../components/parameters/XSignature.yaml
   responses:
     "200":
       description: OK

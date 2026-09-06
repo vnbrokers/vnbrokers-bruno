@@ -1,13 +1,12 @@
 get:
   operationId: getAccountsAccountNoOrders
-  security:
-    - DnseApiKey: []
-      DnseAuxDate: []
-      DnseSignature: []
   summary: Sổ lệnh
   tags:
     - Tài khoản
   parameters:
+    - $ref: ../../components/parameters/XApiKey.yaml
+    - $ref: ../../components/parameters/XAuxDate.yaml
+    - $ref: ../../components/parameters/XSignature.yaml
     - name: marketType
       in: query
       required: true
@@ -236,13 +235,12 @@ get:
       $ref: ../../components/responses/InternalError.yaml
 post:
   operationId: postAccountsAccountNoOrders
-  security:
-    - DnseApiKey: []
-      DnseAuxDate: []
-      DnseSignature: []
-      DnseTradingToken: []
   summary: Đặt lệnh
   parameters:
+    - $ref: ../../components/parameters/XApiKey.yaml
+    - $ref: ../../components/parameters/XAuxDate.yaml
+    - $ref: ../../components/parameters/XSignature.yaml
+    - $ref: ../../components/parameters/TradingToken.yaml
     - name: marketType
       in: query
       required: true

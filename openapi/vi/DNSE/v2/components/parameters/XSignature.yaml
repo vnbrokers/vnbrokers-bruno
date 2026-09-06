@@ -1,0 +1,8 @@
+name: X-Signature
+in: header
+required: true
+description: |-
+  Chữ ký xác thực request được tạo từ API key secret và X-Aux-Date.
+  Ví dụ: `Signature keyId="b3JnOmRuc2UgaWQ6MjdlZTc1MzcxZGFkNTY0NmYzYTM2NDk1ZGE3OGNiOGQgaDptdXJtdXIxMjg=",algorithm="hmac-sha256",headers="(request-target) x-aux-date",signature="rfbVXHDUi%2B%2FsOkLXle7O17Qm%2F05cbISSR%2BDcFrBHfqQ%3D",nonce="4add8c3264e4492b9f8ecde0cf26b523"`
+schema:
+  type: string

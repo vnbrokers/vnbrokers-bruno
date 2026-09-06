@@ -15,6 +15,7 @@ tags:
     description: Tài khoản, số dư, khoản vay, lệnh và vị thế.
   - name: Dữ liệu thị trường
     description: Thông tin mã chứng khoán, báo giá, OHLC và giao dịch.
+security: []
 paths:
   /registration/send-email-otp:
     $ref: "./paths/trading/RegistrationSendEmailOtp.yaml"
@@ -136,12 +137,3 @@ components:
       $ref: "./components/headers/XContentTypeOptions.yaml"
     X-Xss-Protection:
       $ref: "./components/headers/XXssProtection.yaml"
-  securitySchemes:
-    DnseApiKey:
-      $ref: "./components/securitySchemes/DnseApiKey.yaml"
-    DnseAuxDate:
-      $ref: "./components/securitySchemes/DnseAuxDate.yaml"
-    DnseSignature:
-      $ref: "./components/securitySchemes/DnseSignature.yaml"
-    DnseTradingToken:
-      $ref: "./components/securitySchemes/DnseTradingToken.yaml"

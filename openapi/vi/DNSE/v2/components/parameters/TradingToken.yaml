@@ -1,0 +1,8 @@
+name: trading-token
+in: header
+required: true
+description: |-
+  Trading token dùng cho các operation đặt, sửa, hủy lệnh hoặc đóng vị thế.
+  Ví dụ: `9ab81e9c-8a81-45aa-8190-b69a1c179d52`
+schema:
+  type: string

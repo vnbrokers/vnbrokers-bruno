@@ -2,12 +2,11 @@ get:
   operationId: getTradingSession
   tags:
     - Dữ liệu thị trường
-  security:
-    - DnseApiKey: []
-      DnseAuxDate: []
-      DnseSignature: []
   summary: Thông tin phiên giao dịch
   parameters:
+    - $ref: ../../components/parameters/XApiKey.yaml
+    - $ref: ../../components/parameters/XAuxDate.yaml
+    - $ref: ../../components/parameters/XSignature.yaml
     - name: boardId
       in: query
       schema:

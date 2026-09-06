@@ -1,11 +1,10 @@
 get:
   operationId: getAccountsAccountNoPpse
-  security:
-    - DnseApiKey: []
-      DnseAuxDate: []
-      DnseSignature: []
   summary: Sức mua, sức bán
   parameters:
+    - $ref: ../../components/parameters/XApiKey.yaml
+    - $ref: ../../components/parameters/XAuxDate.yaml
+    - $ref: ../../components/parameters/XSignature.yaml
     - name: marketType
       in: query
       required: true

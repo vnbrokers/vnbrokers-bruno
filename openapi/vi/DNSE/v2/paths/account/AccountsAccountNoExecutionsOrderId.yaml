@@ -2,12 +2,11 @@ get:
   operationId: getAccountsAccountNoExecutionsOrderId
   tags:
     - Tài khoản
-  security:
-    - DnseApiKey: []
-      DnseAuxDate: []
-      DnseSignature: []
   summary: Chi tiết trạng thái lệnh
   parameters:
+    - $ref: ../../components/parameters/XApiKey.yaml
+    - $ref: ../../components/parameters/XAuxDate.yaml
+    - $ref: ../../components/parameters/XSignature.yaml
     - name: accountNo
       in: path
       required: true

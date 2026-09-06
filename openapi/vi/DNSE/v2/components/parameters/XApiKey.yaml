@@ -1,0 +1,8 @@
+name: X-Api-Key
+in: header
+required: true
+description: |-
+  API key được cấp khi đăng ký dịch vụ DNSE OpenAPI.
+  Ví dụ: `b3JnOmRuc2UgaWQ6MjdlZTc1MzcxZGFkNTY0NmYzYTM2NDk1ZGE3OGNiOGQgaDptdXJtdXIxMjg=`
+schema:
+  type: string

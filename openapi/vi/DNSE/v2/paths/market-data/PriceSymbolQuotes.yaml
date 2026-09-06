@@ -2,12 +2,11 @@ get:
   operationId: getPriceSymbolQuotes
   tags:
     - Dữ liệu thị trường
-  security:
-    - DnseApiKey: []
-      DnseAuxDate: []
-      DnseSignature: []
   summary: Lịch sử bid/ask
   parameters:
+    - $ref: ../../components/parameters/XApiKey.yaml
+    - $ref: ../../components/parameters/XAuxDate.yaml
+    - $ref: ../../components/parameters/XSignature.yaml
     - name: symbol
       in: path
       required: true

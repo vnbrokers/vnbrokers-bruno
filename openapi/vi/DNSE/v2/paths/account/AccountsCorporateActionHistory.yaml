@@ -2,12 +2,11 @@ get:
   operationId: getAccountsCorporateActionHistory
   tags:
     - Tài khoản
-  security:
-    - DnseApiKey: []
-      DnseAuxDate: []
-      DnseSignature: []
   summary: Lịch sử sự kiện quyền
   parameters:
+    - $ref: ../../components/parameters/XApiKey.yaml
+    - $ref: ../../components/parameters/XAuxDate.yaml
+    - $ref: ../../components/parameters/XSignature.yaml
     - name: accountNo
       in: path
       required: true
